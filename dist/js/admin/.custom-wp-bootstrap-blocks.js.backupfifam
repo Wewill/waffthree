@@ -1,0 +1,22 @@
+/**
+ * Adding new colors to column block settings
+ */
+
+function waffColumnBgColorOptions( bgColorOptions ) {
+    return [
+		{name:'action-1', 		color:'#9600ff'},
+		{name:'action-2', 		color:'#00ff97'},
+		{name:'action-3', 		color:'#0032FF'},
+		{name:'dark', 			color:'#000000'},
+		{name:'light', 			color:'#FFFFFF'},
+		{name:'bgcolor', 		color:'hsl(191,15%,93%)'},
+		{name:'layoutcolor', 	color:'hsl(0,0%,75%)'},
+		{name:'secondary', 		color:'#6c757d'},	
+    ];
+}
+
+wp.hooks.addFilter(
+	'wpBootstrapBlocks.column.bgColorOptions',
+	'myplugin/wp-bootstrap-blocks/column/bgColorOptions',
+	waffColumnBgColorOptions
+);

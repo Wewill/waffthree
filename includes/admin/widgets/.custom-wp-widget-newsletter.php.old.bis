@@ -1,0 +1,165 @@
+<?php 
+class WP_Widget_Newsletter extends WP_Widget {
+
+	protected $registered = false;
+
+    protected $default_instance = array(
+        'title'   => '',
+        'text'   => '<h3 class="w-70 mb-2">Inscrivez-vous à la newsletter pour ne rien rater du festival et des infos en exclusivité !</h3><p class="subline">Nous envoyons un email par mois</p>',
+		'classes' => '--pt-11 pt-10 pb-10 contrast--light --border-bottom',
+		'reduced' => '0',
+    );  
+	function __construct() {
+		$widget_ops  = array(
+			'classname'                   => 'widget_newsletter',
+			'description'                 => __( 'Print newsletter form.', 'waff' ),
+			'customize_selective_refresh' => true,
+		);
+		$control_ops = array(
+			'width'  => 400,
+			'height' => 350,
+		);
+		parent::__construct( 'newsletter', __( '(WA) Newsletter', 'waff' ), $widget_ops, $control_ops );
+	}
+	  
+	// Creating widget front-end
+	public function widget( $args, $instance ) {
+		$title 					= apply_filters( 'widget_title', $instance['title'] );
+		$text                  	= ! empty( $instance['text'] ) ? $instance['text'] : '';
+		$reduced 				= ! empty( $instance['reduced'] ) ? '1' : '0';
+		  
+        // Inject the Text widget's container class name alongside this widget's class name for theme styling compatibility.
+        //$args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_section ', $args['before_widget'] ); // Adds classes too
+        $args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_newsletter '.$instance['classes'].' ', $args['before_widget'] ); // Adds classes too
+
+		// before and after widget arguments are defined by themes
+		echo $args['before_widget'];
+		if ( ! empty( $title ) )
+			echo $args['before_title'] . $title . $args['after_title'];
+		  
+		// This is where you run the code and display the output
+
+		// Reduced version ( half / half )
+		if ( $reduced === '1' ) :
+		?>	
+		
+			<div class="container-fluid px-0">
+				<div class="row g-0">
+
+					<div class="col-12 col-sm-6 ps-5" data-aos="fade-down" data-aos-delay="0">
+						<!-- Content -->
+						<?php echo $text; ?>
+					</div>
+
+					<div class="col-12 col-sm-6 d-table h-100 pe-5" data-aos="fade-down" data-aos-delay="200">
+						<!-- Chimpy SC -->
+						<?php echo do_shortcode('[chimpy_form forms="1"]'); ?>
+					</div>
+
+				</div>
+			</div>		
+			
+		<?php
+		// Or normal version ( full / full )
+		else :
+		?>	
+
+			<div class="container-fluid px-0">
+				<div class="row g-0">
+					<div class="col-12 d-table h-100" data-aos="fade-down" data-aos-delay="0">
+						<div class="card card-body d-table-cell align-middle border-0 rounded-0">
+							<!-- Content -->
+							<?php echo $text; ?>
+							
+							<!-- Sep -->
+							<div class="mt-5"></div>
+							
+							<!-- Chimpy SC -->
+							<?php echo do_shortcode('[chimpy_form forms="1"]'); ?>
+			
+							</div>
+		
+					</div>
+				</div>
+			</div>	
+
+		<?php
+		endif;
+
+		// Render 
+		echo $args['after_widget'];
+	}
+	          
+	// Widget Backend 
+	public function form( $instance ) {
+        $instance = wp_parse_args( (array) $instance, $this->default_instance );
+	    if ( !isset($instance['classes']) )
+	        $instance['classes'] = null;
+
+		/** This filter is documented in wp-includes/class-wp-editor.php */
+		$text = apply_filters( 'the_editor_content', $instance['text'], $default_editor );
+
+		// Process reduced
+		$reduced = isset( $instance['reduced'] ) ? (bool) $instance['reduced'] : false;
+
+
+		// Reset filter addition.
+		if ( user_can_richedit() ) {
+			remove_filter( 'the_editor_content', 'format_for_editor' );
+		}
+
+		// Prevent premature closing of textarea in case format_for_editor() didn't apply or the_editor_content filter did a wrong thing.
+		$escaped_text = preg_replace( '#</textarea#i', '&lt;/textarea', $text );
+
+		// Widget admin form
+		?>
+		<p style="display: none;">
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'waff' ); ?></label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Content:', 'waff' ); ?></label>
+			<textarea class="widefat" rows="8" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $instance['text'] ); ?></textarea>
+		</p>
+	    <p>
+		    <label for="<?php echo $this->get_field_id('classes'); ?>"><?php esc_html_e('Classes:', 'waff' ); ?></label>
+		    <input type="text" id="<?php echo $this->get_field_id( 'classes' ); ?>" name="<?php echo $this->get_field_name( 'classes' ); ?>" class="widefat classes sync-input" value="<?php echo esc_attr( $instance['classes'] ); ?>"/>
+		</p>
+		<p>
+			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('reduced'); ?>" name="<?php echo $this->get_field_name('reduced'); ?>"<?php checked( $reduced ); ?> />
+			<label for="<?php echo $this->get_field_id('reduced'); ?>"><?php _e( 'Display reduced in two columns', 'waff' ); ?></label><br />
+		</p>
+		<?php 
+	}
+	      
+	// Updating widget replacing old instances with new
+	public function update( $new_instance, $old_instance ) {
+		$new_instance = wp_parse_args(
+			(array) $new_instance,
+			$this->default_instance
+		);
+
+		$instance = $old_instance;
+
+		$instance['title'] 		= sanitize_text_field( $new_instance['title'] );
+		$instance['classes'] 	= sanitize_text_field( $new_instance['classes'] );
+		$instance['reduced'] 	= !empty( $new_instance['reduced'] ) ? 1 : 0;
+
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			$instance['text'] = $new_instance['text'];
+		} else {
+			$instance['text'] = wp_kses_post( $new_instance['text'] );
+		}
+
+		return $instance;
+	}
+	 
+// Class newsletter ends here
+} 
+ 
+ 
+// Register and load the widget
+function WP_Widget_Newsletter_init() {
+    register_widget( 'WP_Widget_Newsletter' );
+}
+add_action( 'widgets_init', 'WP_Widget_Newsletter_init' );
