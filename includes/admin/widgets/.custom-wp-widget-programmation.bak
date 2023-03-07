@@ -1,0 +1,537 @@
+<?php 
+class WP_Widget_Programmation extends WP_Widget {
+
+	protected $registered = false;
+
+    protected $default_instance = array(
+        'title'   => '',
+        'text'   => 'La programmation de l\'édition est en cours de remplissage. Rendez-vous quelques jours avant l\'ouverture de l\'édition pour la découvrir !',
+        'classes' => '',
+    );  
+	function __construct() {
+		$widget_ops  = array(
+			'classname'                   => 'widget_programmation',
+			'description'                 => __( 'Print projections block.', 'waff' ),
+			'customize_selective_refresh' => true,
+		);
+		$control_ops = array(
+			'width'  => 400,
+			'height' => 350,
+		);
+		parent::__construct( 'projections', __( '(WA) Programmation', 'waff' ), $widget_ops, $control_ops );
+	}
+	  
+	// Creating widget front-end
+	public function widget( $args, $instance ) {
+		$title 					= apply_filters( 'widget_title', $instance['title'] );
+		$text                  	= ! empty( $instance['text'] ) ? $instance['text'] : '';
+		  
+        // Inject the Text widget's container class name alongside this widget's class name for theme styling compatibility.
+        //$args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_section ', $args['before_widget'] ); // Adds classes too
+        //$args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_programmation '.$instance['classes'].' ', $args['before_widget'] ); // Adds classes too
+
+		// before and after widget arguments are defined by themes
+		// echo $args['before_widget'];
+
+		if ( ! empty( $title ) )
+			echo $args['before_title'] . $title . $args['after_title'];
+		  
+		// This is where you run the code and display the output
+		global $current_edition, $previous_editions, $current_edition_id, $current_edition_films_are_online;
+
+		if ( !$current_edition_films_are_online ) : ?>	
+
+			<div class="modal fade widget_programmation current_edition_films_are_offline <?= $instance['classes'] ?>" id="programmationModal" tabindex="-1" role="dialog" aria-labelledby="programmationModalLabel" aria-hidden="true">
+			<div class="modal-dialog m-0 max-w-100 ml-auto" role="document">
+					<div class="modal-content bg-transparent border-0 rounded-0 color-white text-white" style="overflow: hidden;height: 100vh; position: relative;">
+					<div class="modal-header sticky-top container-fluid">
+							<div class="row g-0 align-items-center">
+								<div class="col-md-5 col-lg-7 d-none d-md-block">
+									<a class="close-icon color-white lead ml-5" data-dismiss="modal" aria-label="Close">
+										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+										</svg>
+									</a>
+								</div>
+								<div class="col-md-7 col-lg-5 p-0 col-days order-1">
+									<div class="bg-action-1 text-center text-white link-white d-none d-xl-block">
+										<div class="p-2"><a class="prog-title headline" data-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="modal-body d-flex align-items-center justify-content-center" style="position: relative;overflow-y: scroll;height: 100%;" id="">
+							<p><?= $text ?></p>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-primary"><?= esc_html__( 'View archives', 'waff' ) ?></button>
+						<button type="button" class="btn btn-primary"><?= esc_html__( 'View blog', 'waff' ) ?></button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"><?= esc_html__( 'Close', 'waff' ) ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<?php else : 
+
+			// Rooms
+			$args = array(
+				'taxonomy' => 'room',
+				'posts_per_page' => -1,
+				'orderby'  => array( 'menu_order' => 'DESC', 'title' => 'ASC' ), //'meta_value_num' => 'DESC', 
+				'hide_empty' => false,
+				//'hierarchical' => false,
+				'parent' => 0,
+				'meta_query' => array(
+					array(
+						'key' => 'wpcf-r-hide-in-website',
+						'compare' => 'NOT EXISTS',
+					),
+				),
+			);
+			$the_rooms = get_terms( $args );
+			$rooms = array();
+			//echo '<pre>',print_r($the_rooms,1),'</pre>';
+			if ( !empty($the_rooms) ) {
+				foreach($the_rooms as $key => $room) {
+					$is_hidden 			= get_term_meta( $room->term_id, 'wpcf-r-hide-in-website', true );
+					//$is_parent_hidden 	= get_term_meta( $room->parent, 'wpcf-r-hide-in-website', true );
+					if ( (boolean) $is_hidden === true ) //(boolean) $is_parent_hidden === true ||
+						continue;
+
+					/*
+					echo '<br/> ####';
+					echo $room->term_id;
+					echo $room->name;
+					echo var_dump($is_hidden);
+					echo var_dump($is_parent_hidden);
+					echo var_dump((boolean)$is_hidden);
+					echo var_dump((boolean)$is_parent_hidden);
+					echo $room->parent;
+					echo var_dump((boolean)( $room->parent != 0));
+					*/
+
+					// Store rooms parent level 
+					$rooms[$room->term_id] = (array) $room;
+			
+					// If existing, store room child level
+					$roomargs = array(
+						'taxonomy' => 'room',
+						'posts_per_page' => -1,
+						'orderby'  => array( 'menu_order' => 'DESC', 'title' => 'ASC' ), //'meta_value_num' => 'DESC', 
+						'hide_empty' => true,
+						//'hierarchical' => false,
+						'parent' => $room->term_id,
+						'meta_query' => array(
+							array(
+								'key' => 'wpcf-r-hide-in-website',
+								'compare' => 'NOT EXISTS',
+							),
+						),
+					);
+					$the_room = get_terms( $roomargs );
+					if ( !empty($the_room) ) {
+						foreach($the_room as $key => $r) {
+							$r_is_hidden 			= get_term_meta( $r->term_id, 'wpcf-r-hide-in-website', true );
+							if ( (boolean) $r_is_hidden === true ) 
+								continue;
+	
+							$rooms[$r->parent]['room'][$r->term_id] = (array) $r;
+							$rooms[$r->parent]['room'][$r->term_id]['projections'] = array();
+						}
+					} 
+				}
+			}
+			//echo '<pre>',print_r($rooms,1),'</pre>';
+
+			// Days 
+			global $current_edition;						
+			setlocale(LC_TIME, 'fr_FR.UTF8');
+			$today = getdate();
+			//echo '<pre>',print_r($today,1),'</pre>';
+			$edition_start_date_meta = get_term_meta($current_edition->term_id, 'wpcf-e-start-date', True);
+			$edition_end_date_meta = get_term_meta($current_edition->term_id, 'wpcf-e-end-date', True);
+			$edition_start_date = date('d', $edition_start_date_meta);//Y-m-d
+			$edition_end_date = date('d', $edition_end_date_meta);
+			$count = 1;
+			$the_days = array();
+			for ($day = $edition_start_date; $day <= $edition_end_date; $day++) { //$day <= $edition_end_date+1
+				$d = (($edition_start_date_meta-82800) + (60 * 60 * (24 * $count-1)));
+				$d1 = (($edition_start_date_meta-82800) + (60 * 60 * (24 * $count)));
+
+				$the_days[$d] = array(
+					'day' 			=> $d,
+					'weekday' 		=> date_i18n('l', $d),
+					'day_number' 	=> $day,
+					'day_count' 	=> $count,
+					'is_active' 	=> (($day >= $edition_end_date)?'unactive':'active'),
+					'is_today' 		=> (($today[0] > $d && $today[0] < $d1 )?true:false),
+					'rooms'			=> $rooms,
+				);
+				$count++;
+			}
+			//echo '<pre>',print_r($the_days,1),'</pre>';
+			?>
+
+			<!-- Programmation Widget  -->
+			<div class="modal fade widget_programmation current_edition_films_are_online <?= $instance['classes'] ?>" id="programmationModal" tabindex="-1" role="dialog" aria-labelledby="programmationModalLabel" aria-hidden="true">
+				<div class="modal-dialog m-0 max-w-100 ml-auto" role="document">
+					<div class="modal-content bg-transparent border-0 rounded-0 color-white text-white" style="overflow: hidden;height: 100vh; position: relative;">
+						<div class="modal-header sticky-top container-fluid">
+							<div class="row g-0 align-items-center">
+								<div class="col-md-5 col-lg-7 d-none d-md-block">
+									<a class="close-icon color-white lead ml-5" data-dismiss="modal" aria-label="Close">
+										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+										</svg>
+									</a>
+								</div>
+								<div class="col-md-7 col-lg-5 p-0 col-days order-1">
+									<div class="bg-action-1 text-center text-white link-white d-none d-xl-block">
+										<div class="p-2"><a class="prog-title headline" data-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+									</div>
+									<div class="d-flex justify-content-between align-items-stretch align-self-stretch days nav" id="navProgrammationModal" role="tablist">
+										<?php foreach($the_days as $the_day) {
+											printf('<a data-scroll="day%s" href="#day%s" class="flex-fill display text-center bg-white color-black day nav-item nav-link active">%s<i class="icon icon-down"></i></a>',
+											$the_day['day_number'],
+											$the_day['day_number'],
+											$the_day['day_number']
+											);
+										} ?>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<!-- END: Modal header-->
+
+			<?php
+			// Projections
+			$args = array(
+				'post_type' => 'projection',
+				'posts_per_page' => -1,
+				'post_status' => 'publish',
+				// In edition
+				'tax_query' => array(
+					'relation' => 'AND',
+					array (
+						'taxonomy' => 'edition',
+						'field' => 'term_id',
+						'terms' => array($current_edition_id),
+					)
+				),
+				// Order by 
+				'orderby'  => array( 'meta_value_num' => 'ASC', 'menu_order' => 'DESC', 'date' => 'DESC' ),
+				'meta_key' => 'wpcf-p-start-and-stop-time__begin',		
+			);
+			$the_projections = array();
+			$projections = new WP_Query( $args ); 
+
+?>
+
+			<?php while ( $projections->have_posts() ) : $projections->the_post(); ?>
+
+			
+				<?php 
+					$id 					= (( isset($post->ID) )?$post->ID:get_the_ID());
+					$title 					= (( isset($post->post_title) )?$post->post_title:get_the_title());
+					$p_date 				= types_render_field( 'p-date', array() );
+					$p_timestamp 			= types_render_field( 'p-date', array('output'=>'raw') );
+					$p_start_and_stop_time 	= types_render_field( 'p-start-and-stop-time', array() );
+					$p_start_and_stop_time_raw = get_post_meta( $id, 'wpcf-p-start-and-stop-time', true );
+					$p_start_and_stop_time__begin = get_post_meta( $id, 'wpcf-p-start-and-stop-time__begin', true );
+					$p_is_guest 			= types_render_field( 'p-is-guest', array() );
+					$p_e_guest_contact 		= types_render_field( 'p-e-guest-contact', array() );
+					$p_e_guest_contact_raw  = get_post_meta( $id, 'wpcf-p-e-guest-contact', false );
+					$p_young_public 		= types_render_field( 'p-young-public', array() );
+					$p_highlights 			= types_render_field( 'p-highlights', array() );
+					$p_translator 			= types_render_field( 'p-translator', array() );
+					$p_tag 					= types_render_field( 'p-tag', array() );
+
+					// Get terms
+					$p_rooms 				= get_the_terms( $id, 'room' );
+					
+					// Check if projection has_film
+					$relationship 			= 'film';
+					$forposttype 			= 'projection';
+					$count_connections 		= 0;
+					$has_relationship 		= toolset_get_relationship( array( $relationship, $forposttype ) );
+					$has_film 				= false;
+
+					if ( $has_relationship ) {
+						$parent = $has_relationship['roles']['parent']['types'][0];
+						$child = $has_relationship['roles']['child']['types'][0];
+						$origin = ( $parent == $forposttype ) ? 'parent' : 'child';
+						// Get connected posts
+						$connections = toolset_get_related_posts( $id, array($relationship,$forposttype), $origin, 9999, 0, array(), 'post_id', 'other', null, 'ASC', true, $count_connections );
+						if ( !empty($connections) )  $has_film = true;
+					}
+
+					// Get film meta values
+					$f_id					= (( true === $has_film )?$connections[0]:0);
+					$f_title 				= (( get_the_title($f_id) )?get_the_title($f_id):'');
+					$f_french_operating_title = get_post_meta( $f_id, 'wpcf-f-french-operating-title', true );
+					$f_movie_length 		= get_post_meta( $f_id, 'wpcf-f-movie-length', true );
+
+					// Get terms
+					$f_sections 				= get_the_terms( $f_id, 'section' );
+					//echo '<pre>',print_r(array($id,$title,$p_date,$p_timestamp,$p_start_and_stop_time,$p_start_and_stop_time_raw,$p_start_and_stop_time__begin,$p_rooms,$p_is_guest,$p_e_guest_contact,$p_e_guest_contact_raw,$p_young_public,$p_highlights,$p_translator,$p_tag,$has_film,$count_connections,$connections,$f_id,$f_title,$f_french_operating_title,$f_movie_length,$f_sections),1),'</pre>';
+
+					$the_projections[$id] = array(
+						'p_id' 								=> $id,
+						'p_title' 							=> $title, //1 
+						'p_date' 							=> $p_date,
+						'p_timestamp' 						=> $p_timestamp,
+						'p_start_and_stop_time' 			=> $p_start_and_stop_time,
+						'p_start_and_stop_time_raw' 		=> $p_start_and_stop_time_raw,
+						'p_start_and_stop_time__begin' 		=> $p_start_and_stop_time__begin,
+						'p_rooms' 							=> $p_rooms,
+						'p_is_guest' 						=> $p_is_guest,
+						'p_e_guest_contact' 				=> $p_e_guest_contact, //9
+						'p_e_guest_contact_raw' 			=> $p_e_guest_contact_raw,
+						'p_young_public' 					=> $p_young_public,
+						'p_highlights' 						=> $p_highlights,
+						'p_translator' 						=> $p_translator,
+						'p_tag' 							=> $p_tag,
+						'p_has_film' 						=> $has_film,
+						'p_count_connections' 				=> $count_connections,
+						'p_connections' 					=> $connections, // 0
+						'f_id' 								=> $f_id,
+						'f_title' 							=> $f_title,
+						'f_french_operating_title' 			=> $f_french_operating_title,
+						'f_movie_length' 					=> $f_movie_length,
+						'f_sections' 						=> $f_sections,
+					);
+
+					// Final Loop
+					foreach($the_days as $key => $the_day) {
+						if ( $key == $p_timestamp ) {
+
+							$the_days[$p_timestamp]['has_films'] = true;
+
+							foreach($p_rooms as $p_room) {
+								$the_days[$p_timestamp]['rooms'][$p_room->parent]['has_films'] = true;
+								$the_days[$p_timestamp]['rooms'][$p_room->parent]['room'][$p_room->term_id]['has_films'] = true;
+								$the_days[$p_timestamp]['rooms'][$p_room->parent]['room'][$p_room->term_id]['projections'][] = $the_projections[$id]; 
+							}
+						}
+					}
+				?>
+
+
+				<?php endwhile; wp_reset_postdata();
+				//echo '<pre>',print_r($the_projections,1),'</pre>';
+				//echo '<pre>',print_r($the_days,1),'</pre>';
+
+				// Render HTML 
+				print('<div class="modal-body container-fluid" style="position: relative;overflow-y: scroll;height: 100%;" id="programmationModalToScroll">');
+				
+				foreach($the_days as $key => $the_day) {
+
+					//echo '<pre>',print_r($the_day,1),'</pre>';
+
+					//Days 
+					if ( $the_day['has_films'] === true ) {
+
+						printf('<!-- Day -->
+						<div class="row g-0 mb-4">
+							<div class="col-md-5 col-day bg-gray p-6">
+								<a class="scrollspy text-white" id="day%d" data-count="%d" data-ts="%d">
+									<span class="subline-4">%s</span>
+									<span class="display-1 d-block mt-3">%s</span>
+								</a>
+							</div>',
+							esc_html($the_day['day_number']),
+							esc_html($the_day['day_count']),
+							esc_html($the_day['day']),
+							esc_html($the_day['weekday']),
+							esc_html($the_day['day_number'])
+						);
+
+						print('<!-- Rooms -->
+							<div class="col-md-7 p-0">');
+
+						// Rooms
+						foreach($the_day['rooms'] as $key => $the_day_rooms) {
+							if ( array_key_exists('has_films', $the_day_rooms) && $the_day_rooms['has_films'] === true ) {
+							
+
+								// Room 
+								foreach($the_day_rooms['room'] as $key => $the_day_room) {
+
+									//echo '<pre>'.print_r($the_day_room,1).'</pre>';
+
+									if ( array_key_exists('has_films', $the_day_rooms) && $the_day_room['has_films'] === true ) {
+
+										$r_use_parent_room_title = get_term_meta( $the_day_room['term_id'], 'wpcf-r-use-parent-room-title', true );
+										$r_use_parent_room_title = ($r_use_parent_room_title == '1')?true:false;
+										
+										printf('<!-- Room  -->
+										<div class="d-flex flex-column flex-lg-row w-100">
+											<div class="col-room bg-dark p-6">
+												<div class="room-list">
+													<a href="%s" class="room-item">%s</a>
+													<a href="%s" class="parentroom-item %s">%s</a>
+												</div>
+											</div>',
+											(($r_use_parent_room_title === false)?(($the_day_room['slug'])?get_term_link($the_day_room['slug'], 'room'):'ERROR'):(($the_day_rooms['slug'])?get_term_link($the_day_rooms['slug'], 'room'):'ERROR')),
+											(($r_use_parent_room_title === false)?(($the_day_room['name'])?esc_html($the_day_room['name']):'ERROR'):(($the_day_rooms['name'])?esc_html($the_day_rooms['name']):'ERROR')),
+											(($the_day_rooms['slug'])?get_term_link($the_day_rooms['slug'], 'room'):'ERROR'),
+											(($r_use_parent_room_title === false)?'':'d-none'),
+											(($the_day_rooms['name'])?esc_html($the_day_rooms['name']):'ERROR')
+										);
+
+										print('<!-- Film --><div class="col-films bg-light p-6 text-black text-dark color-black">
+													<dl class="row">');
+										// Film 
+										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
+											//if ( $the_day_room_projections['has_films'] === true ) {
+												
+												// Sections
+												$html_f_section = '';
+												if (array_key_exists('f_sections', $the_day_room_projections) && is_array($the_day_room_projections['f_sections'])) foreach($the_day_room_projections['f_sections'] as $f_section) {
+													$f_section_color = get_term_meta( $f_section->term_id, 'wpcf-s-color', true );
+													$f_section_edition = get_term_meta( $f_section->term_id, 'wpcf-select-edition', true );
+													if ( $current_edition_id == $f_section_edition ) // Only current edition sections
+													$html_f_section .= sprintf('<a href="%s" %s class="dot-section" data-toggle="tooltip" data-container=".modal" data-title="%s" data-original-title="" title="">•</a>',
+													get_term_link($f_section->slug, 'section'),
+													(( $f_section_color != '' )?'style="color: '.$f_section_color.';"':''),
+													$f_section->name
+													);
+												}
+
+												// Print film
+												printf('<dt class="col-2" data-p-id="%d"><p class="length" data-p-begin="%s">%s</p></dt>
+												<dd class="col-10" data-p-id="%d">
+													<p>
+														<a href="%s" class="%s">%s</a>&nbsp;
+														%s
+														%s
+													</p>
+												</dd>',
+												esc_attr( $the_day_room_projections['p_id'] ),
+												esc_html( $the_day_room_projections['p_start_and_stop_time__begin'] ),
+												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
+												esc_attr( $the_day_room_projections['p_id'] ),
+												get_permalink( $the_day_room_projections['f_id'] ),
+												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
+												esc_html(( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']),
+												(( $the_day_room_projections['f_movie_length'] != '' )?'<span class="length">'.$the_day_room_projections['f_movie_length'].'\'</span>':''),
+												$html_f_section
+												);
+
+											//}
+										}
+
+										print('</dl>
+												</div><!-- END: Film -->');
+
+										print('</div><!-- END: Room -->');
+
+									}
+								}
+							}
+						}
+
+						print('</div><!-- END: Rooms --> ');
+						print('</div><!-- END: Day-->');
+
+					}
+				}
+				print('</div> <!-- End: Modal body -->');
+		?>
+												
+			<div class="modal-footer container-fluid d-none d-xl-flex">
+				<button type="button" class="btn btn-link text-decoration-none link-white color-white mx-4"><i class="icon icon-catalogue f-24 lh-48"></i> <span class="subline d-block"><?= esc_html__( 'Planner', 'waff' ) ?> *.pdf</span></button>
+				<button type="button" class="btn btn-link text-decoration-none link-white color-white mx-4"><i class="icon icon-brochure f-24 lh-48"></i> <span class="subline d-block"><?= esc_html__( 'Booklet', 'waff' ) ?> *.pdf</span></button>
+				<button type="button" class="btn btn-link text-decoration-none link-white color-white mx-4"><i class="icon icon-ticket f-24 lh-48"></i> <span class="subline d-block"><?= esc_html__( 'Book', 'waff' ) ?></span></button>
+			</div>
+			</div>
+		</div>
+		</div>
+		<!-- END: Modal --> 
+
+		<!-- .programmation-button Fixed programmation button for mobile -->
+		<div class="fixed-bottom d-xl-none d-flex zi-max" style="left: auto;">
+			<div class="bg-gray text-center text-white link-white d-inline-block when-modal-is-open">
+				<div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="" class="link"><i class="icon icon-catalogue pr-0 f-12"></i> <?= esc_html__( 'Planner', 'waff' ) ?></a></div>
+				<div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="" class="link"><i class="icon icon-brochure pr-0 f-12"></i> <?= esc_html__( 'Booklet', 'waff' ) ?></a></div>
+				<div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="" class="link"><i class="icon icon-ticket pr-0 f-12"></i> <?= esc_html__( 'Book', 'waff' ) ?></a></div>
+			</div>
+			<div class="bg-action-1 text-center text-white link-white d-inline-block">
+				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-toggle="modal" data-target="#programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+			</div>	
+		</div>
+		<!-- END: .programmation-button  -->
+			
+		<?php endif; // !$current_edition_films_are_online ?> 
+
+		<!-- END: Programmation Widget  -->
+			
+		<?php
+		// echo $args['after_widget'];
+	}
+	          
+	// Widget Backend 
+	public function form( $instance ) {
+        $instance = wp_parse_args( (array) $instance, $this->default_instance );
+	    if ( !isset($instance['classes']) )
+	        $instance['classes'] = null;
+
+		/** This filter is documented in wp-includes/class-wp-editor.php */
+		$text = apply_filters( 'the_editor_content', $instance['text'], $default_editor );
+
+		// Reset filter addition.
+		if ( user_can_richedit() ) {
+			remove_filter( 'the_editor_content', 'format_for_editor' );
+		}
+
+		// Prevent premature closing of textarea in case format_for_editor() didn't apply or the_editor_content filter did a wrong thing.
+		$escaped_text = preg_replace( '#</textarea#i', '&lt;/textarea', $text );
+
+		// Widget admin form
+		?>
+		<p style="display: none;">
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'waff' ); ?></label> 
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'text' ); ?>"><?php _e( 'Content:', 'waff' ); ?></label>
+			<textarea class="widefat" rows="8" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $instance['text'] ); ?></textarea>
+		</p>
+	    <p>
+		    <label for="<?php echo $this->get_field_id('classes'); ?>"><?php esc_html_e('Classes:', 'waff' ); ?></label>
+		    <input type="text" id="<?php echo $this->get_field_id( 'classes' ); ?>" name="<?php echo $this->get_field_name( 'classes' ); ?>" class="widefat classes sync-input" value="<?php echo esc_attr( $instance['classes'] ); ?>"/>
+		</p>
+		<?php 
+	}
+	      
+	// Updating widget replacing old instances with new
+	public function update( $new_instance, $old_instance ) {
+		$new_instance = wp_parse_args(
+			(array) $new_instance,
+			$this->default_instance
+		);
+
+		$instance = $old_instance;
+
+		$instance['title'] = sanitize_text_field( $new_instance['title'] );
+		$instance['classes'] = sanitize_text_field( $new_instance['classes'] );
+
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			$instance['text'] = $new_instance['text'];
+		} else {
+			$instance['text'] = wp_kses_post( $new_instance['text'] );
+		}
+
+		return $instance;
+	}
+	 
+// Class projections ends here
+} 
+ 
+ 
+// Register and load the widget
+function WP_Widget_Programmation_init() {
+    register_widget( 'WP_Widget_Programmation' );
+}
+add_action( 'widgets_init', 'WP_Widget_Programmation_init' );

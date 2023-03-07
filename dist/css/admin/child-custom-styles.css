@@ -1,0 +1,16 @@
+/* Remove unneeded ( for wafftwo ) elmts in customizer */
+
+#customize-control-title_header_colors,
+#customize-control-header_background_color,
+#customize-control-header_text_color,
+#customize-control-title_footer_colors,
+#customize-control-footer_background_color,
+#customize-control-footer_text_color {
+    display: none;
+}
+
+/* Fix MetaBox blocks On the right sidebar design issue */
+
+.mb-block-edit .rwmb-field {
+	display: block !important;
+}

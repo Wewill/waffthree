@@ -1,0 +1,1535 @@
+<?php
+/**
+ * Blocks setup and functions.
+ * v2.0
+ * @package WaffTwo\Blocks
+ */
+
+namespace WaffTwo\Blocks;
+
+use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
+use function WaffTwo\Theme\waff_get_edition_badge as waff_get_edition_badge;
+use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
+use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
+use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
+//use function Go\hex_to_rgb as hex_to_rgb; 
+
+/**
+ * Set up theme defaults and register supported WordPress features.
+ *
+ * @return void
+ */
+function setup() {
+	$n = function( $function ) {
+		return __NAMESPACE__ . "\\$function";
+	};
+
+	// Register Theme Blocks
+	add_filter( 'rwmb_meta_boxes', $n( 'waff_blocks_register_meta_boxes' ));
+
+	// Allow / Disallow some blocks 
+	//add_filter( 'allowed_block_types', $n( 'waff_allowed_block_types' ), 20, 2 );
+
+	// Adds custom theme options to wp bootstrap blocks plugin
+	add_action( 'enqueue_block_editor_assets', $n( 'waff_wp_boostrap_enqueue_block_editor_assets' ));
+}
+
+
+/**
+ * Setup Blocks ( helped from MB Blocks php code )
+ */
+
+function waff_blocks_register_meta_boxes( $meta_boxes ) {
+	$prefix = 'waff_';
+
+	// WA Lastest posts
+    $meta_boxes[] = [
+        'title'           => esc_html__( '(WA) Lastest posts', 'waff' ),
+        'id'              => 'wa-lastest-posts',
+        'fields'          => [
+            [
+                'id'   => $prefix . 'lp_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Featured title', 'waff' ),
+                // 'std'  => esc_html__( 'Breaking news', 'waff' ),
+                'placeholder' => esc_html__( 'Breaking news', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'lp_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Posts title', 'waff' ),
+                // 'std'  => esc_html__( 'News', 'waff' ),
+                'placeholder' => esc_html__( 'News', 'waff' ),
+			],
+			[
+                'id'      => $prefix . 'lp_limit',
+                'name'    => esc_html__( 'Limit posts to ?', 'waff' ),
+                'type'    => 'radio',
+                'desc'    => esc_html__( 'Choose the number of lastest posts to show', 'waff' ),
+                'std'     => 5,
+                'options' => [
+                    4 => esc_html__( '4', 'waff' ),
+                    5 => esc_html__( '5', 'waff' ),
+                    6 => esc_html__( '6', 'waff' ),
+                ],
+                'inline'  => 1,
+			],
+			[
+                'id'    => $prefix . 'lp_morelink',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display more link ?', 'waff' ),
+                'style' => 'rounded',
+			],
+			[
+                'id'		=> $prefix . 'lp_posttype',
+                'name'		=> esc_html__( 'Select post type', 'waff' ),
+                'type'		=> 'select',
+                'desc'		=> esc_html__( 'Choose which post is the lastest post. Default : posts', 'waff' ),
+                'std'		=> 'post',
+                //'placeholder'       => esc_html__( 'Placeholder', 'waff' ),
+                'options'           => [
+                    'post' => esc_html__( 'post', 'waff' ),
+                    'page' => esc_html__( 'page', 'waff' ),
+                    'film' => esc_html__( 'film', 'waff' ),
+                    'jury' => esc_html__( 'jury', 'waff' ),
+                ],
+                'required'          => 1,
+                'label_description' => esc_html__( 'Label', 'waff' ),
+                //'before'            => 'html before',
+                //'after'             => 'html after',
+                //'class'             => 'Customcss',
+                'key'               => 'value',
+			],	
+			[
+                'id'         => $prefix . 'lp_categories',
+                'type'       => 'taxonomy',
+                'name'       => esc_html__( 'Select categories', 'waff' ),
+                'taxonomy'   => 'category',
+                'desc'       => esc_html__( 'Choose to limit to those categories. If empty, all the categories will be showed. Only works with posts.', 'waff' ),
+                'field_type' => 'checkbox_list',
+				'multiple' => true,
+				'select_all_none' => true,
+				'query_args'  => array(
+					'post_status'    => 'publish',
+					'posts_per_page' => - 1,
+				),
+				'hidden' => array( $prefix . 'lp_posttype', '!=', 'post' ),
+            ],	
+            [
+                'id'      => $prefix . 'lp_style',
+                'name'    => esc_html__( 'Select style', 'waff' ),
+                'type'    => 'select',
+                'desc'    => esc_html__( 'Choose the style of the lastest posts block', 'waff' ),
+                'std'     => 'normal',
+                'options' => [
+                    'normal' => esc_html__( 'Normal', 'waff' ),
+                    'magazine' => esc_html__( 'Magazine', 'waff' ),
+                    'bold' => esc_html__( 'Bold', 'waff' ),
+                ],
+			],		
+		],
+        'category'        => 'layout',
+        'icon'            => 'format-standard',
+        'description'     => esc_html__( 'Display lastest posts', 'waff' ),
+        'keywords'        => ['lastest', 'posts', 'blog', 'articles'],
+        'supports'        => [
+            'anchor'          => true,
+            'customClassName' => true,
+            'align'           => ['wide'], // left, center, right, 
+        ],
+        //'enqueue_style'  => 'customCSS',
+        //'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_lastest_posts_callback',
+        'type'            => 'block',
+		'context'         => 'side',
+		//Special attrs
+        //'key'       	  => 'value',
+	];
+	
+	// WA Partners
+	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
+	$meta_boxes[] = [
+		'title'           => esc_html__( '(WA) Partners', 'waff' ),
+		'id'              => 'wa-partners',
+		'fields'          => [
+			[
+				'id'         => $prefix . 'pn_categories',
+				'type'       => 'taxonomy',
+				'name'       => esc_html__( 'Select categories', 'waff' ),
+				'taxonomy'   => $partner_category,
+				'desc'       => esc_html__( 'Choose to display those categories. If empty, none of the categories will be displayed.', 'waff' ),
+				'field_type' => 'checkbox_list',
+				'multiple' => true,
+				'select_all_none' => true,
+				'query_args'  => array(
+					'post_status'    => 'publish',
+					'posts_per_page' => - 1,
+				),
+				//'hidden' => array( $prefix . 'lp_posttype', '!=', 'post' ),
+			],	
+		
+		],
+		'category'        => 'layout',
+		'icon'            => 'megaphone',
+		'description'     => esc_html__( 'Display the current edition partners', 'waff' ),
+		'keywords'        => ['partners', 'posts', 'partner', 'logotype'],
+		'supports'        => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide'], // left, center, right, 
+		],
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_partners_callback',
+		'type'            => 'block',
+		'context'         => 'side',
+		//Special attrs
+		//'key'       	  => 'value',
+	];
+	
+	// WA Edito
+	$meta_boxes[] = [
+        'title'          => esc_html__( '(WA) Edito', 'waff' ),
+        'id'             => 'wa-edito',
+        'fields'         => [
+            [
+                'id'   => $prefix . 'e_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Title', 'waff' ),
+                // 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+                'placeholder' => esc_html__( 'An awesome edition', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'e_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Subtitle', 'waff' ),
+                'std'  => esc_html__( 'Edito', 'waff' ),
+                //'placeholder' => esc_html__( 'An awesome edition', 'waff' ),
+			],
+			[
+                'id'   => $prefix . 'e_leadcontent',
+                'type' => 'textarea',
+                'name' => esc_html__( 'Lead content', 'waff' ),
+                'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'e_content',
+                'type' => 'textarea',
+                'name' => esc_html__( 'Content', 'waff' ),
+                'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+            ],
+            [	
+                'id'   => $prefix . 'e_image',
+                'type' => 'image_upload',
+				'name' => esc_html__( 'Image', 'waff' ),
+                'image_size'       => 'page-featured-image',
+                'max_file_uploads' => 1,
+            ],
+            [
+                'id'    => $prefix . 'e_fit',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Fit image size or limit block ?', 'waff' ),
+                'style' => 'rounded',
+			],
+			[
+                'id'    => $prefix . 'e_editionbadge',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display edition badge ?', 'waff' ),
+                'style' => 'rounded',
+            ],
+            [
+                'id'    => $prefix . 'e_morelink',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display more link ?', 'waff' ),
+                'style' => 'rounded',
+            ],
+            [
+                'id'   => $prefix . 'e_moreurl',
+                'type' => 'url',
+                'name'  => esc_html__( 'More URL', 'waff' ),
+                'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+            ],
+            [
+                'id'    => $prefix . 'e_framed',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display framed version ?', 'waff' ),
+                'desc'  => esc_html__( 'Adds a frame around the content.', 'waff' ),
+                'style' => 'rounded',
+			],
+		],
+		'category'       => 'layout',
+        'icon'           => 'format-quote',
+        'description'     => esc_html__( 'Display edito bloc', 'waff' ),
+        'keywords'       => ['edito', 'post', 'text'],
+        'supports'       => [
+            'anchor'          => true,
+            'customClassName' => true,
+            'align'           => ['wide', 'full'],
+        ],
+        //'render_code'    => '{{Twix}}',
+        //'enqueue_style'  => 'customCSS',
+        //'enqueue_script' => 'CustomJS',
+        //'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_edito_callback',
+        'type'           => 'block',
+        'context'        => 'side',
+        //'Keyattrs'       => 'Value',
+	];
+
+	// WA Contact page
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Contact', 'waff' ),
+		'id'             => 'wa-contact',
+		'fields'         => [
+			// Gallery
+            [
+                'name'              => __( 'Contact block gallery', 'waff' ),
+                'id'                => $prefix . 'c_gallery',
+                'type'              => 'image_advanced',
+                'label_description' => __( 'Choose the images', 'waff' ),
+                'max_file_uploads'  => 4,
+                'required'          => true,
+                'image_size'        => 'post-featured-image',
+			],
+			// First line
+			[
+                'type' => 'heading',
+                'name' => __( 'First block', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'c_first_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'placeholder' => esc_html__( 'Get in touch !', 'waff' ),
+			],
+			[
+                'id'   => $prefix . 'c_first_content',
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Rich content', 'waff' ),
+			],
+			// Second line
+			[
+                'type' => 'heading',
+                'name' => __( 'Second block', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'c_second_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'placeholder' => esc_html__( 'Get in touch !', 'waff' ),
+			],
+			[
+                'id'   => $prefix . 'c_second_content',
+                'type' => 'wysiwyg',
+                'name' => esc_html__( 'Rich content', 'waff' ),
+			],
+			// Form
+			[
+                'type' => 'heading',
+                'name' => __( 'Contact form', 'waff' ),
+			],
+			// [
+            //     'id' => $prefix . 'c_form',
+            //     'type' => 'gform_select', >> TO DEBUG 
+            //     'name' => esc_html__( 'Select contact form', 'waff' ),
+			// ],
+			[
+				'id'   => $prefix . 'c_form',
+				'type' => 'number',
+				'name' => esc_html__( 'Contact form id', 'waff' ),
+                'desc' => esc_html__( 'Fill the Gravity form id.', 'waff' ),
+			],			
+		],
+		'category'       => 'layout',
+		'icon'           => 'text-page',
+		'description'     => esc_html__( 'Display edito bloc', 'waff' ),
+		'keywords'       => ['contact', 'post', 'text'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_contact_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
+	// WA Awards
+    $prefix = 'waff_'; // A SUPPR APRES ≠ 
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Awards', 'waff' ),
+		'id'             => 'wa-awards',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'a_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'std'  => esc_html__( 'Awards', 'waff' ),
+				'placeholder' => esc_html__( 'Title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'a_leadcontent',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Lead content', 'waff' ),
+				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'a_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Content', 'waff' ),
+				'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+			],
+			[
+				'id'         => $prefix . 'a_edition',
+				'type'       => 'taxonomy',
+				'name'       => esc_html__( 'Select edition', 'waff' ),
+				'taxonomy'   => 'edition',
+				'desc'       => esc_html__( 'Choose to display edition awards. If empty, none of the editions will be displayed.', 'waff' ),
+				'field_type' => 'radio_list',
+				'multiple' => false,
+				'select_all_none' => false,
+				'query_args'  => array(
+					'post_status'    => 'publish',
+					'posts_per_page' => - 1,
+				),
+				//'hidden' => array( 'waff_lp_posttype', '!=', 'post' ),
+			],
+			[
+				'id'      => $prefix . 'a_display',
+				'name'    => esc_html__( 'Choose display', 'waff' ),
+				'type'    => 'select',
+				'desc'    => esc_html__( 'Choose to display all the awards or selected awards', 'waff' ),
+				'std'     => 5,
+				'options' => [
+					0 => esc_html__( 'All', 'waff' ),
+					1 => esc_html__( 'Master awards only', 'waff' ),
+					2 => esc_html__( 'Standard awards only', 'waff' ),
+				],
+				'inline'  => 1,
+			],
+			[
+				'id'    => $prefix . 'a_morelink',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display more link ?', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'   => $prefix . 'a_moreurl',
+				'type' => 'url',
+				'name'  => esc_html__( 'More URL', 'waff' ),
+				'hidden' => array( $prefix . 'a_morelink', '!=', 1 ),
+			],
+		],
+		'category'       => 'layout',
+		'icon'           => 'megaphone',
+		'description'     => esc_html__( 'Display awards bloc', 'waff' ),
+		'keywords'       => ['awards', 'film', 'post', 'text'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_awards_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
+	// WA Playlist
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Playlist', 'waff' ),
+		'id'             => 'wa-playlist',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'pl_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'std'  => esc_html__( 'Title', 'waff' ),
+				'placeholder' => esc_html__( 'Title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'pl_leadcontent',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Lead content', 'waff' ),
+				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'pl_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Content', 'waff' ),
+				'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+			],
+			[
+				'id'         => $prefix . 'pl_videos',
+				'type'       => 'oembed',
+				'name'       => __( 'Video(s)', 'waff' ),
+				'std'        => 'https://youtu.be/...',
+				'required'   => true,
+				'clone'      => true,
+				'sort_clone' => true,
+				'max_clone'  => 99,
+				'add_button' => __( 'Add more video to the playlist', 'waff' ),
+			],
+			[
+				'id'    => $prefix . 'pl_playlist',
+				'type' => 'text',
+				'name'  => esc_html__( 'Fill youtube playlist ID here if you want to show it', 'waff' ),
+			],
+			[
+				'id'    => $prefix . 'pl_autoplay',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Autoplay videos ?', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'    => $prefix . 'pl_fullwidth',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display fullwidth videos ?', 'waff' ),
+				'desc' => esc_html__( 'Diplayed in thumbnails by default.', 'waff' ),
+				'style' => 'rounded',
+			],
+		],
+		'category'       => 'layout',
+		'icon'           => 'video-alt3',
+		'description'     => esc_html__( 'Display a video playlist bloc ( better with youtube ).', 'waff' ),
+		'keywords'       => ['video', 'youtube', 'playlist', 'film', 'post', 'text'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_playlist_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+	
+    return $meta_boxes;
+}
+
+function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
+
+	// print_r($attributes);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
+	$themeClass = 'featured mt-md-10 mb-md-10 mt-5 mb-5 contrast--dark fix-vh-50'; // Responsive issue fix
+
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+
+	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' || mb_get_block_field( 'waff_lp_style' ) == null ) :
+	?>
+		<div class="alert alert-dark"><p><?php _e('Normal style not defined', 'waff'); ?></p></div>
+	<?php 
+	endif;
+
+	if ( mb_get_block_field( 'waff_lp_style' ) === 'magazine' ) :
+	?>
+	<!-- #Featured / Magazine style -->
+	<section id="featured-<?= $id ?>" class="magazine-style <?= $class ?>">
+		<div class="container-fluid px-0">
+		<div class="row g-0 align-items-top">
+
+			<?php 
+			$sticky_posts 	= array();
+			$categories 	= array();
+			// mb_get_block_field / mb_the_block_field
+			$limit 			= esc_attr(mb_get_block_field( 'waff_lp_limit' ));
+			$morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
+			$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' )); 
+
+			if ( $posttype === 'post' ) {
+				$categories 	= $attributes['data']['waff_lp_categories']; 
+				// print_r($categories);
+				// echo implode(',',array_values($categories));
+			}
+
+			$sticky_posts = get_posts(array(
+			'post_type'			=> $posttype,
+				'numberposts' 		=> $limit, 
+				'post_status' 		=> 'publish', // Show only the published posts
+				'orderby'			=> 'post_date',
+				'order'				=> 'DESC',
+				// Only the stiky ones !
+				'post__in'  		=> get_option( 'sticky_posts' ),
+				'ignore_sticky_posts' => true,
+			// Limit to selected cats 
+			'category'		=> implode(',',array_values($categories)),
+			));
+
+			$args = array( 
+				'post_type'			=> $posttype,
+				'numberposts' 		=> $limit, 
+				'post_status' 		=> 'publish', // Show only the published posts
+				'orderby'			=> 'post_date',
+				'order'				=> 'DESC',
+				// All but not sticky !
+				'post__not_in'  => get_option( 'sticky_posts' ),
+				// Limit to selected cats 
+				'category'		=> implode(',',array_values($categories)),
+			);
+			$index = 0;
+			$recent_posts = get_posts($args);
+			//$recent_posts = array_merge($sticky_posts, $recent_posts);
+
+			if ( count($sticky_posts) > 0 ) :
+				foreach( $sticky_posts as $post_item ) : 
+					$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_item->ID );
+					//$rgb_post_color			= waff_HTMLToRGB($post_color, 'array');
+					$the_categories 		= get_the_category($post_item->ID);
+					$excerpt 	= get_the_excerpt($post_item->ID);
+					$excerpt 	= force_balance_tags( html_entity_decode( wp_trim_words( htmlentities($excerpt), 15, '...' ) ) );
+					$sticky_post_date = wp_kses(
+						sprintf(
+							'<time datetime="%1$s">%2$s</time>',
+							esc_attr( get_the_date( DATE_W3C, $post_item->ID ) ),
+							( qtranxf_getLanguage() == 'en' )?date_i18n( 'M jS Y', strtotime( get_the_date( DATE_W3C, $post_item->ID ) )  ) : get_the_date('j F Y', $post_item->ID)
+						),
+						array_merge(
+							wp_kses_allowed_html( 'post' ),
+							array(
+								'time' => array(
+									'datetime' => true,
+								),
+							)
+						)
+					);
+					?>
+					<!-- BEGIN: Sticky post -->
+					<div class="col-md-6 p-4" data-aos="fade-right">
+						<h6 class="headline d-inline"><?= mb_get_block_field( 'waff_lp_title' ) ?></h6>
+					</div>
+					<div class="col-md-6 p-0 vh-75 img-shifted shift-right overflow-visible" data-aos="fade-left" data-aos-delay="200">
+						<!-- Images -->
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_item->ID, 'post-thumbnail'); ?>');"></div>
+						
+						<!-- Content -->
+						<div class="card bg-transparent h-100 p-4 border-0 rounded-0 d-flex flex-column justify-content-center n-ms-50 w-100">
+							<h6 class="display d-inline text-action-1 f-14 text-center">
+							<?php if ( ! empty( $the_categories ) ) { echo '<a class="text-action-1" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . ' <span class="bullet bullet-action-1 w-25"></span></a>'; } ?>
+							</h6>
+							<div class="main-post my-5">
+								<h1 class="card-title light display-2"><a href="<?php echo get_permalink($post_item->ID) ?>" class="stretched-link"><?php echo $post_item->post_title ?></a></h1>
+								<p class="card-date mt-2 mb-0"><?php echo $sticky_post_date; ?></p>
+								<p class="card-text d-none"><?php echo $excerpt; ?></p>
+							</div>
+							<p class="text-action-2 pb-0 mb-0"><i class="icon icon-plus"></i> <?php _e('Read more', 'waff'); ?></p>
+						</div>
+					</div>
+					<!-- END: Sticky post --> 
+					<?php
+				endforeach;
+			endif;
+
+			if ( count($recent_posts) > 0 ) :
+				// $oldest_post_date = get_the_date('j F Y', $recent_posts[0]->ID);
+				$oldest_post_date = wp_kses(
+					sprintf(
+						'<time datetime="%1$s">%2$s</time>',
+						esc_attr( get_the_date( DATE_W3C, $recent_posts[0]->ID ) ),
+						( qtranxf_getLanguage() == 'en' )?date_i18n( 'M jS Y', strtotime( get_the_date( DATE_W3C, $recent_posts[0]->ID ) )  ) : get_the_date('j F Y', $recent_posts[0]->ID)
+					),
+					array_merge(
+						wp_kses_allowed_html( 'post' ),
+						array(
+							'time' => array(
+								'datetime' => true,
+							),
+						)
+					)
+				);
+				?>
+				<!-- BEGIN: Posts -->
+				<div class="col-md-3 p-4" data-aos="fade-right">
+					<h6 class="headline d-inline"><?= mb_get_block_field( 'waff_lp_subtitle' ) ?></h6>
+				</div>
+				<div class="col-md-9 p-4 bold text-action-2" data-aos="fade-left">
+					<?php echo $oldest_post_date; ?> <span class="bullet bullet-action-1"></span> <span class="color-action-1"><?php _e('Now', 'waff'); ?></span>
+				</div>				
+				<!-- END: Posts --> 
+				<div class="col-md-12 p-0" data-aos="fade-down" data-aos-delay="400">
+				<div class="list-group list-group-horizontal-lg list-group-flush rounded-0">
+					<?php
+					// Lightness threshold
+					$lightness_threshold = 130;
+
+					foreach( $recent_posts as $post_item ) : 
+						$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_item->ID );
+						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array');
+						$post_color_class					= 'contrast--light';
+						$post_title_color 					= 'color-dark';
+						if ( $rgb_post_color != '' ) {
+							$hsl = waff_RGBToHSL($rgb_post_color);
+							if($hsl->lightness < $lightness_threshold) {
+								$post_color_class 			= 'contrast--dark';
+								$post_title_color 			= 'color-dark';	// Here, this is the same because we do need to handle the hover state l:547
+							}
+						}
+
+
+						$the_categories 		= get_the_category($post_item->ID);
+
+						/*$excerpt = '';
+						$excerpt = wp_strip_all_tags(get_the_excerpt($post_item->ID));
+						if ( strlen($excerpt) > 160 ) {
+							$excerpt = substr($excerpt, 0, 160);
+							$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
+						}*/
+						$excerpt 	= get_the_excerpt($post_item->ID);
+						$excerpt 	= force_balance_tags( html_entity_decode( wp_trim_words( htmlentities($excerpt), 15, '...' ) ) );
+
+						if ( $index > $limit ) { continue; }
+						?>
+						<a 	id="post-<?php echo esc_attr($post_item->ID); ?>" 
+							href="<?php echo get_permalink($post_item->ID) ?>" 
+							class="<?= $post_color_class ?> <?= ( $post_color != '' && $post_color_class != 'contrast--light' )?'has-hover-background':''; ?> --vh-50 lg-vh-50 mh-380-px min-h-180-px p-4 p-sm-5 border border-start-0 border-transparent-color-silver list-group-item list-group-item-light list-group-item-action d-flex flex-column align-items-start justify-content-between"						>
+							<div>
+								<p class="<?= $post_title_color ?> text-muted list-date mt-1 mb-0 d-none"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
+								<h3 class="<?= $post_title_color ?> mb-1 mt-0"><?php echo $post_item->post_title ?></h3>
+								<p class="text-action-2 list-text f-14"><?php echo $excerpt; ?></p>
+							</div>
+							<p class="text-action-2 pb-0 mb-0"><i class="icon icon-plus"></i> <?php _e('Read more', 'waff'); ?></p>
+						</a>
+						<?php if ( $post_color != '' ) : ?>
+						<style> .list-group a#post-<?php echo esc_attr($post_item->ID); ?>.list-group-item:hover { background-color:<?= $post_color ?> !important; }</style>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
+				</div>
+				<?php endif; ?>
+		</div>
+		</div>
+	</section>
+	<!-- END: #Featured / Magazine style-->
+	<?php
+	endif;
+
+	if ( mb_get_block_field( 'waff_lp_style' ) === 'bold' ) :
+	?>
+	<!-- #Featured / Bold style -->
+	<section id="featured-<?= $id ?>" class="bold-style <?= $class ?>" style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid px-0">
+		<div class="row g-0 align-items-top">
+			<div class="col-md-2 p-4" data-aos="fade-right">
+				<h6 class="headline d-inline"><?= mb_get_block_field( 'waff_lp_title' ) ?></h6>
+			</div>
+			<?php 
+			$sticky_posts 	= array();
+			$categories 	= array();
+			// mb_get_block_field / mb_the_block_field
+			$limit 			= esc_attr(mb_get_block_field( 'waff_lp_limit' ));
+			$morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
+			$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' )); 
+
+			if ( $posttype === 'post' ) {
+				$categories 	= $attributes['data']['waff_lp_categories']; 
+				// print_r($categories);
+				// echo implode(',',array_values($categories));
+			}
+
+				$sticky_posts = get_posts(array(
+				'post_type'			=> $posttype,
+					'numberposts' 		=> $limit, 
+					'post_status' 		=> 'publish', // Show only the published posts
+					'orderby'			=> 'post_date',
+					'order'				=> 'DESC',
+					// Only the stiky ones !
+					'post__in'  		=> get_option( 'sticky_posts' ),
+					'ignore_sticky_posts' => true,
+				// Limit to selected cats 
+				'category'		=> implode(',',array_values($categories)),
+				));
+
+			$args = array( 
+				'post_type'			=> $posttype,
+				'numberposts' 		=> $limit, 
+				'post_status' 		=> 'publish', // Show only the published posts
+				'orderby'			=> 'post_date',
+				'order'				=> 'DESC',
+				// All but not sticky !
+				'post__not_in'  => get_option( 'sticky_posts' ),
+				// Limit to selected cats 
+				'category'		=> implode(',',array_values($categories)),
+			);
+			$index = 0;
+			$recent_posts = get_posts($args);
+			$recent_posts = array_merge($sticky_posts, $recent_posts);
+
+			foreach( $recent_posts as $post_item ) : 
+				$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_item->ID );
+				$rgb_post_color			= waff_HTMLToRGB($post_color, 'array');
+				$the_categories 		= get_the_category($post_item->ID);
+				/*$excerpt = '';
+				$excerpt = wp_strip_all_tags(get_the_excerpt($post_item->ID));
+				if ( strlen($excerpt) > 160 ) {
+					$excerpt = substr($excerpt, 0, 160);
+					$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
+				}*/
+				$excerpt 	= get_the_excerpt($post_item->ID);
+				$excerpt 	= force_balance_tags( html_entity_decode( wp_trim_words( htmlentities($excerpt), 15, '...' ) ) );
+				if ( ++$index === 1 ) { 
+					?>
+					<!-- First -->
+					<div class="col-md-5 p-0 vh-50 bg-dark img-shifted shift-right nofilter-hover" data-aos="fade-down" data-aos-delay="200">
+						<!-- Images -->
+						<!-- https://yoksel.github.io/svg-gradient-map/ -->
+						<svg class="duotone-filters position-absolute" xmlns="http://www.w3.org/2000/svg">	
+							<filter id="duotone_featured" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+								<feColorMatrix type="matrix" values="1 0 0 0 0
+							1 0 0 0 0
+							1 0 0 0 0
+							0 0 0 1 0" in="SourceGraphic" result="colormatrix"></feColorMatrix>
+								<feComponentTransfer in="colormatrix" result="componentTransfer">
+									<feFuncR type="table" tableValues="0 <?= $rgb_post_color[0]/255; ?>"/>
+									<feFuncG type="table" tableValues="0 <?= $rgb_post_color[1]/255; ?>"/>
+									<feFuncB type="table" tableValues="0 <?= $rgb_post_color[2]/255; ?>"/>
+									<feFuncA type="table" tableValues="0 1"/>
+								</feComponentTransfer>
+								<feBlend mode="normal" in="componentTransfer" in2="SourceGraphic" result="blend"></feBlend>
+							</filter>
+						</svg>
+						<div class="bg-image bg-cover bg-position-top-center image--origin" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_item->ID, 'post-thumbnail'); ?>');"></div>
+						<div class="bg-image bg-cover bg-position-top-center image--filtered" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_item->ID, 'post-thumbnail'); ?>');"></div>
+						<!-- Content -->
+						<div class="card bg-transparent text-white h-100 p-4 border-0 rounded-0 d-flex flex-column justify-content-between">
+							<h6 class="display d-inline --action-2 f-14 link-white">
+							<?php if ( ! empty( $the_categories ) ) { echo '<a href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+							</h6>
+							<div class="main-post">
+								<p class="card-date text-white mt-1 mb-0"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
+								<h2 class="card-title w-60"><a href="<?php echo get_permalink($post_item->ID) ?>" class="stretched-link link-white"><?php echo $post_item->post_title ?></a></h2>
+							</div>
+							<p class="card-text"><?php echo $excerpt; ?></p>
+						</div>
+					</div>
+					<!-- END : First --> 
+					<?php
+					continue;
+				}
+				if ( $index === 2 ) { 
+					?>
+				<div class="col-md-5 p-0 min-vh-50 min-h-50" data-aos="fade-down" data-aos-delay="400">
+				<div class="list-group list-group-flush h-100 rounded-0">
+					<!-- Second -->
+					<a id="post-<?php echo esc_attr($post_item->ID); ?>" href="<?php echo get_permalink($post_item->ID) ?>" class="list-group-item list-group-item-dark list-group-item-action d-flex flex-column align-items-start justify-content-start h-55 pr-0 overflow-hidden nofilter-hover">
+						<p class="list-date text-muted mt-2 mb-0"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
+						<div class="d-flex w-100 justify-content-between ">
+							<div class="second-post">
+								<h6 class="normal mb-3 mt-0"><?php echo $post_item->post_title ?></h6>
+								<small><?php echo $excerpt; ?></small>
+							</div>
+							<?php echo get_the_post_thumbnail($post_item->ID, 'thumbnail', array( 'class' => 'img-fluid responsive float-right pl-2 max-w-50' )); ?>
+						</div>
+					</a>
+					<style> .list-group a#post-<?php echo esc_attr($post_item->ID); ?>.list-group-item:hover { background-color:<?= $post_color ?> !important; } </style>
+					<!-- END : Second --> 
+					<?php
+					continue;
+				}
+				if ( $index > $limit ) { continue; }
+				?>
+				<a id="post-<?php echo esc_attr($post_item->ID); ?>" href="<?php echo get_permalink($post_item->ID) ?>" class="third-posts list-group-item list-group-item-dark list-group-item-action d-flex flex-column align-items-start justify-content-center h-15">
+						<p class="list-date text-muted mt-1 mb-0"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
+						<h6 class="normal mb-1 mt-0"><?php echo $post_item->post_title ?></h6>
+				</a>
+				<style> .list-group a#post-<?php echo esc_attr($post_item->ID); ?>.list-group-item:hover { background-color:<?= $post_color ?> !important; } </style>
+			<?php endforeach; ?>
+			
+				</div>
+			</div>
+		</div>
+		</div>
+		<style scoped="">
+			#featured-<?= $id ?> .bg-image {
+				transition: opacity .25s;
+			}
+			
+			#featured-<?= $id ?> img, 
+			#featured-<?= $id ?> .bg-image.image--filtered  {
+				-webkit-filter: url(#duotone_featured);
+				-moz-filter: url(#duotone_featured);
+				-o-filter: url(#duotone_featured);
+				-ms-filter: url(#duotone_featured);
+				filter: url(#duotone_featured);
+			}
+
+			#featured-<?= $id ?> .nofilter-hover:hover img { 
+				-webkit-filter: none;
+				-moz-filter: none;
+				-o-filter: none;
+				-ms-filter: none
+				filter: none;
+			}
+
+			#featured-<?= $id ?> .nofilter-hover:hover .bg-image.image--filtered {
+				opacity:0;
+			}
+		</style>
+	</section>
+	<!-- END: #Featured / Bold style -->
+	<?php
+	endif;
+}
+
+function wa_partners_callback( $attributes, $is_preview = false, $post_id = null ) {
+
+	$partner_post_type 	= ( post_type_exists('partenaire') )?'partenaire':'partner'; // Depreciated WAFFTWO V1 
+	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
+	$partner_field 		= ( post_type_exists('partenaire') )?'p-link':'waff_partner_link'; // Depreciated WAFFTWO V1 
+
+	//print_r($attributes);
+	global $current_edition_id, $current_edition_films_are_online;
+
+	// Fields data.
+	if ( empty( $attributes['name'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'partners mt-1 mb-1 contrast--light';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+
+	?>
+	<!-- #Partners -->
+	<section id="partners-<?= $id ?>" class="<?= $class ?>" style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid px-0">
+
+				<?php 
+				$categories 	= array();
+				$posttype 		= $partner_post_type;
+				$categories 	= $attributes['data']['waff_pn_categories']; 
+
+				foreach($categories as $category) {
+
+					$term = get_term_by( 'id', $category, $partner_category );
+					if ( !empty($term) ) {
+						?>
+
+						<p class="subline mt-6 mb-2"><?= $term->name; ?></p>
+						<hr/>
+						<div class="row g-0 align-items-top">
+
+						<?php
+					}
+
+					$args = array( 
+						'numberposts' 		=> -1, // No limit
+						'post_status' 		=> 'publish', // Show only the published posts
+						'orderby'			=> 'post_date',
+						'order'				=> 'DESC',
+						'post_type'			=> $posttype,
+						// Limit to selected cats and edition
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'edition',
+								'field' => 'term_id', 
+								'terms' => $current_edition_id,
+								'include_children' => false
+							),
+							array(
+								'taxonomy' => $partner_category,
+								'field' => 'term_id',
+								'terms' => $category,
+								'operator' => 'IN'
+							),
+						)
+					);
+					$partners = get_posts($args);
+	
+					foreach( $partners as $post ) : 
+
+						$id 		= (( $post->ID )?$post->ID:get_the_ID());
+
+						// DEPRECIATED WAFFTWO V.1 = FIFAM : p-link / DINARD : waff_partner_link
+						if ( post_type_exists('partenaire') ) 
+						$link 		= types_render_field( $partner_field, array('id' => $id) ); 
+						else 
+						$link 		= get_post_meta( $id, $partner_field, true );
+
+						// Post Thumbnail
+						$featured_img_urls = array();
+						$partenaire_featured_sizes = array(
+							//'full',
+							'medium_large', // 768px
+							'medium', // 300px
+							'partenaire-featured-image', // 150px
+							'partenaire-featured-image-x2', // 200px
+						);
+						$selected_featured_sizes = $partenaire_featured_sizes;
+						if ( has_post_thumbnail($post) ) {  //is_singular() &&
+							$featured_img_id     		= get_post_thumbnail_id($post);
+							$featured_img_url_full 		= get_the_post_thumbnail_url($post);
+							foreach ($selected_featured_sizes as $size) {
+								$featured_img_url = wp_get_attachment_image_src( $featured_img_id, $size ); // OK
+								$featured_img_urls[$size] = ( !empty($featured_img_url[0]) )?$featured_img_url[0]:$featured_img_url_full; 
+							}
+						}
+						$featured_img_caption = $post->post_title;
+						
+					?>
+						
+						<div id="p-<?= $id ?>" class="col-3 col-sm-2 partner-slide-item d-inline-block p-2 p-sm-4">
+							<a href="<?= esc_url($link) ?>" class="color-black link link-dark" title="<?php echo $post->post_title; ?>">
+								<figure title="<?php echo esc_attr($featured_img_description); ?>">
+									<picture class="lazy">
+									<!-- Breakpoint : xl -->
+									<data-src media="(min-width: 1200px)"
+											srcset="<?= $featured_img_urls['medium_large']; ?>" type="image/jpeg"></data-src>
+									<!-- Breakpoint : lg -->
+									<data-src media="(min-width: 990px)"
+											srcset="<?= $featured_img_urls['medium']; ?>" type="image/jpeg"></data-src>
+									<!-- Breakpoint : sm -->
+									<data-src media="(min-width: 576px)"
+											srcset="<?= $featured_img_urls['partenaire-featured-image']; ?>" type="image/jpeg"></data-src>
+									<data-img src="<?= $featured_img_urls['partenaire-featured-image']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+									</picture>
+								<!--
+								Sizes :
+								<?php print_r($featured_img_urls); ?>  
+								-->
+								</figure>
+							</a>
+						</div>
+
+					<?php endforeach; 
+
+					?>
+					</div>
+					<?php
+				}
+			?>
+		</div>
+	</section>
+	<!-- END: #Partners -->
+	<?php
+}
+
+function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	//print_r($attributes);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	//$themeClass = 'edito mt-10 mb-10 contrast--light'; 
+	//$themeClass = 'edito mt-10 mb-10 contrast--light fix-vh-100';
+	$themeClass = 'edito mt-md-10 mb-md-10 mt-5 mb-5 contrast--light fix-vh-100'; // Responsive issue fix
+
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+
+	$image = mb_get_block_field('waff_e_image');
+
+	if ( mb_get_block_field( 'waff_e_framed' ) == 0 || mb_get_block_field( 'waff_e_framed' ) == null ) :
+	?>
+	<!-- #Edito / Normal version -->
+	<section id="edito-<?= $id ?>" class="fix-vh-100 <?= $class ?>" style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid px-0">
+			<div class="row g-0 align-items-center">
+				<div class="col-md-5 d-flex flex-column justify-content-center min-h-100" data-aos="fade-right">
+					<div class="p-4">
+					
+					<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
+
+					</div>
+					<div class="p-4">
+						<h2 class="mb-2"><?= mb_get_block_field( 'waff_e_title' ) ?></h2>
+					</div>
+					<div class="p-4">
+						<article class="edito">
+							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
+							<p><?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?></p>
+							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
+							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>">Découvrir...</a>
+							<?php endif; ?>
+						</article>
+					</div>
+				</div>
+				<div class="col-md-2 d-none d-md-block bg-secondary"></div>
+				<div class="col-md-5 overflow-hidden bg-bgcolor" data-aos="fade-left"> 
+					<?php if ( count($image) > 0 ) : ?>
+						<?php foreach ( $image as $im ) : ?>
+							<figure class="img-shifted shift-right vh-100">
+								<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
+								<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+								<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+								<?php endif; /* If captions */ ?>
+								</div>	
+							</figure>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END: #Edito / Normal version -->
+	<?php
+	endif; 
+	
+	if ( mb_get_block_field( 'waff_e_framed' ) == 1 ) :
+	?>
+	<!-- #Edito / Framed version -->
+	<section id="edito-<?= $id ?>" class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'fix-vh-75' ?> px-4 px-sm-8 px-md-10 <?= $class ?>" style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid border border-transparent-color-silver px-0">
+			<div class="row g-0 align-items-center">
+				<div class="col-md-6 overflow-hidden bg-bgcolor" data-aos="fade-left"> 
+					<?php if ( count($image) > 0 ) : ?>
+						<?php foreach ( $image as $im ) : ?>
+							<figure class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'img-shifted shift-right vh-75' ?>">
+								<?php if ( mb_get_block_field( 'waff_e_fit' ) == 1 ) : ?>
+									<img class="w-100" src="<?php echo $im['full_url'] ?>" />
+									<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+									<?php endif; /* If captions */ ?>
+								<?php else : ?>
+									<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
+									<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+									<?php endif; /* If captions */ ?>
+									</div>	
+								<?php endif; ?>
+							</figure>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+				<div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center min-h-100 px-4" data-aos="fade-right">
+					<div class="p-3">
+						<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
+					</div>
+					<div class="p-3">
+						<h2 class="mb-2"><?= mb_get_block_field( 'waff_e_title' ) ?></h2>
+					</div>
+					<div class="p-3">
+						<article class="edito">
+							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
+							<p><?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?></p>
+							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
+							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>">Découvrir...</a>
+							<?php endif; ?>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END: #Edito / Framed version -->
+	<?php
+	endif; 
+
+}
+
+function wa_contact_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	if ( $is_preview ) 
+		print_r($attributes);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'contact mb-10 container-fluid contrast--light';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+
+	$gallery = mb_get_block_field( 'waff_c_gallery' );
+	$images = array();
+	$index = 0; 
+
+	foreach($gallery as $im) {
+		if ( $im['full_url' ] != '')
+			$images[] = $im;
+		else
+			$images[] = $images[$index-1];
+		$index++; 
+	}
+
+	?>
+	<!-- #Contact -->
+	<section class="mt-0 mb-0 contrast--dark bg-bgcolor container-fluid" style="height: 100%;">
+		<div class="row f-w g-0">
+				<div class="col-8 bg-primary" style="height: 540px;">
+
+					<figure class="img-shifted shift-right h-100">
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[0]['full_url'] ?>');">
+						<?php $im['alt'] = 'Legende'; if ( $images[0]['alt'] || $images[0]['description'] ) : ?>
+						<figcaption><strong>© <?= esc_html($images[0]['alt']); ?></strong> <?= esc_html($images[0]['description']); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						</div>	
+					</figure>
+			
+				</div>
+				<div class="col-4"></div>
+				
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+				<div class="col-4 bg-action-1" style="height: 780px;margin-top: -250px;">
+
+					<figure class="img-shifted shift-right h-100">
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[1]['full_url'] ?>');">
+						<?php $im['alt'] = 'Legende'; if ( $images[1]['alt'] || $images[1]['description'] ) : ?>
+						<figcaption><strong>© <?= esc_html($images[1]['alt']); ?></strong> <?= esc_html($images[1]['description']); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						</div>	
+					</figure>
+					<!-- <figure class="img-shifted shift-right h-100">
+						<img src="<?php echo $images[1]['sizes']['post-featured-image-m'] ?>"
+							 srcset="<?php echo $images[1]['srcset'] ?>" 
+							 alt="<?= esc_html($images[1]['alt']); ?>"$
+							 class="img-fluid h-100" style="object-fit: cover; height: 100%;"
+						>
+						<?php $im['alt'] = 'Legende'; if ( $images[1]['alt'] || $images[0]['description'] ) : ?>
+						<figcaption><strong>© <?= esc_html($images[1]['alt']); ?></strong> <?= esc_html($images[1]['description']); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						</div>	
+					</figure> -->
+
+				</div>
+
+				<div class="col-4 bg-action-3" style="height: 540px;margin-top: -160px;">
+					<figure class="img-shifted shift-right h-100">
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[2]['full_url'] ?>');">
+						<?php $im['alt'] = 'Legende'; if ( $images[2]['alt'] || $images[2]['description'] ) : ?>
+						<figcaption><strong>© <?= esc_html($images[2]['alt']); ?></strong> <?= esc_html($images[2]['description']); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						</div>	
+					</figure>
+				</div>
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+
+				
+				<div class="col-4"></div>
+				<div class="col-8 bg-secondary" style="height: 540px;">
+					<figure class="img-shifted shift-right h-100">
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[3]['full_url'] ?>');">
+						<?php $im['alt'] = 'Legende'; if ( $images[3]['alt'] || $images[3]['description'] ) : ?>
+						<figcaption><strong>© <?= esc_html($images[3]['alt']); ?></strong> <?= esc_html($images[3]['description']); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						</div>	
+					</figure>
+				</div>
+		</div>
+	</section>
+	
+	<!-- Begin: CONTACT MAIN -->
+	<main role="main" id="contact-<?= $id ?>" class="<?= $class ?>" style="margin-top: -1820px; position: relative;">
+
+		<div class="row f-w">
+				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-action-2 p-4 p-md-5" style="height: 370px;">
+					
+					<div class="row">
+						<div class="col-12 col-md-6 ">
+							<h2 class="heading-4 mb-5 mb-md-0"><?= waff_do_markdown(mb_get_block_field( 'waff_c_first_title' )) ?></h2>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="row">
+								<?= mb_get_block_field( 'waff_c_first_content' ); ?>
+							</div>						
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-secondary p-4 p-md-5" style="height: 370px;">
+					
+					<div class="row">
+						<div class="col-12 col-md-6 ">
+							<h2 class="heading-4 mb-5 mb-md-0"><?= waff_do_markdown(mb_get_block_field( 'waff_c_second_title' )) ?></h2>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="row">
+								<?= mb_get_block_field( 'waff_c_second_content' ); ?>
+							</div>					
+						</div>
+					</div>
+
+					
+				</div>
+				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-light p-4 p-md-5" style="height: 740px;">
+					<?php
+					echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
+					?>
+				</div>
+		</div>
+
+	</main><!-- /.container -->
+	<!-- End: CONTACT MAIN -->
+
+	<!-- END: #Contact -->
+	<?php
+
+}
+
+/**
+ * Disallow some blocks 
+ * 
+*/
+
+/*
+core/embed
+core-embed/twitter
+core-embed/youtube
+core-embed/facebook
+core-embed/instagram
+core-embed/wordpress
+core-embed/soundcloud
+core-embed/spotify
+core-embed/flickr
+core-embed/vimeo
+core-embed/animoto
+core-embed/cloudup
+core-embed/collegehumor
+core-embed/dailymotion
+core-embed/funnyordie
+core-embed/hulu
+core-embed/imgur
+core-embed/issuu
+core-embed/kickstarter
+core-embed/meetup-com
+core-embed/mixcloud
+core-embed/photobucket
+core-embed/polldaddy
+core-embed/reddit
+core-embed/reverbnation
+core-embed/screencast
+core-embed/scribd
+core-embed/slideshare
+core-embed/smugmug
+core-embed/speaker
+core-embed/ted
+core-embed/tumblr
+core-embed/videopress
+core-embed/wordpress-tv
+*/
+
+/*
+    [0] => complianz/document
+    [1] => toolset-views/view-editor
+    [2] => toolset-views/wpa-editor
+    [3] => toolset-views/sorting
+    [4] => toolset-views/view-pagination-block
+    [5] => core/archives
+    [6] => core/block
+    [7] => core/calendar
+    [8] => core/categories
+    [9] => core/latest-comments
+    [10] => core/latest-posts
+    [11] => core/rss
+    [12] => core/search
+    [13] => core/shortcode
+    [14] => core/social-link
+    [15] => core/tag-cloud
+    [16] => gravityforms/form
+    [17] => coblocks/form
+    [18] => coblocks/field-name
+    [19] => coblocks/field-email
+    [20] => coblocks/field-textarea
+    [21] => coblocks/field-text
+    [22] => coblocks/field-date
+    [23] => coblocks/field-phone
+    [24] => coblocks/field-radio
+    [25] => coblocks/field-select
+    [26] => coblocks/field-submit-button
+    [27] => coblocks/field-checkbox
+    [28] => coblocks/field-website
+    [29] => coblocks/field-hidden
+    [30] => coblocks/events
+    [31] => coblocks/post-carousel
+    [32] => coblocks/posts
+    [33] => coblocks/social
+    [34] => coblocks/social-profiles
+    [35] => wp-bootstrap-blocks/container
+    [36] => wp-bootstrap-blocks/row
+    [37] => wp-bootstrap-blocks/column
+    [38] => wp-bootstrap-blocks/button
+    [39] => bcn/breadcrumb-trail
+    [40] => meta-box/wa-lastest-posts
+    [41] => meta-box/wa-partners
+    [42] => meta-box/wa-edito
+    [43] => toolset/map
+*/
+
+function waff_allowed_block_types( $allowed_block_types, $post ) {
+
+	print_r($post->post_type);
+	print_r($allowed_block_types);
+	print_r(get_dynamic_block_names());
+
+// Fetch block names.
+//$block_names = get_dynamic_block_names();
+
+	if ( $post->post_type !== 'page' ) {
+        return $allowed_block_types;
+    }
+ 
+	//https://wordpress.org/support/article/blocks/
+	//https://rudrastyh.com/gutenberg/remove-default-blocks.html
+	//	
+	$core = array( 
+		// General
+		'core/paragraph',
+		'core/image',
+		'core/heading',
+		'core/gallery',
+		'core/list',
+		'core/quote',
+		'core/audio',
+		'core/cover',
+		'core/file',
+		'core/video',
+
+		// Embed 
+		'core/embed',
+		'core-embed/twitter',
+		'core-embed/youtube',
+		'core-embed/facebook',
+		'core-embed/instagram',
+		// core-embed/wordpress
+		// core-embed/soundcloud
+		// core-embed/spotify
+		'core-embed/flickr',
+		'core-embed/vimeo',
+		// core-embed/animoto
+		// core-embed/cloudup
+		// core-embed/collegehumor
+		// core-embed/dailymotion
+		// core-embed/funnyordie
+		// core-embed/hulu
+		// core-embed/imgur
+		'core-embed/issuu',
+		// core-embed/kickstarter
+		// core-embed/meetup-com
+		// core-embed/mixcloud
+		// core-embed/photobucket
+		// core-embed/polldaddy
+		// core-embed/reddit
+		// core-embed/reverbnation
+		// core-embed/screencast
+		// core-embed/scribd
+		// core-embed/slideshare
+		// core-embed/smugmug
+		// core-embed/speaker
+		// core-embed/ted
+		// core-embed/tumblr
+		// core-embed/videopress
+		// core-embed/wordpress-tv
+
+		//
+		// complianz/document
+		// toolset-views/view-editor
+		// toolset-views/wpa-editor
+		// toolset-views/sorting
+		// toolset-views/view-pagination-block
+		// core/archives
+		// core/block
+		// core/calendar
+		// core/categories
+		// core/latest-comments
+		// core/latest-posts
+		// core/rss
+		// core/search
+		// core/shortcode
+		// core/social-link
+		// core/tag-cloud
+		// gravityforms/form
+		// coblocks/form
+		// coblocks/field-name
+		// coblocks/field-email
+		// coblocks/field-textarea
+		// coblocks/field-text
+		// coblocks/field-date
+		// coblocks/field-phone
+		// coblocks/field-radio
+		// coblocks/field-select
+		// coblocks/field-submit-button
+		// coblocks/field-checkbox
+		// coblocks/field-website
+		// coblocks/field-hidden
+		// coblocks/events
+		// coblocks/post-carousel
+		// coblocks/posts
+		// coblocks/social
+		// coblocks/social-profiles
+		// wp-bootstrap-blocks/container
+		// wp-bootstrap-blocks/row
+		// wp-bootstrap-blocks/column
+		// wp-bootstrap-blocks/button
+		// bcn/breadcrumb-trail
+		// meta-box/wa-lastest-posts
+		// meta-box/wa-partners
+		// meta-box/wa-edito
+		// toolset/map
+	);
+	
+	return array_merge($core,get_dynamic_block_names());
+
+}
+
+
+
+/**
+ * Define new colors for wp-bootstrap-blocks 
+ */
+
+function waff_wp_boostrap_enqueue_block_editor_assets() {
+	wp_enqueue_script( 'wp-bootstrap-block-filter', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-blocks.js', array( 'wp-hooks' ), '1.0.0', true );
+    if ( defined( 'WAFF_THEME_COLORS' ) ) wp_localize_script( 'wp-bootstrap-block-filter', 'wpBootstrapBlockFilterOptions', WAFF_THEME_COLORS );
+}
