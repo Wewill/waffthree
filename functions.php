@@ -10,7 +10,7 @@
  define( 'WAFF_DEBUG', false );
  
 /** Die if no setup */
-if ( !file_exists(get_theme_file_path( 'setup.php' ))  ) {
+if ( !file_exists(get_theme_file_path( '../waffthree.setup.php' ))  ) {
 	wp_die('Error : please define setup.');
 }
 
@@ -68,7 +68,7 @@ function wpm_myme_types($mime_types){
 /**
  * Waff setup.
  */
-require_once get_theme_file_path( 'setup.php' );
+require_once get_theme_file_path( '../waffthree.setup.php' );
 
 /**
  * Common functions ( outside namespace )
