@@ -6,11 +6,9 @@
  *
  */
 
- define( 'WAFF_VERSION', '3.0' );
- define( 'WAFF_DEBUG', false );
+define( 'WAFF_VERSION', '3.0' );
+define( 'WAFF_DEBUG', false );
  
-echo "test"; // Simply testing WP Pusher and webhooks
-
 /** Die if no setup */
 if ( !file_exists(get_theme_file_path( '../waffthree.setup.php' ))  ) {
 	wp_die('Error : please define setup.');
