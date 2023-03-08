@@ -1,0 +1,4025 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WaffTwo Theme : the WA Film Festival Two frontal template based on godaddy go theme and WA Theme V2 v2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2022-10-18 07:39:25+0000\n"
+"Last-Translator: wilhem <maintenance-web@wilhemarnoldy.fr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: header.php:158
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/header.php:41
+#@ go
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+#: includes/admin/custom_media_sizes.php:207
+#@ waff
+msgid "(as Featured Image and in content)"
+msgstr "(comme image en avant et dans le contenu)"
+
+#: includes/admin/custom_media_sizes.php:209
+#@ waff
+msgid "(as Featured Image)"
+msgstr "(comme image en en avant)"
+
+#: includes/admin/custom_media_sizes.php:211
+#@ waff
+msgid "(in content)"
+msgstr "(dans le contenu)"
+
+#: includes/admin/custom_media_sizes.php:214
+#@ waff
+msgid "Y/m/d"
+msgstr ""
+
+#: includes/admin/custom_media_sizes.php:218
+#@ waff
+msgid "(Unused)"
+msgstr "(Inutilisé)"
+
+#: includes/admin/custom_media_sizes.php:228
+#: includes/admin/custom_media_sizes.php:247
+#@ waff
+msgid "Used In"
+msgstr "Utilisé dans"
+
+#: includes/admin/custom_media_sizes.php:581
+#@ waff
+msgid "Updated image sizes for :"
+msgstr "Tailles d'image mises à jour pour:"
+
+#: includes/admin/custom_media_sizes.php:581
+#@ waff
+msgid "Click here to crop new image sizes"
+msgstr "Cliquez ici pour recadrer de nouvelles tailles d'image"
+
+#: includes/admin/custom_media_sizes.php:582
+#: includes/admin/custom_media_sizes.php:590
+#@ waff
+msgid "Dismiss this notice."
+msgstr "Retirer cette avertissement."
+
+#: includes/admin/custom_media_sizes.php:589
+#@ waff
+msgid "Unable to create image sizes ( probably too small ) for :"
+msgstr "Impossible de créer des tailles d'image (probablement trop petites) pour:"
+
+#: includes/admin/custom_media_sizes.php:589
+#@ waff
+msgid "Click here to change original image"
+msgstr "Cliquez ici pour changer l'image d'origine"
+
+#: includes/admin/custom_menu_fields.php:24
+#@ waff
+msgid "Menu item is muted ?"
+msgstr "L'élément de menu est muté ?"
+
+#: includes/admin/custom_menu_fields.php:31
+#@ waff
+msgid "Display only if user is loggued"
+msgstr "Afficher uniquement si l'utilisateur est connecté"
+
+#: includes/admin/custom_metaboxes.php:24
+#@ waff
+msgid "⚡︎ Flash Content"
+msgstr "⚡︎ Contenu Flash"
+
+#: includes/admin/custom_metaboxes.php:25
+#@ waff
+msgid "Fill the flash content"
+msgstr "Saisir le contenu du flash"
+
+#: includes/admin/custom_metaboxes.php:31
+#@ waff
+msgid "⚡︎ Flash URL"
+msgstr "⚡︎ Lien du Flash"
+
+#: includes/admin/custom_metaboxes.php:32
+#: includes/admin/custom_metaboxes.php:122
+#@ waff
+msgid "Fill an url if you want to link to a page"
+msgstr "Remplissez une URL si vous souhaitez créer un lien vers une page"
+
+#: includes/admin/custom_metaboxes.php:39
+#@ waff
+msgid "⚡︎ Flash Color Picker"
+msgstr "⚡︎ Sélecteur de couleurs du Flash"
+
+#: includes/admin/custom_metaboxes.php:80
+#@ waff
+msgid "Slider label"
+msgstr "Label de la diapositive"
+
+#: includes/admin/custom_metaboxes.php:81
+#@ waff
+msgid "Fill a label in upper position (optionnal)."
+msgstr "Remplissez une étiquette en position supérieure (facultatif)."
+
+#: includes/admin/custom_metaboxes.php:84
+#@ waff
+msgid "How to choose the image ? Favor a sober image, with a Shot / reverse shot, a character, a landscape, a depth of field, a nice bokey. An overloaded image will not be ideal given its large size. Better choose a great color ( in shade ) consistent with the color of the slide."
+msgstr "Comment choisir l'image? Privilégiez une image épurée, avec un champ / contre-champ, un personnage, un paysage, une profondeur de champ, un joli bokey. Une image surchargée ne sera pas idéale compte tenu de sa grande taille. Mieux vaut choisir une belle couleur (dans les tons) cohérente avec la couleur de la diapositive."
+
+#: includes/admin/custom_metaboxes.php:84
+#@ waff
+msgid "For the content (below), it's better to not exceed <u>160 signs.</u>"
+msgstr "Pour le contenu (ci-dessous), il vaut mieux ne pas dépasser <u>160 signes.</u>"
+
+#: includes/admin/custom_metaboxes.php:94
+#: includes/admin/custom_metaboxes.php:107
+#@ waff
+msgid "Light"
+msgstr "Lumineux"
+
+#: includes/admin/custom_metaboxes.php:95
+#: includes/admin/custom_metaboxes.php:108
+#@ waff
+msgid "Dark"
+msgstr "Sombre"
+
+#: includes/admin/custom_metaboxes.php:121
+#@ waff
+msgid "Slide URL"
+msgstr "Lien de la diapositive"
+
+#: includes/admin/custom_metaboxes.php:128
+#@ waff
+msgid "Slide color"
+msgstr "Couleur de la diapositive"
+
+#: includes/admin/custom_metaboxes.php:264
+#@ waff
+msgid "Page title"
+msgstr "Titre de page"
+
+#: includes/admin/custom_metaboxes.php:265
+#@ waff
+msgid "Overrides default page title if filled"
+msgstr "Remplace le titre de la page par défaut s'il est rempli"
+
+#: includes/admin/custom_metaboxes.php:270
+#@ waff
+msgid "Page subtitle"
+msgstr "Sous-titre de page"
+
+#: includes/admin/custom_metaboxes.php:271
+#@ waff
+msgid "Show a subtitle if filled"
+msgstr "Affiche un sous-titre si rempli"
+
+#: includes/admin/custom_metaboxes.php:284
+#@ waff
+msgid "Header style"
+msgstr "Style de l'entête"
+
+#: includes/admin/custom_metaboxes.php:286
+#@ waff
+msgid "Choose the header style (default: normal)"
+msgstr "Choisissez le style d'en-tête (par défaut: normal)"
+
+#: includes/admin/custom_metaboxes.php:289
+#: includes/blocks.php:130
+#@ waff
+msgid "Normal"
+msgstr "Normal"
+
+#: includes/admin/custom_metaboxes.php:290
+#@ waff
+msgid "Full"
+msgstr "Plein"
+
+#: includes/admin/custom_metaboxes.php:291
+#@ waff
+msgid "Fancy"
+msgstr "Habillé"
+
+#: includes/admin/custom_metaboxes.php:293
+#@ waff
+msgid "Modern"
+msgstr "Moderne"
+
+#: includes/admin/custom_metaboxes.php:304
+#@ waff
+msgid "Header color"
+msgstr "Couleur de l'en-tête"
+
+#: includes/admin/custom_metaboxes.php:306
+#@ waff
+msgid "Choose the header background color"
+msgstr "Choisissez la couleur d'arrière-plan de l'en-tête"
+
+#: includes/admin/custom_metaboxes.php:318
+#@ waff
+msgid "Header image filter"
+msgstr "Filtre d'image d'en-tête"
+
+#: includes/admin/custom_metaboxes.php:319
+#@ waff
+msgid "Adds a filter to the featured image ( if color header background color is filled )"
+msgstr "Ajoute un filtre à l'image sélectionnée (si la couleur d'arrière-plan de l'en-tête de couleur est remplie)"
+
+#: includes/admin/custom_post_types.php:13
+#: includes/template-tags.php:672
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:228
+#@ waff
+#@ go
+msgid "Featured"
+msgstr "Mis à l'avant"
+
+#: includes/admin/custom_post_types.php:34
+#: includes/admin/custom_post_types.php:36
+#: includes/admin/custom_post_types.php:49
+#@ waff
+msgid "Flashes"
+msgstr "Flashs"
+
+#: includes/admin/custom_post_types.php:37
+#: includes/admin/custom_post_types.php:50
+#@ waff
+msgid "Flash"
+msgstr "Flash"
+
+#: includes/admin/custom_post_types.php:38
+#@ waff
+msgid "Add Flash"
+msgstr "Ajouter un flash"
+
+#: includes/admin/custom_post_types.php:39
+#@ waff
+msgid "Add new Flash"
+msgstr "Ajouter nouveau flash"
+
+#: includes/admin/custom_post_types.php:40
+#@ waff
+msgid "New Flash"
+msgstr "Nouveau flash"
+
+#: includes/admin/custom_post_types.php:41
+#@ waff
+msgid "Edit Flash"
+msgstr "Éditer flash"
+
+#: includes/admin/custom_post_types.php:42
+#: includes/admin/custom_post_types.php:43
+#@ waff
+msgid "View Flash"
+msgstr "Voir flash"
+
+#: includes/admin/custom_post_types.php:44
+#@ waff
+msgid "All Flashes"
+msgstr "Tous les flashs"
+
+#: includes/admin/custom_post_types.php:45
+#@ waff
+msgid "Search Flashes"
+msgstr "Rechercher Flashs"
+
+#: includes/admin/custom_post_types.php:46
+#@ waff
+msgid "Parent Flash"
+msgstr "Flash parent"
+
+#: includes/admin/custom_post_types.php:47
+#@ waff
+msgid "No Flashes found"
+msgstr "Pas de flashs trouvé"
+
+#: includes/admin/custom_post_types.php:48
+#@ waff
+msgid "No Flashes found in Trash"
+msgstr "Pas de Flashs dans la corbeille"
+
+#: includes/admin/custom_post_types.php:78
+#: includes/admin/custom_post_types.php:80
+#: includes/admin/custom_post_types.php:93
+#@ waff
+msgid "Homeslides"
+msgstr "Homeslides"
+
+#: includes/admin/custom_post_types.php:81
+#: includes/admin/custom_post_types.php:94
+#@ waff
+msgid "Homeslide"
+msgstr "Homeslide"
+
+#: includes/admin/custom_post_types.php:82
+#@ waff
+msgid "Add Homeslide"
+msgstr "Ajouter un Homeslide"
+
+#: includes/admin/custom_post_types.php:83
+#@ waff
+msgid "Add new Homeslide"
+msgstr "Ajouter nouveau Homeslide"
+
+#: includes/admin/custom_post_types.php:84
+#@ waff
+msgid "New Homeslide"
+msgstr "Nouveau Homeslide"
+
+#: includes/admin/custom_post_types.php:85
+#@ waff
+msgid "Edit Homeslide"
+msgstr "Éditer un Homeslide"
+
+#: includes/admin/custom_post_types.php:86
+#: includes/admin/custom_post_types.php:87
+#@ waff
+msgid "View Homeslide"
+msgstr "Voir un Homeslide"
+
+#: includes/admin/custom_post_types.php:88
+#@ waff
+msgid "All Homeslides"
+msgstr "Tous les Homeslides"
+
+#: includes/admin/custom_post_types.php:89
+#@ waff
+msgid "Search Homeslides"
+msgstr "Rechercher Homeslides"
+
+#: includes/admin/custom_post_types.php:90
+#@ waff
+msgid "Parent Homeslide"
+msgstr "Homeslide parent"
+
+#: includes/admin/custom_post_types.php:91
+#@ waff
+msgid "No Homeslides found"
+msgstr "Pas de Homeslides trouvé"
+
+#: includes/admin/custom_post_types.php:92
+#@ waff
+msgid "No Homeslides found in Trash"
+msgstr "Pas de Homeslides dans la corbeille"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:31
+#@ waff
+msgid "(WA) Categories"
+msgstr "(WA) Catégories"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:48
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:172
+#@ waff
+#@ go
+msgid "Categories"
+msgstr "Catégories"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:81
+#@ waff
+msgid "Select Category"
+msgstr "Sélectionner la catégorie"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:170
+#: includes/admin/widgets/custom-wp-widget-counter.php:112
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:121
+#: includes/admin/widgets/custom-wp-widget-partners.php:162
+#: includes/admin/widgets/custom-wp-widget-programmation.php:513
+#: includes/admin/widgets/custom-wp-widget-section.php:269
+#@ waff
+msgid "Title:"
+msgstr "Titre:"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:174
+#@ waff
+msgid "Display as dropdown"
+msgstr "Afficher comme un menu déroulant"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:177
+#@ waff
+msgid "Show post counts"
+msgstr "Afficher le compte des articles"
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:180
+#@ waff
+msgid "Show hierarchy"
+msgstr "Afficher la hiérarchie"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:19
+#@ waff
+msgid "Print counter before / after edition."
+msgstr "Afficher le compteur avant / après édition"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:26
+#@ waff
+msgid "(WA) Counter"
+msgstr "(WA) Décompte"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:116
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:125
+#: includes/admin/widgets/custom-wp-widget-partners.php:166
+#: includes/admin/widgets/custom-wp-widget-programmation.php:517
+#: includes/admin/widgets/custom-wp-widget-section.php:274
+#@ waff
+msgid "Content:"
+msgstr "Contenu:"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:120
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:129
+#: includes/admin/widgets/custom-wp-widget-partners.php:170
+#: includes/admin/widgets/custom-wp-widget-programmation.php:521
+#: includes/admin/widgets/custom-wp-widget-section.php:253
+#@ waff
+msgid "Classes:"
+msgstr "Classes:"
+
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:15
+#@ waff
+msgid "Print newsletter form."
+msgstr "Afficher le formulaire de newsletter"
+
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:22
+#@ waff
+msgid "(WA) Newsletter"
+msgstr "(WA) Newsletter"
+
+#: includes/admin/widgets/custom-wp-widget-partners.php:15
+#@ waff
+msgid "Print partners form."
+msgstr "Afficher le carrousel des partenaires"
+
+#: includes/admin/widgets/custom-wp-widget-partners.php:22
+#: includes/blocks.php:162
+#@ waff
+msgid "(WA) Partners"
+msgstr "(WA) Partenaires"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:14
+#@ waff
+msgid "Print projections block."
+msgstr "Afficher le bloc projections"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:21
+#@ waff
+msgid "(WA) Programmation"
+msgstr "(WA) Programmation"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:58
+#: includes/admin/widgets/custom-wp-widget-programmation.php:191
+#: includes/admin/widgets/custom-wp-widget-programmation.php:480
+#: partials/preheaders/preheader-fifam.php:53
+#@ waff
+msgid "Programmation"
+msgstr "Grille horaire"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:67
+#@ waff
+msgid "View archives"
+msgstr "Voir les archives"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:68
+#@ waff
+msgid "View blog"
+msgstr "Voir le blog"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:69
+#@ waff
+msgid "Close"
+msgstr "Fermer"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:463
+#@ waff
+msgid "Planner"
+msgstr "Grille"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:464
+#: includes/admin/widgets/custom-wp-widget-programmation.php:476
+#@ waff
+msgid "Booklet"
+msgstr "Brochure"
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:465
+#: includes/admin/widgets/custom-wp-widget-programmation.php:477
+#@ waff
+msgid "Book"
+msgstr "Catalogue"
+
+#: includes/admin/widgets/custom-wp-widget-section.php:40
+#@ waff
+msgid "A section arbitrary HTML code."
+msgstr "Une section de code HTML arbitraire."
+
+#: includes/admin/widgets/custom-wp-widget-section.php:47
+#: includes/blocks.php:595
+#@ waff
+msgid "(WA) Section"
+msgstr "(WA) Section"
+
+#. translators: %d: Error count.
+#: includes/admin/widgets/custom-wp-widget-section.php:225
+#: includes/admin/widgets/custom-wp-widget-section.php:227
+#, php-format
+#@ waff
+msgid "There is %d error which must be fixed before you can save."
+msgid_plural "There are %d errors which must be fixed before you can save."
+msgstr[0] "Il y a une erreur %d qui doit être corrigée avant de pouvoir enregistrer."
+msgstr[1] "Il y a des erreurs %d qui doivent être corrigées avant de pouvoir enregistrer."
+
+#: includes/admin/widgets/custom-wp-widget-section.php:287
+#@ waff
+msgid "Some HTML tags are not permitted, including:"
+msgstr "Certaines balises HTML ne sont pas autorisées, notamment:"
+
+#: includes/admin/widgets/custom-wp-widget-section.php:308
+#@ waff
+msgid "Use the Custom HTML widget to add arbitrary HTML code to your widget areas."
+msgstr "Utilisez le widget HTML personnalisé pour ajouter du code HTML arbitraire à vos zones de widget."
+
+#. translators: 1: Link to user profile, 2: Additional link attributes, 3: Accessibility text.
+#: includes/admin/widgets/custom-wp-widget-section.php:315
+#, php-format
+#@ waff
+msgid "The edit field automatically highlights code syntax. You can disable this in your <a href=\"%1$s\" %2$s>user profile%3$s</a> to work in plain text mode."
+msgstr "Le champ d'édition met automatiquement en évidence la syntaxe du code. Vous pouvez désactiver cette fonction dans votre <a href=\"%1$s\" %2$s>profil utilisateur%3$s</a> pour travailler en mode texte brut."
+
+#. translators: Accessibility text.
+#: includes/admin/widgets/custom-wp-widget-section.php:321
+#@ waff
+msgid "(opens in a new tab)"
+msgstr "(ouvre dans un nouvel onglet)"
+
+#: includes/admin/widgets/custom-wp-widget-section.php:326
+#@ waff
+msgid "When using a keyboard to navigate:"
+msgstr "Lorsque vous utilisez un clavier pour naviguer:"
+
+#: includes/admin/widgets/custom-wp-widget-section.php:328
+#@ waff
+msgid "In the editing area, the Tab key enters a tab character."
+msgstr "Dans la zone d'édition, la touche Tab entre un caractère de tabulation."
+
+#: includes/admin/widgets/custom-wp-widget-section.php:329
+#@ waff
+msgid "To move away from this area, press the Esc key followed by the Tab key."
+msgstr "Pour vous éloigner de cette zone, appuyez sur la touche Echap puis sur la touche Tab."
+
+#: includes/admin/widgets/custom-wp-widget-section.php:330
+#@ waff
+msgid "Screen reader users: when in forms mode, you may need to press the Esc key twice."
+msgstr "Utilisateurs du lecteur d'écran: en mode formulaires, vous devrez peut-être appuyer deux fois sur la touche Échap."
+
+#: includes/admin/widgets/custom-wp-widget-section.php:337
+#@ waff
+msgid "Custom HTML Widget"
+msgstr "Widget de contenu HTML personnalisé"
+
+#: includes/blocks.php:52
+#@ waff
+msgid "(WA) Lastest posts"
+msgstr "(WA) Derniers articles"
+
+#: includes/blocks.php:58
+#@ waff
+msgid "Featured title"
+msgstr "Titre mis en avant"
+
+#: includes/blocks.php:213
+#: includes/blocks.php:321
+#: includes/blocks.php:337
+#: includes/blocks.php:393
+#: includes/blocks.php:395
+#: includes/blocks.php:481
+#: includes/blocks.php:482
+#: includes/blocks.php:483
+#: includes/blocks.php:665
+#: includes/blocks.php:667
+#@ waff
+msgid "Title"
+msgstr "Titre"
+
+#: includes/blocks.php:71
+#@ waff
+msgid "Limit posts to ?"
+msgstr "Limiter le nombre à ?"
+
+#: includes/blocks.php:73
+#@ waff
+msgid "Choose the number of lastest posts to show"
+msgstr "Choisir le nombre de derniers articles à afficher"
+
+#: includes/blocks.php:76
+#@ waff
+msgid "4"
+msgstr ""
+
+#: includes/blocks.php:77
+#@ waff
+msgid "5"
+msgstr ""
+
+#: includes/blocks.php:78
+#@ waff
+msgid "6"
+msgstr ""
+
+#: includes/blocks.php:90
+#@ waff
+msgid "Select post type"
+msgstr "Choisir un type de publication"
+
+#: includes/blocks.php:92
+#@ waff
+msgid "Choose which post is the lastest post. Default : posts"
+msgstr "Choisir de quel type de publication sont les derniers articles. Par défaut : articles"
+
+#: includes/blocks.php:96
+#@ waff
+msgid "post"
+msgstr "Article"
+
+#: includes/blocks.php:97
+#@ waff
+msgid "page"
+msgstr "Page"
+
+#: includes/blocks.php:98
+#@ waff
+msgid "film"
+msgstr "Film"
+
+#: includes/blocks.php:99
+#@ waff
+msgid "jury"
+msgstr "Jury"
+
+#: includes/blocks.php:102
+#@ waff
+msgid "Label"
+msgstr ""
+
+#: includes/blocks.php:111
+#: includes/blocks.php:168
+#@ waff
+msgid "Select categories"
+msgstr "Choisir les catégories"
+
+#: includes/blocks.php:142
+#@ waff
+msgid "Display lastest posts"
+msgstr "Afficher les derniers articles"
+
+#: includes/blocks.php:188
+#@ waff
+msgid "Display the current edition partners"
+msgstr "Afficher les partenaires de l'édition actuelle"
+
+#: includes/blocks.php:207
+#@ waff
+msgid "(WA) Edito"
+msgstr "(WA) Éditorial"
+
+#: includes/blocks.php:227
+#: includes/blocks.php:400
+#: includes/blocks.php:488
+#: includes/blocks.php:672
+#@ waff
+msgid "Lead content"
+msgstr "Contenu en avant"
+
+#: includes/blocks.php:228
+#: includes/blocks.php:401
+#: includes/blocks.php:489
+#: includes/blocks.php:673
+#@ waff
+msgid "Displayed in a bigger size. Markdown is available."
+msgstr "Affiché dans une plus grande taille. Markdown est disponible."
+
+#: includes/blocks.php:233
+#: includes/blocks.php:406
+#: includes/blocks.php:494
+#: includes/blocks.php:678
+#@ waff
+msgid "Content"
+msgstr "Contenu"
+
+#: includes/blocks.php:234
+#: includes/blocks.php:407
+#: includes/blocks.php:495
+#: includes/blocks.php:679
+#@ waff
+msgid "Markdown is available."
+msgstr "Markdown est disponible."
+
+#: includes/blocks.php:239
+#@ waff
+msgid "Image"
+msgstr "Image"
+
+#: includes/blocks.php:252
+#@ waff
+msgid "Display edition badge ?"
+msgstr "Afficher le badge d'édition?"
+
+#: includes/blocks.php:85
+#: includes/blocks.php:258
+#: includes/blocks.php:440
+#@ waff
+msgid "Display more link ?"
+msgstr "Afficher le lien \\\"lire la suite\\\" ?"
+
+#: includes/blocks.php:264
+#: includes/blocks.php:446
+#@ waff
+msgid "More URL"
+msgstr "Lien \\\"Lire la suite\\\""
+
+#: includes/blocks.php:281
+#: includes/blocks.php:368
+#@ waff
+msgid "Display edito bloc"
+msgstr "Afficher le bloc édito"
+
+#: includes/core.php:226
+#: includes/core.php:230
+#@ go
+msgctxt "color palette name"
+msgid "Original"
+msgstr ""
+
+#: includes/core.php:389
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:181
+#@ waff
+#@ go
+msgctxt "font size option label"
+msgid "Small"
+msgstr "Petit"
+
+#: includes/core.php:390
+#@ waff
+msgctxt "abbreviation of the font size option label"
+msgid "XS"
+msgstr ""
+
+#: includes/core.php:395
+#@ waff
+msgctxt "font size option label"
+msgid "Subline"
+msgstr ""
+
+#: includes/core.php:396
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:182
+#@ waff
+#@ go
+msgctxt "abbreviation of the font size option label"
+msgid "S"
+msgstr ""
+
+#: includes/core.php:401
+#@ waff
+msgctxt "font size option label"
+msgid "Impact"
+msgstr ""
+
+#: includes/core.php:402
+#@ waff
+msgctxt "abbreviation of the font size option label"
+msgid "I"
+msgstr ""
+
+#: includes/core.php:407
+#@ waff
+msgctxt "font size option label"
+msgid "Muted"
+msgstr ""
+
+#: includes/core.php:408
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:188
+#@ waff
+#@ go
+msgctxt "abbreviation of the font size option label"
+msgid "M"
+msgstr ""
+
+#: includes/core.php:413
+#@ waff
+msgctxt "font size option label"
+msgid "Lead"
+msgstr ""
+
+#: includes/core.php:414
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:194
+#@ waff
+#@ go
+msgctxt "abbreviation of the font size option label"
+msgid "L"
+msgstr ""
+
+#: includes/core.php:419
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:199
+#@ waff
+#@ go
+msgctxt "font size option label"
+msgid "Huge"
+msgstr ""
+
+#: includes/core.php:420
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:200
+#@ waff
+#@ go
+msgctxt "abbreviation of the font size option label"
+msgid "XL"
+msgstr ""
+
+#: includes/core.php:438
+#@ go
+msgctxt "name of the fifth color palette selection"
+msgid "Quinary"
+msgstr ""
+
+#: includes/core.php:532
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1406
+#@ go
+msgid "That page can't be found"
+msgstr ""
+
+#: includes/core.php:549
+#@ waff
+msgid "Looking for: "
+msgstr "À la recherche de : "
+
+#: includes/core.php:559
+#@ waff
+msgid "Search for: "
+msgstr "Recherche : "
+
+#: includes/core.php:570
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1432
+#@ go
+msgid "Nothing Found"
+msgstr ""
+
+#: includes/customizer.php:178
+#@ waff
+msgid "Night Mode"
+msgstr "Mode nuit"
+
+#: includes/customizer.php:179
+#@ waff
+msgid "Enable for readers to view content easily while in the dark."
+msgstr "Permettre aux lecteurs de visualiser facilement le contenu dans l'obscurité."
+
+#: includes/customizer.php:258
+#@ waff
+msgid "Phone number"
+msgstr "Numéro de téléphone"
+
+#: includes/customizer.php:299
+#@ waff
+msgid "This will appear in the header at the top of the site."
+msgstr "Cela apparaîtra dans l'en-tête en haut du site."
+
+#: includes/customizer.php:300
+#@ waff
+msgid "Site message"
+msgstr "Message du site"
+
+#: includes/customizer.php:320
+#: includes/customizer.php:341
+#@ waff
+msgid "This will appear in the footer at the bottom of the site."
+msgstr "Cela apparaîtra dans le pied de page en bas du site."
+
+#: includes/customizer.php:321
+#@ waff
+msgid "Company address"
+msgstr "Adresse"
+
+#: includes/customizer.php:342
+#@ waff
+msgid "Privacy Statement"
+msgstr "Déclaration de confidentialité "
+
+#: includes/dark-meta.php:29
+#@ go
+msgid "Toggle page in dark mode."
+msgstr ""
+
+#: includes/template-tags.php:555
+#@ waff
+msgid "Toggle Night Mode"
+msgstr "Basculer en mode nuit"
+
+#: includes/template-tags.php:559
+#@ waff
+msgctxt "settings button"
+msgid "Settings"
+msgstr "Paramètres"
+
+#. translators: %s: publish date.
+#: includes/template-tags.php:609
+#, php-format
+#@ waff
+msgid "Published %s"
+msgstr "Publié %s"
+
+#. translators: %s author name.
+#: includes/template-tags.php:633
+#@ waff
+msgid "By"
+msgstr "par"
+
+#. translators: %s: Name of current post.
+#: includes/template-tags.php:686
+#, php-format
+#@ waff
+msgid "Continue reading %s"
+msgstr "Lire la suite %s"
+
+#. translators: %s: list of categories.
+#. translators: %s: list of categories.
+#: includes/blocks.php:1614
+#: includes/blocks.php:2766
+#: includes/blocks.php:2862
+#: includes/template-tags.php:866
+#: includes/template-tags.php:883
+#: includes/template-tags.php:929
+#: includes/template-tags.php:965
+#: includes/template-tags.php:1013
+#: includes/template-tags.php:1068
+#: includes/template-tags.php:1138
+#: includes/template-tags.php:1165
+#: includes/template-tags.php:1193
+#: includes/template-tags.php:1215
+#@ waff
+msgid "Categorized as"
+msgstr "Catégorisé comme"
+
+#. translators: used between list items, there is a space after the comma.
+#: includes/blocks.php:1615
+#: includes/blocks.php:2767
+#: includes/blocks.php:2863
+#: includes/template-tags.php:867
+#: includes/template-tags.php:884
+#: includes/template-tags.php:930
+#: includes/template-tags.php:959
+#: includes/template-tags.php:971
+#: includes/template-tags.php:1007
+#: includes/template-tags.php:1019
+#: includes/template-tags.php:1069
+#: includes/template-tags.php:1139
+#: includes/template-tags.php:1166
+#: includes/template-tags.php:1194
+#: includes/template-tags.php:1209
+#: includes/template-tags.php:1221
+#@ waff
+msgid "&#8203;"
+msgstr ""
+
+#. translators: %s: list of tags.
+#: includes/template-tags.php:976
+#: includes/template-tags.php:1024
+#: includes/template-tags.php:1226
+#@ waff
+msgid "Taggued"
+msgstr "Taggué"
+
+#: includes/template-tags.php:1255
+#@ waff
+msgctxt "Label for sticky posts"
+msgid "Featured post"
+msgstr "Article collant"
+
+#. translators: %s: Name of current post. Only visible to screen readers.
+#: includes/template-tags.php:1270
+#: includes/template-tags.php:1314
+#, php-format
+#@ waff
+msgid "Edit %s"
+msgstr "Éditer %s"
+
+#. translators: used between list items, there is a space after the comma.
+#: includes/template-tags.php:1282
+#: includes/template-tags.php:1292
+#@ waff
+msgid ", "
+msgstr ""
+
+#. translators: %s: list of categories.
+#: includes/template-tags.php:1286
+#, php-format
+#@ waff
+msgid "Categorized as %s"
+msgstr "Catégorisé comme %s"
+
+#. translators: %s: list of tags.
+#: includes/template-tags.php:1296
+#, php-format
+#@ waff
+msgid "Tagged %s"
+msgstr "Taggué %s"
+
+#: includes/theme.php:204
+#: partials/headers/header-dinard.php:71
+#: partials/navs/nav-dinard.php:28
+#: partials/navs/nav-fifam.php:30
+#@ waff
+msgid "Primary Menu"
+msgstr "Menu principal"
+
+#: includes/theme.php:205
+#: partials/headers/header-dinard.php:92
+#: partials/preheaders/preheader-fifam.php:39
+#@ waff
+msgid "Social Menu"
+msgstr "Menu social"
+
+#: includes/theme.php:206
+#: partials/footers/footer-dinard.php:137
+#: partials/footers/footer-fifam.php:136
+#@ waff
+msgid "Credits Menu"
+msgstr "Menu crédits"
+
+#: includes/theme.php:207
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-1.php:18
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-2.php:21
+#@ waff
+#@ go
+msgid "Footer Menu"
+msgstr "Menu pied de page"
+
+#: includes/theme.php:208
+#@ waff
+msgid "Footer Secondary Menu"
+msgstr "Menu pied de page secondaire"
+
+#: includes/theme.php:209
+#@ waff
+msgid "Footer Third Menu"
+msgstr "Menu pied de page tertiaire"
+
+#: includes/theme.php:220
+#@ waff
+msgid "Blog sidebar"
+msgstr "Barre latérale du blog"
+
+#: includes/theme.php:222
+#@ waff
+msgid "Appears in the blog."
+msgstr "Apparaît dans le blog."
+
+#: includes/theme.php:231
+#@ waff
+msgid "Footer section (before)"
+msgstr "Section pied de page (avant)"
+
+#: includes/theme.php:233
+#@ waff
+msgid "Appears in the site footer before the footer menu."
+msgstr "Apparaît dans le pied de page du site avant le menu du pied de page."
+
+#: includes/theme.php:242
+#@ waff
+msgid "Footer section (after)"
+msgstr "Section pied de page (après)"
+
+#: includes/theme.php:244
+#@ waff
+msgid "Appears in the site footer after the footer menu."
+msgstr "Apparaît dans le pied de page du site après le menu du pied de page."
+
+#: includes/theme.php:254
+#@ waff
+msgid "Programmation section (modal)"
+msgstr "Section de programmation (modale)"
+
+#: includes/theme.php:257
+#@ waff
+msgid "Appears in the programmation modal."
+msgstr "Apparaît dans la boite modale de programmation."
+
+#: includes/theme.php:330
+#@ waff
+msgid "Please define default parameters in the form of an array."
+msgstr "Veuillez définir les paramètres par défaut sous la forme d'un tableau."
+
+#: includes/theme.php:335
+#@ waff
+msgid "Please define an icon name."
+msgstr "Veuillez définir un nom d'icône."
+
+#: includes/wide-meta.php:29
+#@ go
+msgid "Toggle page in wide mode."
+msgstr ""
+
+#: partials/content-excerpt.php:34
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content-excerpt.php:25
+#@ go
+msgctxt "post"
+msgid "Featured"
+msgstr ""
+
+#: partials/.content-dinard.php:65
+#: partials/.content-fifam.php:59
+#: partials/.content-fifam.php:124
+#: partials/content-film.php:29
+#: partials/content.php:62
+#: partials/content.php:131
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content.php:44
+#@ go
+msgid "Page"
+msgstr ""
+
+#: partials/.content-dinard.php:65
+#: partials/.content-fifam.php:59
+#: partials/.content-fifam.php:124
+#: partials/content-film.php:29
+#: partials/content.php:62
+#: partials/content.php:131
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content.php:44
+#@ go
+msgid "Pages:"
+msgstr ""
+
+#: partials/footers/footer-dinard.php:84
+#: partials/footers/footer-fifam.php:30
+#: partials/footers/footer-standard.php:22
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-3.php:21
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-4.php:21
+#@ go
+msgid "Primary Footer Menu"
+msgstr ""
+
+#: partials/footers/footer-dinard.php:105
+#: partials/footers/footer-fifam.php:59
+#: partials/footers/footer-standard.php:38
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-3.php:36
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-4.php:37
+#@ go
+msgid "Secondary Footer Menu"
+msgstr ""
+
+#: partials/footers/footer-fifam.php:88
+#: partials/footers/footer-standard.php:54
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-3.php:51
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/footers/footer-4.php:53
+#@ go
+msgid "Tertiary Footer Menu"
+msgstr ""
+
+#: partials/footers/footer-dinard.php:138
+#: partials/footers/footer-fifam.php:137
+#@ waff
+msgid "Back to top"
+msgstr "En haut"
+
+#: partials/footers/footer-dinard.php:138
+#: partials/footers/footer-fifam.php:137
+#@ waff
+msgid "Home"
+msgstr "Accueil"
+
+#: partials/footers/footer-dinard.php:160
+#: partials/footers/footer-fifam.php:159
+#, php-format
+#@ waff
+msgid "Designed w/ <3 by %1$s using WordPress"
+msgstr "Design w/ <3 par %1$s avec WordPress"
+
+#: partials/headers/header-fifam.php:26
+#: partials/navs/nav-fifam.php:14
+#@ waff
+msgid "Toggle Menu"
+msgstr "Basculer le menu"
+
+#: partials/headers/header-fifam.php:27
+#: partials/navs/nav-fifam.php:15
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:929
+#@ waff
+#@ go
+msgid "Menu"
+msgstr "Menu"
+
+#: partials/headers/header-standard.php:23
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/header.php:59
+#@ go
+msgid "Horizontal"
+msgstr ""
+
+#: partials/navs/nav-fifam.php:56
+#@ waff
+msgid "Primary Sub Menu"
+msgstr "Sous-menu primaire"
+
+#: partials/pagetitles/pagetitle-dinard.php:558
+#: partials/pagetitles/pagetitle-dinard.php:605
+#: partials/pagetitles/pagetitle-fifam.php:732
+#: partials/pagetitles/pagetitle-fifam.php:779
+#@ waff
+msgid "You need to choose a thumbnail image"
+msgstr "Vous devez choisir une image miniature"
+
+#: partials/preheaders/preheader-fifam.php:17
+#@ waff
+msgid "Breaking"
+msgstr "Le flash"
+
+#: partials/preheaders/preheader-fifam.php:17
+#@ waff
+msgid "Breaking news live from festival"
+msgstr "Les informations de dernière minute du festival"
+
+#: partials/preheaders/preheader-fifam.php:17
+#: partials/preheaders/preheader-fifam.php:32
+#@ waff
+msgid "Read More"
+msgstr "Lire la suite"
+
+#: searchform.php:23
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/searchform.php:21
+#@ go
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:25
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/searchform.php:23
+#@ go
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+
+#: searchform.php:27
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/searchform.php:25
+#@ go
+msgctxt "submit button"
+msgid "Submit"
+msgstr ""
+
+#: taxonomy-room.php:148
+#, php-format
+#@ waff
+msgid "%s"
+msgid_plural "%s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: taxonomy-room.php:149
+#@ waff
+msgid "film screened in this room"
+msgid_plural "films screened in this room"
+msgstr[0] "film projeté dans cette salle"
+msgstr[1] "films projetés dans cette salle"
+
+#: taxonomy-room.php:158
+#: taxonomy-room.php:245
+#, php-format
+#@ waff
+msgid "%s program"
+msgid_plural "%s programs"
+msgstr[0] "%s programme"
+msgstr[1] "%s programmes"
+
+#: taxonomy-room.php:160
+#: taxonomy-room.php:247
+#: taxonomy-section.php:266
+#, php-format
+#@ waff
+msgid "%s with guest"
+msgid_plural "%s with guest's"
+msgstr[0] "%s rencontre"
+msgstr[1] "%s rencontres"
+
+#: taxonomy-room.php:162
+#: taxonomy-room.php:249
+#: taxonomy-section.php:268
+#, php-format
+#@ waff
+msgid "%s parent-children"
+msgid_plural "%s parent-children's"
+msgstr[0] "%s parent-enfant"
+msgstr[1] "%s parents-enfants"
+
+#: taxonomy-room.php:164
+#: taxonomy-room.php:251
+#: taxonomy-section.php:270
+#, php-format
+#@ waff
+msgid "%s highlight"
+msgid_plural "%s highlights"
+msgstr[0] "%s temps-fort"
+msgstr[1] "%s temps-forts"
+
+#: taxonomy-room.php:166
+#: taxonomy-room.php:253
+#: taxonomy-section.php:272
+#, php-format
+#@ waff
+msgid "%s favorite"
+msgid_plural "%s favorites"
+msgstr[0] "%s coup de coeur"
+msgstr[1] "%s coups de coeur"
+
+#: taxonomy-room.php:243
+#: taxonomy-section.php:264
+#, php-format
+#@ waff
+msgid "%s film"
+msgid_plural "%s films"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/widgets/custom-wp-widget-categories.php:28
+#@ waff
+msgid "A list or dropdown of categories."
+msgstr "Une liste ou un menu déroulant de catégories."
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:60
+#: taxonomy-section.php:129
+#@ waff
+msgid "Edition"
+msgstr "Édition"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:60
+#@ waff
+msgid "Days"
+msgstr "Jours"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:64
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:232
+#@ waff
+#@ go
+msgid "Hours"
+msgstr "Heures"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:67
+#@ waff
+msgid "Minutes"
+msgstr "Minutes"
+
+#. translators: %s: The post title.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:32
+#, php-format
+#@ go
+msgid "One thought on &ldquo;%s&rdquo;"
+msgstr ""
+
+#. translators: %1$s: The number of comments. %2$s: The post title.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:39
+#, php-format
+#@ go
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:61
+#@ go
+msgid "Comment navigation"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:62
+#@ go
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:63
+#@ go
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/comments.php:74
+#@ go
+msgid "Comments are closed."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/amp.php:101
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/amp.php:105
+#@ go
+msgid "collapse child menu"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/amp.php:102
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/amp.php:105
+#@ go
+msgid "expand child menu"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:325
+#@ go
+msgid "Install Required Plugins"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:326
+#@ go
+msgid "Install Plugins"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:328
+#, php-format
+#@ go
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:330
+#, php-format
+#@ go
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:331
+#@ go
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:334
+#, php-format
+#@ waff
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:340
+#, php-format
+#@ waff
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:346
+#, php-format
+#@ waff
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:352
+#, php-format
+#@ waff
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:358
+#, php-format
+#@ waff
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:364
+#, php-format
+#@ waff
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:369
+#@ waff
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:374
+#@ waff
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:379
+#@ waff
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:383
+#@ go
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:384
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:825
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2531
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3578
+#@ go
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:385
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3157
+#@ go
+msgid "Plugin activated successfully."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:388
+#, php-format
+#@ go
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:390
+#, php-format
+#@ go
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr ""
+
+#. translators: 1: dashboard link.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:392
+#, php-format
+#@ go
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:393
+#@ go
+msgid "Dismiss this notice"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:394
+#@ go
+msgid "There are one or more required or recommended plugins to install, update or activate."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:395
+#@ go
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:520
+#@ go
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:521
+#@ go
+msgid "Update Required"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:932
+#@ go
+msgid "The remote plugin package does not contain a folder with the desired slug and renaming did not work."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:932
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:935
+#@ go
+msgid "Please contact the plugin provider and ask them to package their plugin according to the WordPress guidelines."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:935
+#@ go
+msgid "The remote plugin package consists of more than one file, but the files are not packaged in a folder."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:1119
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2946
+#@ go
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr ""
+
+#. translators: %s: version number
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:1980
+#, php-format
+#@ go
+msgid "TGMPA v%s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2271
+#@ go
+msgid "Required"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2274
+#@ go
+msgid "Recommended"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2290
+#@ go
+msgid "WordPress Repository"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2293
+#@ go
+msgid "External Source"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2296
+#@ go
+msgid "Pre-Packaged"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2313
+#@ go
+msgid "Not Installed"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2317
+#@ go
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2319
+#@ go
+msgid "Active"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2325
+#@ go
+msgid "Required Update not Available"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2328
+#@ go
+msgid "Requires Update"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2331
+#@ go
+msgid "Update recommended"
+msgstr ""
+
+#. translators: 1: install status, 2: update status
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2340
+#, php-format
+#@ go
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#. translators: 1: number of plugins.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2386
+#, php-format
+#@ go
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2390
+#, php-format
+#@ go
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2394
+#, php-format
+#@ go
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2398
+#, php-format
+#@ go
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2480
+#@ go
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2488
+#@ go
+msgid "Installed version:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2496
+#@ go
+msgid "Minimum required version:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2508
+#@ go
+msgid "Available version:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2531
+#@ go
+msgid "No plugins to install, update or activate."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2545
+#@ go
+msgid "Plugin"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2546
+#@ go
+msgid "Source"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2547
+#@ go
+msgid "Type"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2551
+#@ go
+msgid "Version"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2552
+#@ go
+msgid "Status"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2601
+#, php-format
+#@ go
+msgid "Install %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2606
+#, php-format
+#@ go
+msgid "Update %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2612
+#, php-format
+#@ go
+msgid "Activate %2$s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2682
+#@ go
+msgid "Upgrade message from the plugin author:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2715
+#@ go
+msgid "Install"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2721
+#@ go
+msgid "Update"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2724
+#@ go
+msgid "Activate"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2755
+#@ go
+msgid "No plugins were selected to be installed. No action taken."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2757
+#@ go
+msgid "No plugins were selected to be updated. No action taken."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2798
+#@ go
+msgid "No plugins are available to be installed at this time."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2800
+#@ go
+msgid "No plugins are available to be updated at this time."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2906
+#@ go
+msgid "No plugins were selected to be activated. No action taken."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2932
+#@ go
+msgid "No plugins are available to be activated at this time."
+msgstr ""
+
+#. gettext fix: identical singular and plural forms found, that may be ambiguous! Please check the code!
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:2950
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:386
+#@ go
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3156
+#@ go
+msgid "Plugin activation failed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3496
+#, php-format
+#@ go
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#. translators: 1: plugin name, 2: error message.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3499
+#, php-format
+#@ go
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3501
+#, php-format
+#@ go
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3505
+#@ go
+msgid "The installation and activation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3507
+#, php-format
+#@ go
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3507
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3515
+#@ go
+msgid "Show Details"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3507
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3515
+#@ go
+msgid "Hide Details"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3508
+#@ go
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3510
+#, php-format
+#@ go
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3513
+#@ go
+msgid "The installation process is starting. This process may take a while on some hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3515
+#, php-format
+#@ go
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3516
+#@ go
+msgid "All installations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/classes/class-tgm-plugin-activation.php:3518
+#, php-format
+#@ go
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:102
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:551
+#@ go
+msgid "Primary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:103
+#@ go
+msgid "Footer Menu #1"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:104
+#@ go
+msgid "Footer Menu #2"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:105
+#@ go
+msgid "Footer Menu #3"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:187
+#@ go
+msgctxt "font size option label"
+msgid "Medium"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:193
+#@ go
+msgctxt "font size option label"
+msgid "Large"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:212
+#@ go
+msgctxt "name of the first color palette selection"
+msgid "Primary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:217
+#@ go
+msgctxt "name of the second color palette selection"
+msgid "Secondary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:222
+#@ go
+msgctxt "name of the third color palette selection"
+msgid "Tertiary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:227
+#@ go
+msgctxt "name of the fourth color palette selection"
+msgid "Quaternary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:244
+#@ go
+msgid "Primary to Secondary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:249
+#@ go
+msgid "Primary to Tertiary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:254
+#@ go
+msgid "Primary to Background"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:259
+#@ go
+msgid "Secondary to Tertiary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:714
+#@ go
+msgctxt "design style name"
+msgid "Traditional"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:719
+#@ go
+msgctxt "color palette name"
+msgid "Apricot"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:726
+#@ go
+msgctxt "color palette name"
+msgid "Emerald"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:733
+#@ go
+msgctxt "color palette name"
+msgid "Brick"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:740
+#@ go
+msgctxt "color palette name"
+msgid "Bronze"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:767
+#@ go
+msgctxt "design style name"
+msgid "Modern"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:772
+#@ go
+msgctxt "color palette name"
+msgid "Shade"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:779
+#@ go
+msgctxt "color palette name"
+msgid "Blush"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:786
+#@ go
+msgctxt "color palette name"
+msgid "Indigo"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:793
+#@ go
+msgctxt "color palette name"
+msgid "Pacific"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:821
+#@ go
+msgctxt "design style name"
+msgid "Trendy"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:826
+#@ go
+msgctxt "color palette name"
+msgid "Plum"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:835
+#@ go
+msgctxt "color palette name"
+msgid "Steel"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:843
+#@ go
+msgctxt "color palette name"
+msgid "Avocado"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:851
+#@ go
+msgctxt "color palette name"
+msgid "Champagne"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:880
+#@ go
+msgctxt "design style name"
+msgid "Welcoming"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:885
+#@ go
+msgctxt "color palette name"
+msgid "Forest"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:893
+#@ go
+msgctxt "color palette name"
+msgid "Spruce"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:901
+#@ go
+msgctxt "color palette name"
+msgid "Mocha"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:909
+#@ go
+msgctxt "color palette name"
+msgid "Lavender"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:934
+#@ go
+msgctxt "design style name"
+msgid "Playful"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:939
+#@ go
+msgctxt "color palette name"
+msgid "Frolic"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:949
+#@ go
+msgctxt "color palette name"
+msgid "Coral"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:959
+#@ go
+msgctxt "color palette name"
+msgid "Organic"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:969
+#@ go
+msgctxt "color palette name"
+msgid "Berry"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1054
+#@ go
+msgctxt "name of the first header variation option"
+msgid "Header 1"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1058
+#@ go
+msgctxt "name of the second header variation option"
+msgid "Header 2"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1062
+#@ go
+msgctxt "name of the third header variation option"
+msgid "Header 3"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1066
+#@ go
+msgctxt "name of the fourth header variation option"
+msgid "Header 4"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1105
+#@ go
+msgctxt "name of the first footer variation option"
+msgid "Footer 1"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1112
+#@ go
+msgctxt "name of the second footer variation option"
+msgid "Footer 2"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1119
+#@ go
+msgctxt "name of the third footer variation option"
+msgid "Footer 3"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1126
+#@ go
+msgctxt "name of the fourth footer variation option"
+msgid "Footer 4"
+msgstr ""
+
+#. translators: the theme author
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1209
+#@ go
+msgid "Facebook"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1214
+#@ go
+msgid "Twitter"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1219
+#@ go
+msgid "Instagram"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1224
+#@ go
+msgid "LinkedIn"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1234
+#@ go
+msgid "Pinterest"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1239
+#@ go
+msgid "YouTube"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1249
+#@ go
+msgid "GitHub"
+msgstr ""
+
+#. translators: Search query term(s).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1424
+#, php-format
+#@ go
+msgid "Search for: %s"
+msgstr ""
+
+#. translators: %s is the registered nav menu name
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:108
+#, php-format
+#@ go
+msgid "Please assign a menu to the %s menu location"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:350
+#@ go
+msgid "Width"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:379
+#@ go
+msgid "Mobile Width"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:405
+#@ go
+msgid "Site Settings"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:422
+#@ go
+msgid "Page Titles"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:423
+#@ go
+msgid "Display page titles on individual pages that are not individually opted-out."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:441
+#@ go
+msgid "Blog Excerpt"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:442
+#@ go
+msgid "Use post excerpts on the blog page."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:461
+#@ go
+msgid "Copyright Text"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:503
+#@ go
+msgid "Design Style"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:504
+#@ go
+msgid "Choose a style, select a color scheme and customize colors to personalize your site."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:527
+#@ go
+msgid "Color scheme"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:573
+#@ go
+msgid "Secondary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:595
+#@ go
+msgid "Tertiary"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:617
+#@ go
+msgid "Header Colors"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:618
+#@ go
+msgid "Customize colors within the site header."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:638
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:700
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:860
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:967
+#@ go
+msgid "Background"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:658
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:720
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:873
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:980
+#@ go
+msgid "Foreground"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:679
+#@ go
+msgid "Footer Colors"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:680
+#@ go
+msgid "Customize colors within the site footer."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:740
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:993
+#@ go
+msgid "Heading"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:760
+#@ go
+msgid "Social Icon"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:781
+#@ go
+msgid "Additional Design Controls"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:782
+#@ go
+msgid "Customize additional design settings."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:802
+#@ go
+msgid "Site Spacing"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:826
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:845
+#@ go
+msgid "Header"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:846
+#@ go
+msgid "Choose a header for every page on your site, then style it with the selectors below."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:933
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:952
+#@ go
+msgid "Footer"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:953
+#@ go
+msgid "Choose a footer for every page on your site, then style it with the selectors below."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1013
+#@ go
+msgid "Social"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1014
+#@ go
+msgid "Add social media account links to apply social icons on the site footer."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1050
+#@ go
+msgid "Social icon"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1070
+#@ go
+msgid "Menu Behavior"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1087
+#@ go
+msgid "Show sub menus on hover."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1088
+#@ go
+msgid "Show sub menu items on hover."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:1106
+#@ go
+msgid "Site Design"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:28
+#@ go
+msgid "Pingback:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:28
+#@ go
+msgid "(Edit)"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:44
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:115
+#@ go
+msgid "Post author"
+msgstr ""
+
+#. translators: 1: date, 2: time
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:51
+#, php-format
+#@ go
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:57
+#@ go
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:62
+#@ go
+msgid "Edit"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/pluggable.php:71
+#@ go
+msgid "Reply"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:121
+#, php-format
+#@ go
+msgctxt "%s = author name"
+msgid "By %s"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:137
+#@ go
+msgid "Post date"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:176
+#@ go
+msgid "In"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:190
+#@ go
+msgid "Tags"
+msgstr ""
+
+#. translators: %s: The social icon label.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:760
+#, php-format
+#@ go
+msgid "Open %s in a new tab"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/template-tags.php:969
+#@ go
+msgid "Search Toggle"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/title-meta.php:29
+#@ go
+msgid "Hide Page Title."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:153
+#@ go
+msgid "View cart"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:218
+#@ go
+msgid "Close sidebar"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:226
+#@ go
+msgid "Cart"
+msgstr ""
+
+#. translators: 1. Single integer value. (eg: 1 product in your cart). 2. Integer larger than 1. (eg: 5 products in your cart).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:233
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:283
+#, php-format
+#@ go
+msgid "%s product in your cart"
+msgid_plural "%s products in your cart"
+msgstr[0] ""
+msgstr[1] ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:337
+#@ go
+msgid "Your cart is currently empty."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:475
+#@ go
+msgid "Previous Post: "
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:475
+#@ go
+msgid "Previous"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:476
+#@ go
+msgid "Next Post:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:476
+#@ go
+msgid "Next"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:507
+#@ go
+msgid "Back"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/woocommerce.php:558
+#@ go
+msgid "Reset Selections"
+msgstr ""
+
+#. translators: 1: link to WP admin new post page.
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content-none.php:21
+#, php-format
+#@ go
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content-none.php:33
+#@ go
+msgid "Sorry, but nothing matched your search terms. Please try searching again with some different keywords."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/content-none.php:38
+#@ go
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help you out."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:16
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:130
+#@ go
+msgid "About"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:22
+#@ go
+msgid "Hi, I’m Everett"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:31
+#@ go
+msgid "A tenacious, loving and energetic photographer who enjoys grabbing her camera and running out to take some photos."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:39
+#@ go
+msgid "Work With Me"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:54
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:61
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:68
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:219
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:104
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:134
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:164
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:303
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:310
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:79
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:104
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:111
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:121
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:149
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:154
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:159
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:164
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:169
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:174
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:179
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:184
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:189
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:194
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:199
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:204
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:209
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:214
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:219
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:50
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:140
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:176
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:220
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:273
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:280
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:375
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:401
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:513
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:543
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:574
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:767
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:774
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:781
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:788
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:795
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:804
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:822
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:829
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:836
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:886
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:905
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:912
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:919
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1207
+#@ go
+msgid "Image description"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:86
+#@ go
+msgid "Early on"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:94
+#@ go
+msgid "I am so fascinated by photography and it’s capability to bring your imagination to amazing places. Early on, I fell in love with the idea of filming my own productions, so I set out to learn everything I could."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:108
+#@ go
+msgid "Current"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:116
+#@ go
+msgid "I have been teaching myself filmmaking for the past four and a half years and I’m still learning every day. I am building my business as a freelance filmmaker, as well as working on my own photo shoots."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:143
+#@ go
+msgid "Protecting yourself"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:153
+#@ go
+msgid "Miller &amp; Cole is tremendously proud of the impact that we have made in helping our clients by providing quality legal services and exceptional service."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:175
+#@ go
+msgid "Quality Results"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:183
+#@ go
+msgid "Our goal is to create assets from our clients’ innovations through patent, trademark and copyright law.&nbsp; We take great pride in providing quality trademark legal services and exceptional customer service every single day."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:198
+#@ go
+msgid "Experienced"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:206
+#@ go
+msgid "The attorneys at Miller &amp; Cole work as a team to exceed each of our clients’ expectations. We have 30+ years of high-level experience helping businesses protecting the time, money and resources spent developing ideas and inventions."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:241
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:16
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:194
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:208
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1193
+#@ go
+msgid "Contact"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:250
+#@ go
+msgid "Office => (555) 555-5555<br>email@example.com"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:265
+#@ go
+msgid "Location"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:274
+#@ go
+msgid "123 Example Rd<br>Scottsdale, AZ 85260"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:289
+#@ go
+msgid "Connect"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/about.php:298
+#@ go
+msgid "<a href=\"https://twitter.com\">Twitter</a><br><a href=\"https://www.facebook.com\">Facebook</a><br>"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:22
+#@ go
+msgid "Let's get in touch"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:31
+#@ go
+msgid "Well hello there, wonderful, fabulous&nbsp;you!&nbsp;If you’d like to get in touch with me, please feel free to give me a call at (555) 555-5555, or send a message with the form down below. Either way, I'll be in touch shortly!"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:80
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:287
+#@ go
+msgid "Contact Us"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:112
+#@ go
+msgid "\"I appreciate Everett's ability to compose visually stunning photos, brining my memories to live every time I look at them.\""
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:121
+#@ go
+msgid "- Larina H."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:142
+#@ go
+msgid "\"Everett should be nominated for photographer of the year. I am so pleased with her photography at my wedding.\""
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:151
+#@ go
+msgid "- Kam V."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:172
+#@ go
+msgid "\"Everett knew exactly how to pull the best of me out, and into a beautiful portrait. I'm so glad I met Everett!\""
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:181
+#@ go
+msgid "- Jerri S."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:217
+#@ go
+msgid "Studio Gym<br>123 Example Rd, Scottsdale, AZ 85260<br>(555) 555-5555"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/contact.php:241
+#@ go
+msgid "Mon-Fri => 8:00 - 21:00<br>Sat => 8:00 - 20:00<br>Sun => 10:00 - 14:00"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:16
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:41
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:141
+#@ go
+msgid "Gallery"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/gallery.php:54
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:102
+#@ go
+msgid "Connecting audience + artist in our lush, speakeasy-style listening room. Only 50 seats available for this sought-after scene."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:16
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:213
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:395
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:721
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:880
+#@ go
+msgid "Homepage"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:29
+#@ go
+msgid "Where the hustle slows, the rhythm is heard, and the beans are fantastic"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:89
+#@ go
+msgid "Enjoy Live Music + the Best Coffee You've Ever Had"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:147
+#@ go
+msgid "A social house"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:159
+#@ go
+msgid "With our guides' experience, we will not only get you to where the fish are - but we'll get you hooked on them too. Our crew is knowledgeable and friendly - ready to take you on the trip of your dreams."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:183
+#@ go
+msgid "A listening room"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:195
+#@ go
+msgid "Folks have fought some monster bluefin tuna on standup gear with our offshore fishing packager, which is an incredible challenge for sure! Stick to the shoreline and test your strength pulling in some biggies!"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:239
+#@ go
+msgid "Our approach reflects the people we serve. We are diverse, yet the same."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:252
+#@ go
+msgid "Learn More"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:320
+#@ go
+msgid "When we set up shop with an espresso machine up front and a roaster in the back, we hoped to some day be a part of New York's rich tradition of service and culinary achievement. Everyday this aspiration drives us."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:332
+#@ go
+msgid "The city's energy binds us together. It drives us to be the best."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:344
+#@ go
+msgid "This fairly new coffee shop, conveniently located in downtown Scottsdale, is one of the best coffee shops I've ever been to, and trust me when I say, I've been to many. The owners and the staff will make you feel like an old friend or even family."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:357
+#@ go
+msgid "Grab a cup"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:413
+#@ go
+msgid "Bringing the finest culinary food from the heart of Asia directly to you"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:422
+#@ go
+msgid "View our Menu"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:460
+#@ go
+msgid "<strong>Sushi Nakazawa</strong>&nbsp;serves the&nbsp;<em>omakase</em>&nbsp;of&nbsp;<strong>Chef Daisuke Nakazawa</strong>. Within the twenty-course meal lies Chef Nakazawa’s passion for sushi. With ingredients sourced both domestically and internationally, the chef crafts a very special tasting menu within the style of Edomae sushi. Chef Nakazawa is a strong believer in the food he serves representing the waters he is surrounded by, so only the best and freshest find its way to your plate."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:468
+#@ go
+msgid "The relaxed dining experience at Sushi Nakazawa is chic nonetheless. High back leather chairs at the sushi bar coddle you while each course is explained in detail, and every nuance is revealed. Whether an Edomae novice or self-proclaimed sushi foodie, you will leave with a feeling of euphoria."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:521
+#@ go
+msgid "Authentic"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:530
+#@ go
+msgid "The relaxed dining experience at Bento is chic and airy. High back chairs at the sushi bar coddle you for each course."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:551
+#@ go
+msgid "Historical"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:553
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:584
+#@ go
+msgid "Write title..."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:561
+#@ go
+msgid "Housed in the original Yami House, the history behind Bento is amazing. Learn more as you dine in our historical dining room."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:582
+#@ go
+msgid "Best-rated"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:592
+#@ go
+msgid "Bento is one of the best-rated restaurants in the region. With glamourous food and delicious drinks - you won't want to miss out!"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:652
+#@ go
+msgid "Bento, Steak &amp; Sushi"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:661
+#@ go
+msgid "123 Example Rd"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:670
+#@ go
+msgid "Scottsdale, AZ 85260"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:678
+#@ go
+msgid "Reservations"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:733
+#@ go
+msgid "Hello! We're a"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:742
+#@ go
+msgid "Branding &amp; Digital Design<br>Studio in Tokyo"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:750
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:868
+#@ go
+msgid "Let's Talk"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:851
+#@ go
+msgid "Need our help?"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:860
+#@ go
+msgid "We Create Brands and Inspire Experiences"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:928
+#@ go
+msgid "Welcome to Salt"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:937
+#@ go
+msgid "For over forty years Salt has been known for its luxury lobster, steamed clams, barbecued chicken and homemade clam chowder. Stop on by and grab some of the most incredible seafood you'll ever taste."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:953
+#@ go
+msgid "Food &amp; Hours"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1035
+#@ go
+msgid "Ocean to Plate"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1037
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1107
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1177
+#@ go
+msgid "Add feature title..."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1044
+#@ go
+msgid "Cajun &amp; creole seafood cuisine, never frozen - delish"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1052
+#@ go
+msgid "See Menu"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1105
+#@ go
+msgid "Dine with Us"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1114
+#@ go
+msgid "Mon - Thurs => 5pm - 11pm<br> Fri-Sat => 5pm - Midnight"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1122
+#@ go
+msgid "Dine in"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1175
+#@ go
+msgid "Catering"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1184
+#@ go
+msgid "We cater all events from family reunions, to weddings"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/layouts/home.php:1186
+#@ go
+msgid "Add feature content"
+msgstr ""
+
+#: partials/pagination.php:21
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/pagination.php:21
+#@ go
+msgid "Newer <span class=\"nav-short\">Posts</span>"
+msgstr ""
+
+#: partials/pagination.php:25
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/partials/pagination.php:25
+#@ go
+msgid "Older <span class=\"nav-short\">Posts</span>"
+msgstr ""
+
+#. translators: 1. Single integer value. (eg: Items (1), Items (2) etc.).
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:32
+#, php-format
+#@ go
+msgid "Items (%s)"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:37
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:96
+#@ woocommerce
+msgid "Price"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:38
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:102
+#@ woocommerce
+msgid "Quantity"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:39
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:124
+#@ woocommerce
+msgid "Subtotal"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:80
+#@ woocommerce
+msgid "Available on backorder"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:86
+#@ woocommerce
+msgid "Remove this item"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:89
+#@ go
+msgid "Remove"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:142
+#@ woocommerce
+msgid "Coupon:"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:142
+#@ woocommerce
+msgid "Coupon code"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:142
+#@ woocommerce
+msgid "Apply coupon"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/woocommerce/cart/cart.php:147
+#@ woocommerce
+msgid "Update cart"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:276
+#@ waff
+msgid "Page anchors"
+msgstr "Ancres de page"
+
+#: includes/admin/custom_metaboxes.php:277
+#@ waff
+msgid "Fill anchors by name serialized for id ( works only with Modern header style)"
+msgstr "Remplir les ancres par nom sérialisé pour matcher l'identifiant (fonctionne uniquement avec le style d'en-tête moderne)"
+
+#: includes/admin/custom_metaboxes.php:16
+#@ waff
+msgid "⚡︎ Flash › General"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:33
+#: includes/admin/custom_metaboxes.php:119
+#@ waff
+msgid "http://"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:40
+#: includes/admin/custom_metaboxes.php:129
+#@ waff
+msgid "Choose a special color if needed. <br/>Theme colors : <em>Light gray</em> : <code>#EAEFF0</code> / <em>Gray</em> : <code>#BFBFBF</code>"
+msgstr "Choisissez une couleur spéciale si nécessaire. <br/> Couleurs du thème : <em> Gris clair </em> : <code> # EAEFF0 </code> / <em> Gris </em> : <code> #BFBFBF </code>"
+
+#: includes/admin/custom_metaboxes.php:71
+#@ waff
+msgid "Homeslide › General"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:89
+#@ waff
+msgid "Slider lightness mode"
+msgstr "Mode couleur du slide"
+
+#: includes/admin/custom_metaboxes.php:90
+#@ waff
+msgid "Choose if the slide lightness mode is light or dark"
+msgstr "Choisir si le slide est en mode jour ou nuit"
+
+#: includes/admin/custom_metaboxes.php:101
+#@ waff
+msgid "Slider text color mode"
+msgstr "Mode de couleur du texte"
+
+#: includes/admin/custom_metaboxes.php:102
+#@ waff
+msgid "Choose if the slide text mode is light or dark. Overrides slider color mode."
+msgstr "Choisi si le texte est en mode clair ou sombre. Ecrase le mode couleur du slide."
+
+#: includes/admin/custom_metaboxes.php:106
+#@ waff
+msgid "Default"
+msgstr "Default"
+
+#: includes/admin/custom_metaboxes.php:174
+#@ waff
+msgid "Partner › General"
+msgstr "Partenaire › General"
+
+#: includes/admin/custom_metaboxes.php:182
+#@ waff
+msgid "Partner link"
+msgstr "Lien du partenaire"
+
+#: includes/admin/custom_metaboxes.php:184
+#@ waff
+msgid "http://www.google.fr"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:186
+#@ waff
+msgid "<span class=\"label\">UK</span> Enter a website link for the partner (if you want the image to be clickable)<br/><span class=\"label\">FR</span> <em>Saisir un lien de site internet pour le partenaire (si vous souhaitez qu'il soit cliquable)</em>"
+msgstr "<span class=\"label\">UK</span> Saisissez un lien vers le site Web du partenaire (si vous souhaitez que l'image soit cliquable)<br/><span class=\"label\">FR</span > <em>Saisir un lien de site internet pour le partenaire (si vous souhaitez qu'il soit cliquable)</em>"
+
+#: includes/admin/custom_metaboxes.php:189
+#@ waff
+msgid "Les logotypes doivent faire minimum 800 x 800px, recommandé 1200 x 1200px. Nous vous recommandons d'utiliser des images transparentes et détourées en *.PNG. Pour réussir, le traitement de couleur, les blancs doivent être rendus en défonce ( c'est à dire transparents )."
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:208
+#@ waff
+msgid "Film color"
+msgstr "Couleur du film"
+
+#: includes/admin/custom_metaboxes.php:215
+#@ waff
+msgid "Color"
+msgstr "Couleur"
+
+#: includes/admin/custom_metaboxes.php:218
+#@ waff
+msgid "Choose a color for the film page"
+msgstr "Choisissez une couleur de fiche film"
+
+#: includes/admin/custom_metaboxes.php:235
+#@ waff
+msgid "Page › Options"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:327
+#@ waff
+msgid "Advanced page class"
+msgstr "Classe de page avancée"
+
+#: includes/admin/custom_metaboxes.php:328
+#@ waff
+msgid "Fill a custom class for the main page wrapper. Advanced feature."
+msgstr "Remplissez une classe personnalisée pour le wrapper de la page principale. Fonctionnalité avancée."
+
+#: includes/admin/custom_post_types.php:122
+#: includes/admin/custom_post_types.php:124
+#: includes/admin/custom_post_types.php:137
+#@ waff
+msgid "Partners"
+msgstr "Partenaires"
+
+#: includes/admin/custom_post_types.php:125
+#: includes/admin/custom_post_types.php:138
+#@ waff
+msgid "Partner"
+msgstr "Partenaire"
+
+#: includes/admin/custom_post_types.php:126
+#@ waff
+msgid "Add Partner"
+msgstr "Ajouter Partenaire"
+
+#: includes/admin/custom_post_types.php:127
+#@ waff
+msgid "Add new Partner"
+msgstr "Ajouter nouveau Partenaire"
+
+#: includes/admin/custom_post_types.php:128
+#@ waff
+msgid "New Partner"
+msgstr "Nouveau Partenaire"
+
+#: includes/admin/custom_post_types.php:129
+#@ waff
+msgid "Edit Partner"
+msgstr "Modifier Partenaire"
+
+#: includes/admin/custom_post_types.php:130
+#: includes/admin/custom_post_types.php:131
+#@ waff
+msgid "View Partner"
+msgstr "Voir Partenaire"
+
+#: includes/admin/custom_post_types.php:132
+#@ waff
+msgid "All Partner"
+msgstr "Tous les Partenaire"
+
+#: includes/admin/custom_post_types.php:133
+#@ waff
+msgid "Search Partner"
+msgstr "Rechercher Partenaire"
+
+#: includes/admin/custom_post_types.php:134
+#@ waff
+msgid "Parent Partner"
+msgstr "Parent Partenaire"
+
+#: includes/admin/custom_post_types.php:135
+#@ waff
+msgid "No Partners found"
+msgstr "Pas de partenaires"
+
+#: includes/admin/custom_post_types.php:136
+#@ waff
+msgid "No Partners found in Trash"
+msgstr "Pas de partenaires dans la corbeille"
+
+#: includes/admin/custom_post_types.php:155
+#@ waff
+msgid "Partner categories"
+msgstr "Catégories Partenaire"
+
+#: includes/admin/custom_post_types.php:156
+#@ waff
+msgid "Partner category"
+msgstr "Catégorie Partenaire"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:125
+#@ waff
+msgid "First column classes:"
+msgstr "Classes de première colonne:"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:129
+#@ waff
+msgid "Second column classes:"
+msgstr "Classes de seconde colonne:"
+
+#: includes/admin/widgets/custom-wp-widget-counter.php:133
+#@ waff
+msgid "Third column classes:"
+msgstr "Classes de troisième colonne:"
+
+#: includes/admin/widgets/custom-wp-widget-newsletter.php:134
+#@ waff
+msgid "Display reduced in two columns"
+msgstr "Affichage réduit en deux colonnes"
+
+#: includes/admin/widgets/custom-wp-widget-partners.php:174
+#@ waff
+msgid "Inside classes:"
+msgstr "Classes intérieures:"
+
+#: includes/blocks.php:387
+#@ waff
+msgid "(WA) Awards"
+msgstr "(WA) Palmarès"
+
+#: includes/blocks.php:394
+#: includes/blocks.php:1652
+#@ waff
+msgid "Awards"
+msgstr "Palmarès"
+
+#: includes/blocks.php:412
+#: includes/blocks.php:684
+#@ waff
+msgid "Select edition"
+msgstr "Sélectionner une édition"
+
+#: includes/blocks.php:300
+#@ waff
+msgid "(WA) Contact"
+msgstr ""
+
+#: includes/blocks.php:305
+#@ waff
+msgid "Contact block gallery"
+msgstr "Gallerie contact block"
+
+#: includes/blocks.php:308
+#@ waff
+msgid "Choose the images"
+msgstr "Choisir les images"
+
+#: includes/blocks.php:316
+#@ waff
+msgid "First block"
+msgstr "Premier bloc"
+
+#: includes/blocks.php:428
+#@ waff
+msgid "Choose to display all the awards or selected awards"
+msgstr "Choisissez d'afficher tous les prix ou les prix sélectionnées"
+
+#: includes/blocks.php:431
+#@ waff
+msgid "All"
+msgstr "Tous"
+
+#: includes/blocks.php:432
+#@ waff
+msgid "Master awards only"
+msgstr "Grand prix uniquement"
+
+#: includes/blocks.php:433
+#@ waff
+msgid "Standard awards only"
+msgstr "Prix standard uniquement"
+
+#: includes/blocks.php:1561
+#@ waff
+msgid "Be patient ! Awards has not been published yet"
+msgstr "Un peu de patience ! Les prix n'ont pas encore été publiés"
+
+#: includes/blocks.php:1641
+#@ waff
+msgid "Master awards"
+msgstr "Grand prix"
+
+#: includes/blocks.php:1662
+#@ waff
+msgid "All the awards"
+msgstr "Tout le palmarès"
+
+#: includes/blocks.php:1815
+#: includes/blocks.php:1816
+#@ waff
+msgid "Award"
+msgstr "Prix"
+
+#: includes/core.php:158
+#@ go
+msgctxt "name of the waff footer variation option"
+msgid "Footer waff"
+msgstr ""
+
+#: includes/core.php:185
+#@ go
+msgctxt "name of the waff header variation option"
+msgid "Header waff"
+msgstr ""
+
+#: includes/core.php:219
+#@ go
+msgctxt "design style name"
+msgid "WAFF"
+msgstr ""
+
+#: includes/customizer.php:91
+#@ waff
+msgid "Logo dark url ( *.svg )"
+msgstr "Logo sombre url ( *.svg )"
+
+#: includes/customizer.php:109
+#@ waff
+msgid "Logo light url ( *.svg )"
+msgstr "Logo clair url ( *.svg )"
+
+#: includes/customizer.php:127
+#@ waff
+msgid "Sign dark url ( *.svg )"
+msgstr "Symbole sombre url ( *.svg )"
+
+#: includes/customizer.php:145
+#@ waff
+msgid "Sign light url ( *.svg )"
+msgstr "Symbole clair url ( *.svg )"
+
+#: includes/customizer.php:198
+#@ waff
+msgid "Mailchimp popup"
+msgstr "Popup mailchimp"
+
+#: includes/customizer.php:199
+#@ waff
+msgid "Enable the Mailchimp script to add a newsletter popup."
+msgstr "Activez le script Mailchimp pour ajouter une fenêtre contextuelle de newsletter."
+
+#: includes/customizer.php:218
+#@ waff
+msgid "Show author name in single posts ?"
+msgstr "Afficher le nom de l'auteur dans les messages individuels ?"
+
+#: includes/customizer.php:219
+#@ waff
+msgid "Show or hide author name in post metas."
+msgstr "Afficher ou masquer le nom de l'auteur dans les métas de publication."
+
+#: includes/customizer.php:279
+#@ waff
+msgid "Contact email"
+msgstr "Email de contact"
+
+#: partials/pagetitles/pagetitle-dinard.php:237
+#@ waff
+msgid "View film online"
+msgstr "Voir en ligne"
+
+#: partials/pagetitles/pagetitle-dinard.php:239
+#@ waff
+msgid "Buy tickets"
+msgstr "Acheter tickets"
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1070
+#@ go
+msgctxt "name of the fourth header variation option"
+msgid "Header 5"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1074
+#@ go
+msgctxt "name of the fourth header variation option"
+msgid "Header 6"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1078
+#@ go
+msgctxt "name of the fourth header variation option"
+msgid "Header 7"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1229
+#@ go
+msgid "Xing"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1244
+#@ go
+msgid "Spotify"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:293
+#@ go
+msgid "Hide Site Title"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:294
+#@ go
+msgid "Prevent the site title from appearing in the header area."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:314
+#@ go
+msgid "Hide Tagline"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:315
+#@ go
+msgid "Prevent the site tagline from appearing in the header area."
+msgstr ""
+
+#: includes/template-tags.php:719
+#@ waff
+msgid "Fiction"
+msgstr "Fiction"
+
+#: includes/template-tags.php:720
+#@ waff
+msgid "Documentary"
+msgstr "Documentaire"
+
+#: includes/template-tags.php:721
+#@ waff
+msgid "Fiction documentary"
+msgstr "Documentaire fiction"
+
+#: includes/template-tags.php:722
+#@ waff
+msgid "Experimental"
+msgstr "Expérimental"
+
+#: includes/template-tags.php:723
+#@ waff
+msgid "Animation"
+msgstr "Animation"
+
+#: includes/template-tags.php:724
+#@ waff
+msgid "Animation documentary"
+msgstr "Documentaire animation"
+
+#: includes/template-tags.php:725
+#@ waff
+msgid "Drama"
+msgstr "Drame"
+
+#: includes/template-tags.php:726
+#@ waff
+msgid "Comedy"
+msgstr "Comédie"
+
+#: includes/template-tags.php:727
+#@ waff
+msgid "Drama comedy"
+msgstr "Comédie dramatique"
+
+#: includes/template-tags.php:728
+#@ waff
+msgid "Music"
+msgstr "Musique"
+
+#: includes/template-tags.php:729
+#@ waff
+msgid "Other"
+msgstr "Autre"
+
+#: includes/template-tags.php:752
+#@ waff
+msgid "Short film"
+msgstr "Court-métrage"
+
+#: includes/template-tags.php:753
+#@ waff
+msgid "Documentary film"
+msgstr "Long-métrage documentaire"
+
+#: includes/template-tags.php:754
+#@ waff
+msgid "Feature film"
+msgstr "Long-métrage"
+
+#: includes/template-tags.php:755
+#@ waff
+msgid "Medium-length film"
+msgstr "Moyen-métrage"
+
+#: includes/template-tags.php:756
+#@ waff
+msgid "Serie"
+msgstr "Série"
+
+#: includes/template-tags.php:757
+#@ waff
+msgid "Program"
+msgstr "Programme"
+
+#: includes/admin/custom_metaboxes.php:142
+#@ waff
+msgid "Video"
+msgstr ""
+
+#: includes/admin/custom_metaboxes.php:143
+#@ waff
+msgid "Choose a video. It will autoplay and loop it in slide. Squared format recommanded. 20 Mo maximum recommanded."
+msgstr ""
+
+#: includes/admin/widgets/custom-wp-widget-programmation.php:475
+#: taxonomy-section.php:235
+#@ waff
+msgid "Planning"
+msgstr ""
+
+#: includes/blocks.php:60
+#@ waff
+msgid "Breaking news"
+msgstr ""
+
+#: includes/blocks.php:65
+#@ waff
+msgid "Posts title"
+msgstr ""
+
+#: includes/blocks.php:67
+#@ waff
+msgid "News"
+msgstr ""
+
+#: includes/blocks.php:113
+#@ waff
+msgid "Filter to those categories. If empty, all the categories will be showed. Only works with posts."
+msgstr ""
+
+#: includes/blocks.php:125
+#@ waff
+msgid "Select style"
+msgstr ""
+
+#: includes/blocks.php:127
+#@ waff
+msgid "Choose the style of the lastest posts block"
+msgstr ""
+
+#: includes/blocks.php:131
+#@ waff
+msgid "Magazine"
+msgstr ""
+
+#: includes/blocks.php:132
+#@ waff
+msgid "Bold"
+msgstr ""
+
+#: includes/blocks.php:170
+#@ waff
+msgid "Filter to those categories. If empty, none of the categories will be displayed."
+msgstr ""
+
+#: includes/blocks.php:215
+#@ waff
+msgid "An awesome edition"
+msgstr ""
+
+#: includes/blocks.php:220
+#@ waff
+msgid "Subtitle"
+msgstr ""
+
+#: includes/blocks.php:221
+#@ waff
+msgid "Edito"
+msgstr ""
+
+#: includes/blocks.php:246
+#@ waff
+msgid "Fit image size or limit block ?"
+msgstr ""
+
+#: includes/blocks.php:265
+#@ waff
+msgid "Fill an absolute link. Can be internal or external, e.g. : http://www.google.com"
+msgstr ""
+
+#: includes/blocks.php:270
+#@ waff
+msgid "Display framed version ?"
+msgstr ""
+
+#: includes/blocks.php:271
+#@ waff
+msgid "Adds a frame around the content."
+msgstr ""
+
+#: includes/blocks.php:322
+#: includes/blocks.php:338
+#@ waff
+msgid "Get in touch !"
+msgstr ""
+
+#: includes/blocks.php:327
+#: includes/blocks.php:343
+#@ waff
+msgid "Rich content"
+msgstr ""
+
+#: includes/blocks.php:332
+#@ waff
+msgid "Second block"
+msgstr ""
+
+#: includes/blocks.php:348
+#@ waff
+msgid "Contact form"
+msgstr ""
+
+#: includes/blocks.php:358
+#@ waff
+msgid "Contact form id"
+msgstr ""
+
+#: includes/blocks.php:359
+#@ waff
+msgid "Fill the Gravity form id."
+msgstr ""
+
+#: includes/blocks.php:414
+#@ waff
+msgid "Filter awards by edition. If empty, none of the editions will be displayed."
+msgstr ""
+
+#: includes/blocks.php:426
+#@ waff
+msgid "Choose display"
+msgstr ""
+
+#: includes/blocks.php:456
+#@ waff
+msgid "Display film awards block"
+msgstr ""
+
+#: includes/blocks.php:475
+#@ waff
+msgid "(WA) Playlist"
+msgstr ""
+
+#: includes/blocks.php:500
+#@ waff
+msgid "Video(s)"
+msgstr ""
+
+#: includes/blocks.php:506
+#@ waff
+msgid "Add more video to the playlist"
+msgstr ""
+
+#: includes/blocks.php:511
+#@ waff
+msgid "Fill youtube playlist ID here if you want to show it"
+msgstr ""
+
+#: includes/blocks.php:516
+#@ waff
+msgid "Autoplay videos ?"
+msgstr ""
+
+#: includes/blocks.php:522
+#@ waff
+msgid "Display fullwidth videos ?"
+msgstr ""
+
+#: includes/blocks.php:523
+#@ waff
+msgid "Diplayed in thumbnails by default."
+msgstr ""
+
+#: includes/blocks.php:533
+#@ waff
+msgid "Display a video playlist block ( better with youtube )"
+msgstr ""
+
+#: includes/blocks.php:552
+#@ waff
+msgid "(WA) Film"
+msgstr ""
+
+#: includes/blocks.php:556
+#@ waff
+msgid "Select a film"
+msgstr ""
+
+#: includes/blocks.php:557
+#@ waff
+msgid "Choose a film to display a single film card. If empty, none of the categories will be displayed."
+msgstr ""
+
+#: includes/blocks.php:566
+#@ waff
+msgid "Show as promotted film ?"
+msgstr ""
+
+#: includes/blocks.php:576
+#@ waff
+msgid "Display a single film"
+msgstr ""
+
+#: includes/blocks.php:601
+#@ waff
+msgid "Featured section title"
+msgstr ""
+
+#: includes/blocks.php:603
+#@ waff
+msgid "Break into the competition"
+msgstr ""
+
+#: includes/blocks.php:608
+#@ waff
+msgid "Select section"
+msgstr ""
+
+#: includes/blocks.php:630
+#@ waff
+msgid "Use section color ?"
+msgstr ""
+
+#: includes/blocks.php:640
+#@ waff
+msgid "Display a single section slideshow"
+msgstr ""
+
+#: includes/blocks.php:659
+#@ waff
+msgid "(WA) Sections list"
+msgstr ""
+
+#: includes/blocks.php:666
+#@ waff
+msgid "Sections"
+msgstr ""
+
+#: includes/blocks.php:686
+#@ waff
+msgid "Filter sections by edition. If empty, none of the sections will be displayed."
+msgstr ""
+
+#: includes/blocks.php:699
+#@ waff
+msgid "Display introduction content ?"
+msgstr ""
+
+#: includes/blocks.php:705
+#@ waff
+msgid "Display parent edition section of sections ?"
+msgstr ""
+
+#: includes/blocks.php:715
+#@ waff
+msgid "Display a list of sections filtered by edition"
+msgstr ""
+
+#: includes/blocks.php:766
+#@ waff
+msgid "Normal style not defined"
+msgstr ""
+
+#: includes/blocks.php:863
+#: includes/blocks.php:938
+#: taxonomy-section.php:230
+#@ waff
+msgid "Read more"
+msgstr ""
+
+#: includes/blocks.php:894
+#@ waff
+msgid "Now"
+msgstr ""
+
+#: includes/blocks.php:1972
+#@ waff
+msgid "See video"
+msgstr ""
+
+#: includes/blocks.php:2700
+#@ waff
+msgid "Please choose an edition"
+msgstr ""
+
+#: includes/core.php:533
+#@ go
+msgid "Even the things we love break sometimes."
+msgstr ""
+
+#: includes/customizer.php:238
+#@ waff
+msgid "Advanced blocks"
+msgstr ""
+
+#: includes/customizer.php:239
+#@ waff
+msgid "Enable all the advanced blocks for gutenberg or a usefull selection."
+msgstr ""
+
+#: includes/customizer.php:363
+#: includes/customizer.php:385
+#: includes/customizer.php:407
+#@ waff
+msgid "This will appear in the programmation modal."
+msgstr ""
+
+#: includes/customizer.php:364
+#@ waff
+msgid "Planning file URL (*.pdf)"
+msgstr ""
+
+#: includes/customizer.php:386
+#@ waff
+msgid "Booklet file URL (*.pdf)"
+msgstr ""
+
+#: includes/customizer.php:408
+#@ waff
+msgid "Catalog file URL (*.pdf)"
+msgstr ""
+
+#: partials/pagetitles/pagetitle-fifam.php:260
+#@ default
+msgid "[:fr]De[:en]From[:]"
+msgstr ""
+
+#: partials/pagetitles/pagetitle-fifam.php:261
+#@ default
+msgid "[:fr]à[:en]To[:]"
+msgstr ""
+
+#: partials/pagetitles/pagetitle-fifam.php:382
+#@ default
+msgid "[:fr]Président du jury[:en]Jury master[:]"
+msgstr ""
+
+#: taxonomy-section.php:164
+#@ waff
+msgid "Godfather"
+msgstr "Parrai"
+
+#: taxonomy-section.php:164
+#@ waff
+msgid "Godmother"
+msgstr ""
+
+#: taxonomy-section.php:195
+#@ waff
+msgid "Birthdate"
+msgstr ""
+
+#: taxonomy-section.php:199
+#@ waff
+msgid "Country"
+msgstr ""
+
+#: taxonomy-section.php:233
+#@ waff
+msgid "Download in"
+msgstr ""
+
+#: taxonomy-section.php:281
+#@ waff
+msgid "Selective filmography"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/core.php:1254
+#@ go
+msgid "TikTok"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:892
+#@ go
+msgid "Sticky Header"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:893
+#@ go
+msgid "Set the header to sticky, so that it follows as users scroll."
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:912
+#@ go
+msgid "Remove Search"
+msgstr ""
+
+#: /home/fifam.fr/vhosts/www/htdocs/wp-content/themes/go/includes/customizer.php:913
+#@ go
+msgid "Remove the search icon from the header."
+msgstr ""
+
