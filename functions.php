@@ -10,7 +10,7 @@
  define( 'WAFF_DEBUG', false );
  
  /** Die if no setup */
- if ( !defined('WAFF_THEME') ) {
+ if ( file_exists('setup.php') ) {
 	 wp_die('Error : please define setup.');
  }
 
