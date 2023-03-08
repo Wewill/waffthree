@@ -9,10 +9,10 @@
  define( 'WAFF_VERSION', '3.0' );
  define( 'WAFF_DEBUG', false );
  
- /** Die if no setup */
- if ( file_exists('setup.php') ) {
-	 wp_die('Error : please define setup.');
- }
+/** Die if no setup */
+if ( !file_exists(get_theme_file_path( 'setup.php' ))  ) {
+	wp_die('Error : please define setup.');
+}
 
 /**
  * i18n : Load theme langage.
