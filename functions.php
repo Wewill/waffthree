@@ -6,8 +6,13 @@
  *
  */
 
-define( 'WAFF_VERSION', '1.8' );
-define( 'WAFF_DEBUG', false );
+ define( 'WAFF_VERSION', '3.0' );
+ define( 'WAFF_DEBUG', false );
+ 
+ /** Die if no setup */
+ if ( !defined('WAFF_THEME') ) {
+	 wp_die('Error : please define setup.');
+ }
 
 /**
  * i18n : Load theme langage.
