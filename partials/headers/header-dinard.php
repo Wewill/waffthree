@@ -21,7 +21,7 @@ global $page_atts;
 	$navbarborder 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'border-transparent':'border-start border-end border-transparent-color-silver'; 	
 	?>
 
-	<header id="site-header" class="masthead navbar navbar-expand-lg navbar-light classic-navbar container-fluid p-0 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+	<header id="site-header" class="masthead navbar navbar-expand-lg navbar-light classic-navbar container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 	
 		<div class="d-flex align-items-stretch justify-content-center w-100 sticky-top">
 			

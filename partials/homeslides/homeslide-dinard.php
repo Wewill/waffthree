@@ -29,7 +29,7 @@ $slide_colors 		= array();
 		<!-- slick-homeslide content -->
 		<div class="row g-0 align-items-center vh-100 min-h-600-px"> <!-- .vh-100 hack--> 
 
-			<div class="col-9 col-sm-6 zi-2" data-aos="fade-right">
+			<div class="--col-9 col-12 col-sm-6 zi-2" data-aos="fade-right">
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
 					<?php 
@@ -38,8 +38,9 @@ $slide_colors 		= array();
 							$slide_nb ++; 
 							$slide_id 	= $post->ID;
 							$slide_title = get_the_title();
-							$slide_title = str_replace('<br/>', '&nbsp;<WBR>', $slide_title); //&nbsp;<WBR>
-							$slide_title = str_replace('<br>', '&nbsp;<WBR>', $slide_title); //&nbsp;<WBR>
+							$_slide_title = str_replace('<br/>', '&nbsp;<WBR>', $slide_title); //&nbsp;<WBR>
+							$_slide_title = str_replace('<br>', '&nbsp;<WBR>', $slide_title); //&nbsp;<WBR>
+							$_slide_title = str_replace('<>', '<br/>', $slide_title); //&nbsp;<WBR> >>> This one is working great 
 
 							$content 	= apply_filters('the_content', $post->post_content);
 							$content 	= force_balance_tags( html_entity_decode( wp_trim_words( htmlentities($content), 20, '...' ) ) );
@@ -61,7 +62,7 @@ $slide_colors 		= array();
 						<div class="d-flex flex-column justify-content-center --justify-content-lg-between bg-gradient-action-1 border-0 --text-dark vh-100 min-h-600-px position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="ps-3 ps-md-5 pt-4"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="ps-3 ps-md-5 py-3">
-								<h1 class="heading-3 <?= $class ?> w-60"><?= $slide_title; ?></h1>
+								<h1 class="heading-3 <?= $class ?> w-60"><?= $_slide_title; ?></h1>
 							</div>
 							<div class="ps-3 ps-md-5 pb-3 pt-1">
 								<div class="mb-1 d-none d-sm-block <?= $class ?> w-60"><?= $content; ?></div>
@@ -181,7 +182,7 @@ $slide_colors 		= array();
 		<!-- end: slick-homeslide nav-->
 
 		<!-- Mouse down -->
-		<div class="scroll-downs position-absolute bottom-0 start-50 mb-3 ml-n3"><div class="mousey"><div class="scroller"></div></div></div>
+		<div class="scroll-downs position-absolute bottom-0 start-50 mb-3"><div class="mousey"><div class="scroller"></div></div></div>
 
 	</div>
 </section>

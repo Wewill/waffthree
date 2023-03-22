@@ -43,7 +43,7 @@ function waff_defaults( $name ) {
 				'tags'                         => true,
 				'author_meta'                  => true,
 				'mailchimp_popup'              => false,
-				'advanced_blocks'              => true,
+				'advanced_blocks'              => false,
 			)
 		);
 	}

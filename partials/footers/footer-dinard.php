@@ -23,7 +23,7 @@ $blog_description = get_bloginfo( 'description' );
 		<div class="row g-0 border-top">
 
 			<!-- Logotype -->
-			<div class="col-12 col-sm-6 px-5 py-md-7 py-4 pt-5 border-end">
+			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4 pt-5 border-end">
 				<div class="" data-aos="fade-down" data-aos-delay="100">
 					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" width="50" height="60"></div>
 					<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
@@ -31,7 +31,7 @@ $blog_description = get_bloginfo( 'description' );
 			</div>
 
 			<!-- Baseline -->
-			<div class="col-12 col-sm-6 px-5 py-md-7 py-4">
+			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4">
 				<?php if ( !empty( $blog_description ) ) :
 					echo '<p class="h3 f-heading font-weight-bold text-action-1">' . esc_html( $blog_description ) . '</p>';
 				endif;	?>				
@@ -41,7 +41,7 @@ $blog_description = get_bloginfo( 'description' );
 
 		<!-- Second row -->
 		<div class="row g-0 border-bottom">
-			<div class="col-12 col-sm-6 px-5 py-md-7 py-4 border-end">
+			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4 border-end">
 
 				<div class="row">
 					<div class="col-6">
@@ -67,7 +67,6 @@ $blog_description = get_bloginfo( 'description' );
 						<span class="bullet bullet-action-1 ml-0 ms-0"></span>
 						<p class="font-weight-medium">
 							<?php WaffTwo\display_phone(); ?>
-							<br/>
 							<?php WaffTwo\display_email(); ?>
 						</p>
 						<p><small><?php WaffTwo\display_site_message(); ?></small></p>
@@ -75,7 +74,7 @@ $blog_description = get_bloginfo( 'description' );
 				</div>
 
 			</div>
-			<div class="col-12 col-sm-6 px-5 py-md-7 py-4 pb-5">
+			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4 pb-5">
 
 				<div class="row">
 					<div class="col-6">
@@ -132,7 +131,7 @@ $blog_description = get_bloginfo( 'description' );
 <?php do_action( 'waff_after_footer' ); ?>
 
 <!-- .Credits -->
-<footer class="credits container-fluid bg-action-2 pt-4 pb-3 px-5">
+<footer class="credits container-fluid bg-action-2 pt-4 pb-3 px-3 px-md-5">
 	<div class="d-flex justify-content-between align-items-stretch">
 	    <p class="font-weight-bold link-black mb-2" aria-label="<?php esc_attr_e( 'Credits Menu', 'waff' ); ?>">
 			<a class="font-weight-normal" href="#"><?= esc_html__('Back to top', 'waff'); ?></a> <!--  · <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?= esc_html__('Home', 'waff'); ?></a> -->

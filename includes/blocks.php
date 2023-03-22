@@ -605,7 +605,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 			[
 				'id'         => $prefix . 'ss_section',
 				'type'       => 'taxonomy_advanced',
-				'name'       => esc_html__( 'Select section', 'waff' ),
+				'name'       => esc_html__( 'Select a section', 'waff' ),
 				'desc'       => __( 'Choose a section to display a slideshow. If empty, none of the categories will be displayed. <em>Current edition : '.(( $ccp_editions_filter != null )?$ccp_editions_filter->get_current_edition():'None').'</em>', 'waff' ),
 				'taxonomy'   => 'section',
 				'field_type' => 'checkbox_list',
@@ -632,10 +632,10 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 			],
 		],
 		'category'        => 'layout',
-		// 'icon'            => 'excerpt-view',
+		// 'icon'            => 'images-alt',
 		'icon'            => [
             'foreground' 	=> '#9500ff',
-			'src' 			=> 'excerpt-view',
+			'src' 			=> 'images-alt',
 		],
 		'description'     => esc_html__( 'Display a single section slideshow', 'waff' ),
 		'keywords'        => ['film', 'section', 'category'],

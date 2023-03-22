@@ -126,6 +126,10 @@
   
   /* Images */
   --go-featured-image--height: 720px; /*680px*/
+
+  /* Wordpress */
+  --waff-wp-adminbar: 32px;
+  --waff-wp-adminbar-mobile: 46px;
 }
 
 :root .is-dark .contrast--dark {
@@ -2455,9 +2459,6 @@ aside.widget-area h6:first-of-type {
 .waff-theme-dinard article.post:not(.excerpt) p {
   margin-bottom: 2rem; /* DINARD */
 }
-
-
-
 
 /* FIX TO REPORT to styles-dinard.css */
 
