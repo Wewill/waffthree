@@ -1,6 +1,6 @@
 <?php
 /**
- * Child theme : WaffTwo
+ * Child theme : WaffThree
  * Our Child theme overrides.
  * "Keep it light, keep it simple." - Mahatma Gandhi 🙃
  *
@@ -8,9 +8,9 @@
 
 define( 'WAFF_VERSION', '3.0' );
 define( 'WAFF_DEBUG', false );
- 
+
 /** Die if no setup */
-if ( !file_exists(get_theme_file_path( '../waffthree.setup.php' ))  ) {
+if ( !file_exists(get_theme_file_path( '../'.$_SERVER['SERVER_NAME'].'.setup.php' ))  ) {
 	wp_die('Error : please define setup.');
 }
 
@@ -68,7 +68,7 @@ function wpm_myme_types($mime_types){
 /**
  * Waff setup.
  */
-require_once get_theme_file_path( '../waffthree.setup.php' );
+require_once get_theme_file_path( '../'.$_SERVER['SERVER_NAME'].'.setup.php' );
 
 /**
  * Common functions ( outside namespace )
