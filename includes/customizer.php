@@ -35,7 +35,7 @@ function setup() {
 	add_action( 'customize_preview_init', $n( 'customize_preview_init' ) );
 	add_action( 'customize_controls_enqueue_scripts', $n( 'customize_preview_init' ) );
 	
-	add_action( 'customize_register', $n( 'register_waff_site_controls' ) );
+	add_action( 'customize_register', $n( 'register_waff_site_controls' ), 100 );
 
 	// Child inline CSS
 	add_action( 'wp_head', $n( 'waff_inline_css' ) );
@@ -77,6 +77,9 @@ function customize_preview_init() {
  */
 function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 
+	// Remove go social media to menu social
+	$wp_customize->remove_section('go_social_media');
+
 	// Add settings logotype 
 	$wp_customize->add_setting(
 		'svglogo_dark_url', 
@@ -89,6 +92,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 		'svglogo_dark_url',
 		array(
 			'label'    => esc_html__( 'Logo dark url ( *.svg )', 'waff' ),
+			'description' => esc_html__( 'E.g : /dist/images/*.svg', 'waff' ),
 			'priority' => 80,
 			'section'  => 'title_tagline',
 			'settings' => 'svglogo_dark_url',
@@ -107,6 +111,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 		'svglogo_light_url',
 		array(
 			'label'    => esc_html__( 'Logo light url ( *.svg )', 'waff' ),
+			'description' => esc_html__( 'E.g : /dist/images/*.svg', 'waff' ),
 			'priority' => 80,
 			'section'  => 'title_tagline',
 			'settings' => 'svglogo_light_url',
@@ -125,6 +130,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 		'svgsign_dark_url',
 		array(
 			'label'    => esc_html__( 'Sign dark url ( *.svg )', 'waff' ),
+			'description' => esc_html__( 'E.g : /dist/images/*.svg', 'waff' ),
 			'priority' => 80,
 			'section'  => 'title_tagline',
 			'settings' => 'svgsign_dark_url',
@@ -143,6 +149,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 		'svgsign_light_url',
 		array(
 			'label'    => esc_html__( 'Sign light url ( *.svg )', 'waff' ),
+			'description' => esc_html__( 'E.g : /dist/images/*.svg', 'waff' ),
 			'priority' => 80,
 			'section'  => 'title_tagline',
 			'settings' => 'svgsign_light_url',
