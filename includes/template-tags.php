@@ -12,6 +12,39 @@ namespace WaffTwo;
 
 use function Go\load_inline_svg as load_inline_svg;
 
+
+/**
+ * Render the site branding or the logo.
+ *
+ * @param array $args Optional arguments.
+ *
+ * @return void
+ */
+
+function waff_display_site_blogname( $wrapper = 'span' ) {
+	$blog_name    = get_bloginfo( 'name' );
+	$hide_title   = (bool) get_theme_mod( 'hide_site_title', false );
+	if ( !empty( $blog_name ) ) :
+		echo '<a class="display-inline-block no-underline" href="' . esc_url( home_url( '/' ) ) . '" itemprop="url">';
+		printf(
+			'<%1$s class="waff-site-title">' . esc_html( $blog_name ) . '</%1$s>',
+			$wrapper
+		);
+		echo '</a>';
+	endif;
+}
+
+function waff_display_site_description( $wrapper = 'span' ) {
+	$blog_description 	= get_bloginfo( 'description' );
+	$hide_tagline 		= (bool) get_theme_mod( 'hide_site_tagline', false );
+	if ( !$hide_tagline && !empty( $blog_description ) ) :
+		printf(
+			'<%1$s class="waff-site-description d-none d-sm-inline">' . esc_html( $blog_description ) . '</%1$s>',
+			$wrapper
+		);
+	endif;
+}
+
 /**
  * Go func override 
  * Return the Post Meta.
