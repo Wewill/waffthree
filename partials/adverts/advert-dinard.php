@@ -17,6 +17,6 @@ $page_atts = $args;
 					https://via.placeholder.com/840x60" type="image/jpeg"></data-src>
 	<data-img src="https://via.placeholder.com/840x60" alt="32e Edition" class="img-fluid" style="height: 120px; object-fit: cover; width: 100%;"></data-img>
 	</picture>
-	<figcaption><strong>© Credits</strong> La </figcaption>
+	<figcaption><strong>© Credits</strong> Lorem ipsum</figcaption>
 </figure>
 </section>
