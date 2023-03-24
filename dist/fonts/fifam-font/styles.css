@@ -39,9 +39,9 @@
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-/* */
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+	/* */
 	display: inline-block;
 	text-rendering: auto;
 }
@@ -57,15 +57,15 @@
 }
 .icon-arrow:before {
   content: "\61";
-	font-size: 3.5em;
-	vertical-align: middle;
-	line-height: 0.1;
+font-size: 3.5em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-without:before {
   content: "\64";
-	font-size: 1.1em;
-  vertical-align: middle;
-  line-height: 0.1;
+font-size: 1.1em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-alert:before {
   content: "\6e";
@@ -84,9 +84,9 @@
 }
 .icon-3d:before {
   content: "\33";
-  font-size: 1.8em;
-  vertical-align: middle;
-  line-height: 0.1;
+font-size: 1.8em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-vonst:before {
   content: "\4e";
@@ -105,21 +105,21 @@
 }
 .icon-up:before {
   content: "\e003";
-  font-size: 3em;
-  vertical-align: middle;
-  /*line-height: 0.1; Removed #42 since issue in related films UI */
+font-size: 3em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-down:before {
   content: "\e004";
-  font-size: 3em;
-  vertical-align: middle;
-  /*line-height: 0.1; Removed #42 since issue in related films UI */
+font-size: 3em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-left:before {
   content: "\e005";
-  font-size: 3em;
-  vertical-align: middle;
-  line-height: 0.1;
+font-size: 3em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-down-right:before {
   content: "\e006";
@@ -165,9 +165,9 @@
 }
 .icon-right:before {
   content: "\e013";
-  font-size: 3em;
-  vertical-align: middle;
-  line-height: 0.1;
+font-size: 3em;
+vertical-align: middle;
+line-height: 0.1;
 }
 .icon-unlimited:before {
   content: "\e016";
@@ -186,6 +186,4 @@
 }
 .icon-plus:before {
   content: "\e019";
-  font-size: 95%;
-  vertical-align: -.15rem;
 }
