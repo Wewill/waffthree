@@ -16,12 +16,12 @@ global $page_atts;
 	$toggleaffix 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('full', 'fancy') ) )?'affix':''; 	
 
 	// Setting fancy transparent header
-	$headerbackgroundcolor 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'bg-transparent':'mb-0 has-bg bg-color-light'; 	
+	$headerbackgroundcolor 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'bg-transparent':'mb-0 has-bg --bg-color-light'; 	
 	$headerborder 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'border-transparent':'border-bottom border-transparent-color-silver'; 	
 	$navbarborder 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'border-transparent':'--border-start --border-end border-transparent-color-silver'; 	
 	?>
 
-	<header id="site-header" class="masthead navbar navbar-expand-lg navbar-light classic-navbar container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+	<header id="site-header" class="site-header header masthead navbar navbar-expand-lg navbar-light classic-navbar container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 	
 		<div class="d-flex align-items-stretch justify-content-center w-100 sticky-top">
 			
@@ -32,7 +32,7 @@ global $page_atts;
 				      <!-- item to replace -->
 				      <div class="js-replace__item  js-replace__item--active">
 				        <div class="js-replace__content">
-				          <div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" width="90" height="100%"></div>
+				          <div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>"></div>
 				        </div>
 				      </div>  
 				      <!-- end item to replace -->
@@ -40,12 +40,12 @@ global $page_atts;
 				      <!-- item to replace with -->
 				      <div class="js-replace__item">
 				        <div class="js-replace__content">
-				          <div class="logo logo--invert"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_light_url' ); ?>" width="90" height="100%"></div>
+				          <div class="logo logo--invert"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_light_url' ); ?>" ></div>
 				        </div>
 				      </div>
 				      <!-- end item to replace with -->
 				</div>
-				<div class="logo nav-logomenu position-absolute top-0 left-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" width="90" height="100%"></div>
+				<div class="logo nav-logomenu position-absolute top-0 left-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" 	></div>
 				<span class="site-title text-hide visually-hidden"><?= get_bloginfo('description'); ?></span>
 			</a>
 					
@@ -70,10 +70,11 @@ global $page_atts;
 					
 					<!-- First line -->
 					<div class="ps-4">
-						<span class="d-flex align-items-center  justify-content-end edition-wrapper overflow-hidden position-relative">
-							<span class="edition-number bg-white text-secondary pe-1 font-weight-bold zi-4"><?php echo do_shortcode( '[getcurrenteditionsc]' ); ?></span>
-							<span class="edition-dates text-sm text-secondary font-weight-semi-bold"><span class="bullet bullet-action-1"></span> <?php echo do_shortcode( '[getcurrenteditionsc display="full"]' ); ?></span>
+						<span class="d-flex align-items-center justify-content-end edition-wrapper overflow-hidden position-relative" itemscope itemtype="http://schema.org/Organization">
+							<span class="edition-number bg-white text-secondary pe-1 --font-weight-bold zi-4"><?php WaffTwo\waff_display_site_blogname(); ?></span>
+							<span class="edition-dates text-sm text-secondary --font-weight-semi-bold"><span class="bullet bullet-color-light"></span> <?php WaffTwo\waff_display_site_description(); ?></span>
 						</span>
+						<?php // Go\display_site_branding( array( 'description' => true ) ); ?>
 					</div>
 
 					<!-- Second line -->
@@ -111,13 +112,13 @@ global $page_atts;
 					<!-- First line -->
 					<div class="d-flex flex-column flex-sm-row align-items-center justify-content-end">
 						<?php Go\search_toggle(); ?>
-						<?php Go\WooCommerce\woocommerce_cart_link(); ?>
-						<?php //WaffTwo\waff_night_toggle(); ?>
+						<?php //Go\WooCommerce\woocommerce_cart_link(); ?>
+						<?php WaffTwo\waff_night_toggle(); ?>
 						<?php WaffTwo\Theme\waff_get_languages(); ?>
 					</div>
 
 					<!-- Second line -->
-					<div class="text-end mt-2 pe-3 d-lg-block d-none">
+					<!-- <div class="text-end mt-2 pe-3 d-lg-block d-none">
 						<?php
 							if ( !is_front_page() ) { 
 								if ( !is_singular( array('post', 'film') ) ) { 
@@ -127,7 +128,7 @@ global $page_atts;
 								}
 							}
 						?>
-					</div>
+					</div> -->
 
 			</div>
 		</div>	
