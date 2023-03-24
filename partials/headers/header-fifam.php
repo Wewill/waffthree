@@ -71,7 +71,7 @@ global $page_atts;
 				?>
 				
 				<?php Go\search_toggle(); ?>
-				<?php Go\WooCommerce\woocommerce_cart_link(); ?>
+				<?php // Go\WooCommerce\woocommerce_cart_link(); ?>
 				<?php // Go\navigation_toggle(); ?>
 	
 				<?php WaffTwo\waff_night_toggle(); ?>

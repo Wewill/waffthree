@@ -156,7 +156,7 @@ $blog_description = get_bloginfo( 'description' );
 
 		</p>
 		<?php /* Go\copyright( array( 'class' => 'site-info text-sm mb-0' ) ); */ ?>
-	    <p class="text-adaptive"><small>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?> · <a href="http://www.wilhemarnoldy.fr/" class="link-black"><i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <?php printf( esc_html__( 'Designed w/ <3 by %1$s using WordPress', 'waff' ), 'Wilhem Arnoldy, WAG&amp;W' ); ?></a></small><?php WaffTwo\display_privacy_statement(); ?></p>
+	    <p class="text-adaptive"><small>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?> · <a href="http://www.wilhemarnoldy.fr/" class="link-black"><i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i> <?php printf( esc_html__( 'Designed w/ <3 by %1$s using WordPress', 'waff' ), 'Wilhem Arnoldy, WAG&amp;W' ); ?></a> <?php WaffTwo\display_privacy_statement(); ?></small></p>
 	</div>
 </footer>
 <!-- END: .Credits -->

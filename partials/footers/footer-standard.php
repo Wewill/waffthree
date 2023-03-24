@@ -8,7 +8,6 @@
 $has_social_icons = Go\has_social_icons();
 $has_background   = Go\has_footer_background();
 ?>
-#TODOFOOTER 
 
 <footer id="colophon" class="site-footer site-footer--waff <?php echo esc_attr( $has_background ); ?>">
 

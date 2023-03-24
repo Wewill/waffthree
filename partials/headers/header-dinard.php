@@ -16,6 +16,7 @@ global $page_atts;
 	$toggleaffix 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('full', 'fancy') ) )?'affix':''; 	
 
 	// Setting fancy transparent header
+	// @todo > do not block customizer color : remove `bg-color-light` and check if it's ok 
 	$headerbackgroundcolor 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'bg-transparent':'mb-0 has-bg bg-color-light'; 	
 	$headerborder 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'border-transparent':'border-bottom border-transparent-color-silver'; 	
 	$navbarborder 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'border-transparent':'border-start border-end border-transparent-color-silver'; 	

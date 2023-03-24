@@ -121,7 +121,7 @@
 
 	/* Footer  */
   --go-footer--color--text: var(--go-heading--color--text);
-  --go-footer--color--background: var(--go--color--white) !important; /* Dinard */
+  /* --go-footer--color--background: var(--go--color--white) !important; NOt needed > Edited waff_colors > footer_background + personalize /* Dinard */
   --go-footer-navigation--line-height: 1.5; /* Dinard */
   
   /* Images */
