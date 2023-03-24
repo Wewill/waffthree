@@ -77,10 +77,9 @@ function setup() {
 		wp_die('Error : please install WAFF Functions plugin.');
 	}
 
-	if ( !is_admin() && !function_exists('wacwk_load_textdomain') ) {
-		wp_die('Error : please install WAFF Custom Walker plugin.');
-	}
-
+	// if ( !is_admin() && !function_exists('wacwk_load_textdomain') ) {
+	// 	wp_die('Error : please install WAFF Custom Walker plugin.');
+	// }
 
 }
 
