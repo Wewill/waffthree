@@ -38,13 +38,13 @@ $page_atts = $args;
 						</div>
 
 						<!-- Menu footer 2 -->
-						<div class="d-flex me-5">
+						<div class="d-flex me-5 --justify-content-between align-items-center">
 						<?php if ( has_nav_menu( 'preheader-1' ) || is_customize_preview() ) : ?>
-							<nav class="nav link-dark font-weight-bold preheader-navigation--1 nav-md w-auto" aria-label="<?php esc_attr_e( 'Preheader Menu', 'go' ); ?>">
+							<nav class="nav --link-dark font-weight-bold preheader-navigation--1 nav-md w-auto" aria-label="<?php esc_attr_e( 'Preheader Menu', 'go' ); ?>">
 								<span class="screen-reader-text preheader-navigation__title"><?php echo esc_html( wp_get_nav_menu_name( 'preheader-1' ) ); ?></span>
 			
 								<?php
-									print ( preg_replace( '/(<a )/', '<a class="nav-link" ', strip_tags( wp_nav_menu(
+									print ( preg_replace( '/(<a )/', '<a class="nav-link text-action-2" ', strip_tags( wp_nav_menu(
 										array(
 											'theme_location' => 'preheader-1',
 											'items_wrap'      => '%3$s',
