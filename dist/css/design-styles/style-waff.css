@@ -35,7 +35,7 @@
 
 	/* Headings */
 	--go-heading--button-spacing: 1.75rem;
-	--go-heading--color--text: hsl(0, 0%, 0%);
+	--go-heading--color--text: var(--waff-color-heading); /*hsl(0, 0%, 0%);*/
 	--go-heading--font-family: var(--waff-font-heading, 'Arial, sans-serif'); /* FIFAM = "Bureau Grot", Arial, sans-serif; */
 	--go-heading--font-weight: 800;
 	--go-heading--line-height: 1.2;

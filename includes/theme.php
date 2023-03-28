@@ -207,6 +207,7 @@ function waff_setup() {
 			'footer-1'  		=> esc_html__( 'Footer Menu', 'waff' ),
 			'footer-2'  		=> esc_html__( 'Footer Secondary Menu', 'waff' ),
 			'footer-3' 	 		=> esc_html__( 'Footer Third Menu', 'waff' ),
+			'preheader-1'  		=> esc_html__( 'Preheader Menu', 'waff' ),
 		)
 	);
 }

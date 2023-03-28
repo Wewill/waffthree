@@ -27,7 +27,7 @@ global $page_atts;
 			
 			<!-- Logotype -->
 			<?php //Go\display_site_branding(); ?>
-			<a class="navbar-brand w-13 w-sm-15 d-flex align-items-center justify-content-center ps-2 ps-sm-3 pe-2 pt-3 pb-4 m-0 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>" height="100%">
+			<a class="navbar-brand w-13 w-sm-15 d-flex align-items-center justify-content-start pt-3 pb-4 m-0 ms-5 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>" height="100%">
 			    <div class="header__logo js-replace">
 				      <!-- item to replace -->
 				      <div class="js-replace__item  js-replace__item--active">
@@ -105,7 +105,7 @@ global $page_atts;
 			</div>
 				
 			<!-- Toolbar and Page title -->
-			<div class="navbar-text w-13 d-flex align-items-center justify-content-center ps-2 pe-2 pe-sm-3">
+			<div class="navbar-text w-13 d-flex align-items-center justify-content-end --ps-2 --pe-2 --pe-sm-3 me-5">
 
 				<div class="d-flex col flex-column justify-content-center position-relative">
 
