@@ -105,7 +105,7 @@ global $page_atts;
 			</div>
 				
 			<!-- Toolbar and Page title -->
-			<div class="navbar-text w-13 d-flex align-items-center justify-content-end --ps-2 --pe-2 --pe-sm-3 me-5">
+			<div class="navbar-text --w-13 d-flex align-items-center justify-content-end me-5 ms-5">
 
 				<div class="d-flex col flex-column justify-content-center position-relative">
 
