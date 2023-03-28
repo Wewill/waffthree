@@ -22,7 +22,7 @@ $has_background   = Go\has_footer_background();
 					<div class="d-flex align-items-center">
 
 						<div class="ml-4 ms-5 me-4 mb-2" data-aos="fade-down" data-aos-delay="100">
-							<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" width="145" height="100%"></div>
+							<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" width="150" height="100%"></div>
 							<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 						</div>
 						
@@ -114,13 +114,13 @@ $has_background   = Go\has_footer_background();
 					</div>
 					
 					<!-- Theme social menu -->
-					<div id="socials" class="d-inline-block socials p-0 m-0 ms-3 ml-3 --ml-4 list-inline reset-fontsize">
+					<div id="socials" class="d-inline-block socials p-0 m-0 ms-5 ml-3 --ml-4 list-inline reset-fontsize">
 						<?= WaffTwo\Theme\waff_get_social_menu(); ?>
 					</div>
 		
 					<!-- Go social options -->
 					<?php if ( $has_social_icons ) : ?>
-						<div class="site-footer__row flex flex-column lg:flex-row justify-between lg:items-center">
+						<div class="site-footer__row flex flex-column lg:flex-row justify-between lg:items-center ms-5">
 							<?php Go\social_icons( array( 'class' => 'social-icons list-reset' ) ); ?>
 						</div>
 					<?php endif; ?>
