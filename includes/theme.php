@@ -33,6 +33,7 @@ function setup() {
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-counter.php' );
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-partners.php' );
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-programmation.php' );
+	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-contact.php' );
 
 	// Custom Medias sizes by post types 
 	require_once get_theme_file_path( 'includes/admin/custom_media_sizes.php');
