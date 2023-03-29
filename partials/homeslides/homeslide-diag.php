@@ -22,7 +22,6 @@ $slide_colors 		= array();
 
 <?php if ( $homeslide_slides->have_posts() ) : ?>
 
-@todo add menu on homeslide + logo + graphics
 <!-- #slick-homeslide -->
 <section id="slick-homeslide" class="--mb-10 mb-2 mb-lg-7 contrast--light position-relative has-gradient" data-aos="fade-down">
 	<div class="container-fluid px-0">
@@ -30,7 +29,7 @@ $slide_colors 		= array();
 		<!-- slick-homeslide content -->
 		<div class="row g-0 align-items-center vh-100 min-h-600-px"> <!-- .vh-100 hack--> 
 
-			<div class="--col-9 col-12 col-sm-6 zi-2" data-aos="fade-right">
+			<div class="col-12 col-sm-6 zi-2" data-aos="fade-right">
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
 					<?php 
@@ -60,12 +59,12 @@ $slide_colors 		= array();
 					?>
 
 						<!-- Slide <?= $slide_nb ?> -->
-						<div class="d-flex flex-column justify-content-center --justify-content-lg-between bg-gradient-action-1 border-0 --text-dark vh-100 min-h-600-px position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
+						<div class="d-flex flex-column justify-content-end bg-gradient-action-1 border-0 --text-dark vh-100 min-h-600-px position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="ps-3 ps-md-5 pt-4"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
-							<div class="ps-3 ps-md-5 py-3">
-								<h1 class="heading-3 <?= $class ?> w-60"><?= $_slide_title; ?></h1>
+							<div class="ps-3 ps-md-5 py-1">
+								<h1 class="f-20 <?= $class ?> w-60"><?= $_slide_title; ?></h1>
 							</div>
-							<div class="ps-3 ps-md-5 pb-3 pt-1">
+							<div class="ps-3 ps-md-5 pb-3 --pt-1 opacity-50">
 								<div class="mb-1 d-none d-sm-block <?= $class ?> w-60"><?= $content; ?></div>
 								<?= (($url != '')?'<a href="'.$url.'" class="card-link '.$class.' stretched-link d-block pt-3"><i class="icon icon-arrow"></i></a>':''); ?>
 							</div>
@@ -153,7 +152,7 @@ $slide_colors 		= array();
 		<!-- end: slick-homeslide images-->
 			
 		<!-- slick-homeslide nav-->
-		<div class="position-absolute bottom-0 start-0 p-5 mb-10 zi-2 slick-homeslide-list-items">
+		<div class="position-absolute bottom-0 start-0 p-5 mb-10 zi-2 slick-homeslide-list-items d-none">
 
 			<!-- Slide nav list -->
 			<div class="btn-group m-0 slider-list rounded-full" role="group" aria-label="Slider navigation">
@@ -184,6 +183,29 @@ $slide_colors 		= array();
 
 		<!-- Mouse down -->
 		<div class="scroll-downs position-absolute bottom-0 start-50 mb-3"><div class="mousey"><div class="scroller"></div></div></div>
+
+		<div class="position-absolute top-0 start-0 zi-5 w-100 h-100">
+			<div class="d-flex align-items-center justify-content-between h-100">
+				<!-- Logo -->
+				<div class="flex-equal text-start">
+					<div class="d-flex flex-column w-75">
+						<a class="bg-action-3 py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous <i class="bi bi-alarm"></i></a>
+						<a class="bg-color-gray py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne <i class="icon icon"></i></a>
+						<a class="bg-action-2 py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats <i class="icon icon"></i></a>				
+					</div>
+				</div>
+
+				<!-- Logo -->
+				<div class="m-2 ms-4 flex-center" data-aos="fade-down" data-aos-delay="100">
+					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_light_url' ); ?>" width="350" height="100%"></div>
+					<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
+				</div>
+
+				<!-- Shape -->
+				<div class="flex-equal text-end">FORME</div>
+			</div>
+		</div>
+
 
 	</div>
 </section>
