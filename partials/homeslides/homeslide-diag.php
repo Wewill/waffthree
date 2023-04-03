@@ -23,7 +23,7 @@ $slide_colors 		= array();
 <?php if ( $homeslide_slides->have_posts() ) : ?>
 
 <!-- #slick-homeslide -->
-<section id="slick-homeslide" class="--mb-10 mb-2 mb-lg-7 contrast--light position-relative has-gradient" data-aos="fade-down">
+<section id="slick-homeslide" class="contrast--light position-relative has-gradient" data-aos="fade-down">
 	<div class="container-fluid px-0">
 
 		<!-- slick-homeslide content -->
