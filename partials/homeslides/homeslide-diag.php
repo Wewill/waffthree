@@ -202,7 +202,7 @@ $slide_colors 		= array();
 				</div>
 
 				<!-- Shape -->
-				<div class="flex-equal text-end d-none d-sm-block">FORME</div>
+				<div class="flex-equal text-end d-none d-lg-block">FORME</div>
 			</div>
 		</div>
 
