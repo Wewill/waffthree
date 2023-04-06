@@ -196,7 +196,7 @@ $slide_colors 		= array();
 				</div>
 
 				<!-- Logo -->
-				<div class="m-2 ms-4 flex-center d-none d-sm-block" data-aos="fade-down" data-aos-delay="100">
+				<div class="m-2 ms-4 me-4 flex-center d-none d-md-block" data-aos="fade-down" data-aos-delay="100">
 					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_light_url' ); ?>" width="350" height="100%"></div>
 					<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 				</div>
