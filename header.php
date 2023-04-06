@@ -172,6 +172,7 @@
 
 		<!-- Nav / after -->
 		<?php  if ( defined('WAFF_PARTIALS') && 'dinard' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
+		<?php  if ( defined('WAFF_PARTIALS') && 'diag' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 
 		<?php if ( true === WAFF_HAS_ADVERT ) : ?>
 		<!-- Preheader -->

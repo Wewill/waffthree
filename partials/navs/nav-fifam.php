@@ -28,13 +28,6 @@ $page_atts = $args;
 	
 				<div class="col-6 col-md-5 vh-50">
 					<nav id="main-nav" class="ml-0 ml-md-2 ms-0 ms-md-2" aria-label="<?php esc_attr_e( 'Primary Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
-						<!-- <ul class="list-unstyled link-dark">
-							<li class="heading-3 active"><a href="">L'édition</a></li>
-							<li class="heading-3"><a href="">Le festival</a></li>
-							<li class="heading-3"><a href="">Pratique</a></li>
-							<li class="heading-3 link-muted"><a href="">Pro &amp; presse</a></li>
-							<li class="heading-3 link-muted"><a href="">Partenaires</a></li>
-						</ul> -->
 	
 						<?php
 						wp_nav_menu(
@@ -54,14 +47,6 @@ $page_atts = $args;
 				</div>
 				<div class="col-6 col-md-4 mt-0 mt-md-3 vh-50">
 					<nav id="sub-nav" class="ml-0 ml-md-2 ms-0 ms-md-2" aria-label="<?php esc_attr_e( 'Primary Sub Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
-						<!--<ul class="list-unstyled link-dark">
-							<li class="active"><a href="">La compétition</a></li>
-							<li><a href="">Jurys</a></li>
-							<li><a href="">Les sections</a></li>
-							<li><a href="">Tous les films</a></li>
-							<li class="link-muted"><a href="">Exposition</a></li>
-							<li class="link-muted"><a href="">Actualités</a></li>
-						</ul>-->
 						
 						<?php
 						wp_nav_menu(

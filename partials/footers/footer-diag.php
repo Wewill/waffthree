@@ -19,9 +19,9 @@ $has_background   = Go\has_footer_background();
 			<div class="row g-0">
 				<div class="col-12">
 					
-					<div class="d-flex align-items-center">
+					<div class="d-flex align-items-sm-center align-items-start flex-column flex-sm-row">
 
-						<div class="ml-4 ms-5 me-4 mb-2" data-aos="fade-down" data-aos-delay="100">
+						<div class="ml-4 ms-2 ms-sm-5 me-4 mb-2" data-aos="fade-down" data-aos-delay="100">
 							<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" width="150" height="100%"></div>
 							<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 						</div>

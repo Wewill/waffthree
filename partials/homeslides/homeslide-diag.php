@@ -189,20 +189,20 @@ $slide_colors 		= array();
 				<!-- Logo -->
 				<div class="flex-equal text-start">
 					<div class="d-flex flex-column w-75">
-						<a class="bg-action-3 py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous <i class="bi bi-alarm"></i></a>
-						<a class="bg-color-gray py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne <i class="icon icon"></i></a>
-						<a class="bg-action-2 py-4 px-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats <i class="icon icon"></i></a>				
+						<a class="bg-action-3 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous <i class="bi bi-alarm"></i></a>
+						<a class="bg-color-gray py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne <i class="icon icon"></i></a>
+						<a class="bg-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats <i class="icon icon"></i></a>				
 					</div>
 				</div>
 
 				<!-- Logo -->
-				<div class="m-2 ms-4 flex-center" data-aos="fade-down" data-aos-delay="100">
+				<div class="m-2 ms-4 flex-center d-none d-sm-block" data-aos="fade-down" data-aos-delay="100">
 					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_light_url' ); ?>" width="350" height="100%"></div>
 					<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 				</div>
 
 				<!-- Shape -->
-				<div class="flex-equal text-end">FORME</div>
+				<div class="flex-equal text-end d-none d-sm-block">FORME</div>
 			</div>
 		</div>
 

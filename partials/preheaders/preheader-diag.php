@@ -14,9 +14,9 @@ $page_atts = $args;
 				<div class="col-12">
 					<!-- Flex -->
 					<div class="d-flex justify-content-between align-items-center">
-						<div class="ms-5 me-2 --m-gutter-l flash-title --headline font-weight-bold text-nowrap badge badge-sm rounded-pill bg-color-gray text-light"><?= esc_html__( 'Breaking', 'waff' ) ?><!-- Le flash--> <span class="sr-only"><?= esc_html__( 'Breaking news live from festival', 'waff' ) ?></span></div> <!-- <?= esc_html__( 'Read More', 'waff' ) ?> -->
+						<div class="ms-5 me-2 --m-gutter-l flash-title --headline font-weight-bold text-nowrap badge badge-sm rounded-pill bg-color-gray text-light d-none d-sm-block"><?= esc_html__( 'Breaking', 'waff' ) ?><!-- Le flash--> <span class="sr-only"><?= esc_html__( 'Breaking news live from festival', 'waff' ) ?></span></div> <!-- <?= esc_html__( 'Read More', 'waff' ) ?> -->
 						
-						<div class="flex-fill">
+						<div class="flex-fill d-none d-sm-block">
 							<ul id="flash" class="w-70 p-2 mb-0" style="display: none;">
 							<?php $flashes = new WP_Query( array( 'post_type' => 'flash', 'posts_per_page' => 20 ) ); ?>
 	
