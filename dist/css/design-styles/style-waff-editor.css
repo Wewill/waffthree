@@ -76,14 +76,17 @@
     --go-button--color--text: var(--go--color--white);
 
 	/* Input */
-	--go-input--color--background: var(--go--color--background);
-	--go-input-interactive--color--background: var(--go--color--primary);
-	--go-input-interactive--color--text: var(--go--color--white);
-	--go-input--border: var(--go-input--border-width, 3px) var(--go-input--border-style, solid) var(--go-input--border-color, var(--go--color--primary));
-	--go-input--color--text: var(--go--color--primary);
-	--go-input--font-size: 1.1rem;
-	--go-input--padding--x: .75rem; /* 1.5 */
-	--go-input--padding--y: .75rem; /* 1.5 */
+    --go-input--color--background: var(--go--color--background);
+    --go-input-interactive--color--background: var(--go--color--white); /* var(--go--color--primary) */
+    --go-input-interactive--color--border-color: var(--go-heading--color--text, var(--go--color--black)); /* primary */
+    --go-input-interactive--color--text: var(--go-heading--color--text, var(--go--color--black)); /* white */
+    --go-input--border-color: var(--go-heading--color--text, var(--go--color--black)); /*--go--color--black*/ /* primary */
+    --go-input--border: var(--go-input--border-width, 3px) var(--go-input--border-style, solid) var(--go-input--border-color, var(--go--color--primary));
+    --go-input--color--text: var(--go--color--black); /* primary */
+    --go-input--font-size: 1.1rem;
+    --go-input--font-weight: 600;
+    --go-input--padding--x: .75rem; /* 1.5 */
+    --go-input--padding--y: .75rem; /* 1.5 */
 
 	/* Site Title */
 	--go-site-title--color--text: var(--go--color--black);
