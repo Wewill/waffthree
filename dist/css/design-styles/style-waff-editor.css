@@ -489,6 +489,11 @@ h6 {
     }
 }
 
+/* Titles fixes */
+.block-editor-block-list__block.wp-block.wp-block-heading {
+    margin-top: var(--go--spacing--vertical) !important;
+}
+
 /* Removed margin top 0 of posts.php */ 
 /* KO */
 /* .block-editor-block-list__layout > .wp-block.block-editor-block-list__block:first-of-type {
@@ -504,9 +509,6 @@ h6 {
 .block-editor-inner-blocks .block-editor-block-list__layout .wp-block.block-editor-block-list__block:last-of-type {
     margin-bottom: var(--go--spacing--vertical) !important; 
 }
-
-
-
 
 .block-editor-block-list__layout > .wp-block:nth-last-child(2) {
     margin-bottom: var(--go--spacing--vertical) !important; 
