@@ -184,7 +184,7 @@ $slide_colors 		= array();
 		<!-- Mouse down -->
 		<div class="scroll-downs position-absolute bottom-0 start-50 mb-3"><div class="mousey"><div class="scroller"></div></div></div>
 
-		<div class="position-absolute top-0 start-0 zi-5 w-100 h-100">
+		<div class="position-absolute top-0 start-0 zi-2 w-100 h-100">
 			<div class="d-flex align-items-center justify-content-between h-100">
 				<!-- Logo -->
 				<div class="flex-equal text-start">
