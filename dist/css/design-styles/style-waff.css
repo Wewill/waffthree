@@ -276,25 +276,6 @@ button.navbar-toggler {
 	overflow-x: hidden; /* Hack to prevent content going outside the main section div */
 }
 
-/* ONLY FOR DINARD */ 
-.waff-theme-dinard .subline {
-  text-transform: uppercase;
-  font-size: 76%;
-}
-@media (max-width: 767.98px) {
-  .waff-theme-dinard .subline {
-    text-transform: uppercase;
-    font-size: 67%;
-  }
-}
-/* .waff-theme-dinard  .widget_counter .subline {
-  font-size: 64%;
-} */
-.waff-theme-dinard .subline .impact {
-  font-weight: 400;
-  opacity: .7;
-}
-
 /* @end */
 
 /* @group Blocks */
@@ -2394,21 +2375,9 @@ table .bg-action-1 {
   }
 }
 
-/* PROVISOIRE A PASSER DANS STYLE DINARD > FIX BS5 */
-/* .menu-item .nav-link:focus, .menu-item .nav-link:hover {
-  color: var(--waff-action-2);
-}
-.primary-menu .sub-menu .menu-item a:focus, .primary-menu .sub-menu .menu-item a:hover {
-  color: var(--waff-action-1);
-} */
 
-/* PROVISOIRE A PASSER DANS STYLE DINARD > FIX heading-3 styles */
-/* nav#main-nav .sub-menu li {
-  font-size: inherit;
-} */
-
-
-.waff-theme-dinard .wp-block-separator.is-style-wide {
+.waff-theme-dinard .wp-block-separator.is-style-wide,
+.waff-theme-diag .wp-block-separator.is-style-wide {
   border-top: 0;
   border-bottom: 0;
   margin-top: var(--go--spacing--vertical);
@@ -2460,40 +2429,43 @@ aside.widget-area h6:first-of-type {
   height: 100%;
 }
 
-.waff-theme-dinard.single-post .entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+.waff-theme-dinard.single-post .entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide),
+.waff-theme-diag.single-post .entry-content > :not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
   margin-left: 0 !important; /* DINARD */
 }
-.waff-theme-dinard article.post:not(.excerpt) p {
+.waff-theme-dinard article.post:not(.excerpt) p,
+.waff-theme-diag article.post:not(.excerpt) p {
   margin-bottom: 2rem; /* DINARD */
 }
 
 /* FIX TO REPORT to styles-dinard.css */
 
+
 /* Set homeslide to top */
-body.waff-theme-dinard #slick-homeslide {
+/* body.waff-theme-dinard #slick-homeslide {
   margin-top: calc( -1 * var(--waff-header-height-affix) - 1px );
-}
+} */
 
 /* Normal */
-body.waff-theme-dinard #slick-homeslide .vh-100 {
+/* body.waff-theme-dinard #slick-homeslide .vh-100 {
   height: var(--vh100, 100vh) !important;
-}
+} */
 
 /* Loggued in */
-body.waff-theme-dinard.admin-bar #slick-homeslide .vh-100 {
+/* body.waff-theme-dinard.admin-bar #slick-homeslide .vh-100 {
   height: calc(var(--vh100, 100vh) - var(--waff-wp-adminbar, 32px) ) !important;
-}
+} */
 
 /* Loggued in / mobile */
-@media screen and ( max-width: 782px ) {
+/* @media screen and ( max-width: 782px ) {
   body.waff-theme-dinard.admin-bar #slick-homeslide .vh-100 {
     height: calc(var(--vh100, 100vh) - var(--waff-wp-adminbar-mobile, 46px) ) !important;
   }
-}
+} */
 
-body.waff-theme-dinard #slick-homeslide .slider-list .btn {
+/* body.waff-theme-dinard #slick-homeslide .slider-list .btn {
   border: none;
-}
+} */
 
 
 /*
