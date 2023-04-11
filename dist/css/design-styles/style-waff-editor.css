@@ -120,6 +120,10 @@
 	--go-footer--color--text: var(--go--color--primary);
 }
 
+.wp-block {
+    font-family: var(--go--font-family);
+}
+
 .editor-post-title__input {
     /* Debbuging */
     /*color:  var(--waff--editor) !important;*/
@@ -533,7 +537,6 @@ h6 {
 
 /* 
 Blocks 
-
 Featured 
 */
 
@@ -544,6 +547,8 @@ Featured
 .mt-0 {
     margin-top: 0;
 }
+
+
 
 h6:not(.card-title):not(.display):not(.heading) {
     font-family: var(--go-pullquote--font-family);
