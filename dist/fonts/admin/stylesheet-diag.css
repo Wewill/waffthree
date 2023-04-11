@@ -13,64 +13,64 @@
 
 font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-bold-webfont.woff2') format('woff2'),
-         url('ttfirsneue-bold-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-bold-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-bold-webfont.woff') format('woff');
     font-weight: 800;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-bolditalic-webfont.woff2') format('woff2'),
-         url('ttfirsneue-bolditalic-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-bolditalic-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-bolditalic-webfont.woff') format('woff');
     font-weight: 800;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-demibold-webfont.woff2') format('woff2'),
-         url('ttfirsneue-demibold-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-demibold-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-demibold-webfont.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-demibolditalic-webfont.woff2') format('woff2'),
-         url('ttfirsneue-demibolditalic-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-demibolditalic-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-demibolditalic-webfont.woff') format('woff');
     font-weight: 700;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-italic-webfont.woff2') format('woff2'),
-         url('ttfirsneue-italic-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-italic-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-italic-webfont.woff') format('woff');
     font-weight: 400;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-medium-webfont.woff2') format('woff2'),
-         url('ttfirsneue-medium-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-medium-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-medium-webfont.woff') format('woff');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-mediumitalic-webfont.woff2') format('woff2'),
-         url('ttfirsneue-mediumitalic-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-mediumitalic-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-mediumitalic-webfont.woff') format('woff');
     font-weight: 500;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'TT Firs';
-    src: url('ttfirsneue-regular-webfont.woff2') format('woff2'),
-         url('ttfirsneue-regular-webfont.woff') format('woff');
+    src: url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-regular-webfont.woff2') format('woff2'),
+         url('/wp-content/themes/waffthree/dist/fonts/webfontkit-TTFirs/ttfirsneue-regular-webfont.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
