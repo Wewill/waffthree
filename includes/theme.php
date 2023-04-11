@@ -173,7 +173,7 @@ function waff_mailchimp_scripts() {
 	$mailchimp_popup = get_theme_mod( 'mailchimp_popup', waff_defaults( 'mailchimp_popup' ) );
 
 	// If the option is not available, or we're not in the Customizer, return.
-	if ( $mailchimp_popup || is_customize_preview() ) {
+	if ( $mailchimp_popup ) { // || is_customize_preview() Do not show on preview 
 		echo '
 <!-- BEGIN:: Mailchimp popup integration -->
 <script id="mcjs">
