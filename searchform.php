@@ -25,8 +25,8 @@ itemtype="http://schema.org/WebSite"
 					<label for="search-field visually-hidden">
 						<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'go' ); ?></span>
 					</label>
-					<input class="form-control form-control-lg focus-action-3 input input--search search-form__input p-2 ms-1 me-2 flex-fill w-50" itemprop="query-input" type="search" id="search-field" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'go' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
-					<button class="btn btn-action-2 btn-lg search-input__button" type="submit">
+					<input class="form-control form-control-lg focus-action-1 input input--search search-form__input p-2 ms-1 me-2 flex-fill w-50" itemprop="query-input" type="search" id="search-field" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'go' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
+					<button class="btn btn-action-2 btn-lg search-input__button d-flex flex-center rounded-sm rounded" type="submit">
 						<span class="screen-reader-text search-input__label"><?php echo esc_html_x( 'Submit', 'submit button', 'go' ); ?></span>
 						<i class="fas fa-search"></i>
 					</button>
