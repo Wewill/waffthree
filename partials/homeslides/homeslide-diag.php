@@ -202,7 +202,9 @@ $slide_colors 		= array();
 				</div>
 
 				<!-- Shape -->
-				<div class="flex-equal text-end d-none d-lg-block">FORME</div>
+				<div class="flex-equal text-end d-none d-lg-block">
+					<img src="<?= get_stylesheet_directory_uri(); ?>/dist/images/forme_diag.png"  width="300" height="100%" />
+				</div>
 			</div>
 		</div>
 
