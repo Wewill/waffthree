@@ -58,7 +58,7 @@ global $page_atts;
 				      </div>
 				      <!-- end item to replace with -->
 				</div>
-				<div class="logo nav-logomenu position-absolute top-0 left-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" 	></div>
+				<div class="logo nav-logomenu position-absolute --top-0 left-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" 	></div>
 				<span class="site-title text-hide visually-hidden"><?= get_bloginfo('description'); ?></span>
 			</a>
 					
