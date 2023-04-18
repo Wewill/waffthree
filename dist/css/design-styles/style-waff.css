@@ -842,7 +842,8 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .comment-reply-title small,
 .night-mode .no-svg .dropdown-toggle .svg-fallback.icon-down,
 .night-mode .home:not(.blog) .entry-content h5,
-.night-mode .card-body p {
+.night-mode .card-body p, 
+.night-mode main a {
   color: #d2d2d2 !important;
 }
 
