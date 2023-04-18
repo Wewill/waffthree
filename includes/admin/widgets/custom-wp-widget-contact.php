@@ -45,7 +45,7 @@ class WP_Widget_Contact extends WP_Widget {
 			<div class="container-fluid px-0">
 				<div class="row g-0">
 					<div class="col-12 h-100 has-background bg-cover has-background-image bg-no-repeat bg-center-center hero-center-center-align has-padding has-huge-padding has-center-content is-fullscreen" data-aos="fade-down" data-aos-delay="200" style="background-image:url(<?= $bg_url; ?>)">
-                            <div class="wp-block-button aligncenter is-style-circular"><a href="<?= $url ?>" class="wp-block-button__link --bg-white link color-action-1 rounded-pill"><?php esc_html_e('Contact us', 'waff'); ?></a></div>
+                            <div class="wp-block-button aligncenter is-style-circular"><a href="<?= $url ?>" class="wp-block-button__link --bg-white --link --color-action-1 rounded-pill"><?php esc_html_e('Contact us', 'waff'); ?></a></div>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <?= $text ?>
                             </div>
