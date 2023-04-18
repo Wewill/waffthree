@@ -809,7 +809,8 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .color-color-gray,
 .night-mode .text-action-1,
 .night-mode .text-action-2,
-.night-mode .text-action-3 {
+.night-mode .text-action-3,
+.night-mode .text-color-gray{
   color: #f1f1f1 !important;
 }
 
@@ -845,7 +846,8 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
   color: #d2d2d2 !important;
 }
 
-.night-mode .site-header button {
+/* Used for header search and night mode button */
+.night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) button {
   color: #161616 !important;
 }
 
@@ -1121,14 +1123,21 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 }
 
 /*.night-mode h1, .night-mode h2, .night-mode h3, .night-mode h4, .night-mode h5, .night-mode h6,*/
+.night-mode .site-header .nav li > a,
 .night-mode .site-header .nav li a:hover,
 .night-mode .site-header .nav li.current_page_item > a {
   color: #e2e2e2 !important;
 }
 
-.night-mode body.waff-theme-diag .site-header .nav li > a,
+/* .night-mode body.waff-theme-diag .site-header .nav li > a,
 .night-mode body.waff-theme-diag .site-header .nav li a:hover,
 .night-mode body.waff-theme-diag .site-header .nav li.current_page_item > a {
+  color: #000000 !important;
+} */
+
+.night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li > a,
+.night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li a:hover,
+.night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li.current_page_item > a {
   color: #000000 !important;
 }
 
