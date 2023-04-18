@@ -33,7 +33,7 @@ $has_background   = Go\has_footer_background();
 								<span class="screen-reader-text footer-navigation__title"><?php echo esc_html( wp_get_nav_menu_name( 'footer-1' ) ); ?></span>
 			
 								<?php
-									print ( preg_replace( '/(<a )/', '<a class="nav-link" ', strip_tags( wp_nav_menu(
+									print ( preg_replace( '/(<a )/', '<a class="nav-link link color-white" ', strip_tags( wp_nav_menu(
 										array(
 											'theme_location' => 'footer-1',
 											'items_wrap'      => '%3$s',
@@ -91,7 +91,7 @@ $has_background   = Go\has_footer_background();
 								<span class="screen-reader-text footer-navigation__title"><?php echo esc_html( wp_get_nav_menu_name( 'footer-3' ) ); ?></span>
 			
 								<?php
-									print ( preg_replace( '/(<a )/', '<a class="nav-link link-muted" ', strip_tags( wp_nav_menu(
+									print ( preg_replace( '/(<a )/', '<a class="nav-link --link-muted link color-color-gray" ', strip_tags( wp_nav_menu(
 										array(
 											'theme_location' => 'footer-3',
 											'items_wrap'      => '%3$s',
