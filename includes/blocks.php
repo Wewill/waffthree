@@ -26,7 +26,7 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	// Register Theme Blocks
+	// Register Theme Blocks >> need rwmb_meta_boxes
 	add_filter( 'rwmb_meta_boxes', $n( 'waff_blocks_register_meta_boxes' ));
 
 	// Allow / Disallow some blocks 

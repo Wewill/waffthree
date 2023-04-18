@@ -190,24 +190,26 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 	);
 
 	// Add settings 
-	$wp_customize->add_setting(
-		'mailchimp_popup', array(
-			'default'           => false,
-			'transport'         => 'postMessage',
-			'sanitize_callback' => 'absint',
-		)
-	);
+	if ( defined('WAFF_THEME') && WAFF_THEME == 'FIFAM' ) :
+		$wp_customize->add_setting(
+			'mailchimp_popup', array(
+				'default'           => false,
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'absint',
+			)
+		);
 
-	$wp_customize->add_control(
-		'mailchimp_popup_control',
-		array(
-			'type'        => 'checkbox',
-			'label'       => esc_html__( 'Mailchimp popup', 'waff' ),
-			'description' => esc_html__( 'Enable the Mailchimp script to add a newsletter popup.', 'waff' ),
-			'section'     => 'go_site_settings',
-			'settings' 	  => 'mailchimp_popup'
-		)
-	);
+		$wp_customize->add_control(
+			'mailchimp_popup_control',
+			array(
+				'type'        => 'checkbox',
+				'label'       => esc_html__( 'Mailchimp popup', 'waff' ),
+				'description' => esc_html__( 'Enable the Mailchimp script to add a newsletter popup.', 'waff' ),
+				'section'     => 'go_site_settings',
+				'settings' 	  => 'mailchimp_popup'
+			)
+		);
+	endif;
 
 	// Add settings 
 	$wp_customize->add_setting(
@@ -355,70 +357,69 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 	);
 
 	// Planning 
-	$wp_customize->add_setting(
-		'planning_url',
-		array(
-			'default'           => '',
-			'transport'         => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field',
-		)
-	);
+	if ( defined('WAFF_THEME') && (WAFF_THEME == 'FIFAM' || WAFF_THEME == 'DINARD') ) :
+		$wp_customize->add_setting(
+			'planning_url',
+			array(
+				'default'           => '',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+		$wp_customize->add_control(
+			'planning_url_control',
+			array(
+				'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
+				'label'    => esc_html__( 'Planning file URL (*.pdf)', 'waff' ),
+				'priority' => 80,
+				'section'  => 'go_site_settings',
+				'settings' => 'planning_url',
+				'type'     => 'url',
+			)
+		);
 
-	$wp_customize->add_control(
-		'planning_url_control',
-		array(
-			'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
-			'label'    => esc_html__( 'Planning file URL (*.pdf)', 'waff' ),
-			'priority' => 80,
-			'section'  => 'go_site_settings',
-			'settings' => 'planning_url',
-			'type'     => 'url',
-		)
-	);
+		// Booklet 
+		$wp_customize->add_setting(
+			'booklet_url',
+			array(
+				'default'           => '',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+		$wp_customize->add_control(
+			'booklet_url_control',
+			array(
+				'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
+				'label'    => esc_html__( 'Booklet file URL (*.pdf)', 'waff' ),
+				'priority' => 80,
+				'section'  => 'go_site_settings',
+				'settings' => 'booklet_url',
+				'type'     => 'url',
+			)
+		);
 
-	// Booklet 
-	$wp_customize->add_setting(
-		'booklet_url',
-		array(
-			'default'           => '',
-			'transport'         => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field',
-		)
-	);
-
-	$wp_customize->add_control(
-		'booklet_url_control',
-		array(
-			'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
-			'label'    => esc_html__( 'Booklet file URL (*.pdf)', 'waff' ),
-			'priority' => 80,
-			'section'  => 'go_site_settings',
-			'settings' => 'booklet_url',
-			'type'     => 'url',
-		)
-	);
-
-	// Catalog 
-	$wp_customize->add_setting(
-		'catalog_url',
-		array(
-			'default'           => '',
-			'transport'         => 'postMessage',
-			'sanitize_callback' => 'sanitize_text_field',
-		)
-	);
-
-	$wp_customize->add_control(
-		'catalog_url_control',
-		array(
-			'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
-			'label'    => esc_html__( 'Catalog file URL (*.pdf)', 'waff' ),
-			'priority' => 80,
-			'section'  => 'go_site_settings',
-			'settings' => 'catalog_url',
-			'type'     => 'url',
-		)
-	);
+		// Catalog 
+		$wp_customize->add_setting(
+			'catalog_url',
+			array(
+				'default'           => '',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+		$wp_customize->add_control(
+			'catalog_url_control',
+			array(
+				'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
+				'label'    => esc_html__( 'Catalog file URL (*.pdf)', 'waff' ),
+				'priority' => 80,
+				'section'  => 'go_site_settings',
+				'settings' => 'catalog_url',
+				'type'     => 'url',
+			)
+		);
+	endif;
 }
 
 /**
