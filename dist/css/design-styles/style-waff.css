@@ -796,8 +796,21 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode body,
 .night-mode .card, 
 .night-mode .bg-light, 
-.night-mode .bg-action-2 {
-  background-color: #1c1b1b !important;
+.night-mode .bg-color-gray,
+.night-mode .bg-action-1,
+.night-mode .bg-action-2, 
+.night-mode .bg-action-3{
+  background-color: #161616 !important;
+}
+
+.night-mode .color-action-1,
+.night-mode .color-action-2,
+.night-mode .color-action-3,
+.night-mode .color-color-gray,
+.night-mode .text-action-1,
+.night-mode .text-action-2,
+.night-mode .text-action-3 {
+  color: #f1f1f1 !important;
 }
 
 @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: null) {
@@ -829,7 +842,11 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .no-svg .dropdown-toggle .svg-fallback.icon-down,
 .night-mode .home:not(.blog) .entry-content h5,
 .night-mode .card-body p {
-  color: #939393 !important;
+  color: #d2d2d2 !important;
+}
+
+.night-mode .site-header button {
+  color: #161616 !important;
 }
 
 .night-mode .film-card.card-dark h2, 
@@ -849,8 +866,13 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
   color: #939393 !important;
 }
 
-.night-mode .header__logo .logo {
+.night-mode .body:not(.waff-theme-diag) .header__logo .logo {
   filter: invert(100%);
+}
+
+.night-mode header.masthead.has-background.contrast--reverse, 
+.night-mode header.masthead.has-bg.contrast--reverse {
+  background-color: #000 !important;
 }
 
 .night-mode button.btn-outline-dark {
@@ -861,7 +883,7 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 
 /* .night-mode #pagetitle, */
 .night-mode .has-background:not(.masthead),
-.night-mode #slick-homeslide .slick-slide,
+.night-mode #slick-homeslide .slick-slide:not(.bg-gradient-action-1):not(.bg-gradient-action-2):not(.bg-gradient-action-3),
 .night-mode ul.list-group:not(.list-transparent) .list-group-item {
   background: #2e2d2d !important;
 }
@@ -1102,6 +1124,12 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .site-header .nav li a:hover,
 .night-mode .site-header .nav li.current_page_item > a {
   color: #e2e2e2 !important;
+}
+
+.night-mode body.waff-theme-diag .site-header .nav li > a,
+.night-mode body.waff-theme-diag .site-header .nav li a:hover,
+.night-mode body.waff-theme-diag .site-header .nav li.current_page_item > a {
+  color: #000000 !important;
 }
 
 .night-mode .search-toggle .icon,
