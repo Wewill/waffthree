@@ -189,9 +189,10 @@ $slide_colors 		= array();
 				<!-- Logo -->
 				<div class="flex-equal text-start">
 					<div class="d-flex flex-column w-75">
-						<a class="bg-action-3 color-action-1 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous <i class="bi bi-alarm"></i></a>
-						<a class="bg-color-gray py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne <i class="icon icon"></i></a>
-						<a class="bg-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats <i class="icon icon"></i></a>				
+						<a class="bg-action-3 color-action-1 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous</a>
+						<a class="bg-color-gray py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne</a>
+						<a class="bg-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats</a>				
+						<a class="bg-action-1 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Faire son pré-accueil</a>				
 					</div>
 				</div>
 
