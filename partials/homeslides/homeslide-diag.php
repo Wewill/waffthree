@@ -191,8 +191,8 @@ $slide_colors 		= array();
 					<div class="d-flex flex-column w-75">
 						<a class="bg-action-3 color-action-1 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Prendre rendez-vous</a>
 						<a class="bg-color-gray py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Régler en ligne</a>
-						<a class="bg-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats</a>				
-						<a class="bg-action-1 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Faire mon pré-accueil</a>				
+						<a class="bg-light-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Consulter mes résultats</a>				
+						<a class="bg-action-2 py-3 px-5 py-sm-4 px-sm-9 rounded-start rounded-pill text-white h4 text-end" href="#">Faire mon pré-accueil</a>				
 					</div>
 				</div>
 
