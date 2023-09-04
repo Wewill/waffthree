@@ -9,6 +9,10 @@
 define( 'WAFF_VERSION', '3.0' );
 define( 'WAFF_DEBUG', false );
 
+// Use classic Widget Editor
+// add_filter( 'use_widgets_block_editor', '__return_false' );
+
+
 /** Die if no setup */
 if ( !file_exists(get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' ))  ) {
 	wp_die('Error : please define setup.');
