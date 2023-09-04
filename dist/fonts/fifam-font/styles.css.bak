@@ -52,8 +52,8 @@
 .icon-time:before {
   content: "\74";
 }
-.icon-vip:before {
-  content: "\76";
+.icon-guest:before {
+  content: "\67";
 }
 .icon-arrow:before {
   content: "\61";
@@ -130,16 +130,16 @@
   font-size: .85em;
 }
 .icon-links:before {
-  content: "\4c";
+  content: "\e008";
 }
 .icon-ok:before {
-  content: "\6c";
+  content: "\e009";
 }
 .icon-pic:before {
-  content: "\63";
+  content: "\e00a";
 }
 .icon-catalogue:before {
-  content: "\62";
+  content: "\e00b";
 }
 .icon-right-light:before {
   content: "\e00c";
@@ -151,7 +151,7 @@
   content: "\e00e";
 }
 .icon-play:before {
-  content: "\70";
+  content: "\e00f";
 }
 .icon-download:before {
   content: "\e010";
@@ -173,28 +173,19 @@
   content: "\e016";
 }
 .icon-ticket:before {
-  content: "\54";
+  content: "\e017";
 }
 .icon-mouse:before {
   content: "\e014";
 }
 .icon-flag:before {
-  content: "\66";
+  content: "\e015";
 }
 .icon-quote:before {
   content: "\e018";
 }
 .icon-plus:before {
-  content: "\2b";
+  content: "\e019";
   font-size: 95%;
   vertical-align: -.15rem;
-}
-.icon-mic:before {
-  content: "\6d";
-}
-.icon-guest:before {
-  content: "\67";
-}
-.icon-mic-alt:before {
-  content: "\4d";
 }
