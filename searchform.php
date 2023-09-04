@@ -16,7 +16,7 @@ itemtype="http://schema.org/WebSite"
 <?php } ?>
 >
 
-	<?php  if ( defined('WAFF_PARTIALS') && 'diag' === WAFF_PARTIALS ) : ?>
+	<?php if ( defined('WAFF_PARTIALS') && 'diag' === WAFF_PARTIALS ) : /* DIAG */ ?>
 
 		<form role="search" id="searchform" class="search-form is-formatted mt-0" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<div class="form-group g-0 w-100 bg-action-2">
@@ -34,7 +34,7 @@ itemtype="http://schema.org/WebSite"
 			</div>
 		</form>
 
-	<?php else : ?>
+	<?php else : /* OTHERS */ ?>
 
 		<form role="search" id="searchform" class="search-form is-formatted mt-0" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<div class="form-group g-0">
