@@ -266,6 +266,8 @@ if ( have_posts() ) {
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); ?>
 						<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 
 							print( '<small class="d-block"><i class="icon icon-guest mr-1 f-12"></i> ' . sprintf( _n( '%s with guest', '%s with guest\'s', $counts['wpcf-p-is-guest'], 'waff' ), $counts['wpcf-p-is-guest'] ) . '</small>'); ?>
+						<?php if ( isset($counts['wpcf-p-is-debate']) && $counts['wpcf-p-is-debate'] != '0' ) 
+							print( '<small class="d-block"><i class="icon icon-mic mr-1 f-12"></i> ' . sprintf( _n( '%s with debate', '%s with debate\'s', $counts['wpcf-p-is-debate'], 'waff' ), $counts['wpcf-p-is-debate'] ) . '</small>'); ?>
 						<?php if ( isset($counts['wpcf-p-young-public']) && $counts['wpcf-p-young-public'] != '0' ) 
 							print( '<small class="d-block"><i class="icon icon-young mr-1 f-12"></i> ' . sprintf( _n( '%s parent-children', '%s parent-children\'s', $counts['wpcf-p-young-public'], 'waff' ), $counts['wpcf-p-young-public'] ) . '</small>'); ?>
 						<?php if ( isset($counts['wpcf-p-highlights']) && $counts['wpcf-p-highlights'] != '0' ) 
@@ -370,8 +372,28 @@ if ( have_posts() ) {
 
 } else {
 
+	print('<p class="lead"><strong>I’ll be back !</strong> Oui il semblerait que cette section ne contiennent pas encore de films...</p>');
+	print('<div class="wp-block-button aligncenter is-style-circular"><a class="wp-block-button__link wp-element-button" href="/ledition">Consulter l\'édition</a></div>');
+	
+	// Write overaccess for TEAM ($allowed_roles)  
+	if( array_intersect($allowed_roles, $user->roles ) &&  $shownotice == true ) { 
+	?> 
+	<div class="admin-notice" style="background: hsl(275, 100%, 50%)!important;margin-top:2rem;">
+	<!-- Notice for allowed roles -->
+		<div class="admin-notice-content" style="color: #FFF!important;padding-top:2%;padding-bottom:3%;padding-left:30%;padding-right:30%;">
+			<h4 style="text-align: center;font-size: 1.4em;color: #FFF;margin-bottom: 1em;">Hidden content / Contenu caché</h4>
+			<p style="text-align: center;">You can see this content only because you are loggued to the website and you are an administrator or editor. Otherwise it will show only if the current edition match selected edition and if push online option is true and if film status is approved or programmed.</p>
+			<p style="text-align: center;"><em>Vous pouvez voir ce contenu uniquement parce que vous êtes connecté au site web et que vous êtes administrateur ou éditeur. Sinon, il ne sera affiché que si l'édition actuelle correspond à l'édition sélectionnée et si l'option de mise en ligne est cochée et si le status de film est approuvé ou programmé.</em></p>
+			<pre style="border: .15rem solid rgba(255, 255, 255, 0.75);line-height: 1.5;padding: 2rem 2rem;text-align: left;"><strong>A vérifier : </strong><br/>— La section est parent de la catégorie édition<br/>— La section a bien été rattachée à une édition<br/>— La section contient des films<br/>— Les films sont de statut Approuvés ou Programmés</pre>
+		</div>
+	<!-- End: Notice for allowed roles -->
+	</div>
+	<?php 
+	}
+
+
 	// If no content, include the "No posts found" template.
-	get_template_part( 'partials/content', 'none' );
+	// get_template_part( 'partials/content', 'none' );
 }
 
 get_footer();
