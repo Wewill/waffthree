@@ -328,7 +328,7 @@ function waff_page_register_meta_boxes( $meta_boxes ) {
                 'desc' => __( 'Fill a custom class for the main page wrapper. Advanced feature.', 'waff' ),
             ],
         ],
-        'style'      => 'seamless',
+        'style'      => 'normal', //seamless
     ];
 
     return $meta_boxes;
