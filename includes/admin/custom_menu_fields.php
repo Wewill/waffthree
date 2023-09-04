@@ -134,9 +134,10 @@ function waff_add_additional_data_on_a($atts, $item, $args, $depth) {
 	$atts['data-classes'] 		= (array)$item->classes;
 	$atts['data-menu_class'] 	= $args->menu_class;
 
-	// @todo testing fix in 6.1 
+	// @done testing fix in > 6.1
     //if( in_array('main-nav', explode(' ', $args->menu_class) ) && in_array('menu-item-has-children', (array)$item->classes ) && $depth == 0) { // WP 6.0 proper way 
-	if( in_array('main-nav', explode(' ', $args->menu_class) ) && in_array('menu-item', (array)$item->classes ) && $depth == 0) { // WP 6.1 FIX Waiting 6.1.1 //@todo menu-item-has-children has been removed //@fixed in 6.1 ? https://core.trac.wordpress.org/ticket/56946
+	//if( in_array('main-nav', explode(' ', $args->menu_class) ) && in_array('menu-item', (array)$item->classes ) && $depth == 0) { // WP 6.1 FIX Waiting 6.1.1 //@todo menu-item-has-children has been removed //@fixed in 6.1 ? https://core.trac.wordpress.org/ticket/56946
+    if( in_array('main-nav', explode(' ', $args->menu_class) ) && in_array('menu-item-has-children', (array)$item->classes ) && $depth == 0) { // WP > 6.1 fixed in 6.1.1 proper way 
 		//<a class="" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" aria-label="Ouvrir le sous-menu : L'édition">
 		$atts['data-toggle'] 	= 'collapse';
 		$atts['data-target'] 	= '#'.sanitize_title($item->title);
