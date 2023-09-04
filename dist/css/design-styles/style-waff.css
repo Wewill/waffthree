@@ -35,7 +35,7 @@
 
 	/* Headings */
 	--go-heading--button-spacing: 1.75rem;
-	--go-heading--color--text: var(--waff-color-heading); /*hsl(0, 0%, 0%);*/
+	--go-heading--color--text: var(--waff-color-heading); /*hsl(0, 0%, 0%); initially on FIFAM */
 	--go-heading--font-family: var(--waff-font-heading, 'Arial, sans-serif'); /* FIFAM = "Bureau Grot", Arial, sans-serif; */
 	--go-heading--font-weight: 800;
 	--go-heading--line-height: 1.2;
@@ -77,12 +77,12 @@
 
 	/* Input */
   --go-input--color--background: var(--go--color--background);
-  --go-input-interactive--color--background: var(--go--color--white); /* var(--go--color--primary) */
-  --go-input-interactive--color--border-color: var(--go-heading--color--text, var(--go--color--black)); /* primary */
-  --go-input-interactive--color--text: var(--go-heading--color--text, var(--go--color--black)); /* white */
-  --go-input--border-color: var(--go-heading--color--text, var(--go--color--black)); /*--go--color--black*/ /* primary */
+  --go-input-interactive--color--background: var(--go--color--white); /* var(--go--color--primary) initially on FIFAM */
+  --go-input-interactive--color--border-color: var(--go-heading--color--text, var(--go--color--black)); /* primary initially on FIFAM */
+  --go-input-interactive--color--text: var(--go-heading--color--text, var(--go--color--black)); /* white initially on FIFAM */
+  --go-input--border-color: var(--go-heading--color--text, var(--go--color--black)); /*--go--color--black*/ /* primary initially on FIFAM */
   --go-input--border: var(--go-input--border-width, 3px) var(--go-input--border-style, solid) var(--go-input--border-color, var(--go--color--primary));
-  --go-input--color--text: var(--go--color--black); /* primary */
+  --go-input--color--text: var(--go--color--black); /* primary initially on FIFAM */
   --go-input--font-size: 1.1rem;
   --go-input--font-weight: 600;
   --go-input--padding--x: .75rem; /* 1.5 */
@@ -274,6 +274,25 @@ button.navbar-toggler {
 
 #main {
 	overflow-x: hidden; /* Hack to prevent content going outside the main section div */
+}
+
+/* ONLY FOR DINARD */ 
+.waff-theme-dinard .subline {
+  text-transform: uppercase;
+  font-size: 76%;
+}
+@media (max-width: 767.98px) {
+  .waff-theme-dinard .subline {
+    text-transform: uppercase;
+    font-size: 67%;
+  }
+}
+/* .waff-theme-dinard  .widget_counter .subline {
+  font-size: 64%;
+} */
+.waff-theme-dinard .subline .impact {
+  font-weight: 400;
+  opacity: .7;
 }
 
 /* @end */
@@ -2477,7 +2496,7 @@ aside.widget-area h6:first-of-type {
 }
 
 /* FIX TO REPORT to styles-dinard.css */
-
+/* 5 classes A CHECKER CAR PRESENT DANS LE DERNIER WAFFTWO FIFAM */
 
 /* Set homeslide to top */
 /* body.waff-theme-dinard #slick-homeslide {
