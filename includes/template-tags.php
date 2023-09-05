@@ -585,7 +585,7 @@ if ( ! function_exists( 'waff_night_toggle' ) ) {
 		
 		if ( $night || is_customize_preview() ) {
 			?>
-			<button id="night-mode-toggle" class="d-none d-sm-block site-header__button header__button--night-mode button--chromeless<?php echo esc_attr( $visibility ); ?>" role="switch" aria-checked="false" aria-label="<?php esc_attr_e( 'Toggle Night Mode', 'waff' ); ?>">
+			<button id="night-mode-toggle" class="d-none d-sm-inline-block site-header__button header__button--night-mode button--chromeless<?php echo esc_attr( $visibility ); ?>" role="switch" aria-checked="false" aria-label="<?php esc_attr_e( 'Toggle Night Mode', 'waff' ); ?>">
 				<div class="night-mode-toggle-icon">
 					<?php load_inline_svg( 'night-mode.svg' ); ?>
 				</div>
