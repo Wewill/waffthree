@@ -1187,7 +1187,7 @@ function wa_partners_callback( $attributes, $is_preview = false, $post_id = null
 							array(
 								'taxonomy' => $partner_category,
 								'field' => 'term_id',
-								'terms' => $category,
+								'terms' => $category->term_id, // Fixed from DINARD SEPT23
 								'operator' => 'IN'
 							),
 						)
