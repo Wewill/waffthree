@@ -10,6 +10,8 @@ echo ((true === WAFF_DEBUG)?'<code> ##PAGETITLE '.$args.'</code>':'');
 global $page_atts;
 //print_r($page_atts);
 
+// Lightness threshold
+$lightness_threshold = 130;
 
 // To css 
 $title 							= ( isset($page_atts['title']) && $page_atts['title'] != '' )?do_shortcode($page_atts['title']):single_post_title('', false);
@@ -21,10 +23,10 @@ $header_link_color 				= 'link-dark';
 if ( isset($page_atts['header_color']) && $page_atts['header_color'] != '' ) {
 	$rgb = WaffTwo\Core\waff_HTMLToRGB($page_atts['header_color']);
 	$hsl = WaffTwo\Core\waff_RGBToHSL($rgb);
-	if($hsl->lightness < 200) {
+	if($hsl->lightness < $lightness_threshold) {
 		$header_color_class 			= 'contrast--dark';
-		$header_section_title_color 	= 'color-light';	
-		$header_link_color 				= 'link-light';	
+		$header_section_title_color 	= 'color-light'; //color-white	
+		$header_link_color 				= 'link-light'; //link-white	
 	}
 }
 
@@ -34,6 +36,7 @@ if ( isset($page_atts['header_color']) && $page_atts['header_color'] != '' ) {
 $featured_img_urls = array();
 //Pages
 $page_featured_sizes = array(
+	'thumbnail',
 	'full',
 	'page-featured-image', 
 	'page-featured-image-x2',
@@ -50,6 +53,7 @@ $page_featured_sizes = array(
 );
 // Posts & films
 $post_featured_sizes = array(
+	'thumbnail',
 	'full',
 	'post-featured-image', 
 	'post-featured-image-x2',
@@ -124,7 +128,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<section id="pagetitle" class="pt-12 pt-md-20 pb-14 --contrast--light container-10 container-left <?= $header_color_class ?>" <?= $header_color ?> --data-aos="fade-up">
 		<div class="jumbotron">
 		    <div class="container-fluid container-10 container-left">
-				<hgroup>
+				<hgroup data-aos="fade-down">
 					<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
 					<?php if ( $page_atts['subtitle'] != '' ) echo '<h5 class="opacity-75 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h5>'; ?>
 				</hgroup>
@@ -139,7 +143,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<section id="pagetitle" class="pt-12 pt-md-20 pb-14 contrast--light container-10 container-left " <?= $page_atts['post_color_class']?>>
 		<div class="jumbotron">
 		    <div class="container-fluid container-10 container-left">
-				<hgroup>
+				<hgroup data-aos="fade-down">
 					<h1 class="title mb-0"><?php single_post_title(); ?></h1>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
 				</hgroup>
@@ -163,7 +167,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['post-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -212,7 +216,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -282,7 +286,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -298,12 +302,17 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 <?php elseif ( $args == 'film' ) : ?>
 	<?php 
-		$film_french_title 	= get_post_meta( $post->ID, 'wpcf-f-french-operating-title', true ); 
-		$film_gif 			= get_post_meta( $post->ID, 'wpcf-f-film-gif', true ); 
-		$film_length 		= get_post_meta( $post->ID, 'wpcf-f-movie-length', true ); 
-		$film_teaser_url 	= get_post_meta( $post->ID, 'wpcf-f-teaser-urls', true ); 
-		$film_length 		= (( $film_length != 0 && $film_length != '' )?$film_length = sprintf(' <span class="length light">%d\'</span>', esc_attr($film_length) ):'');  
-		$film_awards 		= get_the_terms($post->ID, 'award'); 
+		$film_french_title 		= get_post_meta( $post->ID, 'wpcf-f-french-operating-title', true ); 
+		$film_gif 				= get_post_meta( $post->ID, 'wpcf-f-film-gif', true ); 
+		$film_length 			= get_post_meta( $post->ID, 'wpcf-f-movie-length', true ); 
+		$film_length_seconds	= get_post_meta( $post->ID, 'wpcf-f-movie-length-seconds', true );
+		$film_teaser_url 		= get_post_meta( $post->ID, 'wpcf-f-teaser-urls', true ); 
+		$film_online 			= get_post_meta( $post->ID, 'wpcf-f-is-available-online', true ); 
+		$film_online_url 		= get_post_meta( $post->ID, 'wpcf-f-online-url', true ); 
+		$film_ticketing_url 	= get_post_meta( $post->ID, 'wpcf-f-ticketing-url', true ); 
+
+		$film_length 			= (( $film_length != '0' && $film_length != '' )?$film_length = sprintf(' <span class="--length --light subline-length subline-4">%s\'%s</span>', esc_attr($film_length), (( $film_length_seconds != 0 && $film_length_seconds != '' )?esc_attr($film_length_seconds):'') ):'');  
+		$film_awards 			= get_the_terms($post->ID, 'award'); 
 	?>
 	<!-- #pagetitle : Film -->
 	<section id="pagetitle" class="mt-12 mt-md-20 mb-14 contrast--light">
@@ -336,7 +345,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 		            srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
 		            		<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['post-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
+			<data-img id="filmpicture" src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
 			<?php endif; ?>
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
@@ -347,12 +356,14 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<?php print_r($featured_img_urls); ?>  
 			-->
 		</figure>
+
 		<!-- Play -->
 		<?php if ( $film_teaser_url != '' ) : ?>
 			<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
 				<a href="<?= esc_url($film_teaser_url) ?>?rel=0&amp;showinfo=0" class="btn white play" target="_blank" data-fancybox="header_<?= $post->ID; ?>_fancybox"><i class="fas fa-play"></i></a>
 			</div>
 		<?php endif; /* If film_teaser_url */ ?>
+
 		<!-- Awards image -->
 		<?php if ( count($film_awards) > 0 ) : ?>
 			<div class="absolute position-absolute top-0 end-0 right-0 mt-4 mr-6 me-6">
@@ -391,7 +402,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<!-- #pageheader -->
 	<?php if ( is_singular() && has_post_thumbnail() ) { ?>
 	<section id="pageheader" class="<?= (($page_atts['header_style']=='normal')?'normal-header mt-md-9':'full-header mt-md-18'); ?> --pb-9 contrast--light has_post_thumbnail" data-aos="fade-up" data-aos-id="pageheader">
-		<figure title="<?php echo esc_attr($featured_img_description); ?>">
+		<figure title="<?php echo esc_attr($featured_img_description); ?>" style="background-color:<?= $page_atts['header_color'] ?>;">
 			<picture class="lazy duotone-<?= get_post_thumbnail_id() ?>">
 			<!-- 3800x1200 > 1900x600 -->
 		    <data-src media="(min-width: 990px)"
@@ -403,7 +414,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -433,12 +444,12 @@ if ( is_singular() && has_post_thumbnail() ) {
 		$section_id 						= get_queried_object_id();
 		$section_color 						= get_term_meta( $section_id, 'wpcf-s-color', true ); 
 		$section_color_class				= 'contrast--light';
-		$section_title_color 				= 'color-dark';
+		$section_title_color 				= 'color-dark'; //color-black
 		if ( $section_color != '' ) {
 			$rgb = WaffTwo\Core\waff_HTMLToRGB($section_color);
 			$hsl = WaffTwo\Core\waff_RGBToHSL($rgb);
-			if($hsl->lightness < 200) {
-				$section_title_color 		= 'color-white';	
+			if($hsl->lightness < $lightness_threshold) {
+				$section_title_color 		= 'color-light'; //color-white
 				$section_color_class 		= 'contrast--dark';
 			}
 			$section_color = sprintf('style="background-color:%s;"', esc_attr($section_color) );
@@ -498,7 +509,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<section id="pagetitle" class="pt-12 pt-md-20 pb-14 <?= esc_attr($section_color_class) ?>" <?= $section_color ?>> <!-- ?? pt-md-18 pb-9-->
 		<div class="jumbotron">
 		    <div class="container-fluid container-10 container-left">
-				<hgroup>
+				<hgroup data-aos="fade-down">
 					<h1 class="title mb-0 <?= esc_attr($section_title_color) ?>"><?= sanitize_text_field(single_term_title()) ?></h1>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
 				</hgroup>
@@ -553,8 +564,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 		global $room_id, $room_slug, $room_parent_tax, $room_title_color, $room_color, $_room_color; /* Pass to next php templates */ 
 		/* Look for a parent term if existing */
 		$room_tax 						= $wp_query->get_queried_object();
+		$room_display_child				= get_term_meta( get_queried_object_id(), 'wpcf-r-show-child-content', true ); 
 		$room_parent_tax = get_term_by('term_id', $room_tax->parent, 'room');
-		if ( !empty( $room_parent_tax ) && !is_wp_error( $room_parent_tax ) ) :
+		if ( !empty( $room_parent_tax ) && !is_wp_error( $room_parent_tax ) && $room_display_child == '0' ) :
 			$room_id					= $room_parent_tax->term_id;
 			$room_slug 					= $room_parent_tax->slug;
 		else :
@@ -563,16 +575,16 @@ if ( is_singular() && has_post_thumbnail() ) {
 		endif;
 		$room_color = $_room_color		= get_term_meta( $room_id, 'wpcf-r-color', true ); 
 		$room_color_class				= 'contrast--light';
-		$room_title_color 				= 'color-white';
+		$room_title_color 				= 'color-light'; //color-white
 		if ( $room_color != '' ) {
 			$rgb = WaffTwo\Core\waff_HTMLToRGB($room_color);
 			$hsl = WaffTwo\Core\waff_RGBToHSL($rgb);
-			if($hsl->lightness < 200) {
+			if($hsl->lightness < $lightness_threshold) {
 				$room_color_class 		= 'contrast--dark';
-				$room_title_color 		= 'color-white';	
+				$room_title_color 		= 'color-light'; //color-white
 			} else {
 				$room_color_class 		= 'contrast--white';
-				$room_title_color 		= 'color-black';	
+				$room_title_color 		= 'color-dark'; //color-black
 			}
 			$room_color = sprintf('style="background-color:%s;"', esc_attr($room_color) );
 		} else {
@@ -627,8 +639,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<div class="container-fluid">
 			<div class="row pt-sm-20 pt-15">
 				<div class="col-sm-7 col-12 zi-5">
-					<h1 class="heading-3 title mb-2 <?= esc_attr($room_title_color) ?>"><?= sanitize_text_field(single_term_title()) ?></h1>
-					<?= WaffTwo\waff_entry_meta_header(); ?>	
+					<hgroup data-aos="fade-down">
+						<h1 class="heading-3 title mb-2 <?= esc_attr($room_title_color) ?>"><?= sanitize_text_field(single_term_title()) ?></h1>
+						<?= WaffTwo\waff_entry_meta_header(); ?>	
+					</hgroup>
 				</div>
 			</div>
 			<div class="row <?= (($room_image != '')?'mt-n':'mt-4') ?> align-items-end g-0 f-w">
@@ -644,7 +658,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</ul>
 				</div>
 				<div class="col-sm-7 col-6">
-					<figure title="<?php echo esc_attr($room_image_description); ?>">
+					<figure title="<?php echo esc_attr($room_image_description); ?>" style="background-color:<?= $_room_color ?>;">
 						<picture class="lazy duotone-<?= $room_id ?>">
 						<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
 							<?= $room_image ?>
@@ -679,12 +693,14 @@ if ( is_singular() && has_post_thumbnail() ) {
 		    <div class="container-fluid">
 				<div class="row pt-sm-20 pt-15">
 					<div class="col-sm-7 col-12 zi-5">
-						<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
-						<?php if ( $page_atts['subtitle'] != '' ) echo '<h5 class="opacity-75 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h5>'; ?>
+						<hgroup data-aos="fade-down">
+							<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
+							<?php if ( $page_atts['subtitle'] != '' ) echo '<h5 class="opacity-75 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h5>'; ?>
+						</hgroup>
 					</div>
 				</div>
 				<div class="row <?= (( has_post_thumbnail() )?'mt-n':'mt-15') ?> align-items-end g-0 f-w">
-					<div class="col-sm-5 col-6">
+					<div class="col-sm-5 col-6 delayed-anchors-aos" data-aos="fade-right" data-aos-delay="200">
 						<?php if ( !empty($page_atts['anchors']) ): ?>
 						<ul class="p-gutter-l list-unstyled pb-8 <?= $header_section_title_color ?>">
 							<?php
@@ -697,8 +713,8 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</div>
 					<div class="col-sm-7 col-6">
 						<?php if ( has_post_thumbnail() ): ?>
-						<figure title="<?php echo esc_attr($featured_img_description); ?>">
-						    <picture class="lazy duotone-<?= get_post_thumbnail_id() ?>">
+						<figure title="<?php echo esc_attr($featured_img_description); ?>" style="background-color:<?= $page_atts['header_color'] ?>;">
+						    <picture class="lazy show-img-when-loaded duotone-<?= get_post_thumbnail_id() ?>">
 							<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
 						    <data-src media="(min-width: 990px)"
 						            srcset="<?= $featured_img_urls['page-featured-image-modern-x2']; ?> 2x,
@@ -709,7 +725,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<data-src media="(min-width: 380px)"
 									srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 											<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-							<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
 							</picture>
 							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -725,6 +741,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 								filter: grayscale(1);
 								mix-blend-mode: screen;
 								background-color: <?= $page_atts['header_color'] ?>;
+								opacity: 0;
 							}
 						</style>
 						<?php } ?>
@@ -744,7 +761,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<!-- #pageheader -->
 	<section id="pageheader" class="fancy-header mt-0 --mb-10 mb-0 contrast--light <?= $header_color_class ?>" <?= $header_color ?> data-aos="fade-up" data-aos-id="pageheader">
 		<?php if ( has_post_thumbnail() ): ?>
-		<figure title="<?php echo esc_attr($featured_img_description); ?>">
+		<figure title="<?php echo esc_attr($featured_img_description); ?>" style="background-color:<?= $page_atts['header_color'] ?>;">
 		    <picture class="lazy duotone-<?= get_post_thumbnail_id() ?>">
 			<!-- 3800x2400 > 1900x1200 -->
 		    <data-src media="(min-width: 990px)"
@@ -756,7 +773,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 		            srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 		            		<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="height:  calc(100vh - 38px); object-fit: cover; width: 100%;"></data-img>
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="height:  calc(100vh - 38px); object-fit: cover; width: 100%;"></data-img>
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -789,7 +806,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<!-- #pageheader -->
 	<?php if ( is_singular() && has_post_thumbnail() ) { ?>
 	<section id="pageheader" class="<?= (($page_atts['header_style']=='normal')?'normal-header mt-md-9':'full-header mt-md-18'); ?> --pb-9 contrast--light has_post_thumbnail" data-aos="fade-up" data-aos-id="pageheader">
-		<figure title="<?php echo esc_attr($featured_img_description); ?>">
+		<figure title="<?php echo esc_attr($featured_img_description); ?>" style="background-color:<?= $page_atts['header_color'] ?>;">
 			<picture class="lazy duotone-<?= get_post_thumbnail_id() ?>">
 			<!-- 3800x1200 > 1900x600 -->
 		    <data-src media="(min-width: 990px)"
@@ -801,7 +818,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['page-featured-image-s']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
