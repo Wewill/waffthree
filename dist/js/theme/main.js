@@ -44,9 +44,21 @@ jQuery(document).ready(function() {
 		-------------------------------------------------
 		http://jquery.eisbehr.de/lazy/example_use-srcset-and-sizes
 	*/
-    jQuery('.lazy').Lazy({ effect: 'fadeIn'});
-
-
+	jQuery('.lazy').Lazy({ 
+        effect: 'fadeIn',
+		onError: function(element) {
+            console.log('#LAZY : Error loading ' + element.data('src'));
+		},
+		afterLoad: function(element) {
+			// called after an element was successfully handled
+			console.log("#LAZY : afterLoad");
+			jQuery(".lazy.show-img-when-loaded img").delay(400).animate({opacity : 1}, 1000, function() { 
+				console.log("#LAZY : afterLoad img fadein complete"); 
+				jQuery('.delayed-anchors-aos').addClass('aos-animate');
+			});
+        },
+	});
+	
 	/*
 		-------------------------------------------------
 		Init tootltip & popovers
@@ -502,6 +514,7 @@ jQuery(document).ready(function() {
 
 	var cardsAutoPlay = setInterval(function() {
 		if (running == false) {
+			console.log("#Stacked Cards : Running");
 			running = true;
 			var prependList = function() {
 				if( jQuery('.stacked-cards .card').hasClass('activeNow') ) {
@@ -511,7 +524,7 @@ jQuery(document).ready(function() {
 				}
 			}
 			jQuery('.stacked-cards li').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
-			setTimeout(function(){prependList(); }, 150);
+			setTimeout(function(){prependList();}, 150);
 		}
 	}, 3000);
 
@@ -532,7 +545,7 @@ jQuery(document).ready(function() {
 			  _h = _a.length;
 
 			
-		// console.log('toggleCollapse:' + _t + ' / '+ e.type + ' how many hover ? ' + _h + ' row is hover ? '+ _rp.is(':hover') + ' / ' + _d.is(':hover'));
+		//console.log('toggleCollapse:' + _t + ' / '+ e.type + ' how many hover ? ' + _h + ' row is hover ? '+ _rp.is(':hover') + ' / ' + _d.is(':hover'));
 		/*console.log( _d );
 		console.log( _m );
 		console.log( _mp );
@@ -596,5 +609,23 @@ jQuery(document).ready(function() {
 	  //.on('mouseenter mouseleave','nav#main-nav',isRowHover)
 	  //.on('mouseenter mouseleave','nav#sub-nav',isRowHover)
 	  //.on('click', '.dropdown-menu a', toggleCollapse);
+
+
+	/*
+	-------------------------------------------------
+	Init Color thief > MAJ w/ in PHP
+	-------------------------------------------------
+	Permet de choisir automatiquement une couleur depuis une image
+	*/
+	// if ( jQuery('.single.single-film.waff-theme-dinard') ) {
+	// 	console.log("#film_color");
+	// 	// Init 
+	// 	const colorThief = new ColorThief();
+	// 	var thisColor;
+	// 	thisColor = colorThief.getColor(jQuery('img#filmpicture'));
+	// 	console.log(thisColor);
+	// 	console.log("#colors" + theseColors);
+	// }
+
 
 }); // End dom ready
