@@ -12,6 +12,8 @@ define( 'WAFF_DEBUG', false );
 // Use classic Widget Editor
 // add_filter( 'use_widgets_block_editor', '__return_false' );
 
+// Decrease theme jpeg quality > need to regenrate thumbnails if changed 
+add_filter('jpeg_quality', function($arg){return 82;});
 
 /** Die if no setup */
 if ( !file_exists(get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' ))  ) {
