@@ -274,6 +274,10 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 			// S
 			add_image_size( 'post-featured-image-s', 600, 600, true );
 			add_image_size( 'post-featured-image-s-x2', 1200, 1200, true );
+			// XS
+			add_image_size( 'post-featured-image-xs', 400, 400, true );
+			add_image_size( 'post-featured-image-xs-x2', 800, 800, true );
+			
 
 			// Films
 			add_image_size( 'film-gallery-image', 1600, 1600, true );
@@ -357,7 +361,7 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 				'homeslide-featured-image-m-x2',
 				'homeslide-featured-image-s', 
 				'homeslide-featured-image-s-x2',
-			); 
+			);
 			$new_image_sizes = array_diff($new_image_sizes, $homeslide_image_sizes);
 			
 			// Size for film

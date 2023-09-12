@@ -158,6 +158,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	
 	// WA Partners
 	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
+	if( post_type_exists('partenaire') || post_type_exists('partner') )
 	$meta_boxes[] = [
 		'title'           => esc_html__( '(WA) Partners', 'waff' ),
 		'id'              => 'wa-partners',
@@ -382,7 +383,85 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		//'Keyattrs'       => 'Value',
 	];
 
+	// WA Playlist
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Playlist', 'waff' ),
+		'id'             => 'wa-playlist',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'pl_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'std'  => esc_html__( 'Title', 'waff' ),
+				'placeholder' => esc_html__( 'Title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'pl_leadcontent',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Lead content', 'waff' ),
+				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'pl_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Content', 'waff' ),
+				'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+			],
+			[
+				'id'         => $prefix . 'pl_videos',
+				'type'       => 'oembed',
+				'name'       => __( 'Video(s)', 'waff' ),
+				'std'        => 'https://youtu.be/...',
+				'required'   => true,
+				'clone'      => true,
+				'sort_clone' => true,
+				'max_clone'  => 99,
+				'add_button' => __( 'Add more video to the playlist', 'waff' ),
+			],
+			[
+				'id'    => $prefix . 'pl_playlist',
+				'type' => 'text',
+				'name'  => esc_html__( 'Fill youtube playlist ID here if you want to show it', 'waff' ),
+			],
+			[
+				'id'    => $prefix . 'pl_autoplay',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Autoplay videos ?', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'    => $prefix . 'pl_fullwidth',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display fullwidth videos ?', 'waff' ),
+				'desc' => esc_html__( 'Diplayed in thumbnails by default.', 'waff' ),
+				'style' => 'rounded',
+			],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'video-alt3',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'video-alt3',
+		],
+		'description'     => esc_html__( 'Display a video playlist block ( better with youtube )', 'waff' ),
+		'keywords'       => ['video', 'youtube', 'playlist', 'film'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_playlist_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
 	// WA Awards
+	if( true === WAFF_ISFILM_VERSION )
 	$meta_boxes[] = [
 		'title'          => esc_html__( '(WA) Awards', 'waff' ),
 		'id'             => 'wa-awards',
@@ -470,84 +549,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		//'Keyattrs'       => 'Value',
 	];
 
-	// WA Playlist
-	$meta_boxes[] = [
-		'title'          => esc_html__( '(WA) Playlist', 'waff' ),
-		'id'             => 'wa-playlist',
-		'fields'         => [
-			[
-				'id'   => $prefix . 'pl_title',
-				'type' => 'text',
-				'name' => esc_html__( 'Title', 'waff' ),
-				'std'  => esc_html__( 'Title', 'waff' ),
-				'placeholder' => esc_html__( 'Title', 'waff' ),
-			],
-			[
-				'id'   => $prefix . 'pl_leadcontent',
-				'type' => 'textarea',
-				'name' => esc_html__( 'Lead content', 'waff' ),
-				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
-			],
-			[
-				'id'   => $prefix . 'pl_content',
-				'type' => 'textarea',
-				'name' => esc_html__( 'Content', 'waff' ),
-				'desc' => esc_html__( 'Markdown is available.', 'waff' ),
-			],
-			[
-				'id'         => $prefix . 'pl_videos',
-				'type'       => 'oembed',
-				'name'       => __( 'Video(s)', 'waff' ),
-				'std'        => 'https://youtu.be/...',
-				'required'   => true,
-				'clone'      => true,
-				'sort_clone' => true,
-				'max_clone'  => 99,
-				'add_button' => __( 'Add more video to the playlist', 'waff' ),
-			],
-			[
-				'id'    => $prefix . 'pl_playlist',
-				'type' => 'text',
-				'name'  => esc_html__( 'Fill youtube playlist ID here if you want to show it', 'waff' ),
-			],
-			[
-				'id'    => $prefix . 'pl_autoplay',
-				'type'  => 'switch',
-				'name'  => esc_html__( 'Autoplay videos ?', 'waff' ),
-				'style' => 'rounded',
-			],
-			[
-				'id'    => $prefix . 'pl_fullwidth',
-				'type'  => 'switch',
-				'name'  => esc_html__( 'Display fullwidth videos ?', 'waff' ),
-				'desc' => esc_html__( 'Diplayed in thumbnails by default.', 'waff' ),
-				'style' => 'rounded',
-			],
-		],
-		'category'       => 'layout',
-		// 'icon'           => 'video-alt3',
-		'icon'            => [
-            'foreground' 	=> '#9500ff',
-			'src' 			=> 'video-alt3',
-		],
-		'description'     => esc_html__( 'Display a video playlist block ( better with youtube )', 'waff' ),
-		'keywords'       => ['video', 'youtube', 'playlist', 'film'],
-		'supports'       => [
-			'anchor'          => true,
-			'customClassName' => true,
-			'align'           => ['wide', 'full'],
-		],
-		//'render_code'    => '{{Twix}}',
-		//'enqueue_style'  => 'customCSS',
-		//'enqueue_script' => 'CustomJS',
-		//'enqueue_assets' => 'CustomCallback',
-		'render_callback' => 'WaffTwo\Blocks\wa_playlist_callback',
-		'type'           => 'block',
-		'context'        => 'side',
-		//'Keyattrs'       => 'Value',
-	];
-
 	// WA Film
+	if( true === WAFF_ISFILM_VERSION )
 	$meta_boxes[] = [
 		'title'           => esc_html__( '(WA) Film', 'waff' ),
 		'id'              => 'wa-film',
@@ -591,6 +594,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	];
 
 	// WA Section
+	if( true === WAFF_ISFILM_VERSION )
 	$meta_boxes[] = [
 		'title'           => esc_html__( '(WA) Section', 'waff' ),
 		'id'              => 'wa-section',
@@ -654,7 +658,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		//'key'       	  => 'value',
 	];
 
-	// WA Sections
+	// WA Sections list
+	if( true === WAFF_ISFILM_VERSION )
 	$meta_boxes[] = [
 		'title'          => esc_html__( '(WA) Sections list', 'waff' ),
 		'id'             => 'wa-sections',
@@ -1231,13 +1236,13 @@ function wa_partners_callback( $attributes, $is_preview = false, $post_id = null
 								<figure title="<?php echo esc_attr($featured_img_description); ?>">
 									<picture class="lazy">
 									<!-- Breakpoint : xl -->
-									<data-src media="(min-width: 1200px)"
+									<data-src media="(min-width: 767px)"
 											srcset="<?= $featured_img_urls['medium_large']; ?>" type="image/jpeg"></data-src>
 									<!-- Breakpoint : lg -->
-									<data-src media="(min-width: 990px)"
+									<data-src media="(min-width: 299px)"
 											srcset="<?= $featured_img_urls['medium']; ?>" type="image/jpeg"></data-src>
 									<!-- Breakpoint : sm -->
-									<data-src media="(min-width: 576px)"
+									<data-src media="(min-width: 149px)"
 											srcset="<?= $featured_img_urls['partenaire-featured-image']; ?>" type="image/jpeg"></data-src>
 									<data-img src="<?= $featured_img_urls['partenaire-featured-image']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
 									</picture>
@@ -1702,6 +1707,7 @@ function wa_awards_get_films( $films, $master = true ) {
 			$featured_img_urls = array();
 			if ( has_post_thumbnail($f_id) ) { 
 				$post_featured_sizes = array(
+					'thumbnail',
 					'post-featured-image-s', 
 					'post-featured-image-s-x2',
 					'post-featured-image-m', 
@@ -1720,10 +1726,10 @@ function wa_awards_get_films( $films, $master = true ) {
 				// Render image 
 				$f_image = sprintf('<figure class="w-100 %s fit-image" %s>
 						<picture class="lazy">
-						<data-src media="(min-width: 590px)"
+						<data-src media="(min-width: 399px)"
 								srcset="%s 2x,
 										%s" type="image/jpeg"></data-src>
-						<data-src media="(min-width: 380px)"
+						<data-src media="(min-width: 149px)"
 								srcset="%s 2x,
 										%s" type="image/jpeg"></data-src>
 						<data-img src="%s" class="w-100 img-fluid %s fit-image" alt="%s"></data-img>
@@ -1732,11 +1738,11 @@ function wa_awards_get_films( $films, $master = true ) {
 					</figure>',
 					($master == true)?'h-340-px':'h-200-px',
 					( $featured_img_description )?'title="'.esc_html($featured_img_description).'"':'title="'.esc_html($f_title).'"',
-					$featured_img_urls['post-featured-image-m-x2'],
-					$featured_img_urls['post-featured-image-m'],
 					$featured_img_urls['post-featured-image-s-x2'],
 					$featured_img_urls['post-featured-image-s'],
-					$featured_img_urls['post-featured-image-s'],
+					$featured_img_urls['post-featured-image-xs-x2'],
+					$featured_img_urls['post-featured-image-xs'],
+					$featured_img_urls['thumbnail'],
 					($master == true)?'h-340-px':'h-200-px',
 					( $featured_img_caption )?esc_html($featured_img_caption):esc_html($f_title),
 					( $featured_img_caption || $featured_img_description )?'<figcaption><strong>© '. esc_html($featured_img_caption) .'</strong> '. esc_html($featured_img_description) .'</figcaption>':'',
