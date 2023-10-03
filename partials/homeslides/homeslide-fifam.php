@@ -37,8 +37,31 @@ $slide_colors 		= array();
 				    	$slide_id 		= $post->ID;
 				    	$mode 			= rwmb_meta( $prefix . 'slide_mode' , array(), $slide_id);
 				    	$mode 			= ($mode=='dark')?'contrast--dark':'contrast--light';
-						$featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');
-						$slide_images[$slide_nb] = array( 'full' => $featured_img_url );
+						// BEGIN Fix full sizes from #43 
+						// Post Thumbnail
+						$featured_img_urls = array();
+						$homeslide_image_sizes = array( 
+							'homeslide-featured-image', 
+							'homeslide-featured-image-x2',
+							'homeslide-featured-image-m', 
+							'homeslide-featured-image-m-x2',
+							'homeslide-featured-image-s', 
+							'homeslide-featured-image-s-x2',
+						); 		
+						$selected_featured_sizes = $homeslide_image_sizes;
+						if ( has_post_thumbnail($post) ) {  //is_singular() &&
+							$featured_img_id     		= get_post_thumbnail_id($post);
+							$featured_img_url_full 		= get_the_post_thumbnail_url($post);
+							foreach ($selected_featured_sizes as $size) {
+								$featured_img_url = wp_get_attachment_image_src( $featured_img_id, $size ); // OK
+								$featured_img_urls[$size] = ( !empty($featured_img_url[0]) )?$featured_img_url[0]:$featured_img_url_full; 
+							}
+						}
+						$featured_img_caption = $post->post_title;
+
+						//$slide_images[$slide_nb] = array( 'full' => $featured_img_url_full, 'post-featured-image-s' => $s, 'post-featured-image-m' => $m, 'post-featured-image' => $x );
+						$slide_images[$slide_nb] = $featured_img_urls;
+						// END Fix full sizes from #43
 				    	$videos 		= rwmb_meta( $prefix . 'video' , array('limit' => 1), $slide_id);
 						$video 			= reset($videos);
 					?>
@@ -56,44 +79,45 @@ $slide_colors 		= array();
 
 				</div>
 
-				<style scoped>
-						/*S = 798x755 */
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					@media (min-resolution: 192dpi) {
-					    /*Sx2 = 1596x1510 */
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					}
-					
-					@media (min-width: 769px) {
-					    /*M = 1400x1325 */
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					}
-					@media (min-width: 769px) and (min-resolution: 192dpi) {
-					    /*Mx2 = 2800x2650 */
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					}
-					
-					@media (min-width: 1400px) {
-					    /*XL = 1960x1855*/
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					}
-					@media (min-width: 1400px) and (min-resolution: 192dpi) {
-					    /*XLx2 = 3920x3710 */
-						<?php foreach ($slide_images as $slide => $image) : ?>
-						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['full']; ?>') }
-						<?php endforeach; ?>
-					}
-				</style>		
+				<!-- Images sources-->
+				<style scoped type="text/css">
+					/*S = 798x755 */
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s']; ?>') }
+					<?php endforeach; ?>
+				@media (min-resolution: 192dpi) {
+					/*Sx2 = 1596x1510 */
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s-x2']; ?>') }
+					<?php endforeach; ?>
+				}
+				
+				@media (min-width: 769px) {
+					/*M = 1400x1325 */
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m']; ?>') }
+					<?php endforeach; ?>
+				}
+				@media (min-width: 769px) and (min-resolution: 192dpi) {
+					/*Mx2 = 2800x2650 */
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m-x2']; ?>') }
+					<?php endforeach; ?>
+				}
+				
+				@media (min-width: 1400px) {
+					/*XL = 1960x1855*/
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image']; ?>') }
+					<?php endforeach; ?>
+				}
+				@media (min-width: 1400px) and (min-resolution: 192dpi) {
+					/*XLx2 = 3920x3710 */
+					<?php foreach ($slide_images as $slide => $image) : ?>
+					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-x2']; ?>') }
+					<?php endforeach; ?>
+				}
+			</style>	
 					
 			</div>
 			<div class="col-lg-5 col-xl-3 order-1 order-lg-2" data-aos="fade-down">
