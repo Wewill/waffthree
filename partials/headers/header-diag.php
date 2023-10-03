@@ -1,5 +1,8 @@
 <?php
 
+//DEBUG
+echo ((true === WAFF_DEBUG)?'<code> ##HEADER</code>':'');
+
 // Every passed args
 //var_dump( $args );  
 
