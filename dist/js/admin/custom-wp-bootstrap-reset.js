@@ -261,7 +261,7 @@
 		'coblocks/social-profiles', 
 		'coblocks/counter',
 		'core/calendar',
-		'core/html',
+		//'core/html', #43
 		'core/latest-comments',
 		'core/page-list',
 		'core/rss',

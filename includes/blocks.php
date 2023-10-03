@@ -2979,6 +2979,7 @@ core-embed/wordpress-tv
 */
 
 function waff_allowed_block_types( $allowed_block_types, $post ) {
+	/* OLD WAY > use JS now */
 
 	print_r($post->post_type);
 	print_r($allowed_block_types);
@@ -3007,6 +3008,7 @@ function waff_allowed_block_types( $allowed_block_types, $post ) {
 		'core/cover',
 		'core/file',
 		'core/video',
+		'core/html', // Added #43
 
 		// Embed 
 		'core/embed',
