@@ -533,7 +533,7 @@ function waff_social_links_icons() {
 /**
   * Returns social menu 
 */
-function waff_get_social_menu($colorclass = 'color-white') {
+function waff_get_social_menu($colorclass = 'color-white color-light') {
 	return ( preg_replace( '/(<a )/', '<a class="link mx-2 '.$colorclass.'" ', strip_tags( wp_nav_menu(
 		array(
 			'theme_location' => 'social',
@@ -561,7 +561,7 @@ function waff_get_social_menu($colorclass = 'color-white') {
 /**
  * Returns Edition badge
  */
-function waff_get_edition_badge($colorclass = 'color-black') {
+function waff_get_edition_badge($colorclass = 'color-black color-dark') {
 	return sprintf('
 		<!-- Edition badge -->
 		<div class="text-center w-100-px d-block position-relative %s">
