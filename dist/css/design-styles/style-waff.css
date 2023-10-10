@@ -338,7 +338,8 @@ button.navbar-toggler {
 	/*margin-top: 0;*/
 }
 
-.single-jury .entry-content > :first-child {
+.single-jury .entry-content > :first-child,
+.single-projection .entry-content > :first-child {
 	margin-top: 0;
 }
 
