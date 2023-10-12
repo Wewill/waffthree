@@ -95,13 +95,13 @@
   content: "\41";
 }
 .icon-brochure:before {
-  content: "\e000";
+  content: "\42";
 }
 .icon-prev:before {
-  content: "\e001";
+  content: "\3c";
 }
 .icon-next:before {
-  content: "\e002";
+  content: "\3e";
 }
 .icon-up:before {
   content: "\e003";
@@ -116,7 +116,7 @@
   /*line-height: 0.1; Removed #42 since issue in related films UI */
 }
 .icon-left:before {
-  content: "\e005";
+  content: "\23";
   font-size: 3em;
   vertical-align: middle;
   line-height: 0.1;
@@ -142,47 +142,47 @@
   content: "\62";
 }
 .icon-right-light:before {
-  content: "\e00c";
+  content: "\22";
 }
 .icon-left-light:before {
-  content: "\e00d";
+  content: "\27";
 }
 .icon-pin:before {
-  content: "\e00e";
+  content: "\72";
 }
 .icon-play:before {
   content: "\70";
 }
 .icon-download:before {
-  content: "\e010";
+  content: "\44";
 }
 .icon-down-right-light:before {
-  content: "\e011";
+  content: "\28";
   font-size: 65%;
 }
 .icon-down-left-light:before {
-  content: "\e012";
+  content: "\29";
 }
 .icon-right:before {
-  content: "\e013";
+  content: "\2a";
   font-size: 3em;
   vertical-align: middle;
   line-height: 0.1;
 }
 .icon-unlimited:before {
-  content: "\e016";
+  content: "\49";
 }
 .icon-ticket:before {
   content: "\54";
 }
 .icon-mouse:before {
-  content: "\e014";
+  content: "\53";
 }
 .icon-flag:before {
   content: "\66";
 }
 .icon-quote:before {
-  content: "\e018";
+  content: "\51";
 }
 .icon-plus:before {
   content: "\2b";
@@ -197,4 +197,34 @@
 }
 .icon-mic-alt:before {
   content: "\4d";
+}
+.icon-gratuit:before {
+  content: "\31";
+}
+.icon-special:before {
+  content: "\32";
+}
+.icon-vo:before {
+  content: "\56";
+}
+.icon-avantpremiere:before {
+  content: "\35";
+}
+.icon-premiereint:before {
+  content: "\36";
+}
+.icon-premierefr:before {
+  content: "\37";
+}
+.icon-premiere-1:before {
+  content: "\38";
+}
+.icon-vosta-2:before {
+  content: "\4f";
+}
+.icon-premiere:before {
+  content: "\39";
+}
+.icon-premiere-2:before {
+  content: "\30";
 }
