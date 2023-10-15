@@ -243,21 +243,22 @@ class WP_Widget_Programmation extends WP_Widget {
 					$f_title 					= (( get_the_title($f_id) )?get_the_title($f_id):'');
 					$f_french_operating_title 	= get_post_meta( $f_id, 'wpcf-f-french-operating-title', true );
 					$f_movie_length 			= get_post_meta( $f_id, 'wpcf-f-movie-length', true );
-					$f_country 					= get_post_meta( $f_id, 'wpcf-f-country', true ); //#43
-					$f_co_production_country 	= get_post_meta( $f_id, 'wpcf-f-co-production-country', false ); //#43
+					$f_country_ 				= get_post_meta( $f_id, 'wpcf-f-country', true ); //#43
+					$f_co_production_country_ 	= get_post_meta( $f_id, 'wpcf-f-co-production-country', true ); //#43
 					$f_author 					= get_post_meta( $f_id, 'wpcf-f-author', true ); //#43
 					$f_production_year 			= get_post_meta( $f_id, 'wpcf-f-production-year', true ); //#43
 
-					echo $f_premiere 				= get_post_meta( $f_id, 'wpcf-f-premiere', true ); //#43
-					echo $f_catalog_tag 			= get_post_meta( $f_id, 'wpcf-f-catalog-tag', true ); //#43
+					$f_premiere_ 				= get_post_meta( $f_id, 'wpcf-f-premiere', true ); //#43
+					$f_catalog_tag_ 			= get_post_meta( $f_id, 'wpcf-f-catalog-tag', true ); //#43
 					$f_available_formats 		= get_post_meta( $f_id, 'wpcf-f-available-formats', true ); //#43
-
-					print_r($f_available_formats,true);
 
 					$f_poster 					= get_post_meta( $f_id, 'wpcf-f-film-poster', true ); //#43
 
+					$f_country 					= types_render_field( 'f-country', array('item' => $f_id) ); //#43
 					$f_co_production_country 	= types_render_field( 'f-co-production-country', array('item' => $f_id) ); //#43
-
+					
+					$f_premiere 				= types_render_field( 'f-premiere', array('item' => $f_id) ); //#43
+					$f_catalog_tag 				= types_render_field( 'f-catalog-tag', array('item' => $f_id) ); //#43
 
 					$f_poster 						= get_post_meta( $f_id, 'wpcf-f-film-poster', true ); //#43
 					$f_poster_id 					= WaffTwo\Core\waff_get_image_id_by_url($f_poster);
@@ -308,6 +309,8 @@ class WP_Widget_Programmation extends WP_Widget {
 						'f_poster_img' 						=> $f_poster_img, //#43
 						'f_premiere' 						=> $f_premiere, //#43
 						'f_catalog_tag' 					=> $f_catalog_tag, //#43
+						'f_premiere_' 						=> $f_premiere_, //#43
+						'f_catalog_tag_' 					=> $f_catalog_tag_, //#43
 						'f_available_formats' 				=> $f_available_formats, //#43
 					);
 
@@ -418,8 +421,8 @@ class WP_Widget_Programmation extends WP_Widget {
 												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="En présence de • <strong>'.$the_day_room_projections['p_e_guest_contact'].'</strong>"></i>'; 
 												if ( $the_day_room_projections['p_is_debate'] != '' ) 		$html_f_tags .= ' <i class="icon icon-mic" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Séance avec débat"></i>'; 
 												if ( $the_day_room_projections['p_highlights'] != '' )		$html_f_tags .= ' <i class="icon icon-sun" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Temps-fort"></i>'; 
-												if ( $the_day_room_projections['f_premiere'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
-												if ( $the_day_room_projections['f_catalog_tag'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
+												if ( $the_day_room_projections['f_premiere_'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
+												if ( $the_day_room_projections['f_catalog_tag_'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
 												
 												// Formats 
 												//print_r($the_day_room_projections['f_available_formats']);
