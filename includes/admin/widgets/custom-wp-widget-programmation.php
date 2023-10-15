@@ -418,17 +418,26 @@ class WP_Widget_Programmation extends WP_Widget {
 												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="En présence de • <strong>'.$the_day_room_projections['p_e_guest_contact'].'</strong>"></i>'; 
 												if ( $the_day_room_projections['p_is_debate'] != '' ) 		$html_f_tags .= ' <i class="icon icon-mic" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Séance avec débat"></i>'; 
 												if ( $the_day_room_projections['p_highlights'] != '' )		$html_f_tags .= ' <i class="icon icon-sun" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Temps-fort"></i>'; 
-												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
-												if ( $the_day_room_projections['f_premiere'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
-												if ( $the_day_room_projections['f_catalog_tag'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
+												if ( $the_day_room_projections['f_premiere'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
+												if ( $the_day_room_projections['f_catalog_tag'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
 												
 												// Formats 
-												if ( $the_day_room_projections['f_available_formats'] != '' ) {
-													$format = $the_day_room_projections['f_available_formats'][0];
-													if ($format['vost'] == 'en' && $format['vost'] != '') {
-														$html_f_tags .= ' <i class="icon icon-vo text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="VOSTA"></i>'; 
+												//print_r($the_day_room_projections['f_available_formats']);
+												if ( !empty($the_day_room_projections['f_available_formats']) ) {
+													//$format = $the_day_room_projections['f_available_formats'][0];
+													$format = $the_day_room_projections['f_available_formats'];
+
+													if ($format['vost'] == 'en' && $format['vost'] != '' && $format['vost'] != 'N/A') {
+														$html_f_tags .= ' <i class="icon icon-vosta text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="VOSTA"></i>'; 
+													}
+
+													if ($format['vo'] != '' && $format['vo'] != 'N/A') {
+														$html_f_tags .= ' <i class="icon icon-vo text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="VO"></i> <span class="article text-action-3" style="line-height:1;">' . strtoupper($format['vo']) . '</span>'; 
 													}
 												}
+
+												// Tag
+												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
 
 												// 'p_is_guest' 						=> $p_is_guest,
 												// 'p_e_guest_contact' 					=> $p_e_guest_contact, //9
@@ -563,7 +572,7 @@ class WP_Widget_Programmation extends WP_Widget {
 							</div>
 						</div>
 						<div class="modal-body d-flex align-items-center justify-content-center" style="position: relative;overflow-x: hidden;overflow-y: scroll;height: 100%;" id="">
-							<p>#<?= print_r(var_dump(empty(array_intersect($allowed_roles, $user->roles ))),true) . $text ?></p>
+							<p><?= $text ?></p>
 						</div>
 						<div class="modal-footer">
 						<button type="button" class="btn btn-action-1"><?= esc_html__( 'View archives', 'waff' ) ?></button>

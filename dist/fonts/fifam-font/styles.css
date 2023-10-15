@@ -90,9 +90,13 @@
 }
 .icon-vonst:before {
   content: "\4e";
+  top: -2px;
+  position: relative;
 }
 .icon-vosta:before {
   content: "\41";
+  top: -2px;
+  position: relative;
 }
 .icon-brochure:before {
   content: "\42";
@@ -206,6 +210,8 @@
 }
 .icon-vo:before {
   content: "\56";
+  top: -2px;
+  position: relative;
 }
 .icon-avantpremiere:before {
   content: "\35";
@@ -221,6 +227,8 @@
 }
 .icon-vosta-2:before {
   content: "\4f";
+  top: -2px;
+  position: relative;
 }
 .icon-premiere:before {
   content: "\39";
