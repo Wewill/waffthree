@@ -150,7 +150,7 @@ class WP_Widget_Programmation extends WP_Widget {
 					<div class="modal-content bg-transparent border-0 rounded-0 color-light text-white" style="overflow: hidden;height: 100vh; position: relative;">
 						<div class="modal-header sticky-top container-fluid">
 							<div class="row g-0 align-items-center">
-								<div class="col-md-5 col-lg-7 d-none d-md-block">
+								<div class="col-md-5 col-lg-7 d-none d-md-block"> <!-- ICI Deplacer -->
 									<a class="close-icon color-light lead ml-5" data-dismiss="modal" aria-label="Close">
 										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
@@ -211,7 +211,7 @@ class WP_Widget_Programmation extends WP_Widget {
 					$p_start_and_stop_time_raw = get_post_meta( $id, 'wpcf-p-start-and-stop-time', true );
 					$p_start_and_stop_time__begin = get_post_meta( $id, 'wpcf-p-start-and-stop-time__begin', true );
 					$p_is_guest 			= types_render_field( 'p-is-guest', array() );
-					$p_e_guest_contact 		= types_render_field( 'p-e-guest-contact', array() );
+					$p_e_guest_contact 		= types_render_field( 'p-e-guest-contact', array('item' => $id) );
 					$p_e_guest_contact_raw  = get_post_meta( $id, 'wpcf-p-e-guest-contact', false );
 					$p_is_debate 			= types_render_field( 'p-is-debate', array() ); //#43
 					$p_young_public 		= types_render_field( 'p-young-public', array() );
@@ -346,7 +346,7 @@ class WP_Widget_Programmation extends WP_Widget {
 
 						printf('<!-- Day -->
 						<div class="row g-0 mb-4">
-							<div class="col-md-5 col-day bg-color-gray p-6">
+							<div class="col-md-2 col-day bg-color-gray p-6">
 								<a class="scrollspy text-white" id="day%d" data-count="%d" data-ts="%d">
 									<span class="subline-4">%s</span>
 									<span class="display-1 d-block mt-3">%s</span>
@@ -360,7 +360,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						);
 
 						print('<!-- Rooms -->
-							<div class="col-md-7 p-0">');
+							<div class="col-md-10 p-0">');
 
 						// Rooms
 						foreach($the_day['rooms'] as $key => $the_day_rooms) {
