@@ -489,7 +489,7 @@ class WP_Widget_Programmation extends WP_Widget {
 												);*/
 
 												// Print film
-												printf('<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
+												printf('
 												<dd class="col-10 mb-3" data-p-id="%d">
 													<p class="length"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p>
@@ -504,11 +504,9 @@ class WP_Widget_Programmation extends WP_Widget {
 														%s
 														%s
 													</p>
-												</dd><hr class="bg-layoutcolor op-1 d-none"/>',
-												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-2',
-												esc_attr( $the_day_room_projections['p_id'] ),
-												get_permalink( $the_day_room_projections['f_id'] ),
-												$the_day_room_projections['f_poster_img'],
+												</dd>
+												<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
+												<hr class="--bg-light op-1 %s"/>',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['end'] ),
@@ -522,7 +520,13 @@ class WP_Widget_Programmation extends WP_Widget {
 												(( $the_day_room_projections['f_production_year'] != '' )?'・ <span class="year muted">'.$the_day_room_projections['f_production_year'].'</span>':''),
 												(( $the_day_room_projections['f_movie_length'] != '' )?'・ <span class="length">'.$the_day_room_projections['f_movie_length'].'\'</span>':''),
 												$html_f_section,
-												$html_f_tags
+												$html_f_tags,
+												//
+												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-2',
+												esc_attr( $the_day_room_projections['p_id'] ),
+												get_permalink( $the_day_room_projections['f_id'] ),
+												$the_day_room_projections['f_poster_img'],
+												($key == count($the_day_room['projections'])-1)?'d-none':''
 												);
 												
 
