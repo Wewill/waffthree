@@ -150,14 +150,14 @@ class WP_Widget_Programmation extends WP_Widget {
 					<div class="modal-content bg-transparent border-0 rounded-0 color-light text-white" style="overflow: hidden;height: 100vh; position: relative;">
 						<div class="modal-header sticky-top container-fluid">
 							<div class="row g-0 align-items-center">
-								<div class="col-md-5 col-lg-7 d-none d-md-block"> <!-- ICI Deplacer -->
+								<div class="col-md-2 --col-md-5 --col-lg-7 d-none d-md-block"> <!-- ICI Deplacer -->
 									<a class="close-icon color-light lead ml-5" data-dismiss="modal" aria-label="Close">
 										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
 										</svg>
 									</a>
 								</div>
-								<div class="col-md-7 col-lg-5 p-0 col-days order-1">
+								<div class="col-md-10 --col-md-7 --col-lg-5 p-0 col-days order-1">
 									<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
 										<div class="p-2"><a class="prog-title headline" data-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
 									</div>
@@ -211,8 +211,9 @@ class WP_Widget_Programmation extends WP_Widget {
 					$p_start_and_stop_time_raw = get_post_meta( $id, 'wpcf-p-start-and-stop-time', true );
 					$p_start_and_stop_time__begin = get_post_meta( $id, 'wpcf-p-start-and-stop-time__begin', true );
 					$p_is_guest 			= types_render_field( 'p-is-guest', array() );
-					$p_e_guest_contact 		= types_render_field( 'p-e-guest-contact', array('item' => $id) );
-					$p_e_guest_contact_raw  = get_post_meta( $id, 'wpcf-p-e-guest-contact', false );
+					$p_e_guest_contact 		= types_render_field( 'p-e-guest-contact', array() ); // 'item' => $id not needed // Issued since #43
+					$p_e_guest_contact_raw  = get_post_meta( $id, 'wpcf-p-e-guest-contact', false ); // Working #43
+					$p_guest_name 			= types_render_field( 'p-guest-name', array() );
 					$p_is_debate 			= types_render_field( 'p-is-debate', array() ); //#43
 					$p_young_public 		= types_render_field( 'p-young-public', array() );
 					$p_highlights 			= types_render_field( 'p-highlights', array() );
@@ -288,6 +289,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						'p_is_guest' 						=> $p_is_guest,
 						'p_e_guest_contact' 				=> $p_e_guest_contact, //9
 						'p_e_guest_contact_raw' 			=> $p_e_guest_contact_raw,
+						'p_guest_name' 						=> $p_guest_name, //#43
 						'p_is_debate' 						=> $p_is_debate, //#43
 						'p_young_public' 					=> $p_young_public,
 						'p_highlights' 						=> $p_highlights,
@@ -417,8 +419,22 @@ class WP_Widget_Programmation extends WP_Widget {
 												$html_f_tags = '';
 												// var_dump( $the_day_room_projections['p_young_public'] );
 
+												// Contact list for guests 
+												$contact_list = '';
+												if ( $the_day_room_projections['p_guest_name'] != '')
+													$contact_list = '<strong>' . $the_day_room_projections['p_guest_name'] . '</strong> › ';
+
+												if ( !empty($the_day_room_projections['p_e_guest_contact_raw']) && $the_day_room_projections['p_e_guest_contact_raw'][0] != '' )
+													foreach($the_day_room_projections['p_e_guest_contact_raw'] as $key => $c_id) {
+														$c_firstname = get_post_meta( $c_id, 'wpcf-c-firstname', true );
+														$c_lastname = get_post_meta( $c_id, 'wpcf-c-name', true );
+														$c_surname = get_post_meta( $c_id, 'wpcf-c-surname', true );
+														$contact_list .= (($c_surname!='')?$c_surname:$c_firstname . ' <strong>' . $c_lastname . '</strong>') . (($key != count($the_day_room_projections['p_e_guest_contact_raw'])-1 )?', ':'');
+													}
+												
+												// Icons 
 												if ( $the_day_room_projections['p_young_public'] != '' ) 	$html_f_tags .= ' <i class="icon icon-young" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Parents-enfants"></i>'; 
-												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="En présence de • <strong>'.$the_day_room_projections['p_e_guest_contact'].'</strong>"></i>'; 
+												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="<em>En présence de</em> ・ '.esc_html( $contact_list ).'"></i>'; 
 												if ( $the_day_room_projections['p_is_debate'] != '' ) 		$html_f_tags .= ' <i class="icon icon-mic" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Séance avec débat"></i>'; 
 												if ( $the_day_room_projections['p_highlights'] != '' )		$html_f_tags .= ' <i class="icon icon-sun" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Temps-fort"></i>'; 
 												if ( $the_day_room_projections['f_premiere_'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
@@ -439,7 +455,7 @@ class WP_Widget_Programmation extends WP_Widget {
 													}
 												}
 
-												// Tag
+												// Projection tag
 												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
 
 												// 'p_is_guest' 						=> $p_is_guest,
@@ -473,7 +489,7 @@ class WP_Widget_Programmation extends WP_Widget {
 												);*/
 
 												// Print film
-												printf('<dt class="col-2 mb-2" data-p-id="%d"><a href="%s">%s</a></dt>
+												printf('<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
 												<dd class="col-10 mb-3" data-p-id="%d">
 													<p class="length"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p>
@@ -488,7 +504,8 @@ class WP_Widget_Programmation extends WP_Widget {
 														%s
 														%s
 													</p>
-												</dd><hr class="bg-layoutcolor --op-1"/>',
+												</dd><hr class="bg-layoutcolor op-1"/>',
+												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-2',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												get_permalink( $the_day_room_projections['f_id'] ),
 												$the_day_room_projections['f_poster_img'],

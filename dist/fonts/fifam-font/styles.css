@@ -214,8 +214,8 @@
 }
 .icon-vo:before {
   content: "\56";
-  top: -2px;
-  position: relative;
+  top: 1px; /*#43*/
+  position: relative; /*#43*/
 }
 .icon-avantpremiere:before {
   content: "\35";
