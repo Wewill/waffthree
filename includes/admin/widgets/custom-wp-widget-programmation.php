@@ -381,7 +381,7 @@ class WP_Widget_Programmation extends WP_Widget {
 										
 										printf('<!-- Room  -->
 										<div class="d-flex flex-column flex-lg-row w-100">
-											<div class="col-room bg-color-dark p-6">
+											<div class="col-md-3 col-room bg-color-dark px-6 py-4 pt-4 pb-2">
 												<div class="room-list">
 													<a href="%s" class="room-item">%s</a>
 													<a href="%s" class="parentroom-item %s">%s</a>
@@ -394,7 +394,7 @@ class WP_Widget_Programmation extends WP_Widget {
 											(($the_day_rooms['name'])?esc_html($the_day_rooms['name']):'ERROR')
 										);
 
-										print('<!-- Film --><div class="col-films bg-light p-6 text-black text-dark color-dark">
+										print('<!-- Film --><div class="col-md-9 col-films bg-light px-6 py-4 pt-4 pb-2 text-black text-dark color-dark">
 													<dl class="row">');
 										// Film 
 										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
@@ -504,7 +504,7 @@ class WP_Widget_Programmation extends WP_Widget {
 														%s
 														%s
 													</p>
-												</dd><hr class="bg-layoutcolor op-1"/>',
+												</dd><hr class="bg-layoutcolor op-1 d-none"/>',
 												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-2',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												get_permalink( $the_day_room_projections['f_id'] ),
