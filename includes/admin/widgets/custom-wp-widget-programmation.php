@@ -219,6 +219,7 @@ class WP_Widget_Programmation extends WP_Widget {
 					$p_highlights 			= types_render_field( 'p-highlights', array() );
 					$p_translator 			= types_render_field( 'p-translator', array() );
 					$p_tag 					= types_render_field( 'p-tag', array() );
+					$p_hide_projection_title= types_render_field( 'p-hide-projection-title', array() ); //#43
 
 					// Get terms
 					$p_rooms 				= get_the_terms( $id, 'room' );
@@ -244,20 +245,17 @@ class WP_Widget_Programmation extends WP_Widget {
 					$f_title 					= (( get_the_title($f_id) )?get_the_title($f_id):'');
 					$f_french_operating_title 	= get_post_meta( $f_id, 'wpcf-f-french-operating-title', true );
 					$f_movie_length 			= get_post_meta( $f_id, 'wpcf-f-movie-length', true );
-					$f_country_ 				= get_post_meta( $f_id, 'wpcf-f-country', true ); //#43
-					$f_co_production_country_ 	= get_post_meta( $f_id, 'wpcf-f-co-production-country', true ); //#43
 					$f_author 					= get_post_meta( $f_id, 'wpcf-f-author', true ); //#43
 					$f_production_year 			= get_post_meta( $f_id, 'wpcf-f-production-year', true ); //#43
+					$f_available_formats 		= get_post_meta( $f_id, 'wpcf-f-available-formats', true ); //#43
+
+					$f_country_ 				= get_post_meta( $f_id, 'wpcf-f-country', true ); //#43
+					$f_co_production_country_ 	= get_post_meta( $f_id, 'wpcf-f-co-production-country', true ); //#43
+					$f_country 					= types_render_field( 'f-country', array('item' => $f_id) ); //#43
+					$f_co_production_country 	= types_render_field( 'f-co-production-country', array('item' => $f_id) ); //#43
 
 					$f_premiere_ 				= get_post_meta( $f_id, 'wpcf-f-premiere', true ); //#43
 					$f_catalog_tag_ 			= get_post_meta( $f_id, 'wpcf-f-catalog-tag', true ); //#43
-					$f_available_formats 		= get_post_meta( $f_id, 'wpcf-f-available-formats', true ); //#43
-
-					$f_poster 					= get_post_meta( $f_id, 'wpcf-f-film-poster', true ); //#43
-
-					$f_country 					= types_render_field( 'f-country', array('item' => $f_id) ); //#43
-					$f_co_production_country 	= types_render_field( 'f-co-production-country', array('item' => $f_id) ); //#43
-					
 					$f_premiere 				= types_render_field( 'f-premiere', array('item' => $f_id) ); //#43
 					$f_catalog_tag 				= types_render_field( 'f-catalog-tag', array('item' => $f_id) ); //#43
 
@@ -295,6 +293,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						'p_highlights' 						=> $p_highlights,
 						'p_translator' 						=> $p_translator,
 						'p_tag' 							=> $p_tag,
+						'p_hide_projection_title' 			=> $p_hide_projection_title, //#43
 						'p_has_film' 						=> $has_film,
 						'p_count_connections' 				=> $count_connections,
 						'p_connections' 					=> $connections, // 0
@@ -368,7 +367,6 @@ class WP_Widget_Programmation extends WP_Widget {
 						foreach($the_day['rooms'] as $key => $the_day_rooms) {
 							if ( array_key_exists('has_films', $the_day_rooms) && $the_day_rooms['has_films'] === true ) {
 							
-
 								// Room 
 								foreach($the_day_rooms['room'] as $key => $the_day_room) {
 
@@ -458,35 +456,83 @@ class WP_Widget_Programmation extends WP_Widget {
 												// Projection tag
 												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
 
-												// 'p_is_guest' 						=> $p_is_guest,
-												// 'p_e_guest_contact' 					=> $p_e_guest_contact, //9
-												// 'p_e_guest_contact_raw' 				=> $p_e_guest_contact_raw,
-												// 'p_young_public' 					=> $p_young_public,
-												// 'p_highlights' 						=> $p_highlights,
-												// 'p_translator' 						=> $p_translator,
-												// 'p_tag' 								=> $p_tag,
-
-												// Print film
-												/*printf('<dt class="col-2" data-p-id="%d"><p class="length" data-p-begin="%s">%s</p></dt>
-												<dd class="col-10" data-p-id="%d">
-													<p>
-														<a href="%s" class="%s">%s</a>&nbsp;
-														%s
-														%s
-														%s
-													</p>
-												</dd>',
-												esc_attr( $the_day_room_projections['p_id'] ),
-												esc_html( $the_day_room_projections['p_start_and_stop_time__begin'] ),
-												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
-												esc_attr( $the_day_room_projections['p_id'] ),
-												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?get_permalink( $the_day_room_projections['p_id'] ):get_permalink( $the_day_room_projections['f_id'] )),
-												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
-												esc_html(( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']).(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?' <i class="icon icon-down-right-light ml-2 ms-2"></i>':''),
-												(( $the_day_room_projections['f_movie_length'] != '' )?'<span class="length">'.$the_day_room_projections['f_movie_length'].'\'</span>':''),
-												$html_f_section,
-												$html_f_tags
-												);*/
+												// Get films to create programs 
+												// > see waff_functions
+												if ( function_exists('func_get_programs') && $the_day_room_projections['p_id'] ) {
+													$program = '';
+													$program_length = 0;
+													$films = func_get_programs(array('output' => 'array'), '', '', $the_day_room_projections['p_id']);
+													if ( !empty($films) )
+														foreach( $films as $k => $p_f_id ) {
+															$p_f_title 						= (( get_the_title($p_f_id) )?get_the_title($p_f_id):'');
+															$p_f_french_operating_title 	= get_post_meta( $p_f_id, 'wpcf-f-french-operating-title', true );
+															$p_f_movie_length 				= get_post_meta( $p_f_id, 'wpcf-f-movie-length', true );
+															$p_f_author 					= get_post_meta( $p_f_id, 'wpcf-f-author', true ); //#43
+															$p_f_production_year 			= get_post_meta( $p_f_id, 'wpcf-f-production-year', true ); //#43
+															$p_f_available_formats 			= get_post_meta( $p_f_id, 'wpcf-f-available-formats', true ); //#43
+										
+															$p_f_country_ 					= get_post_meta( $p_f_id, 'wpcf-f-country', true ); //#43
+															$p_f_co_production_country_ 	= get_post_meta( $p_f_id, 'wpcf-f-co-production-country', true ); //#43
+															$p_f_country 					= types_render_field( 'f-country', array('item' => $p_f_id) ); //#43
+															$p_f_co_production_country 		= types_render_field( 'f-co-production-country', array('item' => $p_f_id) ); //#43
+										
+															$p_f_premiere_ 					= get_post_meta( $p_f_id, 'wpcf-f-premiere', true ); //#43
+															$p_f_catalog_tag_ 				= get_post_meta( $p_f_id, 'wpcf-f-catalog-tag', true ); //#43
+															$p_f_premiere 					= types_render_field( 'f-premiere', array('item' => $p_f_id) ); //#43
+															$p_f_catalog_tag 				= types_render_field( 'f-catalog-tag', array('item' => $p_f_id) ); //#43
+										
+															$p_f_poster 					= get_post_meta( $p_f_id, 'wpcf-f-film-poster', true ); //#43
+															$p_f_poster_id 					= WaffTwo\Core\waff_get_image_id_by_url($p_f_poster);
+															$p_f_poster_url 				= wp_get_attachment_image_url( $p_f_poster_id, "film-poster" ); // OK
+															$p_f_poster_img 				= wp_get_attachment_image( $p_f_poster_id, "film-poster", "", array( "class" => "img-responsive" ) ); // OK
+										
+															$p_f_featured_img 				= get_the_post_thumbnail( $p_f_id, 'film-poster');
+															$p_f_poster_img					= ( $p_f_poster != '') ? $p_f_poster_img : $p_f_featured_img;
+										
+															// Get terms
+															$p_f_sections 				= get_the_terms( $p_f_id, 'section' );
+															$html_p_f_section = '';
+															$last_p_f_section_color = '';
+															if (is_array($p_f_sections)) foreach($p_f_sections as $p_f_section) {
+																$p_f_section_color = get_term_meta( $p_f_section->term_id, 'wpcf-s-color', true );
+																if ( $p_f_section_color != '' ) $last_p_f_section_color = $p_f_section_color;
+																$p_f_section_edition = get_term_meta( $p_f_section->term_id, 'wpcf-select-edition', true );
+																if ( $current_edition_id == $p_f_section_edition ) // Only current edition sections
+																$html_p_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container=".modal" data-bs-title="%s" data-bs-original-title="" title="">•</a>',
+																get_term_link($p_f_section->slug, 'section'),
+																(( $p_f_section_color != '' )?'style="color: '.$p_f_section_color.';"':''),
+																$p_f_section->name
+																);
+															}																					
+															$program .= sprintf('
+																	<span class="last_f_section_color" %s>
+																		<a href="%s" class="title %s">%s</a>
+																		%s
+																	</span>
+																	%s
+																	%s
+																	%s
+																	%s
+																	%s
+																	<!-- Program sep-->
+																	%s',
+															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''),
+															(( $p_f_title != '' )?get_permalink( $p_f_id ):get_permalink( $p_f_id )),
+															(( $p_f_title != '' )?'text-link btn-link disabled':'text-link'),
+															esc_html(( $p_f_french_operating_title != '' )?$p_f_french_operating_title.' ('.$p_f_title.')':$p_f_title),
+															(( $p_f_author != '' )?'&nbsp;<span class="article">DE</span>&nbsp;<span class="director">'.$p_f_author['lastname'].' '.$p_f_author['firstname'].'</span>':''),
+															(( $p_f_country != '' )?'・ <span class="country">'.$p_f_country.'</span>':''),
+															(( $p_f_co_production_country != '' )?'・ <span class="co_production_country">'.$p_f_co_production_country.'</span>':''),
+															(( $p_f_production_year != '' )?'・ <span class="year muted">'.$p_f_production_year.'</span>':''),
+															(( $p_f_movie_length != '' )?'・ <span class="length">'.$p_f_movie_length.'\'</span>':''),
+															$html_p_f_section,
+															// Program sep 
+															( $k < (count($films)) )?' <span class="sep display h5 bold op-5">+</span> ':'',
+															);
+															$program_length +=  (int) $p_f_movie_length;
+														} // End foreach
+												} // End if func
+												//print_r($films);
 
 												// Print film
 												printf('
@@ -494,13 +540,17 @@ class WP_Widget_Programmation extends WP_Widget {
 													<p class="length"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p>
 														<span class="last_f_section_color" %s>
-															<a href="%s" class="title %s">%s</a>&nbsp;
+															<a href="%s" class="title %s">%s</a>
 															%s
 														</span>
 														%s
 														%s
 														%s
 														%s
+														<!-- Program -->
+														%s
+														%s
+														<!-- Section & tag -->
 														%s
 														%s
 													</p>
@@ -513,12 +563,14 @@ class WP_Widget_Programmation extends WP_Widget {
 												(( $last_f_section_color != '' )?'style="color: '.$last_f_section_color.';"':''),
 												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?get_permalink( $the_day_room_projections['p_id'] ):get_permalink( $the_day_room_projections['f_id'] )),
 												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
-												esc_html(( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']).(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?' <i class="icon icon-down-right-light ml-2 ms-2"></i>':''),
-												(( $the_day_room_projections['f_author'] != '' )?'<span class="article">DE</span>&nbsp;<span class="director">'.$the_day_room_projections['f_author']['lastname'].' '.$the_day_room_projections['f_author']['firstname'].'</span>':''),
+												(( $the_day_room_projections['p_hide_projection_title'] != 1 )?esc_html(( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']).(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?' <i class="icon icon-down-right-light ml-2 ms-2"></i>':''):'' ),
+												(( $the_day_room_projections['f_author'] != '' )?'&nbsp;<span class="article">DE</span>&nbsp;<span class="director">'.$the_day_room_projections['f_author']['lastname'].' '.$the_day_room_projections['f_author']['firstname'].'</span>':''),
 												(( $the_day_room_projections['f_country'] != '' )?'・ <span class="country">'.$the_day_room_projections['f_country'].'</span>':''),
 												(( $the_day_room_projections['f_co_production_country'] != '' )?'・ <span class="co_production_country">'.$the_day_room_projections['f_co_production_country'].'</span>':''),
 												(( $the_day_room_projections['f_production_year'] != '' )?'・ <span class="year muted">'.$the_day_room_projections['f_production_year'].'</span>':''),
 												(( $the_day_room_projections['f_movie_length'] != '' )?'・ <span class="length">'.$the_day_room_projections['f_movie_length'].'\'</span>':''),
+												(( $program != '' )?(($the_day_room_projections['p_hide_projection_title'] != 1)?'— ':'').'<span class="program">'.$program.'</span>':''),
+												(( $program_length != 0 )?'・ <span class="length bold">( '.$program_length.'\' )</span>':''),
 												$html_f_section,
 												$html_f_tags,
 												//
