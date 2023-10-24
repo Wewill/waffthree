@@ -93,14 +93,14 @@
   font-size: 170%;
   vertical-align: middle;
   position: relative;
-  top: 0px;
+  top: -1px;
 }
 .icon-vosta:before {
   content: "\41";
   font-size: 170%;
   vertical-align: middle;
   position: relative;
-  top: 0px;
+  top: -1px;
 }
 .icon-brochure:before {
   content: "\42";
@@ -234,7 +234,7 @@
   font-size: 170%;
   vertical-align: middle;
   position: relative;
-  top: 0px;
+  top: -1px;
 }
 .icon-premiere:before {
   content: "\39";
