@@ -161,7 +161,67 @@ while ( have_posts() ) :
 	// echo('##postid<pre>'); print_r($postid);  echo('</pre>');
 	// echo('##posttype<pre>'); print_r($posttype);  echo('</pre>');
 
+	// ********************
+	// Check if has_film
+	$relationship		= 'film';
+	$forposttype 		= 'projection';
+	$identification 	= 'film_projection'; // > Toolset 3.0
+	if ( $identification != '' ) 
+		$has_relationship = toolset_get_relationship( $identification ); // DINARD
+	else
+		$has_relationship = toolset_get_relationship( array( $relationship, $forposttype ) ); //FIFAM / KO DINARD // FIFAM Old < 2.3 
+	// echo('##has_relationship<pre>'); print_r($has_relationship);  echo('</pre>');
 
+	if ( $has_relationship ) {
+		$parent = $has_relationship['roles']['parent']['types'][0];
+		$child = $has_relationship['roles']['child']['types'][0];
+		$origin = ( $parent == $posttype ) ? 'child' : 'parent';
+		$returning = ( $parent == $posttype ) ? 'parent' : 'child';
+		// echo('##parent<pre>'); print_r($parent);  echo('</pre>');
+		// echo('##origin<pre>'); print_r($origin);  echo('</pre>');
+		// echo('##returning<pre>'); print_r($returning);  echo('</pre>');
+		
+		//Get connected posts // FIFAM Old < 2.3 
+		// $connections = toolset_get_related_posts( $postid, array($relationship,$forposttype), $origin, 9999, 0, array(), 'post_id', 'other', null, 'ASC', true, $count_connections );
+		// if ( !empty($connections) )  $has_projections = true;
+
+		// Get connected posts // DINARD New > 2.3 
+		$connections = toolset_get_related_posts(
+			$postid, //query_by_elements : single ID or array( 'parent' => $films_in_section_results ), //query_by_elements
+			$identification, //relationship
+			array(
+				'query_by_role' => $returning, // Origin post role / query_by_role: Name of the element role to query by. This argument is required if a single post is provided in $query_by_elements, and in other cases, it must not be present at all. Accepted values: 'parent' | 'child' | 'intermediary'.
+				'role_to_return' => 'all', // Role of posts to return : 'parent' | 'child' | 'intermediary' | 'all'
+				'return' => 'post_object', // Return array of IDs (post_id) or post objects (post_object)
+				'limit' => 999, // Max number of results
+				'offset' => 0, // Starting from
+				// 'orderby' => 'title', 
+				// 'order' => 'ASC',
+				'need_found_rows' => false, // also return count of results
+				'args' => null // Array for adding meta queries etc.
+			)
+		);
+		//retrieve parent post ID from a one to many relationsship when knowing the child post-ID
+		//$connections = toolset_get_related_posts( $postid, $identification, 'parent' );
+		// echo('##connections<pre>'); print_r($connections); echo('</pre>');
+
+		// Finally, we just have to check if we have connections 
+		if ( !empty($connections) && count($connections) > 0 ) {
+			// $has_projections 		= true;
+			// $has_youngpublic		= false;
+			// $has_highlight			= false;
+			// $has_guest				= false;
+			// $has_debate				= false; //ADDED #43
+			// $has_tag				= false;
+			// $guests					= array();
+
+			foreach($connections as $index => $connection) {
+				$output[] = $connection["parent"]->ID;
+			}
+		}
+	}
+	
+	// ********************
 	// Check if has_programs
 	$relationship		= 'film';
 	$forposttype 		= 'projection';
@@ -233,7 +293,7 @@ while ( have_posts() ) :
 	// echo('##ordered<pre>'); print_r($ordered);  echo('</pre>');
 
 ?>
-	<div class="row g-0 align-items-center py-2 --offset-md-2 col-10">
+	<section class="row g-0 align-items-center py-2 --offset-md-2 col-10">
 	<!-- FILM CARD -->
 		<?php
 		global $attributes;
@@ -297,7 +357,7 @@ while ( have_posts() ) :
 		endforeach;
 		?>					
 	<!-- END FILM CARD -->
-	</div>
+	</section>
 	<?php
 	// Previous/next page navigation.
 	get_template_part( 'partials/pagination' );
