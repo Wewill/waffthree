@@ -464,7 +464,6 @@ jQuery(document).ready(function() {
 	// When the page has loaded
 	jQuery('#flash').fadeOut().removeClass('d-none').fadeIn(600);
 	
-	
 	jQuery('#flash').slick({
 		slidesToShow: 1,
 		slidesToScroll: 1, 
@@ -474,6 +473,20 @@ jQuery(document).ready(function() {
 		buttons: false,
 		autoplay: true, 
 		autoplaySpeed: 6000
+	});
+
+	jQuery('.slick-film-card').slick({
+		arrows: false,
+		dots: true,
+		buttons: false,
+		infinite: true,
+		speed: 200,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: true, 
+		autoplaySpeed: 3000,
+		focusOnSelect:true,
+		lazyLoad: 'ondemand',
 	});
 	
 	/*
@@ -512,21 +525,25 @@ jQuery(document).ready(function() {
 		setTimeout(function(){appendToList();}, 150);
 	});
 
-	var cardsAutoPlay = setInterval(function() {
-		if (running == false) {
-			console.log("#Stacked Cards : Running");
-			running = true;
-			var prependList = function() {
-				if( jQuery('.stacked-cards .card').hasClass('activeNow') ) {
-					var $slicedCard = jQuery('.stacked-cards .card').slice(lastCard).removeClass('transformThis activeNow');
-					jQuery('.stacked-cards ul').prepend($slicedCard);
-					running = false;
+	if ( $card && $card.length > 0 ) {
+		var cardsAutoPlay = setInterval(function() {
+			if (running == false) {
+				console.log("#Stacked Cards : Running");
+				running = true;
+				var prependList = function() {
+					if( jQuery('.stacked-cards .card').hasClass('activeNow') ) {
+						var $slicedCard = jQuery('.stacked-cards .card').slice(lastCard).removeClass('transformThis activeNow');
+						jQuery('.stacked-cards ul').prepend($slicedCard);
+						running = false;
+					}
 				}
+				jQuery('.stacked-cards li').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
+				setTimeout(function(){prependList();}, 150);
 			}
-			jQuery('.stacked-cards li').last().removeClass('transformPrev').addClass('transformThis').prev().addClass('activeNow');
-			setTimeout(function(){prependList();}, 150);
-		}
-	}, 3000);
+		}, 3000);
+	} else {
+		console.log("#Stacked Cards : not found");
+	}
 
 	/*
 		-------------------------------------------------
