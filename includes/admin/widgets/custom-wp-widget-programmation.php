@@ -151,7 +151,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						<div class="modal-header sticky-top container-fluid">
 							<div class="row g-0 align-items-center">
 								<div class="col-md-2 --col-md-5 --col-lg-7 d-none d-md-block"> <!-- ICI Deplacer -->
-									<a class="close-icon color-light lead ml-5" data-dismiss="modal" aria-label="Close">
+									<a class="close-icon color-light lead ml-5" data-bs-dismiss="modal" aria-label="Close">
 										<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
 										</svg>
@@ -159,7 +159,7 @@ class WP_Widget_Programmation extends WP_Widget {
 								</div>
 								<div class="col-md-10 --col-md-7 --col-lg-5 p-0 col-days order-1">
 									<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
-										<div class="p-2"><a class="prog-title headline" data-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+										<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
 									</div>
 									<div class="d-flex justify-content-between align-items-stretch align-self-stretch days nav" id="navProgrammationModal" role="tablist">
 										<?php foreach($the_days as $the_day) {
@@ -223,6 +223,7 @@ class WP_Widget_Programmation extends WP_Widget {
 
 					// Get terms
 					$p_rooms 				= get_the_terms( $id, 'room' );
+					$p_tags 				= get_the_terms( $id, 'post_tag' );
 					
 					// Check if projection has_film
 					$relationship 			= 'film';
@@ -242,7 +243,7 @@ class WP_Widget_Programmation extends WP_Widget {
 
 					// Get film meta values
 					$f_id						= (( true === $has_film )?$connections[0]:0);
-					$f_title 					= (( get_the_title($f_id) )?get_the_title($f_id):'');
+					$f_title 					= (( get_the_title($f_id) && true === $has_film )?get_the_title($f_id):'');
 					$f_french_operating_title 	= get_post_meta( $f_id, 'wpcf-f-french-operating-title', true );
 					$f_movie_length 			= get_post_meta( $f_id, 'wpcf-f-movie-length', true );
 					$f_author 					= get_post_meta( $f_id, 'wpcf-f-author', true ); //#43
@@ -284,6 +285,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						'p_start_and_stop_time_raw' 		=> $p_start_and_stop_time_raw,
 						'p_start_and_stop_time__begin' 		=> $p_start_and_stop_time__begin,
 						'p_rooms' 							=> $p_rooms,
+						'p_tags' 							=> $p_tags, //43
 						'p_is_guest' 						=> $p_is_guest,
 						'p_e_guest_contact' 				=> $p_e_guest_contact, //9
 						'p_e_guest_contact_raw' 			=> $p_e_guest_contact_raw,
@@ -347,10 +349,10 @@ class WP_Widget_Programmation extends WP_Widget {
 
 						printf('<!-- Day -->
 						<div class="row g-0 mb-4">
-							<div class="col-md-2 col-day bg-color-gray p-6">
+							<div class="col-md-2 col-day bg-color-gray px-6 py-4 pt-4 pb-2">
 								<a class="scrollspy text-white" id="day%d" data-count="%d" data-ts="%d">
-									<span class="subline-4">%s</span>
-									<span class="display-1 d-block mt-3">%s</span>
+									<span class="subline h4 --subline-4">%s</span>
+									<span class="display-2 d-block mt-3">%s</span>
 								</a>
 							</div>',
 							esc_html($the_day['day_number']),
@@ -398,6 +400,15 @@ class WP_Widget_Programmation extends WP_Widget {
 										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
 											//if ( $the_day_room_projections['has_films'] === true ) {
 												
+												// Tags
+												$html_p_tags = '';
+												if (array_key_exists('p_tags', $the_day_room_projections) && is_array($the_day_room_projections['p_tags'])) foreach($the_day_room_projections['p_tags'] as $p_tag) {
+													$html_p_tags .= sprintf('<a href="%s" class="category-item">%s</a>',
+													get_term_link($p_tag->slug, 'post_tag'),
+													$p_tag->name
+													);
+												}
+
 												// Sections
 												$html_f_section = '';
 												$last_f_section_color = '';
@@ -458,11 +469,13 @@ class WP_Widget_Programmation extends WP_Widget {
 
 												// Get films to create programs 
 												// > see waff_functions
+												$has_program = false;
 												if ( function_exists('func_get_programs') && $the_day_room_projections['p_id'] ) {
 													$program = '';
 													$program_length = 0;
 													$films = func_get_programs(array('output' => 'array'), '', '', $the_day_room_projections['p_id']);
-													if ( !empty($films) )
+													if ( !empty($films) ) {
+														$has_program = true;
 														foreach( $films as $k => $p_f_id ) {
 															$p_f_title 						= (( get_the_title($p_f_id) )?get_the_title($p_f_id):'');
 															$p_f_french_operating_title 	= get_post_meta( $p_f_id, 'wpcf-f-french-operating-title', true );
@@ -503,7 +516,7 @@ class WP_Widget_Programmation extends WP_Widget {
 																(( $p_f_section_color != '' )?'style="color: '.$p_f_section_color.';"':''),
 																$p_f_section->name
 																);
-															}																					
+															}																		
 															$program .= sprintf('
 																	<span class="last_f_section_color" %s>
 																		<a href="%s" class="title %s">%s</a>
@@ -531,8 +544,26 @@ class WP_Widget_Programmation extends WP_Widget {
 															);
 															$program_length +=  (int) $p_f_movie_length;
 														} // End foreach
+													} // End if films 
 												} // End if func
 												//print_r($films);
+												
+												/*echo '<code>';
+												echo '#p_id=' . $the_day_room_projections['p_id'];
+												echo '#f_id=' . $the_day_room_projections['f_id'];
+												echo '#f_french_operating_title=' . $the_day_room_projections['f_french_operating_title'];
+												echo '#f_title=' . $the_day_room_projections['f_title'];
+												echo '#p_title=' . $the_day_room_projections['p_title'];
+												echo '#p_count_connections=' . $the_day_room_projections['p_count_connections'];
+												echo '#p_has_film=' . $the_day_room_projections['p_has_film'];
+												echo '#has_program=' . var_dump($has_program);
+												echo '</code>';*/
+												//print_r($the_day_room_projections);
+
+												$_f_title = esc_html( ( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']);
+												$_p_title = esc_html( ( $the_day_room_projections['p_hide_projection_title'] != 1 )?$the_day_room_projections['p_title']:'' );
+												//echo '#_f_title=' . $_f_title;
+												//echo '#_p_title=' . $_p_title;
 
 												// Print film
 												printf('
@@ -553,6 +584,8 @@ class WP_Widget_Programmation extends WP_Widget {
 														<!-- Section & tag -->
 														%s
 														%s
+														<!-- Post tag -->
+														<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>
 													</p>
 												</dd>
 												<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
@@ -561,18 +594,26 @@ class WP_Widget_Programmation extends WP_Widget {
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['end'] ),
 												(( $last_f_section_color != '' )?'style="color: '.$last_f_section_color.';"':''),
-												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?get_permalink( $the_day_room_projections['p_id'] ):get_permalink( $the_day_room_projections['f_id'] )),
-												(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
-												(( $the_day_room_projections['p_hide_projection_title'] != 1 )?esc_html(( $the_day_room_projections['f_french_operating_title'] != '' )?$the_day_room_projections['f_french_operating_title'].' ('.$the_day_room_projections['f_title'].')':$the_day_room_projections['f_title']).(($the_day_room_projections['p_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?' <i class="icon icon-down-right-light ml-2 ms-2"></i>':''):'' ),
+												(( $the_day_room_projections['f_id'] != 0 || $the_day_room_projections['p_count_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?get_permalink( $the_day_room_projections['p_id'] ):get_permalink( $the_day_room_projections['f_id'] )),
+												(( $the_day_room_projections['f_id'] != 0 || $the_day_room_projections['p_count_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
+												// Film title or projection title
+												(( $has_program === true )?'<i class="icon icon-play me-2 f-12"></i>':'') .
+												(( $the_day_room_projections['f_id'] != 0  )?$_f_title:$_p_title.( ( $has_program === false )?'<i class="icon icon-down-right-light me-2 ms-2"></i>':'' ) ),
+												//
 												(( $the_day_room_projections['f_author'] != '' )?'&nbsp;<span class="article">DE</span>&nbsp;<span class="director">'.$the_day_room_projections['f_author']['lastname'].' '.$the_day_room_projections['f_author']['firstname'].'</span>':''),
 												(( $the_day_room_projections['f_country'] != '' )?'・ <span class="country">'.$the_day_room_projections['f_country'].'</span>':''),
 												(( $the_day_room_projections['f_co_production_country'] != '' )?'・ <span class="co_production_country">'.$the_day_room_projections['f_co_production_country'].'</span>':''),
 												(( $the_day_room_projections['f_production_year'] != '' )?'・ <span class="year muted">'.$the_day_room_projections['f_production_year'].'</span>':''),
 												(( $the_day_room_projections['f_movie_length'] != '' )?'・ <span class="length">'.$the_day_room_projections['f_movie_length'].'\'</span>':''),
-												(( $program != '' )?(($the_day_room_projections['p_hide_projection_title'] != 1)?'— ':'').'<span class="program">'.$program.'</span>':''),
-												(( $program_length != 0 )?'・ <span class="length bold">( '.$program_length.'\' )</span>':''),
+												//
+												(( $has_program === true )?(( $the_day_room_projections['p_hide_projection_title'] != 1 )?' — ':'').'<span class="program">'.$program.'</span>':''),
+												(( $has_program === true && $program_length != 0 )?'・ <span class="length bold">( '.$program_length.'\' )</span>':''),
+												//
 												$html_f_section,
 												$html_f_tags,
+												//
+												esc_html__( 'Taggued', 'waff' ),
+												$html_p_tags,
 												//
 												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-2',
 												esc_attr( $the_day_room_projections['p_id'] ),
