@@ -10,7 +10,7 @@ function docReady(fn) {
 
 docReady(function() {
   function getTimeRemaining(endtime) {
-      const twentyHoursMoreThanMidnight = 20*3600*1000; // in ms 
+      const twentyHoursMoreThanMidnight = 18*3600*1000; // in ms 
       const total = Date.parse(endtime) + twentyHoursMoreThanMidnight - Date.parse(new Date());
       console.info("#Countdown > countdownVars > getTimeRemaining::", new Date(endtime), new Date(Date.parse(endtime) + twentyHoursMoreThanMidnight), total );
       //const seconds = Math.floor((total / 1000) % 60);
