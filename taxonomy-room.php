@@ -269,6 +269,10 @@ if ( have_posts() ) {
 									$rendered_guests = array();
 									foreach($counts['guests'] as $projection) {
 										$guest 				= get_post_meta( $projection, 'wpcf-p-e-guest-contact', false );
+										$_guest_name 		= get_post_meta( $projection, 'wpcf-p-guest-name', true );
+										if ( $_guest_name != '' )
+											$rendered_guests[] = array('g_fullname' => $_guest_name);
+
 										// Loop all guest to process datas 
 										foreach($guest as $g) {
 											$g_picture 		= get_post_meta( $g, 'wpcf-c-picture', true );
@@ -305,10 +309,11 @@ if ( have_posts() ) {
 												(($i < count($counts['guests']))?' • ':'')
 											); > push to array to avoid • before empty guest */
 
-											$rendered_guests[$i]['g_picture'] 		= $g_picture;
-											$rendered_guests[$i]['g_fullname'] 		= $g_fullname;
-											$rendered_guests[$i]['g_fullposition'] 	= $g_fullposition;
-										}										
+											// $rendered_guests[$i]['g_picture'] 		= $g_picture;
+											// $rendered_guests[$i]['g_fullname'] 		= $g_fullname;
+											// $rendered_guests[$i]['g_fullposition'] 	= $g_fullposition;
+											$rendered_guests[] = array ('g_picture' => $g_picture,  'g_fullname' => $g_fullname, 'g_fullposition' => $g_fullposition);
+										}								
 									}
 									// Final Loop all processed guests to avoid empty guests 
 									$i=0;
