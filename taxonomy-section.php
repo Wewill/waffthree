@@ -234,7 +234,7 @@ if ( have_posts() ) {
 			<?php if ( $section_additionnal_content != '' ) : ?> 
 			<a href="<?= $section_additionnal_content ?>" class="btn btn-outline-dark rounded-0"><?= __('Download in', 'waff') ?> *.pdf</a>
 			<?php endif; ?>
-			<a href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':'#'; ?>" class="btn btn-action-1 rounded-0"><?= __('Planning', 'waff') ?></a>
+			<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':'#'; ?>" class="btn btn-action-1 rounded-0"><?= __('Planning', 'waff') ?></a>
 			</p>
 
 			<!-- Section content -->
