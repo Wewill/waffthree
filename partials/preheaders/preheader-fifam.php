@@ -29,7 +29,7 @@ $page_atts = $args;
 							    	$style 		= ( $color )?'style="color:'.$color.'!important;"':'';
 							    ?>
 								
-								<li class="flash-item text-truncate" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?php the_title(); ?>" data-bs-content="<?= $content; ?>" <?= $style; ?>><i class="fas fa-plus"></i> <strong><u><?php the_title(); ?></u></strong> <?= $content; ?><?= ( $url )?' · <a href="'.$url.'" class="link-light subline" '.$style.'>'.esc_attr__( 'Read More', 'waff' ).'</a>':''; ?></li>
+								<li class="flash-item text-truncate" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?php WaffTwo\Core\waff_do_markdown(the_title()); ?>" data-bs-content="<?= WaffTwo\Core\waff_do_markdown($content); ?>" <?= $style; ?>><i class="fas fa-plus"></i> <strong><u><?php WaffTwo\Core\waff_do_markdown(the_title()); ?></u></strong> <?= WaffTwo\Core\waff_do_markdown($content); ?><?= ( $url )?' · <a href="'.$url.'" class="link-light subline" '.$style.'>'.esc_attr__( 'Read More', 'waff' ).'</a>':''; ?></li>
 	
 							<?php endwhile; wp_reset_postdata(); ?>
 						</ul>

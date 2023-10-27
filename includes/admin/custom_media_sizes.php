@@ -281,6 +281,7 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 
 			// Films
 			add_image_size( 'film-gallery-image', 1600, 1600, true );
+			add_image_size( 'film-poster', 150 ); //150 w unlimited h no crop #43
 
 	
 			// Pages 
@@ -373,6 +374,10 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 				'post-featured-image-m-x2',
 				'post-featured-image-s', 
 				'post-featured-image-s-x2',
+				'post-featured-image-xs',
+				'post-featured-image-xs-x2',
+				'film-gallery-image',
+				'film-poster',
 			); 
 			$new_image_sizes = array_diff($new_image_sizes, $film_image_sizes);
 			
@@ -385,6 +390,8 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 				'post-featured-image-m-x2',
 				'post-featured-image-s', 
 				'post-featured-image-s-x2',
+				'post-featured-image-xs',
+				'post-featured-image-xs-x2',
 			); 
 			$new_image_sizes = array_diff($new_image_sizes, $post_image_sizes);
 			

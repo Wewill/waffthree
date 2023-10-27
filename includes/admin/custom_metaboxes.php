@@ -22,7 +22,7 @@ if( true === WAFF_HAS_FLASHS_POSTTYPE) {
                 [
                     'type' => 'textarea',
                     'name' => esc_html__( '⚡︎ Flash Content', 'waff' ),
-                    'desc' => __( 'Fill the flash content', 'waff' ),
+                    'desc' => __( 'Fill the flash content', 'waff' ) . '. ' . __( '<p class="description"><span class="important">Informations pour le catalogue :</span><br><span class="label">UK</span> Markdown available : *italic* **bold** ***label*** #small# ##huge##<br><span class="label">FR</span> <em>Markdown disponible : *italique* **gras** ***label*** #petit# ##grand##</em></p>', 'waff' ),
                     'id'   => $prefix . 'content',
                     'admin_columns' => 'after title',
                 ],
