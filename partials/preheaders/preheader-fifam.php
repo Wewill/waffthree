@@ -15,7 +15,7 @@ $page_atts = $args;
 					<!-- Flex -->
 					<div class="d-flex justify-content-between--- align-items-center">
 						<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap "><?= esc_html__( 'Breaking', 'waff' ) ?><!-- Le flash--> <span class="sr-only"><?= esc_html__( 'Breaking news live from festival', 'waff' ) ?></span></div> <!-- <?= esc_html__( 'Read More', 'waff' ) ?> -->
-						<ul id="flash" class="w-70 p-2 mb-0" style="display: none;">
+						<ul id="flash" class="w-70 p-1 p-sm-2 mb-0" style="display: none;">
 							<?php $flashes = new WP_Query( array( 'post_type' => 'flash', 'posts_per_page' => 20 ) ); ?>
 	
 							<?php while ( $flashes->have_posts() ) : $flashes->the_post(); ?>
@@ -29,7 +29,7 @@ $page_atts = $args;
 							    	$style 		= ( $color )?'style="color:'.$color.'!important;"':'';
 							    ?>
 								
-								<li class="flash-item text-truncate" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?php WaffTwo\Core\waff_do_markdown(the_title()); ?>" data-bs-content="<?= WaffTwo\Core\waff_do_markdown($content); ?>" <?= $style; ?>><i class="fas fa-plus"></i> <strong><u><?php WaffTwo\Core\waff_do_markdown(the_title()); ?></u></strong> <?= WaffTwo\Core\waff_do_markdown($content); ?><?= ( $url )?' · <a href="'.$url.'" class="link-light subline" '.$style.'>'.esc_attr__( 'Read More', 'waff' ).'</a>':''; ?></li>
+								<li class="flash-item text-truncate" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="bottom" title="<?php strip_tags(WaffTwo\Core\waff_do_markdown(the_title())); ?>" data-bs-content="<?= strip_tags(WaffTwo\Core\waff_do_markdown($content)); ?>" <?= $style; ?>><i class="fas fa-plus"></i> <strong><u><?php WaffTwo\Core\waff_do_markdown(the_title()); ?></u></strong> <?= WaffTwo\Core\waff_do_markdown($content); ?><?= ( $url )?' · <a href="'.$url.'" class="link-light subline" '.$style.'>'.esc_attr__( 'Read More', 'waff' ).'</a>':''; ?></li>
 	
 							<?php endwhile; wp_reset_postdata(); ?>
 						</ul>
