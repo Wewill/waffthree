@@ -889,6 +889,38 @@ svg.duotone-filters {
     visibility: hidden;
 }
 
+/* Blocks */
 /* Sections blocks  */
 
 @media (max-width:575.98px) 	{ .heading-sm	{ font-size: 1.8rem !important;	} }
+
+.filmtitle a { text-decoration: none;}
+.film-card { float: left; width: 20%; color: var(--go--color--black) !important; }
+/* .float-start { float: left; }
+.float-end { float: right; }
+.w-50 { width: 50%; } */
+.bg-dark { background-color: var(--go--color--black); }
+.bg-light { background-color: var(--go--color--white); }
+.color-dark { color: var(--go--color--black);}
+.color-light { color: var(--go--color--white);}
+
+.wa-section .slick-carousel {
+    overflow: scroll;
+    height: 400px;
+}
+.wa-sections .card {
+    background-color: transparent !important;
+    border: none !important;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    color: var(--go--color--black) !important;
+}
+.wa-sections .card img {
+    width: 250px !important;
+    height: 180px !important;
+}
+
+.wa-sections .card .card-title {
+    padding-top: .5em;
+}

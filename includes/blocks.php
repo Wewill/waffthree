@@ -2853,7 +2853,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 				<?php endif; ?>
 				<div class="<?= (($section_image!='')?'card-img-overlay':'p-3 h-800-px'); ?> d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-start align-items-sm-center" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
 					<div class="w-sm-50">
-						<h2 class="pt-4 heading-2 heading-sm card-title <?= $section_title_color ?>"><?= sanitize_text_field($section->name) ?></h2>
+						<h2 class="pt-4 heading-4 heading-sm card-title <?= $section_title_color ?>"><?= sanitize_text_field($section->name) ?></h2>
 						<!-- Edition-->
 						<?php
 						if ( !empty($the_edition_terms_list) ) {
