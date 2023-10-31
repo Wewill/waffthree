@@ -221,13 +221,13 @@ if ( have_posts() ) {
 			</p>
 			<!-- Description -->
 			<?php if ( strlen(strip_tags($section_description)) > 0 ) : ?> 
-				<p class="lead light pt-4 pb-4"><?= WaffTwo\Core\waff_do_markdown(strip_tags($section_description)) ?></p>
+				<p class="lead light pt-4 pb-0 pb-sm-4 mb-4 mb-sm-5"><?= WaffTwo\Core\waff_do_markdown(strip_tags($section_description)) ?></p>
 			<?php else : ?>
 				<?php echo apply_filters('the_content', WaffTwo\Core\waff_do_markdown($section_content)); ?>
 			<?php endif; ?>
 				
 			<!-- Buttons -->
-			<p>
+			<p class="mb-0 mb-sm-4">
 			<?php if ( strlen(strip_tags($section_content)) > 0 && strlen(strip_tags($section_description)) > 0 ) : ?> 
 			<a class="btn btn-outline-dark rounded-0" data-toggle="collapse" data-bs-toggle="collapse" href="#collapseContent" role="button" aria-expanded="false" aria-controls="collapseContent"><i class="fas fa-ellipsis-h"></i> <?= __('Read more', 'waff') ?></a>
 			<?php endif; ?>
@@ -264,6 +264,8 @@ if ( have_posts() ) {
 						<!-- <small class="d-block"><strong><?= $wp_query->post_count ?> films</strong></small> -->
 						<?php if ( isset($counts['films']) && $counts['films'] != '0' ) 
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); ?>
+						<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
+							print( '<small class="d-block"><strong>' . sprintf( _n( '%s program', '%s programs', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'); ?>
 						<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 
 							print( '<small class="d-block"><i class="icon icon-guest mr-1 f-12"></i> ' . sprintf( _n( '%s with guest', '%s with guest\'s', $counts['wpcf-p-is-guest'], 'waff' ), $counts['wpcf-p-is-guest'] ) . '</small>'); ?>
 						<?php if ( isset($counts['wpcf-p-is-debate']) && $counts['wpcf-p-is-debate'] != '0' ) 
@@ -293,7 +295,7 @@ if ( have_posts() ) {
 				</div>
 				<?php endif; ?>
 			</div>
-			<div class="row g-0 align-items-center py-2 offset-md-2">
+			<div class="row g-0 align-items-center py-0 py-sm-2 offset-md-2">
 				<!-- FILM CARD -->
 					<?php
 					global $attributes;

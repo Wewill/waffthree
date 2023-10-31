@@ -151,7 +151,7 @@ if ( have_posts() ) {
 			</div>
 
 			<div class="col-sm-2" data-aos="fade-right">
-				<p class="--text-muted text-black">
+				<p class="--text-muted text-black position-sticky sticky-top --mb-0">
 					<?php /*if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
 						print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>');*/ ?>
 					<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
@@ -236,7 +236,7 @@ if ( have_posts() ) {
 				</div>
 				<div class="row g-0 align-items-center">
 					<div class="col-md-3 p-4" data-aos="fade-right">
-						<p class="--text-muted text-black">
+						<p class="--text-muted text-black position-sticky sticky-top mb-0">
 							<!-- <small class="d-block"><strong><?= count($results) ?> films</strong></small> -->
 
 							<?php /* if ( isset($counts['films']) && $counts['films'] != '0' ) 
@@ -247,6 +247,8 @@ if ( have_posts() ) {
 								print( '<small class="d-block"><strong>' . sprintf( _n( '%s program', '%s programs', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'); ?>
 							<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 
 								print( '<small class="d-block"><i class="icon icon-guest mr-1 f-12"></i> ' . sprintf( _n( '%s with guest', '%s with guest\'s', $counts['wpcf-p-is-guest'], 'waff' ), $counts['wpcf-p-is-guest'] ) . '</small>'); ?>
+							<?php if ( isset($counts['wpcf-p-is-debate']) && $counts['wpcf-p-is-debate'] != '0' ) 
+								print( '<small class="d-block"><i class="icon icon-mic mr-1 f-12"></i> ' . sprintf( _n( '%s with debate', '%s with debate\'s', $counts['wpcf-p-is-debate'], 'waff' ), $counts['wpcf-p-is-debate'] ) . '</small>'); ?>
 							<?php if ( isset($counts['wpcf-p-young-public']) && $counts['wpcf-p-young-public'] != '0' ) 
 								print( '<small class="d-block"><i class="icon icon-young mr-1 f-12"></i> ' . sprintf( _n( '%s parent-children', '%s parent-children\'s', $counts['wpcf-p-young-public'], 'waff' ), $counts['wpcf-p-young-public'] ) . '</small>'); ?>
 							<?php if ( isset($counts['wpcf-p-highlights']) && $counts['wpcf-p-highlights'] != '0' ) 
@@ -260,7 +262,7 @@ if ( have_posts() ) {
 					<div class="col-md-7 bg-bgcolor-lighten h-100">
 						<div class="row p-4">
 							<div class="col-sm-4">
-								<p><small><strong>Les invité.e.s du jour</strong></small></p>
+								<p class="mb-0 mb-sm-4"><small><strong>Les invité.e.s du jour</strong></small></p>
 							</div>
 							<div class="col-sm-8">
 								<p>

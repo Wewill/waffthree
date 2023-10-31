@@ -480,7 +480,7 @@ class WP_Widget_Programmation extends WP_Widget {
 																	<!-- Program sep-->
 																	%s',
 															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''),
-															(( $p_f_title != '' )?get_permalink( $p_f_id ):get_permalink( $p_f_id )),
+															(( $p_f_title != '' )?get_permalink( $p_f_id ):'#debug'),
 															(( $p_f_title != '' )?'text-link btn-link disabled':'text-link'),
 															esc_html(( $p_f_french_operating_title != '' )?$p_f_french_operating_title.' ('.$p_f_title.')':$p_f_title),
 															(( $p_f_author != '' )?'&nbsp;<span class="article">DE</span>&nbsp;<span class="director">'.$p_f_author['lastname'].' '.$p_f_author['firstname'].'</span>':''),
@@ -544,8 +544,8 @@ class WP_Widget_Programmation extends WP_Widget {
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['end'] ),
 												(( $last_f_section_color != '' )?'style="color: '.$last_f_section_color.';"':''),
-												(( $the_day_room_projections['f_id'] != 0 || $the_day_room_projections['p_count_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?get_permalink( $the_day_room_projections['p_id'] ):get_permalink( $the_day_room_projections['f_id'] )),
-												(( $the_day_room_projections['f_id'] != 0 || $the_day_room_projections['p_count_connections'] == 0 || $the_day_room_projections['p_has_film'] == '' )?'text-link btn-link disabled':'text-link'),
+												(( $the_day_room_projections['f_id'] != 0 )?get_permalink( $the_day_room_projections['f_id'] ):get_permalink( $the_day_room_projections['p_id'] )),
+												(( $the_day_room_projections['f_id'] != 0 )?'text-link btn-link disabled':'text-link'),
 												// Film title or projection title
 												(( $has_program === true )?'<i class="icon icon-play me-2 f-12"></i>':'') .
 												(( $the_day_room_projections['f_id'] != 0  )?$_f_title:$_p_title.( ( $has_program === false )?'<i class="icon icon-down-right-light me-2 ms-2"></i>':'' ) ),

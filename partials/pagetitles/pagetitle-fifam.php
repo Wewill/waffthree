@@ -311,7 +311,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		$film_online_url 		= get_post_meta( $post->ID, 'wpcf-f-online-url', true ); 
 		$film_ticketing_url 	= get_post_meta( $post->ID, 'wpcf-f-ticketing-url', true ); 
 
-		$film_length 			= (( $film_length != '0' && $film_length != '' )?$film_length = sprintf(' <span class="--length --light subline-length subline-4">%s\'%s</span>', esc_attr($film_length), (( $film_length_seconds != 0 && $film_length_seconds != '' )?esc_attr($film_length_seconds):'') ):'');  
+		$film_length 			= (( $film_length != '0' && $film_length != '' )?$film_length = sprintf(' <span class="--length --light subline-length subline-4">%s\'<span class="op-3">%s</span></span>', esc_attr($film_length), (( $film_length_seconds != 0 && $film_length_seconds != '' )?esc_attr($film_length_seconds . '"'):'') ):'');  
 		$film_awards 			= get_the_terms($post->ID, 'award'); 
 	?>
 	<!-- #pagetitle : Film -->
@@ -646,7 +646,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div>
 			</div>
 			<div class="row <?= (($room_image != '')?'mt-n':'mt-4') ?> align-items-end g-0 f-w">
-				<div class="col-sm-5 col-6">
+				<div class="col-sm-5 col-12">
 					<?php if ( $room_address != '' ) echo '<h6 class="m-gutter-l headline d-inline '.$room_title_color.'">'.$room_address.'</h6>'; ?>
 					<ul class="p-gutter-l list-unstyled mt-3 mb-2 <?= $room_title_color ?>">
 						<?= $openings ?>
@@ -657,7 +657,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<?php if ( $room_pmr != '' ) echo '<li class="subline opacity-75"><strong>Places PMR</strong> <span class="headline medium">'.$room_pmr.'</span></li>'; ?>
 					</ul>
 				</div>
-				<div class="col-sm-7 col-6">
+				<div class="col-sm-7 col-12">
 					<figure title="<?php echo esc_attr($room_image_description); ?>" style="background-color:<?= $_room_color ?>;">
 						<picture class="lazy duotone-<?= $room_id ?>">
 						<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
