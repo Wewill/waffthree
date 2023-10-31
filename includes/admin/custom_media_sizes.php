@@ -266,11 +266,11 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 		public function waff_add_image_sizes( $image_sizes ){	
 			// Articles & films
 			// XL
-			add_image_size( 'post-featured-image', 1900, 600, true );
-			add_image_size( 'post-featured-image-x2', 3800, 1200, true );
+			add_image_size( 'post-featured-image', 1700, 600, true ); //1900
+			//add_image_size( 'post-featured-image-x2', 3800, 1200, true ); 
 			// M
 			add_image_size( 'post-featured-image-m', 1000, 600, true );
-			add_image_size( 'post-featured-image-m-x2', 2000, 1200, true );
+			//add_image_size( 'post-featured-image-m-x2', 2000, 1200, true );
 			// S
 			add_image_size( 'post-featured-image-s', 600, 600, true );
 			add_image_size( 'post-featured-image-s-x2', 1200, 1200, true );

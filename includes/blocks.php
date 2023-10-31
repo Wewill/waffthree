@@ -230,7 +230,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
             ],
             [
                 'id'   => $prefix . 'e_content',
-                'type' => 'textarea',
+                'type' => 'wysiwyg', //textarea
                 'name' => esc_html__( 'Content', 'waff' ),
                 'desc' => esc_html__( 'Markdown is available.', 'waff' ),
             ],
@@ -708,6 +708,12 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'id'    => $prefix . 'sl_show_parent_section',
                 'type'  => 'switch',
                 'name'  => esc_html__( 'Display parent edition section of sections ?', 'waff' ),
+                'style' => 'rounded',
+			],
+			[
+                'id'    => $prefix . 'sl_show_tiny_list',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display as a tiny list?', 'waff' ),
                 'style' => 'rounded',
 			],
 		],
@@ -2696,6 +2702,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 	// Params
 	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ))?'1':'0'; 
 	$show_parent_section 	= (mb_get_block_field( 'waff_sl_show_parent_section' ))?'1':'0'; 
+	$show_tiny_list 		= (mb_get_block_field( 'waff_sl_show_tiny_list' ))?'1':'0'; 
 
 	// Get edition metas
 	$edition 			= mb_get_block_field( 'waff_sl_edition' ); // WP_Term Object
@@ -2775,7 +2782,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 							);
 						}
 					?>
-					<h6 class="visually-hidden">Le palmarès de l'édition <?= $edition_name; ?> du Festival Internationnal du Film d'Amiens</h6>
+					<h6 class="visually-hidden">Les sections de l'édition <?= $edition_name; ?> du Festival Internationnal du Film d'Amiens</h6>
 				</hgroup>
 
 				<?php if ( mb_get_block_field( 'waff_sl_leadcontent' ) ) : ?>
@@ -2788,6 +2795,12 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 			</div>
 		</section>
 		<!-- END:Introduction -->
+		<?php endif; ?>
+
+		<!-- #BEGIN: Sections tiny list -->
+		<?php if ( isset( $show_tiny_list ) && $show_tiny_list == '1' ) : ?>
+		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?> tiny-list" <?= $data ?>>
+			<div class="d-sm-flex row g-0">
 		<?php endif; ?>
 
 		<?php
@@ -2826,15 +2839,16 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 				if ( function_exists( 'types_render_termmeta' ) ) {
 					$section_image = types_render_termmeta( 's-image', array(
 						'term_id' => $section_id, 
-						'size' => 'post-featured-image-x2',
+						'size' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'post-featured-image-xs':'post-featured-image', //post-featured-image-x2
 						'alt' => esc_html($featured_img_caption),
-						'style' => 'height: 800px; object-fit: cover; width: 100%;',
-						'class' => 'img-fluid')
+						'style' => 'object-fit: cover; width: 100%;',
+						'class' => 'img-fluid h-100-px')
 					);
 				}
 				$section_credits_image 				= get_term_meta( $section_id, 'wpcf-s-credits-image', true ); 
 		?>
-		<!-- BEGIN:Sections -->
+		<!-- BEGIN:Sections list-->
+		<?php if ( isset( $show_tiny_list ) && $show_tiny_list == '0' ) : ?>
 		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?>" <?= $data ?>>
 			<div class="card border-0 rounded-0">
 				<?php if ( $section_image != '' ) : ?> 
@@ -2880,8 +2894,41 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 				</div>
 			</div>
 		</section>
+		<?php else: ?>
+		<!-- BEGIN:Sections list tiny-->
+		<div class="card border-0 rounded-0 flex-sm-equal col-4 col-sm-12" <?= (($section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?> >
+			<?php if ( $section_image != '' ) : ?> 
+			<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="">
+				<picture class="lazy">
+				<!-- 3800x1200 > 1900x600 -->
+				<?= $section_image ?>
+				</picture>
+				<?php if ( $featured_img_caption ) : ?>
+				<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($featured_img_caption); ?></strong></figcaption>
+				<?php elseif ( $section_credits_image ) : ?>
+				<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($section_credits_image); ?></strong></figcaption>
+				<?php endif; /* If captions */ ?>
+			</figure>
+			<?php endif; ?>
+			<div class="p-2 d-flex flex-column justify-content-between h-100" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
+				<h6 class="pt-2 <?= $section_title_color ?>"><?= sanitize_text_field($section->name) ?></h6>
+				<div class="mt-2 mt-sm-0 pb-4">
+					<a href="<?= get_term_link($section_id); ?>" class="card-link <?= $section_title_color ?> stretched-link pr-1"><?= $counts['films']; ?> films
+					<i class="icon icon-right pl-2"></i></a>
+				</div>
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<?php
 			endforeach;
+
+		if ( isset( $show_tiny_list ) && $show_tiny_list == '1' ) : ?>
+			</div>
+		</section>
+		<!-- #END: Sections tiny list -->
+		<?php endif;
+
 		endif;
 		?>
 		<!-- END:Sections -->
