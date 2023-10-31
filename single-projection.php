@@ -293,7 +293,7 @@ while ( have_posts() ) :
 	// echo('##ordered<pre>'); print_r($ordered);  echo('</pre>');
 
 ?>
-	<section class="row g-0 align-items-center py-2 --offset-md-2 col-10">
+	<section class="row g-0 align-items-center py-2 --offset-md-2 col-12 col-sm-10">
 	<!-- FILM CARD -->
 		<?php
 		global $attributes;
