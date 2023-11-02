@@ -272,6 +272,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'desc'  => esc_html__( 'Adds a frame around the content.', 'waff' ),
                 'style' => 'rounded',
 			],
+			[
+                'id'    => $prefix . 'e_hide_center_column',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Hide center column ?', 'waff' ),
+                'desc'  => esc_html__( 'Hide the empty column between the content and the image.', 'waff' ),
+                'style' => 'rounded',
+			],
 		],
 		'category'       => 'layout',
         // 'icon'           => 'format-quote',
@@ -1305,13 +1312,16 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 
 	$image = mb_get_block_field('waff_e_image');
 
+	$hide_center_column				= (mb_get_block_field( 'waff_e_hide_center_column' ))?'1':'0'; 
+
+
 	if ( mb_get_block_field( 'waff_e_framed' ) == 0 || mb_get_block_field( 'waff_e_framed' ) == null ) :
 	?>
 	<!-- #Edito / Normal version -->
 	<section id="<?= $id ?>" class="fix-vh-100 <?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center">
-				<div class="col-md-5 d-flex flex-column justify-content-center min-h-100" data-aos="fade-right">
+				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> d-flex flex-column justify-content-center min-h-100" data-aos="fade-right">
 					<div class="p-4">
 					
 					<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
@@ -1330,13 +1340,13 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 						</article>
 					</div>
 				</div>
-				<div class="col-md-2 d-none d-md-block bg-secondary"></div>
-				<div class="col-md-5 overflow-hidden bg-bgcolor" data-aos="fade-left"> 
+				<?php if ( $hide_center_column != '1' ) : ?><div class="col-md-2 d-none d-md-block bg-secondary"></div><?php endif; ?>
+				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> overflow-hidden bg-bgcolor" data-aos="fade-left"> 
 					<?php if ( count($image) > 0 ) : ?>
 						<?php foreach ( $image as $im ) : ?>
 							<figure class="img-shifted shift-right vh-100">
 								<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
-								<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 								<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
 								<?php endif; /* If captions */ ?>
 								</div>	
@@ -1363,12 +1373,12 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 							<figure class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'img-shifted shift-right vh-75' ?>">
 								<?php if ( mb_get_block_field( 'waff_e_fit' ) == 1 ) : ?>
 									<img class="w-100" src="<?php echo $im['full_url'] ?>" />
-									<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
 									<?php endif; /* If captions */ ?>
 								<?php else : ?>
 									<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
-									<?php $im['alt'] = 'Legende'; if ( $im['alt'] || $im['description'] ) : ?>
+									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
 									<?php endif; /* If captions */ ?>
 									</div>	
@@ -2269,7 +2279,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 
 					<figure class="img-shifted shift-right h-100">
 						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[0]['full_url'] ?>');">
-						<?php $im['alt'] = 'Legende'; if ( $images[0]['alt'] || $images[0]['description'] ) : ?>
+						<?php $im['alt'] = 'DR'; if ( $images[0]['alt'] || $images[0]['description'] ) : ?>
 						<figcaption><strong>© <?= esc_html($images[0]['alt']); ?></strong> <?= esc_html($images[0]['description']); ?></figcaption>
 						<?php endif; /* If captions */ ?>
 						</div>	
@@ -2284,7 +2294,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 
 					<figure class="img-shifted shift-right h-100">
 						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[1]['full_url'] ?>');">
-						<?php $im['alt'] = 'Legende'; if ( $images[1]['alt'] || $images[1]['description'] ) : ?>
+						<?php $im['alt'] = 'DR'; if ( $images[1]['alt'] || $images[1]['description'] ) : ?>
 						<figcaption><strong>© <?= esc_html($images[1]['alt']); ?></strong> <?= esc_html($images[1]['description']); ?></figcaption>
 						<?php endif; /* If captions */ ?>
 						</div>	
@@ -2295,7 +2305,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 							 alt="<?= esc_html($images[1]['alt']); ?>"$
 							 class="img-fluid h-100" style="object-fit: cover; height: 100%;"
 						>
-						<?php $im['alt'] = 'Legende'; if ( $images[1]['alt'] || $images[0]['description'] ) : ?>
+						<?php $im['alt'] = 'DR'; if ( $images[1]['alt'] || $images[0]['description'] ) : ?>
 						<figcaption><strong>© <?= esc_html($images[1]['alt']); ?></strong> <?= esc_html($images[1]['description']); ?></figcaption>
 						<?php endif; /* If captions */ ?>
 						</div>	
@@ -2306,7 +2316,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 				<div class="col-4 bg-action-3" style="height: 540px;margin-top: -160px;">
 					<figure class="img-shifted shift-right h-100">
 						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[2]['full_url'] ?>');">
-						<?php $im['alt'] = 'Legende'; if ( $images[2]['alt'] || $images[2]['description'] ) : ?>
+						<?php $im['alt'] = 'DR'; if ( $images[2]['alt'] || $images[2]['description'] ) : ?>
 						<figcaption><strong>© <?= esc_html($images[2]['alt']); ?></strong> <?= esc_html($images[2]['description']); ?></figcaption>
 						<?php endif; /* If captions */ ?>
 						</div>	
@@ -2320,7 +2330,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 				<div class="col-8 bg-secondary" style="height: 540px;">
 					<figure class="img-shifted shift-right h-100">
 						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $images[3]['full_url'] ?>');">
-						<?php $im['alt'] = 'Legende'; if ( $images[3]['alt'] || $images[3]['description'] ) : ?>
+						<?php $im['alt'] = 'DR'; if ( $images[3]['alt'] || $images[3]['description'] ) : ?>
 						<figcaption><strong>© <?= esc_html($images[3]['alt']); ?></strong> <?= esc_html($images[3]['description']); ?></figcaption>
 						<?php endif; /* If captions */ ?>
 						</div>	
@@ -2671,7 +2681,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 	global $current_edition_id, $current_edition_slug; 
 	
 	// if ( $is_preview ) 
-	// 	print_r($attributes);
+	 	//print_r($attributes);
 
 	// Fields data.
 	if ( empty( $attributes['data'] ) ) {
@@ -2710,7 +2720,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 	$edition_id 		= ( isset($edition_id) && $edition_id != null && $edition_id != 0 )?$edition_id:$current_edition_id;
 	$edition_name		= ( !empty($edition) && !is_wp_error($edition) )?$edition->name:get_term($edition_id)->name;
 	$edition_year 		= ( !empty($edition) && !is_wp_error($edition) )?get_term_meta( $edition_id, 'wpcf-e-year', true ):'';
-	if ( empty($edition) || is_wp_error($edition) )
+	if ( empty($edition_id) ) //|| is_wp_error($edition) 
 		echo esc_html__( 'Please choose an edition', 'waff' );
 
 	// Get parent section by edition year
@@ -2842,7 +2852,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 						'size' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'post-featured-image-xs':'post-featured-image', //post-featured-image-x2
 						'alt' => esc_html($featured_img_caption),
 						'style' => 'object-fit: cover; width: 100%;',
-						'class' => 'img-fluid h-100-px')
+						'class' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'img-fluid h-100-px':'img-fluid h-800-px')
 					);
 				}
 				$section_credits_image 				= get_term_meta( $section_id, 'wpcf-s-credits-image', true ); 
@@ -2903,11 +2913,6 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 				<!-- 3800x1200 > 1900x600 -->
 				<?= $section_image ?>
 				</picture>
-				<?php if ( $featured_img_caption ) : ?>
-				<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($featured_img_caption); ?></strong></figcaption>
-				<?php elseif ( $section_credits_image ) : ?>
-				<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($section_credits_image); ?></strong></figcaption>
-				<?php endif; /* If captions */ ?>
 			</figure>
 			<?php endif; ?>
 			<div class="p-2 d-flex flex-column justify-content-between h-100" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>

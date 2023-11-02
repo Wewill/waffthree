@@ -44,7 +44,7 @@ $noedition = get_query_var( 'noedition', null );
 // Don\'t do any of that if USER is loggued / THEN write it ( below) 
 //if ( $selected_edition != $current_edition_id ) {
 if ( !in_array($current_edition_id, $selected_editions) ) {
-	//echo '#####';
+	// echo '#####';
 	if ( empty(array_intersect($allowed_roles, $user->roles )) )
 		$relocate = true;
 } 
@@ -52,18 +52,18 @@ if ( !in_array($current_edition_id, $selected_editions) ) {
 // Redirect if option current content online 
 // Don\'t do any of that if USER is loggued / THEN write it ( below) 
 if( $current_edition_films_are_online == false ){
-	//echo '%%%%%%';
+	// echo '%%%%%%';
 	if ( empty(array_intersect($allowed_roles, $user->roles )) )
 		$relocate = true;
 } 
 
 // Redirect if film status don't fit 
 // Don\'t do any of that if USER is loggued / THEN write it ( below) 
-if( !in_array($status, $allowed_status) ){
-	//echo '******';
-	if ( empty(array_intersect($allowed_roles, $user->roles )) )
-		$relocate = true;
-} 
+// if( !in_array($status, $allowed_status) ){
+// 	//echo '******';
+// 	if ( empty(array_intersect($allowed_roles, $user->roles )) )
+// 		$relocate = true;
+// } 
 
 if( $noedition == 1 ) {
 	$relocate = false;
@@ -87,13 +87,13 @@ echo '<br/>allowed=';
 print_r($allowed_roles);
 echo '<br/>In allowed users=';
 print_r(array_intersect($allowed_roles, $user->roles ));
-echo '<br/>In allowed edition / empty ? =';
+echo '<br/>In allowed users / empty ? =';
 echo empty(array_intersect($allowed_roles, $user->roles ));
 */
 
 if ( 	
-	in_array($status, $allowed_status) 
-	&& in_array($current_edition_id, $selected_editions)
+	/*in_array($status, $allowed_status) 
+	&&*/ in_array($current_edition_id, $selected_editions)
 	&& $current_edition_films_are_online == true
 ) 
 	$shownotice = false;
@@ -122,7 +122,7 @@ if( $relocate == true ){
 	header("HTTP/1.1 301 Moved Permanently");
 	header("Location: ".get_bloginfo('url'));
 	exit();
-	//echo 'JE REDIRIGE';
+	// echo 'JE REDIRIGE';
 }
 // Fin Relocate 
 

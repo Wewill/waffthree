@@ -152,8 +152,12 @@ if ( have_posts() ) {
 
 			<div class="col-sm-2" data-aos="fade-right">
 				<p class="--text-muted text-black position-sticky sticky-top --mb-0">
+					<?php if ( isset($counts['films']) && $counts['films'] != '0' ) 
+						print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); ?>
 					<?php /*if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
 						print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>');*/ ?>
+					<?php if ( isset($counts['events']) && $counts['events'] != '0' ) 
+						print( '<small class="d-block"><strong>' . sprintf( _n( '%s event', '%s events', $counts['events'], 'waff' ), $counts['events'] ) . '</strong></small>'); ?>
 					<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
 						print( '<small class="d-block"><strong>' . sprintf( _n( '%s program', '%s programs', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'); ?>
 					<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 
@@ -238,11 +242,12 @@ if ( have_posts() ) {
 					<div class="col-md-3 p-4" data-aos="fade-right">
 						<p class="--text-muted text-black position-sticky sticky-top mb-0">
 							<!-- <small class="d-block"><strong><?= count($results) ?> films</strong></small> -->
-
 							<?php /* if ( isset($counts['films']) && $counts['films'] != '0' ) 
 								print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); */ ?>
 							<?php if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
 								print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>'); ?>
+							<?php if ( isset($counts['events']) && $counts['events'] != '0' ) 
+								print( '<small class="d-block"><strong>' . sprintf( _n( '%s event', '%s events', $counts['events'], 'waff' ), $counts['events'] ) . '</strong></small>'); ?>
 							<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
 								print( '<small class="d-block"><strong>' . sprintf( _n( '%s program', '%s programs', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'); ?>
 							<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 

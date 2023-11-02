@@ -100,7 +100,6 @@ if ( have_posts() ) {
 	));	
 	print_r($results);*/
 
-
 	global $section_title_color, $section_color; /* From pagetitles/content php partial */ 
 
 	$section_id 						= get_queried_object_id();
@@ -111,6 +110,8 @@ if ( have_posts() ) {
 	//print_r('<pre>'.htmlspecialchars($section_content).'</pre>');
 	//print_r('<pre>'.strip_tags($section_content).'</pre>');
 	$section_additionnal_content 		= get_term_meta( $section_id, 'wpcf-s-additionnal-content', true ); 
+	$section							= get_term( $section_id, 'section' );
+
 
 	$filmography = '';
 	$section_filmography_of 			= get_term_meta( $section_id, 'wpcf-s-filmography-of', true ); 
@@ -250,6 +251,7 @@ if ( have_posts() ) {
 	</div>
 
 	<!-- List -->
+	<?php if ( $section->parent != 0 ) : ?> 
 	<section id="section" class="mt-md-10 mb-md-10 mt-5 mb-0 contrast--light <?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?'no-bg':'bg-bgcolor'; ?> f-w">
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center">
@@ -264,6 +266,10 @@ if ( have_posts() ) {
 						<!-- <small class="d-block"><strong><?= $wp_query->post_count ?> films</strong></small> -->
 						<?php if ( isset($counts['films']) && $counts['films'] != '0' ) 
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); ?>
+						<?php if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
+							print( '<small class="d-block"><strong>' . sprintf( _n( '%s projection', '%s projections', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>'); ?>
+						<?php if ( isset($counts['events']) && $counts['events'] != '0' ) 
+							print( '<small class="d-block"><strong>' . sprintf( _n( '%s event', '%s events', $counts['events'], 'waff' ), $counts['events'] ) . '</strong></small>'); ?>
 						<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s program', '%s programs', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'); ?>
 						<?php if ( isset($counts['wpcf-p-is-guest']) && $counts['wpcf-p-is-guest'] != '0' ) 
@@ -368,6 +374,26 @@ if ( have_posts() ) {
 				?>
 		</div>
 	</section>
+
+	<!-- Section list -->
+	<?php else: ?>
+		<section id="sections" class="mt-md-10 mb-md-10 mt-5 mb-0 contrast--light f-w">
+		<?php print(WaffTwo\Blocks\wa_sections_callback(
+			array(
+				'id' => 'called-from-taxonomy-section',
+				'name' => 'wa-sections',
+				'data' => array(
+					'waff_sl_title' => 'Sections', 
+					'waff_sl_edition' => $current_edition_id,
+					'waff_sl_show_introduction' => 1,
+					'waff_sl_show_parent_section' => 0,
+					'waff_sl_show_tiny_list' => 0,
+				),
+			)
+		)); ?>
+		</section>
+	<?php endif; ?>
+
 	<?php
 	// Reset 
 	wp_reset_postdata(); 

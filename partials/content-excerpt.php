@@ -38,14 +38,21 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 			the_title( '<h1 class="post__title entry-title m-0">', '</h1>' );
 		else :
 			if ( get_post_type(get_the_ID()) === 'film' ) : 
-				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true ); 
-				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true ); 
-					the_title( 
-						sprintf( '<h2 class="post__title entry-title m-0"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), 
-						sprintf( '</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">%s</span></h2>', $film_length, $film_french_title )
-					);
+					$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true ); 
+					$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true ); 
+					if ( $film_french_title != "" ) {
+						the_title( 
+							sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length ), 
+							'</span></h2>'
+						);
+					} else {
+						the_title( 
+							sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
+							sprintf('</a> <span class="length light">%s\'</span></h2>', $film_length) 
+						);
+					}
 				else :
-					the_title( sprintf( '<h2 class="post__title entry-title m-0"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
+					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 				endif;
 		endif;
 
