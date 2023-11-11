@@ -26,7 +26,7 @@ $page_atts = $args;
 				
 				<?php if ( has_nav_menu( 'primary' ) ) : ?>
 	
-				<div class="col-6 col-md-5 vh-50">
+				<div class="col-5 col-md-5 vh-50">
 					<nav id="main-nav" class="ml-0 ml-md-2 ms-0 ms-md-2" aria-label="<?php esc_attr_e( 'Primary Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
 	
 						<?php
@@ -45,7 +45,7 @@ $page_atts = $args;
 	
 					</nav>
 				</div>
-				<div class="col-6 col-md-4 mt-0 mt-md-3 vh-50">
+				<div class="col-7 col-md-4 mt-0 mt-md-3 vh-50">
 					<nav id="sub-nav" class="ml-0 ml-md-2 ms-0 ms-md-2" aria-label="<?php esc_attr_e( 'Primary Sub Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						
 						<?php
@@ -77,8 +77,8 @@ $page_atts = $args;
 						<div class="col-12 col-md-12 col-contact">
 
 							<!-- Contacts infos -->
-							<div class="subline medium mt-sm-5 mt-0 color-dark"><?php WaffTwo\display_site_message(); ?></div>
-							<div class="mt-1">
+							<div class="subline medium mt-sm-5 mt-0 color-dark d-none d-sm-block"><?php WaffTwo\display_site_message(); ?></div>
+							<div class="mt-1 d-none d-sm-block">
 								<small>
 									<?php WaffTwo\display_company_address(); ?>
 									<?php WaffTwo\display_phone(); ?>

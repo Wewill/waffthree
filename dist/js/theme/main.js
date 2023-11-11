@@ -553,7 +553,7 @@ jQuery(document).ready(function() {
 	function toggleCollapse (e) {
 		const _d = jQuery(e.target),
 			_t = jQuery(e.target).attr('aria-controls'),
-			_m = jQuery('.collapse-menu#' + _t),
+			_m = jQuery('#sub-nav .collapse-menu#' + _t), // #43 Added sub-nav 
 			_mp = jQuery(_d).parents('nav'),
 			_sp = jQuery(_m).parents('nav'),
 			_rp = jQuery(_d).parents('.row');
@@ -626,6 +626,14 @@ jQuery(document).ready(function() {
 	  //.on('mouseenter mouseleave','nav#main-nav',isRowHover)
 	  //.on('mouseenter mouseleave','nav#sub-nav',isRowHover)
 	  //.on('click', '.dropdown-menu a', toggleCollapse);
+
+	// #43 Added to prevent clickable link that block collapse submenu to open for android + add icon 
+	jQuery('#main-nav ul > li > a').each(function() {
+		console.log(jQuery(this).attr('data-target'));
+		var $t = jQuery(this);
+		if ( $t.attr('data-target') )
+			$t.attr({ href_disabled: $t.attr('href') }).removeAttr('href').parent().append('<i class="icon icon-down-right"></i>');
+	});
 
 
 	/*

@@ -214,8 +214,28 @@
 
 /* @group Nav */
 
-nav#main-nav li a > svg, nav#sub-nav li a > svg {
+/* #43 Stylized svg from theme */ 
+nav#main-nav li a > svg, nav#sub-nav li a > svg:first-of-type {
 	display: none;
+  height: 8px;
+}
+nav#sub-nav li a > svg {
+	/*display: none;*/
+  height: 8px;
+  margin-left: 5px;
+}
+
+/* #43 Icon down right added to main nav from main.js */ 
+nav#main-nav li > i, nav#sub-nav li > i {
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  nav#main-nav li a > svg, nav#sub-nav li a > svg {
+    height: 4px !important;
+  }
+  nav#main-nav li > i, nav#sub-nav li > i {
+    font-size: 10px !important;
+  }  
 }
 
 /* @end */
