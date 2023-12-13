@@ -1184,7 +1184,8 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li > a,
 .night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li a:hover,
 .night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) .nav li.current_page_item > a {
-  color: #000000 !important;
+  /*color: #000000 !important;*/
+  color: #FFF !important;
 }
 
 .night-mode .search-toggle .icon,
