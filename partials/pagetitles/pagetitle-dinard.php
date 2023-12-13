@@ -262,6 +262,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 		</section>
 		<!-- END: #pagetitle -->
 
+	</section>
+	<!-- END: #pageheader -->
+
 <?php elseif ( $args == 'jury' ) : ?>
 	<?php 
 		$jury_description 	= get_post_meta( $post->ID, 'wpcf-j-description', true ); 
@@ -520,51 +523,51 @@ if ( is_singular() && has_post_thumbnail() ) {
 		}		
 	?>	<!-- #pagetitle : Modern -->
 	<section id="pagetitle" class="--mt-0 --mt-md-9 mb-0 --contrast--light bg-action-1 modern-header <?= esc_attr($room_color_class) ?>" <?= $room_color ?> data-aos="fade-up" data-aos-id="pagetitle">
-	<div class="jumbotron">
-		<div class="container-fluid">
-			<div class="row pt-sm-20 --pt-15 pt-10">
-				<div class="col-sm-7 col-12 zi-5">
-					<hgroup data-aos="fade-down">
-						<h1 class="heading-3 title mb-2 <?= esc_attr($room_title_color) ?>"><?= sanitize_text_field(single_term_title()) ?></h1>
-						<?= WaffTwo\waff_entry_meta_header(); ?>	
-					</hgroup>
+		<div class="jumbotron">
+			<div class="container-fluid">
+				<div class="row pt-sm-20 --pt-15 pt-10">
+					<div class="col-sm-7 col-12 zi-5">
+						<hgroup data-aos="fade-down">
+							<h1 class="heading-3 title mb-2 <?= esc_attr($room_title_color) ?>"><?= sanitize_text_field(single_term_title()) ?></h1>
+							<?= WaffTwo\waff_entry_meta_header(); ?>	
+						</hgroup>
+					</div>
 				</div>
-			</div>
-			<div class="row <?= (($room_image != '')?'mt-n':'mt-4') ?> align-items-end g-0 f-w">
-				<div class="col-sm-5 col-6">
-					<?php if ( $room_address != '' ) echo '<h6 class="m-gutter-l headline d-inline '.$room_title_color.'">'.$room_address.'</h6>'; ?>
-					<ul class="p-gutter-l list-unstyled mt-3 mb-2 <?= $room_title_color ?>">
-						<?= $openings ?>
-					</ul>
-					<ul class="p-gutter-l list-unstyled mt-2 mb-8 <?= $room_title_color ?>">
-						<?php if ( $room_gauge != '' ) echo '<li class="subline opacity-75"><strong>Capacité</strong> <span class="headline medium">'.$room_gauge.'</span></li>'; ?>
-						<?php if ( $room_maximum != '' ) echo '<li class="subline opacity-75"><strong>Capacité max.</strong> <span class="headline medium">'.$room_maximum.'</span></li>'; ?>
-						<?php if ( $room_pmr != '' ) echo '<li class="subline opacity-75"><strong>Places PMR</strong> <span class="headline medium">'.$room_pmr.'</span></li>'; ?>
-					</ul>
-				</div>
-				<div class="col-sm-7 col-6">
-					<figure title="<?php echo esc_attr($room_image_description); ?>">
-						<picture class="lazy duotone-<?= $room_id ?>" style="background-color:<?= $_room_color ?>;">
-						<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
-							<?= $room_image ?>
-						</picture>
-						<?php if ( $room_image_caption || $room_image_description ) : ?>
-						<figcaption><strong>© <?= esc_html($room_image_caption); ?></strong> <?= esc_html($room_image_description); ?></figcaption>
-						<?php endif; /* If captions */ ?>
-					</figure>
-					<style scoped>
-						.duotone-<?= $room_id ?> img {
-							filter: grayscale(1);
-							mix-blend-mode: screen;
-							background-color: <?= $_room_color ?>;
-						}
-					</style> 
+				<div class="row <?= (($room_image != '')?'mt-n':'mt-4') ?> align-items-end g-0 f-w">
+					<div class="col-sm-5 col-6">
+						<?php if ( $room_address != '' ) echo '<h6 class="m-gutter-l headline d-inline '.$room_title_color.'">'.$room_address.'</h6>'; ?>
+						<ul class="p-gutter-l list-unstyled mt-3 mb-2 <?= $room_title_color ?>">
+							<?= $openings ?>
+						</ul>
+						<ul class="p-gutter-l list-unstyled mt-2 mb-8 <?= $room_title_color ?>">
+							<?php if ( $room_gauge != '' ) echo '<li class="subline opacity-75"><strong>Capacité</strong> <span class="headline medium">'.$room_gauge.'</span></li>'; ?>
+							<?php if ( $room_maximum != '' ) echo '<li class="subline opacity-75"><strong>Capacité max.</strong> <span class="headline medium">'.$room_maximum.'</span></li>'; ?>
+							<?php if ( $room_pmr != '' ) echo '<li class="subline opacity-75"><strong>Places PMR</strong> <span class="headline medium">'.$room_pmr.'</span></li>'; ?>
+						</ul>
+					</div>
+					<div class="col-sm-7 col-6">
+						<figure title="<?php echo esc_attr($room_image_description); ?>">
+							<picture class="lazy duotone-<?= $room_id ?>" style="background-color:<?= $_room_color ?>;">
+							<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
+								<?= $room_image ?>
+							</picture>
+							<?php if ( $room_image_caption || $room_image_description ) : ?>
+							<figcaption><strong>© <?= esc_html($room_image_caption); ?></strong> <?= esc_html($room_image_description); ?></figcaption>
+							<?php endif; /* If captions */ ?>
+						</figure>
+						<style scoped>
+							.duotone-<?= $room_id ?> img {
+								filter: grayscale(1);
+								mix-blend-mode: screen;
+								background-color: <?= $_room_color ?>;
+							}
+						</style> 
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- END: #pagetitle -->
+	</section>
+	<!-- END: #pagetitle -->
 
 <?php else: ?>	
 
