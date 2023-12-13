@@ -2552,13 +2552,12 @@ aside.widget-area h6:first-of-type {
 
 
 /*
-  Search 
+  Search form bg color but not in night mode
 */
 
-.search .site-content {
+*:not(.night-mode) .search .site-content {
   background-color: var(--waff-color-layout-lighten-1, #eee);
 }
-
 
 /* FIX TO REPORT to styles-fifam.css */
 
