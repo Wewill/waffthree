@@ -839,6 +839,7 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 --------------------------------------------------------------*/
 .night-mode body,
 .night-mode .card, 
+.night-mode .bg-white,
 .night-mode .bg-action-1,
 .night-mode .bg-action-2, 
 .night-mode .bg-action-3,
