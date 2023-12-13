@@ -133,6 +133,10 @@
     text-align: var(--editor-title-block--alignment);
 }
 
+.edit-post-visual-editor__post-title-wrapper {
+    margin-top: 1rem !important; /* Reducing padding berfore title for wizard */
+}
+
 /* @group Blocks */
 
 .wp-block:not([data-align=full]):not([data-type=coblocks/feature]):not([data-type=core/button]):not([data-type=core/column]) {
