@@ -895,7 +895,7 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 
 /* Used for header search and night mode button */
 .night-mode body.waff-theme-diag header.masthead.has-background:not(.contrast--reverse) button {
-  color: #161616 !important;
+  /*color: #161616 !important;*/
 }
 
 .night-mode .film-card.card-dark h2, 
