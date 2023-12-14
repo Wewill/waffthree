@@ -69,11 +69,11 @@ function setup() {
 	remove_filter( 'nav_menu_item_title', 'Go\Core\\add_dropdown_icons');
 	add_filter( 'nav_menu_item_title', $n( 'waff_add_dropdown_icons' ), 10, 4 );
 
-	if ( !is_admin() && !function_exists('rwmb_meta') ) {
+	if ( !is_login() && !is_admin() && !function_exists('rwmb_meta') ) {
 		wp_die('Error : please install Meta Box plugin.');
 	}
 	
-	if ( !is_admin() && !function_exists('waff_load_textdomain') ) {
+	if ( !is_login() && !is_admin() && !function_exists('waff_load_textdomain') ) {
 		wp_die('Error : please install WAFF Functions plugin.');
 	}
 
