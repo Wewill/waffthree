@@ -74,7 +74,7 @@ function setup() {
 	}
 
 	if ( !is_login() && !is_admin() && !function_exists('mb_blocks_load') ) {
-		wp_die('Error : please install Meta Box plugin.');
+		wp_die('Error : please install Meta Box Blocks plugin.');
 	}
 	
 	if ( !is_login() && !is_admin() && !function_exists('waff_load_textdomain') ) {
