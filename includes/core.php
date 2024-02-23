@@ -237,9 +237,9 @@ function waff_design_styles( $default_design_styles = '' ) {
 					'label'             => _x( 'Original', 'color palette name', 'go' ), // possibly for alternative (in the future)
 				), (array)WAFF_COLORS ),
 				// Double because of an error of sibling the right 'one' color schemes instead on waff-one ( new IN WP ? .. )
-				'waff-one'   => array_merge( array(
-					'label'             => _x( 'Original', 'color palette name', 'go' ), // possibly for alternative (in the future)
-				), (array)WAFF_COLORS ),
+				// 'waff-one'   => array_merge( array(
+				// 	'label'             => _x( 'Original', 'color palette name', 'go' ), // possibly for alternative (in the future)
+				// ), (array)WAFF_COLORS ),
 			),
 			/* > No google fonts
 			'fonts' => array(
