@@ -1,3 +1,10 @@
+"use strict"; // Apply strict mode to the entire script
+
+/**
+ * Logo-invert considering scroll position and section class functions file.
+ * Call by custom-wp-widget-counter.php
+ */
+
 var fps = 25;
 
 // Detect request animation frame
@@ -88,13 +95,15 @@ function loop(){
 	      if ( currentSection ) { 
 	        replaceContainer[0].classList.remove('js-replace--reverse');
 			headerContainer[0].classList.add('contrast--reverse');
-			//headerContainer[0].classList.remove('navbar-light');
-			//headerContainer[0].classList.add('navbar-dark');
+			// Handle fifam case 
+			headerContainer[0].classList.remove('navbar-light'); // Why ? Because fifam does not change color on home homeslide 
+			headerContainer[0].classList.add('navbar-dark'); // Handle this case @TODO FIFAM 
 	      } else {
 	        replaceContainer[0].classList.add('js-replace--reverse')
 	        headerContainer[0].classList.remove('contrast--reverse')
-			//headerContainer[0].classList.remove('navbar-dark');
-			//headerContainer[0].classList.add('navbar-light');
+			// Handle fifam case 
+			headerContainer[0].classList.remove('navbar-dark'); // Why ? Because fifam does not change color on home homeslide 
+			headerContainer[0].classList.add('navbar-light'); // Handle this case @TODO FIFAM 
 	      }
 	    }
 	    // end active section
@@ -103,7 +112,8 @@ function loop(){
 	    if ( (replaceItemTop < sectionTop) && ( sectionTop <= replaceItemBottom) ) {
 	      // animate only, if section background changed
 	      if (currentSection != lastSection)  {
-	        document.documentElement.style.setProperty('--replace-offset', 100 / replaceItemHeight * parseInt(sectionTop - replaceItemTop) + '%');
+	        //document.documentElement.style.setProperty('--replace-offset', 100 / replaceItemHeight * parseInt(sectionTop - replaceItemTop) + '%');
+	        document.documentElement.style.setProperty('--waff-logo-invert-replace-offset', 100 / replaceItemHeight * parseInt(sectionTop - replaceItemTop) + '%'); //WAFFTWO 2
 	      }
 	    }
 	    // end active section in replace area
@@ -111,7 +121,8 @@ function loop(){
 	    // if section above replace area
 	    if ( replaceItemTop >= sectionTop ) {
 	      // set offset to 0 if you scroll too fast
-	      document.documentElement.style.setProperty('--replace-offset', 0 + '%');
+	      //document.documentElement.style.setProperty('--replace-offset', 0 + '%');
+	      document.documentElement.style.setProperty('--waff-logo-invert-replace-offset', 0 + '%'); //WAFFTWO 2
 	      // set last section to current section
 	      lastSection = currentSection;
 	    }
