@@ -30,10 +30,10 @@ $blog_description = get_bloginfo( 'description' );
 				</div>
 			</div>
 
-			<!-- Baseline -->
+			<!-- Tagline -->
 			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4">
 				<?php if ( !empty( $blog_description ) ) :
-					echo '<p class="h3 f-heading font-weight-bold text-action-1">' . esc_html( $blog_description ) . '</p>';
+					echo '<p class="h3 f-heading font-weight-bold text-action-1">' . WaffTwo\waff_display_site_description() . '</p>';
 				endif;	?>				
 			</div>
 
