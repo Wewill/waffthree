@@ -22,7 +22,7 @@ itemtype="http://schema.org/WebSite"
 			<div class="form-group g-0 w-100 --bg-action-2">
 					<div class="input-group p-2">
 					<meta itemprop="target" content="<?php echo esc_url( home_url( '/' ) ); ?>/?s={s}" />
-					<label for="search-field visually-hidden">
+					<label for="search-field" class="visually-hidden">
 						<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'go' ); ?></span>
 					</label>
 					<input class="form-control form-control-lg focus-action-1 input input--search search-form__input p-2 ms-1 me-2 flex-fill w-50" itemprop="query-input" type="search" id="search-field" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'go' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
@@ -40,7 +40,7 @@ itemtype="http://schema.org/WebSite"
 			<div class="form-group g-0">
 					<div class="input-group mb-3">
 					<meta itemprop="target" content="<?php echo esc_url( home_url( '/' ) ); ?>/?s={s}" />
-					<label for="search-field visually-hidden">
+					<label for="search-field" class="visually-hidden">
 						<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'go' ); ?></span>
 					</label>
 					<input class="form-control form-control-lg focus-dark input input--search search-form__input" itemprop="query-input" type="search" id="search-field" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'go' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
