@@ -14,3 +14,9 @@
 .mb-block-edit .rwmb-field {
 	display: block !important;
 }
+
+/* Hide Metabox no licence notification */
+
+#meta-box-notification {
+    display: none;
+}
