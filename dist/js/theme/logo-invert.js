@@ -26,7 +26,7 @@ var replaceItemHeight = -1;
 //Start at items Height
 var itemHeight = 0; // FIFAM 140 / DINARD 0
 var body = document.querySelector("body");
-hasHeight = body.classList.contains('waff-theme-fifam');
+var hasHeight = body.classList.contains('waff-theme-fifam');
 if ( hasHeight ) { 
 	itemHeight = 140;
 } else {
