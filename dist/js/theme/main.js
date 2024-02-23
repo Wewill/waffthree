@@ -32,7 +32,8 @@ jQuery(document).ready(function() {
 		https://michalsnik.github.io/aos/
 	*/
 	AOS.init({
-		offset: 	0, // offset (in px) from the original trigger point
+		offset: 	120, // offset (in px) from the original trigger point // old 120
+		delay: 		100, // Main delay 
 		disable: 	'mobile', //disabled on mobiles 
 		once: 		true, // play once only
 	});
@@ -219,7 +220,7 @@ jQuery(document).ready(function() {
 		}
 	};
   
-	jQuery('[data-toggle="affix"]').each(function() {
+	jQuery('[data-toggle="affix"], [data-bs-toggle="affix"]').each(function() {
 		var ele = jQuery(this),
 		    wrapper = jQuery('<div></div>');
 		ele.before(wrapper);
@@ -320,18 +321,17 @@ jQuery(document).ready(function() {
 	
 	// Home slide > Events
 	jQuery('.slider-for').on('afterChange', function(event,slick,i){ 
-	    jQuery('.slider-list li').removeClass('slick-current').removeClass('active'); 
-	    jQuery('.slider-list li').eq(i).addClass('slick-current').addClass('active');
+	    jQuery('.slider-list li, .slider-list a').removeClass('slick-current').removeClass('active'); 
+	    jQuery('.slider-list li, .slider-list a').eq(i).addClass('slick-current').addClass('active');
 	}); 
 	//set active class to first slide 
-	jQuery('.slider-list li').eq(0).addClass('slick-current').addClass('active'); 
+	jQuery('.slider-list li, .slider-list a').eq(0).addClass('slick-current').addClass('active'); 
 	
 	//Clicks 
-	jQuery('.slider-list li').click(function(e){
+	jQuery('.slider-list li, .slider-list a').click(function(e){
 	    e.preventDefault();
 		jQuery('#slick-homeslide .slider-nav').slick('slickGoTo', parseInt(jQuery(this).index()), false);
 	});
-	 
 	
 	// Carousel > master Slick Slide 				
 	jQuery('.slick-carousel').slick({
@@ -464,6 +464,7 @@ jQuery(document).ready(function() {
 	// When the page has loaded
 	jQuery('#flash').fadeOut().removeClass('d-none').fadeIn(600);
 	
+	
 	jQuery('#flash').slick({
 		slidesToShow: 1,
 		slidesToScroll: 1, 
@@ -488,6 +489,7 @@ jQuery(document).ready(function() {
 		focusOnSelect:true,
 		lazyLoad: 'ondemand',
 	});
+
 	
 	/*
 		-------------------------------------------------
@@ -550,7 +552,7 @@ jQuery(document).ready(function() {
 		Collapse on hover main-nav  
 		-------------------------------------------------
 	*/
-	function toggleCollapse (e) {
+	function toggleCollapseNav (e) {
 		const _d = jQuery(e.target),
 			_t = jQuery(e.target).attr('aria-controls'),
 			_m = jQuery('#sub-nav .collapse-menu#' + _t), // #43 Added sub-nav 
@@ -620,9 +622,10 @@ jQuery(document).ready(function() {
 			}
 		}, 3000);
 	}
-	
+
+	// @Todo To update in pure javascript 	
 	jQuery('body')
-	  .on('mouseenter mouseleave','nav#main-nav a',toggleCollapse)
+	  .on('mouseenter mouseleave','nav#main-nav a',toggleCollapseNav)
 	  //.on('mouseenter mouseleave','nav#main-nav',isRowHover)
 	  //.on('mouseenter mouseleave','nav#sub-nav',isRowHover)
 	  //.on('click', '.dropdown-menu a', toggleCollapse);
@@ -634,8 +637,30 @@ jQuery(document).ready(function() {
 		if ( $t.attr('data-target') )
 			$t.attr({ href_disabled: $t.attr('href') }).removeAttr('href').parent().append('<i class="icon icon-down-right"></i>');
 	});
+	
 
+	/*
+		-------------------------------------------------
+		Collapse on hover main-nav  
+		-------------------------------------------------
+	*/
 
+	// Collapse Hover 
+	var collapsesHover = document.getElementsByClassName('collapse-hover');
+	for (var i = 0; i < collapsesHover.length; ++i) {
+		let _id = collapsesHover[i].getAttribute('aria-controls');
+		let _collapseHover = document.getElementById(_id);	
+		var bsCollapseHover = new bootstrap.Collapse(_collapseHover, { toggle: false });
+		// Hover
+		collapsesHover[i].addEventListener("mouseover",function(e){
+			bsCollapseHover.show();
+		},false);
+		// Out
+		collapsesHover[i].addEventListener("mouseout",function(e){
+			bsCollapseHover.hide();
+		},false);
+	}
+	
 	/*
 	-------------------------------------------------
 	Init Color thief > MAJ w/ in PHP
@@ -651,6 +676,15 @@ jQuery(document).ready(function() {
 	// 	console.log(thisColor);
 	// 	console.log("#colors" + theseColors);
 	// }
+
+	/*
+	-------------------------------------------------
+	Styling
+	-------------------------------------------------
+	*/
+
+	// Tag first word on H2 to css styling it / added .site > only FRONT / added .waff-theme-rsfp only RSFP
+	jQuery('.waff-theme-rsfp .site .is-formatted h2').each(function(){  jQuery(this).html( jQuery(this).html().replace(/(^\w+)/,'<span class="first-word">$1</span>') ); });
 
 
 }); // End dom ready
