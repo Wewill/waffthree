@@ -21,7 +21,7 @@ $has_background   = Go\has_footer_background();
 				<div class="col-12">
 					
 					<div class="ml-4 ms-4 mb-2" data-aos="fade-down" data-aos-delay="100">
-						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?>/dist/images/logotype_fifam_seul_white.svg" width="50" height="60"></div>
+						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?>/dist/images/logotype_fifam_seul_white.svg" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="50" height="60"></div>
 						<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 					</div>
 					

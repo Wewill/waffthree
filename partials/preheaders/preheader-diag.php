@@ -66,7 +66,7 @@ $page_atts = $args;
 
 						<!-- Social menu -->
 						<?php if ( has_nav_menu( 'social' ) ) : ?>
-							<div id="socials" class="socials ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline --d-none --d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'Social Menu', 'waff' ); ?>">
+							<div class="socials ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline --d-none --d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'Social Menu', 'waff' ); ?>">
 								<?= WaffTwo\Theme\waff_get_social_menu(); ?>
 							</div>
 						<?php endif; ?>

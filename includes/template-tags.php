@@ -311,11 +311,11 @@ function waff_get_post_meta( $post_id = null, $location = 'top' ) {
  * @return void
 */
 function browser_notice() {
-	?>
-	<!--[if lt IE 8]>
+?>
+<!--[if lt IE 8]>
 		<p class="browserupgrade d-block px-3 py-2 text-center text-bold text-dark bg-warning m-0">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" class="text-danger link">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
-	<?php
+<?php
 }
 
 /**
@@ -447,11 +447,9 @@ function display_site_message( $args = array() ) {
 	?>
 
 	<?php if ( $site_message != "" || is_customize_preview() ) : ?>
-		<div class="<?php echo esc_attr( $args['class'] ); ?>">
-			<span id="site_message" class="message">
+		<span class="<?php echo esc_attr( $args['class'] ); ?> message">
 				<?php echo wp_kses( $site_message, $html ); ?>
-			</span>
-		</div>
+		</span>
 	<?php endif; ?>
 
 	<?php

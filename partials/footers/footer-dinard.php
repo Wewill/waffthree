@@ -25,7 +25,7 @@ $blog_description = get_bloginfo( 'description' );
 			<!-- Logotype -->
 			<div class="col-12 col-sm-6 px-3 px-md-5 py-md-7 py-4 pt-5 border-end">
 				<div class="" data-aos="fade-down" data-aos-delay="100">
-					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" width="50" height="60"></div>
+					<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="50" height="60"></div>
 					<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 				</div>
 			</div>

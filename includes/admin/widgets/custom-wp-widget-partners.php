@@ -8,6 +8,7 @@ class WP_Widget_Partners extends WP_Widget {
         'text'   			=> '<p class="subline px-4">Nos sponsors & partenaires</p>',
 		'classes' 			=> 'pt-md-10 pb-md-10 pt-5 pb-5 contrast--light bg-layoutcolor',
 		'inside_classes' 	=> 'px-4',
+		'width' 			=> 'full',
     );  
 	function __construct() {	
 		$widget_ops  = array(
@@ -40,8 +41,8 @@ class WP_Widget_Partners extends WP_Widget {
 		global $current_edition, $previous_editions, $current_edition_id, $current_edition_films_are_online;
 		?>	
 		
-			<div class="container-fluid px-0">
-				<div class="row g-0">
+			<div class="container-fluid <?= $instance['width'] === 'full' ? 'px-0':''; ?>">
+				<div class="row <?= $instance['width'] === 'full' ? 'g-0':''; ?>">
 					<div class="col-12 h-100" data-aos="fade-down" data-aos-delay="200">
 							<?= $text ?>
 							<!-- Partners carousel -->
@@ -51,8 +52,9 @@ class WP_Widget_Partners extends WP_Widget {
 							$post_type 			= ( post_type_exists('partenaire') )?'partenaire':'partner'; // Depreciated WAFFTWO V1 
 							$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
 							$partner_field 		= ( post_type_exists('partenaire') )?'p-link':'waff_partner_link'; // Depreciated WAFFTWO V1 
+							$partner_field 		= ( defined('WAFF_THEME') && 'RSFP' === WAFF_THEME && post_type_exists('partner') )?'p_general_link':$partner_field; // Special RSFP 
 
-							$partners = new WP_Query( array( 'post_type' => $post_type, 'posts_per_page' => 200 ) ); 
+							$partners = new WP_Query( array( 'post_type' => $post_type, 'posts_per_page' => 200 ) );
 							
 							while ( !is_admin() && $partners->have_posts() ) : $partners->the_post(); 
 							
@@ -70,13 +72,25 @@ class WP_Widget_Partners extends WP_Widget {
 										$link = 'https://' . $link;
 									}
 
+									// Edition / or archive filtering 
 							    	// Get selected edition term
-									$terms = get_the_terms( $id, 'edition' );
-									$selected_edition = $terms[0]->term_id; 
-									$selected_editions = array();
-									foreach ($terms as $term) 
-										$selected_editions[] = $term->term_id;
-									if ( in_array($current_edition_id, $selected_editions) ) :
+									$__print_this_partner = false;
+									if ( $current_edition_id !== NULL && taxonomy_exists( 'edition') ) {
+										// Edition filtering, check edition before continuing
+										$terms = get_the_terms( $id, 'edition' );
+										$selected_edition = $terms[0]->term_id; 
+										$selected_editions = array();
+										foreach ($terms as $term) 
+											$selected_editions[] = $term->term_id;
+										if (in_array($current_edition_id, $selected_editions)) $__print_this_partner = true; 
+									} else {
+										// No edition filtering, continue
+										$__print_this_partner = true;
+									}
+
+									// Then continue if we have a selected edition OR no edition taxonomy
+									if ( $__print_this_partner ) :
+
 								    	// Post Thumbnail
 										$featured_img_urls = array();
 										$partenaire_featured_sizes = array(
@@ -85,6 +99,8 @@ class WP_Widget_Partners extends WP_Widget {
 											'partenaire-featured-image-x2',
 										);
 										$selected_featured_sizes = $partenaire_featured_sizes;
+
+
 										if ( !empty($id) && has_post_thumbnail($id) ) {  //is_singular() &&
 											
 											// Featured Image
@@ -93,7 +109,7 @@ class WP_Widget_Partners extends WP_Widget {
 											// Colorized image 
 											if ( defined('WAFF_HAS_PARTNERS_COLORIZED_IMAGES') && WAFF_HAS_PARTNERS_COLORIZED_IMAGES === true ) {
 												$_colorized_desktop_URL = get_post_meta( $id, '_colorized_desktop_URL', true );
-												$_colorized_retina_URL = get_post_meta( $id, '_colorized_retina_URL', true );
+												$_colorized_retina_URL 	= get_post_meta( $id, '_colorized_retina_URL', true );
 												$featured_img_urls['partenaire-featured-image-colorized'] = $_colorized_desktop_URL;
 												$featured_img_urls['partenaire-featured-image-colorized-x2'] = $_colorized_retina_URL;
 											}
@@ -145,6 +161,9 @@ class WP_Widget_Partners extends WP_Widget {
 		if ( !isset($instance['inside_classes']) )
 	        $instance['inside_classes'] = null;
 
+		if ( !isset($instance['width']) )
+	        $instance['width'] = null;
+
 			/** This filter is documented in wp-includes/class-wp-editor.php */
 		$text = apply_filters( 'the_editor_content', $instance['text'], $default_editor );
 
@@ -174,6 +193,18 @@ class WP_Widget_Partners extends WP_Widget {
 		    <label for="<?php echo $this->get_field_id('inside_classes'); ?>"><?php esc_html_e('Inside classes:', 'waff'); ?></label>
 		    <input type="text" id="<?php echo $this->get_field_id( 'inside_classes' ); ?>" name="<?php echo $this->get_field_name( 'inside_classes' ); ?>" class="widefat inside_classes sync-input" value="<?php echo esc_attr( $instance['inside_classes'] ); ?>"/>
 		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('width'); ?>"><?php esc_html_e('Width:', 'waff'); ?>
+				<select class='widefat' id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text">
+					<option value='fluid' <?php echo ($instance['width']=='fluid')?'selected':''; ?>>
+						<?php _e( 'Container-fluid', 'waff' ); ?>
+					</option>
+					<option value='full' <?php echo ($instance['width']=='full')?'selected':''; ?>>
+						<?php _e( 'Full-width', 'waff' ); ?>
+					</option> 
+				</select>                
+			</label>
+		</p>			
 		<?php 
 	}
 	      
@@ -189,6 +220,7 @@ class WP_Widget_Partners extends WP_Widget {
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		$instance['classes'] = sanitize_text_field( $new_instance['classes'] );
 		$instance['inside_classes'] = sanitize_text_field( $new_instance['inside_classes'] );
+		$instance['width'] = sanitize_text_field( $new_instance['width'] );
 
 		if ( current_user_can( 'unfiltered_html' ) ) {
 			$instance['text'] = $new_instance['text'];

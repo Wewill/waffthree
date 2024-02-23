@@ -31,6 +31,7 @@ function setup() {
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-newsletter.php' );
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-partners.php' );
 	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-contact.php' );
+	require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-twocols.php' );
 	if( true === WAFF_ISFILM_VERSION ) {
 		require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-section.php' );
 		//require_once get_theme_file_path( 'includes/admin/widgets/custom-wp-widget-programmation.php' );
@@ -78,11 +79,12 @@ function setup() {
 function waff_child_enqueue_styles() {
     //wp_enqueue_style( 'waff-parent-style', get_template_directory_uri() . '/style.css' );
     //wp_enqueue_style( 'waff-parent-style', get_stylesheet_directory_uri() . '/parent-style.css' ); // Keep some styles from waff
-    wp_enqueue_style( 'bootstrap', 	'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css', 				array(), '5.2.0'); 
-    wp_enqueue_style( 'aos', 		'https://unpkg.com/aos@next/dist/aos.css', 												array(), '3.0.0'); // Version beta next
-    wp_enqueue_style( 'slick', 		'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', 					array(), '1.8.1'); 
-    wp_enqueue_style( 'fancybox', 	'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', 	array(), '3.5.7'); 
-    wp_enqueue_style( 'fontawesome','https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css', 			array(), '5.13.0'); 
+    wp_enqueue_style( 'bootstrap', 		'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', 				array(), '5.3.2'); 
+    wp_enqueue_style( 'bootstrap-icons','https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', 	array(), '1.11.3'); 
+    wp_enqueue_style( 'aos', 			'https://unpkg.com/aos@next/dist/aos.css', 												array(), '3.0.0'); // Version beta next
+    wp_enqueue_style( 'slick', 			'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', 					array(), '1.8.1'); 
+    wp_enqueue_style( 'fancybox', 		'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', 	array(), '3.5.7'); 
+    wp_enqueue_style( 'fontawesome',	'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css', 			array(), '5.13.0'); 
 	//
     wp_enqueue_style( 'waff-style', get_stylesheet_directory_uri() . '/dist/css/style-'.WAFF_STYLES.'.css', 				array(), WAFF_THEME_VERSION); // Will import framework.css
     //wp_enqueue_style( 'waff-logo', get_stylesheet_directory_uri() . '/css/logo-invert.css', 										array(), '1.0.0'); 	    
@@ -90,14 +92,9 @@ function waff_child_enqueue_styles() {
 
 function waff_child_enqueue_scripts() {
 	// Jquery
-    //wp_enqueue_script( 'jquery', 				'https://code.jquery.com/jquery-3.6.1.min.js',													array(),'3.6.1',true);
     wp_enqueue_script( 'modernizer', 			get_stylesheet_directory_uri() . '/dist/js/theme/vendor/modernizr-2.8.3-respond-1.4.2.min.js', 	array(), '2.8.3',true);
 	// Distant 
-		// Issue with jQuery
-		// wp_enqueue_script( 'popper', 				'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js',			array(),'5.2.0',true);
-		// wp_enqueue_script( 'bootstrap', 			'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js',				array(),'5.2.0',true);
-	// Issue with jQuery
-	wp_enqueue_script( 'bootstrap', 			'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js',			array(), '5.2.0',true);
+	wp_enqueue_script( 'bootstrap', 			'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js',			array(), '5.3.2',true);
     wp_enqueue_script( 'slick', 				'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js',					array(), '1.8.1',true);
     wp_enqueue_script( 'aos', 					'https://unpkg.com/aos@next/dist/aos.js',												array(), '3.0.0',true); // Version beta next
     wp_enqueue_script( 'fancybox', 				'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js',		array(), '3.5.7',true);
@@ -115,16 +112,13 @@ function waff_child_enqueue_scripts() {
 		wp_enqueue_script( 'waff-programmation-ajax', get_stylesheet_directory_uri() . '/dist/js/theme/programmation-ajax.js', 			array('jquery'), WAFF_THEME_VERSION,true); //#43 New ajax version 
 }
 
-// Add attributes
+// Add attributes / integrity check
 function waff_add_style_attributes( $html, $handle ) {
-    if ( 'bootstrap' === $handle ) return str_replace( "media='all'", "media='all' integrity='sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx' crossorigin='anonymous'", $html );
+    if ( 'bootstrap' === $handle ) return str_replace( "media='all'", "media='all' integrity='sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN' crossorigin='anonymous'", $html );
     return $html;
 }
 function waff_add_script_attributes( $html, $handle ) {
-    // if ( 'popper' === $handle ) return str_replace( "id='popper-js'", "id='popper-js' integrity='sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk' crossorigin='anonymous'", $html );
-	// if ( 'bootstrap' === $handle ) return str_replace( "id='bootstrap-js'", "id='bootstrap-js' integrity='sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK' crossorigin='anonymous'", $html );
-    // Bundle 
-	if ( 'bootstrap' === $handle ) return str_replace( "id='bootstrap-js'", "id='bootstrap-js' integrity='sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa' crossorigin='anonymous'", $html );
+	if ( 'bootstrap' === $handle ) return str_replace( "id='bootstrap-js'", "id='bootstrap-js' integrity='sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL' crossorigin='anonymous'", $html );
     return $html;
 }
 
@@ -140,7 +134,7 @@ function waff_child_admin_scripts($hook) {
 
 	// For All 
     wp_enqueue_style( 'child-custom-styles', 	get_stylesheet_directory_uri() . '/dist/css/admin/child-custom-styles.css', array(), '1.0.0'); 
-    wp_enqueue_script( 'child-custom-admin', get_stylesheet_directory_uri() . '/dist/js/admin/child-custom-admin.js','','',true);
+    wp_enqueue_script( 'child-custom-admin', 	get_stylesheet_directory_uri() . '/dist/js/admin/child-custom-admin.js','','',true);
 }	
 
 /**
@@ -153,21 +147,16 @@ function waff_localstorage_scripts() {
 	// If the option is not available, or we're not in the Customizer, return.
 	if ( $night || is_customize_preview() ) {
 		echo '
-<!-- BEGIN:: Theme night_mode-->
-<script type="text/javascript">
-	! function(e, t, n) {
-		"use strict";
-
-		function o(e) {
-			var n = localStorage.getItem(e); n && ( "true" === n && t.documentElement.classList.add(e) )
-		}
-
-		"querySelector" in t && "addEventListener" in e, "localStorage" in e && (o("night-mode") )
-
-	}(window, document)
-</script>
-<!-- END:: Theme night_mode-->
-		';
+	<!-- BEGIN:: Theme night_mode-->
+	<script type="text/javascript">
+		! function(e, t, n) {
+			"use strict";
+			function o(e) { var n = localStorage.getItem(e); n && ( "true" === n && t.documentElement.classList.add(e) ) }
+			"querySelector" in t && "addEventListener" in e, "localStorage" in e && (o("night-mode") )
+		}(window, document)
+	</script>
+	<!-- END:: Theme night_mode-->
+	';
 	}
 }
 
@@ -181,14 +170,14 @@ function waff_mailchimp_scripts() {
 	// If the option is not available, or we're not in the Customizer, return.
 	if ( $mailchimp_popup ) { // || is_customize_preview() Do not show on preview 
 		echo '
-<!-- BEGIN:: Mailchimp popup integration -->
-<script id="mcjs">
-	!function(c,h,i,m,p){
-		m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)
-	}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/b6c9c94df00c02d584564bcf2/f7d077a1f79e1dd7510312a37.js");
-</script>
-<!-- END:: Mailchimp popup integration -->
-		';
+	<!-- BEGIN:: Mailchimp popup integration -->
+	<script id="mcjs">
+		!function(c,h,i,m,p){
+			m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)
+		}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/b6c9c94df00c02d584564bcf2/f7d077a1f79e1dd7510312a37.js");
+	</script>
+	<!-- END:: Mailchimp popup integration -->
+	';
 	}
 }
 

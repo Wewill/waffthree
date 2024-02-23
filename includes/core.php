@@ -72,6 +72,10 @@ function setup() {
 	if ( !is_login() && !is_admin() && !function_exists('rwmb_meta') ) {
 		wp_die('Error : please install Meta Box plugin.');
 	}
+
+	if ( !is_login() && !is_admin() && !function_exists('mb_blocks_load') ) {
+		wp_die('Error : please install Meta Box plugin.');
+	}
 	
 	if ( !is_login() && !is_admin() && !function_exists('waff_load_textdomain') ) {
 		wp_die('Error : please install WAFF Functions plugin.');
@@ -210,9 +214,9 @@ function waff_default_header_variation() {
 function waff_design_styles( $default_design_styles = '' ) {
 
 	echo ((true === WAFF_DEBUG)?'<code> #waff_design_styles</code>':'');
-	//echo ((true === WAFF_DEBUG)?'<pre>'.print_r($default_design_styles, 1).'</pre>':'');
+	// echo ((true === WAFF_DEBUG)?'<pre>'.print_r($default_design_styles, 1).'</pre>':'');
 
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	$suffix = WAFF_SCRIPT_DEBUG ? '' : '.min';
 	$rtl    = ! is_rtl() ? '' : '-rtl';
 
 //	$default_design_styles['....'] = array(
@@ -266,7 +270,7 @@ function waff_design_styles( $default_design_styles = '' ) {
  */
 function waff_editor_styles() {
 
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	$suffix = WAFF_SCRIPT_DEBUG ? '' : '.min';
 	$rtl    = ! is_rtl() ? '' : '-rtl';
 
 	echo ((true === WAFF_DEBUG)?'<code> #waff_editor_styles</code>':'');
@@ -331,7 +335,7 @@ function waff_styles() {
 	echo ((true === WAFF_DEBUG)?'<code> #waff_styles</code>':'');
 
 	// Enqueue the Go parent shared styles.
-	$suffix                = SCRIPT_DEBUG ? '' : '.min';
+	$suffix                = WAFF_SCRIPT_DEBUG ? '' : '.min';
 	$rtl                   = ! is_rtl() ? '' : '-rtl';
 	$go_style_dependencies = array();
 

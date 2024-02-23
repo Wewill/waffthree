@@ -12,17 +12,17 @@
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-    <link rel="apple-touch-icon" href="dist/images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" href="dist/images/apple-touch-icon.png">
 	<link rel="icon" type="image/x-icon" href="dist/images/favicon.ico">
-    <link rel="canonical" href="<?php bloginfo( 'url' ); ?>">
+	<link rel="canonical" href="<?php bloginfo( 'url' ); ?>">
 	<?php
 	/** WWW VS DEV : Desactivation du referencement */
 	$subdomain = substr($_SERVER['SERVER_NAME'],0,3);
-	if ( $subdomain ==  'dev' ) { echo '<meta name="robots" content="noindex" />'; }
+	if ( $subdomain ==  'dev' ) { echo '<meta name="robots" content="noindex">'; }
 	?>
 	<?php wp_head(); ?>
 </head>
@@ -96,9 +96,18 @@
 	
 	$page_atts['page_mode_class'] 		= ( true === apply_filters('waff_is_page_dark', false) || true === is_404())?'bg-color-dark text-white contrast--dark':'contrast--light';
 	
-	$page_atts['post_class'] 			= '--pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-4 pb-sm-10'
-	$page_atts['post_class'] 			= ( true === is_singular('page') )?'is-page --pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
-	$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+	// MAIN Post classes
+	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) : 
+		// Type always transparent header 
+		$page_atts['post_class'] 			= 'pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-4 pb-sm-10'
+		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page pt-15 pt-md-20  pt-md-10 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+	else : 
+		// Type plain header 
+		$page_atts['post_class'] 			= '--pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-4 pb-sm-10'
+		$page_atts['post_class'] 			= ( true === is_singular('page') )?'is-page --pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+	endif;
 	
 	if ( true === WAFF_HAS_LEFTSTYLE_BLOG ) :
 		$page_atts['post_class'] 			= ( true === is_singular('post') )?'is-post mt-0 --mt-10 --mb-10 pt-10 container-fluid container-10 container-left':$page_atts['post_class'];
@@ -108,6 +117,7 @@
 		$page_atts['post_class'] 			= ( true === is_home() && false === is_front_page() )?'is-blog pt-4 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
 	endif;
 
+	// MAIN Extra post classes 
 	$page_atts['post_type_class'] 		= ( true === is_singular() )?'single-'.get_post_type():'site-content'; 
 	$page_atts['post_type_class'] 	   .= ( true === is_tax() )?' single-'.$wp_query->get_queried_object()->taxonomy:''; 
 	$page_atts['forcewide_class'] 		= ( true === is_search() )?'is-wide':''; 
@@ -173,6 +183,7 @@
 		<!-- Nav / after -->
 		<?php  if ( defined('WAFF_PARTIALS') && 'dinard' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 		<?php  if ( defined('WAFF_PARTIALS') && 'diag' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
+		<?php  if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 
 		<?php if ( true === WAFF_HAS_ADVERT ) : ?>
 		<!-- Preheader -->
@@ -200,5 +211,5 @@
 		<!-- End: HEADER -->				
 
 		<!-- Begin: MAIN -->
-		<main id="main" role="main" class="<?= $page_atts['post_type_class'] ?> site-main <?= $page_atts['forcewide_class'] ?> <?= $page_atts['post_class'] ?> <?= $page_atts['page_mode_class'] ?> is-formatted" role="main" <?= (isset($page_atts['post_color_class']))?$page_atts['post_color_class']:'' ?>> 
-		<!-- Remove is-formatted to remove margins / paddings / styling -->
+		<main id="main" class="<?= $page_atts['post_type_class'] ?> site-main <?= $page_atts['forcewide_class'] ?> <?= $page_atts['post_class'] ?> <?= $page_atts['page_mode_class'] ?> is-formatted" role="main" <?= (isset($page_atts['post_color_class']))?$page_atts['post_color_class']:'' ?>> 
+		<!-- Remove .is-formatted to remove margins / paddings / styling -->

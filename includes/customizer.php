@@ -49,7 +49,7 @@ function setup() {
  */
 function customize_preview_init() {
 
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	$suffix = WAFF_SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_script(
 		'go-customize-preview',
@@ -477,112 +477,111 @@ function waff_inline_css() {
 	$button_border_radius  				= (defined('WAFF_BUTTON_BORDER_RADIUS'))?WAFF_BUTTON_BORDER_RADIUS:'0';
 	
 	?>
-		<style>
-			:root {
-				--waff: #0F0 !important;
-				--waff--editor: #0F0 !important;
+<style>
+:root {
+	--waff: #0F0 !important;
+	--waff--editor: #0F0 !important;
 
-				/* Customizer > change waff action color */
-				<?php if ( $primary_color ) : ?>
-					--waff-action-1-h: <?php echo esc_attr( $primary_color[0] ) ?> !important;
-					--waff-action-1-s: <?php echo esc_attr( $primary_color[1] ) ?>% !important;
-					--waff-action-1-l: <?php echo esc_attr( $primary_color[2] ) ?>% !important;
-				<?php endif; ?>
-				<?php if ( $secondary_color ) : ?>
-					--waff-action-2-h: <?php echo esc_attr( $secondary_color[0] ) ?> !important;
-					--waff-action-2-s: <?php echo esc_attr( $secondary_color[1] ) ?>% !important;
-					--waff-action-2-l: <?php echo esc_attr( $secondary_color[2] ) ?>% !important;
-				<?php endif; ?>
-				<?php if ( $tertiary_color ) : ?>
-					--waff-action-3-h: <?php echo esc_attr( $tertiary_color[0] ) ?> !important;
-					--waff-action-3-s: <?php echo esc_attr( $tertiary_color[1] ) ?>% !important;
-					--waff-action-3-l: <?php echo esc_attr( $tertiary_color[2] ) ?>% !important;
-				<?php endif; ?>
+	/* Customizer > change waff action color */
+<?php if ( $primary_color ) : ?>
+	--waff-action-1-h: <?php echo esc_attr( $primary_color[0] ) ?> !important;
+	--waff-action-1-s: <?php echo esc_attr( $primary_color[1] ) ?>% !important;
+	--waff-action-1-l: <?php echo esc_attr( $primary_color[2] ) ?>% !important;
+<?php endif; ?>
+<?php if ( $secondary_color ) : ?>
+	--waff-action-2-h: <?php echo esc_attr( $secondary_color[0] ) ?> !important;
+	--waff-action-2-s: <?php echo esc_attr( $secondary_color[1] ) ?>% !important;
+	--waff-action-2-l: <?php echo esc_attr( $secondary_color[2] ) ?>% !important;
+<?php endif; ?>
+<?php if ( $tertiary_color ) : ?>
+	--waff-action-3-h: <?php echo esc_attr( $tertiary_color[0] ) ?> !important;
+	--waff-action-3-s: <?php echo esc_attr( $tertiary_color[1] ) ?>% !important;
+	--waff-action-3-l: <?php echo esc_attr( $tertiary_color[2] ) ?>% !important;
+<?php endif; ?>
 
-				/* If film as a color > if we have a film_id & a post_type */
-				<?php if ( $post->post_type == 'film' && get_queried_object_id() != '' ) :
-					$film_color = rwmb_meta( 'waff_film_color', array(), get_queried_object_id() );
-					if ( $film_color != '' && $film_color != '#ffffff' && $film_color != '#000000' ) :
-						$film_color_rgb = waff_HTMLToRGB($film_color, 'array');
-						$film_color 	= hex_to_hsl($film_color);
-				?> 
-					/* Film have a color */
-					--waff-action-1-h: <?php echo esc_attr( $film_color[0] ) ?> !important;
-					--waff-action-1-s: <?php echo esc_attr( $film_color[1] ) ?>% !important;
-					--waff-action-1-l: <?php echo esc_attr( $film_color[2] ) ?>% !important;
-					--waff-action-1-r: <?php echo esc_attr( $film_color_rgb[0] ) ?> !important;
-					--waff-action-1-g: <?php echo esc_attr( $film_color_rgb[1] ) ?> !important;
-					--waff-action-1-b: <?php echo esc_attr( $film_color_rgb[2] ) ?> !important;
-					<?php else:
-						if ( defined('WAFF_USE_DOMINANT_FILM_COLOR') && true == WAFF_USE_DOMINANT_FILM_COLOR ) :
-							if ( is_singular() && has_post_thumbnail() ) { 
-								$featured_img_id     			= get_post_thumbnail_id( get_queried_object_id() );
-								$featured_img_url 				= wp_get_attachment_image_src( $featured_img_id, "large" ); // OK
-							}
-							if ( !empty($featured_img_url) && $featured_img_url[0] != '' ) :
-								// echo ( print_r($featured_img_url, true)); 
-								$dominant_color = waff_get_dominant_color($featured_img_url[0]);
-								// echo ( print_r($dominant_color, true)); 
-								if ( !empty($dominant_color) ) :
-									$film_color = rgbToHsl($dominant_color[0], $dominant_color[1], $dominant_color[2]);
-									// echo ( print_r($film_color, true)); 
-									?>
-									/* Film haven't a color, we found dominant colors */
-									--waff-action-1-h: <?php echo esc_attr( $film_color['h'] ) ?> !important;
-									--waff-action-1-s: <?php echo esc_attr( $film_color['s'] ) ?>% !important;
-									--waff-action-1-l: <?php echo esc_attr( $film_color['l'] ) ?>% !important;
-									--waff-action-1-r: <?php echo esc_attr( $dominant_color[0] ) ?> !important;
-									--waff-action-1-g: <?php echo esc_attr( $dominant_color[1] ) ?> !important;
-									--waff-action-1-b: <?php echo esc_attr( $dominant_color[2] ) ?> !important;
-								<?php endif; ?>
-							<?php endif; ?>
-						<?php endif; ?>
+	/* If film as a color > if we have a film_id & a post_type */
+<?php if ( $post->post_type == 'film' && get_queried_object_id() != '' ) :
+		$film_color = rwmb_meta( 'waff_film_color', array(), get_queried_object_id() );
+		if ( $film_color != '' && $film_color != '#ffffff' && $film_color != '#000000' ) :
+			$film_color_rgb = waff_HTMLToRGB($film_color, 'array');
+			$film_color 	= hex_to_hsl($film_color);
+?>
+		/* Film have a color */
+		--waff-action-1-h: <?php echo esc_attr( $film_color[0] ) ?> !important;
+		--waff-action-1-s: <?php echo esc_attr( $film_color[1] ) ?>% !important;
+		--waff-action-1-l: <?php echo esc_attr( $film_color[2] ) ?>% !important;
+		--waff-action-1-r: <?php echo esc_attr( $film_color_rgb[0] ) ?> !important;
+		--waff-action-1-g: <?php echo esc_attr( $film_color_rgb[1] ) ?> !important;
+		--waff-action-1-b: <?php echo esc_attr( $film_color_rgb[2] ) ?> !important;
+<?php else:
+			if ( defined('WAFF_USE_DOMINANT_FILM_COLOR') && true == WAFF_USE_DOMINANT_FILM_COLOR ) :
+				if ( is_singular() && has_post_thumbnail() ) { 
+					$featured_img_id     			= get_post_thumbnail_id( get_queried_object_id() );
+					$featured_img_url 				= wp_get_attachment_image_src( $featured_img_id, "large" ); // OK
+				}
+				if ( !empty($featured_img_url) && $featured_img_url[0] != '' ) :
+					// echo ( print_r($featured_img_url, true)); 
+					$dominant_color = waff_get_dominant_color($featured_img_url[0]);
+					// echo ( print_r($dominant_color, true)); 
+					if ( !empty($dominant_color) ) :
+						$film_color = rgbToHsl($dominant_color[0], $dominant_color[1], $dominant_color[2]);
+						// echo ( print_r($film_color, true)); 
+						?>
+						/* Film haven't a color, we found dominant colors */
+						--waff-action-1-h: <?php echo esc_attr( $film_color['h'] ) ?> !important;
+						--waff-action-1-s: <?php echo esc_attr( $film_color['s'] ) ?>% !important;
+						--waff-action-1-l: <?php echo esc_attr( $film_color['l'] ) ?>% !important;
+						--waff-action-1-r: <?php echo esc_attr( $dominant_color[0] ) ?> !important;
+						--waff-action-1-g: <?php echo esc_attr( $dominant_color[1] ) ?> !important;
+						--waff-action-1-b: <?php echo esc_attr( $dominant_color[2] ) ?> !important;
 					<?php endif; ?>
 				<?php endif; ?>
+			<?php endif; ?>
+		<?php endif; ?>
+	<?php endif; ?>
 
-				--go--color--white: hsl(0, 0%, 100%);
-				--go--color--black: hsl(0, 0%, 0%);
-				<?php if ( $quarternary_color ) : ?>
-					--go--color--quarternary: hsl(<?php echo esc_attr( $quarternary_color[0] ) . ', ' . esc_attr( $quarternary_color[1] ) . '%, ' . esc_attr( $quarternary_color[2] ) . '%'; ?>);
-				<?php endif; ?>
-				<?php if ( $quinary_color ) : ?>
-					--go--color--quinary: hsl(<?php echo esc_attr( $quinary_color[0] ) . ', ' . esc_attr( $quinary_color[1] ) . '%, ' . esc_attr( $quinary_color[2] ) . '%'; ?>);
-				<?php endif; ?>
-				<?php if ( $font_size ) : ?>
-					--go--font-size: <?php echo esc_attr( $font_size ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $max_width ) : ?>
-					--go--max-width: <?php echo esc_attr( $max_width ); ?> !important;
-					--stored--max-width: <?php echo esc_attr( $max_width ); ?> !important;
-					--go-entryheader--max-width: <?php echo esc_attr( $max_width ); ?> !important;
-					--stored-entryheader--max-width: <?php echo esc_attr( $max_width ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $max_width_alignwide ) : ?>
-					--go--max-width--alignwide: <?php echo esc_attr( $max_width_alignwide ); ?> !important;
-					--stored--max-width--alignwide: <?php echo esc_attr( $max_width_alignwide ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $layout_left_alignement ) : ?>
-					--waff--layout--left-alignement: <?php echo esc_attr( $layout_left_alignement ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $editor_title_block_alignement ) : ?>
-					--editor-title-block--alignment: <?php echo esc_attr( $editor_title_block_alignement ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $button_font_size ) : ?>
-					--go-button--font-size: <?php echo esc_attr( $button_font_size ); ?> !important;
-				<?php endif; ?>
-				<?php if ( $button_font_weight ) : ?>
-					--go-button--font-weight: <?php echo esc_attr( $button_font_weight ); ?> !important;
-				<?php endif; ?>				
-				<?php if ( $button_border_radius ) : ?>
-					--go-button--border-radius: <?php echo esc_attr( $button_border_radius ); ?> !important;
-				<?php endif; ?>				
-				<?php if ( WAFF_FONTS ) : ?>
-				<?php foreach ( WAFF_FONTS as $name => $font ) : ?>
-					--<?php echo esc_attr( $name ); ?>: <?php echo $font; ?>;
-				<?php endforeach; ?>
-				<?php endif; ?>
-
-			}
-		</style>
+	/* Generic theme */
+	/* --go--color--white: hsl(0, 0%, 100%); */
+	--go--color--black: hsl(0, 0%, 0%);
+<?php if ( $quarternary_color ) : ?>
+	--go--color--quarternary: hsl(<?php echo esc_attr( $quarternary_color[0] ) . ', ' . esc_attr( $quarternary_color[1] ) . '%, ' . esc_attr( $quarternary_color[2] ) . '%'; ?>);
+<?php endif; ?>
+<?php if ( $quinary_color ) : ?>
+	--go--color--quinary: hsl(<?php echo esc_attr( $quinary_color[0] ) . ', ' . esc_attr( $quinary_color[1] ) . '%, ' . esc_attr( $quinary_color[2] ) . '%'; ?>);
+<?php endif; ?>
+<?php if ( $font_size ) : ?>
+	--go--font-size: <?php echo esc_attr( $font_size ); ?> !important;
+<?php endif; ?>
+<?php if ( $max_width ) : ?>
+	--go--max-width: <?php echo esc_attr( $max_width ); ?> !important;
+	--stored--max-width: <?php echo esc_attr( $max_width ); ?> !important;
+	--go-entryheader--max-width: <?php echo esc_attr( $max_width ); ?> !important;
+	--stored-entryheader--max-width: <?php echo esc_attr( $max_width ); ?> !important;
+<?php endif; ?>
+<?php if ( $max_width_alignwide ) : ?>
+	--go--max-width--alignwide: <?php echo esc_attr( $max_width_alignwide ); ?> !important;
+	--stored--max-width--alignwide: <?php echo esc_attr( $max_width_alignwide ); ?> !important;
+<?php endif; ?>
+<?php if ( $layout_left_alignement ) : ?>
+	--waff--layout--left-alignement: <?php echo esc_attr( $layout_left_alignement ); ?> !important;
+<?php endif; ?>
+<?php if ( $editor_title_block_alignement ) : ?>
+	--editor-title-block--alignment: <?php echo esc_attr( $editor_title_block_alignement ); ?> !important;
+<?php endif; ?>
+<?php if ( $button_font_size ) : ?>
+	--go-button--font-size: <?php echo esc_attr( $button_font_size ); ?> !important;
+<?php endif; ?>
+<?php if ( $button_font_weight ) : ?>
+	--go-button--font-weight: <?php echo esc_attr( $button_font_weight ); ?> !important;
+<?php endif; ?>				
+<?php if ( $button_border_radius ) : ?>
+	--go-button--border-radius: <?php echo esc_attr( $button_border_radius ); ?> !important;
+<?php endif; ?>
+	/* Font definitions */
+<?php if ( WAFF_FONTS ) : ?><?php foreach ( WAFF_FONTS as $name => $font ) : ?>
+	--<?php echo esc_attr( $name ); ?>: <?php echo $font; ?>;
+<?php endforeach; ?><?php endif; ?>
+}
+</style>
 	<?php
 }

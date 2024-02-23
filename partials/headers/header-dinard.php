@@ -28,7 +28,7 @@ global $page_atts;
 			
 			<!-- Logotype -->
 			<?php //Go\display_site_branding(); ?>
-			<a class="navbar-brand w-13 w-sm-15 d-flex align-items-center justify-content-center ps-2 ps-sm-3 pe-2 pt-3 pb-4 m-0 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>" height="100%">
+			<a class="navbar-brand w-13 w-sm-15 d-flex align-items-center justify-content-center ps-2 ps-sm-3 pe-2 pt-3 pb-4 m-0 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>"> <!--  Removed height="100%" : Attribute height not allowed on element a at this point. -->
 			    <div class="header__logo js-replace">
 				      <!-- item to replace -->
 				      <div class="js-replace__item  js-replace__item--active">
@@ -90,7 +90,7 @@ global $page_atts;
 
 						<!-- Social menu -->
 						<?php if ( has_nav_menu( 'social' ) ) : ?>
-							<div id="socials" class="socials ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'Social Menu', 'waff' ); ?>">
+							<div class="socials ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'Social Menu', 'waff' ); ?>">
 								<?= WaffTwo\Theme\waff_get_social_menu('color-dark'); ?>
 								<span class="bullet bullet-action-1"></span>
 							</div>

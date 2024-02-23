@@ -132,7 +132,7 @@
   --waff-wp-adminbar-mobile: 46px;
 }
 
-:root .is-dark .contrast--dark {
+:root .is-dark .contrast--dark, :root .night-mode {
 	--go--color--text: hsl(0, 0%, 100%);
 	--go--color--background: hsl(0, 0%, 0%);
 	--go-heading--color--text: hsl(0, 0%, 100%);
@@ -239,6 +239,19 @@ nav#main-nav li > i, nav#sub-nav li > i {
 }
 
 /* @end */
+
+/* @group Side */
+
+.widget-area h2 {
+  font-size: var(--go--type-scale-2, --go-heading--font-size) !important;
+}
+
+.widget-area .widget_search {
+  margin-bottom: 15px;
+}
+
+/* @end */
+
 
 /* @group Header */
 
@@ -845,7 +858,11 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .bg-action-3,
 .night-mode *[class*='bg-light'], 
 .night-mode *[class*='bg-color'] {
-    background-color: #161616 !important;
+  background-color: #161616 !important;
+}
+
+.night-mode .bullet {
+  background-color: #f1f1f1 !important;
 }
 
 .night-mode .color-action-1,
@@ -855,6 +872,7 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
 .night-mode .text-action-1,
 .night-mode .text-action-2,
 .night-mode .text-action-3,
+.night-mode .text-color-gray,
 .night-mode *[class*='text-light'], 
 .night-mode *[class*='text-light'] {
   color: #f1f1f1 !important;

@@ -89,7 +89,7 @@ $page_atts = $args;
 							<p class="mb-0 mt-sm-5 mt-1"><a class="underline semibold link-dark" href="/contactez-nous/">Contactez-nous</a></p>
 							
 							<!-- Theme social menu -->
-							<div id="socials" class="socials ml-auto ms-auto p-0 mt-2 list-inline reset-fontsize">
+							<div class="socials ml-auto ms-auto p-0 mt-2 list-inline reset-fontsize">
 								<?= WaffTwo\Theme\waff_get_social_menu('color-dark'); ?>
 							</div>
 							

@@ -35,6 +35,73 @@ function setup() {
 
 	// Adds custom theme options to wp bootstrap blocks plugin
 	add_action( 'enqueue_block_editor_assets', $n( 'waff_wp_boostrap_enqueue_block_editor_assets' ));
+
+	// Adds a page option for some blocks in settings
+	add_filter( 'mb_settings_pages', $n( 'waff_add_setting_page' ) );
+	add_filter( 'rwmb_meta_boxes',  $n( 'waff_add_custom_fields_to_setting_page' ) );
+	
+}
+
+/**
+ * Setup options 
+ */
+
+ function waff_add_setting_page( $settings_pages ) {
+	$settings_pages[] = [
+		'menu_title' => __( 'Blocks', 'waff' ),
+		'id'         => 'theme-blocks',
+		'parent'     => 'options-general.php',
+		'class'      => 'custom_css',
+		'style'      => 'no-boxes',
+		// 'message'    => __( 'Custom message', 'waff' ), // Saved custom message
+		'customizer' => true,
+		'icon_url'   => 'dashicons-admin-generic',
+	];
+
+	return $settings_pages;
+}
+
+function waff_add_custom_fields_to_setting_page( $meta_boxes ) {
+	$prefix = 'waff_';
+
+	$meta_boxes[] = [
+		'id'             => 'theme-blocks-fields',
+		'settings_pages' => ['theme-blocks'],
+		'fields'         => [
+			[
+				'name'            => __( 'Blocks background', 'waff' ),
+				'id'              => $prefix . 'blocks_background',
+				'type'            => 'image_advanced',
+			],
+			[
+				'name'            => __( 'Blocks pattern', 'waff' ),
+				'id'              => $prefix . 'blocks_pattern',
+				'type'            => 'image_advanced',
+			],
+			[
+				'name'            => __( 'Blocks transition', 'waff' ),
+				'id'              => $prefix . 'blocks_transition',
+				'type'            => 'image_advanced',
+			],
+		],
+	];
+
+	return $meta_boxes;
+}
+
+function waff_get_blocks_background() {
+	$prefix = 'waff_';
+	return rwmb_meta( $prefix . 'blocks_background', [ 'size' => 'full', 'limit' => 1, 'object_type' => 'setting' ], 'theme-blocks' );
+}
+
+function waff_get_blocks_pattern() {
+	$prefix = 'waff_';
+	return rwmb_meta( $prefix . 'blocks_pattern', [ 'size' => 'full', 'limit' => 1, 'object_type' => 'setting' ], 'theme-blocks' );
+}
+
+function waff_get_blocks_transition() {
+	$prefix = 'waff_';
+	return rwmb_meta( $prefix . 'blocks_transition', [ 'size' => 'full', 'limit' => 1, 'object_type' => 'setting' ], 'theme-blocks' );
 }
 
 
@@ -236,7 +303,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
             ],
             [	
                 'id'   => $prefix . 'e_image',
-                'type' => 'image_upload',
+                'type' => 'image_advanced',
 				'name' => esc_html__( 'Image', 'waff' ),
                 'image_size'       => 'page-featured-image',
                 'max_file_uploads' => 1,
@@ -746,7 +813,440 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		'context'        => 'side',
 		//'Keyattrs'       => 'Value',
 	];
-	
+
+	// WA Mission ( #RSFP )
+	$meta_boxes[] = [
+        'title'          => esc_html__( '(WA) Mission', 'waff' ),
+        'id'             => 'wa-misson',
+        'fields'         => [
+            [
+                'id'   => $prefix . 'm_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Title', 'waff' ),
+                // 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+                'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'm_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Subtitle', 'waff' ),
+                // 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+			[
+                'id'   => $prefix . 'm_leadcontent',
+                'type' => 'textarea',
+                'name' => esc_html__( 'Lead content', 'waff' ),
+                'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'm_content',
+                'type' => 'wysiwyg', //textarea
+                'name' => esc_html__( 'Content', 'waff' ),
+                'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+            ],
+			[
+                'id'                => $prefix . 'm_lists',
+                'type'              => 'text_list',
+                'name'              => __( 'List.s', 'waff' ),
+                'label_description' => __( '<span class="label">INFO</span> Fill to create a list of items.', 'wa-rsfp' ),
+                'options'           => [
+                    'Label'       	=> 'Label',
+                    'Description' 	=> 'Description',
+                    'Icon'       	=> 'Fill here an css icon',
+                    // 'Value'       	=> 'Value',
+                ],
+                'clone'             => true,
+                'sort_clone'        => true,
+                'max_clone'         => 100,
+            ],
+            [	
+                'id'   => $prefix . 'm_image',
+                'type' => 'image_advanced',
+				'name' => esc_html__( 'Image', 'waff' ),
+                'image_size'       => 'page-featured-image',
+                'max_file_uploads' => 1,
+            ],
+            [
+                'id'    => $prefix . 'm_alignment',
+				'name'		=> esc_html__( 'Select an alignment', 'waff' ),
+                'type'		=> 'select',
+                'desc'		=> esc_html__( 'Choose the aligment beetween background and image.', 'waff' ),
+                'std'		=> 'post',
+                'options'           => [
+                    'aligned' => esc_html__( 'Aligned', 'waff' ),
+                    'shifted' => esc_html__( 'Shifted', 'waff' ),
+                ],
+                // 'required'          => 1,
+                'key'               => 'value',
+			],	
+			[
+                'id'		=> $prefix . 'm_position',
+                'name'		=> esc_html__( 'Select a position', 'waff' ),
+                'type'		=> 'select',
+                'desc'		=> esc_html__( 'Choose image position.', 'waff' ),
+                'std'		=> 'post',
+                'options'           => [
+                    'top' => esc_html__( 'Top', 'waff' ),
+                    'center' => esc_html__( 'Centered', 'waff' ),
+                    'bottom' => esc_html__( 'Bottom', 'waff' ),
+                ],
+                // 'required'          => 1,
+                'key'               => 'value',
+			],	
+            [
+                'id'    => $prefix . 'm_morelink',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display more link ?', 'waff' ),
+                'style' => 'rounded',
+            ],
+            [
+                'id'   => $prefix . 'm_moreurl',
+                'type' => 'url',
+                'name'  => esc_html__( 'More URL', 'waff' ),
+                'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+            ],
+		],
+		'category'       => 'layout',
+        // 'icon'           => 'format-quote',
+		'icon'            => [
+            'foreground' 	=> '#9500ff',
+			'src' 			=> 'align-pull-left',
+		],
+        'description'     => esc_html__( 'Display mission bloc', 'waff' ),
+        'keywords'       => ['hero', 'content', 'text', 'mission', 'bloc'],
+        'supports'       => [
+            'anchor'          => true,
+            'customClassName' => true,
+            'align'           => ['wide', 'full'],
+        ],
+        //'render_code'    => '{{Twix}}',
+        //'enqueue_style'  => 'customCSS',
+        //'enqueue_script' => 'CustomJS',
+        //'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_mission_callback',
+        'type'           => 'block',
+        'context'        => 'side',
+        //'Keyattrs'       => 'Value',
+	];
+
+	// WA Cols ( #RSFP )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Cols', 'waff' ),
+		'id'             => 'wa-cols',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'c_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				// 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'c_subtitle',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle', 'waff' ),
+				// 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'c_leadcontent',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Lead content', 'waff' ),
+				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'c_contents',
+				'type' => 'wysiwyg', //textarea
+				'name' => esc_html__( 'Content', 'waff' ),
+				'desc' => esc_html__( 'Content will be displayed as cols. Markdown is available.', 'waff' ),
+				'clone'             => true,
+				'sort_clone'        => true,
+				'max_clone'         => 4,
+			],
+			[	
+				'id'   => $prefix . 'c_image',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Image', 'waff' ),
+				'image_size'       => 'page-featured-image',
+				'max_file_uploads' => 1,
+			],
+			[
+				'id'    => $prefix . 'c_morelink',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display more link ?', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'   => $prefix . 'c_moreurl',
+				'type' => 'url',
+				'name'  => esc_html__( 'More URL', 'waff' ),
+				'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+			],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'format-quote',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'table-row-before',
+		],
+		'description'     => esc_html__( 'Display text bloc with cols', 'waff' ),
+		'keywords'       => ['hero', 'content', 'text', 'columns', 'bloc'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_cols_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
+	// WA Breaking ( #RSFP )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Breaking', 'waff' ),
+		'id'             => 'wa-breaking',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'b_label_1',
+				'type' => 'text',
+				'name' => esc_html__( 'Label (first)', 'waff' ),
+				// 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+				'placeholder' => esc_html__( 'A top label', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_title_1',
+				'type' => 'text',
+				'name' => esc_html__( 'Title (first)', 'waff' ),
+				// 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_subtitle_1',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle (first)', 'waff' ),
+				// 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_content_1',
+				'type' => 'wysiwyg', //textarea
+				'name' => esc_html__( 'Content (first)', 'waff' ),
+				'desc' => esc_html__( 'Content will be displayed as cols. Markdown is available.', 'waff' ),
+			],
+			[	
+				'id'   => $prefix . 'b_image_1',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Image (first)', 'waff' ),
+				'image_size'       => 'page-featured-image',
+				'max_file_uploads' => 1,
+			],
+			[
+				'id'    => $prefix . 'b_morelink_1',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display more link ? (first)', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'   => $prefix . 'b_moreurl_1',
+				'type' => 'url',
+				'name'  => esc_html__( 'More URL (first)', 'waff' ),
+				'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+			],
+			[
+				'type' => 'divider',
+			],
+			[
+				'id'   => $prefix . 'b_label_2',
+				'type' => 'text',
+				'name' => esc_html__( 'Label (last)', 'waff' ),
+				// 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+				'placeholder' => esc_html__( 'A top label', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_title_2',
+				'type' => 'text',
+				'name' => esc_html__( 'Title (last)', 'waff' ),
+				// 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_subtitle_2',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle (last)', 'waff' ),
+				// 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'b_content_2',
+				'type' => 'wysiwyg', //textarea
+				'name' => esc_html__( 'Content (last)', 'waff' ),
+				'desc' => esc_html__( 'Content will be displayed as cols. Markdown is available.', 'waff' ),
+			],
+			[	
+				'id'   => $prefix . 'b_image_2',
+				'type' => 'image_advanced',
+				'name' => esc_html__( 'Image (last)', 'waff' ),
+				'image_size'       => 'page-featured-image',
+				'max_file_uploads' => 1,
+			],
+			[
+				'id'    => $prefix . 'b_morelink_2',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Display more link ? (last)', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'   => $prefix . 'b_moreurl_2',
+				'type' => 'url',
+				'name'  => esc_html__( 'More URL (last)', 'waff' ),
+				'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+			],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'format-quote',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'format-status',
+		],
+		'description'     => esc_html__( 'Display breaking bloc with two cols', 'waff' ),
+		'keywords'       => ['hero', 'content', 'text', 'breaking', 'news', 'bloc'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_breaking_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
+	// WA Insights ( #RSFP )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Insights', 'waff' ),
+		'id'             => 'wa-insights',
+		'fields'         => [
+			[
+                'id'   => $prefix . 'i_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Title', 'waff' ),
+                // 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+                'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'i_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Subtitle', 'waff' ),
+                // 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+			[
+                'id'   => $prefix . 'i_leadcontent',
+                'type' => 'textarea',
+                'name' => esc_html__( 'Lead content', 'waff' ),
+                'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+            ],
+            // [
+            //     'id'   => $prefix . 'i_content',
+            //     'type' => 'wysiwyg', //textarea
+            //     'name' => esc_html__( 'Content', 'waff' ),
+            //     'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+            // ],
+			[
+                'id'                => $prefix . 'i_lists',
+                'type'              => 'text_list',
+                'name'              => __( 'List.s', 'waff' ),
+                'label_description' => __( '<span class="label">INFO</span> Fill to create a list of items.', 'wa-rsfp' ),
+                'options'           => [
+                    'Label'       	=> 'Label',
+                    'Description' 	=> 'Description',
+                    'Icon'       	=> 'Fill here an css icon',
+                    // 'Value'       	=> 'Value',
+                ],
+                'clone'             => true,
+                'sort_clone'        => true,
+                'max_clone'         => 100,
+            ],
+            [	
+                'id'   => $prefix . 'i_image',
+                'type' => 'image_advanced',
+				'name' => esc_html__( 'Image', 'waff' ),
+                'image_size'       => 'page-featured-image',
+                'max_file_uploads' => 1,
+            ],
+            // [
+            //     'id'    => $prefix . 'i_alignment',
+			// 	'name'		=> esc_html__( 'Select an alignment', 'waff' ),
+            //     'type'		=> 'select',
+            //     'desc'		=> esc_html__( 'Choose the aligment beetween background and image.', 'waff' ),
+            //     'std'		=> 'post',
+            //     'options'           => [
+            //         'aligned' => esc_html__( 'Aligned', 'waff' ),
+            //         'shifted' => esc_html__( 'Shifted', 'waff' ),
+            //     ],
+            //     // 'required'          => 1,
+            //     'key'               => 'value',
+			// ],	
+			// [
+            //     'id'		=> $prefix . 'i_position',
+            //     'name'		=> esc_html__( 'Select a position', 'waff' ),
+            //     'type'		=> 'select',
+            //     'desc'		=> esc_html__( 'Choose image position.', 'waff' ),
+            //     'std'		=> 'post',
+            //     'options'           => [
+            //         'top' => esc_html__( 'Top', 'waff' ),
+            //         'center' => esc_html__( 'Centered', 'waff' ),
+            //         'bottom' => esc_html__( 'Bottom', 'waff' ),
+            //     ],
+            //     // 'required'          => 1,
+            //     'key'               => 'value',
+			// ],	
+            [
+                'id'    => $prefix . 'i_morelink',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display more link ?', 'waff' ),
+                'style' => 'rounded',
+            ],
+            [
+                'id'   => $prefix . 'i_moreurl',
+                'type' => 'url',
+                'name'  => esc_html__( 'More URL', 'waff' ),
+                'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+            ],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'format-quote',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'chart-area',
+		],
+		'description'     => esc_html__( 'Display breaking bloc with two cols', 'waff' ),
+		'keywords'       => ['hero', 'content', 'text', 'insight', 'data', 'bloc'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_insights_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+ 
     return $meta_boxes;
 }
 
@@ -1333,9 +1833,9 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 					<div class="p-4">
 						<article class="edito">
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
-							<p><?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?></p>
+							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>">Découvrir...</a>
+							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -1397,9 +1897,9 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 					<div class="p-3">
 						<article class="edito">
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
-							<p><?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?></p>
+							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>">Découvrir...</a>
+							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -1645,7 +2145,7 @@ function wa_awards_callback( $attributes, $is_preview = false, $post_id = null )
 			<?php endif; ?>
 
 			<?php if ( mb_get_block_field( 'waff_a_content' ) ) : ?>
-			<p class="mt-1 mt-sm-3 text-center w-75 m-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_a_content' )) ?></p>
+			<div class="mt-1 mt-sm-3 text-center w-75 m-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_a_content' )) ?></div>
 			<?php endif; ?>
 
 			<!-- Empty -->
@@ -1976,7 +2476,7 @@ function wa_playlist_callback( $attributes, $is_preview = false, $post_id = null
 			<?php endif; ?>
 
 			<?php if ( mb_get_block_field( 'waff_pl_content' ) ) : ?>
-			<p class="mt-0 mt-sm-2 mb-1 mb-sm-3 text-center w-75 mx-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_pl_content' )) ?></p>
+			<div class="mt-0 mt-sm-2 mb-1 mb-sm-3 text-center w-75 mx-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_pl_content' )) ?></div>
 			<?php endif; ?>
 
 			<?php $classes = ''; if ( mb_get_block_field( 'waff_pl_videos' ) ) :
@@ -2800,7 +3300,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 				<?php endif; ?>
 
 				<?php if ( mb_get_block_field( 'waff_sl_content' ) ) : ?>
-				<p class="mt-1 mt-sm-3 text-center w-75 m-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_sl_content' )) ?></p>
+				<div class="mt-1 mt-sm-3 text-center w-75 m-auto"><?= waff_do_markdown(mb_get_block_field( 'waff_sl_content' )) ?></div>
 				<?php endif; ?>
 			</div>
 		</section>
@@ -2940,6 +3440,568 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 		<!-- END: #Sections list -->
 		<?php
 }
+
+function wa_mission_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	// print_r($is_preview);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'mission mt-10 mb-10 pt-10 pb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	// Image 
+	$image 					= mb_get_block_field('waff_m_image');
+
+	// print_r(mb_get_block_field('waff_m_alignment'));
+	// print_r(mb_get_block_field('waff_m_position'));
+	switch(mb_get_block_field('waff_m_alignment')) {
+		case 'aligned': 
+			$r_alignment 	= '';
+			$b_alignment 	= 'col-4 bg-action-1 h-850-px';
+			//$f_alignment 	= 'align-items-end';
+			$i_alignment 	= 'h-700-px';
+			break;
+		case 'shifted': 
+			$r_alignment 	= 'vh-100';
+			$b_alignment 	= 'col-lg-5 col-xl-5 bg-action-2 vh-75';
+			$f_alignment 	= 'vh-75';
+			$i_alignment 	= 'vh-75';
+			break;
+	}
+
+	switch(mb_get_block_field('waff_m_position')) {
+		case 'top': 
+			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-end' : 'align-items-start';
+			$f_position 	= 'top-0';
+			$aos_position 	= 'fade-up';
+			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-start'; }
+			break;
+		case 'center': 
+			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-center' : 'align-items-end';
+			$f_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'top-50 end-0 translate-middle-y' : 'bottom-0';
+			$aos_position 	= 'fade-up';
+			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-center'; }
+			break;
+		case 'bottom': 
+			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-start' : 'align-items-end';
+			$f_position 	= 'bottom-0';
+			$aos_position 	= 'fade-down';
+			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-end'; }
+			break;
+	}
+
+	// Alignment 
+
+	// Position 
+
+	// Background image 
+	$bg_images = waff_get_blocks_background();
+	$bg_image = reset( $bg_images );
+
+	?>
+	<!-- #Mission -->
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>; background-image: url('<?= $bg_image['url']; ?>');">
+		<div class="container-fluid px-0 position-relative">
+			<div class="row g-0 <?= $b_position; ?> <?= $r_alignment; ?> <?= $is_preview ? 'd-none' : '' ?>">
+				<div class="<?= $b_alignment; ?> rounded-end-4" --data-aos="fade-left" --data-aos-delay="100"></div>
+			</div>
+			<div class="row <?= $f_alignment; ?> w-100 ---- position-absolute <?= $f_position; ?> left-0">
+				<div class="col-2" ---data-aos="fade-left"></div>
+
+				<!-- Figure -->
+				<?php if ( count($image) > 0 ) : ?>
+					<?php foreach ( $image as $im ) : ?>
+						<figure class="col-4 p-0 rounded-4 contrast--light <?= $i_alignment; ?> overflow-hidden position-relative" data-aos="<?= $aos_position; ?>" data-aos-delay="200" style="<?= $is_preview ? 'float:left; width:49%;' : '' ?>">
+							<picture class="">
+								<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid rounded-4 <?= $i_alignment; ?> fit-image w-100 img-transition-scale">
+							</picture>
+							<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
+								<!-- <figcaption> -->
+								<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+										</span>
+									</span>
+								</figcaption>
+							<?php endif; /* If captions */ ?>
+						</figure>
+					<?php endforeach; ?>
+				<?php endif; ?>
+
+				<!-- Begin: Content -->
+				<div class="col-4 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
+					<div>
+						<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
+						<h2><?= mb_get_block_field( 'waff_m_title' ) ?></h2>
+						<p class="lead mb-3"><?= waff_do_markdown(mb_get_block_field( 'waff_m_leadcontent' )) ?></p>
+						<?= waff_do_markdown(mb_get_block_field( 'waff_m_content' )) ?>
+					</div>
+					
+					<div>
+						<div class="row row-cols-1 row-cols-md-2 g-4 py-5">
+							<?php 
+							foreach( mb_get_block_field( 'waff_m_lists' ) as $list ) : 
+								echo sprintf('<div class="col d-flex align-items-center">
+									<i class="%s flex-shrink-0 me-3 h4"></i>
+									<div>
+										<h6 class="fw-bold">%s</h6>
+										<p>%s</p>
+									</div>
+								</div>', 
+								$list[2],
+								$list[0],
+								$list[1]
+								);
+							endforeach;
+							?>
+						</div>
+
+						<?php if ( mb_get_block_field( 'waff_m_morelink' ) == 1 ) : ?>
+						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_m_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+						<?php endif; ?>
+
+					</div>
+				</div>
+				<!-- End: Content -->
+
+				<?php if ($is_preview) { echo '<div class="clear clearfix"></div>'; } ?>
+			</div>
+		</div>
+	</section>
+	<!-- END: #Mission -->
+	<?php
+	
+}
+
+function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	// print_r($is_preview);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'cols mt-10 mb-0 contrast--dark text-white';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	// Image 
+	$image 					= mb_get_block_field('waff_c_image');
+
+	// Background image 
+	$bg_images = waff_get_blocks_transition();
+	$bg_image = reset( $bg_images );
+
+	?>
+	<!-- #cols -->
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
+
+		<figure class="m-0 p-0 overflow-hidden mb-n1 z-2">
+			<picture class="">
+				<img src="<?= $bg_image['url']; ?>" alt="Image" class="img-fluid fit-image w-100">
+			</picture>
+		</figure>
+
+		<div class="container-fluid p-8 bg-v-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+			<div class="row mt-10 mb-10">
+				<div class="col-4"></div>
+				<div class="col-4 text-center">
+					<h6 class="subline text-action-3" style="<?=!$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
+					<h2 class="text-white" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_title' ) ?></h2>
+				</div>
+				<div class="col-4 d-flex align-items-start justify-content-end">
+					<?php if ( mb_get_block_field( 'waff_c_morelink' ) == 1 ) : ?>
+					<a class="btn btn-action-3 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_c_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="row mb-15">
+				<?php if (mb_get_block_field( 'waff_c_leadcontent' ) != "") {
+					echo '<div class="col-12"><p class="lead mb-4 text-center fw-bold">'.waff_do_markdown(mb_get_block_field( 'waff_c_leadcontent' )).'</p></div>';
+				} ?>
+
+				<?php 
+				foreach( mb_get_block_field( 'waff_c_contents' ) as $content ) : 
+					echo '<div class="col" style="' .( $is_preview ? 'display: inline-block; width: calc(24% - 10px); margin-right: 10px;' : '' ). '"><div class="lead">'.waff_do_markdown($content).'</div></div>';
+				endforeach;
+				?>
+			</div>	
+		</div>
+
+		<!-- Background image-->
+		<?php if ( count($image) > 0 && !$is_preview ) : ?>
+			<?php foreach ( $image as $im ) : ?>
+				<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" style="height: calc(100% - 112px);  margin-top: 112px;">
+					<picture class="">
+							<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid fit-image h-100 w-100">
+					</picture>
+				</figure>
+			<?php endforeach; ?>
+		<?php endif; ?>
+
+	</section>
+	<!-- END: #cols -->
+	<?php
+	
+}
+
+function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	// print_r($is_preview);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'breaking mt-0 mb-10 contrast--dark';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	// Image 
+	$image_1 					= mb_get_block_field('waff_b_image_1');
+	$image_2 					= mb_get_block_field('waff_b_image_2');
+
+	?>
+	<!-- #Breaking -->
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
+		<div class="container-fluid px-0">
+			<div class="row g-0 align-items-center">
+
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0" data-aos="fade-up" data-aos-delay="0" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+					
+					<!-- Figure -->
+					<?php if ( count($image_1) > 0 && !$is_preview ) : ?>
+						<?php foreach ( $image_1 as $im ) : ?>
+								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
+								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
+								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
+									<!-- <figcaption> -->
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 position-absolute bottom-0 start-0">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
+											<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
+												<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+											</span>
+										</span>
+									</figcaption>
+								<?php endif; /* If captions */ ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
+					
+					<div class="card bg-transparent border-0 text-white --h-100 px-8 py-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
+						<h6 class="subline d-inline text-light"><?= mb_get_block_field( 'waff_b_label_1' ) ?></h6>
+						<div>
+							<div class="w-100 w-lg-50">
+								<p class="card-date fw-bold text-transparent-color-layout mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_1' ) ?></p>
+								<h2 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_1' ) ?></a></h2>
+							</div>
+							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_1' )) ?></div>
+							<?php if ( mb_get_block_field( 'waff_b_morelink_1' ) == 1 ) : ?>
+							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?= mb_get_block_field( 'waff_b_moreurl_1' ) ?>"><?php _e('More...', 'waff'); ?></a>
+							<?php endif; ?>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0" data-aos="fade-up" data-aos-delay="100" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+					
+					<!-- Figure -->
+					<?php if ( count($image_2) > 0 && !$is_preview ) : ?>
+						<?php foreach ( $image_2 as $im ) : ?>
+								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
+								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
+								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
+									<!-- <figcaption> -->
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 position-absolute bottom-0 end-0">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
+											<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
+												<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+											</span>
+										</span>
+									</figcaption>
+								<?php endif; /* If captions */ ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
+					
+					<div class="card bg-transparent border-0 text-white --h-100 px-8 py-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
+						<h6 class="subline d-inline action-1"><?= mb_get_block_field( 'waff_b_label_2' ) ?></h6>
+						<div>
+							<div class="w-100 w-lg-50">
+								<p class="card-date fw-bold text-transparent-color-layout mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_2' ) ?></p>
+								<h3 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_2' ) ?></a></h3>
+							</div>
+							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_2' )) ?></div>
+							<?php if ( mb_get_block_field( 'waff_b_morelink_2' ) == 1 ) : ?>
+							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?= mb_get_block_field( 'waff_b_moreurl_2' ) ?>"><?php _e('More...', 'waff'); ?></a>
+							<?php endif; ?>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- END: #Breaking -->
+	<?php
+	
+}
+
+function wa_insights_callback( $attributes, $is_preview = false, $post_id = null ) {
+	
+	// print_r($is_preview);
+
+	// Fields data.
+	if ( empty( $attributes['data'] ) ) {
+		return;
+	}
+	
+	// Unique HTML ID if available.
+	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+
+	// Custom CSS class name.
+	$themeClass = 'insights mt-10 mb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
+	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	// Image 
+	$image 					= mb_get_block_field('waff_i_image');
+
+	// // Background image 
+	// $bg_images = waff_get_blocks_background();
+	// $bg_image = reset( $bg_images );
+
+	// Pattern image 
+	$pat_images = waff_get_blocks_pattern();
+	$pat_image = reset( $pat_images );
+	
+	?>
+	<!-- #Insights -->
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
+		<div class="container-fluid px-0 position-relative">
+			<div class="row">
+				<div class="col-8 ps-10 pe-10" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?>">
+
+					<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_i_subtitle' ) ?></h6>
+					<hgroup class="pt-8 pb-4 d-flex justify-content-between align-items-center">
+						<h2><?= mb_get_block_field( 'waff_i_title' ) ?></h2>
+						<?php if ( mb_get_block_field( 'waff_i_morelink' ) == 1 ) : ?>
+						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_i_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+						<?php endif; ?>
+					</hgroup>
+
+					<p class="lead mb-3"><?= waff_do_markdown(mb_get_block_field( 'waff_i_leadcontent' )) ?></p>
+
+					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+						<div class="col">
+							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-1">
+								<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">Lorem</h4>
+							</div>
+							<div class="card-body">
+							<h1 class="card-title">100<small class="text-body-secondary fw-light">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum dolor</li>
+							</ul>
+							<button type="button" class="w-100 btn btn-lg btn-outline-light">En savoir plus...</button>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-color-bg">
+								<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">Pro</h4>
+							</div>
+							<div class="card-body">
+							<h1 class="card-title">15<small class="text-body-secondary fw-light">+</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum</li>
+							</ul>
+							<button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+						<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
+							<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">Enterprise</h4>
+							</div>
+							<div class="card-body">
+							<h1 class="card-title">$29<small class="text-body-secondary fw-light">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum amet</li>
+							</ul>
+							<button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+						<div class="col">
+							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
+							<div class="card-body">
+							<h1 class="card-title heading-2">100<small class="text-action-1 fw-light op-10">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum dolor</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
+							<div class="card-body">
+							<h1 class="card-title heading-2">15<small class="text-action-1 fw-light op-10">+</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+						<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
+							<div class="card-body">
+							<h1 class="card-title heading-2">10 000<small class="text-action-1 fw-light op-10"></small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum amet</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+						<div class="col">
+							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout text-color-main">
+								<div class="card-body">
+							<h1 class="card-title fw-medium">100+<small class="text-body-secondary fw-light">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum dolor</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout">
+								<div class="card-body">
+							<h1 class="card-title fw-medium">15<small class="text-body-secondary fw-light">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+						<div class="col">
+							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout">
+								<div class="card-body">
+							<h1 class="card-title fw-medium">100<small class="text-body-secondary fw-light">/mo</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li>Lorem ipsum amet</li>
+							</ul>
+							</div>
+						</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="col-4 bg-color-layout rounded-start-4 d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
+
+					<!-- Figure -->
+					<?php if ( count($image) > 0 ) : ?>
+						<?php foreach ( $image as $im ) : ?>
+							<figure class="p-0 rounded-start-4 contrast--light h-80 w-80 overflow-hidden" data-aos="fade-left" data-aos-delay="200">
+								<picture class="">
+									<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid rounded-4 w-100 h-100 fit-image img-transition-scale">
+								</picture>
+								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
+									<!-- <figcaption> -->
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+										</span>
+									</figcaption>
+								<?php endif; /* If captions */ ?>
+							</figure>
+						<?php endforeach; ?>
+					<?php endif; ?>
+
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- END: #Insights -->
+	<?php
+	
+}
+
 
 /**
  * Disallow some blocks 

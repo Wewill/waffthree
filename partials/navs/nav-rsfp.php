@@ -1,13 +1,13 @@
 <?php
-
+// Todo mega menu nav
 //var_dump( $args );  // Everything
 $page_atts = $args;
 
 ?>
 	<!-- Toggle External nav -->
-	<div class="collapse sticky-top navbar-external border-top border-bottom border-transparent-color-silver" id="navbarToggleExternalContent">
-		<div class="bg-color-light text-dark px-4 py-6">
-			<h6 class="headline d-inline">Menu</h6>
+	<div class="collapse sticky-top navbar-external shadow-sm" id="navbarToggleExternalContent">
+		<div class="bg-color-bg text-light px-6 py-6">
+			<h6 class="subline d-inline">Menu</h6>
 
 			<?php if ( has_nav_menu( 'primary' ) ) : ?>
 				<nav id="main-nav" class="mt-4" aria-label="<?php esc_attr_e( 'Primary Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
@@ -16,7 +16,7 @@ $page_atts = $args;
 						array(
 							'container'       => false,
 							'theme_location' => 'primary',
-							'menu_class'     => 'main-nav list-unstyled link-dark',
+							'menu_class'     => 'main-nav list-unstyled link-light',
 							'depth'          => '3',
 							'add_li_class'  	 => 'heading-3'
 							// + le cas link-muted

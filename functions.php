@@ -6,8 +6,10 @@
  *
  */
 
-define( 'WAFF_VERSION', '3.0' );
-define( 'WAFF_DEBUG', false );
+define( 'WAFF_VERSION', '3.2' );
+define( 'WAFF_DEBUG', false ); // display debug
+define( 'WAFF_SCRIPT_DEBUG', false ); // do not load minified sources 
+
 
 // Use classic Widget Editor
 // add_filter( 'use_widgets_block_editor', '__return_false' );
@@ -130,5 +132,5 @@ WaffTwo\Theme\setup();
 WaffTwo\Customizer\setup();
 WaffTwo\Wide_Meta\setup();
 WaffTwo\Dark_Meta\setup();
-WaffTwo\Migrate\setup();
 WaffTwo\Blocks\setup();
+if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }

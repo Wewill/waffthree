@@ -33,7 +33,7 @@ function setup() {
  */
 function customize_preview_init() {
 
-	$suffix = SCRIPT_DEBUG ? '' : '.min';
+	$suffix = WAFF_SCRIPT_DEBUG ? '' : '.min';
 
 	wp_enqueue_script(
 		'go-customize-preview',
