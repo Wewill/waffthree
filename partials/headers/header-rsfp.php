@@ -14,9 +14,12 @@ global $page_atts;
 
 	<!-- #header -->
 	<?php 
-	// Setting affix
+	// Setting affix == reduced header 
 	$affix 			=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('modern') ) )?'affix':''; 
-	$toggleaffix 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('normal', 'full', 'fancy') ) )?'affix':''; 	
+	$toggleaffix 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('normal', 'full', 'fancy') ) )?'affix':'';
+
+	// Setting sticky from mods == sticky header 
+	$sticky 		=  ( !get_theme_mod( 'sticky_header', false ) )?'position-relative':''; 
 
 	// Setting fancy transparent header
 	$headerbackgroundcolor 	=  ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) )?'bg-transparent':'has-bg'; 	
@@ -26,7 +29,7 @@ global $page_atts;
 	$navbarborder = '';
 	?>
 
-	<header id="site-header" class="site-header header masthead navbar navbar-light classic-navbar bg-transparent container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+	<header id="site-header" class="site-header header masthead navbar navbar-light classic-navbar bg-transparent container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($sticky) ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 		<nav class="w-100 sticky-top row g-0">
 
