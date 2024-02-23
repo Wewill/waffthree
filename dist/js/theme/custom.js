@@ -1,31 +1,27 @@
+"use strict"; // Apply strict mode to the entire script
+
 /**
  * Theme javascript functions file.
  */
 
-( function( $ ) {
-	"use strict";
+document.addEventListener("DOMContentLoaded", function() {
+    "use strict";
 
-	var
-	html			= $( 'html' ),
-	body			= $( 'body' ),
-	nightToggle 		= $( '#night-mode-toggle' ),
-	nightActive 		= ( 'night-mode' );
+    var html = document.documentElement,
+        body = document.body,
+        nightToggle = document.getElementById('night-mode-toggle'),
+        nightActive = 'night-mode';
 
-	/* Document Ready */
-	$( document ).ready( function () {
+    /* Night Mode */
+    nightToggle.addEventListener('click', function(e) {
 
-		/* Night Mode */
-		nightToggle.on( 'click', function( e ) {
+        if (html.classList.contains(nightActive)) {
+            html.classList.remove(nightActive);
+            localStorage.setItem('night-mode', 'false');
+        } else {
+            html.classList.add(nightActive);
+            localStorage.setItem('night-mode', 'true');
+        }
+    });
 
-			if ( html.hasClass( nightActive ) ) {
-				html.removeClass( nightActive );
-				localStorage.setItem( 'night-mode', 'false' );
-			} else {
-				html.addClass( nightActive );
-				localStorage.setItem( 'night-mode', 'true' );
-			}
-		});
-	
-	});
-
-} )( jQuery );
+});
