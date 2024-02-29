@@ -6,9 +6,12 @@
  */
 
 $has_social_icons = Go\has_social_icons();
-$has_background   = Go\has_footer_background();
+$has_background   = Go\has_footer_background(); // background-color: ...
 $blog_description = get_bloginfo( 'description' );
 
+// Footer bg image 
+$bg_images   	= WaffTwo\Blocks\waff_get_blocks_background();
+$bg_image 		= reset( $bg_images );
 ?>
 
 <?php do_action( 'waff_before_footer' ); ?>
@@ -17,7 +20,7 @@ $blog_description = get_bloginfo( 'description' );
 
 <!-- Begin: FOOTER -->
 <!-- #footer -->
-<footer id="colophon" class="site-footer site-footer--waff pt-20 pb-18 bg-action-1 text-light link-light contrast--dark rounded-top-4 ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>">
+<footer id="colophon" class="site-footer site-footer--waff mt-0 pt-20 pb-18 bg-action-1 text-light link-light contrast--dark rounded-top-4 ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" style="background-image: url('<?= $bg_image['url']; ?>');">
 	<div class="container-fluid --px-0">
 
 		<!-- First row -->
