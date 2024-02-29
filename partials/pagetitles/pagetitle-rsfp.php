@@ -71,6 +71,9 @@ switch (get_post_type()) {
 	case ( 'page' ) :
 	    	$selected_featured_sizes = $page_featured_sizes;
 	break;
+	case ( 'directory' ) :
+			$selected_featured_sizes = $post_featured_sizes;
+	break;
 	/*case ( 'homeslide' === $pt ) :
 	    	$selected_featured_sizes = 
 	break;*/
@@ -226,6 +229,104 @@ if ( is_singular() && has_post_thumbnail() ) {
 		</figure>
 	</section>
 	<?php } /* is_singular + has_post_thumbnail */ ?>
+	<!-- END: #pageheader -->
+
+<?php elseif ( $args == 'directory' ) : ?>
+
+	<?php 
+		$d_general_subtitle 					= get_post_meta( $post->ID, 'd_general_subtitle', true ); 
+		$d_general_introduction 				= get_post_meta( $post->ID, 'd_general_introduction', true ); 
+		/* <?php if ( $args != '' ) printf('<h5 class="subline text-muted mb-1">%s</h5>', sanitize_text_field(ucfirst($args)));?> 
+		esc_html(__('[:fr]De[:en]From[:]')) */
+	?>
+
+	<!-- #pageheader -->
+	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-100 position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
+		<div class="container-fluid px-0">
+			<div class="row g-0 align-items-center vh-100"><!-- .vh-100 hack-->
+				
+				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
+				<div class="col-lg-5 col-xl-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+					<!-- Image -->  
+					<figure title="<?php echo esc_attr($featured_img_description); ?>">
+						<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
+						<!-- 3800x1200 > 1900x600 -->
+						<data-src media="(min-width: 990px)"
+								srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 590px)"
+								srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 380px)"
+								srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
+						<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-100 fit-image w-100"></data-img>
+						</picture>
+						<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+						<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						<!--
+						Sizes :
+						<?php print_r($featured_img_urls); ?>  
+						-->
+					</figure>
+
+					<!-- Play -->
+					<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
+						<a class="btn action-1 --color-light play" data-fancybox="header_71_fancybox" href="https://www.youtube.com/watch?v=_FN_zr4rQzY?rel=0&amp;showinfo=0" target="_blank"><i class="bi bi-play-fill h3 ms-1"></i></a>
+					</div>
+				</div>
+				<?php } /* is_singular + has_post_thumbnail */ ?>
+
+				<div class="col-lg overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-5 pt-20" data-aos="fade-left">
+					
+					<hgroup>
+						<?= WaffTwo\waff_entry_meta_header(); ?>
+						<div class="production-list d-inline-block"><a class="production-item" tabindex="-1">Production</a></div>
+						<div class="thematic-list d-inline-block"><a class="thematic-item" tabindex="-1">Thématique</a></div>
+						<div class="geography-list d-inline-block"><a class="geography-item" tabindex="-1">Geography</a></div>
+						<h2 class="my-3"><?php single_post_title(); ?></h2>
+					</hgroup>
+					
+					<div>
+						<p class="lead fw-bold"><?= esc_html($d_general_subtitle); ?></p>
+						<div class="lead"><?= apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)); ?></p>
+					</div>
+
+					<div class="d-flex align-items-center justify-content-center py-4 px-5 bg-body rounded-4 shadow">
+						<div class="d-flex align-items-center">
+							<i class="bi bi-bootstrap flex-shrink-0 me-3 h2 text-action-1"></i>
+							<div>
+							<h6 class="fw-bold text-action-1">Lorem ipsum</h6>
+							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							</div>
+						</div>
+
+						<div class="d-flex align-items-center justify-content-center px-5">
+							<span class="bullet bullet-action-2 ml-0"></span>
+						</div>
+
+						<div class="d-flex align-items-center">
+							<i class="bi bi-bootstrap flex-shrink-0 me-3 h2"></i>
+							<div>
+							<h6 class="fw-bold text-action-1">Lorem ipsum</h6>
+							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+		
+				<!-- Mouse down -->
+				<!-- <div class="scroll-downs position-absolute bottom-0 start-45 mb-4">
+					<div class="mousey">
+						<div class="scroller"></div>
+					</div>
+				</div> -->
+
+			</div>
+		</div>
+	</section>
 	<!-- END: #pageheader -->
 
 <?php else: ?>	
