@@ -123,6 +123,9 @@
 	$page_atts['forcewide_class'] 		= ( true === is_search() )?'is-wide':''; 
 	$page_atts['forcewide_class'] 		= ( true === is_404() )?'is-404 bg-dark':''; 
 
+	if ( is_singular('directory') )  
+		$page_atts['post_class'] 		= 'is-directory p-0 pb-4 pb-sm-10 container-fluid'; 
+
 	if ( '' != WAFF_BLOG_STYLE )
 		$page_atts['post_class'] 			.= ' is-blog-style-'.WAFF_BLOG_STYLE; 
 
@@ -202,6 +205,7 @@
 		<?php elseif ( is_singular('partenaire') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'partenaire'); ?>
 		<?php elseif ( is_singular('projection') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'projection'); ?>
 		<?php elseif ( is_singular('post') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'post'); ?>
+		<?php elseif ( is_singular('directory') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'directory'); ?>
 		<?php elseif ( is_tax('section') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'section'); ?>
 		<?php elseif ( is_tax('room') ) : 					get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'room'); ?>
 		<?php elseif ( is_page() && false === $is_home ) :  get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS); ?>
