@@ -47,32 +47,79 @@ function setup() {
 	// Actions 
 
 	// Enqueue custom sctipts and styles
-	add_action( 'wp_enqueue_scripts', $n( 'waff_child_enqueue_styles' ) );
-	add_action( 'wp_enqueue_scripts', $n( 'waff_child_enqueue_scripts' ), 90 );
-	add_action( 'admin_enqueue_scripts', $n( 'waff_child_admin_scripts' ), 90 );
-	add_filter( 'style_loader_tag', $n( 'waff_add_style_attributes' ), 10, 2 ); //#42
-	add_filter( 'script_loader_tag', $n( 'waff_add_script_attributes' ), 10, 2 ); //#42
+	add_action( 'wp_enqueue_scripts', 		$n( 'waff_child_enqueue_styles' ) );
+	add_action( 'wp_enqueue_scripts', 		$n( 'waff_child_enqueue_scripts' ), 90 );
+	add_action( 'admin_enqueue_scripts', 	$n( 'waff_child_admin_scripts' ), 90 );
+	add_filter( 'style_loader_tag', 		$n( 'waff_add_style_attributes' ), 10, 2 ); //#42
+	add_filter( 'script_loader_tag', 		$n( 'waff_add_script_attributes' ), 10, 2 ); //#42
 
 	// Custom inline scripts
-	add_action( 'wp_enqueue_scripts', $n( 'waff_localstorage_scripts'), 110 );
-	add_action( 'wp_head', $n( 'waff_mailchimp_scripts'), 999 );
+	add_action( 'wp_enqueue_scripts', 		$n( 'waff_localstorage_scripts'), 110 );
+	add_action( 'wp_head', 					$n( 'waff_mailchimp_scripts'), 999 );
 
 	// Init
-	add_action( 'after_setup_theme', $n( 'waff_setup') );
-	add_action( 'widgets_init', $n( 'waff_widgets_init') );
+	add_action( 'after_setup_theme', 		$n( 'waff_setup') );
+	add_action( 'widgets_init', 			$n( 'waff_widgets_init') );
 	//add_filter( 'theme_page_templates', $n( 'waff_remove_page_templates' );
 	
 	// Stop cache SC
-	add_shortcode('stop_cache', $n( 'waff_shortcode_no_cache') );
+	add_shortcode('stop_cache', 			$n( 'waff_shortcode_no_cache') );
 	
 	// Remove comments 
-	add_action('init', $n( 'waff_remove_comment_support' ), 100);
+	add_action('init', 						$n( 'waff_remove_comment_support' ), 100);
 	
-	// Customn social icons Walker 
+	// Custom social icons Walker 
 	add_filter( 'walker_nav_menu_start_el', $n( 'waff_nav_menu_social_icons' ), 20, 4 );
 
+	// Adds a page option for theme in settings
+	add_filter( 'mb_settings_pages', 		$n( 'waff_add_theme_setting_page' ) );
+	add_filter( 'rwmb_meta_boxes',  		$n( 'waff_add_theme_custom_fields_to_setting_page' ) );
 
 }
+
+/**
+ * Setup options 
+ */
+
+ function waff_add_theme_setting_page( $settings_pages ) {
+	$settings_pages[] = [
+		'menu_title' => __( 'Theme', 'waff' ),
+		'id'         => 'theme-settings',
+		'parent'     => 'options-general.php',
+		'class'      => 'custom_css',
+		'style'      => 'no-boxes',
+		// 'message'    => __( 'Custom message', 'waff' ), // Saved custom message
+		'customizer' => true,
+		'icon_url'   => 'dashicons-admin-generic',
+	];
+
+	return $settings_pages;
+}
+
+
+function waff_add_theme_custom_fields_to_setting_page( $meta_boxes ) {
+	$prefix = 'waff_';
+
+	$meta_boxes[] = [
+		'id'             => 'theme-settings-fields',
+		'settings_pages' => ['theme-settings'],
+		'fields'         => [
+			[
+				'name'            => __( 'Homeslide background', 'waff' ),
+				'id'              => $prefix . 'homeslide_background',
+				'type'            => 'image_advanced',
+			],
+		],
+	];
+
+	return $meta_boxes;
+}
+
+function waff_get_theme_homeslide_background() {
+	$prefix = 'waff_';
+	return rwmb_meta( $prefix . 'homeslide_background', [ 'size' => 'full', 'limit' => 1, 'object_type' => 'setting' ], 'theme-settings' );
+}
+
 
 /* LOAD PARENT THEME STYLES & SCRIPTS
 ================================================== */

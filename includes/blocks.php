@@ -37,8 +37,8 @@ function setup() {
 	add_action( 'enqueue_block_editor_assets', $n( 'waff_wp_boostrap_enqueue_block_editor_assets' ));
 
 	// Adds a page option for some blocks in settings
-	add_filter( 'mb_settings_pages', $n( 'waff_add_setting_page' ) );
-	add_filter( 'rwmb_meta_boxes',  $n( 'waff_add_custom_fields_to_setting_page' ) );
+	add_filter( 'mb_settings_pages', $n( 'waff_add_blocks_setting_page' ) );
+	add_filter( 'rwmb_meta_boxes',  $n( 'waff_add_blocks_custom_fields_to_setting_page' ) );
 	
 }
 
@@ -46,7 +46,7 @@ function setup() {
  * Setup options 
  */
 
- function waff_add_setting_page( $settings_pages ) {
+ function waff_add_blocks_setting_page( $settings_pages ) {
 	$settings_pages[] = [
 		'menu_title' => __( 'Blocks', 'waff' ),
 		'id'         => 'theme-blocks',
@@ -61,7 +61,7 @@ function setup() {
 	return $settings_pages;
 }
 
-function waff_add_custom_fields_to_setting_page( $meta_boxes ) {
+function waff_add_blocks_custom_fields_to_setting_page( $meta_boxes ) {
 	$prefix = 'waff_';
 
 	$meta_boxes[] = [
@@ -861,23 +861,24 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'max_clone'         => 100,
             ],
             [	
-                'id'   => $prefix . 'm_image',
-                'type' => 'image_advanced',
-				'name' => esc_html__( 'Image', 'waff' ),
-                'image_size'       => 'page-featured-image',
-                'max_file_uploads' => 1,
+                'id'   				=> $prefix . 'm_image',
+                'type' 				=> 'image_advanced',
+				'name' 				=> esc_html__( 'Image', 'waff' ),
+                'image_size'       	=> 'page-featured-image',
+                'max_file_uploads' 	=> 1,
+                'required'         	=> 1,
             ],
             [
-                'id'    => $prefix . 'm_alignment',
-				'name'		=> esc_html__( 'Select an alignment', 'waff' ),
-                'type'		=> 'select',
-                'desc'		=> esc_html__( 'Choose the aligment beetween background and image.', 'waff' ),
-                'std'		=> 'post',
+                'id'    			=> $prefix . 'm_alignment',
+				'name'				=> esc_html__( 'Select an alignment', 'waff' ),
+                'type'				=> 'select',
+                'desc'				=> esc_html__( 'Choose the aligment beetween background and image.', 'waff' ),
+                'std'				=> 'post',
                 'options'           => [
                     'aligned' => esc_html__( 'Aligned', 'waff' ),
                     'shifted' => esc_html__( 'Shifted', 'waff' ),
                 ],
-                // 'required'          => 1,
+                // 'required'       => 1,
                 'key'               => 'value',
 			],	
 			[
@@ -887,9 +888,9 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'desc'		=> esc_html__( 'Choose image position.', 'waff' ),
                 'std'		=> 'post',
                 'options'           => [
-                    'top' => esc_html__( 'Top', 'waff' ),
-                    'center' => esc_html__( 'Centered', 'waff' ),
-                    'bottom' => esc_html__( 'Bottom', 'waff' ),
+                    'top' 		=> esc_html__( 'Top', 'waff' ),
+                    'center' 	=> esc_html__( 'Centered', 'waff' ),
+                    'bottom' 	=> esc_html__( 'Bottom', 'waff' ),
                 ],
                 // 'required'          => 1,
                 'key'               => 'value',
@@ -1168,9 +1169,12 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'name'              => __( 'List.s', 'waff' ),
                 'label_description' => __( '<span class="label">INFO</span> Fill to create a list of items.', 'wa-rsfp' ),
                 'options'           => [
+                    'Title'       	=> 'Title (optionnal)',
                     'Label'       	=> 'Label',
+                    'Suffix'       	=> 'Suffix (optionnal)',
                     'Description' 	=> 'Description',
-                    'Icon'       	=> 'Fill here an css icon',
+                    'Color'       	=> 'Fill here an css icon (optionnal)',
+                    'Link'       	=> 'http://www.google.fr (optionnal)',
                     // 'Value'       	=> 'Value',
                 ],
                 'clone'             => true,
@@ -1632,6 +1636,7 @@ function wa_partners_callback( $attributes, $is_preview = false, $post_id = null
 	$partner_post_type 	= ( post_type_exists('partenaire') )?'partenaire':'partner'; // Depreciated WAFFTWO V1 
 	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
 	$partner_field 		= ( post_type_exists('partenaire') )?'p-link':'waff_partner_link'; // Depreciated WAFFTWO V1 
+	$partner_field 		= ( defined('WAFF_THEME') && 'RSFP' === WAFF_THEME && post_type_exists('partner') )?'p_general_link':$partner_field; // Special RSFP 
 
 	// print_r($attributes);
 	// if ( $is_preview ) 
@@ -1688,28 +1693,48 @@ function wa_partners_callback( $attributes, $is_preview = false, $post_id = null
 						<?php
 					}
 
-					$args = array( 
-						'numberposts' 		=> -1, // No limit
-						'post_status' 		=> 'publish', // Show only the published posts
-						'orderby'			=> 'post_date',
-						'order'				=> 'DESC',
-						'post_type'			=> $posttype,
-						// Limit to selected cats and edition
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'edition',
-								'field' => 'term_id', 
-								'terms' => $current_edition_id,
-								'include_children' => false
-							),
-							array(
-								'taxonomy' => $partner_category,
-								'field' => 'term_id',
-								'terms' => $category->term_id, // Fixed from DINARD SEPT23
-								'operator' => 'IN'
-							),
-						)
-					);
+					if ( $current_edition_id !== NULL && taxonomy_exists( 'edition') ) {
+						$args = array( 
+							'numberposts' 		=> -1, // No limit
+							'post_status' 		=> 'publish', // Show only the published posts
+							'orderby'			=> 'post_date',
+							'order'				=> 'DESC',
+							'post_type'			=> $posttype,
+							// Limit to selected cats and edition
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'edition',
+									'field' => 'term_id', 
+									'terms' => $current_edition_id,
+									'include_children' => false
+								),
+								array(
+									'taxonomy' => $partner_category,
+									'field' => 'term_id',
+									'terms' => $category->term_id, // Fixed from DINARD SEPT23
+									'operator' => 'IN'
+								),
+							)
+						);
+					} else {
+						$args = array( 
+							'numberposts' 		=> -1, // No limit
+							'post_status' 		=> 'publish', // Show only the published posts
+							'orderby'			=> 'post_date',
+							'order'				=> 'DESC',
+							'post_type'			=> $posttype,
+							// Limit to selected cats and edition
+							'tax_query' => array(
+								array(
+									'taxonomy' => $partner_category,
+									'field' => 'term_id',
+									'terms' => $category->term_id, // Fixed from DINARD SEPT23
+									'operator' => 'IN'
+								),
+							)
+						);
+					}
+
 					$partners = get_posts($args);
 	
 					foreach( $partners as $post ) : 
@@ -3858,114 +3883,28 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 					<p class="lead mb-3"><?= waff_do_markdown(mb_get_block_field( 'waff_i_leadcontent' )) ?></p>
 
 					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-						<div class="col">
-							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-1">
-								<div class="card-header py-3">
-							<h4 class="my-0 fw-normal">Lorem</h4>
-							</div>
-							<div class="card-body">
-							<h1 class="card-title">100<small class="text-body-secondary fw-light">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum dolor</li>
-							</ul>
-							<button type="button" class="w-100 btn btn-lg btn-outline-light">En savoir plus...</button>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-color-bg">
-								<div class="card-header py-3">
-							<h4 class="my-0 fw-normal">Pro</h4>
-							</div>
-							<div class="card-body">
-							<h1 class="card-title">15<small class="text-body-secondary fw-light">+</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum</li>
-							</ul>
-							<button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-						<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
-							<div class="card-header py-3">
-							<h4 class="my-0 fw-normal">Enterprise</h4>
-							</div>
-							<div class="card-body">
-							<h1 class="card-title">$29<small class="text-body-secondary fw-light">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum amet</li>
-							</ul>
-							<button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
-							</div>
-						</div>
-						</div>
-					</div>
-
-					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-						<div class="col">
-							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
-							<div class="card-body">
-							<h1 class="card-title heading-2">100<small class="text-action-1 fw-light op-10">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum dolor</li>
-							</ul>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-							<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
-							<div class="card-body">
-							<h1 class="card-title heading-2">15<small class="text-action-1 fw-light op-10">+</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum</li>
-							</ul>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-						<div class="card mb-4 rounded-3 shadow-sm border-0 text-start bg-action-3">
-							<div class="card-body">
-							<h1 class="card-title heading-2">10 000<small class="text-action-1 fw-light op-10"></small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum amet</li>
-							</ul>
-							</div>
-						</div>
-						</div>
-					</div>
-
-					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-						<div class="col">
-							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout text-color-main">
-								<div class="card-body">
-							<h1 class="card-title fw-medium">100+<small class="text-body-secondary fw-light">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum dolor</li>
-							</ul>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout">
-								<div class="card-body">
-							<h1 class="card-title fw-medium">15<small class="text-body-secondary fw-light">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum</li>
-							</ul>
-							</div>
-						</div>
-						</div>
-						<div class="col">
-							<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start bg-color-layout">
-								<div class="card-body">
-							<h1 class="card-title fw-medium">100<small class="text-body-secondary fw-light">/mo</small></h1>
-							<ul class="list-unstyled mt-3 mb-4">
-								<li>Lorem ipsum amet</li>
-							</ul>
-							</div>
-						</div>
-						</div>
+						<?php 
+						foreach( mb_get_block_field( 'waff_i_lists' ) as $list ) : 
+							echo sprintf('<div class="col">
+								<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start %s text-color-main">
+									%s
+									<div class="card-body">
+										<h1 class="card-title %s">%s<small class="text-body-secondary fw-light">%s</small></h1>
+										<p class="mt-3 mb-4">%s</p>
+										%s
+									</div>
+								</div>
+							</div>',
+							$list[4]?$list[4]:'bg-color-layout',
+							$list[0]?'<div class="card-header py-3"><h4 class="my-0 fw-normal">'.$list[0].'</h4></div>':'',
+							$list[4]?'heading-2':'fw-medium',
+							$list[1],
+							$list[2],
+							$list[3],
+							$list[5]?'<a href="'.$list[5].'" class="w-100 btn btn-lg '.($list[4]=='bg-action-1'?'btn-outline-light':'btn-primary').'">En savoir plus...</a>':''
+							);
+						endforeach;
+						?>
 					</div>
 					
 				</div>

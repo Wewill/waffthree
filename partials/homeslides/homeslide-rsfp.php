@@ -20,6 +20,9 @@ $slide_nb 			= 0;
 $slide_images 		= array();
 $slide_colors 		= array();
 
+// Homeslide image 
+$homeslide_images = WaffTwo\Theme\waff_get_theme_homeslide_background();
+$homeslide_image = reset( $homeslide_images );
 
 ?>
 
@@ -80,7 +83,7 @@ $slide_colors 		= array();
 				</div>
 
 				<!-- Special RSFP -->
-				<div class="position-absolute top-50 end-0 translate-middle-y opacity-50 --op-2"><img src="img/rsfp/Fond_epis_unique.png" /></div>
+				<div class="position-absolute top-50 end-0 translate-middle-y opacity-50 --op-2"><img src="<?= $homeslide_image['url']; ?>" /></div>
 
 				<!-- Images sources-->
 				<style scoped type="text/css">
@@ -154,7 +157,7 @@ $slide_colors 		= array();
 						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-100 position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="px-6 pt-16"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="px-6 py-2">
-								<h1 class="display-3 <?= $class ?>"><?= $slide_title; ?></h1>
+								<h1 class="h2 --display-3 <?= $class ?>"><?= $slide_title; ?></h1>
 							</div>
 							<div class="px-6 pb-3">
 								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= do_shortcode($content); ?></div>
@@ -195,6 +198,35 @@ $slide_colors 		= array();
 			<!-- Mouse down -->
 			<!-- <div class="scroll-downs"><div class="mousey"><div class="scroller"></div></div></div> -->
 			<div class="scroll-downs position-absolute bottom-0 start-45 mb-4"><div class="mousey"><div class="scroller"></div></div></div>
+
+			<!-- Contextual menu -->
+			<div class="position-absolute --top-50 bottom-10 start-50 translate-middle d-flex justify-content-between px-6 pe-20">
+				
+				<div>
+					<span class="bullet bullet-light ml-0"></span>
+					<h5 class="color-light">S'installer paysan.ne,<br/>
+						pourquoi pas moi ?</h5>
+				</div>
+				<div>
+					<span class="bullet bullet-light ml-0"></span>
+					<h5 class="color-light">Découvrir<br/>
+						des savoir-faire</h5>
+				</div>
+				<div>
+					<span class="bullet bullet-light ml-0"></span>
+					<h5 class="color-light">Visiter une ferme</h5>
+				</div>
+				<div>
+					<span class="bullet bullet-light ml-0"></span>
+					<h5 class="color-light">Se faire<br/>
+						accompagner</h5>
+				</div>
+				<div>
+					&nbsp;
+				</div>
+
+			</div>
+
 		</div>
 	</div>
 </section>
