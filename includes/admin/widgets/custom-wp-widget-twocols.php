@@ -110,20 +110,21 @@ class WP_Widget_CallToAction extends WP_Widget {
 
 					<!-- First col -->
 					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
-						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-top-center"></div>
+						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_start']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_start ?></h6>
 							<hgroup>
 								<p class="card-date text-muted mt-1 mb-0"><?= $subtitle_start ?></p>
-								<h2 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_start ?>"><?= $title_start ?></a></h2>
+								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_start ?>"><?= $title_start ?></a></h3>
 							</hgroup>
 							<?= $text_start ?>
+							<?= $url_start != '' ? '<div><a href="'.$url_start.'" class="btn --btn-sm btn-inverse-action-2" alt="'.$title_start.'">En savoir plus...</a></div>':'' ?>
 						</div>
 					</div>
 
 					<!-- Last col -->
 					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
-						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-top-center"></div>
+						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_end']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_end ?></h6>
 							<hgroup>
@@ -131,6 +132,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_end ?>"><?= $title_end ?></a></h3>
 							</hgroup>
 							<?= $text_end ?>
+							<?= $url_end != '' ? '<div><a href="'.$url_end.'" class="btn --btn-sm btn-inverse-action-2" alt="'.$title_end.'">En savoir plus...</a></div>':'' ?>
 						</div>
 					</div>
 					
