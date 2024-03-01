@@ -70,7 +70,7 @@ $homeslide_image = reset( $homeslide_images );
 					?>
 					<!-- Slide <?= $slide_nb ?> -->
 					<div class="img-shifted shift-left vh-100 <?= $mode; ?>">
-						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center" data-style="background-image: url('<?= $featured_img_url; ?>');">
+						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-start-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100">
 								<video class="w-auto h-100 bg-cover" autoplay loop playsinline src="<?= $video['src']; ?>"></video>
@@ -154,7 +154,7 @@ $homeslide_image = reset( $homeslide_images );
 					?>
 		
 						<!-- Slide <?= $slide_nb ?> -->
-						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-100 position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
+						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-100 position-relative rounded-bottom-4 rounded-bottom-end-0" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="px-6 pt-16"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="px-6 py-2">
 								<h1 class="h2 --display-3 <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
