@@ -62,7 +62,7 @@ $slide_colors 		= array();
 						<div class="d-flex flex-column justify-content-end bg-gradient-action-1 border-0 --text-dark vh-100 min-h-600-px position-relative" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="ps-3 ps-md-5 pt-4"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="ps-3 ps-md-5 py-1">
-								<h1 class="f-20 <?= $class ?> w-60"><?= $_slide_title; ?></h1>
+								<h1 class="f-20 <?= $class ?> w-60"><?= WaffTwo\Core\waff_do_markdown($_slide_title); ?></h1>
 							</div>
 							<div class="ps-3 ps-md-5 pb-3 --pt-1 opacity-50">
 								<div class="mb-1 d-none d-sm-block <?= $class ?> w-60"><?= $content; ?></div>
