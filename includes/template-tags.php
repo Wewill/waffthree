@@ -1259,6 +1259,43 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					);
 				}
 			}
+
+			// DIRECTORY / SINGLE 
+			if ( 'directory' == get_post_type() ) {
+
+				//DEBUG
+				echo ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
+
+				$meta_output = '';
+				$terms_list = array('production','thematic','geography');
+
+				foreach($terms_list as $terms_name) {
+
+					$terms = get_terms( array(
+						'taxonomy'   => $terms_name,
+						'hide_empty' => false,
+					) );
+	
+					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+						foreach ( $terms as $term ) {
+							$term_link = get_term_link( $term );
+							if ( ! is_wp_error( $term_link ) ) {
+								$meta_output .= sprintf(
+									'<div class="%s-list d-inline"><a href="%s" class="%s-item --link-disabled">%s</a></div>',
+									$terms_name,
+									esc_url( $term_link ),
+									$terms_name,
+									esc_html( sanitize_text_field($term->name) )
+								);
+							}
+						}
+					}
+				}
+
+				// Finally print
+				if ( $meta_output != '' ) echo $meta_output;
+			
+			}
 		}
 	}
 endif;

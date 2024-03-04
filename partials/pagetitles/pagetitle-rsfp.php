@@ -234,12 +234,28 @@ if ( is_singular() && has_post_thumbnail() ) {
 <?php elseif ( $args == 'directory' ) : ?>
 
 	<?php 
-		$d_general_subtitle 					= get_post_meta( $post->ID, 'd_general_subtitle', true ); 
-		$d_general_introduction 				= get_post_meta( $post->ID, 'd_general_introduction', true ); 
+		$prefix = 'd_';
+
+		$d_general_subtitle 				= get_post_meta( $post->ID, $prefix . 'general_subtitle', true ); 
+		$d_general_introduction 			= get_post_meta( $post->ID, $prefix . 'general_introduction', true ); 
 		/* <?php if ( $args != '' ) printf('<h5 class="subline text-muted mb-1">%s</h5>', sanitize_text_field(ucfirst($args)));?> 
 		esc_html(__('[:fr]De[:en]From[:]')) */
-	?>
 
+		// $d_medias_video_link 				= get_post_meta( $post->ID, 'd_medias_video_link', true ); 
+		// $d_medias_video 						= get_post_meta( $post->ID, 'd_medias_video', true );
+
+		$d_medias_video_links 				= rwmb_meta( $prefix . 'medias_video_link', array('limit' => 1), $post->ID);
+		$d_medias_video_link 				= reset($d_medias_video_links); // Recursive field
+
+		$d_medias_videos 					= rwmb_meta( $prefix . 'medias_video', array('limit' => 1), $post->ID);
+		$d_medias_video 					= reset($d_medias_videos); // Recursive field
+
+		$d_stage_opentovisit 				= rwmb_meta( $prefix . 'stage_opentovisit', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
+		echo '########';
+		print_r($d_stage_opentovisit); // Array ( [0] => visite_libre [1] => visite_collective )
+		
+	?>
+	
 	<!-- #pageheader -->
 	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-100 position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
 		<div class="container-fluid px-0">
@@ -247,34 +263,47 @@ if ( is_singular() && has_post_thumbnail() ) {
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
 				<div class="col-lg-5 col-xl-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+					
 					<!-- Image -->  
-					<figure title="<?php echo esc_attr($featured_img_description); ?>">
-						<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
-						<!-- 3800x1200 > 1900x600 -->
-						<data-src media="(min-width: 990px)"
-								srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
-										<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
-						<data-src media="(min-width: 590px)"
-								srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
-										<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
-						<data-src media="(min-width: 380px)"
-								srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
-										<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-						<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-100 fit-image w-100"></data-img>
-						</picture>
-						<?php if ( $featured_img_caption || $featured_img_description ) : ?>
-						<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
-						<?php endif; /* If captions */ ?>
-						<!--
-						Sizes :
-						<?php print_r($featured_img_urls); ?>  
-						-->
-					</figure>
+					<?php if (empty($d_medias_video)): ?>
+						<figure title="<?php echo esc_attr($featured_img_description); ?>">
+							<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
+							<!-- 3800x1200 > 1900x600 -->
+							<data-src media="(min-width: 990px)"
+									srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 590px)"
+									srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 380px)"
+									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-100 fit-image w-100"></data-img>
+							</picture>
+							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+							<?php endif; /* If captions */ ?>
+							<!--
+							Sizes :
+							<?php print_r($featured_img_urls); ?>  
+							-->
+						</figure>
+					<?php endif; ?>
+
+					<!-- Video -->  
+					<?php if (!empty($d_medias_video)): ?>
+						<!-- <pre><?= print_r($d_medias_video); ?></pre> -->
+						<figure class="wp-block-video h-100 d-flex flex-center">
+							<video class="w-auto h-100" autoplay loop muted playsinline src="<?= $d_medias_video['src']; ?>"><!-- poster="<?= $d_medias_video['image']['src']; ?>" --></video>
+						</figure>
+					<?php endif; ?>
 
 					<!-- Play -->
-					<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
-						<a class="btn action-1 --color-light play" data-fancybox="header_71_fancybox" href="https://www.youtube.com/watch?v=_FN_zr4rQzY?rel=0&amp;showinfo=0" target="_blank"><i class="bi bi-play-fill h3 ms-1"></i></a>
-					</div>
+					<?php if (!empty($d_medias_video_link)): ?>
+						<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
+							<a class="btn action-1 --color-light play" data-fancybox="pagetitle_fancybox_<?= $post->ID; ?>" href="<?= $d_medias_video_link; ?>" target="_blank"><i class="bi bi-play-fill h3 ms-1"></i></a>
+						</div>
+					<?php endif; ?>
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
@@ -282,9 +311,6 @@ if ( is_singular() && has_post_thumbnail() ) {
 					
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
-						<div class="production-list d-inline-block"><a class="production-item" tabindex="-1">Production</a></div>
-						<div class="thematic-list d-inline-block"><a class="thematic-item" tabindex="-1">Thématique</a></div>
-						<div class="geography-list d-inline-block"><a class="geography-item" tabindex="-1">Geography</a></div>
 						<h2 class="my-3"><?php single_post_title(); ?></h2>
 					</hgroup>
 					
@@ -295,10 +321,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 					<div class="d-flex align-items-center justify-content-center py-4 px-5 bg-body rounded-4 shadow">
 						<div class="d-flex align-items-center">
-							<i class="bi bi-bootstrap flex-shrink-0 me-3 h2 text-action-1"></i>
+							<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
 							<div>
-							<h6 class="fw-bold text-action-1">Lorem ipsum</h6>
-							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
+							<p class="mb-0"><?= esc_html__( 'Farm is open to visit.', 'waff' ); ?> <?= implode(', ', $d_stage_opentovisit); ?></p>
 							</div>
 						</div>
 
@@ -307,10 +333,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 						</div>
 
 						<div class="d-flex align-items-center">
-							<i class="bi bi-bootstrap flex-shrink-0 me-3 h2"></i>
+							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
 							<div>
-							<h6 class="fw-bold text-action-1">Lorem ipsum</h6>
-							<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
+							<p class="mb-0"><span class="badge bg-action-2">Bientôt disponible...</span></p>
 							</div>
 						</div>
 					</div>
