@@ -294,7 +294,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<data-src media="(min-width: 380px)"
 									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
 											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-100 fit-image w-100"></data-img>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-100 fit-image w-100"></data-img>
 							</picture>
 							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
