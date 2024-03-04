@@ -1271,10 +1271,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 				foreach($terms_list as $terms_name) {
 
-					$terms = get_terms( array(
-						'taxonomy'   => $terms_name,
-						'hide_empty' => false,
-					) );
+					$terms = wp_get_post_terms( get_the_ID(), $terms_name);
 	
 					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						foreach ( $terms as $term ) {
@@ -1289,6 +1286,9 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 								);
 							}
 						}
+					} else {
+						// Handle the error
+						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
 					}
 				}
 
