@@ -250,10 +250,26 @@ if ( is_singular() && has_post_thumbnail() ) {
 		$d_medias_videos 					= rwmb_meta( $prefix . 'medias_video', array('limit' => 1), $post->ID);
 		$d_medias_video 					= reset($d_medias_videos); // Recursive field
 
+
+		$_d_stage_opentostage   			= rwmb_get_field_settings( $prefix . 'stage_opentostage' );
+		$options_d_stage_opentostage 		= $_d_stage_opentostage['options'];
+		$d_stage_opentostage 				= rwmb_meta( $prefix . 'stage_opentostage', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
+
+		$_d_stage_opentovisit  				= rwmb_get_field_settings( $prefix . 'stage_opentovisit' );
+		$options_d_stage_opentovisit 		= $_d_stage_opentovisit['options'];
 		$d_stage_opentovisit 				= rwmb_meta( $prefix . 'stage_opentovisit', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
-		echo '########';
-		print_r($d_stage_opentovisit); // Array ( [0] => visite_libre [1] => visite_collective )
 		
+		function implodeOptions($glue = ', ', $keys, $options) {
+			$result = [];
+		
+			foreach ($keys as $key) {
+				if (array_key_exists($key, $options)) {
+					$result[] = $options[$key];
+				}
+			}
+		
+			return implode(', ', $result);
+		}
 	?>
 	
 	<!-- #pageheader -->
@@ -320,17 +336,31 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</div>
 
 					<div class="d-flex align-items-center justify-content-center py-4 px-5 bg-body rounded-4 shadow">
+						<?php if (!empty($d_stage_opentovisit)): ?>
 						<div class="d-flex align-items-center">
 							<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
 							<div>
 							<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
-							<p class="mb-0"><?= esc_html__( 'Farm is open to visit.', 'waff' ); ?> <?= implode(', ', $d_stage_opentovisit); ?></p>
+							<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= implodeOptions(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
 							</div>
 						</div>
-
 						<div class="d-flex align-items-center justify-content-center px-5">
 							<span class="bullet bullet-action-2 ml-0"></span>
 						</div>
+						<?php endif; ?>
+
+						<?php if (!empty($d_stage_opentostage)): ?>
+						<div class="d-flex align-items-center">
+							<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
+							<div>
+							<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
+							<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= implodeOptions(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+							</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-center px-5">
+							<span class="bullet bullet-action-2 ml-0"></span>
+						</div>
+						<?php endif; ?>
 
 						<div class="d-flex align-items-center">
 							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
