@@ -1075,3 +1075,46 @@ function waff_trim($content = '', $length = 100) {
 	}
 	return $content;
 }
+
+/**
+ * Implode and return option of an array 
+ * Joins elements from an associative array into a string, based on specified keys.
+ */
+function waff_implode_options($glue = ', ', $keys, $options) {
+    $result = []; // Initialize an empty array to store the values found in $options using $keys
+
+    foreach ($keys as $key) { // Iterate over each key provided in $keys
+        if (array_key_exists($key, $options)) { // Check if the current key exists in the $options array
+            $result[] = esc_html($options[$key]); // If the key exists, add its corresponding value to the $result array
+        }
+    }
+
+    // Use the implode() function to join the values in the $result array with the specified $glue
+    // and return the resulting string.
+	return implode($glue, $result);
+}
+
+/**
+ * Implode and return non empty values
+ */
+function waff_implode_nonempty($glue = ', ', $keys) {
+    // Filter out empty values from the array
+    $nonEmptyKeys = array_filter($keys, function($value) {
+        return !empty(esc_html($value));
+    });
+
+    // Implode the non-empty values with a comma separator
+    return implode($glue, $nonEmptyKeys);
+
+	// Alternative
+    // $result = []; // Initialize an empty array to store the values found in $options using $keys
+
+    // foreach ($keys as $key => $value) { // Iterate over each key provided in $keys
+    //     if (!empty($value)) { // Check if the value is defined or not empty
+    //         $result[] = $value; 
+    //     }
+    // }
+
+    // // Implode the non-empty values with a comma separator
+	// return implode($glue, $result);
+}
