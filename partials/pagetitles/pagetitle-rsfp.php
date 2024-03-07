@@ -334,7 +334,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							</div>
 						</div>
 						<div class="d-flex align-items-center justify-content-center px-5">
-							<span class="bullet bullet-action-2 ml-0"></span>
+							<span class="bullet bullet-action-2 ms-0"></span>
 						</div>
 						<?php endif; ?>
 
@@ -347,7 +347,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							</div>
 						</div>
 						<div class="d-flex align-items-center justify-content-center px-5">
-							<span class="bullet bullet-action-2 ml-0"></span>
+							<span class="bullet bullet-action-2 ms-0"></span>
 						</div>
 						<?php endif; ?>
 

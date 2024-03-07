@@ -777,12 +777,12 @@ input[type=url]:focus, input[type=week]:focus {
 	color: var(--go-search-toggle--color--text, var(--go-navigation--color--text));
 }
 
-body .navbar-light .navbar-toggler .navbar-toggler-icon {
+body:not(.waff-theme-rsfp) .navbar-light .navbar-toggler .navbar-toggler-icon {
   background-image: none !important;
   -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='butt' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
   mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='butt' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
   background-color: var(--go-search-toggle--color--text, var(--go-navigation--color--text)) !important;
-}
+} /* Purpose ????? */
 
 body:not(.waff-theme-fifam) .navbar-dark .header__button--night-mode,
 body:not(.waff-theme-fifam) .navbar-dark .header__search-toggle,

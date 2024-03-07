@@ -32,9 +32,8 @@ global $page_atts;
 	<header id="site-header" class="site-header header masthead navbar navbar-light classic-navbar bg-transparent container-fluid p-0 zi-5 <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($sticky) ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 		<nav class="w-100 sticky-top row g-0">
-
 			<!-- Filled col 1 -->
-			<div class="col-5 bg-white d-flex align-items-center justify-content-center">
+			<div class="col-10 col-md-6 col-lg-5 bg-white d-flex align-items-center justify-content-center">
 
 				<!-- Logotype -->
 				<?php //Go\display_site_branding(); ?>
@@ -71,7 +70,7 @@ global $page_atts;
 			<!-- end: Filled col 1 -->
 
 			<!-- Filled col 2 -->
-			<div class="col-1 bg-action-3 d-flex align-items-center justify-content-center rounded-end-4 rounded-top-right-0">
+			<div class="col-2 col-md-1 col-lg-1 bg-action-3 d-flex align-items-center justify-content-center rounded-end-4 rounded-top-right-0 rounded-md-0">
 
 				<!-- Mobile nav -->
 				<!-- Burger .navbar-toggler -->
@@ -89,9 +88,9 @@ global $page_atts;
 			</div>
 			<!-- end: Filled col 2 -->
 
-			<!-- Transparent col 3 -->
+			<!-- Transparent col 3 / Hidden xs sm -->
 			<!-- Nav -->
-			<div class="navbar-menu col-6 d-flex align-items-center justify-content-end <?= esc_attr($navbarborder); ?>">
+			<div class="navbar-menu col-12 col-md-5 col-lg-6 d-none d-md-flex d-flex align-items-center justify-content-end <?= esc_attr($navbarborder); ?>">
 
 				<!-- Desktop nav .navbar-nav-->
 				<div class="d-flex flex-column align-items-stretch justify-content-center d-lg-block d-none ps-5 pe-0">
@@ -151,6 +150,7 @@ global $page_atts;
 				</div>
 
 			</div>
+			<!-- end: Transparent col 3 -->
 		</nav>	
 
 		<?php get_template_part( 'partials/modal-search' ); ?>
