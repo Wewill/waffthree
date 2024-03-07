@@ -83,7 +83,7 @@ $homeslide_image = reset( $homeslide_images );
 				</div>
 
 				<!-- Special RSFP -->
-				<div class="position-absolute top-50 end-0 translate-middle-y opacity-50 --op-2 zi-5"><img src="<?= $homeslide_image['url']; ?>" /></div>
+				<div class="position-absolute top-50 end-0 translate-middle-y opacity-50 --op-2 --zi-5"><img src="<?= $homeslide_image['url']; ?>" /></div>
 
 				<!-- Images sources-->
 				<style scoped type="text/css">
@@ -126,7 +126,7 @@ $homeslide_image = reset( $homeslide_images );
 			</style>	
 					
 			</div>
-			<div class="col-lg-5 col-xl-5 --order-first order-1 order-lg-first" data-aos="fade-down">
+			<div class="col-lg-5 col-xl-5 --order-first order-1 order-lg-first zi-5" data-aos="fade-down">
 
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
