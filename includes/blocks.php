@@ -3668,7 +3668,7 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 			</picture>
 		</figure>
 
-		<div class="container-fluid p-8 bg-v-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-4 p-md-8 bg-v-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mt-10 mb-10">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
@@ -3749,7 +3749,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center">
 
-				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0" data-aos="fade-up" data-aos-delay="0" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0 md-rounded-0" data-aos="fade-up" data-aos-delay="0" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
 					<?php if ( count($image_1) > 0 && !$is_preview ) : ?>
@@ -3769,7 +3769,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 						<?php endforeach; ?>
 					<?php endif; ?>
 					
-					<div class="card bg-transparent border-0 text-white --h-100 px-8 py-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
+					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline text-light"><?= mb_get_block_field( 'waff_b_label_1' ) ?></h6>
 						<div>
 							<div class="w-100 w-lg-50">
@@ -3785,7 +3785,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 
 
 				</div>
-				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0" data-aos="fade-up" data-aos-delay="100" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0 md-rounded-bottom-4" data-aos="fade-up" data-aos-delay="100" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
 					<?php if ( count($image_2) > 0 && !$is_preview ) : ?>
@@ -3805,7 +3805,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 						<?php endforeach; ?>
 					<?php endif; ?>
 					
-					<div class="card bg-transparent border-0 text-white --h-100 px-8 py-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
+					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline action-1"><?= mb_get_block_field( 'waff_b_label_2' ) ?></h6>
 						<div>
 							<div class="w-100 w-lg-50">
@@ -3874,7 +3874,7 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
 		<div class="container-fluid px-0 position-relative">
 			<div class="row">
-				<div class="col-8 ps-10 pe-10" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?>">
+				<div class="col-12 col-lg-8 ps-4 pe-4 ps-lg-10 pe-lg-10" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?>">
 
 					<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_i_subtitle' ) ?></h6>
 					<hgroup class="pt-8 pb-4 d-flex justify-content-between align-items-center">
@@ -3913,7 +3913,7 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 					
 				</div>
 
-				<div class="col-4 bg-color-layout rounded-start-4 d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
+				<div class="col-12 col-lg-4 bg-color-layout rounded-start-4 d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
 
 					<!-- Figure -->
 					<?php if ( count($image) > 0 ) : ?>

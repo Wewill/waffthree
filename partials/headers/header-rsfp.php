@@ -70,7 +70,7 @@ global $page_atts;
 			<!-- end: Filled col 1 -->
 
 			<!-- Filled col 2 -->
-			<div class="col-2 col-md-1 col-lg-1 bg-action-3 d-flex align-items-center justify-content-center rounded-end-4 rounded-top-right-0 rounded-md-0">
+			<div class="col-2 col-md-1 col-lg-1 bg-action-3 d-flex align-items-center justify-content-center rounded-end-4 rounded-top-right-0 md-rounded-0">
 
 				<!-- Mobile nav -->
 				<!-- Burger .navbar-toggler -->
