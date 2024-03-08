@@ -264,10 +264,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<!-- #pageheader -->
 	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-100 position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
 		<div class="container-fluid px-0">
-			<div class="row g-0 align-items-center vh-100"><!-- .vh-100 hack-->
+			<div class="row g-0 justify-content-between align-items-center vh-100"><!-- .vh-100 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
-				<div class="col-lg-5 col-xl-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+				<div class="col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
 					
 					<!-- Image -->  
 					<?php if (empty($d_medias_video)): ?>
@@ -312,7 +312,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
-				<div class="col-lg overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-5 pt-20" data-aos="fade-left">
+				<div class="col-lg overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-5 pt-5 pt-lg-20" data-aos="fade-left">
 					
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
@@ -320,8 +320,8 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</hgroup>
 					
 					<div>
-						<p class="lead fw-bold"><?= esc_html($d_general_subtitle); ?></p>
-						<div class="lead"><?= apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)); ?></p>
+						<p class="lead fw-bold lg-reset-fontsize"><?= esc_html($d_general_subtitle); ?></p>
+						<div class="lead lg-reset-fontsize"><?= apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)); ?></p>
 					</div>
 
 					<div class="d-flex align-items-center justify-content-center py-4 px-5 bg-body rounded-4 shadow">
