@@ -5,10 +5,10 @@ class WP_Widget_CallToAction extends WP_Widget {
 
     protected $default_instance = array(
         'title'   			=> '',
-        'text_start'   			=> '<p class="card-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>',
-        'text_end'   			=> '<p class="card-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>',
+        'text_start'   		=> '<p class="card-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>',
+        'text_end'   		=> '<p class="card-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>',
 		'classes' 			=> 'mt-10 mb-n8 contrast--dark z-2',
-		'inside_classes' 	=> 'ms-10 me-10',
+		'inside_classes' 	=> 'ms-1 me-1 ms-lg-10 me-lg-10',
 		'card_classes_start'=> 'justify-content-between',
 		'card_classes_end' 	=> 'justify-content-center',
     );  
@@ -109,7 +109,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<div class="row g-0 align-items-top <?= $instance['inside_classes']; ?>" <?php echo $this->is_widget_preview() ? 'style="margin:0!important;"' : ''; ?>>
 
 					<!-- First col -->
-					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4 rounded-lg-top-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_start']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_start ?></h6>
@@ -118,12 +118,12 @@ class WP_Widget_CallToAction extends WP_Widget {
 								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_start ?>"><?= $title_start ?></a></h3>
 							</hgroup>
 							<?= $text_start ?>
-							<?= $url_start != '' ? '<div><a href="'.$url_start.'" class="btn --btn-sm btn-inverse-action-2" alt="'.$title_start.'">En savoir plus...</a></div>':'' ?>
+							<?= $url_start != '' ? '<div><a href="'.$url_start.'" class="btn btn-sm btn-inverse-action-2" alt="'.$title_start.'">En savoir plus...</a></div>':'' ?>
 						</div>
 					</div>
 
 					<!-- Last col -->
-					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-6 h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_end']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_end ?></h6>
@@ -132,7 +132,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_end ?>"><?= $title_end ?></a></h3>
 							</hgroup>
 							<?= $text_end ?>
-							<?= $url_end != '' ? '<div><a href="'.$url_end.'" class="btn --btn-sm btn-inverse-action-2" alt="'.$title_end.'">En savoir plus...</a></div>':'' ?>
+							<?= $url_end != '' ? '<div><a href="'.$url_end.'" class="btn btn-sm btn-inverse-action-2" alt="'.$title_end.'">En savoir plus...</a></div>':'' ?>
 						</div>
 					</div>
 					

@@ -3499,31 +3499,33 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 
 	// print_r(mb_get_block_field('waff_m_alignment'));
 	// print_r(mb_get_block_field('waff_m_position'));
+	// Alignment 
 	switch(mb_get_block_field('waff_m_alignment')) {
 		case 'aligned': 
 			$r_alignment 	= '';
-			$b_alignment 	= 'col-4 bg-action-1 h-850-px';
+			$b_alignment 	= 'col-12 col-lg-4 bg-action-1 h-850-px h-lg-850-px'; // col-4
 			//$f_alignment 	= 'align-items-end';
-			$i_alignment 	= 'h-700-px';
+			$i_alignment 	= 'h-700-px h-lg-700-px'; // h-700-px
 			break;
 		case 'shifted': 
 			$r_alignment 	= 'vh-100';
 			$b_alignment 	= 'col-lg-5 col-xl-5 bg-action-2 vh-75';
-			$f_alignment 	= 'vh-75';
-			$i_alignment 	= 'vh-75';
+			$f_alignment 	= 'lg-vh-75 h-100'; // h-100 pose soucis. 
+			$i_alignment 	= 'vh-75 --h-100';
 			break;
 	}
 
+	// Position 
 	switch(mb_get_block_field('waff_m_position')) {
 		case 'top': 
-			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-end' : 'align-items-start';
+			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-lg-end align-items-start' : 'align-items-start';
 			$f_position 	= 'top-0';
 			$aos_position 	= 'fade-up';
 			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-start'; }
 			break;
 		case 'center': 
-			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-center' : 'align-items-end';
-			$f_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'top-50 end-0 translate-middle-y' : 'bottom-0';
+			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-lg-center align-items-start' : 'align-items-end';
+			$f_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'top-50 end-0 translate-middle-y lg-transform-0' : 'bottom-0';
 			$aos_position 	= 'fade-up';
 			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-center'; }
 			break;
@@ -3535,9 +3537,8 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 			break;
 	}
 
-	// Alignment 
-
-	// Position 
+	// Responsive 
+	$b_position 	.= ' ---- position-absolute position-lg-relative top-0 left-0 w-100'; 
 
 	// Background image 
 	$bg_images = waff_get_blocks_background();
@@ -3550,13 +3551,15 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 			<div class="row g-0 <?= $b_position; ?> <?= $r_alignment; ?> <?= $is_preview ? 'd-none' : '' ?>">
 				<div class="<?= $b_alignment; ?> rounded-end-4" --data-aos="fade-left" --data-aos-delay="100"></div>
 			</div>
-			<div class="row <?= $f_alignment; ?> w-100 ---- position-absolute <?= $f_position; ?> left-0">
-				<div class="col-2" ---data-aos="fade-left"></div>
+			<div class="row <?= $f_alignment; ?> w-100 ---- position-lg-absolute <?= $f_position; ?> left-0">
+				<!-- Col 1 -->
+				<div class="col-2 d-none d-lg-block" ---data-aos="fade-left"></div>
 
+				<!-- Col 2 -->
 				<!-- Figure -->
 				<?php if ( count($image) > 0 ) : ?>
 					<?php foreach ( $image as $im ) : ?>
-						<figure class="col-4 p-0 rounded-4 contrast--light <?= $i_alignment; ?> overflow-hidden position-relative" data-aos="<?= $aos_position; ?>" data-aos-delay="200" style="<?= $is_preview ? 'float:left; width:49%;' : '' ?>">
+						<figure class="wp-block col-10 col-lg-4 p-0 rounded-4 contrast--light <?= $i_alignment; ?> overflow-hidden position-relative mb-10 --mb-md-10 mb-lg-0" data-aos="<?= $aos_position; ?>" data-aos-delay="200" style="<?= $is_preview ? 'float:left; width:49%;' : '' ?>">
 							<picture class="">
 								<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid rounded-4 <?= $i_alignment; ?> fit-image w-100 img-transition-scale">
 							</picture>
@@ -3574,8 +3577,9 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 					<?php endforeach; ?>
 				<?php endif; ?>
 
+				<!-- Col 3 -->
 				<!-- Begin: Content -->
-				<div class="col-4 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
+				<div class="col-12 col-lg-6 col-xl-4 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
 					<div>
 						<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
 						<h2><?= mb_get_block_field( 'waff_m_title' ) ?></h2>
@@ -3584,7 +3588,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 					</div>
 					
 					<div>
-						<div class="row row-cols-1 row-cols-md-2 g-4 py-5">
+						<div class="row row-cols-2 row-cols-sm-3 row-cols-lg-2 g-4 py-5">
 							<?php 
 							foreach( mb_get_block_field( 'waff_m_lists' ) as $list ) : 
 								echo sprintf('<div class="col d-flex align-items-center">

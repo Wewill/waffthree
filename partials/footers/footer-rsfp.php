@@ -27,7 +27,7 @@ $bg_image 		= reset( $bg_images );
 		<div class="row --g-0">
 
 			<!-- Col -->
-			<div class="col-3">
+			<div class="col-6 col-lg-3">
 				<!-- First nav -->
 				<?php if ( has_nav_menu( 'footer-1' ) || is_customize_preview() ) : ?>
 					<nav class="footer-navigation footer-navigation--1" aria-label="<?php esc_attr_e( 'Primary Footer Menu', 'go' ); ?>">
@@ -48,7 +48,7 @@ $bg_image 		= reset( $bg_images );
 				<?php endif; ?>
 			</div>
 			<!-- Col -->
-			<div class="col-3">
+			<div class="col-6 col-lg-3">
 				<!-- Second nav -->
 				<?php if ( has_nav_menu( 'footer-2' ) || is_customize_preview() ) : ?>
 					<nav class="footer-navigation footer-navigation--2" aria-label="<?php esc_attr_e( 'Secondary Footer Menu', 'go' ); ?>">
@@ -69,7 +69,7 @@ $bg_image 		= reset( $bg_images );
 				<?php endif; ?>
 			</div>
 			<!-- Col -->
-			<div class="col-3">
+			<div class="col-6 col-lg-3">
 				<!-- Theme address -->
 				<?php WaffTwo\display_company_address(array('class' => 'font-weight-bold')); ?>
 
@@ -93,7 +93,7 @@ $bg_image 		= reset( $bg_images );
 				<p><small><?php WaffTwo\display_site_message(); ?></small></p>
 			</div>
 			<!-- Col -->
-			<div class="col-3">
+			<div class="col-6 col-lg-3">
 				<!-- Logotype -->
 				<div class="">
 					<div class="ml-4 mb-2" data-aos="fade-down" data-aos-delay="100">
