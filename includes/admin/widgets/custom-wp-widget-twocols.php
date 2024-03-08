@@ -109,7 +109,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<div class="row g-0 align-items-top <?= $instance['inside_classes']; ?>" <?php echo $this->is_widget_preview() ? 'style="margin:0!important;"' : ''; ?>>
 
 					<!-- First col -->
-					<div class="col-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4 rounded-lg-top-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4 md-rounded-end-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_start']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_start ?></h6>
@@ -123,7 +123,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 					</div>
 
 					<!-- Last col -->
-					<div class="col-6 h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 d-none d-md-block h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_end']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_end ?></h6>
