@@ -34,6 +34,24 @@ itemtype="http://schema.org/WebSite"
 			</div>
 		</form>
 
+	<?php elseif ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) : /* RSFP */ ?>
+
+		<form role="search" id="searchform" class="search-form is-formatted mt-0 bg-color-layout" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<div class="form-group g-0 w-100 --bg-action-2">
+					<div class="input-group --p-2">
+					<meta itemprop="target" content="<?php echo esc_url( home_url( '/' ) ); ?>/?s={s}" />
+					<label for="search-field" class="visually-hidden">
+						<span class="screen-reader-text"><?php echo esc_html_x( 'Search for:', 'label', 'go' ); ?></span>
+					</label>
+					<input class="form-control form-control-lg --focus-dark focus-0 input input--search search-form__input p-5 flex-fill --w-50" itemprop="query-input" type="search" id="search-field" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'go' ); ?>" value="<?php echo get_search_query(); ?>" name="s">
+					<button class="btn btn-action-3 btn-lg search-input__button d-flex flex-center rounded-start-4 rounded-top-left-0 rounded-top-right-0 rounded-bottom-right-0 m-0 --px-4 w-10" type="submit">
+						<span class="screen-reader-text search-input__label"><?php echo esc_html_x( 'Submit', 'submit button', 'go' ); ?></span>
+						<i class="fas fa-search text-light"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+
 	<?php else : /* OTHERS */ ?>
 
 		<form role="search" id="searchform" class="search-form is-formatted mt-0" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
