@@ -20,3 +20,9 @@
 #meta-box-notification {
     display: none;
 }
+
+/* Make long text_list readable */
+
+.rwmb-text_list-non-cloneable > .rwmb-input, .rwmb-text_list-clone {
+	flex-direction: column;
+}

@@ -859,6 +859,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'clone'             => true,
                 'sort_clone'        => true,
                 'max_clone'         => 100,
+                'desc'				=> __( '<br/><span class="label">TIPS</span> You can use Boostrap icons, ex : bi bi-bookmark ( https://icons.getbootstrap.com ).', 'waff' ),
             ],
             [	
                 'id'   				=> $prefix . 'm_image',
