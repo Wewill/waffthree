@@ -812,7 +812,6 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 	 */
 	function waff_entry_meta_header($post = null) {
 		global $current_edition_id;
-		global $post;
 
 		// echo 'TOREMOVE/AFTER/MERGED';
 		$__post_type = get_post_type(); 
@@ -827,6 +826,11 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			$__queried_object_ID = $__ID;
 			// echo var_dump(is_single($post->ID));
 		}
+
+		if ( $post == null ) {
+			global $post;
+		}
+
 
 		// Early exit if not a post, film.
 		if ( !in_array( $__post_type, array('post', 'film'), true ) ) {
