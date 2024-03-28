@@ -810,18 +810,32 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 	 *
 	 * @return void
 	 */
-	function waff_entry_meta_header() {
+	function waff_entry_meta_header($post = null) {
 		global $current_edition_id;
 		global $post;
 
+		// echo 'TOREMOVE/AFTER/MERGED';
+		$__post_type = get_post_type(); 
+		$__ID = get_the_ID(); 
+		$__queried_object_ID = get_queried_object_id();
+		// echo var_dump(is_single());
+		// // print_r(get_queried_object());
+
+		if ( $post !== null ) {
+			$__post_type = get_post_type($post->ID); 
+			$__ID = $post->ID;
+			$__queried_object_ID = $__ID;
+			// echo var_dump(is_single($post->ID));
+		}
+
 		// Early exit if not a post, film.
-		if ( !in_array( get_post_type(), array('post', 'film'), true ) ) {
+		if ( !in_array( $__post_type, array('post', 'film'), true ) ) {
 			echo ((true === WAFF_DEBUG)?'<code> #NOTPOSTorFILM</code>':'');
 			//return;
 		}
 				
 		// Hide meta information on pages.
-		if ( !is_single() ) {
+		if ( !is_single($__ID) ) {
 
 			// DEBUG
 			echo ((true === WAFF_DEBUG)?'<code> #NOTSINGLE</code>':'');
@@ -847,7 +861,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					}
 				endif;
 			} else {
-				$terms = wp_get_object_terms( get_the_ID(), $taxonomy );
+				$terms = wp_get_object_terms( $__ID, $taxonomy );
 				if ( ! empty( $terms ) ) :
 					if ( ! is_wp_error( $terms ) ) :
 						foreach ( $terms as $term ) {
@@ -919,7 +933,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			} 
 
 			// FILM
-			if ( 'film' == get_post_type() && !is_tax() ) {
+			if ( 'film' == $__post_type && !is_tax() ) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #ISaFILM</code>':'');		
@@ -935,7 +949,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					/', '<a class="section-item" style="background-color: #0000FF;"', get_the_term_list(
 					get_the_ID(), 'section', 'BEFORE ', __( '&#8203;', 'waff' ) ) ); */
 					//$terms = get_terms( array( 'taxonomy' => 'section' ) ); // Returns the complete list
-					$terms = wp_get_object_terms( get_the_ID(),  'section' );
+					$terms = wp_get_object_terms( $__ID,  'section' );
 					if ( ! empty( $terms ) ) :
 						if ( ! is_wp_error( $terms ) ) :
 							$terms_list = array();
@@ -971,8 +985,8 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					$film_category 			= get_translated_movie_category(types_render_field( 'f-movie-category', array('output' =>'raw') ), $film_category); // Return an non zero-based index 
 					//https://toolset.com/forums/topic/can-types-works-with-qtranslate-x-httpswordpress-orgpluginsqtranslate-x/
 				else: 
-					$film_type 			= get_post_meta( $post->ID, 'wpcf-f-movie-type', true ); 
-					$film_category 		= get_post_meta( $post->ID, 'wpcf-f-movie-category', true ); 
+					$film_type 			= get_post_meta( $__ID, 'wpcf-f-movie-type', true ); 
+					$film_category 		= get_post_meta( $__ID, 'wpcf-f-movie-category', true ); 
 				endif;
 
 				// Finally print
@@ -1012,7 +1026,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			}
 
 			// POST
-			if ( 'post' == get_post_type() ) {
+			if ( 'post' == $__post_type ) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #ISPOST</code>':'');		
@@ -1063,18 +1077,55 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 			}
 
+			// DIRECTORY 
+			if ( 'directory' == $__post_type ) {
+
+				//DEBUG
+				echo ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
+
+				$meta_output = '';
+				$terms_list = array('production','thematic','geography');
+
+				foreach($terms_list as $terms_name) {
+
+					$terms = wp_get_post_terms( $__ID, $terms_name);
+	
+					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+						foreach ( $terms as $term ) {
+							$term_link = get_term_link( $term );
+							if ( ! is_wp_error( $term_link ) ) {
+								$meta_output .= sprintf(
+									'<div class="%s-list d-inline"><a href="%s" class="%s-item --link-disabled">%s</a></div>',
+									$terms_name,
+									esc_url( $term_link ),
+									$terms_name,
+									esc_html( sanitize_text_field($term->name) )
+								);
+							}
+						}
+					} else {
+						// Handle the error
+						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+					}
+				}
+
+				// Finally print
+				if ( $meta_output != '' ) echo $meta_output;
+			
+			}
+
 		} else {
 
 			//DEBUG
 			echo ((true === WAFF_DEBUG)?'<code> #SINGLE</code>':'');		
 
 			// FILM / IN SECTION ? 
-			if ( 'film' == get_post_type() && has_term('','section') ) {
+			if ( 'film' == $__post_type && has_term('','section') ) {
 				/* translators: used between list items, there is a space after the comma. */
 				/* $terms_list = preg_replace('/<a /', '<a class="section-item" style="background-color: #0000FF;"', get_the_term_list(
 				get_the_ID(), 'section', 'BEFORE ', __( '&#8203;', 'waff' ) ) ); */
 				//$terms = get_terms( array( 'taxonomy' => 'section' ) ); // Returns the complete list
-				$terms = wp_get_object_terms( get_the_ID(),  'section' );
+				$terms = wp_get_object_terms( $__ID,  'section' );
 				if ( ! empty( $terms ) ) :
 					if ( ! is_wp_error( $terms ) ) :
 						$terms_list = array();
@@ -1103,7 +1154,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			}
 
 			// FILM / SINGLE 
-			if ( 'film' == get_post_type() ) {
+			if ( 'film' == $__post_type ) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #SINGLE FILM</code>':'');		
@@ -1116,8 +1167,8 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					$film_category 			= get_translated_movie_category(types_render_field( 'f-movie-category', array('output' =>'raw') ), $film_category); // Return an non zero-based index 
 					//https://toolset.com/forums/topic/can-types-works-with-qtranslate-x-httpswordpress-orgpluginsqtranslate-x/
 				else: 
-					$film_type 			= get_post_meta( $post->ID, 'wpcf-f-movie-type', true ); 
-					$film_category 		= get_post_meta( $post->ID, 'wpcf-f-movie-category', true ); 
+					$film_type 			= get_post_meta( $__ID, 'wpcf-f-movie-type', true ); 
+					$film_category 		= get_post_meta( $__ID, 'wpcf-f-movie-category', true ); 
 				endif;
 
 				// Finally print
@@ -1127,14 +1178,14 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			}
 
 			// JURY / SINGLE 
-			if ( in_array(get_post_type(), array('jury','partenaire','projection')) ) {
+			if ( in_array($__post_type, array('jury','partenaire','projection')) ) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #SINGLE JURY PARTNAIRE PROJECTION</code>':'');	
 
 
-				if ( get_post_type() !== 'partenaire' ):
-					$editions = wp_get_object_terms( get_the_ID(),  'edition' );
+				if ( $__post_type !== 'partenaire' ):
+					$editions = wp_get_object_terms( $__ID,  'edition' );
 					$sections_args = array(
 						'taxonomy'   => 'section',
 						'parent'        => 0,
@@ -1172,11 +1223,11 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					}
 				endif;
 		
-				if ( get_post_type() === 'partenaire' ):
+				if ( $__post_type === 'partenaire' ):
 					/* translators: used between list items, there is a space after the comma. */
 					/* edition */
 					$terms_list_edition = array();
-					$terms = wp_get_object_terms( get_the_ID(),  'edition' );
+					$terms = wp_get_object_terms( $__ID,  'edition' );
 					if ( ! empty( $terms ) ) :
 						if ( ! is_wp_error( $terms ) ) :
 							$termcolor = 'var(--waff-color-dark)';
@@ -1199,11 +1250,11 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					}
 				endif;
 				
-				if ( get_post_type() === 'jury' ):
+				if ( $__post_type === 'jury' ):
 					/* translators: used between list items, there is a space after the comma. */
 					/* movie-type */
 					$terms_list_movie_type = array();
-					$terms = wp_get_object_terms( get_the_ID(),  'movie-type' );
+					$terms = wp_get_object_terms( $__ID,  'movie-type' );
 					if ( ! empty( $terms ) ) :
 						if ( ! is_wp_error( $terms ) ) :
 							$termcolor = 'var(--waff-color-silver)';
@@ -1261,7 +1312,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			}
 
 			// DIRECTORY / SINGLE 
-			if ( 'directory' == get_post_type() ) {
+			if ( 'directory' == $__post_type ) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
@@ -1271,7 +1322,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 				foreach($terms_list as $terms_name) {
 
-					$terms = wp_get_post_terms( get_the_ID(), $terms_name);
+					$terms = wp_get_post_terms( $__ID, $terms_name);
 	
 					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 						foreach ( $terms as $term ) {
@@ -1395,3 +1446,39 @@ if ( ! function_exists( 'waff_entry_meta_footer' ) ) :
 		}
 	}
 endif;
+
+
+// if ( ! function_exists( 'waff_directory_entry_meta' ) ) :
+// 	function waff_directory_entry_meta($the_ID = 0) {
+
+// 		$meta_output = '';
+// 		$terms_list = array('production','thematic','geography');
+
+// 		foreach($terms_list as $terms_name) {
+
+// 			$terms = wp_get_post_terms( $the_ID, $terms_name);
+
+// 			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+// 				foreach ( $terms as $term ) {
+// 					$term_link = get_term_link( $term );
+// 					if ( ! is_wp_error( $term_link ) ) {
+// 						$meta_output .= sprintf(
+// 							'<div class="%s-list d-inline"><a href="%s" class="%s-item --link-disabled">%s</a></div>',
+// 							$terms_name,
+// 							esc_url( $term_link ),
+// 							$terms_name,
+// 							esc_html( sanitize_text_field($term->name) )
+// 						);
+// 					}
+// 				}
+// 			} else {
+// 				// Handle the error
+// 				if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+// 			}
+// 		}
+
+// 		// Finally print
+// 		if ( $meta_output != '' ) return $meta_output;
+
+// 	}
+// endif;
