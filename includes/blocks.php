@@ -14,6 +14,7 @@ use function WaffTwo\Theme\waff_get_edition_badge as waff_get_edition_badge;
 use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
 use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
 use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
+use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
 //use function Go\hex_to_rgb as hex_to_rgb; 
 
 /**
@@ -114,10 +115,10 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	// global $current_edition_id; // Not working
 	global $ccp_editions_filter; // Working 
 
-	// WA Lastest posts
+	// WA Latest posts
     $meta_boxes[] = [
-        'title'           => esc_html__( '(WA) Lastest posts', 'waff' ),
-        'id'              => 'wa-lastest-posts',
+        'title'           => esc_html__( '(WA) Latest posts', 'waff' ),
+        'id'              => 'wa-latest-posts',
         'fields'          => [
             [
                 'id'   => $prefix . 'lp_title',
@@ -137,9 +138,10 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'id'      => $prefix . 'lp_limit',
                 'name'    => esc_html__( 'Limit posts to ?', 'waff' ),
                 'type'    => 'radio',
-                'desc'    => esc_html__( 'Choose the number of lastest posts to show', 'waff' ),
+                'desc'    => esc_html__( 'Choose the number of latest posts to show', 'waff' ),
                 'std'     => 5,
                 'options' => [
+                    3 => esc_html__( '3', 'waff' ),
                     4 => esc_html__( '4', 'waff' ),
                     5 => esc_html__( '5', 'waff' ),
                     6 => esc_html__( '6', 'waff' ),
@@ -156,15 +158,25 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'id'		=> $prefix . 'lp_posttype',
                 'name'		=> esc_html__( 'Select post type', 'waff' ),
                 'type'		=> 'select',
-                'desc'		=> esc_html__( 'Choose which post is the lastest post. Default : posts', 'waff' ),
+                'desc'		=> esc_html__( 'Choose which post is the latest post. Default : posts', 'waff' ),
                 'std'		=> 'post',
                 //'placeholder'       => esc_html__( 'Placeholder', 'waff' ),
-                'options'           => [
-                    'post' => esc_html__( 'post', 'waff' ),
-                    'page' => esc_html__( 'page', 'waff' ),
-                    'film' => esc_html__( 'film', 'waff' ),
-                    'jury' => esc_html__( 'jury', 'waff' ),
-                ],
+                'options'           => array_merge([
+						'post' => esc_html__( 'post', 'waff' ),
+						'page' => esc_html__( 'page', 'waff' )
+					],
+					( true === WAFF_ISFILM_VERSION ) ? [
+						'film' => esc_html__( 'film', 'waff' ),
+						'jury' => esc_html__( 'jury', 'waff' )
+					] : [],
+					( 'RSFP' === WAFF_THEME ) ? [
+						'directory' 	=> esc_html__( 'directory', 'waff' ), //@TODO BLOCK Considering film or RSFP theme 
+						'farm' 			=> esc_html__( 'farm', 'waff' ),
+						'structure' 	=> esc_html__( 'structure', 'waff' ),
+						'operation' 	=> esc_html__( 'operation', 'waff' ),
+						'partner' 		=> esc_html__( 'partner', 'waff' )
+					] : [],
+				),
                 'required'          => 1,
                 'label_description' => esc_html__( 'Label', 'waff' ),
                 //'before'            => 'html before',
@@ -191,12 +203,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'id'      => $prefix . 'lp_style',
                 'name'    => esc_html__( 'Select style', 'waff' ),
                 'type'    => 'select',
-                'desc'    => esc_html__( 'Choose the style of the lastest posts block', 'waff' ),
+                'desc'    => esc_html__( 'Choose the style of the latest posts block', 'waff' ),
                 'std'     => 'normal',
                 'options' => [
-                    'normal' => esc_html__( 'Normal', 'waff' ),
-                    'magazine' => esc_html__( 'Magazine', 'waff' ),
-                    'bold' => esc_html__( 'Bold', 'waff' ),
+                    'normal' 		=> esc_html__( 'Normal', 'waff' ),
+                    'magazine' 		=> esc_html__( 'Magazine', 'waff' ),
+                    'bold' 			=> esc_html__( 'Bold', 'waff' ),
+                    // 'directory' 	=> esc_html__( 'Directory list', 'waff' ), //@TODO BLOCK Considering film or RSFP theme 
                 ],
 			],		
 		],
@@ -206,8 +219,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
             'foreground' 	=> '#9500ff',
 			'src' 			=> 'format-standard',
 		],
-        'description'     => esc_html__( 'Display lastest posts', 'waff' ),
-        'keywords'        => ['lastest', 'posts', 'blog', 'articles'],
+        'description'     => esc_html__( 'Display latest posts', 'waff' ),
+        'keywords'        => ['latest', 'posts', 'blog', 'articles'],
         'supports'        => [
             'anchor'          => true,
             'customClassName' => true,
@@ -216,7 +229,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
         //'enqueue_style'  => 'customCSS',
         //'enqueue_script' => 'CustomJS',
 		//'enqueue_assets' => 'CustomCallback',
-		'render_callback' => 'WaffTwo\Blocks\wa_lastest_posts_callback',
+		'render_callback' => 'WaffTwo\Blocks\wa_latest_posts_callback',
         'type'            => 'block',
 		'context'         => 'side',
 		//Special attrs
@@ -1255,7 +1268,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
     return $meta_boxes;
 }
 
-function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
+function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
 
 	// print_r($attributes);
 
@@ -1273,6 +1286,7 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
 	$themeClass = 'featured mt-md-10 mb-md-10 mt-5 mb-5 contrast--dark fix-vh-50'; // Responsive issue fix
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal ') $themeClass = 'mt-2 mb-10 contrast--light'; 
 	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
@@ -1284,9 +1298,9 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 		$data .= " data-coblocks-animation='{$attributes['animation']}'";
 	}
 
-	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' || mb_get_block_field( 'waff_lp_style' ) == null ) :
+	if ( mb_get_block_field( 'waff_lp_style' ) == null ) :
 	?>
-		<div class="alert alert-dark"><p><?php _e('Normal style not defined', 'waff'); ?></p></div>
+		<div class="alert alert-dark"><p><?php _e('Please define style to continue', 'waff'); ?></p></div>
 	<?php 
 	endif;
 
@@ -1310,11 +1324,11 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 		'post_status' 		=> 'publish', // Show only the published posts
 		'orderby'			=> 'post_date',
 		'order'				=> 'DESC',
-		// Only the stiky ones !
+		// Only the sticky ones !
 		'post__in'  		=> get_option( 'sticky_posts' ),
 		'ignore_sticky_posts' => true,
 		// Limit to selected cats 
-		'category'		=> $categories_id,
+		'category'			=> $categories_id,
 	));
 
 	$args = array( 
@@ -1324,10 +1338,82 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 		'orderby'			=> 'post_date',
 		'order'				=> 'DESC',
 		// All but not sticky !
-		'post__not_in'  => get_option( 'sticky_posts' ),
+		'post__not_in'  	=> get_option( 'sticky_posts' ),
 		// Limit to selected cats 
-		'category'		=> $categories_id,
+		'category'			=> $categories_id,
 	);
+
+	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' ) :
+		?>
+		<!-- #Latest / Normal style -->
+		<section id="<?= $id ?>" class="normal-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
+			<div class="container-fluid">
+
+				<span class="bullet bullet-action-2 ml-0"></span>
+				<h5><?= mb_get_block_field( 'waff_lp_title' ) ?></h5>
+
+				<div class="row row-cols-1 row-cols-md-<?= ($limit != '')?$limit:3; ?> mt-4 mb-4">
+				
+				<?php 
+					$index = 0;
+					$recent_posts = get_posts($args);
+					//$recent_posts = array_merge($sticky_posts, $recent_posts);
+
+					foreach( $recent_posts as $post_item ) : 
+						// Set up global post data in loop 
+						// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
+
+						$post_id 				= esc_attr($post_item->ID);
+						$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
+						$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
+						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
+						$the_categories 		= get_the_category($post_id);
+						$excerpt = '';
+						$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
+						$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
+						$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
+						// echo $post_id;
+						// echo $the_content; 
+						$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
+						$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
+						if ( strlen($excerpt) > 140 ) {
+							$excerpt = substr($excerpt, 0, 140);
+							$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
+						}
+						if ( $index > $limit ) { continue; }
+						?>
+					<div class="col">
+						<div class="card mb-3 border-0" id="<?= $post_id; ?>">
+							<div class="row g-0">
+								<div class="col-md-4">
+									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+									<?php if ( ! empty( $the_categories ) ) { echo '<a href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+									<?= waff_entry_meta_header($post_item); ?>									
+
+									<h5 class="card-title mt-2"><a href="<?= get_permalink($post_id) ?>" class="stretched-link"><?= $post_item->post_title ?></a></h5>
+									<p class="card-text"><?= $excerpt; ?></p>
+									<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php endforeach; 
+						// After the loop, reset post data to ensure the global $post returns to its original state
+						wp_reset_postdata();
+					?>
+					
+				</div> <!-- END: .row -->
+
+			</div>
+		</section>
+		<!-- END: #Latest / Normal style-->
+		<?php 
+	endif;
+
 
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'magazine' ) :
 	?>
@@ -1371,7 +1457,7 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 					</div>
 					<div class="col-md-6 p-0 vh-75 img-shifted shift-right overflow-visible" data-aos="fade-left" data-aos-delay="200">
 						<!-- Images -->
-						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_item->ID, 'post-thumbnail'); ?>');"></div>
+						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_item->ID, 'large'); ?>');"></div>
 						
 						<!-- Content -->
 						<div class="card bg-transparent h-100 p-4 border-0 rounded-0 d-flex flex-column justify-content-center n-ms-50 w-100">
@@ -1521,8 +1607,8 @@ function wa_lastest_posts_callback( $attributes, $is_preview = false, $post_id =
 								<feBlend mode="normal" in="componentTransfer" in2="SourceGraphic" result="blend"></feBlend>
 							</filter>
 						</svg>
-						<div class="bg-image bg-cover bg-position-top-center image--origin filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'post-thumbnail'); ?>');"></div>
-						<div class="bg-image bg-cover bg-position-top-center image--filtered filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'post-thumbnail'); ?>');"></div>
+						<div class="bg-image bg-cover bg-position-top-center image--origin filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'large'); ?>');"></div>
+						<div class="bg-image bg-cover bg-position-top-center image--filtered filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'large'); ?>');"></div>
 						<!-- Content -->
 						<div class="card bg-transparent text-light h-100 p-4 border-0 rounded-0 d-flex flex-column justify-content-between">
 							<h6 class="display d-inline --action-2 f-14 link-light">
@@ -4030,7 +4116,7 @@ core-embed/wordpress-tv
     [37] => wp-bootstrap-blocks/column
     [38] => wp-bootstrap-blocks/button
     [39] => bcn/breadcrumb-trail
-    [40] => meta-box/wa-lastest-posts
+    [40] => meta-box/wa-latest-posts
     [41] => meta-box/wa-partners
     [42] => meta-box/wa-edito
     [43] => toolset/map
@@ -4145,7 +4231,7 @@ function waff_allowed_block_types( $allowed_block_types, $post ) {
 		// wp-bootstrap-blocks/column
 		// wp-bootstrap-blocks/button
 		// bcn/breadcrumb-trail
-		// meta-box/wa-lastest-posts
+		// meta-box/wa-latest-posts
 		// meta-box/wa-partners
 		// meta-box/wa-edito
 		// toolset/map
