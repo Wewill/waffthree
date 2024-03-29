@@ -244,7 +244,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php endif; /* If film_awards */ ?>
 
 		<!-- #pagetitle : Film -->
-		<section id="pagetitle" class="position-absolute top-0 start-0 w-100 h-100 bg-v-gradient-action-1 border-0 contrast--dark">
+		<section id="pagetitle" class="position-absolute top-0 start-0 w-100 h-100 bg-v-smooth-gradient-action-1 border-0 contrast--dark">
 			<div class="jumbotron mt-6 mt-md-8">
 				<div class="container-fluid d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
 					<hgroup data-aos="fade-down">

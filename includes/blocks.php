@@ -3755,7 +3755,7 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 			</picture>
 		</figure>
 
-		<div class="container-fluid p-4 p-md-8 bg-v-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-4 p-md-8 bg-v-plain-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mt-10 mb-10">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
