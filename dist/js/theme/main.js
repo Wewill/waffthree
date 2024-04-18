@@ -490,6 +490,50 @@ jQuery(document).ready(function() {
 		lazyLoad: 'ondemand',
 	});
 
+	// Farms Slick Slide 
+	jQuery('.farm-slide').slick({
+		arrows: false,
+		infinite: true,
+		focusOnSelect: true,
+		pauseOnFocus: false, 
+		pauseOnHover: false,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		autoplay: true, 
+		autoplaySpeed: 3000,
+		//focusOnSelect:true,
+		lazyLoad: 'ondemand',
+		// responsive: [
+		// 	{
+		// 	  breakpoint: 1400,
+		// 	  settings: {
+		// 		slidesToShow: 12,
+		// 		slidesToScroll: 1,
+		// 	  }
+		// 	},
+		// 	{
+		// 	  breakpoint: 1200,
+		// 	  settings: {
+		// 		slidesToShow: 8,
+		// 		slidesToScroll: 3,
+		// 	  }
+		// 	},
+		// 	{
+		// 	  breakpoint: 992,
+		// 	  settings: {
+		// 		slidesToShow: 6,
+		// 		slidesToScroll: 3,
+		// 	  }
+		// 	},
+		// 	{
+		// 	  breakpoint: 768,
+		// 	  settings: {
+		// 		slidesToShow: 4,
+		// 		slidesToScroll: 4,
+		// 	  }
+		// 	} 
+		// ]
+	});
 	
 	/*
 		-------------------------------------------------
