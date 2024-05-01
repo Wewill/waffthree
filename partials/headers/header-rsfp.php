@@ -131,7 +131,7 @@ global $page_atts;
 						<div class="d-flex flex-column flex-sm-row align-items-center justify-content-end">
 							<?php Go\search_toggle(); ?>
 							<?php //Go\WooCommerce\woocommerce_cart_link(); ?>
-							<?php WaffTwo\waff_night_toggle(); ?>
+							<?php //WaffTwo\waff_night_toggle(); ?>
 							<?php WaffTwo\Theme\waff_get_languages(); ?>
 						</div>
 						<!-- Second line -->
