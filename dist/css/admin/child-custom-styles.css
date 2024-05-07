@@ -26,3 +26,12 @@
 .edit-post-sidebar .rwmb-text_list-non-cloneable > .rwmb-input, .edit-post-sidebar .rwmb-text_list-clone {
 	flex-direction: column;
 }
+
+.post-type-homeslide #titlewrap::after {
+    content: 'Vous pouvez utiliser <br> pour forcer un retour à la ligne / You can use <br> to force a newline';
+    display: block;
+    padding-left: 10px;
+    margin-top: 0px;
+    height: 20px;
+    color: #5085b3;
+}
