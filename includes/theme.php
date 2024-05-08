@@ -245,6 +245,7 @@ function waff_setup() {
 	register_nav_menus(
 		array(
 			'primary' 			=> esc_html__( 'Primary Menu', 'waff' ),
+			'secondary' 		=> esc_html__( 'Secondary Menu', 'waff' ),
 			'social'  			=> esc_html__( 'Social Menu', 'waff' ),
 			'credits'  			=> esc_html__( 'Credits Menu', 'waff' ),
 			'footer-1'  		=> esc_html__( 'Footer Menu', 'waff' ),

@@ -55,7 +55,7 @@ global $page_atts;
 						</div>
 						<!-- end item to replace with -->
 					</div>
-					<div class="logo nav-logomenu position-absolute top-0 start-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>"></div>
+					<!-- <div class="logo nav-logomenu position-absolute top-0 start-0 d-none"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svglogo_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>"></div> -->
 					<span class="site-title text-hide visually-hidden"><?= get_bloginfo('description'); ?></span>
 				</a>
 
@@ -97,7 +97,21 @@ global $page_atts;
 					<!-- First line -->
 					<div class="d-flex align-items-center justify-content-between" aria-label="<?php esc_attr_e( 'Primary Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						<!-- Primary menu -->
-						<?php if ( has_nav_menu( 'primary' ) ) : ?>
+						<?php if ( has_nav_menu( 'secondary' ) ) : ?>
+							<?php
+							wp_nav_menu(
+								array(
+									'container'       => false,
+									'theme_location' => 'secondary',
+									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset',
+									'depth'          => '3',
+									'add_li_class'  	 => 'nav-link font-weight-bold --ps-4 --pe-0 px-4'
+									// + le cas link-muted
+									// + le cas is_loggued_in
+								)
+							);
+							?>
+						<?php elseif ( has_nav_menu( 'primary' ) ) : ?>
 							<?php
 							wp_nav_menu(
 								array(

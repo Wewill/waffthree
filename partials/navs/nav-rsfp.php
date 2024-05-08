@@ -5,8 +5,8 @@ $page_atts = $args;
 
 ?>
 	<!-- Toggle External nav -->
-	<div class="collapse sticky-top navbar-external shadow-sm" id="navbarToggleExternalContent">
-		<div class="bg-color-bg text-light px-3 px-md-6 py-6">
+	<div class="collapse --sticky-top position-fixed zi-5 top-0 left-0 w-100 navbar-external shadow-sm" id="navbarToggleExternalContent">
+		<div class="bg-color-bg text-light px-3 px-md-6 py-6 pt-20">
 			<h6 class="subline d-inline">Menu</h6>
 
 			<?php if ( has_nav_menu( 'primary' ) ) : ?>
