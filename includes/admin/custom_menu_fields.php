@@ -123,7 +123,10 @@ add_filter( 'nav_menu_css_class', 'waff_custom_menu_class', 10, 3 );
 function waff_add_additional_data_on_a($atts, $item, $args, $depth) {
 
 	// print_r($item); //> classes > [4] => menu-item-has-children
+	// print_r($item->object_id);
+	// print_r($item->object);
 	// print_r($args); //> menu_class
+	// print_r($args->menu_class);
 	// print_r($depth); //> 0
 
 	// echo "Depth::" . $depth;
@@ -149,6 +152,14 @@ function waff_add_additional_data_on_a($atts, $item, $args, $depth) {
 	if( in_array('main-nav', explode(' ', $args->menu_class) ) && $atts['href'] == '#') {
 		$atts['class'] 			= 'no-links';
 	}
+
+	// Object : thematic 
+	if( 'thematic' === $item->object ) {
+		$t_general_color = get_term_meta($item->object_id, 't_general_color', true);
+		//$atts['class'] 			= 'px-2 rounded-2';
+		$atts['style'] 			= 'background-color:'.$t_general_color.';';
+	}
+
 
 	//print_r($atts);
 	return $atts;
