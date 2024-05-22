@@ -346,18 +346,18 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
 							</div>
 						</div>
-						<div class="d-none d-md-flex align-items-center justify-content-center px-5">
+						<!-- <div class="d-none d-md-flex align-items-center justify-content-center px-5">
 							<span class="bullet bullet-action-2 ms-0"></span>
-						</div>
+						</div> -->
 						<?php endif; ?>
 
-						<div class="d-md-flex d-inline-block align-items-center">
+						<!-- <div class="d-md-flex d-inline-block align-items-center">
 							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
 							<div>
 							<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
 							<p class="mb-0"><span class="badge bg-action-2">Bientôt disponible...</span></p>
 							</div>
-						</div>
+						</div> -->
 					</div>
 
 				</div>
