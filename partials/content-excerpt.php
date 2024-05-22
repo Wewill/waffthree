@@ -38,22 +38,85 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 			the_title( '<h1 class="post__title entry-title m-0">', '</h1>' );
 		else :
 			if ( get_post_type(get_the_ID()) === 'film' ) : 
-					$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true ); 
-					$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true ); 
-					if ( $film_french_title != "" ) {
-						the_title( 
-							sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length ), 
-							'</span></h2>'
-						);
-					} else {
-						the_title( 
-							sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
-							sprintf('</a> <span class="length light">%s\'</span></h2>', $film_length) 
-						);
-					}
-				else :
-					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				endif;
+				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true ); 
+				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true ); 
+				if ( $film_french_title != "" ) {
+					the_title( 
+						sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length ), 
+						'</span></h2>'
+					);
+				} else {
+					the_title( 
+						sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
+						sprintf('</a> <span class="length light">%s\'</span></h2>', $film_length) 
+					);
+				}
+			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
+				the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+			elseif ( get_post_type(get_the_ID()) === 'structure' ) : 
+				the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
+				// Get operation content
+				$o_more_description 	= get_post_meta( get_the_ID(), 'o_more_description', true );
+				$o_general_links 	= get_post_meta( get_the_ID(), 'o_general_links', true );
+				printf('<div class="card my-2 border-0">
+						<div class="row g-0 align-items-center">
+							<div class="col-md-3 order-first">
+								<img decoding="async" src="https://placehold.co/300x300" class="img-fluid rounded-4">
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">', 'test');
+									WaffTwo\waff_entry_meta_header();
+				printf('
+									%s
+									<p class="card-text fs-sm mb-0">%s</p>
+									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+								</div>
+							</div>
+						</div>
+						</div>', 
+					the_title( sprintf( '<h5 class="post__title entry-title card-title mt-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h5>', false),
+					wp_trim_words(
+						get_the_excerpt() != ''?get_the_excerpt():$o_more_description,
+						15,
+						' &hellip;'
+					),
+					$o_general_links
+				);
+
+			elseif ( get_post_type(get_the_ID()) === 'directory' ) : 
+				// Get directory content
+				// $d_general_subtitle 		= get_post_meta( get_the_ID(), 'd_general_subtitle', true );
+				$d_general_introduction 	= get_post_meta( get_the_ID(), 'd_general_introduction', true );
+				// $d_identity_location 	= get_post_meta( get_the_ID(), 'd_identity_location', true );
+				$d_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				printf('<div class="card my-2 border-0">
+						<div class="row g-0 align-items-center">
+							<div class="col-md-3 order-first">
+								<img decoding="async" src="https://placehold.co/300x300" class="img-fluid rounded-4">
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">', 'test');
+									WaffTwo\waff_entry_meta_header();
+				printf('
+									%s
+									<p class="card-text fs-sm mb-0">%s</p>
+									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+								</div>
+							</div>
+						</div>
+						</div>', 
+					the_title( sprintf( '<h5 class="post__title entry-title card-title mt-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h5>', false),
+					wp_trim_words(
+						get_the_excerpt() != ''?get_the_excerpt():$d_general_introduction,
+						15,
+						' &hellip;'
+					),
+					$d_last_updated
+				);
+			else :
+				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+			endif;
 		endif;
 
 		//DEBUG
@@ -63,6 +126,8 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 		?>
 	</header>
 
+
+	<?php if ( get_post_type(get_the_ID()) !== 'operation' && get_post_type(get_the_ID()) !== 'directory') : ?>
 	<div class="<?php Go\content_wrapper_class( 'content-area__wrapper' ); ?>">
 		<div class="content-area entry-content">
 			<?php 
@@ -77,5 +142,6 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 			?>
 		</div>
 	</div>
+	<?php endif; ?>
 
 </article>
