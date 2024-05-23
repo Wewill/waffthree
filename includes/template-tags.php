@@ -901,12 +901,29 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			echo ((true === WAFF_DEBUG)?'<code> #HASTERMSECTION '.has_term('', 'section').'</code>':'');
 			echo ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($terms,1).'</pre>':'');
 			
-			// SECTION or ROOM
-			//if ( is_tax('section') ) { //&& has_term('', 'section')
+			// CATEGORY >> all TAXs 
 			if ( is_tax() ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #ISaSECTION</code>':'');		
+				echo ((true === WAFF_DEBUG)?'<code> #ISaTAX(generic)</code>':'');		
+				
+				if ( $terms_list ) {
+					printf(
+						/* translators: %s: list of categories. */
+						'<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
+						esc_html__( 'Categorized as', 'waff' ),
+						implode($terms_list, __( '&#8203;', 'waff' )) // phpcs:ignore WordPress.Security.EscapeOutput
+					);
+				}
+			
+			}
+
+			// SECTION or ROOM
+			//if ( is_tax('section') ) { //&& has_term('', 'section')
+			if ( is_tax('section') || is_tax( 'room' ) ) {
+
+				//DEBUG
+				echo ((true === WAFF_DEBUG)?'<code> #ISaSECTIONorROOM</code>':'');		
 				
 				if ( $terms_list ) {
 					printf(
