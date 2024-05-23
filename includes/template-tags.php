@@ -899,10 +899,11 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			echo ((true === WAFF_DEBUG)?'<code> #ISTAX '.is_tax().'</code>':'');
 			echo ((true === WAFF_DEBUG)?'<code> #ISTAXSECTION '.is_tax('section').'</code>':'');
 			echo ((true === WAFF_DEBUG)?'<code> #HASTERMSECTION '.has_term('', 'section').'</code>':'');
-			echo ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($terms,1).'</pre>':'');
+			echo ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($terms_list,1).'</pre>':'');
 			
+			// All top parents 
 			// CATEGORY >> all TAXs 
-			if ( is_tax() ) {
+			if ( is_tax('category') || is_tax('tag')) {
 
 				//DEBUG
 				echo ((true === WAFF_DEBUG)?'<code> #ISaTAX(generic)</code>':'');		
@@ -953,7 +954,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 			} 
 
-			// FILM
+			// FILM + not tax 
 			if ( 'film' == $__post_type && !is_tax() ) {
 
 				//DEBUG
