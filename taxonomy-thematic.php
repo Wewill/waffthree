@@ -19,11 +19,20 @@
 	// print_r($current_thematic);
 
 	$thematic_description 				= term_description($thematic_id);
-	$thematic_content 					= get_term_meta( $thematic_id, 't_general_content', true ); 
-	$thematic_image 					= get_term_meta( $thematic_id, 't_general_image', true ); 
-	$thematic_color 					= get_term_meta( $thematic_id, 't_general_color', true ); 
-	$thematic_bgcolor					= (( $thematic_color != '' )?'style="background-color:'.$thematic_color.'"':'');
+	$t_general_content 					= get_term_meta( $thematic_id, 't_general_content', true ); 
+	$t_general_image 					= get_term_meta( $thematic_id, 't_general_image', true ); 
+	$t_general_image_meta 				= WaffTwo\Core\waff_get_attachment($t_general_image);
+	$t_general_image_url = wp_get_attachment_image_url(
+		$t_general_image,
+		'large' // full
+	);
+	$t_general_image_thumbnail_url = wp_get_attachment_image_url(
+		$t_general_image,
+		'thumbnail' // medium = 300x300
+	);
 
+	$t_general_color 					= get_term_meta( $thematic_id, 't_general_color', true ); 
+	$thematic_bgcolor					= (( $t_general_color != '' )?'style="background-color:'.$t_general_color.'"':'style="background-color:var(--waff-color-accent-2);"');
 
 	?> 
 	<!-- Header -->
@@ -31,7 +40,7 @@
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center h-550-px"><!-- .vh-100 hack-->
 
-				<div class="col-lg-5 overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-5 ps-6 pt-20 aos-init aos-animate" data-aos="fade-left" <?= $thematic_bgcolor?>>
+				<div class="col-lg overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-5 ps-6 pt-20 aos-init aos-animate" data-aos="fade-left" <?= $thematic_bgcolor?>>
 						
 						<hgroup>
 							<h6 class="subline text-white">Thématique</h6>						
@@ -74,9 +83,19 @@
 					</div>
 
 					<!-- Image -->
-					<div class="col-lg bg-color-layout h-100 ---- img-shifted shift-right aos-init aos-animate" data-aos="fade-down" data-aos-delay="200">
-						<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('https://picsum.photos/720/900');"></div>
-					</div>
+					<?php if ( $t_general_image ) : ?>
+						<div class="col-lg-7 bg-color-layout h-100 ---- img-shifted shift-right aos-init aos-animate" data-aos="fade-down" data-aos-delay="200">
+							<figure class="" id="<?= $t_general_image ?>">
+								<picture class="lazy" data-src="<?= $t_general_image_url ?>">
+									<data-src media="(min-width: 150px)" srcset="<?= $t_general_image_url; ?>" type="image/jpeg"></data-src>
+									<data-img src="<?= $t_general_image_thumbnail_url; ?>" alt="<?= esc_html($t_general_image_meta['alt']); ?>" class="img-fluid --rounded-4 rounded-top-4 rounded-top-left-0 --shadow-lg h-550-px fit-image w-100" style="" title="<?= $t_general_image_meta['title']; ?>"></data-img>
+								</picture>
+								<?php if ( $t_general_image_meta['alt'] || $t_general_image_meta['caption'] || $t_general_image_meta['description'] ) : ?>
+								<figcaption><strong>© <?= esc_html($t_general_image_meta['alt']); ?></strong> <?= esc_html($t_general_image_meta['caption']); ?> <?= esc_html($t_general_image_meta['description']); ?></figcaption>
+								<?php endif; /* If captions */ ?>
+							</figure>
+						</div>
+					<?php endif; ?>
 			
 					<!-- Mouse down -->
 					<!-- <div class="scroll-downs position-absolute bottom-0 start-45 mb-4">
@@ -90,9 +109,9 @@
 	</section>
 
 	<!-- Content -->
-	<?php if ( strlen(strip_tags($thematic_content)) > 0 ) : ?>
+	<?php if ( strlen(strip_tags($t_general_content)) > 0 ) : ?>
 		<div class="content taxonomy-content mt-5 mb-10">
-		<?php echo apply_filters('the_content', WaffTwo\Core\waff_do_markdown($thematic_content)); ?>
+		<?php echo apply_filters('the_content', WaffTwo\Core\waff_do_markdown($t_general_content)); ?>
 		</div>
 	<?php endif; ?>
 

@@ -57,16 +57,22 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
 				// Get operation content
-				$o_more_description 	= get_post_meta( get_the_ID(), 'o_more_description', true );
-				$o_general_links 	= get_post_meta( get_the_ID(), 'o_general_links', true );
+				$o_more_description 		= get_post_meta( get_the_ID(), 'o_more_description', true );
+				$o_general_links 			= get_post_meta( get_the_ID(), 'o_general_links', true );
+				$o_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+				$o_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
+				$o_image = $o_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$o_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+
 				printf('<div class="card my-2 border-0">
 						<div class="row g-0 align-items-center">
 							<div class="col-md-3 order-first">
-								<img decoding="async" src="https://placehold.co/300x300" class="img-fluid rounded-4">
+								%s
 							</div>
 							<div class="col-md-9">
-								<div class="card-body">', 'test');
-									WaffTwo\waff_entry_meta_header();
+								<div class="card-body">', 
+					$o_image
+				);
+				WaffTwo\waff_entry_meta_header();
 				printf('
 									%s
 									<p class="card-text fs-sm mb-0">%s</p>
@@ -89,15 +95,23 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				// $d_general_subtitle 		= get_post_meta( get_the_ID(), 'd_general_subtitle', true );
 				$d_general_introduction 	= get_post_meta( get_the_ID(), 'd_general_introduction', true );
 				// $d_identity_location 	= get_post_meta( get_the_ID(), 'd_identity_location', true );
+				$d_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+				$d_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
+				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				
 				$d_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+
+
 				printf('<div class="card my-2 border-0">
 						<div class="row g-0 align-items-center">
 							<div class="col-md-3 order-first">
-								<img decoding="async" src="https://placehold.co/300x300" class="img-fluid rounded-4">
+								%s
 							</div>
 							<div class="col-md-9">
-								<div class="card-body">', 'test');
-									WaffTwo\waff_entry_meta_header();
+								<div class="card-body">', 
+					$d_image
+				);
+				WaffTwo\waff_entry_meta_header();
 				printf('
 									%s
 									<p class="card-text fs-sm mb-0">%s</p>

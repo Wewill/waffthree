@@ -17,10 +17,10 @@ if( true === WAFF_DEBUG ){
 }
 
 $archive_post_type = is_archive() ? get_queried_object()->name : false;
-$allowed_post_type = array('film', 'client', 'accreditation', 'contact', 'projection', 'jury');	
+$allowed_post_type = array('film', 'client', 'accreditation', 'contact', 'projection', 'jury', 'directory');	
 
 $archive_taxonomy = ( is_archive() && is_tax() ) ? get_queried_object()->taxonomy : false;
-$allowed_taxonomy = array('function', 'movie-type', 'partenaire-category', 'category'); // 'edition' => taxonomy-edition.php 'section' => taxonomy-section.php 'room' => taxonomy-room.php 
+$allowed_taxonomy = array('function', 'movie-type', 'partenaire-category', 'category', 'thematic', 'operation'); // 'edition' => taxonomy-edition.php 'section' => taxonomy-section.php 'room' => taxonomy-room.php 
 
 
 // Redirect if archive_post_type don't fit 
@@ -59,10 +59,10 @@ if( true === WAFF_DEBUG ){
 }
 
 if( $relocate == true ){
-	/*header("HTTP/1.1 301 Moved Permanently");
+	header("HTTP/1.1 301 Moved Permanently");
 	header("Location: ".get_bloginfo('url'));
-	exit();*/
-	echo "Je redirige";
+	exit();
+	// echo "##Je redirige";
 }
 
 get_header();
