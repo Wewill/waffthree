@@ -2602,3 +2602,13 @@ aside.widget-area h6:first-of-type {
 /* Sections blocks  */
 
 @media (max-width:575.98px) 	{ .heading-sm	{ font-size: 1.8rem !important;	} }
+
+
+/* Cite */
+.wp-block-pullquote.text-white cite {
+  color: white;
+}
+
+.wp-block-pullquote.has-quaternary-color cite {
+  color: var(--go--color--quaternary);
+}

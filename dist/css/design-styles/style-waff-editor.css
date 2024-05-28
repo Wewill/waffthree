@@ -929,9 +929,16 @@ svg.duotone-filters {
     padding-top: .5em;
 }
 
+/* Cite */
+.wp-block-pullquote.text-white cite {
+color: white;
+}
+
+.wp-block-pullquote.has-quaternary-color cite {
+color: var(--go--color--quaternary);
+}
 
 /**
 TEST SPECIFIC RSFP 
 To get the bootstrap specific and theme specific into blocks ? 
 */
-
