@@ -31,8 +31,8 @@ function setup() {
 	add_filter( 'rwmb_meta_boxes', $n( 'waff_blocks_register_meta_boxes' ));
 
 	// Allow / Disallow some blocks 
-	//add_filter( 'allowed_block_types', $n( 'waff_allowed_block_types' ), 20, 2 ); // Not working since WP update
-	add_action( 'enqueue_block_editor_assets', $n( 'waff_reset_blocks_enqueue_block_editor_assets' )); // JS way 
+	add_filter( 'allowed_block_types_all', $n( 'waff_allowed_block_types' ), 10, 2 ); // Php way
+	// add_action( 'enqueue_block_editor_assets', $n( 'waff_reset_blocks_enqueue_block_editor_assets' )); // JS way 
 
 	// Adds custom theme options to wp bootstrap blocks plugin
 	add_action( 'enqueue_block_editor_assets', $n( 'waff_wp_boostrap_enqueue_block_editor_assets' ));
@@ -4039,40 +4039,40 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
  */
 
 /*
-core/embed
-core-embed/twitter
-core-embed/youtube
-core-embed/facebook
-core-embed/instagram
-core-embed/wordpress
-core-embed/soundcloud
-core-embed/spotify
-core-embed/flickr
-core-embed/vimeo
-core-embed/animoto
-core-embed/cloudup
-core-embed/collegehumor
-core-embed/dailymotion
-core-embed/funnyordie
-core-embed/hulu
-core-embed/imgur
-core-embed/issuu
-core-embed/kickstarter
-core-embed/meetup-com
-core-embed/mixcloud
-core-embed/photobucket
-core-embed/polldaddy
-core-embed/reddit
-core-embed/reverbnation
-core-embed/screencast
-core-embed/scribd
-core-embed/slideshare
-core-embed/smugmug
-core-embed/speaker
-core-embed/ted
-core-embed/tumblr
-core-embed/videopress
-core-embed/wordpress-tv
+	core/embed
+	core-embed/twitter
+	core-embed/youtube
+	core-embed/facebook
+	core-embed/instagram
+	core-embed/wordpress
+	core-embed/soundcloud
+	core-embed/spotify
+	core-embed/flickr
+	core-embed/vimeo
+	core-embed/animoto
+	core-embed/cloudup
+	core-embed/collegehumor
+	core-embed/dailymotion
+	core-embed/funnyordie
+	core-embed/hulu
+	core-embed/imgur
+	core-embed/issuu
+	core-embed/kickstarter
+	core-embed/meetup-com
+	core-embed/mixcloud
+	core-embed/photobucket
+	core-embed/polldaddy
+	core-embed/reddit
+	core-embed/reverbnation
+	core-embed/screencast
+	core-embed/scribd
+	core-embed/slideshare
+	core-embed/smugmug
+	core-embed/speaker
+	core-embed/ted
+	core-embed/tumblr
+	core-embed/videopress
+	core-embed/wordpress-tv
 */
 
 /*
@@ -4122,124 +4122,124 @@ core-embed/wordpress-tv
     [43] => toolset/map
 */
 
-function waff_allowed_block_types( $allowed_block_types, $post ) {
-	/* OLD WAY > use JS now */
+// function waff_allowed_block_types( $allowed_block_types, $post ) {
+// 	/* OLD WAY > use JS now */
 
-	print_r($post->post_type);
-	print_r($allowed_block_types);
-	print_r(get_dynamic_block_names());
+// 	print_r($post->post_type);
+// 	print_r($allowed_block_types);
+// 	print_r(get_dynamic_block_names());
 
-	// Fetch block names.
-	//$block_names = get_dynamic_block_names();
+// 	// Fetch block names.
+// 	//$block_names = get_dynamic_block_names();
 
-	if ( $post->post_type !== 'page' ) {
-        return $allowed_block_types;
-    }
+// 	if ( $post->post_type !== 'page' ) {
+//         return $allowed_block_types;
+//     }
  
-	//https://wordpress.org/support/article/blocks/
-	//https://rudrastyh.com/gutenberg/remove-default-blocks.html
-	//https://github.com/WordPress/gutenberg/issues/27913
-	//https://github.com/WordPress/gutenberg/issues/27708
-	$core = array( 
-		// General
-		'core/paragraph',
-		'core/image',
-		'core/heading',
-		'core/gallery',
-		'core/list',
-		'core/quote',
-		'core/audio',
-		'core/cover',
-		'core/file',
-		'core/video',
-		'core/html', // Added #43
+// 	//https://wordpress.org/support/article/blocks/
+// 	//https://rudrastyh.com/gutenberg/remove-default-blocks.html
+// 	//https://github.com/WordPress/gutenberg/issues/27913
+// 	//https://github.com/WordPress/gutenberg/issues/27708
+// 	$core = array( 
+// 		// General
+// 		'core/paragraph',
+// 		'core/image',
+// 		'core/heading',
+// 		'core/gallery',
+// 		'core/list',
+// 		'core/quote',
+// 		'core/audio',
+// 		'core/cover',
+// 		'core/file',
+// 		'core/video',
+// 		'core/html', // Added #43
 
-		// Embed 
-		'core/embed',
-		'core-embed/twitter',
-		'core-embed/youtube',
-		'core-embed/facebook',
-		'core-embed/instagram',
-		// core-embed/wordpress
-		// core-embed/soundcloud
-		// core-embed/spotify
-		'core-embed/flickr',
-		'core-embed/vimeo',
-		// core-embed/animoto
-		// core-embed/cloudup
-		// core-embed/collegehumor
-		// core-embed/dailymotion
-		// core-embed/funnyordie
-		// core-embed/hulu
-		// core-embed/imgur
-		'core-embed/issuu',
-		// core-embed/kickstarter
-		// core-embed/meetup-com
-		// core-embed/mixcloud
-		// core-embed/photobucket
-		// core-embed/polldaddy
-		// core-embed/reddit
-		// core-embed/reverbnation
-		// core-embed/screencast
-		// core-embed/scribd
-		// core-embed/slideshare
-		// core-embed/smugmug
-		// core-embed/speaker
-		// core-embed/ted
-		// core-embed/tumblr
-		// core-embed/videopress
-		// core-embed/wordpress-tv
+// 		// Embed 
+// 		'core/embed',
+// 		'core-embed/twitter',
+// 		'core-embed/youtube',
+// 		'core-embed/facebook',
+// 		'core-embed/instagram',
+// 		// core-embed/wordpress
+// 		// core-embed/soundcloud
+// 		// core-embed/spotify
+// 		'core-embed/flickr',
+// 		'core-embed/vimeo',
+// 		// core-embed/animoto
+// 		// core-embed/cloudup
+// 		// core-embed/collegehumor
+// 		// core-embed/dailymotion
+// 		// core-embed/funnyordie
+// 		// core-embed/hulu
+// 		// core-embed/imgur
+// 		'core-embed/issuu',
+// 		// core-embed/kickstarter
+// 		// core-embed/meetup-com
+// 		// core-embed/mixcloud
+// 		// core-embed/photobucket
+// 		// core-embed/polldaddy
+// 		// core-embed/reddit
+// 		// core-embed/reverbnation
+// 		// core-embed/screencast
+// 		// core-embed/scribd
+// 		// core-embed/slideshare
+// 		// core-embed/smugmug
+// 		// core-embed/speaker
+// 		// core-embed/ted
+// 		// core-embed/tumblr
+// 		// core-embed/videopress
+// 		// core-embed/wordpress-tv
 
-		//
-		// complianz/document
-		// toolset-views/view-editor
-		// toolset-views/wpa-editor
-		// toolset-views/sorting
-		// toolset-views/view-pagination-block
-		// core/archives
-		// core/block
-		// core/calendar
-		// core/categories
-		// core/latest-comments
-		// core/latest-posts
-		// core/rss
-		// core/search
-		// core/shortcode
-		// core/social-link
-		// core/tag-cloud
-		// gravityforms/form
-		// coblocks/form
-		// coblocks/field-name
-		// coblocks/field-email
-		// coblocks/field-textarea
-		// coblocks/field-text
-		// coblocks/field-date
-		// coblocks/field-phone
-		// coblocks/field-radio
-		// coblocks/field-select
-		// coblocks/field-submit-button
-		// coblocks/field-checkbox
-		// coblocks/field-website
-		// coblocks/field-hidden
-		// coblocks/events
-		// coblocks/post-carousel
-		// coblocks/posts
-		// coblocks/social
-		// coblocks/social-profiles
-		// wp-bootstrap-blocks/container
-		// wp-bootstrap-blocks/row
-		// wp-bootstrap-blocks/column
-		// wp-bootstrap-blocks/button
-		// bcn/breadcrumb-trail
-		// meta-box/wa-latest-posts
-		// meta-box/wa-partners
-		// meta-box/wa-edito
-		// toolset/map
-	);
+// 		//
+// 		// complianz/document
+// 		// toolset-views/view-editor
+// 		// toolset-views/wpa-editor
+// 		// toolset-views/sorting
+// 		// toolset-views/view-pagination-block
+// 		// core/archives
+// 		// core/block
+// 		// core/calendar
+// 		// core/categories
+// 		// core/latest-comments
+// 		// core/latest-posts
+// 		// core/rss
+// 		// core/search
+// 		// core/shortcode
+// 		// core/social-link
+// 		// core/tag-cloud
+// 		// gravityforms/form
+// 		// coblocks/form
+// 		// coblocks/field-name
+// 		// coblocks/field-email
+// 		// coblocks/field-textarea
+// 		// coblocks/field-text
+// 		// coblocks/field-date
+// 		// coblocks/field-phone
+// 		// coblocks/field-radio
+// 		// coblocks/field-select
+// 		// coblocks/field-submit-button
+// 		// coblocks/field-checkbox
+// 		// coblocks/field-website
+// 		// coblocks/field-hidden
+// 		// coblocks/events
+// 		// coblocks/post-carousel
+// 		// coblocks/posts
+// 		// coblocks/social
+// 		// coblocks/social-profiles
+// 		// wp-bootstrap-blocks/container
+// 		// wp-bootstrap-blocks/row
+// 		// wp-bootstrap-blocks/column
+// 		// wp-bootstrap-blocks/button
+// 		// bcn/breadcrumb-trail
+// 		// meta-box/wa-latest-posts
+// 		// meta-box/wa-partners
+// 		// meta-box/wa-edito
+// 		// toolset/map
+// 	);
 	
-	return array_merge($core,get_dynamic_block_names());
+// 	return array_merge($core,get_dynamic_block_names());
 
-}
+// }
 
 /**
  * Disallow some blocks 
@@ -4253,40 +4253,220 @@ function waff_reset_blocks_enqueue_block_editor_assets() {
 
 	// If the option is not checked, return.
 	if ( $advanced_blocks !== true )
-		//wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true ); // Script solution > only remove blocks but not in list
-		add_filter( 'allowed_block_types_all', 'waff_allowed_block_types', 10, 2 ); // Php way 
-
+		wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true ); // Script solution > only remove blocks but not in list
 }
 
+/**
+ * Disallow some blocks 
+ * PHP way 
+ */
+
 function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
-	error_log($allowed_blocks);
-	//if ( isset( $editor_context->post ) && $editor_context->post->post_type === 'page' ) { // Only page or a custom post_type 
-	if ( isset( $editor_context->post ) ) { // All post_type blocks 
+
+	// Get theme option
+	$advanced_blocks = (bool) get_theme_mod( 'advanced_blocks', waff_defaults( 'advanced_blocks' ) );
+
+	// error_log($advanced_blocks);
+	// error_log(print_r($allowed_blocks, true));
+
+	//if ( $advanced_blocks !== true && isset( $editor_context->post ) && $editor_context->post->post_type === 'page' ) { // Only page or a custom post_type 
+	if ( $advanced_blocks !== true && isset( $editor_context->post ) ) { // All post_type blocks 
 			return array(
-			'core/image', 
-			'core/heading', 
-			'core/paragraph', 
-			'core/list', 
-			'core/quote', 
-			'core/pullquote', 
-			'core/block', 
-			'core/button', 
-			'core/buttons', 
-			'core/column', 
-			'core/columns', 
-			'core/table', 
-			'core/text-columns', 
-			//
-			'coblocks/accordion',
-			'coblocks/accordion-item',
-			'coblocks/alert',
-			'coblocks/counter',
-			'coblocks/column',
-			'coblocks/row',
-			'coblocks/dynamic-separator',
-			'coblocks/logos',
-			'coblocks/icon',
-			'coblocks/buttons',			
+			// 'core/image', 
+			// 'core/heading', 
+			// 'core/paragraph', 
+			// 'core/list', 
+			// 'core/quote', 
+			// 'core/pullquote', 
+			// 'core/block', 
+			// 'core/button', 
+			// 'core/buttons', 
+			// 'core/column', 
+			// 'core/columns', 
+			// 'core/table', 
+			// 'core/text-columns', 
+			// //
+			// 'coblocks/accordion',
+			// 'coblocks/accordion-item',
+			// 'coblocks/alert',
+			// 'coblocks/counter',
+			// 'coblocks/column',
+			// 'coblocks/row',
+			// 'coblocks/dynamic-separator',
+			// 'coblocks/logos',
+			// 'coblocks/icon',
+			// 'coblocks/buttons',	
+			
+			
+			//"toolset/ct",
+			//"bcn/breadcrumb-trail",
+			"meta-box/wa-latest-posts",
+			"meta-box/wa-partners",
+			"meta-box/wa-edito",
+			"meta-box/wa-contact",
+			"meta-box/wa-playlist",
+			"meta-box/wa-awards",
+			"meta-box/wa-film",
+			"meta-box/wa-section",
+			"meta-box/wa-sections",
+			"meta-box/wa-misson",
+			"meta-box/wa-cols",
+			"meta-box/wa-breaking",
+			"meta-box/wa-insights",
+			"coblocks/accordion",
+			"coblocks/accordion-item",
+			"coblocks/alert",
+			"coblocks/author",
+			"coblocks/gallery-carousel",
+			// "coblocks/shape-divider",
+			"coblocks/social",
+			"coblocks/social-profiles",
+			"coblocks/gallery-stacked",
+			"coblocks/posts",
+			"coblocks/post-carousel",
+			"coblocks/map",
+			"coblocks/counter",
+			"coblocks/column",
+			"coblocks/dynamic-separator",
+			// "coblocks/events",
+			// "coblocks/event-item",
+			"coblocks/faq",
+			"coblocks/faq-item",
+			"coblocks/feature",
+			"coblocks/features",
+			// "coblocks/form",
+			// "coblocks/field-date",
+			// "coblocks/field-email",
+			// "coblocks/field-name",
+			// "coblocks/field-radio",
+			// "coblocks/field-phone",
+			// "coblocks/field-textarea",
+			// "coblocks/field-text",
+			// "coblocks/field-select",
+			// "coblocks/field-submit-button",
+			// "coblocks/field-checkbox",
+			// "coblocks/field-website",
+			// "coblocks/field-hidden",
+			// "coblocks/click-to-tweet",
+			"coblocks/gallery-collage",
+			// "coblocks/food-and-drinks",
+			// "coblocks/food-item",
+			"coblocks/logos",
+			"coblocks/gallery-masonry",
+			// "coblocks/pricing-table",
+			// "coblocks/pricing-table-item",
+			"coblocks/row",
+			"coblocks/service",
+			"coblocks/services",
+			"coblocks/gallery-offset",
+			// "coblocks/opentable",
+			"coblocks/icon",
+			"coblocks/gif",
+			"coblocks/gist",
+			"coblocks/hero",
+			"coblocks/highlight",
+			// "complianz/document",
+			// "complianz/consent-area",
+			"wp-bootstrap-blocks/container",
+			"wp-bootstrap-blocks/column",
+			"wp-bootstrap-blocks/row",
+			"wp-bootstrap-blocks/button",
+			"gravityforms/form",
+			"core/paragraph",
+			"core/image",
+			"core/heading",
+			"core/gallery",
+			"core/list",
+			"core/list-item",
+			"core/quote",
+			// "core/archives",
+			"core/audio",
+			"core/button",
+			"core/buttons",
+			// "core/calendar",
+			// "core/categories",
+			// "core/code",
+			"core/column",
+			"core/columns",
+			"core/cover",
+			"core/details",
+			// "core/embed",
+			"core/file",
+			"core/group",
+			"core/html",
+			// "core/latest-comments",
+			// "core/latest-posts",
+			"core/media-text",
+			"core/missing",
+			// "core/more",
+			// "core/nextpage",
+			// "core/page-list",
+			// "core/page-list-item",
+			"core/pattern",
+			// "core/preformatted",
+			"core/pullquote",
+			"core/block",
+			// "core/rss",
+			// "core/search",
+			"core/separator",
+			"core/shortcode",
+			"core/social-link",
+			// "core/social-links",
+			"core/spacer",
+			"core/table",
+			// "core/tag-cloud",
+			"core/text-columns",
+			// "core/verse",
+			"core/video",
+			"core/footnotes",
+			// "core/navigation",
+			// "core/navigation-link",
+			// "core/navigation-submenu",
+			// "core/site-logo",
+			// "core/site-title",
+			// "core/site-tagline",
+			// "core/query",
+			"core/template-part",
+			// "core/avatar",
+			// "core/post-title",
+			// "core/post-excerpt",
+			// "core/post-featured-image",
+			// "core/post-content",
+			// "core/post-author",
+			// "core/post-author-name",
+			// "core/post-date",
+			// "core/post-terms",
+			// "core/post-navigation-link",
+			// "core/post-template",
+			// "core/query-pagination",
+			// "core/query-pagination-next",
+			// "core/query-pagination-numbers",
+			// "core/query-pagination-previous",
+			// "core/query-no-results",
+			// "core/read-more",
+			// "core/comments",
+			// "core/comment-author-name",
+			// "core/comment-content",
+			// "core/comment-date",
+			// "core/comment-edit-link",
+			// "core/comment-reply-link",
+			// "core/comment-template",
+			// "core/comments-title",
+			// "core/comments-pagination",
+			// "core/comments-pagination-next",
+			// "core/comments-pagination-numbers",
+			// "core/comments-pagination-previous",
+			// "core/post-comments-form",
+			"core/home-link",
+			// "core/loginout",
+			// "core/term-description",
+			// "core/query-title",
+			// "core/post-author-biography",
+			// "core/freeform",
+			"core/legacy-widget",
+			"core/widget-group",
+			"coblocks/buttons",
+			"coblocks/media-card",
 
 			// Remplacez ceci par l'identifiant du bloc que vous souhaitez autoriser
 			// Ajoutez d'autres identifiants de blocs au besoin
