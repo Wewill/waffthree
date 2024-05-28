@@ -2458,7 +2458,7 @@ function wa_awards_get_films( $films, $master = true ) {
 			//var_dump($f_award_light_img);
 			//print_r($counter);//count($films)
 
-			$html .= '<div class="col-12 col-md-' . ( ($master == true)?12/$counter:3 ) . ' award-item ' . (($master == true)?'master-':'') . 'award">';
+			$html .= '<div class="col-12 col-md-' . ( ($master == true)?ceil(12/$counter):3 ) . ' award-item ' . (($master == true)?'master-':'') . 'award">';
 
 			// Print film / <img src="%s" class="w-100 %s fit-image" alt="%s">
 			$html .= sprintf('<div class="card film-card flex-row flex-wrap bg-color-dark my-2 border-0 %s" %s data-film-id="%d" data-aos="flip-up" data-aos-delay="%d">
