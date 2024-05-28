@@ -4251,11 +4251,50 @@ function waff_reset_blocks_enqueue_block_editor_assets() {
 	// Get theme option
 	$advanced_blocks = (bool) get_theme_mod( 'advanced_blocks', waff_defaults( 'advanced_blocks' ) );
 
-	// If the option is not available, return.
+	// If the option is not checked, return.
 	if ( $advanced_blocks !== true )
-		wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true );
+		//wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true ); // Script solution > only remove blocks but not in list
+		add_filter( 'allowed_block_types_all', 'waff_allowed_block_types', 10, 2 ); // Php way 
+
 }
 
+function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
+	error_log($allowed_blocks);
+	//if ( isset( $editor_context->post ) && $editor_context->post->post_type === 'page' ) { // Only page or a custom post_type 
+	if ( isset( $editor_context->post ) ) { // All post_type blocks 
+			return array(
+			'core/image', 
+			'core/heading', 
+			'core/paragraph', 
+			'core/list', 
+			'core/quote', 
+			'core/pullquote', 
+			'core/block', 
+			'core/button', 
+			'core/buttons', 
+			'core/column', 
+			'core/columns', 
+			'core/table', 
+			'core/text-columns', 
+			//
+			'coblocks/accordion',
+			'coblocks/accordion-item',
+			'coblocks/alert',
+			'coblocks/counter',
+			'coblocks/column',
+			'coblocks/row',
+			'coblocks/dynamic-separator',
+			'coblocks/logos',
+			'coblocks/icon',
+			'coblocks/buttons',			
+
+			// Remplacez ceci par l'identifiant du bloc que vous souhaitez autoriser
+			// Ajoutez d'autres identifiants de blocs au besoin
+			'directory/wa-rsfp-directory-block',
+		);
+	}
+	return $allowed_blocks;
+}
 
 /**
  * Define new colors for wp-bootstrap-blocks 
