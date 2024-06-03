@@ -134,3 +134,32 @@ WaffTwo\Wide_Meta\setup();
 WaffTwo\Dark_Meta\setup();
 WaffTwo\Blocks\setup();
 if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }
+
+
+// @TOREMOVE / add_query_vars DEBUG
+function display_query_vars_shortcode() {
+	// Get the query variables from the URL
+	$query_vars = $_GET;
+
+	// Initialize an empty string to store the output
+	$output = '';
+
+	// Check if there are any query variables
+	if (!empty($query_vars)) {
+		// Iterate through each query variable and append to the output string
+		foreach ($query_vars as $key => $value) {
+			// Sanitize the key and value to avoid XSS attacks
+			$safe_key = esc_html($key);
+			$safe_value = esc_html($value);
+			$output .= "<p><strong>{$safe_key}:</strong> {$safe_value}</p>";
+		}
+	} else {
+		// If no query variables are found
+		$output = '<p>No query variables found.</p>';
+	}
+
+	// Return the output string to be displayed
+	return $output;
+}
+
+add_shortcode('display_query_vars', 'display_query_vars_shortcode');
