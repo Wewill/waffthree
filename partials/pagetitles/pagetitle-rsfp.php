@@ -324,41 +324,43 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<div class="lead lg-reset-fontsize"><?= apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)); ?></p>
 					</div>
 
-					<div class="d-flex align-items-center justify-content-center p-3 py-md-4 px-md-5 bg-body rounded-4 shadow">
-						<?php if (!empty($d_stage_opentovisit)): ?>
-						<div class="d-md-flex d-inline-block align-items-center">
-							<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
-							<div>
-							<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
-							<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
+					<?php if (!empty($d_stage_opentovisit) || !empty($d_stage_opentostage)) { ?>
+						<div class="d-flex align-items-center justify-content-center p-3 py-md-4 px-md-5 bg-body rounded-4 shadow">
+							<?php if (!empty($d_stage_opentovisit)): ?>
+							<div class="d-md-flex d-inline-block align-items-center">
+								<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
+								<div>
+								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
+								<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
+								</div>
 							</div>
-						</div>
-						<div class="d-none d-md-flex align-items-center justify-content-center px-5">
-							<span class="bullet bullet-action-2 ms-0"></span>
-						</div>
-						<?php endif; ?>
+							<div class="d-none d-md-flex align-items-center justify-content-center px-5">
+								<span class="bullet bullet-action-2 ms-0"></span>
+							</div>
+							<?php endif; ?>
 
-						<?php if (!empty($d_stage_opentostage)): ?>
-						<div class="d-md-flex d-inline-block align-items-center">
-							<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
-							<div>
-							<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
-							<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+							<?php if (!empty($d_stage_opentostage)): ?>
+							<div class="d-md-flex d-inline-block align-items-center">
+								<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
+								<div>
+								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
+								<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+								</div>
 							</div>
-						</div>
-						<!-- <div class="d-none d-md-flex align-items-center justify-content-center px-5">
-							<span class="bullet bullet-action-2 ms-0"></span>
-						</div> -->
-						<?php endif; ?>
+							<!-- <div class="d-none d-md-flex align-items-center justify-content-center px-5">
+								<span class="bullet bullet-action-2 ms-0"></span>
+							</div> -->
+							<?php endif; ?>
 
-						<!-- <div class="d-md-flex d-inline-block align-items-center">
-							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
-							<div>
-							<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
-							<p class="mb-0"><span class="badge bg-action-2">Bientôt disponible...</span></p>
-							</div>
-						</div> -->
-					</div>
+							<!-- <div class="d-md-flex d-inline-block align-items-center">
+								<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
+								<div>
+								<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
+								<p class="mb-0"><span class="badge bg-action-2">Bientôt disponible...</span></p>
+								</div>
+							</div> -->
+						</div>
+					<?php } ?>
 
 				</div>
 		
