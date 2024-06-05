@@ -8,7 +8,7 @@
 namespace WaffTwo\Blocks;
 
 use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
-use function WaffTwo\Core\waff_clean_tags as waff_clean_tags;
+use function WaffTwo\Core\waff_clean_alltags as waff_clean_alltags;
 use function WaffTwo\Core\waff_trim as waff_trim;
 use function WaffTwo\Theme\waff_get_edition_badge as waff_get_edition_badge;
 use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
@@ -3506,7 +3506,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 						<?php if ( strlen(strip_tags($section_description)) > 0 ) : ?> 
 							<p class="card-text <?= $section_title_color ?> pt-4 mb-2"><?= waff_do_markdown(strip_tags($section_description)) ?></p>
 						<?php else : ?>
-							<?php echo apply_filters('the_content', waff_do_markdown(waff_trim(waff_clean_tags($section_content), 300))); ?>
+							<?php echo apply_filters('the_content', waff_do_markdown(waff_trim(waff_clean_alltags($section_content), 300))); ?>
 						<?php endif; ?>
 					</div>
 					<div class="mt-2 mt-sm-0">

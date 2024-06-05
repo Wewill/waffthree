@@ -176,7 +176,7 @@ if ( have_posts() ) {
 
 			<div class="col-sm-7" data-aos="fade-left">
 				<?php if ( strlen(strip_tags($room_description)) > 0 ) : ?>
-				<p class="lead"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_tags(strip_tags($room_description)) ); ?></p>
+				<p class="lead"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_alltags($room_description) ); ?></p>
 				<?php endif; ?>
 				<?php if ( strlen(strip_tags($room_content)) > 0 ) : ?>
 				<?php echo apply_filters('the_content', WaffTwo\Core\waff_do_markdown($room_content)); ?>

@@ -42,14 +42,14 @@
 						<hgroup>
 							<h6 class="subline text-white">Production</h6>						
 							<?php if ( strlen(strip_tags($current_production_name)) > 0 ) : ?>
-							<h3 class="my-3 text-white border-white border-2 border rounded-4 p-2"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_tags(strip_tags($current_production_name)) ); ?></h3>
+							<h3 class="my-3 text-white border-white border-2 border rounded-4 p-2"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_alltags($current_production_name) ); ?></h3>
 							<?php endif; ?>
 							<!-- <div class="production-list d-inline-block"><a class="production-item" tabindex="-1">Sous-thématique ?</a></div> -->
 						</hgroup>
 						
 						<div class="text-white">
 							<?php if ( strlen(strip_tags($production_description)) > 0 ) : ?>
-							<p class="fw-bold text-white"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_tags(strip_tags($production_description)) ); ?></p>
+							<p class="fw-bold text-white"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_alltags($production_description) ); ?></p>
 							<?php endif; ?>
 						</div>
 						

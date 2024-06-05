@@ -45,14 +45,14 @@
 						<hgroup>
 							<h6 class="subline text-white">Thématique</h6>						
 							<?php if ( strlen(strip_tags($current_thematic_name)) > 0 ) : ?>
-							<h3 class="my-3 text-white border-white border-2 border rounded-4 p-2"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_tags(strip_tags($current_thematic_name)) ); ?></h3>
+							<h3 class="my-3 text-white border-white border-2 border rounded-4 p-2"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_alltags($current_thematic_name) ); ?></h3>
 							<?php endif; ?>
 							<!-- <div class="thematic-list d-inline-block"><a class="thematic-item" tabindex="-1">Sous-thématique ?</a></div> -->
 						</hgroup>
 						
 						<div class="text-white">
 							<?php if ( strlen(strip_tags($thematic_description)) > 0 ) : ?>
-							<p class="fw-bold text-white"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_tags(strip_tags($thematic_description)) ); ?></p>
+							<p class="fw-bold text-white"><?php echo WaffTwo\Core\waff_do_markdown( WaffTwo\Core\waff_clean_alltags($thematic_description) ); ?></p>
 							<?php endif; ?>
 						</div>
 						

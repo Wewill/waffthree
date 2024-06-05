@@ -1037,6 +1037,79 @@ function hslToHex($h, $s, $l, $prependPound = true) {
 }
 
 /**
+ * Sanitize / simplify / filter content 
+ * Filter tags
+ * Do not authorize font manipulations
+ * Simple Clean from word copy/paste
+ */
+
+ function waff_simplify_content($content='') {
+    // Autoriser uniquement certaines balises
+	$allowed_tags = '<p><strong><em><span><ul><ol><li><blockquote><a>';
+
+    // Utiliser strip_tags pour supprimer toutes les balises sauf celles autorisées
+    $content = strip_tags(do_shortcode($content), $allowed_tags);
+
+    // Supprimer les balises <span> avec des styles de font et autres attributs de style copier/coller
+    $content = preg_replace('/<span[^>]*style="[^"]*(font-size|font-family|font-weight|font-style|color|background-color|line-height|mso-)[^"]*"[^>]*>(.*?)<\/span>/', '$2', $content);
+
+    return $content;
+}
+
+/**
+ * Sanitize / simplify / filter content 
+ * Do not authorize font manipulations
+ * Advanced Clean from word copy/paste
+ */
+
+ function waff_sanitize_msword_content($content='') {
+    $content = do_shortcode($content);
+
+    // Supprimer les styles indésirables dans toutes les balises
+    $content = preg_replace_callback(
+        '/<([a-z][a-z0-9]*)\b[^>]*style="([^"]*)"[^>]*>/i',
+        function ($matches) {
+            $tag = $matches[1];
+            $styles = $matches[2];
+
+            // Supprimer les styles indésirables
+            $styles = preg_replace('/(font-size|font-family|font-weight|font-style|color|background-color|line-height|mso-[^:]+):[^;"]*;?/', '', $styles);
+
+            // Si aucun style n'est autorisé, supprimer complètement l'attribut style
+            if (trim($styles) === '') {
+                return "<$tag>";
+            } else {
+                return "<$tag style=\"$styles\">";
+            }
+        },
+        $content
+    );
+
+    // Supprimer les classes spécifiques à Word
+    $content = preg_replace('/\s*class="[^"]*Mso[^"]*"/', '', $content);
+
+    return $content;
+}
+
+/**
+ * Removes all tags except <p>
+ */
+
+function waff_clean_tags($content='') {
+	$content = strip_tags(do_shortcode($content), array('p'));
+	return $content;
+}
+
+/**
+ * Removes all tags
+ */
+
+function waff_clean_alltags($content='') {
+	$content = strip_tags(do_shortcode($content));
+	return $content;
+}
+
+/**
  * Do markdown helper
  */
 
@@ -1062,11 +1135,9 @@ function waff_do_markdown($content='') {
   	return html_entity_decode($content);
 }
 
-function waff_clean_tags($content='') {
-	$content = strip_tags(do_shortcode($content), array('p'));
-	return $content;
-}
-
+/**
+ * Trim content 
+ */
 function waff_trim($content = '', $length = 100) {
 	$content = wpv_do_shortcode($content);
 	$length = (int)$length;
