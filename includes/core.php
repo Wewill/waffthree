@@ -1119,19 +1119,42 @@ function waff_do_markdown($content='') {
 	//  ['\\\*(\\\w.+?)\\\*', {'italics': true}], // *value*
 	$content = do_shortcode($content);
 	$content = str_replace('###SPACE###', '', $content); // Je ne sais pas d'ou cela provient mais probablement types
-	$content = str_replace('&#8217;', '\'', $content); // Gerer les carateres spéciaux de word 
+	$content = str_replace('&#8217;', '\'', $content); // Gerer les carateres spéciaux de word = '
+	$content = str_replace('&#039;', '\'', $content); // Gerer les carateres spéciaux de word = '
 	$content = str_replace('&#8220;', '&ldquo;', $content);
 	$content = str_replace('&#8221;', '&rdquo;', $content);
 	$content = str_replace('&#8211;', '&ndash;', $content);
 	$content = str_replace('&#8230;', '&hellip;', $content); // Gérer les ...
 	$content = str_replace(': #', ': &num;', $content); // Gérer les attrributs <span style="color: #...."
 
+	// $content = htmlentities($content);
+    // $patterns = array('/\*\*\*(\w.+?)\*\*\*/', '/\*\*(\w.+?)\*\*/', '/\*(\w.+?)\*/', '/\#\#([^#]+?)\#\#/', '/\#([^#]+?)\#/'); // '/\#\#([^#(SPACE)]+?)\#\#/', '/\#([^#(SPACE)]+?)\#/' // '/\#\#(\w.+?)\#\#/', '/\#(\w.+?)\#/'
+	// $replacements = array('<span class="label">$1</span>', '<strong>$1</strong>','<em>$1</em>', '<span class="paragraph-huge">$1</span>', '<span class="paragraph-small">$1</span>');
+	//   ksort($patterns);
+	// 	ksort($replacements);
+    // $content = preg_replace($patterns, $replacements, $content);
+
+	// 2024 
 	$content = htmlentities($content);
-    $patterns = array('/\*\*\*(\w.+?)\*\*\*/', '/\*\*(\w.+?)\*\*/', '/\*(\w.+?)\*/', '/\#\#([^#]+?)\#\#/', '/\#([^#]+?)\#/'); // '/\#\#([^#(SPACE)]+?)\#\#/', '/\#([^#(SPACE)]+?)\#/' // '/\#\#(\w.+?)\#\#/', '/\#(\w.+?)\#/'
-	$replacements = array('<span class="label">$1</span>', '<strong>$1</strong>','<em>$1</em>', '<span class="paragraph-huge">$1</span>', '<span class="paragraph-small">$1</span>');
-	  ksort($patterns);
-		ksort($replacements);
-    $content = preg_replace($patterns, $replacements, $content);
+	$patterns = array(
+		'/\*\*\*(\w.+?)\*\*\*/',
+		'/\*\*(\w.+?)\*\*/',
+		'/\*(\w.+?)\*/',
+		'/(?<!&)\#\#([^#]+?)\#\#/', // Updated pattern
+		'/(?<!&)\#([^#]+?)\#/'      // Updated pattern
+	);
+	$replacements = array(
+		'<span class="label">$1</span>',
+		'<strong>$1</strong>',
+		'<em>$1</em>',
+		'<span class="paragraph-huge">$1</span>',
+		'<span class="paragraph-small">$1</span>'
+	);
+	ksort($patterns);
+	ksort($replacements);
+	$content = preg_replace($patterns, $replacements, $content);
+
+	// Return
   	return html_entity_decode($content);
 }
 
