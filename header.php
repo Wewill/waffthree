@@ -156,9 +156,8 @@
 	}
 
 	// Force some page headers
-	if ( is_tax('room') ) {
-		$page_atts['header_style'] = 'modern';
-	}
+	if ( is_tax('room') ) { $page_atts['header_style'] = 'modern'; }
+	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS || is_singular() ) { $page_atts['header_style'] = 'normal';  } // @TODO / @TOCHECK 060624 if no particular case, header_style has to be normal
 
 	?>
 
