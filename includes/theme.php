@@ -532,7 +532,7 @@ function waff_social_links_icons() {
 		'fa-newspaper'      		=> 'fab fa-newspaper',
 		'fa-paper-plane'      		=> 'fas fa-paper-plane',
 		'fa-flickr'      			=> 'fab fa-flickr',
-		'fa-envelope'      			=> 'fab fa-envelope',
+		'fa-envelope'      			=> 'fa fa-envelope',
 		//FIFAM
 		'info'     		 			=> 'icon icon-info',
 		'time'      				=> 'icon icon-time',
