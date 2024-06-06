@@ -532,6 +532,7 @@ function waff_social_links_icons() {
 		'fa-newspaper'      		=> 'fab fa-newspaper',
 		'fa-paper-plane'      		=> 'fas fa-paper-plane',
 		'fa-flickr'      			=> 'fab fa-flickr',
+		'fa-envelope'      			=> 'fab fa-envelope',
 		//FIFAM
 		'info'     		 			=> 'icon icon-info',
 		'time'      				=> 'icon icon-time',
@@ -551,7 +552,7 @@ function waff_social_links_icons() {
 		'next'      				=> 'icon icon-next',
 		'up'      					=> 'icon icon-up',
 		'down'      				=> 'icon icon-down',
-		'left'      					=> 'icon icon-left',
+		'left'      				=> 'icon icon-left',
 		'down-right'      			=> 'icon icon-down-right',
 		'down-left'      			=> 'icon icon-down-left',
 		'links'      				=> 'icon icon-links',
