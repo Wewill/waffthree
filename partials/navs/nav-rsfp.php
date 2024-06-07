@@ -18,7 +18,7 @@ $page_atts = $args;
 							'theme_location' => 'primary',
 							'menu_class'     => 'main-nav list-unstyled link-light',
 							'depth'          => '3',
-							'add_li_class'  	 => 'heading-3'
+							'add_li_class'  	 => 'heading-4' //heading-3
 							// + le cas link-muted
 							// + le cas is_loggued_in
 						)
