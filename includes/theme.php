@@ -67,6 +67,7 @@ function setup() {
 	
 	// Remove comments 
 	add_action('init', 						$n( 'waff_remove_comment_support' ), 100);
+	add_action('init', 						$n( 'waff_handle_custom_login' ), 110);
 	
 	// Custom social icons Walker 
 	add_filter( 'walker_nav_menu_start_el', $n( 'waff_nav_menu_social_icons' ), 20, 4 );
@@ -332,6 +333,41 @@ function waff_remove_comment_support() {
     remove_post_type_support( 'post', 'comments' );
     remove_post_type_support( 'page', 'comments' );
 }
+
+/* HANDLE Template custom log in / log out from form post modal 
+================================================== */
+function waff_handle_custom_login() {
+	
+    if ( isset( $_POST['submit'] ) && isset( $_POST['action'] ) && $_POST['action'] == 'custom_login' ) {
+        $user_login 	= sanitize_user( $_POST['user_login'] );
+        $password 		= esc_attr( $_POST['user_password'] );
+        $redirect_to 	= esc_url( $_POST['redirect_to'] );
+
+        $creds = array(
+            'user_login'    => $user_login,
+            'user_password' => $password,
+            'remember'      => true
+        );
+
+        $user = wp_signon( $creds, false );
+
+        if ( is_wp_error( $user ) ) {
+			echo '<div class="alert alert-action-1 alert-dismissible fade show position-fixed bottom-0 left-0 zi-max m-4" role="alert">
+			' . $user->get_error_message() . '
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>';
+        } else {
+			// print_r($user);
+            wp_redirect( home_url() );
+            exit;
+			// echo '<div class="alert alert-action-3 alert-dismissible fade show position-fixed bottom-0 left-0 zi-max m-4" role="alert">
+			// 	You are now logged in !
+			// 	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			// </div>';
+        }
+    }
+}
+
 
 /* HEX TO RGB COLOR
 ================================================== */
