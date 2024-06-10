@@ -147,6 +147,7 @@ global $page_atts;
 							<?php //Go\WooCommerce\woocommerce_cart_link(); ?>
 							<?php //WaffTwo\waff_night_toggle(); ?>
 							<?php WaffTwo\Theme\waff_get_languages(); ?>
+							<?php WaffTwo\waff_get_loginout(); ?>
 						</div>
 						<!-- Second line -->
 						<div class="text-end mt-2 pe-3 visually-hidden">

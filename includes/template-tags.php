@@ -549,7 +549,35 @@ function display_catalog_url() {
   *
   * @return void
   */
-function get_loginout_link() {
+function waff_get_loginout() {
+	$link_text = $icon = '';
+
+	if ( is_user_logged_in() ) {
+		$link_text = _x('My Account', 'Login / register button', 'waff');
+		$icon = 'bi-person-check';
+	}
+
+	elseif ( ! is_user_logged_in() ) {
+		$link_text = _x('Sign in', 'Login / register button', 'waff');
+		$icon = 'bi-person';
+	}
+
+	?>
+	<button id="loginout-toggle" class="d-none d-sm-inline-block site-header__button header__button--night-mode button--chromeless px-2" role="switch" data-bs-toggle="modal" data-bs-target="#modalLoginout" aria-checked="false" aria-label="<?php esc_attr_x( 'Toggle Login / register button', 'Login / register button', 'waff' ); ?>">
+		<div class="loginout-toggle-icon"><i class="bi <?= $icon ?> fs-3"></i></div>
+		<span class="screen-reader-text"><?= $link_text; ?></span>
+	</button>
+	<?php
+}
+
+ /**
+  * WooCommerce
+  * Get either Logged in or Logged out link based
+  * on current user's state.
+  *
+  * @return void
+  */
+  function waff_get_wc_loginout_link() {
 	$link_text = '';
 
 	if ( is_user_logged_in() ) {

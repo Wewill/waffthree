@@ -151,3 +151,6 @@ $bg_image 		= reset( $bg_images );
 	</div>
 </footer>
 <!-- END: .Credits -->
+
+<!-- Begin: Modal signloginout -->
+<?php get_template_part( 'partials/modal-loginout' ); ?>

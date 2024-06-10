@@ -163,3 +163,37 @@ function display_query_vars_shortcode() {
 }
 
 add_shortcode('display_query_vars', 'display_query_vars_shortcode');
+
+// @TOMOVE
+function handle_custom_login() {
+	
+    if ( isset( $_POST['submit'] ) && isset( $_POST['action'] ) && $_POST['action'] == 'custom_login' ) {
+        $user_login 	= sanitize_user( $_POST['user_login'] );
+        $password 		= esc_attr( $_POST['user_password'] );
+        $redirect_to 	= esc_url( $_POST['redirect_to'] );
+
+        $creds = array(
+            'user_login'    => $user_login,
+            'user_password' => $password,
+            'remember'      => true
+        );
+
+        $user = wp_signon( $creds, false );
+
+        if ( is_wp_error( $user ) ) {
+			echo '<div class="alert alert-action-1 alert-dismissible fade show position-fixed bottom-0 left-0 zi-max m-4" role="alert">
+			' . $user->get_error_message() . '
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>';
+        } else {
+			// print_r($user);
+            wp_redirect( home_url() );
+            exit;
+			// echo '<div class="alert alert-action-3 alert-dismissible fade show position-fixed bottom-0 left-0 zi-max m-4" role="alert">
+			// 	You are now logged in !
+			// 	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			// </div>';
+        }
+    }
+}
+add_action( 'init', 'handle_custom_login' );
