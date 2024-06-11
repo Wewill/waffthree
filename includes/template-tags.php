@@ -751,6 +751,10 @@ if ( ! function_exists( 'waff_continue_reading_text' ) ) {
 }
 
 /**
+ * Terms 
+ */
+
+/**
  * Determine the top-most parent of a term
  */ 
 function get_term_top_most_parent( $term, $taxonomy ) {
@@ -766,6 +770,45 @@ function get_term_top_most_parent( $term, $taxonomy ) {
 		endif;
 	endif;
 	return $parent;
+}
+
+function get_all_parent_terms($term_id, $taxonomy) {
+    $ascendant_terms = array();
+
+    $term = get_term($term_id, $taxonomy);
+
+    if ($term && !is_wp_error($term) && $term->parent != 0) {
+        $parent_term = get_term($term->parent, $taxonomy);
+        if ($parent_term && !is_wp_error($parent_term)) {
+            $ascendant_terms[] = $parent_term;
+            $ascendant_terms = array_merge($ascendant_terms, get_all_parent_terms($parent_term->term_id, $taxonomy));
+        }
+    }
+
+    return $ascendant_terms;
+}
+
+
+function get_all_child_terms($term_id, $taxonomy) {
+    $descendant_terms = array();
+
+	$child_terms = get_terms(array(
+        'taxonomy'   => $taxonomy,
+        'parent'     => $term_id,
+        'hide_empty' => false,
+    ));
+
+    if (!empty($child_terms) && !is_wp_error($child_terms)) {
+        foreach ($child_terms as $child_term) {
+            $descendant_terms[] = $child_term;
+            $descendants = get_all_child_terms($child_term->term_id, $taxonomy);
+            if (!empty($descendants)) {
+                $descendant_terms = array_merge($descendant_terms, $descendants);
+            }
+        }
+    }
+
+    return $descendant_terms;
 }
 
 /**

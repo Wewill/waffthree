@@ -22,11 +22,11 @@
 	$t_general_content 					= get_term_meta( $thematic_id, 't_general_content', true ); 
 	$t_general_image 					= get_term_meta( $thematic_id, 't_general_image', true ); 
 	$t_general_image_meta 				= WaffTwo\Core\waff_get_attachment($t_general_image);
-	$t_general_image_url = wp_get_attachment_image_url(
+	$t_general_image_url 				= wp_get_attachment_image_url(
 		$t_general_image,
 		'large' // full
 	);
-	$t_general_image_thumbnail_url = wp_get_attachment_image_url(
+	$t_general_image_thumbnail_url 		= wp_get_attachment_image_url(
 		$t_general_image,
 		'thumbnail' // medium = 300x300
 	);
@@ -107,6 +107,42 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- Parent and child terms --> 
+	<?php 
+	$all_child_terms = WaffTwo\get_all_child_terms($thematic_id, 'thematic');
+
+	// Display all descendant terms
+	if (!empty($all_child_terms) && !is_wp_error($all_child_terms)) {
+		echo '<h6 class="subline mt-5 mb-0">Les thématiques enfant</h6><div class="d-flex flex-wrap gap-3 my-3 attribute-list">';
+		foreach ($all_child_terms as $child_term) {
+			printf('<a href="%s" class="fs-4 m-0 text-white border-0 rounded-4 px-3 py-2 d-inline-block" %s>%s</a>',
+				esc_url(get_term_link($child_term)),
+				$thematic_bgcolor,
+				esc_html($child_term->name),
+			);
+		}
+		echo '</div>';
+	}
+	?> 
+
+	<?php 
+	$all_parent_terms = WaffTwo\get_all_parent_terms($thematic_id, 'thematic');
+
+	// Display all descendant terms
+	if (!empty($all_parent_terms) && !is_wp_error($all_parent_terms)) {
+		echo '<h6 class="subline mt-5 mb-0">Les thématiques parent</h6><div class="d-flex flex-wrap gap-3 my-3 attribute-list">';
+		foreach ($all_parent_terms as $parent_term) {
+			printf('<a href="%s" class="fs-4 m-0 text-white border-0 rounded-4 px-3 py-2 d-inline-block" %s>%s</a>',
+				esc_url(get_term_link($parent_term)),
+				$thematic_bgcolor,
+				esc_html($parent_term->name),
+			);
+		}
+		echo '</div>';
+	}
+	?> 
+
 
 	<!-- Content -->
 	<?php if ( strlen(strip_tags($t_general_content)) > 0 ) : ?>
