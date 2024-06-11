@@ -2612,3 +2612,68 @@ aside.widget-area h6:first-of-type {
 .wp-block-pullquote.has-quaternary-color cite {
   color: var(--go--color--quaternary);
 }
+
+/* Gforms modified by JS custom = resetted */
+
+.gfield_required {
+  color: #c02b0a;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors {
+background: #fff9f9;
+border-radius: 5px;
+border: 1.5px solid #c02b0a;
+box-shadow: 0 1px 4px rgba(0,0,0,.11),0 0 4px rgba(18,25,97,.0405344);
+margin-block-end: 8px;
+margin-block-start: 8px;
+padding-block: 16px;
+padding-inline-end: 16px;
+padding-inline-start: 48px;
+position: relative;
+width: 100%;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors>h2 {
+color: #c02b0a;
+font-size: 13.2px;
+font-weight: 500;
+line-height: 17.6px;
+margin-block-end: 12px;
+margin-block-start: 0;
+margin-inline: 0;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors>ol {
+padding-inline-start: 20px;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors>ol li {
+color: #c02b0a;
+font-size: 13.2px;
+list-style-type: disc!important;
+margin-block-end: 8px;
+margin-block-start: 0;
+margin-inline: 0;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors>ol a {
+color: #c02b0a;
+font-size: 13.2px;
+}
+
+.gform_wrapper_js-modified .gform_validation_errors>h2 .gform-icon {
+align-items: center;
+display: flex;
+font-size: 28px;
+height: 100%;
+inset-inline-start: 12px;
+position: absolute;
+inset-block-start: 0;
+}
+
+.gform_wrapper_js-modified .gf_invisible, 
+.gform_wrapper_js-modified .gfield_visibility_hidden {
+left: -9999px;
+position: absolute;
+visibility:hidden
+}
