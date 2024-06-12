@@ -110,6 +110,19 @@ function waff_add_theme_custom_fields_to_setting_page( $meta_boxes ) {
 				'id'              => $prefix . 'homeslide_background',
 				'type'            => 'image_advanced',
 			],
+			[
+				'name'            => __( 'Homeslide content', 'wa-rsfp' ),
+				'id'              => $prefix . 'homeslide_content',
+                'type'       => 'text_list',
+                'options'    => [
+                    'Ligne 1' => 'Ligne 1',
+                    'Ligne 2' => 'Ligne 2',
+                ],
+                'clone'      => true,
+                'sort_clone' => true,
+                'max_clone'  => 5,
+				// 'options'         => $this->posts_options_callback(),
+			],
 		],
 	];
 
@@ -119,6 +132,11 @@ function waff_add_theme_custom_fields_to_setting_page( $meta_boxes ) {
 function waff_get_theme_homeslide_background() {
 	$prefix = 'waff_';
 	return rwmb_meta( $prefix . 'homeslide_background', [ 'size' => 'full', 'limit' => 1, 'object_type' => 'setting' ], 'theme-settings' );
+}
+
+function waff_get_theme_homeslide_content() {
+	$prefix = 'waff_';
+	return rwmb_meta( $prefix . 'homeslide_content', [ 'object_type' => 'setting' ], 'theme-settings' );
 }
 
 

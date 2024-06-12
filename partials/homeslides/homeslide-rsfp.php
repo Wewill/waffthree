@@ -202,7 +202,19 @@ $homeslide_image = reset( $homeslide_images );
 
 			<!-- Contextual menu -->
 			<div class="position-absolute --top-50 bottom-10 start-50 translate-middle d-flex justify-content-between px-3 px-lg-6 pe-lg-20 zi-5">
-				
+
+				<?php if ( WaffTwo\Theme\waff_get_theme_homeslide_content() ) :  ?>
+			
+				<?php foreach (WaffTwo\Theme\waff_get_theme_homeslide_content() as $contents) : ?>
+					<div>
+						<span class="bullet bullet-light ms-0"></span>
+						<h5 class="color-light small-sm"><?= esc_html($contents[0]); ?><br/>
+							<?= esc_html($contents[1]); ?></h5>
+					</div>
+				<?php endforeach; ?>
+
+				<?php else :  ?>
+
 				<div>
 					<span class="bullet bullet-light ms-0"></span>
 					<h5 class="color-light small-sm">S'installer paysan.ne,<br/>
@@ -225,6 +237,8 @@ $homeslide_image = reset( $homeslide_images );
 				<div>
 					&nbsp;
 				</div>
+				
+				<?php endif;  ?>
 
 			</div>
 
