@@ -267,7 +267,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<div class="row g-0 justify-content-between align-items-center vh-100"><!-- .vh-100 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
-				<div class="col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+				<div class="col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
 					
 					<!-- Image -->  
 					<?php if (empty($d_medias_video)): ?>
@@ -312,7 +312,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
-				<div class="col-lg overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-4 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-20" data-aos="fade-left">
+				<div class="col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-md-17 pt-lg-20" data-aos="fade-left">
 					
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
@@ -320,8 +320,8 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</hgroup>
 					
 					<div>
-						<p class="lead fw-bold lg-reset-fontsize mb-1 mb-md-6"><?= esc_html($d_general_subtitle); ?></p>
-						<div class="lead lg-reset-fontsize"><?= apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)); ?></p>
+						<?php if ($d_general_subtitle) printf('<p class="lead fw-bold lg-reset-fontsize mb-1 mb-md-5">%s</p>', esc_html($d_general_subtitle)); ?>
+						<?php if ($d_general_introduction) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)))); ?>
 					</div>
 
 					<?php if (!empty($d_stage_opentovisit) || !empty($d_stage_opentostage)) { ?>
