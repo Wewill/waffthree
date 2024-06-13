@@ -925,7 +925,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'id'    => $prefix . 'm_blockmargin',
 				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
                 'type'  => 'switch',
-                'style' => 'square',
+                'style' => 'rounded',
                 'std'   => true,
             ],
 		],
@@ -3679,7 +3679,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 
 				<!-- Col 3 -->
 				<!-- Begin: Content -->
-				<div class="col-12 col-lg-6 col-xl-4 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
+				<div class="col-12 col-lg-6 col-xl-5 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
 					<div>
 						<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
 						<h2><?= mb_get_block_field( 'waff_m_title' ) ?></h2>
