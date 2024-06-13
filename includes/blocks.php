@@ -921,6 +921,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'name'  => esc_html__( 'More URL', 'waff' ),
                 'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
             ],
+			[
+                'id'    => $prefix . 'm_blockmargin',
+				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
+                'type'  => 'switch',
+                'style' => 'square',
+                'std'   => true,
+            ],
 		],
 		'category'       => 'layout',
         // 'icon'           => 'format-quote',
@@ -1285,7 +1292,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
-	$themeClass = 'featured mt-md-10 mb-md-10 mt-5 mb-5 contrast--dark fix-vh-50'; // Responsive issue fix
+	$themeClass = 'featured mt-md-5 mb-md-5 mt-2 mb-2 contrast--dark fix-vh-50'; // Responsive issue fix
 	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal ') $themeClass = 'mt-2 mb-10 contrast--light'; 
 	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
@@ -1383,7 +1390,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 						if ( $index > $limit ) { continue; }
 						?>
 					<div class="col">
-						<div class="card mb-3 border-0" id="<?= $post_id; ?>">
+						<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
 							<div class="row g-0">
 								<div class="col-md-4">
 									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
@@ -3569,7 +3576,13 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 	}
 
 	// Custom CSS class name.
-	$themeClass = 'mission mt-10 mb-10 pt-10 pb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
+	if ( mb_get_block_field( 'waff_m_blockmargin' ) == 1 ) {
+		$blockmargin = 'mt-lg-10 mb-lg-10 mt-5 mb-5';
+	} else {
+		$blockmargin = 'mt-n10 mb-0';
+	}
+
+	$themeClass = 'mission '.$blockmargin.' pt-10 pb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
 	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
