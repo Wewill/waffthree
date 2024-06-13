@@ -2,23 +2,37 @@
 
 /* Responsive ajustemnts */
 
-.single-directory #pageheader picture img.vh-100 {
-    margin-top: var(--waff-header-height);
-    height: calc( 100vh - var(--waff-header-height) )!important;
+@media screen and (min-width:768px) {
+    .single-directory #pageheader picture img.vh-100 {
+        margin-top: var(--waff-header-height);
+        height: calc( 100vh - var(--waff-header-height) )!important;
+    }
 }
 
-@media (max-width:1200px) {
+@media screen and (max-width:1200px) {
 
     .single-directory #pageheader .lead p, 
     .single-directory #pageheader p.lead {
         font-size: var(--go--font-size);
     }
 
-
 }
 
-@media (max-width:991.98px) {
+@media screen and (max-width:991.98px) and (min-width:768px) {
     .single-directory #pageheader.vh-100 [class*=col-], .single-directory #pageheader.vh-100 img.vh-100 {
         height: 100vh !important;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .single-directory #pageheader.vh-100,
+    .single-directory #pageheader.vh-100 .row.vh-100 {
+        height: 100% !important;
+    }
+    .single-directory #pageheader.vh-100 [class*=col-].header-image, .single-directory #pageheader.vh-100 [class*=col-].img-shifted img.vh-100 {
+        height: calc(30vh) !important;
+    }
+    .single-directory #pageheader.vh-100 [class*=col-].header-content {
+        height:100% !important;
     }
 }

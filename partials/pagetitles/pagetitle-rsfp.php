@@ -267,7 +267,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<div class="row g-0 justify-content-between align-items-center vh-100"><!-- .vh-100 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
-				<div class="col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
 					
 					<!-- Image -->  
 					<?php if (empty($d_medias_video)): ?>
@@ -312,7 +312,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
-				<div class="col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-md-17 pt-lg-20" data-aos="fade-left">
+				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-md-17 pt-lg-20" data-aos="fade-left">
 					
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
@@ -325,38 +325,38 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</div>
 
 					<?php if (!empty($d_stage_opentovisit) || !empty($d_stage_opentostage)) { ?>
-						<div class="d-flex align-items-center justify-content-center p-3 py-md-4 px-md-5 bg-body rounded-4 shadow">
+						<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
 							<?php if (!empty($d_stage_opentovisit)): ?>
-							<div class="d-md-flex d-inline-block align-items-center">
+							<div class="d-lg-flex d-inline-block align-items-center px-1 px-md-0">
 								<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
 								<div>
 								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
-								<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
+								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
 								</div>
 							</div>
-							<div class="d-none d-md-flex align-items-center justify-content-center px-5">
+							<div class="d-none d-lg-flex align-items-center justify-content-center px-2 px-md-4 px-xl-5">
 								<span class="bullet bullet-action-2 ms-0"></span>
 							</div>
 							<?php endif; ?>
 
 							<?php if (!empty($d_stage_opentostage)): ?>
-							<div class="d-md-flex d-inline-block align-items-center">
+							<div class="d-lg-flex d-inline-block align-items-center px-1 px-md-0">
 								<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
 								<div>
 								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
-								<p class="mb-0"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
 								</div>
 							</div>
-							<!-- <div class="d-none d-md-flex align-items-center justify-content-center px-5">
+							<!-- <div class="d-none d-lg-flex align-items-center justify-content-center px-5">
 								<span class="bullet bullet-action-2 ms-0"></span>
 							</div> -->
 							<?php endif; ?>
 
-							<!-- <div class="d-md-flex d-inline-block align-items-center">
+							<!-- <div class="d-lg-flex d-inline-block align-items-center">
 								<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
 								<div>
 								<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
-								<p class="mb-0"><span class="badge bg-action-2">Bientôt disponible...</span></p>
+								<p class="mb-0 small-lg"><span class="badge bg-action-2">Bientôt disponible...</span></p>
 								</div>
 							</div> -->
 						</div>
