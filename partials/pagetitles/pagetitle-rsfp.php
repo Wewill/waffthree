@@ -320,7 +320,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</hgroup>
 					
 					<div>
-						<?php if ($d_general_subtitle) printf('<p class="lead fw-bold lg-reset-fontsize mb-1 mb-md-5">%s</p>', esc_html($d_general_subtitle)); ?>
+						<?php if ($d_general_subtitle) printf('<p class="lead fw-bold lg-reset-fontsize mb-1 mb-lg-3 mb-xl-5">%s</p>', esc_html($d_general_subtitle)); ?>
 						<?php if ($d_general_introduction) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)))); ?>
 					</div>
 
