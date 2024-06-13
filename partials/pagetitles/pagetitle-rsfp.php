@@ -327,7 +327,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					<?php if (!empty($d_stage_opentovisit) || !empty($d_stage_opentostage)) { ?>
 						<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
 							<?php if (!empty($d_stage_opentovisit)): ?>
-							<div class="d-lg-flex d-inline-block align-items-center px-1 px-md-0">
+							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
 								<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
 								<div>
 								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
@@ -340,7 +340,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<?php endif; ?>
 
 							<?php if (!empty($d_stage_opentostage)): ?>
-							<div class="d-lg-flex d-inline-block align-items-center px-1 px-md-0">
+							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
 								<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
 								<div>
 								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
