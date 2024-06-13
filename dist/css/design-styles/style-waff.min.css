@@ -2,6 +2,10 @@
 
 /* Responsive ajustemnts */
 
+.is-formatted .page-header h1 {
+    margin-bottom: 1rem;
+}
+
 @media screen and (min-width:768px) {
     .single-directory #pageheader picture img.vh-100 {
         margin-top: var(--waff-header-height);
