@@ -93,7 +93,7 @@ global $page_atts;
 			<div class="navbar-menu col-12 col-md-5 col-lg-6 d-none d-md-flex d-flex align-items-center justify-content-end <?= esc_attr($navbarborder); ?>">
 
 				<!-- Desktop nav .navbar-nav-->
-				<div class="d-flex flex-column align-items-stretch justify-content-center d-lg-block d-none ps-2 ps-lg-5 pe-0">
+				<div class="d-flex flex-column align-items-stretch justify-content-center d-lg-block d-none ps-2 ps-xl-5 pe-0">
 					<!-- First line -->
 					<div class="d-flex align-items-center justify-content-between" aria-label="<?php esc_attr_e( 'Primary Menu', 'waff' ); ?>" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
 						<!-- Primary menu -->
@@ -103,7 +103,7 @@ global $page_atts;
 								array(
 									'container'       => false,
 									'theme_location' => 'secondary',
-									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset gap-2 gap-xl-3',
+									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset gap-2 gap-xl-4 me-2 me-xl-3',
 									'depth'          => '3',
 									'add_li_class'  	 => 'nav-link font-weight-bold --px-1 --px-lg-2 --px-xl-3'
 									// + le cas link-muted
