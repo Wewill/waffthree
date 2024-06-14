@@ -24,7 +24,18 @@
         font-size: .8rem !important;
     }
 
+    .h2, h2 {
+        font-size: 2rem !important;
+    }
 }
+
+/* @media screen and (max-height:650px) {
+
+    .h2, h2 {
+        font-size: 2rem !important;
+    }
+
+} */
 
 @media screen and (max-width:991.98px) and (min-width:768px) {
     .single-directory #pageheader.vh-100 [class*=col-], .single-directory #pageheader.vh-100 img.vh-100 {
