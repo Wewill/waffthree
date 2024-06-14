@@ -37,7 +37,7 @@
 
 }
 
-@media screen and (max-width:1520px) {
+@media screen and (max-width:1520px) and (min-width:1321px) {
 
     .classic-navbar .navbar-nav .nav-link {
         font-size: .9rem !important;
