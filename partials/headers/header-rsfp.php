@@ -103,7 +103,7 @@ global $page_atts;
 								array(
 									'container'       => false,
 									'theme_location' => 'secondary',
-									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset gap-2 gap-xl-4 me-2 me-xl-3',
+									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset gap-2 gap-lg-4 gap-xl-5 me-2 me-xl-3',
 									'depth'          => '3',
 									'add_li_class'  	 => 'nav-link font-weight-bold --px-1 --px-lg-2 --px-xl-3'
 									// + le cas link-muted
