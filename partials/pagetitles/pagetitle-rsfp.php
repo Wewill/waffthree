@@ -328,9 +328,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
 							<?php if (!empty($d_stage_opentovisit)): ?>
 							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-house-heart flex-shrink-0 me-3 h2 text-action-1"></i>
+								<i class="bi bi-house-heart flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
 								<div>
-								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
+								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
 								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
 								</div>
 							</div>
@@ -341,9 +341,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 							<?php if (!empty($d_stage_opentostage)): ?>
 							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-highlighter flex-shrink-0 me-3 h2 text-action-1"></i>
+								<i class="bi bi-highlighter flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
 								<div>
-								<h6 class="fw-bold text-action-1"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
+								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
 								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
 								</div>
 							</div>
@@ -353,7 +353,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<?php endif; ?>
 
 							<!-- <div class="d-lg-flex d-inline-block align-items-center">
-								<i class="bi bi-cloud-arrow-down flex-shrink-0 me-3 h2"></i>
+								<i class="bi bi-cloud-arrow-down flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
 								<div>
 								<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
 								<p class="mb-0 small-lg"><span class="badge bg-action-2">Bientôt disponible...</span></p>
