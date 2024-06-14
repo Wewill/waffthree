@@ -29,6 +29,22 @@
     }
 }
 
+@media screen and (max-width:1320px) {
+
+    .classic-navbar .navbar-nav .nav-link {
+        font-size: .8rem !important;
+    }
+
+}
+
+@media screen and (max-width:1520px) {
+
+    .classic-navbar .navbar-nav .nav-link {
+        font-size: .9rem !important;
+    }
+
+}
+
 /* @media screen and (max-height:650px) {
 
     .h2, h2 {
