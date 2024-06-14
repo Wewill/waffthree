@@ -105,7 +105,7 @@ global $page_atts;
 									'theme_location' => 'secondary',
 									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset',
 									'depth'          => '3',
-									'add_li_class'  	 => 'nav-link font-weight-bold --ps-4 --pe-0 px-4'
+									'add_li_class'  	 => 'nav-link font-weight-bold px-2 px-lg-3'
 									// + le cas link-muted
 									// + le cas is_loggued_in
 								)
@@ -119,7 +119,7 @@ global $page_atts;
 									'theme_location' => 'primary',
 									'menu_class'     => 'nav navbar-nav main-nav flex-row primary-menu list-reset',
 									'depth'          => '3',
-									'add_li_class'  	 => 'nav-link font-weight-bold --ps-4 --pe-0 px-4'
+									'add_li_class'  	 => 'nav-link font-weight-bold px-2 px-lg-3 '
 									// + le cas link-muted
 									// + le cas is_loggued_in
 								)
