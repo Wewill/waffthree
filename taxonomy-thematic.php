@@ -131,7 +131,7 @@
 
 	// Display all descendant terms
 	if (!empty($all_parent_terms) && !is_wp_error($all_parent_terms)) {
-		echo '<h6 class="subline mt-5 mb-0">Les thématiques</h6><div class="d-flex flex-wrap gap-3 my-3 attribute-list">'; //@TODO à traduire
+		echo '<h6 class="subline mt-5 mb-0">La thématique</h6><div class="d-flex flex-wrap gap-3 my-3 attribute-list">'; //@TODO à traduire
 		foreach ($all_parent_terms as $parent_term) {
 			printf('<a href="%s" class="fs-4 m-0 text-white border-0 rounded-4 px-3 py-2 d-inline-block" %s>%s</a>',
 				esc_url(get_term_link($parent_term)),
