@@ -18,7 +18,7 @@
 
 		<?php if ( !is_user_logged_in() ) : ?>
 
-		<h4 class="fs-6 fw-bold mb-3"><?= esc_html_x( 'Log-in', 'Loginout modal', 'waff' ); ?></h4>
+		<h4 class="fs-6 fw-bold mb-3"><?= esc_html_x( 'Account log-in', 'Loginout modal', 'waff' ); ?></h4>
         <form action="<?= esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" id="user_login" name="user_login" placeholder="name@example.com">
@@ -34,7 +34,7 @@
 		  <i class="bi bi-box-arrow-in-right fs-5 lh-0 me-2"></i>
 		  	<?= esc_html_x( 'Sign-in', 'Loginout modal', 'waff' ); ?>
 		  </button>
-          <small class="text-body-secondary"><?= esc_html_x( 'By clicking Sign-up, you agree to the terms of use.', 'Loginout modal', 'waff' ); ?></small>
+          <small class="text-body-secondary"><?= esc_html_x( 'By clicking Sign-in, you agree to the terms of use.', 'Loginout modal', 'waff' ); ?></small>
           
 		  <hr class="my-4 op-1">
 
@@ -42,8 +42,9 @@
           <a href="<?= esc_url( wp_registration_url() ); ?>" class="w-100 py-2 mb-2 btn btn-outline-action-1 rounded-3 d-flex flex-center">
 		  <i class="bi bi-person-add fs-5 lh-0 me-2"></i>
             <?= esc_html_x( 'Sign-up', 'Loginout modal', 'waff' ); ?>
-			</a>
-        </form>
+		</a>
+		<small class="text-body-secondary"><?= esc_html_x( 'By clicking Sign-up, you agree to the terms of use.', 'Loginout modal', 'waff' ); ?></small>
+		</form>
 
 		<?php else : 
 			
