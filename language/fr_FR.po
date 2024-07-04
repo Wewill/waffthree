@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: WaffThree Theme : the WA Three frontal template based on "
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-04 13:41+0000\n"
-"Last-Translator: wilhem <maintenance-web@wilhemarnoldy.fr>\n"
+"POT-Creation-Date: 2024-07-04 13:44+0000\n"
+"PO-Revision-Date: 2024-07-04 13:44+0000\n"
+"Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Loco-Version: 2.6.10; wp-6.5.5"
 
 # @ waff
 #: taxonomy-room.php:148
@@ -1752,7 +1753,7 @@ msgstr ""
 #: includes/blocks.php:3710 includes/blocks.php:3780 includes/blocks.php:3881
 #: includes/blocks.php:3917 includes/blocks.php:3983
 msgid "More..."
-msgstr ""
+msgstr "Plus..."
 
 #: includes/template-tags.php:830
 msgid "Music"
