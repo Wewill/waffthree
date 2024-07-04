@@ -34,7 +34,7 @@
 		  <i class="bi bi-box-arrow-in-right fs-5 lh-0 me-2"></i>
 		  	<?= esc_html_x( 'Sign-in', 'Loginout modal', 'waff' ); ?>
 		  </button>
-          <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
+          <small class="text-body-secondary"><?= esc_html_x( 'By clicking Sign-up, you agree to the terms of use.', 'Loginout modal', 'waff' ); ?></small>
           
 		  <hr class="my-4 op-1">
 
@@ -62,11 +62,11 @@
 			<p class="mb-1 op-5"><?= esc_html($current_user->user_email); ?></p> 
 
 			<?php if ( $user_geography ) : ?>
-			<p class="mb-1">Geography : <?php foreach($user_geography as $geography) { $term = get_term_by('slug', $geography, 'geography'); if (!is_wp_error($term)) { echo $term->name; } } ?></p> 
+			<p class="mb-1"><?= esc_html_x( 'Geography', 'Loginout modal', 'waff' ); ?> : <?php foreach($user_geography as $geography) { $term = get_term_by('slug', $geography, 'geography'); if (!is_wp_error($term)) { echo $term->name; } } ?></p> 
 			<?php endif; ?>
 
 			<?php if ( $user_structure ) : ?>
-			<p class="mb-1">Structure : <?php foreach($user_structure as $structure) { echo get_the_title($structure); } ?></p> 
+			<p class="mb-1"><?= esc_html_x( 'Structure', 'Loginout modal', 'waff' ); ?> : <?php foreach($user_structure as $structure) { echo get_the_title($structure); } ?></p> 
 			<?php endif; ?>
 
 			<hr class="my-4 op-1">
