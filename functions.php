@@ -6,7 +6,7 @@
  *
  */
 
-define( 'WAFF_VERSION', '3.2' );
+define( 'WAFF_VERSION', '3.3' );
 define( 'WAFF_DEBUG', false ); // display debug
 define( 'WAFF_SCRIPT_DEBUG', false ); // do not load minified sources 
 
