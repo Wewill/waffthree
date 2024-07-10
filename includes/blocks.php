@@ -238,7 +238,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	
 	// WA Partners
 	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
-	if( post_type_exists('partenaire') || post_type_exists('partner') )
+	//wp_die(var_dump(post_type_exists('partner'))); // Returns false 
+	if( post_type_exists('partenaire') || post_type_exists('partner') || true === WAFF_HAS_PARTNERS_POSTTYPE )
 	$meta_boxes[] = [
 		'title'           => esc_html__( '(WA) Partners', 'waff' ),
 		'id'              => 'wa-partners',
