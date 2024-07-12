@@ -4,7 +4,7 @@ msgstr ""
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 13:44+0000\n"
-"PO-Revision-Date: 2024-07-04 13:44+0000\n"
+"PO-Revision-Date: 2024-07-12 14:04+0000\n"
 "Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -918,7 +918,7 @@ msgstr ""
 
 #: includes/blocks.php:1957 includes/blocks.php:2021
 msgid "Discover..."
-msgstr ""
+msgstr "Découvrir..."
 
 # @ waff
 #: includes/admin/custom_media_sizes.php:593
