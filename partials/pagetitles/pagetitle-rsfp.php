@@ -349,7 +349,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 								<i class="bi bi-highlighter flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
 								<div>
 								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
-								<p class="mb-2 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
 								<a class="btn btn-action-1 btn-sm btn-transition-scale mt-3 --flex-fill --w-100 px-2 py-0" href="<?= esc_url(add_query_arg(array('form_type' => 'stage', 'ID' => $post->ID),$contact_permalink)) ?>"><?= esc_html__( 'Apply to a stage', 'wa-rsfp' ); ?></a>
 								</div>
 							</div>
