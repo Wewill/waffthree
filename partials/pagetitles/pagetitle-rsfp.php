@@ -259,6 +259,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 		$options_d_stage_opentovisit 		= $_d_stage_opentovisit['options'];
 		$d_stage_opentovisit 				= rwmb_meta( $prefix . 'stage_opentovisit', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
 		
+		/* Contact form link */
+		$contact_slug = "contact";
+		$contact_page_object = get_page_by_path( $contact_slug );
+		$contact_permalink = get_permalink( $contact_page_object->ID );
 	?>
 	
 	<!-- #pageheader -->
@@ -332,6 +336,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 								<div>
 								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
 								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentovisit, $options_d_stage_opentovisit); ?></p>
+								<a class="btn btn-action-1 btn-sm btn-transition-scale mt-4 flex-fill w-100" href="<?= esc_url(add_query_arg(array('form_type' => 'visit', 'ID' => $post->ID),$contact_permalink)) ?>"><?= esc_html__( 'Book a visit', 'wa-rsfp' ); ?></a>
 								</div>
 							</div>
 							<div class="d-none d-lg-flex align-items-center justify-content-center px-2 px-md-4 px-xl-5">
@@ -345,6 +350,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 								<div>
 								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
 								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options(', ', $d_stage_opentostage, $options_d_stage_opentostage); ?></p>
+								<a class="btn btn-action-1 btn-transition-scale mt-4 flex-fill w-100" href="<?= esc_url(add_query_arg(array('form_type' => 'stage', 'ID' => $post->ID),$contact_permalink)) ?>"><?= esc_html__( 'Apply to a stage', 'wa-rsfp' ); ?></a>
 								</div>
 							</div>
 							<!-- <div class="d-none d-lg-flex align-items-center justify-content-center px-5">
