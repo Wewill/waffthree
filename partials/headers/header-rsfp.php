@@ -59,12 +59,17 @@ global $page_atts;
 					<span class="site-title text-hide visually-hidden"><?= get_bloginfo('description'); ?></span>
 				</a>
 
-				<!-- Social menu -->
-				<?php if ( has_nav_menu( 'social' ) ) : ?>
+				<!-- Social menu = false do not show -->
+				<?php if ( false && has_nav_menu( 'social' ) ) : ?>
 					<div class="socials ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'Social Menu', 'waff' ); ?>">
 						<?= WaffTwo\Theme\waff_get_social_menu('color-white text-action-3'); ?>
 					</div>
 				<?php endif; ?>
+
+				<div class="embleme ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'ARDEAR', 'waff' ); ?>">
+					<img class="h-60-px" src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>">
+				</div>
+
 
 			</div>
 			<!-- end: Filled col 1 -->
