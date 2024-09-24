@@ -97,7 +97,7 @@ $bg_image 		= reset( $bg_images );
 				<!-- Logotype -->
 				<div class="">
 					<div class="ml-4 mb-2" data-aos="fade-down" data-aos-delay="100">
-						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="255" height="65"></div>
+						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="255" height="65"></div>
 						<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
 					</div>
 				</div>
