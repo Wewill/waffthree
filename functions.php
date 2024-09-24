@@ -6,7 +6,7 @@
  *
  */
 
-define( 'WAFF_VERSION', '3.3' );
+define( 'WAFF_VERSION', '3.4' );
 define( 'WAFF_DEBUG', false ); // display debug
 define( 'WAFF_SCRIPT_DEBUG', false ); // do not load minified sources 
 
@@ -18,7 +18,7 @@ define( 'WAFF_SCRIPT_DEBUG', false ); // do not load minified sources
 add_filter('jpeg_quality', function($arg){return 82;});
 
 /** Die if no setup */
-if ( !file_exists(get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' ))  ) {
+if ( isset($_SERVER['SERVER_NAME']) && !file_exists(get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' ))  ) {
 	wp_die('Error : please define setup.');
 }
 
@@ -53,14 +53,16 @@ define( 'WAFF_CUSTOM_BRAND', $blogname ); // Localized brand
 define( 'WAFF_CUSTOM_BRAND_DESCRIPTION', $blogdescription ); // Localized brand
 
 // Domain 
-$sub = substr($_SERVER['SERVER_NAME'], 0, 3);
-if ( $sub == ( 'www' || 'dev') ) {
-	/* We have www.example.com OR dev.example.com  */
-	$domain = substr($_SERVER['SERVER_NAME'], 4);
-} else {
-	/* We have example.com */
-	$domain = $_SERVER['SERVER_NAME'];
-}
+if ( isset($_SERVER['SERVER_NAME']) ) {
+	$sub = substr($_SERVER['SERVER_NAME'], 0, 3);
+	if ( $sub == ( 'www' || 'dev') ) {
+		/* We have www.example.com OR dev.example.com  */
+		$domain = substr($_SERVER['SERVER_NAME'], 4);
+	} else {
+		/* We have example.com */
+		$domain = $_SERVER['SERVER_NAME'];
+	}
+} else $domain = "";
 define( 'WAFF_DOMAIN', $domain );
 
 /**
@@ -76,7 +78,9 @@ function wpm_myme_types($mime_types){
 /**
  * Waff setup.
  */
-require_once get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' );
+if ( isset($_SERVER['SERVER_NAME']) ) {
+	require_once get_theme_file_path( '../'.preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']).'.setup.php' );
+}
 
 /**
  * Common functions ( outside namespace )
