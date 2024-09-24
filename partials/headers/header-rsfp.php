@@ -66,8 +66,8 @@ global $page_atts;
 					</div>
 				<?php endif; ?>
 
-				<div class="embleme ml-auto ms-auto p-0 mb-0 mr-2 me-2 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'ARDEAR', 'waff' ); ?>">
-					<img class="h-60-px" src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>">
+				<div class="embleme ml-auto ms-auto p-0 mb-0 mr-2 me-4 list-inline d-none d-sm-block reset-fontsize" aria-label="<?php esc_attr_e( 'ARDEAR', 'waff' ); ?>">
+					<img class="h-50-px" src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_dark_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>">
 				</div>
 
 
