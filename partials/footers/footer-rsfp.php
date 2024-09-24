@@ -36,7 +36,7 @@ $bg_image 		= reset( $bg_images );
 							print ( preg_replace( '/(<a )/', '<a class="nav-link" ', wp_nav_menu(
 								array(
 									'theme_location' => 'footer-1',
-									'menu_class'     => 'footer-menu list-unstyled list-inverse list-ps-0 font-weight-semi-bold list-md',
+									'menu_class'     => 'footer-menu list-unstyled --list-inverse list-ps-0 font-weight-semi-bold list-md',
 									'depth'          => 1,
 									'echo'		 	 => false,
 									'container'		 => false,
@@ -57,7 +57,7 @@ $bg_image 		= reset( $bg_images );
 							print ( preg_replace( '/(<a )/', '<a class="nav-link" ', wp_nav_menu(
 								array(
 									'theme_location' => 'footer-2',
-									'menu_class'     => 'footer-menu list-unstyled list-inverse list-ps-0 font-weight-semi-bold',
+									'menu_class'     => 'footer-menu list-unstyled --list-inverse list-ps-0 font-weight-semi-bold',
 									'depth'          => 1,
 									'echo'		 	 => false,
 									'container'		 => false,
@@ -74,7 +74,7 @@ $bg_image 		= reset( $bg_images );
 				<?php WaffTwo\display_company_address(array('class' => 'font-weight-bold')); ?>
 
 				<!-- Theme social menu -->
-				<div id="socials" class="d-inline-block socials p-0 m-0 list-inline reset-fontsize">
+				<div id="socials" class="d-inline-block socials p-0 m-0 ms-n2 list-inline reset-fontsize">
 					<?= WaffTwo\Theme\waff_get_social_menu('color-dark'); ?>
 				</div>
 
