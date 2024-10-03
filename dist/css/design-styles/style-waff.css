@@ -2707,3 +2707,8 @@ visibility:hidden
 .comments-area .comment .reply {
   opacity: .5;
 }
+
+.comments-area .logged-in-as a {
+  font-weight: 600;
+  opacity: .8;
+}
