@@ -35,7 +35,8 @@
 		  	<?= esc_html_x( 'Sign-in', 'Loginout modal', 'waff' ); ?>
 		  </button>
           <small class="text-body-secondary"><?= esc_html_x( 'By clicking Sign-in, you agree to the terms of use.', 'Loginout modal', 'waff' ); ?></small>
-          
+		  <small class="text-body-secondary"><a href="<?= esc_url( wp_lostpassword_url() ); ?>"><?= esc_html_x( 'Lost password ?', 'Loginout modal', 'waff' ); ?></a></small>
+
 		  <hr class="my-4 op-1">
 
           <h4 class="fs-6 fw-bold mb-3 text-action-1"><?= esc_html_x( 'Or register for free if you are new here...', 'Loginout modal', 'waff' ); ?></h4>
