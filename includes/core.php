@@ -69,6 +69,9 @@ function setup() {
 	remove_filter( 'nav_menu_item_title', 'Go\Core\\add_dropdown_icons');
 	add_filter( 'nav_menu_item_title', $n( 'waff_add_dropdown_icons' ), 10, 4 );
 
+	add_filter( 'comment_form_defaults', $n( 'waff_comment_form_reply_title' ), 20);
+
+
 	// Plugins dependencies 
 	if ( !is_login() && !is_admin() && !function_exists('rwmb_meta') ) {
 		wp_die('Error : please install Meta Box plugin.');
@@ -617,6 +620,47 @@ function waff_add_dropdown_icons( $title, $item, $args, $depth ) {
 
 	return $title;
 
+}
+
+/**
+ * Alter the reply title to an <h2> element. a11y fix.
+ *
+ * @param array $args Default arguments and form fields to override.
+ *
+ * @return $args Comment form arguments.
+ */
+function waff_comment_form_reply_title( $args ) {
+
+	// Identify required fields visually and create a message about the indicator.
+	$required_indicator = ' ' . wp_required_field_indicator();
+	$required_text      = ' ' . wp_required_field_message();
+
+	// Define attributes in HTML5 or XHTML syntax.
+	$required_attribute = ( $html5 ? ' required' : ' required="required"' );
+	$checked_attribute  = ( $html5 ? ' checked' : ' checked="checked"' );
+	
+	$args['title_reply_before'] = '<h5 id="reply-title" class="comment-reply-title fs-6">';
+	$args['title_reply_after']  = '</h5>';
+	$args['class_container']  = 'comment-respond is-formatted';
+
+	$args['comment_field'] = sprintf('
+		<div class="form-group row g-0">
+			<div class="col-12">
+				<div class="form-floating mb-3">
+					%s
+					%s
+				</div>
+			</div>
+		</div>',
+		'<textarea class="form-control form-control-lg focus-action-3" placeholder="Leave a comment here" id="comment" name="comment" cols="45" rows="6" style="height: 200px;" ' . $required_attribute . '></textarea>',
+		sprintf(
+			'<label for="comment">%s%s</label>',
+			_x( 'Comment', 'noun' ),
+			$required_indicator
+		),
+	);
+
+	return $args;
 }
 
 /**
