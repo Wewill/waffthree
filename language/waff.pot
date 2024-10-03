@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WaffThree Theme : the WA Three template based on godaddy "
 "go theme and WA Frontal Theme V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-04 13:38+0000\n"
+"POT-Creation-Date: 2024-10-03 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -95,7 +95,7 @@ msgstr[1] ""
 #: includes/template-tags.php:1250 includes/template-tags.php:1320
 #: includes/template-tags.php:1347 includes/template-tags.php:1375
 #: includes/template-tags.php:1390 includes/template-tags.php:1402
-#: includes/blocks.php:2255 includes/blocks.php:3410 includes/blocks.php:3507
+#: includes/blocks.php:2256 includes/blocks.php:3411 includes/blocks.php:3508
 msgid "&#8203;"
 msgstr ""
 
@@ -120,11 +120,11 @@ msgstr ""
 msgid "(Unused)"
 msgstr ""
 
-#: includes/blocks.php:553
+#: includes/blocks.php:554
 msgid "(WA) Awards"
 msgstr ""
 
-#: includes/blocks.php:1034
+#: includes/blocks.php:1035
 msgid "(WA) Breaking"
 msgstr ""
 
@@ -132,11 +132,11 @@ msgstr ""
 msgid "(WA) Categories"
 msgstr ""
 
-#: includes/blocks.php:957
+#: includes/blocks.php:958
 msgid "(WA) Cols"
 msgstr ""
 
-#: includes/blocks.php:388
+#: includes/blocks.php:389
 msgid "(WA) Contact"
 msgstr ""
 
@@ -148,15 +148,15 @@ msgstr ""
 msgid "(WA) Counter"
 msgstr ""
 
-#: includes/blocks.php:288
+#: includes/blocks.php:289
 msgid "(WA) Edito"
 msgstr ""
 
-#: includes/blocks.php:642
+#: includes/blocks.php:643
 msgid "(WA) Film"
 msgstr ""
 
-#: includes/blocks.php:1158
+#: includes/blocks.php:1159
 msgid "(WA) Insights"
 msgstr ""
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "(WA) Latest posts"
 msgstr ""
 
-#: includes/blocks.php:832
+#: includes/blocks.php:833
 msgid "(WA) Mission"
 msgstr ""
 
@@ -172,12 +172,12 @@ msgstr ""
 msgid "(WA) Newsletter"
 msgstr ""
 
-#: includes/blocks.php:243
+#: includes/blocks.php:244
 #: includes/admin/widgets/custom-wp-widget-partners.php:23
 msgid "(WA) Partners"
 msgstr ""
 
-#: includes/blocks.php:475
+#: includes/blocks.php:476
 msgid "(WA) Playlist"
 msgstr ""
 
@@ -186,12 +186,12 @@ msgstr ""
 msgid "(WA) Programmation"
 msgstr ""
 
-#: includes/blocks.php:686
+#: includes/blocks.php:687
 #: includes/admin/widgets/custom-wp-widget-section.php:47
 msgid "(WA) Section"
 msgstr ""
 
-#: includes/blocks.php:751
+#: includes/blocks.php:752
 msgid "(WA) Sections list"
 msgstr ""
 
@@ -220,11 +220,11 @@ msgstr ""
 msgid "6"
 msgstr ""
 
-#: includes/blocks.php:700
+#: includes/blocks.php:701
 msgid "</em>"
 msgstr ""
 
-#: includes/blocks.php:875
+#: includes/blocks.php:876
 msgid ""
 "<br/><span class=\"label\">TIPS</span> You can use Boostrap icons, ex : bi "
 "bi-bookmark ( https://icons.getbootstrap.com )."
@@ -259,7 +259,7 @@ msgstr ""
 msgid "A section arbitrary HTML code."
 msgstr ""
 
-#: includes/blocks.php:1042 includes/blocks.php:1091
+#: includes/blocks.php:1043 includes/blocks.php:1092
 msgid "A top label"
 msgstr ""
 
@@ -311,7 +311,7 @@ msgstr ""
 msgid "Add media"
 msgstr ""
 
-#: includes/blocks.php:506
+#: includes/blocks.php:507
 msgid "Add more video to the playlist"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgid ""
 "filled )"
 msgstr ""
 
-#: includes/blocks.php:352
+#: includes/blocks.php:353
 msgid "Adds a frame around the content."
 msgstr ""
 
@@ -349,11 +349,11 @@ msgstr ""
 msgid "Advanced page class"
 msgstr ""
 
-#: includes/blocks.php:892
+#: includes/blocks.php:893
 msgid "Aligned"
 msgstr ""
 
-#: includes/blocks.php:597
+#: includes/blocks.php:598
 msgid "All"
 msgstr ""
 
@@ -369,21 +369,21 @@ msgstr ""
 msgid "All Partner"
 msgstr ""
 
-#: includes/blocks.php:2302
+#: includes/blocks.php:2303
 msgid "All the awards"
 msgstr ""
 
-#: includes/blocks.php:296
+#: includes/blocks.php:297
 msgid "An awesome edition"
 msgstr ""
 
-#: includes/blocks.php:847 includes/blocks.php:972 includes/blocks.php:1056
-#: includes/blocks.php:1105 includes/blocks.php:1173
+#: includes/blocks.php:848 includes/blocks.php:973 includes/blocks.php:1057
+#: includes/blocks.php:1106 includes/blocks.php:1174
 msgid "An awesome subtitle"
 msgstr ""
 
-#: includes/blocks.php:840 includes/blocks.php:965 includes/blocks.php:1049
-#: includes/blocks.php:1098 includes/blocks.php:1166
+#: includes/blocks.php:841 includes/blocks.php:966 includes/blocks.php:1050
+#: includes/blocks.php:1099 includes/blocks.php:1167
 msgid "An awesome title"
 msgstr ""
 
@@ -411,15 +411,19 @@ msgstr ""
 msgid "Appears in the site footer before the footer menu."
 msgstr ""
 
-#: includes/blocks.php:516
+#: partials/headers/header-rsfp.php:69
+msgid "ARDEAR"
+msgstr ""
+
+#: includes/blocks.php:517
 msgid "Autoplay videos ?"
 msgstr ""
 
-#: includes/blocks.php:2457 includes/blocks.php:2458
+#: includes/blocks.php:2458 includes/blocks.php:2459
 msgid "Award"
 msgstr ""
 
-#: includes/blocks.php:560 includes/blocks.php:2292
+#: includes/blocks.php:561 includes/blocks.php:2293
 msgid "Awards"
 msgstr ""
 
@@ -438,7 +442,7 @@ msgstr ""
 msgid "Background image:"
 msgstr ""
 
-#: includes/blocks.php:2201
+#: includes/blocks.php:2202
 msgid "Be patient ! Awards has not been published yet"
 msgstr ""
 
@@ -451,7 +455,7 @@ msgstr ""
 msgid "Birthdate"
 msgstr ""
 
-#: includes/blocks.php:926
+#: includes/blocks.php:927
 msgid "Block have margin ?"
 msgstr ""
 
@@ -497,13 +501,13 @@ msgstr ""
 msgid "Booklet file URL (*.pdf)"
 msgstr ""
 
-#: includes/blocks.php:907
+#: includes/blocks.php:908
 #: includes/admin/widgets/custom-wp-widget-twocols.php:254
 #: includes/admin/widgets/custom-wp-widget-twocols.php:306
 msgid "Bottom"
 msgstr ""
 
-#: includes/blocks.php:694
+#: includes/blocks.php:695
 msgid "Break into the competition"
 msgstr ""
 
@@ -549,8 +553,8 @@ msgstr ""
 #: includes/template-tags.php:1103 includes/template-tags.php:1151
 #: includes/template-tags.php:1249 includes/template-tags.php:1319
 #: includes/template-tags.php:1346 includes/template-tags.php:1374
-#: includes/template-tags.php:1396 includes/blocks.php:2254
-#: includes/blocks.php:3409 includes/blocks.php:3506
+#: includes/template-tags.php:1396 includes/blocks.php:2255
+#: includes/blocks.php:3410 includes/blocks.php:3507
 msgid "Categorized as"
 msgstr ""
 
@@ -565,7 +569,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: includes/blocks.php:906
+#: includes/blocks.php:907
 msgid "Centered"
 msgstr ""
 
@@ -573,7 +577,7 @@ msgstr ""
 msgid "Choose a color for the film page"
 msgstr ""
 
-#: includes/blocks.php:647
+#: includes/blocks.php:648
 msgid ""
 "Choose a film to display a single film card. If empty, none of the "
 "categories will be displayed."
@@ -585,7 +589,7 @@ msgid ""
 "recommanded. 20 Mo maximum recommanded."
 msgstr ""
 
-#: includes/blocks.php:592
+#: includes/blocks.php:593
 msgid "Choose display"
 msgstr ""
 
@@ -598,11 +602,11 @@ msgid ""
 "Choose if the slide text mode is light or dark. Overrides slider color mode."
 msgstr ""
 
-#: includes/blocks.php:902
+#: includes/blocks.php:903
 msgid "Choose image position."
 msgstr ""
 
-#: includes/blocks.php:889
+#: includes/blocks.php:890
 msgid "Choose the aligment beetween background and image."
 msgstr ""
 
@@ -614,7 +618,7 @@ msgstr ""
 msgid "Choose the header style (default: normal)"
 msgstr ""
 
-#: includes/blocks.php:396
+#: includes/blocks.php:397
 msgid "Choose the images"
 msgstr ""
 
@@ -626,7 +630,7 @@ msgstr ""
 msgid "Choose the style of the latest posts block"
 msgstr ""
 
-#: includes/blocks.php:594
+#: includes/blocks.php:595
 msgid "Choose to display all the awards or selected awards"
 msgstr ""
 
@@ -677,7 +681,7 @@ msgstr ""
 msgid "Company address"
 msgstr ""
 
-#: includes/blocks.php:393
+#: includes/blocks.php:394
 msgid "Contact block gallery"
 msgstr ""
 
@@ -685,11 +689,11 @@ msgstr ""
 msgid "Contact email"
 msgstr ""
 
-#: includes/blocks.php:436
+#: includes/blocks.php:437
 msgid "Contact form"
 msgstr ""
 
-#: includes/blocks.php:446
+#: includes/blocks.php:447
 msgid "Contact form id"
 msgstr ""
 
@@ -705,16 +709,16 @@ msgstr ""
 msgid "Container-fluid"
 msgstr ""
 
-#: includes/blocks.php:314 includes/blocks.php:494 includes/blocks.php:572
-#: includes/blocks.php:770 includes/blocks.php:858 includes/blocks.php:983
+#: includes/blocks.php:315 includes/blocks.php:495 includes/blocks.php:573
+#: includes/blocks.php:771 includes/blocks.php:859 includes/blocks.php:984
 msgid "Content"
 msgstr ""
 
-#: includes/blocks.php:1061
+#: includes/blocks.php:1062
 msgid "Content (first)"
 msgstr ""
 
-#: includes/blocks.php:1110
+#: includes/blocks.php:1111
 msgid "Content (last)"
 msgstr ""
 
@@ -723,7 +727,7 @@ msgstr ""
 msgid "Content or subpage nav"
 msgstr ""
 
-#: includes/blocks.php:984 includes/blocks.php:1062 includes/blocks.php:1111
+#: includes/blocks.php:985 includes/blocks.php:1063 includes/blocks.php:1112
 msgid "Content will be displayed as cols. Markdown is available."
 msgstr ""
 
@@ -785,7 +789,7 @@ msgstr ""
 msgid "Designed w/ <3 by %1$s using WordPress"
 msgstr ""
 
-#: includes/blocks.php:523
+#: includes/blocks.php:524
 msgid "Diplayed in thumbnails by default."
 msgstr ""
 
@@ -793,7 +797,7 @@ msgstr ""
 msgid "directory"
 msgstr ""
 
-#: includes/blocks.php:1957 includes/blocks.php:2021
+#: includes/blocks.php:1958 includes/blocks.php:2022
 msgid "Discover..."
 msgstr ""
 
@@ -802,23 +806,23 @@ msgstr ""
 msgid "Dismiss this notice."
 msgstr ""
 
-#: includes/blocks.php:813
+#: includes/blocks.php:814
 msgid "Display a list of sections filtered by edition"
 msgstr ""
 
-#: includes/blocks.php:666
+#: includes/blocks.php:667
 msgid "Display a single film"
 msgstr ""
 
-#: includes/blocks.php:731
+#: includes/blocks.php:732
 msgid "Display a single section slideshow"
 msgstr ""
 
-#: includes/blocks.php:533
+#: includes/blocks.php:534
 msgid "Display a video playlist block ( better with youtube )"
 msgstr ""
 
-#: includes/blocks.php:803
+#: includes/blocks.php:804
 msgid "Display as a tiny list?"
 msgstr ""
 
@@ -826,31 +830,31 @@ msgstr ""
 msgid "Display as dropdown"
 msgstr ""
 
-#: includes/blocks.php:1139 includes/blocks.php:1258
+#: includes/blocks.php:1140 includes/blocks.php:1259
 msgid "Display breaking bloc with two cols"
 msgstr ""
 
-#: includes/blocks.php:333
+#: includes/blocks.php:334
 msgid "Display edition badge ?"
 msgstr ""
 
-#: includes/blocks.php:369 includes/blocks.php:456
+#: includes/blocks.php:370 includes/blocks.php:457
 msgid "Display edito bloc"
 msgstr ""
 
-#: includes/blocks.php:622
+#: includes/blocks.php:623
 msgid "Display film awards block"
 msgstr ""
 
-#: includes/blocks.php:351
+#: includes/blocks.php:352
 msgid "Display framed version ?"
 msgstr ""
 
-#: includes/blocks.php:522
+#: includes/blocks.php:523
 msgid "Display fullwidth videos ?"
 msgstr ""
 
-#: includes/blocks.php:791
+#: includes/blocks.php:792
 msgid "Display introduction content ?"
 msgstr ""
 
@@ -858,20 +862,20 @@ msgstr ""
 msgid "Display latest posts"
 msgstr ""
 
-#: includes/blocks.php:938
+#: includes/blocks.php:939
 msgid "Display mission bloc"
 msgstr ""
 
-#: includes/blocks.php:154 includes/blocks.php:339 includes/blocks.php:606
-#: includes/blocks.php:915 includes/blocks.php:999 includes/blocks.php:1242
+#: includes/blocks.php:154 includes/blocks.php:340 includes/blocks.php:607
+#: includes/blocks.php:916 includes/blocks.php:1000 includes/blocks.php:1243
 msgid "Display more link ?"
 msgstr ""
 
-#: includes/blocks.php:1074
+#: includes/blocks.php:1075
 msgid "Display more link ? (first)"
 msgstr ""
 
-#: includes/blocks.php:1123
+#: includes/blocks.php:1124
 msgid "Display more link ? (last)"
 msgstr ""
 
@@ -879,7 +883,7 @@ msgstr ""
 msgid "Display only if user is loggued"
 msgstr ""
 
-#: includes/blocks.php:797
+#: includes/blocks.php:798
 msgid "Display parent edition section of sections ?"
 msgstr ""
 
@@ -887,17 +891,17 @@ msgstr ""
 msgid "Display reduced in two columns"
 msgstr ""
 
-#: includes/blocks.php:1015
+#: includes/blocks.php:1016
 msgid "Display text bloc with cols"
 msgstr ""
 
-#: includes/blocks.php:269
+#: includes/blocks.php:270
 msgid "Display the current edition partners"
 msgstr ""
 
-#: includes/blocks.php:309 includes/blocks.php:489 includes/blocks.php:567
-#: includes/blocks.php:765 includes/blocks.php:853 includes/blocks.php:978
-#: includes/blocks.php:1179
+#: includes/blocks.php:310 includes/blocks.php:490 includes/blocks.php:568
+#: includes/blocks.php:766 includes/blocks.php:854 includes/blocks.php:979
+#: includes/blocks.php:1180
 msgid "Displayed in a bigger size. Markdown is available."
 msgstr ""
 
@@ -909,7 +913,7 @@ msgstr ""
 msgid "Documentary film"
 msgstr ""
 
-#: partials/pagetitles/pagetitle-rsfp.php:358
+#: partials/pagetitles/pagetitle-rsfp.php:364
 msgid "Download"
 msgstr ""
 
@@ -954,7 +958,7 @@ msgstr ""
 msgid "Edition"
 msgstr ""
 
-#: includes/blocks.php:302
+#: includes/blocks.php:303
 msgid "Edito"
 msgstr ""
 
@@ -982,11 +986,11 @@ msgstr ""
 msgid "farm"
 msgstr ""
 
-#: partials/pagetitles/pagetitle-rsfp.php:347
+#: partials/pagetitles/pagetitle-rsfp.php:352
 msgid "Farm is open to stage :"
 msgstr ""
 
-#: partials/pagetitles/pagetitle-rsfp.php:334
+#: partials/pagetitles/pagetitle-rsfp.php:338
 msgid "Farm is open to visit :"
 msgstr ""
 
@@ -998,7 +1002,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: includes/blocks.php:692
+#: includes/blocks.php:693
 msgid "Featured section title"
 msgstr ""
 
@@ -1022,8 +1026,8 @@ msgstr ""
 msgid "Fill a label in upper position (optionnal)."
 msgstr ""
 
-#: includes/blocks.php:346 includes/blocks.php:922 includes/blocks.php:1006
-#: includes/blocks.php:1081 includes/blocks.php:1130 includes/blocks.php:1249
+#: includes/blocks.php:347 includes/blocks.php:923 includes/blocks.php:1007
+#: includes/blocks.php:1082 includes/blocks.php:1131 includes/blocks.php:1250
 msgid ""
 "Fill an absolute link. Can be internal or external, e.g. : http://www.google."
 "com"
@@ -1043,11 +1047,11 @@ msgstr ""
 msgid "Fill the flash content"
 msgstr ""
 
-#: includes/blocks.php:447
+#: includes/blocks.php:448
 msgid "Fill the Gravity form id."
 msgstr ""
 
-#: includes/blocks.php:511
+#: includes/blocks.php:512
 msgid "Fill youtube playlist ID here if you want to show it"
 msgstr ""
 
@@ -1069,12 +1073,12 @@ msgstr[1] ""
 msgid "Films"
 msgstr ""
 
-#: includes/blocks.php:580
+#: includes/blocks.php:581
 msgid ""
 "Filter awards by edition. If empty, none of the editions will be displayed."
 msgstr ""
 
-#: includes/blocks.php:778
+#: includes/blocks.php:779
 msgid ""
 "Filter sections by edition. If empty, none of the sections will be displayed."
 msgstr ""
@@ -1085,13 +1089,13 @@ msgid ""
 "Only works with posts."
 msgstr ""
 
-#: includes/blocks.php:251
+#: includes/blocks.php:252
 msgid ""
 "Filter to those categories. If empty, none of the categories will be "
 "displayed."
 msgstr ""
 
-#: includes/blocks.php:404
+#: includes/blocks.php:405
 msgid "First block"
 msgstr ""
 
@@ -1099,7 +1103,7 @@ msgstr ""
 msgid "First column classes:"
 msgstr ""
 
-#: includes/blocks.php:327
+#: includes/blocks.php:328
 msgid "Fit image size or limit block ?"
 msgstr ""
 
@@ -1176,7 +1180,7 @@ msgstr ""
 msgid "Full-width"
 msgstr ""
 
-#: includes/blocks.php:410 includes/blocks.php:426
+#: includes/blocks.php:411 includes/blocks.php:427
 msgid "Get in touch !"
 msgstr ""
 
@@ -1209,11 +1213,11 @@ msgstr ""
 msgid "Header style"
 msgstr ""
 
-#: includes/blocks.php:358
+#: includes/blocks.php:359
 msgid "Hide center column ?"
 msgstr ""
 
-#: includes/blocks.php:359
+#: includes/blocks.php:360
 msgid "Hide the empty column between the content and the image."
 msgstr ""
 
@@ -1271,16 +1275,16 @@ msgstr ""
 msgid "http://www.wilhemarnoldy.fr"
 msgstr ""
 
-#: includes/blocks.php:320 includes/blocks.php:880 includes/blocks.php:992
-#: includes/blocks.php:1208
+#: includes/blocks.php:321 includes/blocks.php:881 includes/blocks.php:993
+#: includes/blocks.php:1209
 msgid "Image"
 msgstr ""
 
-#: includes/blocks.php:1067
+#: includes/blocks.php:1068
 msgid "Image (first)"
 msgstr ""
 
-#: includes/blocks.php:1116
+#: includes/blocks.php:1117
 msgid "Image (last)"
 msgstr ""
 
@@ -1306,11 +1310,11 @@ msgstr ""
 msgid "Label"
 msgstr ""
 
-#: includes/blocks.php:1040
+#: includes/blocks.php:1041
 msgid "Label (first)"
 msgstr ""
 
-#: includes/blocks.php:1089
+#: includes/blocks.php:1090
 msgid "Label (last)"
 msgstr ""
 
@@ -1324,9 +1328,9 @@ msgstr ""
 msgid "Label:"
 msgstr ""
 
-#: includes/blocks.php:308 includes/blocks.php:488 includes/blocks.php:566
-#: includes/blocks.php:764 includes/blocks.php:852 includes/blocks.php:977
-#: includes/blocks.php:1178
+#: includes/blocks.php:309 includes/blocks.php:489 includes/blocks.php:567
+#: includes/blocks.php:765 includes/blocks.php:853 includes/blocks.php:978
+#: includes/blocks.php:1179
 msgid "Lead content"
 msgstr ""
 
@@ -1356,7 +1360,7 @@ msgstr ""
 msgid "Link to page url:"
 msgstr ""
 
-#: includes/blocks.php:864 includes/blocks.php:1190
+#: includes/blocks.php:865 includes/blocks.php:1191
 msgid "List.s"
 msgstr ""
 
@@ -1389,17 +1393,22 @@ msgctxt "Loginout modal"
 msgid "By clicking Sign-in, you agree to the terms of use."
 msgstr ""
 
-#: partials/modal-loginout.php:46
+#: partials/modal-loginout.php:47
 msgctxt "Loginout modal"
 msgid "By clicking Sign-up, you agree to the terms of use."
 msgstr ""
 
-#: partials/modal-loginout.php:66
+#: partials/modal-loginout.php:67
 msgctxt "Loginout modal"
 msgid "Geography"
 msgstr ""
 
-#: partials/modal-loginout.php:41
+#: partials/modal-loginout.php:38
+msgctxt "Loginout modal"
+msgid "Lost password ?"
+msgstr ""
+
+#: partials/modal-loginout.php:42
 msgctxt "Loginout modal"
 msgid "Or register for free if you are new here..."
 msgstr ""
@@ -1409,7 +1418,7 @@ msgctxt "Loginout modal"
 msgid "Password"
 msgstr ""
 
-#: partials/modal-loginout.php:61
+#: partials/modal-loginout.php:62
 msgctxt "Loginout modal"
 msgid "Profile"
 msgstr ""
@@ -1419,17 +1428,17 @@ msgctxt "Loginout modal"
 msgid "Sign-in"
 msgstr ""
 
-#: partials/modal-loginout.php:77
+#: partials/modal-loginout.php:78
 msgctxt "Loginout modal"
 msgid "Sign-out"
 msgstr ""
 
-#: partials/modal-loginout.php:44
+#: partials/modal-loginout.php:45
 msgctxt "Loginout modal"
 msgid "Sign-up"
 msgstr ""
 
-#: partials/modal-loginout.php:70
+#: partials/modal-loginout.php:71
 msgctxt "Loginout modal"
 msgid "Structure"
 msgstr ""
@@ -1459,16 +1468,16 @@ msgstr ""
 msgid "Mailchimp popup"
 msgstr ""
 
-#: includes/blocks.php:315 includes/blocks.php:495 includes/blocks.php:573
-#: includes/blocks.php:771 includes/blocks.php:859
+#: includes/blocks.php:316 includes/blocks.php:496 includes/blocks.php:574
+#: includes/blocks.php:772 includes/blocks.php:860
 msgid "Markdown is available."
 msgstr ""
 
-#: includes/blocks.php:2281
+#: includes/blocks.php:2282
 msgid "Master awards"
 msgstr ""
 
-#: includes/blocks.php:598
+#: includes/blocks.php:599
 msgid "Master awards only"
 msgstr ""
 
@@ -1477,6 +1486,7 @@ msgid "Medium-length film"
 msgstr ""
 
 #: partials/headers/header-fifam.php:27 partials/navs/nav-fifam.php:15
+#: partials/navs/nav-rsfp.php:14
 msgid "Menu"
 msgstr ""
 
@@ -1492,21 +1502,21 @@ msgstr ""
 msgid "Modern"
 msgstr ""
 
-#: includes/blocks.php:345 includes/blocks.php:612 includes/blocks.php:921
-#: includes/blocks.php:1005 includes/blocks.php:1248
+#: includes/blocks.php:346 includes/blocks.php:613 includes/blocks.php:922
+#: includes/blocks.php:1006 includes/blocks.php:1249
 msgid "More URL"
 msgstr ""
 
-#: includes/blocks.php:1080
+#: includes/blocks.php:1081
 msgid "More URL (first)"
 msgstr ""
 
-#: includes/blocks.php:1129
+#: includes/blocks.php:1130
 msgid "More URL (last)"
 msgstr ""
 
-#: includes/blocks.php:3710 includes/blocks.php:3780 includes/blocks.php:3881
-#: includes/blocks.php:3917 includes/blocks.php:3983
+#: includes/blocks.php:3711 includes/blocks.php:3781 includes/blocks.php:3882
+#: includes/blocks.php:3918 includes/blocks.php:3984
 msgid "More..."
 msgstr ""
 
@@ -1562,11 +1572,11 @@ msgstr ""
 msgid "Normal"
 msgstr ""
 
-#: includes/blocks.php:1510
+#: includes/blocks.php:1511
 msgid "Now"
 msgstr ""
 
-#: partials/pagetitles/pagetitle-rsfp.php:346
+#: partials/pagetitles/pagetitle-rsfp.php:351
 msgid "Open to stage"
 msgstr ""
 
@@ -1664,7 +1674,7 @@ msgstr ""
 msgid "Planning file URL (*.pdf)"
 msgstr ""
 
-#: includes/blocks.php:3343
+#: includes/blocks.php:3344
 msgid "Please choose an edition"
 msgstr ""
 
@@ -1676,7 +1686,7 @@ msgstr ""
 msgid "Please define default parameters in the form of an array."
 msgstr ""
 
-#: includes/blocks.php:1310
+#: includes/blocks.php:1311
 msgid "Please define style to continue"
 msgstr ""
 
@@ -1693,9 +1703,9 @@ msgid "Preheader Menu"
 msgstr ""
 
 #: includes/theme.php:266 partials/headers/header-diag.php:97
-#: partials/headers/header-dinard.php:72 partials/headers/header-rsfp.php:98
+#: partials/headers/header-dinard.php:72 partials/headers/header-rsfp.php:103
 #: partials/navs/nav-fifam.php:30 partials/navs/nav-dinard.php:13
-#: partials/navs/nav-rsfp.php:13 partials/navs/nav-diag.php:13
+#: partials/navs/nav-rsfp.php:28 partials/navs/nav-diag.php:13
 msgid "Primary Menu"
 msgstr ""
 
@@ -1757,11 +1767,11 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: taxonomy-section.php:233 includes/blocks.php:1479 includes/blocks.php:1554
+#: taxonomy-section.php:233 includes/blocks.php:1480 includes/blocks.php:1555
 msgid "Read more"
 msgstr ""
 
-#: includes/blocks.php:415 includes/blocks.php:431
+#: includes/blocks.php:416 includes/blocks.php:432
 msgid "Rich content"
 msgstr ""
 
@@ -1791,7 +1801,7 @@ msgstr ""
 msgid "Search Partner"
 msgstr ""
 
-#: includes/blocks.php:420
+#: includes/blocks.php:421
 msgid "Second block"
 msgstr ""
 
@@ -1803,31 +1813,31 @@ msgstr ""
 msgid "Secondary Menu"
 msgstr ""
 
-#: includes/blocks.php:758
+#: includes/blocks.php:759
 msgid "Sections"
 msgstr ""
 
-#: includes/blocks.php:2614
+#: includes/blocks.php:2615
 msgid "See video"
 msgstr ""
 
-#: includes/blocks.php:646
+#: includes/blocks.php:647
 msgid "Select a film"
 msgstr ""
 
-#: includes/blocks.php:900
+#: includes/blocks.php:901
 msgid "Select a position"
 msgstr ""
 
-#: includes/blocks.php:699
+#: includes/blocks.php:700
 msgid "Select a section"
 msgstr ""
 
-#: includes/blocks.php:887
+#: includes/blocks.php:888
 msgid "Select an alignment"
 msgstr ""
 
-#: includes/blocks.php:190 includes/blocks.php:249
+#: includes/blocks.php:190 includes/blocks.php:250
 msgid "Select categories"
 msgstr ""
 
@@ -1835,7 +1845,7 @@ msgstr ""
 msgid "Select Category"
 msgstr ""
 
-#: includes/blocks.php:578 includes/blocks.php:776
+#: includes/blocks.php:579 includes/blocks.php:777
 msgid "Select edition"
 msgstr ""
 
@@ -1860,7 +1870,7 @@ msgctxt "settings button"
 msgid "Settings"
 msgstr ""
 
-#: includes/blocks.php:893
+#: includes/blocks.php:894
 msgid "Shifted"
 msgstr ""
 
@@ -1872,7 +1882,7 @@ msgstr ""
 msgid "Show a subtitle if filled"
 msgstr ""
 
-#: includes/blocks.php:656
+#: includes/blocks.php:657
 msgid "Show as promotted film ?"
 msgstr ""
 
@@ -1934,7 +1944,7 @@ msgstr ""
 msgid "Some HTML tags are not permitted, including:"
 msgstr ""
 
-#: includes/blocks.php:599
+#: includes/blocks.php:600
 msgid "Standard awards only"
 msgstr ""
 
@@ -1942,16 +1952,16 @@ msgstr ""
 msgid "structure"
 msgstr ""
 
-#: includes/blocks.php:301 includes/blocks.php:845 includes/blocks.php:970
-#: includes/blocks.php:1171
+#: includes/blocks.php:302 includes/blocks.php:846 includes/blocks.php:971
+#: includes/blocks.php:1172
 msgid "Subtitle"
 msgstr ""
 
-#: includes/blocks.php:1054
+#: includes/blocks.php:1055
 msgid "Subtitle (first)"
 msgstr ""
 
-#: includes/blocks.php:1103
+#: includes/blocks.php:1104
 msgid "Subtitle (last)"
 msgstr ""
 
@@ -2011,19 +2021,19 @@ msgstr ""
 msgid "This will appear in the programmation modal."
 msgstr ""
 
-#: includes/blocks.php:294 includes/blocks.php:409 includes/blocks.php:425
-#: includes/blocks.php:481 includes/blocks.php:482 includes/blocks.php:483
-#: includes/blocks.php:559 includes/blocks.php:561 includes/blocks.php:757
-#: includes/blocks.php:759 includes/blocks.php:838 includes/blocks.php:963
-#: includes/blocks.php:1164
+#: includes/blocks.php:295 includes/blocks.php:410 includes/blocks.php:426
+#: includes/blocks.php:482 includes/blocks.php:483 includes/blocks.php:484
+#: includes/blocks.php:560 includes/blocks.php:562 includes/blocks.php:758
+#: includes/blocks.php:760 includes/blocks.php:839 includes/blocks.php:964
+#: includes/blocks.php:1165
 msgid "Title"
 msgstr ""
 
-#: includes/blocks.php:1047
+#: includes/blocks.php:1048
 msgid "Title (first)"
 msgstr ""
 
-#: includes/blocks.php:1096
+#: includes/blocks.php:1097
 msgid "Title (last)"
 msgstr ""
 
@@ -2046,6 +2056,7 @@ msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr ""
 
 #: partials/headers/header-fifam.php:26 partials/navs/nav-fifam.php:14
+#: partials/navs/nav-rsfp.php:13
 msgid "Toggle Menu"
 msgstr ""
 
@@ -2053,7 +2064,7 @@ msgstr ""
 msgid "Toggle Night Mode"
 msgstr ""
 
-#: includes/blocks.php:905
+#: includes/blocks.php:906
 #: includes/admin/widgets/custom-wp-widget-twocols.php:248
 #: includes/admin/widgets/custom-wp-widget-twocols.php:300
 msgid "Top"
@@ -2067,7 +2078,7 @@ msgstr ""
 msgid "Updated image sizes for :"
 msgstr ""
 
-#: includes/blocks.php:721
+#: includes/blocks.php:722
 msgid "Use section color ?"
 msgstr ""
 
@@ -2085,7 +2096,7 @@ msgstr ""
 msgid "Video"
 msgstr ""
 
-#: includes/blocks.php:500
+#: includes/blocks.php:501
 msgid "Video(s)"
 msgstr ""
 
@@ -2118,7 +2129,7 @@ msgstr ""
 msgid "View Partner"
 msgstr ""
 
-#: partials/pagetitles/pagetitle-rsfp.php:333
+#: partials/pagetitles/pagetitle-rsfp.php:337
 msgid "Visit farm"
 msgstr ""
 
@@ -2148,8 +2159,8 @@ msgstr ""
 #: partials/pagetitles/pagetitle-diag.php:342
 #: partials/pagetitles/pagetitle-fifam.php:749
 #: partials/pagetitles/pagetitle-fifam.php:796
-#: partials/pagetitles/pagetitle-rsfp.php:444
-#: partials/pagetitles/pagetitle-rsfp.php:491
+#: partials/pagetitles/pagetitle-rsfp.php:450
+#: partials/pagetitles/pagetitle-rsfp.php:497
 #: partials/pagetitles/pagetitle-dinard.php:637
 #: partials/pagetitles/pagetitle-dinard.php:684
 msgid "You need to choose a thumbnail image"
