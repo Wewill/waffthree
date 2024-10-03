@@ -1270,4 +1270,4 @@ function waff_get_attachment( $attachment_id ) {
         'src' => $attachment->guid,
         'title' => $attachment->post_title
     );
-}
+}	
