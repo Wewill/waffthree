@@ -2677,3 +2677,33 @@ left: -9999px;
 position: absolute;
 visibility:hidden
 }
+
+
+
+
+/**
+    Comments 
+*/
+.comments-area .comment-content p:not(.edit-link) {
+  font-weight: 600;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.comments-area article {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: var(--waff-color-layout);
+  border-radius: 10px;
+  border: 0;
+}
+
+.comments-area .comment-edit-link {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 80%;
+}
+
+.comments-area .comment .reply {
+  opacity: .5;
+}

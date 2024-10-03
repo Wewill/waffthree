@@ -78,7 +78,7 @@
 /**
     Comments 
 */
-.comments-area .comment-content p {
+.comments-area .comment-content p:not(.edit-link) {
     font-weight: 600;
     margin-top: .5rem;
     margin-bottom: .5rem;
