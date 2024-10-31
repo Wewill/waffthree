@@ -5,7 +5,8 @@ jQuery(document).ready(function() {
 			var programmationModalAjax = document.querySelector('#programmationModalAjax');	
 			if (programmationModalAjax) {
 			    var useCache = false;
-			    const durationCache = 30 * 60 * 1000; // 30 minutes
+			    //const durationCache = 30 * 60 * 1000; // 30 minutes
+				const durationCache = 6 * 60 * 60 * 1000; // 6 heures
 			    let programmationTimeout = localStorage.getItem('programmationTimeout');
 			    if (programmationTimeout) {
 				    if (programmationTimeout >= new Date().getTime())
