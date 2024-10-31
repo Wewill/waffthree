@@ -150,7 +150,6 @@ class WP_Widget_Programmation extends WP_Widget {
 ?>
 
 			<?php while ( $projections->have_posts() ) : $projections->the_post(); ?>
-
 			
 				<?php 
 					$id 					= (( isset($post->ID) )?$post->ID:get_the_ID());

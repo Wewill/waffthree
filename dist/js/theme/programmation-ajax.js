@@ -4,27 +4,43 @@ jQuery(document).ready(function() {
 		programmationModal.addEventListener('click', function (event) {
 			var programmationModalAjax = document.querySelector('#programmationModalAjax');	
 			if (programmationModalAjax) {
-			    const data = {
-				'action': 'widget_programmation_ajax_html',
-			    };
-			    fetch('/wp-admin/admin-ajax.php', {
-				method: 'POST',
-				headers: {
-				    'Content-Type': 'application/x-www-form-urlencoded',
-				    'Cache-Control': 'no-cache',
-				},
-				body: new URLSearchParams(data),
-			    })
-			    .then(response => response.text())
-			    .then(response => {
-				programmationModalAjax.innerHTML = response;
-				// programmationModalAjax.parentNode.insertBefore(programmationModalAjax.querySelector(':scope > div'), programmationModalAjax);
-				// programmationModalAjax.remove();
+			    var useCache = false;
+			    const durationCache = 30 * 60 * 1000; // 30 minutes
+			    let programmationTimeout = localStorage.getItem('programmationTimeout');
+			    if (programmationTimeout) {
+				    if (programmationTimeout >= new Date().getTime())
+					    useCache = true;
+			    }
+			    // useCache = False; // @Wilhem si tu veux forcer à toujour charger
+			    if (useCache) {
+				programmationModalAjax.innerHTML = localStorage.getItem('programmationHtml');
 				const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
 				modal.handleUpdate();
-				// modal.dispose(); 
-				// modal.show(); 
-			    });
+		            } else {
+				    const data = {
+					'action': 'widget_programmation_ajax_html',
+				    };
+				    fetch('/wp-admin/admin-ajax.php', {
+					method: 'POST',
+					headers: {
+					    'Content-Type': 'application/x-www-form-urlencoded',
+					    'Cache-Control': 'no-cache',
+					},
+					body: new URLSearchParams(data),
+				    })
+				    .then(response => response.text())
+				    .then(response => {
+					programmationModalAjax.innerHTML = response;
+					// programmationModalAjax.parentNode.insertBefore(programmationModalAjax.querySelector(':scope > div'), programmationModalAjax);
+					// programmationModalAjax.remove();
+					const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
+					modal.handleUpdate();
+					localStorage.setItem('programmationTimeout', new Date().getTime() + durationCache);
+					localStorage.setItem('programmationHtml', response);
+					// modal.dispose(); 
+					// modal.show(); 
+				    });
+			    }
 			}
 		});
 	});
