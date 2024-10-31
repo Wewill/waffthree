@@ -161,6 +161,8 @@ while ( have_posts() ) :
 	// echo('##postid<pre>'); print_r($postid);  echo('</pre>');
 	// echo('##posttype<pre>'); print_r($posttype);  echo('</pre>');
 
+	echo do_shortcode( '[get_formats output="tag"]' ); // Get formats 
+
 	// ********************
 	// Check if has_film
 	$relationship		= 'film';

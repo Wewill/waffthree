@@ -266,8 +266,8 @@ if ( have_posts() ) {
 						<!-- <small class="d-block"><strong><?= $wp_query->post_count ?> films</strong></small> -->
 						<?php if ( isset($counts['films']) && $counts['films'] != '0' ) 
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'); ?>
-						<?php if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
-							print( '<small class="d-block"><strong>' . sprintf( _n( '%s projection', '%s projections', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>'); ?>
+						<?php /*if ( isset($counts['projections']) && $counts['projections'] != '0' ) 
+							print( '<small class="d-block"><strong>' . sprintf( _n( '%s projection', '%s projections', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>'); */ ?>
 						<?php if ( isset($counts['events']) && $counts['events'] != '0' ) 
 							print( '<small class="d-block"><strong>' . sprintf( _n( '%s event', '%s events', $counts['events'], 'waff' ), $counts['events'] ) . '</strong></small>'); ?>
 						<?php if ( isset($counts['programs']) && $counts['programs'] != '0' ) 
@@ -282,7 +282,12 @@ if ( have_posts() ) {
 							print( '<small class="d-block"><i class="icon icon-sun mr-1 f-12"></i> ' . sprintf( _n( '%s highlight', '%s highlights', $counts['wpcf-p-highlights'], 'waff' ), $counts['wpcf-p-highlights'] ) . '</small>'); ?>
 						<?php if ( isset($counts['wpcf-f-promote']) && $counts['wpcf-f-promote'] != '0' ) 
 							print( '<small class="d-block"><i class="icon icon-ok mr-1 f-12"></i> ' . sprintf( _n( '%s favorite', '%s favorites', $counts['wpcf-f-promote'], 'waff' ), $counts['wpcf-f-promote'] ) . '</small>'); ?>
-						<!-- <small class="d-block">6 compétitons</small>-->
+						<!-- #44 -->
+						<?php if ( isset($counts['wpcf-f-premiere']) && $counts['wpcf-f-premiere'] != '0' ) 
+							print( '<small class="d-block"><i class="icon icon-premiere mr-1 f-12"></i> ' . sprintf( _n( '%s premiere', '%s premieres', $counts['wpcf-f-premiere'], 'waff' ), $counts['wpcf-f-premiere'] ) . '</small>'); ?>
+						<?php if ( isset($counts['wpcf-f-avant-premiere']) && $counts['wpcf-f-avant-premiere'] != '0' ) 
+							print( '<small class="d-block"><i class="icon icon-avantpremiere mr-1 f-12"></i> ' . sprintf( _n( '%s avant-premiere', '%s avant-premieres', $counts['wpcf-f-avant-premiere'], 'waff' ), $counts['wpcf-f-avant-premiere'] ) . '</small>'); ?>
+						<!-- EX: <small class="d-block">6 compétitons</small>-->
 					</p>
 				</div>
 				<?php if ( $section_filmography_index > 0 ) : ?> 
