@@ -99,22 +99,22 @@
 	// MAIN Post classes
 	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) : 
 		// Type always transparent header 
-		$page_atts['post_class'] 			= 'pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-4 pb-sm-10'
-		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page pt-15 pt-md-20  pt-md-10 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
-		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= 'pt-5 pt-md-10 pb-3 pb-sm-5 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-3 pb-sm-5'
+		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page pt-15 pt-md-20  pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 	else : 
 		// Type plain header 
-		$page_atts['post_class'] 			= '--pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-4 pb-sm-10'
-		$page_atts['post_class'] 			= ( true === is_singular('page') )?'is-page --pt-10 pt-5 pt-md-10 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
-		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= '--pt-10 pt-5 pt-md-10 pb-3 pb-sm-5 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-3 pb-sm-5'
+		$page_atts['post_class'] 			= ( true === is_singular('page') )?'is-page --pt-10 pt-5 pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 	endif;
 	
 	if ( true === WAFF_HAS_LEFTSTYLE_BLOG ) :
 		$page_atts['post_class'] 			= ( true === is_singular('post') )?'is-post mt-0 --mt-10 --mb-10 pt-10 container-fluid container-10 container-left':$page_atts['post_class'];
-		$page_atts['post_class'] 			= ( true === is_home() && false === is_front_page() )?'is-blog pt-4 pb-4 pb-sm-10 container-fluid container-10 container-left':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( true === is_home() && false === is_front_page() )?'is-blog pt-4 pb-3 pb-sm-5 container-fluid container-10 container-left':$page_atts['post_class'];
 	else : 
 		$page_atts['post_class'] 			= ( true === is_singular('post') )?'is-post mt-0 --mt-10 --mb-10 pt-10 container-fluid':$page_atts['post_class'];
-		$page_atts['post_class'] 			= ( true === is_home() && false === is_front_page() )?'is-blog pt-4 pb-4 pb-sm-10 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( true === is_home() && false === is_front_page() )?'is-blog pt-4 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 	endif;
 
 	// MAIN Extra post classes 
@@ -124,7 +124,7 @@
 	$page_atts['forcewide_class'] 		= ( true === is_404() )?'is-404 bg-dark':''; 
 
 	if ( is_singular('directory') )  
-		$page_atts['post_class'] 		= 'is-directory p-0 pb-4 pb-sm-10 container-fluid'; 
+		$page_atts['post_class'] 		= 'is-directory p-0 pb-3 pb-sm-5 container-fluid'; 
 
 	if ( '' != WAFF_BLOG_STYLE )
 		$page_atts['post_class'] 			.= ' is-blog-style-'.WAFF_BLOG_STYLE; 
