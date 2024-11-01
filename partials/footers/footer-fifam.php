@@ -15,7 +15,7 @@ $has_background   = Go\has_footer_background();
 <?php dynamic_sidebar('sidebar-before'); ?>
 
 <!-- Begin: FOOTER -->
-<footer id="colophon" class="site-footer pt-10 pb-10 bg-color-dark color-light contrast--dark site-footer--waff <?php echo esc_attr( $has_background ); ?>">
+<footer id="colophon" class="site-footer mt-0 pt-10 pb-10 bg-color-dark color-light contrast--dark site-footer--waff <?php echo esc_attr( $has_background ); ?>">
 		<div class="container-fluid px-0">
 			<div class="row g-0">
 				<div class="col-12">
