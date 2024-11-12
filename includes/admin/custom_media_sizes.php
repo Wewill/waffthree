@@ -404,10 +404,10 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 				'page-featured-image-fancy-x2',
 				'page-featured-image-modern', 
 				'page-featured-image-modern-x2',
+				'page-featured-image-modern-m', 
+				'page-featured-image-modern-m-x2',
 				'page-featured-image-m', 
 				'page-featured-image-m-x2',
-				'page-featured-image-m-modern', 
-				'page-featured-image-m-modern-x2',
 				'page-featured-image-s', 
 				'page-featured-image-s-x2',
 			); 
@@ -431,12 +431,21 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 					case ( 'partenaire' === $pt ) :
 					    	$new_image_sizes = array_merge($new_image_sizes, $partenaire_image_sizes);
 					break;
-			    }
-			}	
+			    } // If not = $common_image_sizes
+			}
 	
-			//error_log('####RETURN FILTER = NEW IMAGES SIZES BY POSTTYPE :' );
-			//error_log(print_r($new_image_sizes,true));
-		
+			// error_log('####RETURN FILTER = NEW IMAGES SIZES BY POSTTYPE :' . print_r($new_image_sizes,true));
+			// error_log('##FILTER for '.
+			// '<pre>postypes ::'.print_r($post_types,true).'</pre>'.
+			// '<pre>Init sizes ::'.print_r($sizes,true).'</pre>'.
+			// '<pre>New sizes ::'.print_r($new_image_sizes,true).'</pre>'
+			// );
+			// wp_die('##FILTER for '.
+			// '<pre>postypes ::'.print_r($post_types,true).'</pre>'.
+			// '<pre>Init sizes ::'.print_r($sizes,true).'</pre>'.
+			// '<pre>New sizes ::'.print_r($new_image_sizes,true).'</pre>'
+			// );
+
 		    return $new_image_sizes;
 		}
 	
@@ -445,7 +454,7 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 		*/
 		
 		public function waff_limit_image_sizes_by_post_type( $image_sizes ){
-			//error_log('##intermediate_image_sizes : CALL');
+			// error_log('##intermediate_image_sizes : CALL');
 		
 			$post = (isset($_REQUEST['post_id']))?get_post( $_REQUEST['post_id'] ):get_post();
 			$post_type = (isset($_REQUEST['post_id']))?(array)get_post_type( $_REQUEST['post_id'] ):(array)get_post_type();
@@ -460,8 +469,8 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 				}
 			}
 			
-			//error_log('##intermediate_image_sizes : MEDIA IS USED IN: ');
-			//error_log(print_r($post_type,true));
+			// error_log('##intermediate_image_sizes : MEDIA IS USED IN: ');
+			// error_log(print_r($post_type,true));
 	
 			$image_sizes = apply_filters( 'media_sizes_by_post_types', $image_sizes, $post_type );
 		    return $image_sizes;
@@ -529,20 +538,20 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 	
 			// On agit si les deux arrays sont différents
 			$current_sizes = $sizes;
-			error_log('------ ------ ------ DANS SAVEPOST > GET SIZES ');
+			// error_log('------ ------ ------ DANS SAVEPOST > GET SIZES ');
 			$needed_sizes = get_intermediate_image_sizes();
 			$missing_sizes = array_diff( $needed_sizes, array_keys($current_sizes) );
 			
 			if ( !empty($missing_sizes) ) {
-				error_log('##WE DONT HAVE THIS SIZE : ');
-				error_log(print_r($missing_sizes, true));
+				// error_log('##WE DONT HAVE THIS SIZE : ');
+				// error_log(print_r($missing_sizes, true));
 	
 				$attachment_data = wp_generate_attachment_metadata( $attachment_id, $path ); // Appel > intermediate_image_sizes
 				$not_generated_sizes = array_diff( $needed_sizes, array_keys($attachment_data['sizes']) );
 				$generated_sizes = $this->array_except( $needed_sizes, $not_generated_sizes );
 				wp_update_attachment_metadata( $attachment_id, $attachment_data );
 			
-				error_log('##------ ------ ------ ------ ------ ------ FINAL AFTER wp_update_attachment_metadata '.$post->ID);
+				// error_log('##------ ------ ------ ------ ------ ------ FINAL AFTER wp_update_attachment_metadata '.$post->ID);
 	
 				// Add your query var if the coordinates are not retreive correctly.
 		        $this->_aborded_sizes = $not_generated_sizes;
@@ -553,12 +562,12 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 	
 			} else {
 				error_log('##WE HAVE ALL SIZES !');
-			}		
+			}
 			
 		}
 		
 		/*
-			Admin notices 
+			Admin notices
 		*/
 		
 		public function add_notice_query_var( $location ) {
