@@ -5,40 +5,40 @@
  * Call by custom-wp-widget-counter.php
  */
 
-var fps = 25;
+let fps = 25;
 
 // Detect request animation frame
-var scroll = window.requestAnimationFrame
+let scroll = window.requestAnimationFrame
   || window.webkitRequestAnimationFrame
   || window.mozRequestAnimationFrame
   || window.msRequestAnimationFrame
   || window.oRequestAnimationFrame
   // IE Fallback, you can even fallback to onscroll
   || function(callback){ window.setTimeout(callback, 1000/fps) };
-var lastPosition = -1;
+  let lastPosition = -1;
 
 // my Variables
-var lastSection = false;
-var replaceItemTop = -1;
-var replaceItemBottom = -1;
-var replaceItemHeight = -1;
+let lastSection = false;
+let replaceItemTop = -1;
+let replaceItemBottom = -1;
+let replaceItemHeight = -1;
 
 //Start at items Height
-var itemHeight = 0; // FIFAM 140 / DINARD 0
-var body = document.querySelector("body");
-var hasHeight = body.classList.contains('waff-theme-fifam');
+let itemHeight = 0; // FIFAM 140 / DINARD 0
+let body = document.querySelector("body");
+let hasHeight = body.classList.contains('waff-theme-fifam');
 if ( hasHeight ) { 
 	itemHeight = 140;
 } else {
 	itemHeight = 0;
 }
-console.log("#LOGOINVERT:: itemHeight", itemHeight);
+// console.log("#LOGOINVERT:: itemHeight", itemHeight);
 
 // my sections to calculate stuff
-var sections = document.querySelectorAll('main, main > .row, section, header, footer');
-var replaceContainer = document.querySelectorAll('.js-replace');
-var headerContainer = document.querySelectorAll('header.masthead');
-var replaceItem = document.querySelectorAll('.js-replace__item');
+let sections = document.querySelectorAll('main, main > .row, section, header, footer');
+let replaceContainer = document.querySelectorAll('.js-replace');
+let headerContainer = document.querySelectorAll('header.masthead');
+let replaceItem = document.querySelectorAll('.js-replace__item');
 
  
 // The Scroll Function
@@ -46,7 +46,7 @@ function loop(){
 
   // Set a frame rate 
   setTimeout(function() {
-	  var top = window.pageYOffset;
+	  //let top = window.scrollY;
 	
 	  if (replaceItem.length > 0) {
 	    // get top position of item from container, because image might not have loaded
@@ -55,63 +55,49 @@ function loop(){
 	    replaceItemBottom = replaceItemTop + replaceItemHeight;
 	  }
 	
-	  var sectionTop = -1;
-	  var sectionBottom = -1;
-	  var currentSection = -1;
+	  let sectionTop = -1;
+	  let sectionBottom = -1;
+	  let currentSectionIsDark = null;
 	  
 	  // Fire when needed
-	  if (lastPosition == window.pageYOffset) {
+	  if (lastPosition == window.scrollY) {
 	    scroll(loop);
 	    return false;
 	  } else {
-	    lastPosition = window.pageYOffset;
+	    lastPosition = window.scrollY;
 	
 	  // Your Function
 	  Array.prototype.forEach.call(sections, function(el, i){
 	    sectionTop = parseInt(el.getBoundingClientRect().top);
 	    sectionBottom = parseInt(el.getBoundingClientRect().bottom);
-		
+
+		// console.log('%c #LOGOINVERT:: --- section id + isDark? + top + index', 'color:orange;', el.id, el.classList.contains('contrast--dark'), sectionTop, i);
+		// console.log('%c #LOGOINVERT:: Active section', ((sectionTop+itemHeight) <= replaceItemBottom) && ((sectionBottom+itemHeight) > replaceItemTop)?'color:lime;':'color:gray;', sectionTop+itemHeight, replaceItemBottom, sectionBottom+itemHeight, replaceItemTop);
 		// active section for contrast 
 	    if ( ((sectionTop+itemHeight) <= replaceItemBottom) && ((sectionBottom+itemHeight) > replaceItemTop) ) {
-	      // check if current section has bg
-		  currentSection = el.classList.contains('contrast--dark');
-		  
-	      // switch class depending on background image
-	      if ( currentSection ) { 
-			headerContainer[0].classList.remove('navbar-light');
-			headerContainer[0].classList.add('navbar-dark');
-	      } else {
-			headerContainer[0].classList.remove('navbar-dark');
-			headerContainer[0].classList.add('navbar-light');
-		  }
-		}
+			// check if current section has bg
+			currentSectionIsDark = el.classList.contains('contrast--dark');
 
-	    // active section
-	    if ( (sectionTop <= replaceItemBottom) && (sectionBottom > replaceItemTop)) {
-	      // check if current section has bg
-	      currentSection = el.classList.contains('contrast--dark');
-	
-	      // switch class depending on background image
-	      if ( currentSection ) { 
-	        replaceContainer[0].classList.remove('js-replace--reverse');
+			// switch class depending on background image
+			if ( currentSectionIsDark ) { 
+			replaceContainer[0].classList.remove('js-replace--reverse');
 			headerContainer[0].classList.add('contrast--reverse');
 			// Handle fifam case 
 			headerContainer[0].classList.remove('navbar-light'); // Why ? Because fifam does not change color on home homeslide 
 			headerContainer[0].classList.add('navbar-dark'); // Handle this case @TODO FIFAM 
-	      } else {
-	        replaceContainer[0].classList.add('js-replace--reverse')
-	        headerContainer[0].classList.remove('contrast--reverse')
+			} else {
+			replaceContainer[0].classList.add('js-replace--reverse')
+			headerContainer[0].classList.remove('contrast--reverse')
 			// Handle fifam case 
 			headerContainer[0].classList.remove('navbar-dark'); // Why ? Because fifam does not change color on home homeslide 
 			headerContainer[0].classList.add('navbar-light'); // Handle this case @TODO FIFAM 
-	      }
-	    }
-	    // end active section
+			}
+		}
 	
 	    // if active Section hits replace area
 	    if ( (replaceItemTop < sectionTop) && ( sectionTop <= replaceItemBottom) ) {
 	      // animate only, if section background changed
-	      if (currentSection != lastSection)  {
+	      if (currentSectionIsDark != lastSection)  {
 	        //document.documentElement.style.setProperty('--replace-offset', 100 / replaceItemHeight * parseInt(sectionTop - replaceItemTop) + '%');
 	        document.documentElement.style.setProperty('--waff-logo-invert-replace-offset', 100 / replaceItemHeight * parseInt(sectionTop - replaceItemTop) + '%'); //WAFFTWO 2
 	      }
@@ -124,7 +110,7 @@ function loop(){
 	      //document.documentElement.style.setProperty('--replace-offset', 0 + '%');
 	      document.documentElement.style.setProperty('--waff-logo-invert-replace-offset', 0 + '%'); //WAFFTWO 2
 	      // set last section to current section
-	      lastSection = currentSection;
+	      lastSection = currentSectionIsDark;
 	    }
 	
 	  }); 
@@ -175,8 +161,8 @@ document.addEventListener('aos:out:pageheader', ({ detail }) => {
 });
 
 // Call the loop after an slick slider animation on init and on change
-var slickHomeslideChange = function(slick,i) {
-  var elSlide = jQuery(slick.$slides[i]);
+let slickHomeslideChange = function(slick,i) {
+  let elSlide = jQuery(slick.$slides[i]);
   // Check classes 
   if( elSlide.hasClass('contrast--dark') ) {
   	jQuery('section#slick-homeslide').removeClass('contrast--light').addClass('contrast--dark');
