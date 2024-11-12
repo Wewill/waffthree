@@ -643,7 +643,7 @@ class WP_Widget_Programmation extends WP_Widget {
 				'day_count' 	=> $count,
 				'is_active' 	=> (($day >= $edition_end_date)?'unactive':'active'),
 				'is_today' 		=> (($today[0] > $d && $today[0] < $d1 )?true:false),
-				'rooms'			=> $rooms,
+				//'rooms'			=> $rooms,
 			);
 			$count++;
 		}
@@ -699,7 +699,8 @@ class WP_Widget_Programmation extends WP_Widget {
 					<div class="ml-4 flex-grow-1"><span class="headline"><?= esc_html__( 'Programmation', 'waff' ) ?></span></div>
 						<?php if (get_theme_mod( 'planning_url')) : ?><a href="<?php WaffTwo\display_planning_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-time f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Planner', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
 						<?php if (get_theme_mod( 'booklet_url')) : ?><a href="<?php WaffTwo\display_booklet_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-brochure f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Booklet', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
-						<?php if (get_theme_mod( 'catalog_url')) : ?><a href="<?php WaffTwo\display_catalog_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-catalogue f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Book', 'waff' ) ?></span></a><?php endif; ?>
+						<?php if (get_theme_mod( 'catalog_url')) : ?><a href="<?php WaffTwo\display_catalog_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-catalogue f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Book', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
+						<?php if (get_theme_mod( 'youngpublic_url')) : ?><a href="<?php WaffTwo\display_youngpublic_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-brochure f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Young public', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
 						<button type="button" class="btn btn-outline-light mr-4" data-bs-dismiss="modal"><?= esc_html__( 'Close', 'waff' ) ?></button>
 					</div>
 					<!-- End: Modal body -->

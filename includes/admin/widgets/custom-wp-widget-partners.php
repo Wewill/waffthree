@@ -125,11 +125,11 @@ class WP_Widget_Partners extends WP_Widget {
 								
 								<div id="<?= $id ?>" class="partner-slide-item d-inline-block p-2">
 									<a href="<?= esc_url($link) ?>" class="color-black link link-dark h-90-px d-flex align-items-center" title="<?php the_title(); ?>">
-										<?php if ( $featured_img_urls['partenaire-featured-image-colorized'] != '' ) : ?>
+										<?php if ( isset($featured_img_urls['partenaire-featured-image-colorized']) && $featured_img_urls['partenaire-featured-image-colorized'] != '' ) : ?>
 										<img data-srcset="<?= $featured_img_urls['partenaire-featured-image-colorized-x2']; ?> 2x, <?= $featured_img_urls['partenaire-featured-image-colorized']; ?>" 
 											 data-lazy="<?= $featured_img_urls['partenaire-featured-image-colorized']; ?>" 
 											 data-sizes="" class="img-fluid" alt="Logotype partenaire : <?php the_title(); ?>" width="90" height="90">
-										<?php else : ?>
+										<?php elseif ( isset($featured_img_urls['partenaire-featured-image']) && $featured_img_urls['partenaire-featured-image-x2'] ): ?>
 										<img data-srcset="<?= $featured_img_urls['partenaire-featured-image-x2']; ?> 2x, <?= $featured_img_urls['partenaire-featured-image']; ?>" 
 											 data-lazy="<?= $featured_img_urls['partenaire-featured-image']; ?>" 
 											 data-sizes="" class="img-fluid" alt="Logotype partenaire : <?php the_title(); ?>" width="90" height="90">
