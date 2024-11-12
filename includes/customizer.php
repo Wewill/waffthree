@@ -358,6 +358,8 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 
 	// Planning 
 	if ( defined('WAFF_THEME') && (WAFF_THEME == 'FIFAM' || WAFF_THEME == 'DINARD') ) :
+
+		// Planning
 		$wp_customize->add_setting(
 			'planning_url',
 			array(
@@ -378,7 +380,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 			)
 		);
 
-		// Booklet 
+		// Booklet
 		$wp_customize->add_setting(
 			'booklet_url',
 			array(
@@ -399,7 +401,7 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 			)
 		);
 
-		// Catalog 
+		// Catalog
 		$wp_customize->add_setting(
 			'catalog_url',
 			array(
@@ -419,6 +421,28 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 				'type'     => 'url',
 			)
 		);
+
+		// Young public
+		$wp_customize->add_setting(
+			'youngpublic_url',
+			array(
+				'default'           => '',
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'sanitize_text_field',
+			)
+		);
+		$wp_customize->add_control(
+			'youngpublic_url_control',
+			array(
+				'description' => esc_html__( 'This will appear in the programmation modal.', 'waff' ),
+				'label'    => esc_html__( 'Young public booklet file URL (*.pdf)', 'waff' ),
+				'priority' => 80,
+				'section'  => 'go_site_settings',
+				'settings' => 'youngpublic_url',
+				'type'     => 'url',
+			)
+		);
+		
 	endif;
 }
 

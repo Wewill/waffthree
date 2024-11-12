@@ -543,6 +543,19 @@ function display_catalog_url() {
 	}
 }
 
+/**
+ * Displays the catalog url (set in Customizer).
+ *
+ * @return void
+ */
+function display_youngpublic_url() {
+	$youngpublic_url = get_theme_mod( 'youngpublic_url' );
+
+	if ( $youngpublic_url || is_customize_preview() ) {
+		echo esc_url( $youngpublic_url );
+	}
+}
+
  /**
   * Get either Logged in or Logged out link based
   * on current user's state.
