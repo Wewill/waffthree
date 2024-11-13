@@ -5,7 +5,7 @@
  * Call by custom-wp-widget-counter.php
  */
 
-let fps = 25;
+let fps = 2;
 
 // Detect request animation frame
 let scroll = window.requestAnimationFrame
@@ -43,11 +43,14 @@ let replaceItem = document.querySelectorAll('.js-replace__item');
  
 // The Scroll Function
 function loop(){
+//    console.info("matchMedia::", window.matchMedia("(max-width:576px)"));
+   let isMobilewidth = window.matchMedia("(max-width:576px)");
 
   // Set a frame rate 
   setTimeout(function() {
 	  //let top = window.scrollY;
-	
+	  console.info("matchMedia:: setTimeout");
+
 	  if (replaceItem.length > 0) {
 	    // get top position of item from container, because image might not have loaded
 	    replaceItemTop = parseInt(replaceContainer[0].getBoundingClientRect().top);
@@ -61,7 +64,7 @@ function loop(){
 	  
 	  // Fire when needed
 	  if (lastPosition == window.scrollY) {
-	    scroll(loop);
+	    if ( isMobilewidth.matches === false ) scroll(loop);
 	    return false;
 	  } else {
 	    lastPosition = window.scrollY;
@@ -118,8 +121,9 @@ function loop(){
 	}
 	
 	// Recall the loop
-	scroll(loop);
-    }, 1000 / fps);
+	if ( isMobilewidth.matches === false ) scroll(loop); // Do not recall if mobile. 
+  }, 1000 / fps); // Limit fps
+  // END: setTimeout
 }
 
 // Call the loop for the first time
