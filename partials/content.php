@@ -20,17 +20,17 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 	<?php echo ((true === WAFF_DEBUG)?'<code> ##!is_singular</code>':''); ?>
 
 	<header class="row content-header g-0">
-		<div class="col-12 col-sm-6 <?= (($wp_query->current_post % 2 == 0)?'order-1':'order-sm-2 order-1') ?>">
+		<div class="col-12 col-md-6 <?= (($wp_query->current_post % 2 == 0)?'order-1':'order-md-2 order-1') ?> h-250-px-md">
 
 			<!-- Thumbnail -->
 			<?php if ( has_post_thumbnail() ) : ?>
 				<div class="post__thumbnail" data-aos="fade-down">
-					<?php the_post_thumbnail('post-thumbnail', ['class' => 'img-responsive fit-image h-100']); ?>
+					<?php the_post_thumbnail('post-thumbnail', ['class' => 'img-responsive fit-image h-100 h-250-px-md']); ?>
 				</div>
 			<?php endif; ?>
 
 		</div>
-		<div class="contrast--light col-12 col-sm-6 p-6 <?= (($wp_query->current_post % 2 == 0)?'order-2':'order-sm-1 order-2') ?>" <?= $post_color_class;?>>
+		<div class="contrast--light col-12 col-md-6 p-6 <?= (($wp_query->current_post % 2 == 0)?'order-2':'order-md-1 order-2') ?>" <?= $post_color_class;?>>
 			
 			<!-- Title -->
 			<?php

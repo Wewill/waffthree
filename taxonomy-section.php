@@ -135,6 +135,7 @@ if ( have_posts() ) {
 
 	?>
 	<!-- Punchlines -->
+	<?php if ( $section->parent != 0 ) : ?> 
 	<div class="row punchlines" data-section-id="<?= $section_id ?>">
 	
 		<div class="col-12 col-lg-10">
@@ -249,6 +250,7 @@ if ( have_posts() ) {
 
 		</div>
 	</div>
+	<?php endif; ?>
 
 	<!-- List -->
 	<?php if ( $section->parent != 0 ) : ?> 
@@ -382,7 +384,7 @@ if ( have_posts() ) {
 
 	<!-- Section list -->
 	<?php else: ?>
-		<section id="sections" class="mt-md-10 mb-md-10 mt-5 mb-0 contrast--light f-w">
+		<section id="sections" class="mt-0 mt-n10 mb-0 contrast--light f-w">
 		<?php print(WaffTwo\Blocks\wa_sections_callback(
 			array(
 				'id' => 'called-from-taxonomy-section',

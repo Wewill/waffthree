@@ -69,7 +69,7 @@ class WP_Widget_Counter extends WP_Widget {
 		?>	
 			<!-- Before / After edition -->
 			<div class="container-fluid px-0">
-				<div class="row g-0 vh-50">
+				<div class="row g-0 lg-vh-50 h-250-px">
 					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col1_classes'] ); ?>" data-aos="fade-down" data-aos-delay="0">
 						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col1_classes'] ); ?>"><p class="subline text-center opacity-75"><?php _e('Edition', 'waff'); ?> <?php echo do_shortcode('[getcurrenteditionsc][/getcurrenteditionsc]'); ?></p><span class="display-impact-number"><strong class="days">00</strong></span><p class="subline"><?php _e('Days', 'waff'); ?></p></div>
 					</div>
@@ -89,16 +89,26 @@ class WP_Widget_Counter extends WP_Widget {
 
 			<!-- During edition -->
 			<div class="container-fluid px-0">
-				<div class="row g-0 vh-50">
+				<div class="row g-0 lg-vh-50 h-250-px">
 					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col1_classes'] ); ?>" data-aos="fade-down" data-aos-delay="0">
 						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col1_classes'] ); ?>"><p class="subline text-center opacity-75"><?php _e('Edition', 'waff'); ?> <?php echo do_shortcode('[getcurrenteditionsc][/getcurrenteditionsc]'); ?></p><span class="display-impact-number"><strong class="days"><?= $counts['films'] ?></strong></span><p class="subline"><?php _e('Films', 'waff'); ?></p></div>
 					</div>
 					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col2_classes'] ); ?>" data-aos="fade-down" data-aos-delay="200">
 						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col2_classes'] ); ?>"><p class="subline text-center opacity-75"><?php echo do_shortcode('[getcurrenteditionsc display="full"][/getcurrenteditionsc]'); ?></p><span class="display-impact-number"><strong class="hours"><?= $counts['wpcf-p-is-guest'] ?></strong></span><p class="subline"><i class="icon icon-guest mr-1 f-12"></i> <?php _e('Guest', 'waff'); ?></p></div>
 					</div>
+					<?php if ( $counts['wpcf-p-highlights'] != 0 ) : ?>
 					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col3_classes'] ); ?>" data-aos="fade-down" data-aos-delay="400">
 						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col3_classes'] ); ?>"><p class="subline text-center opacity-75"><?php _e('It started !', 'waff'); ?></p><span class="display-impact-number"><span class="minutes"><?= $counts['wpcf-p-highlights'] ?></span></span><p class="subline"><i class="icon icon-sun mr-1 f-12"></i> <?php _e('Highlights', 'waff'); ?></p></div>
 					</div>
+					<?php elseif ( $counts['wpcf-f-avant-premiere'] != 0 || $counts['wpcf-f-premiere'] != 0 ) : ?>
+					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col3_classes'] ); ?>" data-aos="fade-down" data-aos-delay="400">
+						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col3_classes'] ); ?>"><p class="subline text-center opacity-75"><?php _e('It started !', 'waff'); ?></p><span class="display-impact-number"><span class="minutes"><?= intval($counts['wpcf-f-avant-premiere']) + intval($counts['wpcf-f-premiere']) ?></span></span><p class="subline"><i class="icon icon-premiere mr-1 f-12"></i> <?php _e('Première et avant-première', 'waff'); ?></p></div>
+					</div>
+					<?php else : ?>
+					<div class="col-4 text-center d-table h-100 <?= esc_attr( $instance['col3_classes'] ); ?>" data-aos="fade-down" data-aos-delay="400">
+						<div class="card card-body d-table-cell align-middle border-0 rounded-0 <?= esc_attr( $instance['col3_classes'] ); ?>"><p class="subline text-center opacity-75"><?php _e('It started !', 'waff'); ?></p><span class="display-impact-number"><span class="minutes"><?= $counts['wpcf-p-young-public'] ?></span></span><p class="subline"><i class="icon icon-sun mr-1 f-12"></i> <?php _e('Young public', 'waff'); ?></p></div>
+					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 			

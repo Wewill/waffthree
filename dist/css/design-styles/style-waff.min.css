@@ -70,11 +70,6 @@
     }
 }
 
-
-
-
-
-
 /**
     Comments 
 */
@@ -105,4 +100,20 @@
 .comments-area .logged-in-as a {
     font-weight: 600;
     opacity: .8;
+}
+
+
+/* Responsive ajustemnts FIFAM SPECIAL */
+/* #TODO MOVE TO SPECIAL FIFAM wAFF THEME */
+
+@media screen and (max-width:768px) {
+    .wa-sections .card-text {
+            font-size: 75%;
+    }
+}
+
+@media screen and (max-width:768px) {
+    [class*=h-].h-250-px-md {
+        height: 250px !important;
+    }
 }

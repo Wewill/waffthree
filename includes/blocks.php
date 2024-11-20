@@ -3472,7 +3472,7 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 						'size' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'post-featured-image-xs':'post-featured-image', //post-featured-image-x2
 						'alt' => esc_html($featured_img_caption),
 						'style' => 'object-fit: cover; width: 100%;',
-						'class' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'img-fluid h-100-px':'img-fluid h-800-px')
+						'class' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'img-fluid h-100-px':'img-fluid h-600-px')
 					);
 				}
 				$section_credits_image 				= get_term_meta( $section_id, 'wpcf-s-credits-image', true ); 
@@ -3482,20 +3482,20 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?>" <?= $data ?>>
 			<div class="card border-0 rounded-0">
 				<?php if ( $section_image != '' ) : ?> 
-				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-800-px">
+				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-600-px">
 					<div class="overlay bg-dark" <?= (($section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>></div>
 					<picture class="lazy">
 					<!-- 3800x1200 > 1900x600 -->
 					<?= $section_image ?>
 					</picture>
 					<?php if ( $featured_img_caption ) : ?>
-					<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($featured_img_caption); ?></strong></figcaption>
+					<figcaption class="bg-transparent text-light"><strong>© <?= waff_do_markdown(strip_tags(esc_html($featured_img_caption))); ?></strong></figcaption>
 					<?php elseif ( $section_credits_image ) : ?>
-					<figcaption class="<?= $section_color_class ?>"><strong>© <?= esc_html($section_credits_image); ?></strong></figcaption>
+					<figcaption class="bg-transparent text-light"><strong>© <?= waff_do_markdown(strip_tags(esc_html($section_credits_image))); ?></strong></figcaption>
 					<?php endif; /* If captions */ ?>
 				</figure>
 				<?php endif; ?>
-				<div class="<?= (($section_image!='')?'card-img-overlay':'p-3 h-800-px'); ?> d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-start align-items-sm-center" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
+				<div class="<?= (($section_image!='')?'card-img-overlay':'p-3 h-600-px'); ?> d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-start align-items-sm-center" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
 					<div class="w-sm-50">
 						<h2 class="pt-4 heading-4 heading-sm card-title <?= $section_title_color ?>"><?= sanitize_text_field($section->name) ?></h2>
 						<!-- Edition-->
