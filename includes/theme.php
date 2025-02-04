@@ -632,7 +632,7 @@ function waff_social_links_icons() {
   * Returns social menu 
 */
 function waff_get_social_menu($colorclass = 'color-white color-light') {
-	return ( preg_replace( '/(<a )/', '<a class="link mx-2 '.$colorclass.'" ', strip_tags( wp_nav_menu(
+	$menu = wp_nav_menu(
 		array(
 			'theme_location' => 'social',
 			'items_wrap'      => '%3$s',
@@ -642,7 +642,13 @@ function waff_get_social_menu($colorclass = 'color-white color-light') {
 			'link_before'    => '<span class="screen-reader-text">',
 			'link_after'     => '</span>' . waff_get_icon( array( 'icon' => 'icon-links' ) ),
 		)
-	), '<a><span><i><title><desc>' ) ) );
+	);
+
+	if (is_null($menu)) {
+		$menu = '';
+	}
+
+	return ( preg_replace( '/(<a )/', '<a class="link mx-2 '.$colorclass.'" ', strip_tags( $menu, '<a><span><i><title><desc>' ) ) );
 	
 	/*wp_nav_menu(
 		array(
