@@ -1,6 +1,6 @@
 <?php
 /**
- * Footer waff / RSFP
+ * Footer waff / Golfs
  *
  * @package Waff
  */
@@ -20,11 +20,64 @@ $bg_image 		= reset( $bg_images );
 
 <!-- Begin: FOOTER -->
 <!-- #footer -->
-<footer id="colophon" class="site-footer site-footer--waff mt-0 pt-13 pb-10 pt-md-20 pb-md-18 bg-action-1 text-light link-light contrast--dark rounded-top-4 ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" style="background-image: url('<?= $bg_image['url']; ?>');">
+<footer id="colophon" class="site-footer site-footer--waff mt-0 pt-13 pt-md-20 pb-10 pb-md-18 bg-action-3 --text-light --link-light contrast--dark ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" style="background-image: url('<?= $bg_image['url']; ?>');">
 	<div class="container-fluid --px-0">
+
+		<h2 class="w-70 heading-4 text-color-main lh-sm mb-4">Nous proposons un golf de qualité, des compétitions, et de l'entrainement</h2>
 
 		<!-- First row -->
 		<div class="row g-4">
+
+			<!-- Col -->
+			<div class="col-6 col-lg-3">
+				<p class="font-weight-bold text-color-main">Rejoignez-nous</p>
+
+				<!-- Logotype -->
+				<!-- <div class="">
+					<div class="ml-4 mb-2" data-aos="fade-down" data-aos-delay="100">
+						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="255" height="65"></div>
+						<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
+					</div>
+				</div> -->
+
+				<!-- Tagline -->
+				<div class="">
+					<?php if ( !empty( $blog_description ) ) :
+						WaffTwo\waff_display_site_description();
+					endif; ?>
+				</div>
+
+				<!-- Theme address -->
+				<?php WaffTwo\display_company_address(array('class' => '')); ?>
+
+				<p><small><?php WaffTwo\display_site_message(); ?></small></p>
+
+			</div>
+
+
+			<!-- Col -->
+			<div class="col-6 col-lg-3">
+				<p class="font-weight-bold text-color-main">Contactez-nous</p>
+
+				<!-- Theme contact -->
+				<p class="font-weight-medium">
+					<?php WaffTwo\display_email(); ?>
+					<?php WaffTwo\display_phone(); ?>
+				</p>
+
+				<!-- Theme social menu -->
+				<div id="socials" class="d-inline-block socials p-0 m-0 ms-n2 list-inline reset-fontsize">
+					<?= WaffTwo\Theme\waff_get_social_menu('color-dark'); ?>
+				</div>
+
+				<!-- Go social options -->
+				<?php if ( $has_social_icons ) : ?>
+					<div class="site-footer__row flex flex-column lg:flex-row justify-between lg:items-center">
+						<?php Go\social_icons( array( 'class' => 'social-icons list-reset' ) ); ?>
+					</div>
+				<?php endif; ?>
+
+			</div>
 
 			<!-- Col -->
 			<div class="col-6 col-lg-3">
@@ -36,7 +89,7 @@ $bg_image 		= reset( $bg_images );
 							print ( preg_replace( '/(<a )/', '<a class="nav-link" ', wp_nav_menu(
 								array(
 									'theme_location' => 'footer-1',
-									'menu_class'     => 'footer-menu list-unstyled --list-inverse list-ps-0 font-weight-semi-bold list-md',
+									'menu_class'     => 'footer-menu list-unstyled --list-inverse list-ps-0 font-weight-semi-bold',
 									'depth'          => 1,
 									'echo'		 	 => false,
 									'container'		 => false,
@@ -68,52 +121,11 @@ $bg_image 		= reset( $bg_images );
 					</nav>
 				<?php endif; ?>
 			</div>
-			<!-- Col -->
-			<div class="col-6 col-lg-3">
-				<!-- Theme address -->
-				<?php WaffTwo\display_company_address(array('class' => 'font-weight-bold')); ?>
-
-				<!-- Theme social menu -->
-				<div id="socials" class="d-inline-block socials p-0 m-0 ms-n2 list-inline reset-fontsize">
-					<?= WaffTwo\Theme\waff_get_social_menu('color-dark'); ?>
-				</div>
-
-				<!-- Go social options -->
-				<?php if ( $has_social_icons ) : ?>
-					<div class="site-footer__row flex flex-column lg:flex-row justify-between lg:items-center">
-						<?php Go\social_icons( array( 'class' => 'social-icons list-reset' ) ); ?>
-					</div>
-				<?php endif; ?>
-
-				<!-- Theme contact -->
-				<p class="font-weight-medium">
-					<?php WaffTwo\display_phone(); ?>
-					<?php WaffTwo\display_email(); ?>
-				</p>
-				<p><small><?php WaffTwo\display_site_message(); ?></small></p>
-			</div>
-			<!-- Col -->
-			<div class="col-6 col-lg-3">
-				<!-- Logotype -->
-				<div class="">
-					<div class="ml-4 mb-2" data-aos="fade-down" data-aos-delay="100">
-						<div class="logo"><img src="<?= get_stylesheet_directory_uri(); ?><?= get_theme_mod( 'svgsign_light_url' ); ?>" alt="<?= get_bloginfo('name'); ?> : <?= get_bloginfo('description'); ?>" width="255" height="65"></div>
-						<?php /* Go\display_site_branding( array( 'description' => false ) ); */ ?>
-					</div>
-				</div>
-
-				<!-- Tagline -->
-				<div class="">
-					<?php if ( !empty( $blog_description ) ) :
-						echo '<p class="h6 f-heading font-weight-bold text-light mt-3">' . WaffTwo\waff_display_site_description() . '</p>';
-					endif;	?>				
-				</div>
-			</div>
 
 		</div>
 		<!--End: First row -->
 
-	</div>	
+	</div>
 </footer>
 
 <?php dynamic_sidebar('sidebar-after'); ?>
