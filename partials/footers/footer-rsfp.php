@@ -20,7 +20,7 @@ $bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 
 <!-- Begin: FOOTER -->
 <!-- #footer -->
-<footer id="colophon" class="site-footer site-footer--waff mt-0 pt-13 pb-10 pt-md-20 pb-md-18 bg-action-1 text-light link-light contrast--dark rounded-top-4 ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" <?php ($bg_image['url'] ? 'style="background-image: url('.$bg_image['url'].');"' : ''); ?>>
+<footer id="colophon" class="site-footer site-footer--waff mt-0 pt-13 pb-10 pt-md-20 pb-md-18 bg-action-1 text-light link-light contrast--dark rounded-top-4 ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" <?php ($bg_image ? 'style="background-image: url('.$bg_image['url'].');"' : ''); ?>>
 	<div class="container-fluid --px-0">
 
 		<!-- First row -->
