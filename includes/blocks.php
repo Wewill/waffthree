@@ -1326,18 +1326,34 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 		$categories_id  = wp_list_pluck($categories, 'term_id');
 	}
 
-	$sticky_posts = get_posts(array(
-		'post_type'			=> $posttype,
-		'numberposts' 		=> $limit, 
-		'post_status' 		=> 'publish', // Show only the published posts
-		'orderby'			=> 'post_date',
-		'order'				=> 'DESC',
-		// Only the sticky ones !
-		'post__in'  		=> get_option( 'sticky_posts' ),
-		'ignore_sticky_posts' => true,
-		// Limit to selected cats 
-		'category'			=> $categories_id,
-	));
+	$sticky_posts_option = get_option('sticky_posts');
+	$sticky_posts = array();
+
+	if (!empty($sticky_posts_option)) {
+		$sticky_posts = get_posts(array(
+			'post_type'			=> $posttype,
+			'numberposts' 		=> $limit, 
+			'post_status' 		=> 'publish', // Show only the published posts
+			'orderby'			=> 'post_date',
+			'order'				=> 'DESC',
+			// Only the sticky ones !
+			'post__in'  		=> $sticky_posts_option,
+			'ignore_sticky_posts' => true,
+			// Limit to selected cats 
+			'category'			=> $categories_id,
+		));
+	} else {
+		$sticky_posts = get_posts(array(
+			'post_type'			=> $posttype,
+			'numberposts' 		=> 1, 
+			'post_status' 		=> 'publish', // Show only the published posts
+			'orderby'			=> 'post_date',
+			'order'				=> 'DESC',
+			// No limit to sticky if not, only the last one if featured 
+			// Limit to selected cats 
+			'category'			=> $categories_id,
+		));
+	}
 
 	$args = array( 
 		'post_type'			=> $posttype,
