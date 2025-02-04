@@ -1215,10 +1215,11 @@ function waff_trim($content = '', $length = 100) {
 }
 
 /**
- * Implode and return option of an array 
+ * Implode and return option of an array
  * Joins elements from an associative array into a string, based on specified keys.
  */
-function waff_implode_options($glue = ', ', $keys, $options) {
+// RSFP used
+function waff_implode_options($keys, $options, $glue = ', ') {
     $result = []; // Initialize an empty array to store the values found in $options using $keys
 
     foreach ($keys as $key) { // Iterate over each key provided in $keys
@@ -1235,7 +1236,8 @@ function waff_implode_options($glue = ', ', $keys, $options) {
 /**
  * Implode and return non empty values
  */
-function waff_implode_nonempty($glue = ', ', $keys) {
+// RSFP used
+function waff_implode_nonempty($keys, $glue = ', ') {
     // Filter out empty values from the array
     $nonEmptyKeys = array_filter($keys, function($value) {
         return !empty(esc_html($value));

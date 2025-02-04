@@ -98,7 +98,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						15,
 						' &hellip;'
 					),
-					WaffTwo\Core\waff_implode_nonempty('<br/>', $o_general_links)
+					WaffTwo\Core\waff_implode_nonempty($o_general_links, '<br/>')
 				);
 
 			elseif ( get_post_type(get_the_ID()) === 'directory' ) : 
