@@ -1518,11 +1518,11 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 					$lightness_threshold = 130;
 
 					foreach( $recent_posts as $post_item ) : 
-						$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_item->ID );
-						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI BUG ?? 
+						$post_color 			= rwmb_meta('_waff_bg_color_metafield', $args, $post_item->ID );
+						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // TODO , 'array' ICI BUG ?
 						$post_color_class					= 'contrast--light';
 						$post_title_color 					= 'color-dark';
-						if ( $rgb_post_color != '' ) {
+						if ( $post_color != '' ) { // Si $post_color n'est pas vide
 							$hsl = waff_RGBToHSL($rgb_post_color);
 							if($hsl->lightness < $lightness_threshold) {
 								$post_color_class 			= 'contrast--dark';

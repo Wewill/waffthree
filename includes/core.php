@@ -700,11 +700,12 @@ function waff_HTMLToRGB($htmlCode, $output='code') {
 
 /**
  * Convert colors from RGB
+ * $RGB as to be an integer
  */
 
 function waff_RGBToHSL($RGB) {
-    $r = 0xFF & ($RGB >> 16);
-    $g = 0xFF & ($RGB >> 8);
+    $r = 0xFF & ($RGB >> 0x10);
+    $g = 0xFF & ($RGB >> 0x8);
     $b = 0xFF & $RGB;
 
     $r = ((float)$r) / 255.0;
