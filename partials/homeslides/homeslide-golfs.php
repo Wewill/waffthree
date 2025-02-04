@@ -20,9 +20,9 @@ $slide_nb 			= 0;
 $slide_images 		= array();
 $slide_colors 		= array();
 
-// Homeslide image 
+// Homeslide background image
 $homeslide_images = WaffTwo\Theme\waff_get_theme_homeslide_background();
-$homeslide_image = reset( $homeslide_images );
+$homeslide_image = if ( !empty($homeslide_images) ) ? reset($homeslide_images) : false;
 
 ?>
 
@@ -84,7 +84,9 @@ $homeslide_image = reset( $homeslide_images );
 				</div>
 
 				<!-- Special GOLFS -->
+				<?php if ( $homeslide_image ) : ?>
 				<div class="position-absolute top-50 start-0 translate-middle-y h-100 no-drag"><img class="h-100 bg-cover bg-position-center-center img-fluid no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
+				<?php endif; ?>
 
 				<!-- Images sources-->
 				<style scoped type="text/css">
