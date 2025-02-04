@@ -745,7 +745,7 @@ function waff_RGBToHSL($RGB) {
     $s = (int)round(255.0 * $s);
     $l = (int)round(255.0 * $l);
 
-    return (object) Array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
+    return (object) array('hue' => $h, 'saturation' => $s, 'lightness' => $l);
 }
 
 /**
