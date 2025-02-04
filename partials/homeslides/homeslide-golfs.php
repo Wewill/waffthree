@@ -22,7 +22,7 @@ $slide_colors 		= array();
 
 // Homeslide background image
 $homeslide_images = WaffTwo\Theme\waff_get_theme_homeslide_background();
-$homeslide_image = if ( !empty($homeslide_images) ) ? reset($homeslide_images) : false;
+$homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : false;
 
 ?>
 
