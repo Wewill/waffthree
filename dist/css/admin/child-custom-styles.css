@@ -6,32 +6,43 @@
 #customize-control-title_footer_colors,
 #customize-control-footer_background_color,
 #customize-control-footer_text_color {
-    display: none;
+  display: none;
 }
 
 /* Fix MetaBox blocks On the right sidebar design issue */
 
 .mb-block-edit .rwmb-field {
-	display: block !important;
+  display: block !important;
 }
 
 /* Hide Metabox no licence notification */
 
 #meta-box-notification {
-    display: none;
+  display: none;
 }
 
 /* Make long text_list readable */
 
-.edit-post-sidebar .rwmb-text_list-non-cloneable > .rwmb-input, .edit-post-sidebar .rwmb-text_list-clone {
-	flex-direction: column;
+.edit-post-sidebar .rwmb-text_list-non-cloneable > .rwmb-input,
+.edit-post-sidebar .rwmb-text_list-clone {
+  flex-direction: column;
 }
 
 .post-type-homeslide #titlewrap::after {
-    content: 'Vous pouvez utiliser <br> pour forcer un retour à la ligne / You can use <br> to force a newline';
-    display: block;
-    padding-left: 10px;
-    margin-top: 0px;
-    height: 20px;
-    color: #5085b3;
+  content: "Vous pouvez utiliser <br> pour forcer un retour à la ligne / You can use <br> to force a newline";
+  display: block;
+  padding-left: 10px;
+  margin-top: 0px;
+  height: 20px;
+  color: #5085b3;
+}
+
+/* Fix the issue with rwmb no padding & swith width */
+.mb-block-edit .rwmb-meta-box {
+  padding: 16px;
+  background-color: #f1f1f1;
+}
+
+.mb-block-edit .rwmb-field.rwmb-switch-wrapper .rwmb-label {
+  width: 100%;
 }
