@@ -44,7 +44,7 @@
 }
 
 .mb-block-edit .rwmb-meta-box .rwmb-switch-label {
-  --color: var(#9500ff, --wp-admin-theme-color);
+  --color: #9500ff !important;
 }
 
 .mb-block-edit .rwmb-field.rwmb-switch-wrapper .rwmb-label {
