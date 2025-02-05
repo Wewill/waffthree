@@ -148,10 +148,16 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 ],
                 'inline'  => 1,
 			],
+			// [
+            //     'id'    => $prefix . 'lp_morelink',
+            //     'type'  => 'switch',
+            //     'name'  => esc_html__( 'Display more link ?', 'waff' ),
+            //     'style' => 'rounded',
+			// ],
 			[
-                'id'    => $prefix . 'lp_morelink',
+                'id'    => $prefix . 'lp_meta',
                 'type'  => 'switch',
-                'name'  => esc_html__( 'Display more link ?', 'waff' ),
+                'name'  => esc_html__( 'Display meta infos ( posted by, posted at ... ) ?', 'waff' ),
                 'style' => 'rounded',
 			],
 			[
@@ -207,9 +213,10 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'std'     => 'normal',
                 'options' => [
                     'normal' 		=> esc_html__( 'Normal', 'waff' ),
+					'classic' 		=> esc_html__( 'Classic', 'waff' ),
                     'magazine' 		=> esc_html__( 'Magazine', 'waff' ),
                     'bold' 			=> esc_html__( 'Bold', 'waff' ),
-                    // 'directory' 	=> esc_html__( 'Directory list', 'waff' ), //@TODO BLOCK Considering film or RSFP theme 
+                    // 'directory' 	=> esc_html__( 'Directory list', 'waff' ), // TODO BLOCK Considering film or RSFP theme 
                 ],
 			],		
 		],
@@ -285,7 +292,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	];
 	
 	// WA Edito
-	$meta_boxes[] = [
+	$__meta_box_edition = [
         'title'          => esc_html__( '(WA) Edito', 'waff' ),
         'id'             => 'wa-edito',
         'fields'         => [
@@ -328,12 +335,12 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'name'  => esc_html__( 'Fit image size or limit block ?', 'waff' ),
                 'style' => 'rounded',
 			],
-			[
-                'id'    => $prefix . 'e_editionbadge',
-                'type'  => 'switch',
-                'name'  => esc_html__( 'Display edition badge ?', 'waff' ),
-                'style' => 'rounded',
-            ],
+			// [
+            //     'id'    => $prefix . 'e_editionbadge',
+            //     'type'  => 'switch',
+            //     'name'  => esc_html__( 'Display edition badge ?', 'waff' ),
+            //     'style' => 'rounded',
+            // ],
             [
                 'id'    => $prefix . 'e_morelink',
                 'type'  => 'switch',
@@ -383,6 +390,15 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
         'context'        => 'side',
         //'Keyattrs'       => 'Value',
 	];
+	// WA Edition conditionnal for FILMS version
+	if( true === WAFF_ISFILM_VERSION )
+		$__meta_box_edition['fields'][] = [
+			'id'    => $prefix . 'e_editionbadge',
+			'type'  => 'switch',
+			'name'  => esc_html__( 'Display edition badge ?', 'waff' ),
+			'style' => 'rounded',
+		];
+	$meta_boxes[] = $__meta_box_edition;
 
 	// WA Contact page
 	$meta_boxes[] = [
@@ -1195,7 +1211,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                     'Label'       	=> 'Label',
                     'Suffix'       	=> 'Suffix (optionnal)',
                     'Description' 	=> 'Description',
-                    'Color'       	=> 'Fill here an css icon (optionnal)',
+                    'Icon <i>'       	=> 'Fill here an css icon (optionnal)',
                     'Link'       	=> 'http://www.google.fr (optionnal)',
                     // 'Value'       	=> 'Value',
                 ],
@@ -1309,7 +1325,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	if ( mb_get_block_field( 'waff_lp_style' ) == null ) :
 	?>
 		<div class="alert alert-dark"><p><?php _e('Please define style to continue', 'waff'); ?></p></div>
-	<?php 
+	<?php
 	endif;
 
 	$sticky_posts 	= array();
@@ -1317,8 +1333,9 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	$categories_id	= array();
 	// mb_get_block_field / mb_the_block_field
 	$limit 			= esc_attr(mb_get_block_field( 'waff_lp_limit' ));
-	$morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
-	$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' )); 
+	// $morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
+	$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' ));
+	$meta 			= esc_attr(mb_get_block_field( 'waff_lp_meta' ));
 
 	if ( $posttype === 'post' ) {
 		//$categories 	= $attributes['data']['waff_lp_categories'];
@@ -1327,7 +1344,6 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	}
 
 	$sticky_posts_option = get_option('sticky_posts');
-	$sticky_posts = array();
 
 	if (!empty($sticky_posts_option)) {
 		$sticky_posts = get_posts(array(
@@ -1345,7 +1361,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	} else {
 		$sticky_posts = get_posts(array(
 			'post_type'			=> $posttype,
-			'numberposts' 		=> 1, 
+			'numberposts' 		=> 1,
 			'post_status' 		=> 'publish', // Show only the published posts
 			'orderby'			=> 'post_date',
 			'order'				=> 'DESC',
@@ -1355,7 +1371,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 		));
 	}
 
-	$args = array( 
+	$args = array(
 		'post_type'			=> $posttype,
 		'numberposts' 		=> $limit, 
 		'post_status' 		=> 'publish', // Show only the published posts
@@ -1367,77 +1383,174 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 		'category'			=> $categories_id,
 	);
 
+	$all_posts = array(
+		'post_type'			=> $posttype,
+		'numberposts' 		=> $limit, 
+		'post_status' 		=> 'publish', // Show only the published posts
+		'orderby'			=> 'post_date',
+		'order'				=> 'DESC',
+		// Limit to selected cats 
+		'category'			=> $categories_id,
+	);
+
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' ) :
-		?>
-		<!-- #Latest / Normal style -->
-		<section id="<?= $id ?>" class="normal-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
-			<div class="container-fluid">
+	?>
+	<!-- #Latest / Normal style -->
+	<section id="<?= $id ?>" class="normal-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
+		<div class="container-fluid">
 
-				<span class="bullet bullet-action-2 ml-0"></span>
-				<h5><?= mb_get_block_field( 'waff_lp_title' ) ?></h5>
+			<span class="bullet bullet-action-2 ml-0"></span>
+			<h5><?= mb_get_block_field( 'waff_lp_title' ) ?></h5>
 
-				<div class="row row-cols-1 row-cols-md-<?= ($limit != '')?$limit:3; ?> mt-4 mb-4">
-				
-				<?php 
-					$index = 0;
-					$recent_posts = get_posts($args);
-					//$recent_posts = array_merge($sticky_posts, $recent_posts);
+			<div class="row row-cols-1 row-cols-md-<?= ($limit != '')?$limit:3; ?> mt-4 mb-4">
+			
+			<?php 
+				$index = 0;
+				$recent_posts = get_posts($all_posts);
+				//$recent_posts = array_merge($sticky_posts, $recent_posts);
 
-					foreach( $recent_posts as $post_item ) : 
-						// Set up global post data in loop 
-						// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
+				foreach( $recent_posts as $post_item ) : 
+					// Set up global post data in loop 
+					// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
 
-						$post_id 				= esc_attr($post_item->ID);
-						$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
-						$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
-						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
-						$the_categories 		= get_the_category($post_id);
-						$excerpt = '';
-						$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
-						$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
-						$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
-						// echo $post_id;
-						// echo $the_content; 
-						$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
-						$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
-						if ( strlen($excerpt) > 140 ) {
-							$excerpt = substr($excerpt, 0, 140);
-							$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
-						}
-						if ( $index > $limit ) { continue; }
-						?>
-					<div class="col">
-						<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
-							<div class="row g-0">
-								<div class="col-md-4">
-									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-									<?php if ( ! empty( $the_categories ) ) { echo '<a href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
-									<?= waff_entry_meta_header($post_item); ?>									
+					$post_id 				= esc_attr($post_item->ID);
+					$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
+					$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
+					$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
+					$the_categories 		= get_the_category($post_id);
+					$excerpt = '';
+					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
+					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
+					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
+					// echo $post_id;
+					// echo $the_content; 
+					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
+					$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
+					if ( strlen($excerpt) > 140 ) {
+						$excerpt = substr($excerpt, 0, 140);
+						$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
+					}
+					if ( $index > $limit ) { continue; }
+					?>
+				<div class="col">
+					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body py-0">
+								
+									<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+									
+									<h5 class="card-title mt-2">
+										<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link">
+											<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
+											<?= $post_item->post_title ?>
+										</a>
+									</h5>
 
-									<h5 class="card-title mt-2"><a href="<?= get_permalink($post_id) ?>" class="stretched-link"><?= $post_item->post_title ?></a></h5>
 									<p class="card-text"><?= $excerpt; ?></p>
+
+									<?php if ( $meta == 1 ) : ?>
+									<?= waff_entry_meta_header($post_item); ?>
+									<?php else : ?>
 									<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
-									</div>
+									<?php endif; ?>
+
 								</div>
 							</div>
 						</div>
 					</div>
-					<?php endforeach; 
-						// After the loop, reset post data to ensure the global $post returns to its original state
-						wp_reset_postdata();
-					?>
-					
-				</div> <!-- END: .row -->
+				</div>
+				<?php endforeach; 
+					// After the loop, reset post data to ensure the global $post returns to its original state
+					wp_reset_postdata();
+				?>
+				
+			</div> <!-- END: .row -->
 
-			</div>
-		</section>
-		<!-- END: #Latest / Normal style-->
-		<?php 
+		</div>
+	</section>
+	<!-- END: #Latest / Normal style-->
+	<?php
 	endif;
 
+	if ( mb_get_block_field( 'waff_lp_style' ) === 'classic' ) :
+	?>
+	<!-- #Latest / Classic style -->
+	<section id="<?= $id ?>" class="normal-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
+		<div class="container-fluid">
+
+
+			<div class="row row-cols-1 row-cols-md-<?= ($limit != '')?$limit:3; ?> mt-4 mb-4">
+
+			<div class="col-6">Sticky</div>
+			<div class="col-6">Normal in a grid</div>
+			
+			<?php 
+				$index = 0;
+				$recent_posts = get_posts($all_posts);
+				//$recent_posts = array_merge($sticky_posts, $recent_posts);
+
+				foreach( $recent_posts as $post_item ) : 
+					// Set up global post data in loop 
+					// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
+
+					$post_id 				= esc_attr($post_item->ID);
+					$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
+					$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
+					$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
+					$the_categories 		= get_the_category($post_id);
+					$excerpt = '';
+					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
+					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
+					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
+					// echo $post_id;
+					// echo $the_content; 
+					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
+					$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
+					if ( strlen($excerpt) > 140 ) {
+						$excerpt = substr($excerpt, 0, 140);
+						$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
+					}
+					if ( $index > $limit ) { continue; }
+					?>
+				<div class="col">
+					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body py-0">
+								<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+								<h5 class="card-title mt-2">
+									<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link">
+										<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
+										<?= $post_item->post_title ?>
+									</a>
+								</h5>
+								<p class="card-text"><?= $excerpt; ?></p>
+								<?= waff_entry_meta_header($post_item); ?>
+								<!-- <p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php endforeach; 
+					// After the loop, reset post data to ensure the global $post returns to its original state
+					wp_reset_postdata();
+				?>
+				
+			</div> <!-- END: .row -->
+
+		</div>
+	</section>
+	<!-- END: #Latest / Classic style-->
+	<?php
+	endif;
 
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'magazine' ) :
 	?>
@@ -1490,13 +1603,16 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 							</h6>
 							<div class="main-post my-5">
 								<h1 class="card-title light display-2"><a href="<?php echo get_permalink($post_item->ID) ?>" class="stretched-link"><?php echo $post_item->post_title ?></a></h1>
-								<p class="card-date mt-2 mb-0"><?php echo $sticky_post_date; ?></p>
+								<p class="card-date mt-2 mb-0">
+									<?= is_sticky( $post_item->ID ) ? '<i class="bi bi-pin"></i>' : '' ?>
+									<?php echo $sticky_post_date; ?>
+								</p>
 								<p class="card-text d-none"><?php echo $excerpt; ?></p>
 							</div>
 							<p class="text-action-2 pb-0 mb-0"><i class="icon icon-plus"></i> <?php _e('Read more', 'waff'); ?></p>
 						</div>
 					</div>
-					<!-- END: Sticky post --> 
+					<!-- END: Sticky post -->
 					<?php
 				endforeach;
 			endif;
@@ -1534,12 +1650,16 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 					$lightness_threshold = 130;
 
 					foreach( $recent_posts as $post_item ) : 
-						$post_color 			= rwmb_meta('_waff_bg_color_metafield', $args, $post_item->ID );
-						$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // TODO , 'array' ICI BUG ?
+						$post_color 						= rwmb_meta('_waff_bg_color_metafield', $args, $post_item->ID );
+						$rgb_post_color						= waff_HTMLToRGB($post_color); // TODO , 'array' ICI BUG ? // 'array'
 						$post_color_class					= 'contrast--light';
 						$post_title_color 					= 'color-dark';
-						if ( $post_color != '' ) { // Si $post_color n'est pas vide
-							$hsl = waff_RGBToHSL($rgb_post_color);
+
+						// print_r($rgb_post_color);
+
+						// Check if the color is dark or light
+						if ( $post_color && $post_color != '' ) { // Si $post_color n'est pas vide
+							$hsl = waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
 							if($hsl->lightness < $lightness_threshold) {
 								$post_color_class 			= 'contrast--dark';
 								$post_title_color 			= 'color-dark';	// Here, this is the same because we do need to handle the hover state l:547
@@ -1560,18 +1680,24 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 
 						if ( $index > $limit ) { continue; }
 						?>
-						<a 	id="post-<?php echo esc_attr($post_item->ID); ?>" 
-							href="<?php echo get_permalink($post_item->ID) ?>" 
-							class="<?= $post_color_class ?> <?= ( $post_color != '' && $post_color_class != 'contrast--light' )?'has-hover-background':''; ?> --vh-50 lg-vh-50 mh-380-px min-h-180-px p-4 p-sm-5 border border-start-0 border-transparent-color-silver list-group-item list-group-item-light list-group-item-action d-flex flex-column align-items-start justify-content-between"						>
-							<div>
-								<p class="<?= $post_title_color ?> text-muted list-date mt-1 mb-0 d-none"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
-								<h3 class="<?= $post_title_color ?> mb-1 mt-0"><?php echo $post_item->post_title ?></h3>
-								<p class="text-action-2 list-text f-14"><?php echo $excerpt; ?></p>
+							<div id="post-<?php echo esc_attr($post_item->ID); ?>" 
+								class="<?= $post_color_class ?> <?= ( $post_color != '' && $post_color_class != 'contrast--light' )?'has-hover-background':''; ?> --vh-50 lg-vh-50 mh-380-px min-h-180-px p-4 p-sm-5 border border-start-0 border-transparent-color-silver list-group-item list-group-item-light list-group-item-action d-flex flex-column align-items-start justify-content-between">
+								<div>
+									<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+									
+									<?php if ( $meta == 1 ) : ?>
+									<?= waff_entry_meta_header($post_item); ?>
+									<?php else : ?>
+									<p class="<?= $post_title_color ?> text-muted list-date mt-1 mb-0 d-none"><?php echo get_the_date('j F Y', $post_item->ID); ?></p>
+									<?php endif; ?>
+									
+									<h3 class="<?= $post_title_color ?> mb-1 mt-0"><?php echo $post_item->post_title ?></h3>
+									<p class="text-action-2 list-text f-14"><?php echo $excerpt; ?></p>
+								</div>
+								<a href="<?php echo get_permalink($post_item->ID) ?>" class="stretched-link text-action-2 pb-0 mb-0"><i class="icon icon-plus"></i> <?php _e('Read more', 'waff'); ?></a>
 							</div>
-							<p class="text-action-2 pb-0 mb-0"><i class="icon icon-plus"></i> <?php _e('Read more', 'waff'); ?></p>
-						</a>
 						<?php if ( $post_color != '' ) : ?>
-						<style> .list-group a#post-<?php echo esc_attr($post_item->ID); ?>.list-group-item:hover { background-color:<?= $post_color ?> !important; }</style>
+							<style> .list-group #post-<?php echo esc_attr($post_item->ID); ?>.list-group-item:hover { background-color:<?= $post_color ?> !important; }</style>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</div>
@@ -1601,7 +1727,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 			foreach( $recent_posts as $post_item ) : 
 				$post_id 				= esc_attr($post_item->ID);
 				$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
-				$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
+				$post_color				= ($post_color!='')?$post_color:'var(--waff-color-layout)'; // 444444 //00ff97
 				$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
 				$the_categories 		= get_the_category($post_id);
 				$excerpt = '';
@@ -1639,7 +1765,10 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 							<?php if ( ! empty( $the_categories ) ) { echo '<a href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
 							</h6>
 							<div class="main-post">
-								<p class="card-date text-light mt-1 mb-0"><?php echo get_the_date('j F Y', $post_id); ?></p>
+								<p class="card-date text-light mt-1 mb-0">
+									<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
+									<?php echo get_the_date('j F Y', $post_id); ?>
+								</p>
 								<h2 class="card-title w-60"><a href="<?php echo get_permalink($post_id) ?>" class="stretched-link link-light"><?php echo $post_item->post_title ?></a></h2>
 							</div>
 							<p class="card-text"><?php echo $excerpt; ?></p>
@@ -1971,7 +2100,7 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
 							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
+								<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -2035,7 +2164,7 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
 							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-							<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
+								<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -3658,8 +3787,8 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 	$b_position 	.= ' ---- position-absolute position-lg-relative top-0 left-0 w-100'; 
 
 	// Background image 
-	$bg_images = waff_get_blocks_background();
-	$bg_image = reset( $bg_images );
+	$bg_images 		= waff_get_blocks_background();
+	$bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 
 	?>
 	<!-- #Mission -->
@@ -3772,8 +3901,8 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 	$image 					= mb_get_block_field('waff_c_image');
 
 	// Background image 
-	$bg_images = waff_get_blocks_transition();
-	$bg_image = reset( $bg_images );
+	$bg_images 		= waff_get_blocks_transition();
+	$bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 
 	?>
 	<!-- #cols -->
@@ -3982,9 +4111,9 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 	// $bg_images = waff_get_blocks_background();
 	// $bg_image = reset( $bg_images );
 
-	// Pattern image 
+	// Pattern image
 	$pat_images = waff_get_blocks_pattern();
-	$pat_image = reset( $pat_images );
+	$pat_image 		= ( !empty($pat_images) ) ? reset( $pat_images ) : false;
 	
 	?>
 	<!-- #Insights -->
