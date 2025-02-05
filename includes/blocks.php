@@ -4072,24 +4072,24 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0 md-rounded-0" data-aos="fade-up" data-aos-delay="0" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
+					<figure class="bg-image h-100 m-0 position-absolute">
 					<?php if ( count($image_1) > 0 && !$is_preview ) : ?>
 						<?php foreach ( $image_1 as $im ) : ?>
-							<figure>
 								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
+									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseA-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapseA-<?= $id  ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseA-<?= $id  ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
-							</figure>
 						<?php endforeach; ?>
 					<?php endif; ?>
-					
+					</figure>
+
 					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline text-light"><?= mb_get_block_field( 'waff_b_label_1' ) ?></h6>
 						<div>
@@ -4109,23 +4109,23 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0 md-rounded-bottom-4" data-aos="fade-up" data-aos-delay="100" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
+					<figure class="bg-image h-100 m-0 position-absolute">
 					<?php if ( count($image_2) > 0 && !$is_preview ) : ?>
 						<?php foreach ( $image_2 as $im ) : ?>
-							<figure>
 								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
+									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseB-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseB-<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseB-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
-							</figure>
 						<?php endforeach; ?>
 					<?php endif; ?>
+					</figure>
 					
 					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline action-1"><?= mb_get_block_field( 'waff_b_label_2' ) ?></h6>
