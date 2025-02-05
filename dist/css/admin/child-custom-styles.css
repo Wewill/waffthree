@@ -40,7 +40,11 @@
 /* Fix the issue with rwmb no padding & swith width */
 .mb-block-edit .rwmb-meta-box {
   padding: 16px;
-  background-color: #f1f1f1;
+  background-color: #fdf4fe;
+}
+
+.mb-block-edit .rwmb-meta-box .rwmb-switch-label {
+  --color: var(#9500ff, --wp-admin-theme-color);
 }
 
 .mb-block-edit .rwmb-field.rwmb-switch-wrapper .rwmb-label {
