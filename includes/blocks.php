@@ -157,7 +157,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 			[
                 'id'    => $prefix . 'lp_meta',
                 'type'  => 'switch',
-                'name'  => esc_html__( 'Display meta infos ( posted by, posted at ... ) ?', 'waff' ),
+                'name'  => esc_html__( 'Display meta infos ( posted by, posted at, catégories ... ) ?', 'waff' ),
                 'style' => 'rounded',
 			],
 			[
@@ -1295,41 +1295,39 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
 
 	if ( $is_preview === true ) {
+		?>
+		<section style="text-align: center; padding-left: 15%; padding-right: 15%;">
+		<?php
 		switch(mb_get_block_field( 'waff_lp_style' )) {
 			case 'normal':
 				?>
-					<section style="text-align: center;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-normal.svg" class="img-fluid" />	
-					</section>
 				<?php
 				break;
 			case 'magazine':
 				?>
-					<section style="text-align: center;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-magazine.svg" class="img-fluid" />	
-					</section>
 				<?php
 				break;
 			case 'bold':
 				?>
-					<section style="text-align: center;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-bold.svg" class="img-fluid" />	
-					</section>
 				<?php
 				break;
 			case 'classic':
 				?>
-					<section style="text-align: center;">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-classic.svg" class="img-fluid" />	
-					</section>
 				<?php
 				break;
 			default:
 				?>
-					<section>ERROR / No style is selected</section>
+					ERROR / No style is selected
 				<?php
 				break;
 		}
+		?>
+		</section>
+		<?php
 		return;
 	}
 
@@ -1349,7 +1347,8 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
 	$themeClass = 'featured mt-md-5 mb-md-5 mt-2 mb-2 contrast--dark fix-vh-50'; // Responsive issue fix
-	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal ') $themeClass = 'mt-2 mb-10 contrast--light'; 
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-6 contrast--light';
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-6 contrast--light overflow-visible';
 	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
@@ -1518,67 +1517,91 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'classic' ) :
 	?>
 	<!-- #Latest / Classic style -->
-	<section id="<?= $id ?>" class="normal-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
+	<section id="<?= $id ?>" class="classic-style <?= $class ?> <?= $animation_class ?>" <?= $data ?>>
 		<div class="container-fluid">
+			<div class="row row-cols-1 row-cols-md-2 mt-4 mb-4">
 
+				<!-- Right col-->
+				<div class="col mb-4 mb-md-0">
 
-			<div class="row row-cols-1 row-cols-md-<?= ($limit != '')?$limit:3; ?> mt-4 mb-4">
-
-			<div class="col-6">Sticky</div>
-			<div class="col-6">Normal in a grid</div>
-			
-			<?php 
-				$index = 0;
-				$recent_posts = get_posts($all_posts);
-				//$recent_posts = array_merge($sticky_posts, $recent_posts);
-
-				foreach( $recent_posts as $post_item ) : 
-					// Set up global post data in loop 
-					// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
-
-					$post_id 				= esc_attr($post_item->ID);
-					$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
-					$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
-					$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
-					$the_categories 		= get_the_category($post_id);
-					$excerpt = '';
-					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
-					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
-					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
-					// echo $post_id;
-					// echo $the_content; 
-					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
-					$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
-					if ( strlen($excerpt) > 140 ) {
-						$excerpt = substr($excerpt, 0, 140);
-						$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
-					}
-					if ( $index > $limit ) { continue; }
-					?>
-				<div class="col">
-					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body py-0">
-								<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
-								<h5 class="card-title mt-2">
-									<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link">
-										<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
+				<?php 
+					foreach( $sticky_posts as $post_item ) : 
+						$post_id 				= esc_attr($post_item->ID);
+						$the_categories 		= get_the_category($post_id);
+						?>
+					<div class="card min-h-250-px h-100 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center"
+					id="<?= $post_id; ?>" 
+					style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');">
+						<div class="card-img-overlay bg-gradient-action-2">
+							<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
+								<div>
+									<h6 class="subline text-action-1"><?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?> En avant</h6>
+									<?php if ( ! empty( $the_categories ) && $meta ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+								</div>
+								<h2 class="text-white mt-auto mb-8">
+									<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link link-white">
 										<?= $post_item->post_title ?>
 									</a>
 								</h5>
-								<p class="card-text"><?= $excerpt; ?></p>
-								<?= waff_entry_meta_header($post_item); ?>
-								<!-- <p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p> -->
-								</div>
+								<ul class="d-flex list-unstyled m-0">
+									<li class="me-auto subline">Lire la suite <i class="bi bi-chevron-right"></i></li>
+									<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?= get_the_date('j F Y', $post_id); ?></small></li>
+								</ul>
 							</div>
 						</div>
 					</div>
+					<?php endforeach; 
+					// After the loop, reset post data to ensure the global $post returns to its original state
+					wp_reset_postdata();
+				?>
+
 				</div>
-				<?php endforeach; 
+
+				<!-- Left col-->
+				<div class="col">
+					<style scoped>
+						.card.r-card {
+							height: 250px;
+						}
+
+						@media (min-width: 768px) {
+							.card.r-card {
+								height:16vw !important;
+							}
+						}
+					</style>
+					<!-- Grid rows -->
+					<div class="row row-cols-1 row-cols-md-2 g-4">	
+					<?php 
+						$recent_posts = get_posts($args);
+						foreach( $recent_posts as $post_item ) : 
+							$post_id 				= esc_attr($post_item->ID);
+							$the_categories 		= get_the_category($post_id);
+							?>
+						<div class="col">
+							<div class="card r-card h-250-px overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" 
+							id="<?= $post_id; ?>" 
+							style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');">
+								<div class="card-img-overlay bg-gradient-action-2">
+									<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
+										<div>
+											<?php if ( ! empty( $the_categories ) && $meta ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
+										</div>
+										<h5 class="text-white">
+											<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link link-white">
+												<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
+												<?= $post_item->post_title ?>
+											</a>
+										</h5>
+										<ul class="d-flex list-unstyled m-0">
+											<li class="me-auto subline">Lire la suite <i class="bi bi-chevron-right"></i></li>
+											<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?= get_the_date('j F Y', $post_id); ?></small></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php endforeach; 
 					// After the loop, reset post data to ensure the global $post returns to its original state
 					wp_reset_postdata();
 				?>
@@ -2125,11 +2148,9 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 	<section id="<?= $id ?>" class="fix-vh-100 <?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center">
-				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> d-flex flex-column justify-content-center min-h-100" data-aos="fade-right">
+				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> d-flex flex-column justify-content-center min-h-100" data-aos="fade-right" <?= $is_preview?'style="float:left;"':''; ?>>
 					<div class="p-4">
-					
-					<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
-
+						<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
 					</div>
 					<div class="p-4">
 						<h2 class="mb-2"><?= mb_get_block_field( 'waff_e_title' ) ?></h2>
@@ -2144,11 +2165,11 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 						</article>
 					</div>
 				</div>
-				<?php if ( $hide_center_column != '1' ) : ?><div class="col-md-2 d-none d-md-block bg-secondary"></div><?php endif; ?>
-				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> overflow-hidden bg-bgcolor" data-aos="fade-left"> 
+				<?php if ( $hide_center_column != '1' ) : ?><div class="col-md-2 d-none d-md-block bg-secondary" <?= $is_preview?'style="display:none;"':''; ?>></div><?php endif; ?>
+				<div class="<?= ( $hide_center_column != '1' )?'col-md-5':'col-md-6'; ?> overflow-hidden bg-bgcolor" data-aos="fade-left" <?= $is_preview?'style="float:right;"':''; ?>>
 					<?php if ( count($image) > 0 ) : ?>
 						<?php foreach ( $image as $im ) : ?>
-							<figure class="img-shifted shift-right vh-100">
+							<figure class="img-shifted shift-right vh-100" <?= $is_preview?'style="margin:0;"':''; ?>>
 								<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 								<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
@@ -2170,11 +2191,11 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 	<!-- #Edito / Framed version -->
 	<section id="<?= $id ?>" class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'fix-vh-75' ?> px-4 px-sm-8 px-md-10 <?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="container-fluid border border-transparent-color-silver px-0">
-			<div class="row g-0 align-items-center">
-				<div class="col-md-6 overflow-hidden bg-bgcolor" data-aos="fade-left"> 
+			<div class="row g-0 align-items-center" <?= $is_preview?'style="border:1px solid silver;display:flex;"':''; ?>>
+				<div class="col-md-6 overflow-hidden bg-bgcolor" data-aos="fade-left" <?= $is_preview?'style="float:left;"':''; ?>> 
 					<?php if ( count($image) > 0 ) : ?>
 						<?php foreach ( $image as $im ) : ?>
-							<figure class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'img-shifted shift-right vh-75' ?>">
+							<figure class="<?= ( mb_get_block_field( 'waff_e_fit' ) == 1 )?'':'img-shifted shift-right vh-75' ?>" <?= $is_preview?'style="margin:0;"':''; ?>>
 								<?php if ( mb_get_block_field( 'waff_e_fit' ) == 1 ) : ?>
 									<img class="w-100" src="<?php echo $im['full_url'] ?>" />
 									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
@@ -2191,7 +2212,7 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 						<?php endforeach; ?>
 					<?php endif; ?>
 				</div>
-				<div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center min-h-100 px-4" data-aos="fade-right">
+				<div class="col-md-6 d-flex flex-column align-items-center justify-content-center text-center min-h-100 px-4" data-aos="fade-right" <?= $is_preview?'style="float:right;text-align: center;"':''; ?>>
 					<div class="p-3">
 						<?php if ( mb_get_block_field( 'waff_e_editionbadge' ) == 1 ) echo waff_get_edition_badge(); ?>
 					</div>
@@ -3834,7 +3855,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>; background-image: url('<?= $bg_image['url']; ?>');">
 		<div class="container-fluid px-0 position-relative">
 			<div class="row g-0 <?= $b_position; ?> <?= $r_alignment; ?> <?= $is_preview ? 'd-none' : '' ?>">
-				<div class="<?= $b_alignment; ?> rounded-end-4" --data-aos="fade-left" --data-aos-delay="100"></div>
+				<div class="<?= $b_alignment; ?> <?= $attributes['align'] === 'full' ? 'rounded-end-4':'rounded-4'; ?>" --data-aos="fade-left" --data-aos-delay="100"></div>
 			</div>
 			<div class="row <?= $f_alignment; ?> w-100 ---- position-lg-absolute <?= $f_position; ?> left-0">
 				<!-- Col 1 -->
@@ -4198,21 +4219,27 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 					
 				</div>
 
-				<div class="col-12 col-lg-4 bg-color-layout rounded-start-4 d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
+				<div class="col-12 col-lg-4 bg-color-layout <?= $attributes['align'] === 'full' ? 'rounded-start-4':'rounded-4'; ?> d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
 
 					<!-- Figure -->
 					<?php if ( count($image) > 0 ) : ?>
 						<?php foreach ( $image as $im ) : ?>
-							<figure class="p-0 rounded-start-4 contrast--light h-80 w-80 overflow-hidden" data-aos="fade-left" data-aos-delay="200">
+							<figure class="p-0 <?= $attributes['align'] === 'full' ? 'rounded-start-4':'rounded-4'; ?> contrast--light h-80 w-80 overflow-hidden" data-aos="fade-left" data-aos-delay="200">
 								<picture class="">
 									<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid rounded-4 w-100 h-100 fit-image img-transition-scale">
 								</picture>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+									<!-- <figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
 										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+										</span>
+									</figcaption> -->
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold">Helmut Newton, <em>photographer</em></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
