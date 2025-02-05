@@ -1294,6 +1294,10 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 
 function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
 
+	if ( $is_preview === true ) 
+		return 'PREVIEW !';
+
+
 	// print_r($attributes);
 
 	// Fields data.
