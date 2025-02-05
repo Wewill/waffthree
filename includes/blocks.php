@@ -2172,7 +2172,12 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 							<figure class="img-shifted shift-right vh-100" <?= $is_preview?'style="margin:0;"':''; ?>>
 								<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
-								<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+								<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+									<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+										<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+									</span>
+								</figcaption>
 								<?php endif; /* If captions */ ?>
 								</div>	
 							</figure>
@@ -2199,12 +2204,22 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 								<?php if ( mb_get_block_field( 'waff_e_fit' ) == 1 ) : ?>
 									<img class="w-100" src="<?php echo $im['full_url'] ?>" />
 									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
-									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+										<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+										</span>
+									</figcaption>
 									<?php endif; /* If captions */ ?>
 								<?php else : ?>
 									<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
 									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
-									<figcaption><strong>© <?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></figcaption>
+										<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
+										</span>
+									</figcaption>
 									<?php endif; /* If captions */ ?>
 									</div>	
 								<?php endif; ?>
@@ -3872,10 +3887,9 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 							<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 								<!-- <figcaption> -->
 								<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
-											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
-										</span>
+									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+									<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+										<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 									</span>
 								</figcaption>
 							<?php endif; /* If captions */ ?>
@@ -4064,11 +4078,10 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 position-absolute bottom-0 start-0">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
-											<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
-												<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
-											</span>
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
@@ -4100,11 +4113,10 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 position-absolute bottom-0 end-0">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
-											<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
-												<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
-											</span>
+									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
@@ -4230,16 +4242,10 @@ function wa_insights_callback( $attributes, $is_preview = false, $post_id = null
 								</picture>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] ) : ?>
 									<!-- <figcaption> -->
-									<!-- <figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
-											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
-										</span>
-									</figcaption> -->
 									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseExample2">
-											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold">Helmut Newton, <em>photographer</em></span>
+										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#figCaption<?= $id ?>" role="button" aria-expanded="false" aria-controls="figCaption<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="figCaption<?= $id ?>">
+											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-bold"><strong><?= esc_html($im['alt']); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
 								<?php endif; /* If captions */ ?>
