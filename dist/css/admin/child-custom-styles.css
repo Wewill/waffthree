@@ -38,15 +38,15 @@
 }
 
 /* Fix the issue with rwmb no padding & swith width */
-.mb-block-edit .rwmb-meta-box {
+.editor-sidebar .mb-block-edit .rwmb-meta-box {
   padding: 16px;
-  background-color: #fdf4fe;
+  background-color: #fbf5fb;
 }
 
-.mb-block-edit .rwmb-meta-box .rwmb-switch-label {
+.editor-sidebar .mb-block-edit .rwmb-meta-box .rwmb-switch-label {
   --color: #9500ff !important;
 }
 
-.mb-block-edit .rwmb-field.rwmb-switch-wrapper .rwmb-label {
+.editor-sidebar .mb-block-edit .rwmb-field .rwmb-label {
   width: 100%;
 }
