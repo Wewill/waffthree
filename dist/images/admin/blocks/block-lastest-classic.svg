@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 554 197.76">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fdfeff;
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: #555d66;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x="281.93" y="18.91" width="115.76" height="76.24" rx="8.83" ry="8.83"/>
+  <g>
+    <path class="cls-1" d="M296.38,39.65h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M296.12,67.22h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M296.12,56.22h28v4h-28v-4Z"/>
+  </g>
+  <rect class="cls-2" x="25.76" y="18.91" width="242.61" height="161.22" rx="8.83" ry="8.83"/>
+  <g>
+    <path class="cls-1" d="M38.87,83.13h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M38.61,110.7h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M38.61,99.7h28v4h-28v-4Z"/>
+  </g>
+  <rect class="cls-2" x="281.93" y="105.87" width="115.76" height="76.24" rx="8.83" ry="8.83"/>
+  <g>
+    <path class="cls-1" d="M296.38,126.61h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M296.12,154.18h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M296.12,143.18h28v4h-28v-4Z"/>
+  </g>
+  <rect class="cls-2" x="411.25" y="18.91" width="115.76" height="76.24" rx="8.83" ry="8.83"/>
+  <g>
+    <path class="cls-1" d="M425.69,39.65h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M425.44,67.22h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M425.44,56.22h28v4h-28v-4Z"/>
+  </g>
+  <rect class="cls-2" x="411.25" y="105.87" width="115.76" height="76.24" rx="8.83" ry="8.83"/>
+  <g>
+    <path class="cls-1" d="M425.69,126.61h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M425.44,154.18h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M425.44,143.18h28v4h-28v-4Z"/>
+  </g>
+</svg>
