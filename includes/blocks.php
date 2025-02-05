@@ -3865,7 +3865,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 				<!-- Figure -->
 				<?php if ( count($image) > 0 ) : ?>
 					<?php foreach ( $image as $im ) : ?>
-						<figure class="wp-block col-10 col-lg-4 p-0 rounded-4 contrast--light <?= $i_alignment; ?> overflow-hidden position-relative mb-10 --mb-md-10 mb-lg-0" data-aos="<?= $aos_position; ?>" data-aos-delay="200" style="<?= $is_preview ? 'float:left; width:49%;' : '' ?>">
+						<figure class="col-10 col-lg-4 p-0 rounded-4 contrast--light <?= $i_alignment; ?> overflow-hidden position-relative mb-10 --mb-md-10 mb-lg-0" data-aos="<?= $aos_position; ?>" data-aos-delay="200" style="<?= $is_preview ? 'float:left; width:49%;' : '' ?>">
 							<picture class="">
 								<img src="<?= $im['full_url'] ?>" alt="Image" class="img-fluid rounded-4 <?= $i_alignment; ?> fit-image w-100 img-transition-scale">
 							</picture>
