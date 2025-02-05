@@ -4,24 +4,25 @@
  * Theme javascript functions file.
  */
 
-document.addEventListener("DOMContentLoaded", function() {
-    "use strict";
+document.addEventListener("DOMContentLoaded", function () {
+  "use strict";
 
-    var html = document.documentElement,
-        body = document.body,
-        nightToggle = document.getElementById('night-mode-toggle'),
-        nightActive = 'night-mode';
+  var html = document.documentElement,
+    nightToggle = document.getElementById("night-mode-toggle"),
+    nightActive = "night-mode";
 
-    /* Night Mode */
-    nightToggle.addEventListener('click', function(e) {
-
-        if (html.classList.contains(nightActive)) {
-            html.classList.remove(nightActive);
-            localStorage.setItem('night-mode', 'false');
-        } else {
-            html.classList.add(nightActive);
-            localStorage.setItem('night-mode', 'true');
-        }
+  /* Night Mode */
+  if (nightToggle) {
+    nightToggle.addEventListener("click", function () {
+      if (html.classList.contains(nightActive)) {
+        html.classList.remove(nightActive);
+        localStorage.setItem("night-mode", "false");
+      } else {
+        html.classList.add(nightActive);
+        localStorage.setItem("night-mode", "true");
+      }
     });
-
+  } else {
+    console.info("Night mode toggle button not found.");
+  }
 });
