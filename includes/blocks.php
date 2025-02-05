@@ -1294,9 +1294,44 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 
 function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
 
-	if ( $is_preview === true ) 
-		return 'PREVIEW !';
-
+	if ( $is_preview === true ) {
+		switch(mb_get_block_field( 'waff_lp_style' )) {
+			case 'normal':
+				?>
+					<section style="text-align: center;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-normal.svg" class="img-fluid" />	
+					</section>
+				<?php
+				break;
+			case 'magazine':
+				?>
+					<section style="text-align: center;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-magazine.svg" class="img-fluid" />	
+					</section>
+				<?php
+				break;
+			case 'bold':
+				?>
+					<section style="text-align: center;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-bold.svg" class="img-fluid" />	
+					</section>
+				<?php
+				break;
+			case 'classic':
+				?>
+					<section style="text-align: center;">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-lastest-classic.svg" class="img-fluid" />	
+					</section>
+				<?php
+				break;
+			default:
+				?>
+					<section>ERROR / No style is selected</section>
+				<?php
+				break;
+		}
+		return;
+	}
 
 	// print_r($attributes);
 
