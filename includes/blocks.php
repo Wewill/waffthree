@@ -431,6 +431,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'type' => 'wysiwyg',
                 'name' => esc_html__( 'Rich content', 'waff' ),
 			],
+			[
+				'id'   => $prefix . 'c_first_color_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Class', 'waff' ),
+				'std' => 'bg-action-2',
+                'desc' => esc_html__( 'Fill the background color class ( or more ).', 'waff' ),
+			],
 			// Second line
 			[
                 'type' => 'heading',
@@ -447,6 +454,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'type' => 'wysiwyg',
                 'name' => esc_html__( 'Rich content', 'waff' ),
 			],
+			[
+				'id'   => $prefix . 'c_second_color_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Class', 'waff' ),
+				'std' => 'bg-secondary',
+                'desc' => esc_html__( 'Fill the background color class ( or more ).', 'waff' ),
+			],
 			// Form
 			[
                 'type' => 'heading',
@@ -462,7 +476,17 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'type' => 'number',
 				'name' => esc_html__( 'Contact form id', 'waff' ),
                 'desc' => esc_html__( 'Fill the Gravity form id.', 'waff' ),
-			],			
+			],
+			[
+                'type' => 'heading',
+                'name' => __( 'Style', 'waff' ),
+			],
+			[
+                'id'    => $prefix . 'c_rounded',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Rounded elements ?', 'waff' ),
+                'style' => 'rounded',
+			],
 		],
 		'category'       => 'layout',
 		// 'icon'           => 'text-page',
@@ -3102,7 +3126,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 
 	$gallery = mb_get_block_field( 'waff_c_gallery' );
 	$images = array();
-	$index = 0; 
+	$index = 0;
 
 	foreach($gallery as $im) {
 		if ( $im['full_url' ] != '')
@@ -3114,7 +3138,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 
 	?>
 	<!-- #Contact -->
-	<section id="<?= $id ?>" class="mt-0 mb-0 contrast--dark bg-bgcolor container-fluid" style="height: 100%;">
+	<section id="<?= $id ?>" class="<?= $class ?> mt-0 mb-0 bg-bgcolor" style="height: 100%;">
 		<div class="row f-w g-0">
 				<div class="col-8 bg-primary" style="height: 540px;">
 
@@ -3180,12 +3204,10 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 		</div>
 	</section>
 	
-	<!-- Begin: CONTACT MAIN -->
-	<main role="main" id="contact-<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="margin-top: -1820px; position: relative;">
-
+	<!-- Begin: Contact content -->
+	<section id="contact-section-<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="margin-top: -1820px; position: relative;">
 		<div class="row f-w">
-				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-action-2 p-4 p-md-5" style="height: 370px;">
-					
+				<div class="col-10 col-md-8 offset-1 offset-md-2 p-4 p-md-5 <?= mb_get_block_field( 'waff_c_first_color_class' ) && mb_get_block_field( 'waff_c_first_color_class' ) !== '' ? mb_get_block_field( 'waff_c_first_color_class' ) : 'bg-action-2' ?> <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-top-4' :'' ?>" style="height: 370px;">
 					<div class="row">
 						<div class="col-12 col-md-6 ">
 							<h2 class="heading-4 mb-5 mb-md-0"><?= waff_do_markdown(mb_get_block_field( 'waff_c_first_title' )) ?></h2>
@@ -3193,12 +3215,12 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 						<div class="col-12 col-md-6">
 							<div class="row">
 								<?= mb_get_block_field( 'waff_c_first_content' ); ?>
-							</div>						
+							</div>
 						</div>
 					</div>
 					
 				</div>
-				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-secondary p-4 p-md-5" style="height: 370px;">
+				<div class="col-10 col-md-8 offset-1 offset-md-2 p-4 p-md-5 <?= mb_get_block_field( 'waff_c_second_color_class' ) && mb_get_block_field( 'waff_c_second_color_class' ) !== '' ? mb_get_block_field( 'waff_c_second_color_class' ) : 'bg-secondary' ?>" style="height: 370px;">
 					
 					<div class="row">
 						<div class="col-12 col-md-6 ">
@@ -3207,21 +3229,21 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 						<div class="col-12 col-md-6">
 							<div class="row">
 								<?= mb_get_block_field( 'waff_c_second_content' ); ?>
-							</div>					
+							</div>
 						</div>
 					</div>
 
 					
 				</div>
-				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-light p-4 p-md-5" style="height: 740px;">
+				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-light p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
 					<?php
 					echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
 					?>
 				</div>
 		</div>
-
-	</main><!-- /.container -->
-	<!-- End: CONTACT MAIN -->
+	</section>
+	<div class="clear clearfix"></div>
+	<!-- End: Contact content -->
 
 	<!-- END: #Contact -->
 	<?php
