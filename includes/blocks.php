@@ -3097,8 +3097,14 @@ function wa_playlist_callback( $attributes, $is_preview = false, $post_id = null
 
 function wa_contact_callback( $attributes, $is_preview = false, $post_id = null ) {
 	
-	// if ( $is_preview ) 
-	// 	print_r($attributes);
+	if ( $is_preview === true ) {
+		?>
+		<section style="text-align: center; padding-left: 15%; padding-right: 15%;">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-contact.svg" class="img-fluid" />	
+		</section>
+		<?php
+		return;
+	}
 
 	// Fields data.
 	if ( empty( $attributes['data'] ) ) {
