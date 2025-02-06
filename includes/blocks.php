@@ -1320,7 +1320,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 
 	if ( $is_preview === true ) {
 		?>
-		<section style="text-align: center; padding-left: 15%; padding-right: 15%;">
+		<section style="text-align: center; padding-left: 20%; padding-right: 20%;">
 		<?php
 		switch(mb_get_block_field( 'waff_lp_style' )) {
 			case 'normal':
@@ -3099,7 +3099,7 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 	
 	if ( $is_preview === true ) {
 		?>
-		<section style="text-align: center; padding-left: 15%; padding-right: 15%;">
+		<section style="text-align: center; padding-left: 20%; padding-right: 20%;">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/dist/images/admin/blocks/block-contact.svg" class="img-fluid" />	
 		</section>
 		<?php
