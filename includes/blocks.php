@@ -1471,19 +1471,19 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 				$recent_posts = get_posts($all_posts);
 				//$recent_posts = array_merge($sticky_posts, $recent_posts);
 
-				foreach( $recent_posts as $post_item ) : 
-					// Set up global post data in loop 
+				foreach( $recent_posts as $post_item ) :
+					// Set up global post data in loop
 					// setup_postdata($GLOBALS['post'] =& $post_item); //$GLOBALS['post'] =& $post_item
 
 					$post_id 				= esc_attr($post_item->ID);
-					$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
-					$post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
-					$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
+					// $post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
+					// $post_color				= ($post_color!='')?$post_color:'#444444'; //00ff97
+					// $rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
 					$the_categories 		= get_the_category($post_id);
 					$excerpt = '';
 					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
 					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
-					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true));
+					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true)); // RSFP only 
 					// echo $post_id;
 					// echo $the_content; 
 					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
@@ -1492,10 +1492,12 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 						$excerpt = substr($excerpt, 0, 140);
 						$excerpt = substr($excerpt, 0, strrpos($excerpt, ' ')) . '...';
 					}
-					if ( $index > $limit ) { continue; }
+					// if ( $index > $limit ) { continue; }
+					$index++; 
+
 					?>
 				<div class="col">
-					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>">
+					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>" data-aos="fade-up" data-aos-delay="<?= $index*100; ?>">
 						<div class="row g-0">
 							<div class="col-md-4">
 								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
@@ -1555,7 +1557,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 						?>
 					<div class="card min-h-250-px h-100 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center"
 					id="<?= $post_id; ?>" 
-					style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');">
+					style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');" data-aos="fade-right">
 						<div class="card-img-overlay bg-gradient-action-2">
 							<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
 								<div>
@@ -1597,15 +1599,17 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 					<!-- Grid rows -->
 					<div class="row row-cols-1 row-cols-md-2 g-4">	
 					<?php 
+						$index=0;
 						$recent_posts = get_posts($args);
 						foreach( $recent_posts as $post_item ) : 
 							$post_id 				= esc_attr($post_item->ID);
 							$the_categories 		= get_the_category($post_id);
+							$index++; 
 							?>
 						<div class="col">
 							<div class="card r-card h-250-px overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" 
 							id="<?= $post_id; ?>" 
-							style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');">
+							style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');" data-aos="fade-left" data-aos-delay="<?= $index*200; ?>">
 								<div class="card-img-overlay bg-gradient-action-2">
 									<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
 										<div>
@@ -1753,7 +1757,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 						}
 
 
-						$the_categories 		= get_the_category($post_item->ID);
+						$the_categories = get_the_category($post_item->ID);
 
 						/*$excerpt = '';
 						$excerpt = wp_strip_all_tags(get_the_excerpt($post_item->ID));
@@ -4001,7 +4005,8 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 	}
 
 	// Image 
-	$image 					= mb_get_block_field('waff_c_image');
+	$image 			= mb_get_block_field('waff_c_image');
+	$im 			= ( !empty($image) ) ? reset( $image ) : false;
 
 	// Background image 
 	$bg_images 		= waff_get_blocks_transition();
@@ -4011,14 +4016,16 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 	<!-- #cols -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
 
+		<?php if ( $bg_image ) : ?>
 		<figure class="m-0 p-0 overflow-hidden mb-n1 z-2" <?= $is_preview ? 'style="display:none;"' : '' ?>>
 			<picture class="">
-				<img src="<?= $bg_image['url']; ?>" alt="Image de fond" class="img-fluid fit-image w-100">
+				<img src="<?= $bg_image['url']; ?>" alt="Image de transition" class="img-fluid fit-image w-100">
 			</picture>
 		</figure>
+		<?php endif; ?>
 
-		<div class="container-fluid p-4 p-md-8 bg-v-plain-gradient-action-2 z-2 position-relative" style="<?= !$is_preview ?: 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
-			<div class="row mt-10 mb-10">
+		<div class="container-fluid p-4 p-md-8 z-2 position-relative <?= $bg_image ? 'bg-v-plain-gradient-action-2' : 'bg-v-gradient-action-2 z'?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
 					<h6 class="subline text-action-3" style="<?=!$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
@@ -4029,29 +4036,38 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 					<a class="btn btn-action-3 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_c_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
 					<?php endif; ?>
 				</div>
-			</div>
-			<div class="row mb-15">
 				<?php if (mb_get_block_field( 'waff_c_leadcontent' ) != "") {
 					echo '<div class="col-12"><p class="lead mb-4 text-center fw-bold">'.waff_do_markdown(mb_get_block_field( 'waff_c_leadcontent' )).'</p></div>';
 				} ?>
-
+			</div>
+			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?>">
 				<?php 
 				foreach( mb_get_block_field( 'waff_c_contents' ) as $content ) : 
 					echo '<div class="col" style="' .( $is_preview ? 'display: inline-block; width: calc(24% - 10px); margin-right: 10px;' : '' ). '"><div class="lead">'.waff_do_markdown($content).'</div></div>';
 				endforeach;
 				?>
-			</div>	
+			</div>
+			<figure class="bg-image h-100 m-0 position-absolute">
+				<?php $im[0]['alt'] = 'DR'; if ( $im[0]['alt'] || $im[0]['description'] || wp_get_attachment_caption($im[0]['ID']) ) : ?>
+					<!-- <figcaption> -->
+					<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 zi-max">
+						<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id  ?>">©</span>
+						<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id  ?>">
+							<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im[0]['ID']) ? wp_get_attachment_caption($im[0]['ID']) : esc_html($im[0]['alt'] ? $im[0]['alt'] : 'DR'); ?></strong> <?= esc_html($im[0]['description']); ?></span>
+						</span>
+					</figcaption>
+				<?php endif; /* If captions */ ?>
+			</figure>
 		</div>
 
 		<!-- Background image-->
-		<?php if ( count($image) > 0 && !$is_preview ) : ?>
-			<?php foreach ( $image as $im ) : ?>
-				<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" style="height: calc(100% - 112px);  margin-top: 112px;">
-					<picture class="">
-							<img src="<?= $im['full_url'] ?>" alt="Image de fond" class="img-fluid fit-image h-100 w-100">
-					</picture>
-				</figure>
-			<?php endforeach; ?>
+		<?php if ( $im && !$is_preview ) : ?>
+			<?php  ?>
+			<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" <?=  $bg_image ? 'style="height: calc(100% - 112px);  margin-top: 112px;"':'' ?>>
+				<picture class="">
+						<img src="<?= $im['full_url'] ?>" alt="<?= $im['alt'] ?>" class="img-fluid fit-image h-100 w-100">
+				</picture>
+			</figure>
 		<?php endif; ?>
 
 	</section>
@@ -4098,13 +4114,13 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center">
 
-				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0 md-rounded-0" data-aos="fade-up" data-aos-delay="0" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-right-0 md-rounded-0" data-aos="fade-down" data-aos-delay="0" style="<?=!$is_preview ? '' : 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
 					<figure class="bg-image h-100 m-0 position-absolute">
 					<?php if ( count($image_1) > 0 && !$is_preview ) : ?>
 						<?php foreach ( $image_1 as $im ) : ?>
-								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
+								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');"></div>
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<!-- <figcaption> -->
@@ -4121,7 +4137,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 
 					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline text-light"><?= mb_get_block_field( 'waff_b_label_1' ) ?></h6>
-						<div>
+						<div class="w-100">
 							<div class="w-100 w-lg-50">
 								<p class="card-date fw-bold text-transparent-color-layout mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_1' ) ?></p>
 								<h2 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_1' ) ?></a></h2>
@@ -4135,13 +4151,13 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 
 
 				</div>
-				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0 md-rounded-bottom-4" data-aos="fade-up" data-aos-delay="100" style="<?=!$is_preview ?: 'display:inline-block; width:49%' ?>">
+				<div class="col-md-6 h-500-px bg-color-layout img-shifted --shift-right rounded-bottom-4 rounded-bottom-left-0 md-rounded-bottom-4" data-aos="fade-down" data-aos-delay="400" style="<?=!$is_preview ? '' : 'display:inline-block; width:49%' ?>">
 					
 					<!-- Figure -->
 					<figure class="bg-image h-100 m-0 position-absolute">
 					<?php if ( count($image_2) > 0 && !$is_preview ) : ?>
 						<?php foreach ( $image_2 as $im ) : ?>
-								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');" data-aos="fade" data-aos-delay="200"></div>
+								<div class="bg-image bg-cover bg-position-center-center z-0" style="background-image: url('<?= $im['full_url'] ?>');"></div>
 								<div class="bg-image bg-v-inverse-gradient-action-2 z-1"></div>
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<!-- <figcaption> -->
@@ -4158,7 +4174,7 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 					
 					<div class="card bg-transparent border-0 text-white --h-100 px-4 py-4 px-md-8 py-md-6 d-flex flex-column justify-content-between align-items-start z-2 <?= $is_preview ? '' : 'h-100' ?>">
 						<h6 class="subline d-inline action-1"><?= mb_get_block_field( 'waff_b_label_2' ) ?></h6>
-						<div>
+						<div class="w-100">
 							<div class="w-100 w-lg-50">
 								<p class="card-date fw-bold text-transparent-color-layout mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_2' ) ?></p>
 								<h3 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_2' ) ?></a></h3>
