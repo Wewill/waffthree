@@ -1802,7 +1802,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 					?>
 					<!-- First -->
 					<div class="col-md-5 p-0 vh-50 bg-dark img-shifted shift-right nofilter-hover" data-aos="fade-down" data-aos-delay="200">
-						<!-- Images -->
+						<!-- Duotone filter : blended w/ custom post color  -->
 						<!-- https://yoksel.github.io/svg-gradient-map/ -->
 						<svg class="duotone-filters position-absolute" xmlns="http://www.w3.org/2000/svg">	
 							<filter id="duotone_featured_<?= $post_id; ?>" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -1819,6 +1819,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 								<feBlend mode="normal" in="componentTransfer" in2="SourceGraphic" result="blend"></feBlend>
 							</filter>
 						</svg>
+						<!-- Images -->
 						<div class="bg-image bg-cover bg-position-top-center image--origin filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'large'); ?>');"></div>
 						<div class="bg-image bg-cover bg-position-top-center image--filtered filter--<?= $post_id; ?>" style="background-image: url('<?php echo get_the_post_thumbnail_url($post_id, 'large'); ?>');"></div>
 						<!-- Content -->
