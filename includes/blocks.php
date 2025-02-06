@@ -1789,8 +1789,8 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 			foreach( $recent_posts as $post_item ) : 
 				$post_id 				= esc_attr($post_item->ID);
 				$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
-				$post_color				= ($post_color!='')?$post_color:'var(--waff-color-layout)'; // 444444 //00ff97
-				$rgb_post_color			= waff_HTMLToRGB($post_color); // , 'array' ICI Bug ?? Removed 'array' since GOLFS 60225
+				$post_color				= ($post_color!='')?$post_color:'#444444'; // 444444 //00ff97 > Gray blending color if no post custom color 
+				$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
 				$the_categories 		= get_the_category($post_id);
 				$excerpt = '';
 				$excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
