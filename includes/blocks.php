@@ -1790,7 +1790,7 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 				$post_id 				= esc_attr($post_item->ID);
 				$post_color 			= rwmb_meta( '_waff_bg_color_metafield', $args, $post_id );
 				$post_color				= ($post_color!='')?$post_color:'var(--waff-color-layout)'; // 444444 //00ff97
-				$rgb_post_color			= waff_HTMLToRGB($post_color, 'array'); // , 'array' ICI Bug ??
+				$rgb_post_color			= waff_HTMLToRGB($post_color); // , 'array' ICI Bug ?? Removed 'array' since GOLFS 60225
 				$the_categories 		= get_the_category($post_id);
 				$excerpt = '';
 				$excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
