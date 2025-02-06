@@ -3898,7 +3898,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 	<!-- #Mission -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>; background-image: url('<?= $bg_image['url']; ?>');">
 		<div class="container-fluid px-0 position-relative">
-			<div class="row g-0 <?= $b_position; ?> <?= $r_alignment; ?> <?= $is_preview ? 'd-none' : '' ?>">
+			<div class="row g-0 <?= $b_position; ?> <?= $r_alignment; ?>" <?= $is_preview ? 'style="display:none;"' : '' ?>>
 				<div class="<?= $b_alignment; ?> <?= $attributes['align'] === 'full' ? 'rounded-end-4':'rounded-4'; ?>" --data-aos="fade-left" --data-aos-delay="100"></div>
 			</div>
 			<div class="row <?= $f_alignment; ?> w-100 ---- position-lg-absolute <?= $f_position; ?> left-0">
@@ -4011,7 +4011,7 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 	<!-- #cols -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
 
-		<figure class="m-0 p-0 overflow-hidden mb-n1 z-2">
+		<figure class="m-0 p-0 overflow-hidden mb-n1 z-2" <?= $is_preview ? 'style="display:none;"' : '' ?>>
 			<picture class="">
 				<img src="<?= $bg_image['url']; ?>" alt="Image de fond" class="img-fluid fit-image w-100">
 			</picture>
