@@ -1,4 +1,10 @@
 <?php
+use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
+use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
+
+// Lightness threshold
+$lightness_threshold = 130;
+
 $prefix 	= 'waff_homeslide_';
 $random = 0;
 $slide_count    = intval( 10 );
@@ -284,80 +290,76 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <!-- #slick-breaking -->
 <section id="slick-breaking" class="mt-0 mb-10 mb-lg-7 contrast--light ---- mt-n2 pt-2">
 	<div class="container-fluid px-0">
-
-		<div class="row row-cols-1 row-cols-lg-4 align-items-stretch gx-4 --py-5 offset-3 col-9 position-absolute top-0 start-0 w-90 z-2" style="height:calc(80% + 3.5rem)!important;">
-			<div class="col" data-aos="fade-down" data-aos-delay="400">
-				<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="background-image: url('https://picsum.photos/310/195');">
-					<div class="card-img-overlay bg-gradient-action-2">
-						<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
-							<div></div>
-							<h5 class="text-white"><a href="#" class="stretched-link">Short title, long jacket</a></h5>
-							<ul class="d-flex list-unstyled m-0">
-								<li class="me-auto subline"><a href="#">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
-								<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small>3d</small></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col" data-aos="fade-down" data-aos-delay="600">
-				<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="background-image: url('https://picsum.photos/310/195');">
-					<div class="card-img-overlay bg-gradient-action-2">
-						<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
-								<div></div>
-								<h5 class="text-white"><a href="#" class="stretched-link">Much longer title that wraps to multiple lines</a></h5>
-								<ul class="d-flex list-unstyled m-0">
-									<li class="me-auto subline"><a href="#">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
-									<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small>4d</small></li>
-								</ul>
+		<style scoped>
+			@media (max-width: 768px) {
+				.w-90 {
+					width: 70% !important;
+				}
+			}
+		</style>
+		<!-- News -->
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 align-items-stretch gx-4 --py-5 offset-3 position-absolute top-0 start-0 w-90 z-2" style="height:calc(80% + 3.5rem)!important;">
+			<?php
+			$recent_posts = new WP_Query(array(
+				'posts_per_page' => 4,
+				'post_status' => 'publish',
+			));
+			if ($recent_posts->have_posts()) :
+				$delay = 400;
+				while ($recent_posts->have_posts()) : $recent_posts->the_post(); 
+					$post_id 					= get_the_ID();
+					// Post Color
+					$post_color 				= rwmb_meta('_waff_bg_color_metafield', array(), $post_id);
+					$post_color 				= ($post_color != '') ? $post_color : 'var(--waff-action-2)';
+					$rgb_post_color				= waff_HTMLToRGB($post_color);
+					$post_title_color 			= 'text-white';
+					// Check if the color is dark or light
+					if ( $post_color && $post_color != '' && $post_color != 'var(--waff-action-2)' ) { // Si $post_color n'est pas vide
+						$hsl = waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
+						if($hsl->lightness > $lightness_threshold) {
+							$post_title_color 			= 'text-dark';
+						}
+					}
+					// Post Thumbnail
+					$thumbnail_url = get_the_post_thumbnail_url($post_id, 'large');
+					$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
+			?>
+					<div class="col <?php if ($delay > 400) echo 'd-none d-md-block'; ?> <?php if ($delay > 600) echo 'd-none d-lg-block'; ?> <?php if ($delay > 800) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
+						<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="<?= $background_style; ?>">
+							<div class="card-img-overlay <?= $thumbnail_url ? 'bg-gradient-action-2' : '' ?>">
+								<div class="d-flex flex-column justify-content-between h-100 p-3 pb-2 <?= $post_title_color ?> text-shadow-1">
+									<div></div>
+									<h5 class="<?= $post_title_color ?>"><a href="<?php the_permalink(); ?>" class="stretched-link"><?php the_title(); ?></a></h5>
+									<ul class="d-flex list-unstyled m-0">
+										<li class="me-auto subline"><a href="<?php the_permalink(); ?>">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
+										<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?php echo str_replace('minutes', 'mins', human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'); ?></small></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
-			</div>
-			<div class="col" data-aos="fade-down" data-aos-delay="800">
-				<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="background-image: url('https://picsum.photos/310/195');">
-					<div class="card-img-overlay bg-gradient-action-2">
-						<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
-							<div></div>
-							<h5 class="card-title text-white"><a href="#" class="stretched-link">Another longer title belongs here</a></h5>
-							<ul class="d-flex list-unstyled m-0">
-								<li class="me-auto subline"><a href="#">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
-								<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small>5d</small></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col" data-aos="fade-down" data-aos-delay="1000">
-				<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="background-image: url('https://picsum.photos/310/195');">
-					<div class="card-img-overlay bg-gradient-action-2">
-						<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
-							<div></div>
-							<h5 class="text-white"><a href="#" class="stretched-link">Short title</a></h5>
-							<ul class="d-flex list-unstyled m-0">
-								<li class="me-auto subline"><a href="#">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
-								<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small>5d</small></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-
+				<?php
+					$delay += 200;
+				endwhile;
+			endif;
+			wp_reset_postdata();
+			?>
 		</div>
 
-
+		<!-- Categories -->
 		<div class="row g-0 align-items-between justify-content-start vh-25 bg-color-main position-relative"> <!-- .vh-100 hack--> 
 
-			<div class="col-lg-3 col-xl-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
-				<h6 class="headflat text-white m-0">Dernières actualités</h6>
+			<div class="col-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
+				<h6 class="headflat text-white m-0 text-center">Dernières actualités</h6>
 			</div>
 
 			<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2">
-				<li class="list-group-item text-center"><a class="headflat">Evenement</a></li>
-				<li class="list-group-item text-center"><a class="headflat">Terrain</a></li>
-				<li class="list-group-item text-center"><a class="headflat">Supporter</a></li>
-				<li class="list-group-item text-center"><a class="headflat">Nouvelles</a></li>
-				<li class="list-group-item text-center"><a class="headflat">Organisation</a></li>
+				<?php
+				$categories = get_categories();
+				foreach ($categories as $category) {
+					echo '<li class="list-group-item text-center"><a class="headflat" href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';
+				}
+				?>
 			</ul>
 
 		</div>
