@@ -11,6 +11,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 		'inside_classes' 	=> 'ms-1 me-1 ms-lg-10 me-lg-10',
 		'card_classes_start'=> 'justify-content-between',
 		'card_classes_end' 	=> 'justify-content-center',
+		'fullwitdh' 		=> 'no',
     );  
 
 	private function is_widget_preview() {
@@ -61,11 +62,13 @@ class WP_Widget_CallToAction extends WP_Widget {
 		$url_start             	= ! empty( $instance['url_start'] ) ? $instance['url_start'] : '';
 		$url_end               	= ! empty( $instance['url_end'] ) ? $instance['url_end'] : '';
 
-		$card_classes_start             	= ! empty( $instance['url_start'] ) ? $instance['url_start'] : '';
-		$card_classes_start               	= ! empty( $instance['url_end'] ) ? $instance['url_end'] : '';
+		$card_classes_start          = ! empty( $instance['url_start'] ) ? $instance['url_start'] : '';
+		$card_classes_start          = ! empty( $instance['url_end'] ) ? $instance['url_end'] : '';
 
 		$bg_image_start             = ! empty( $instance['bg_image_start'] ) ? $instance['bg_image_start'] : '';
 		$bg_image_end               = ! empty( $instance['bg_image_end'] ) ? $instance['bg_image_end'] : '';
+
+		$fullwidth          		= ! empty( $instance['fullwidth'] ) ? $instance['fullwidth'] : '';
 
 		// Inject the Text widget's container class name alongside this widget's class name for theme styling compatibility.
         //$args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_section ', $args['before_widget'] ); // Adds classes too
@@ -105,11 +108,11 @@ class WP_Widget_CallToAction extends WP_Widget {
 		// global $current_edition, $previous_editions, $current_edition_id, $current_edition_films_are_online;
 		?>	
 		
-			<div class="container-fluid">
+			<div class="container-fluid <?= $fullwidth === 'yes' ? 'px-0':'' ?>">
 				<div class="row g-0 align-items-top <?= $instance['inside_classes']; ?>" <?php echo $this->is_widget_preview() ? 'style="margin:0!important;"' : ''; ?>>
 
 					<!-- First col -->
-					<div class="col-md-6 h-250-px bg-color-layout img-shifted --shift-right rounded-start-4 md-rounded-end-4" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 h-250-px bg-color-layout img-shifted <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-start-4 md-rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_start']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_start ?></h6>
@@ -123,7 +126,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 					</div>
 
 					<!-- Last col -->
-					<div class="col-md-6 d-none d-md-block h-250-px bg-color-layout img-shifted --shift-right rounded-end-4" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 d-none d-md-block h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_end']; ?>">
 							<h6 class="display d-inline action-2"><?= $label_end ?></h6>
@@ -328,6 +331,22 @@ class WP_Widget_CallToAction extends WP_Widget {
 		    <label for="<?php echo $this->get_field_id('inside_classes'); ?>"><?php esc_html_e('Inside classes:', 'waff'); ?></label>
 		    <input type="text" id="<?php echo $this->get_field_id( 'inside_classes' ); ?>" name="<?php echo $this->get_field_name( 'inside_classes' ); ?>" class="widefat inside_classes sync-input" value="<?php echo esc_attr( $instance['inside_classes'] ); ?>"/>
 		</p>
+
+		<p>
+				<label for="<?php echo $this->get_field_id('fullwidth'); ?>"><?php esc_html_e('Container width :', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('fullwidth'); ?>"
+					name="<?php echo $this->get_field_name('fullwidth'); ?>" type="text">
+						<option value='no' <?php echo ($instance['fullwidth']=='no')?'selected':''; ?>>
+							<?php _e( 'Normal', 'waff' ); ?>
+						</option>
+						<option value='yes' <?php echo ($instance['fullwidth']=='yes')?'selected':''; ?>>
+							<?php _e( 'Full-width', 'waff' ); ?>
+						</option> 
+					</select>                
+				</label>
+				<!-- <input type="text" id="<?php echo $this->get_field_id( 'fullwidth' ); ?>" name="<?php echo $this->get_field_name( 'fullwidth' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['fullwidth'] ); ?>" /> -->
+			</p>			
+
 		<?php 
 	}
 
@@ -369,6 +388,8 @@ class WP_Widget_CallToAction extends WP_Widget {
 
 		$instance['bg_image_start'] = ( ! empty( $new_instance['bg_image_start'] ) ) ? strip_tags( $new_instance['bg_image_start'] ) : '';
 		$instance['bg_image_end'] = ( ! empty( $new_instance['bg_image_end'] ) ) ? strip_tags( $new_instance['bg_image_end'] ) : '';
+
+		$instance['fullwidth'] = sanitize_text_field( $new_instance['fullwidth'] );
 
 		return $instance;
 	}
