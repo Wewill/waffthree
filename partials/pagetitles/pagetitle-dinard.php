@@ -23,7 +23,7 @@ $header_link_color 				= 'link-dark';
 if ( isset($page_atts['header_color']) && $page_atts['header_color'] != '' ) {
 	$rgb = WaffTwo\Core\waff_HTMLToRGB($page_atts['header_color']);
 	$hsl = WaffTwo\Core\waff_RGBToHSL($rgb);
-		if($hsl->lightness < $lightness_threshold) {
+	if($hsl->lightness < $lightness_threshold) {
 		$header_color_class 			= 'contrast--dark';
 		$header_section_title_color 	= 'color-light'; //color-white	
 		$header_link_color 				= 'link-light'; //link-white	
