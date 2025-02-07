@@ -324,7 +324,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					$thumbnail_url = get_the_post_thumbnail_url($post_id, 'large');
 					$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
 			?>
-					<div class="col <?php if ($delay > 400) echo 'd-none d-md-block'; ?> <?php if ($delay > 600) echo 'd-none d-lg-block'; ?> <?php if ($delay > 800) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
+					<div class="col <?php if ($delay === 600) echo 'd-none d-md-block'; ?> <?php if ($delay === 800) echo 'd-none d-lg-block'; ?> <?php if ($delay === 1000) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
 						<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="<?= $background_style; ?>">
 							<div class="card-img-overlay <?= $thumbnail_url ? 'bg-gradient-action-2' : '' ?>">
 								<div class="d-flex flex-column justify-content-between h-100 p-3 pb-2 <?= $post_title_color ?> text-shadow-1">
