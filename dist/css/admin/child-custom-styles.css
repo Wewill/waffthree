@@ -37,11 +37,11 @@
   color: #5085b3;
 }
 
-/* Fix the issue with rwmb no padding & swith width */
-.editor-sidebar .mb-block-edit .rwmb-meta-box {
+/* Fix the issue with rwmb no padding & swith width > fixed since MB blocks updated */
+/* .editor-sidebar .mb-block-edit .rwmb-meta-box {
   padding: 16px;
   background-color: #fbf5fb;
-}
+} */
 
 .editor-sidebar .mb-block-edit .rwmb-meta-box .rwmb-switch-label {
   --color: #9500ff !important;

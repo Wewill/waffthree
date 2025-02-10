@@ -4750,7 +4750,8 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 
 			// Remplacez ceci par l'identifiant du bloc que vous souhaitez autoriser
 			// Ajoutez d'autres identifiants de blocs au besoin
-			'directory/wa-rsfp-directory-block',
+			// 'directory/wa-rsfp-directory-block', // See plugins
+			// 'meta-box/wa-golfs-testimony', // See plugins	
 		);
 	}
 	return $allowed_blocks;
