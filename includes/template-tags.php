@@ -902,7 +902,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 		$__ID = get_the_ID(); 
 		$__queried_object_ID = get_queried_object_id();
 		// echo var_dump(is_single());
-		// // print_r(get_queried_object());
+		// print_r(get_queried_object());
 
 		if ( $post !== null ) {
 			$__post_type = get_post_type($post->ID); 
@@ -1451,6 +1451,41 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 									$terms_name,
 									esc_url( $term_link ),
 									$terms_name,
+									esc_html( sanitize_text_field($term->name) )
+								);
+							}
+						}
+					} else {
+						// Handle the error
+						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+					}
+				}
+
+				// Finally print
+				if ( $meta_output != '' ) echo $meta_output;
+			
+			}
+
+			// COMPETITIONS / SINGLE 
+			if ( 'competitions' == $__post_type ) {
+
+				//DEBUG
+				echo ((true === WAFF_DEBUG)?'<code> #SINGLE COMPETITIONS</code>':'');		
+
+				$meta_output = '';
+				$terms_list = array('competition-category');
+
+				foreach($terms_list as $terms_name) {
+
+					$terms = wp_get_post_terms( $__ID, $terms_name, array('fields' => 'all'));
+
+					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+						foreach ( $terms as $term ) {
+							$term_link = get_term_link( $term );
+							if ( ! is_wp_error( $term_link ) ) {
+								$meta_output .= sprintf(
+									'<div class="category-list d-inline"><a href="%s" class="category-item --link-disabled">%s</a></div>',
+									esc_url( $term_link ),
 									esc_html( sanitize_text_field($term->name) )
 								);
 							}
