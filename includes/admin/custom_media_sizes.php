@@ -490,7 +490,7 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 			if( wp_is_post_revision( $post_id ) ) { return; }
 		
 			// On évite les sauvegardes automatiques
-			if( defined( 'DOING_AUTOSAVE' ) and DOING_AUTOSAVE ) { return; }
+			if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) { return; }
 		
 			// Seulement si il est dans les post_type allowed
 			if( ! in_array($post->post_type, $allowed_post_type) ) { return; }

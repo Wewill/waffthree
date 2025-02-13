@@ -186,6 +186,7 @@
 		<?php  if ( defined('WAFF_PARTIALS') && 'dinard' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 		<?php  if ( defined('WAFF_PARTIALS') && 'diag' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 		<?php  if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
+		<?php  if ( defined('WAFF_PARTIALS') && 'golfs' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 
 		<?php if ( true === WAFF_HAS_ADVERT ) : ?>
 		<!-- Preheader -->
@@ -205,6 +206,8 @@
 		<?php elseif ( is_singular('projection') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'projection'); ?>
 		<?php elseif ( is_singular('post') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'post'); ?>
 		<?php elseif ( is_singular('directory') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'directory'); ?>
+		<?php elseif ( is_singular('competitions') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'competitions'); ?>
+		<?php elseif ( is_singular('course') ) : 			get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'course'); ?>
 		<?php elseif ( is_tax('section') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'section'); ?>
 		<?php elseif ( is_tax('room') ) : 					get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'room'); ?>
 		<?php elseif ( is_page() && false === $is_home ) :  get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS); ?>

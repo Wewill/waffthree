@@ -1,6 +1,6 @@
 <?php
 /**
- * The template used for displaying taxonomy edition content
+ * The template used for displaying single page
  */
 ?>
 

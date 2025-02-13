@@ -14,6 +14,7 @@ function waff_custom_fields( $item_id, $item ) {
 	wp_nonce_field( 'custom_menu_meta_nonce', '_custom_menu_meta_nonce_name' );
 	$ismuted_menu_meta = get_post_meta( $item_id, '_ismuted_menu_meta', true );
 	$isloggued_menu_meta = get_post_meta( $item_id, '_isloggued_menu_meta', true );
+	$isfeatured_menu_meta = get_post_meta( $item_id, '_isfeatured_menu_meta', true );
 	?>
 
 	<input type="hidden" name="waff-nonce" value="<?php echo wp_create_nonce( 'waff-name' ); ?>" />
@@ -22,14 +23,21 @@ function waff_custom_fields( $item_id, $item ) {
 	<p class="field-custom_menu_meta description description-thin">
 		<label for="waff-for-ismuted_menu_meta-<?php echo $item_id ;?>">
 			<?php _e( 'Menu item is muted ?', 'waff' ); ?><br>
-	        <input type="checkbox" name="ismuted_menu_meta[<?php echo $item_id ;?>]" id="waff-for-ismuted_menu_meta-<?php echo $item_id ;?>" <?php checked($ismuted_menu_meta, true); ?> />
+			<input type="checkbox" name="ismuted_menu_meta[<?php echo $item_id ;?>]" id="waff-for-ismuted_menu_meta-<?php echo $item_id ;?>" <?php checked($ismuted_menu_meta, true); ?> />
 		</label>
 	</p>
 
 	<p class="field-custom_menu_meta description description-thin">
 		<label for="waff-for-isloggued_menu_meta-<?php echo $item_id ;?>">
 			<?php _e( 'Display only if user is loggued', 'waff' ); ?><br>
-	        <input type="checkbox" name="isloggued_menu_meta[<?php echo $item_id ;?>]" id="waff-for-isloggued_menu_meta-<?php echo $item_id ;?>" <?php checked($isloggued_menu_meta, true); ?> />
+			<input type="checkbox" name="isloggued_menu_meta[<?php echo $item_id ;?>]" id="waff-for-isloggued_menu_meta-<?php echo $item_id ;?>" <?php checked($isloggued_menu_meta, true); ?> />
+		</label>
+	</p>
+
+	<p class="field-custom_menu_meta description description-thin">
+		<label for="waff-for-isfeatured_menu_meta-<?php echo $item_id ;?>">
+			<?php _e( 'Menu item is featured ?', 'waff' ); ?><br>
+			<input type="checkbox" name="isfeatured_menu_meta[<?php echo $item_id ;?>]" id="waff-for-isfeatured_menu_meta-<?php echo $item_id ;?>" <?php checked($isfeatured_menu_meta, true); ?> />
 		</label>
 	</p>
 
@@ -65,6 +73,13 @@ function waff_nav_update( $menu_id, $menu_item_db_id ) {
 		delete_post_meta( $menu_item_db_id, '_isloggued_menu_meta' );
 	}
 
+	$isfeatured_menu_meta = ( isset($_POST['isfeatured_menu_meta'][$menu_item_db_id]) && $_POST['isfeatured_menu_meta'][$menu_item_db_id] == 'on') ? true : false;
+	if ( $isfeatured_menu_meta ) {
+		update_post_meta( $menu_item_db_id, '_isfeatured_menu_meta', $isfeatured_menu_meta );
+	} else {
+		delete_post_meta( $menu_item_db_id, '_isfeatured_menu_meta' );
+	}
+
 }
 add_action( 'wp_update_nav_menu_item', 'waff_nav_update', 10, 2 );
 
@@ -94,7 +109,7 @@ function waff_custom_menu_hide( $item_output, $item, $depth, $args ) {
 add_filter( 'walker_nav_menu_start_el', 'waff_custom_menu_hide', 10, 4 );
 
 /**
-* Displays field on the front-end.
+* Add menu item class on the front-end.
 *
 * @param string[] $classes Array of the CSS classes that are applied to the menu item's `<li>` element.
 * @param WP_Post  $item    The current menu item.
@@ -102,7 +117,7 @@ add_filter( 'walker_nav_menu_start_el', 'waff_custom_menu_hide', 10, 4 );
 * @param int      $depth   Depth of menu item. Used for padding.
 * @return string      
 */
-function waff_custom_menu_class( $classes, $item, $args) {
+function waff_custom_menu_muted( $classes, $item, $args) {
 
 	if( is_object( $item ) && isset( $item->ID ) ) {
 
@@ -115,7 +130,32 @@ function waff_custom_menu_class( $classes, $item, $args) {
 	return $classes;
 
 }
-add_filter( 'nav_menu_css_class', 'waff_custom_menu_class', 10, 3 );
+add_filter( 'nav_menu_css_class', 'waff_custom_menu_muted', 10, 3 );
+
+/**
+* Add menu item class on the front-end.
+*
+* @param string[] $classes Array of the CSS classes that are applied to the menu item's `<li>` element.
+* @param WP_Post  $item    The current menu item.
+* @param stdClass $args    An object of wp_nav_menu() arguments.
+* @param int      $depth   Depth of menu item. Used for padding.
+* @return string      
+*/
+function waff_custom_menu_featured( $classes, $item, $args) {
+
+	if( is_object( $item ) && isset( $item->ID ) ) {
+
+		$isfeatured_menu_meta = get_post_meta( $item->ID, '_isfeatured_menu_meta', true );
+
+		if ( !empty( $isfeatured_menu_meta ) && $isfeatured_menu_meta == 1) {
+			$classes[] = 'link-featured';
+		}
+	}
+	return $classes;
+
+}
+add_filter( 'nav_menu_css_class', 'waff_custom_menu_featured', 10, 3 );
+
 
 /* ADDS CUSTOM DATA TO WALKERS
 ================================================== */

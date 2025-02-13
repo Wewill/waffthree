@@ -38,6 +38,12 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTNAVLIST</code>':'');
 
 	<?php if ( empty( get_the_content() ) ) Go\page_title(); ?>
 
+	<?php if ( get_post_meta( get_the_ID(), 'waff_page_content', true ) ) : ?>
+		<div class="page-head-content">
+			<?php echo wp_kses_post( get_post_meta( get_the_ID(), 'waff_page_content', true ) ); ?>
+		</div>
+	<?php endif; ?>
+
 	<div class="<?php Go\content_wrapper_class( 'content-area__wrapper' ); ?>">
 		<div class="content-area --entry-content row">
 

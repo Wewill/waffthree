@@ -231,7 +231,142 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<?php } /* is_singular + has_post_thumbnail */ ?>
 	<!-- END: #pageheader -->
 
-<?php elseif ( $args == 'directory' ) : ?>
+<?php elseif ( $args == 'competitions' ) : ?>
+
+	<?php 
+	$stateColors = array(
+		'pending' => array(
+			'textColor' => 'rgb(236, 173, 39)',
+			'backgroundColor' => 'rgb(249, 235, 204)',
+		),
+		'current' => array(
+			'textColor' => 'rgb(66, 149, 66)',
+			'backgroundColor' => 'rgb(182, 222, 182)',
+		),
+		'ended' => array(
+			'textColor' => 'rgb(171, 171, 171)',
+			'backgroundColor' => 'rgb(226,226,226)',
+		),
+	);
+	$stateLabels = array(
+		'pending' => array(
+			'label' => 'À venir',
+		),
+		'current' => array(
+			'label' => 'En cours',
+		),
+		'ended' => array(
+			'label' => 'Terminé',
+		),
+	);
+	$c_state = get_post_meta(get_the_ID(), 'c_state', true);
+
+	
+	$page_atts['anchors'][] = __('Departures', 'waff');
+	$page_atts['anchors'][] = __('Results', 'waff');
+	$page_atts['anchors'][] = __('Sign-up', 'waff');
+	?>
+
+	<!-- #pagetitle : Modern -->
+	<section id="pagetitle" class="modern-header mt-0 mb-0 --contrast--light bg-action-3 rounded-start-4 <?= $header_color_class ?>" <?= $header_color ?> data-aos="fade-up" data-aos-id="pagetitle" style="background-color:var(--waff-action-3-lighten-3)">
+		<div class="jumbotron p-0">
+			<div class="container-fluid">
+				<div class="row pt-sm-15 pt-10">
+					<h6 class="subline text-action-3 position-absolute top-0 mt-4"><?= __('Competition', 'waff') ?></h6>
+
+					<div class="col-sm-7 col-12 zi-5">
+						<hgroup data-aos="fade-down">
+							<?= WaffTwo\waff_entry_meta_header(); ?>
+							<div class="spacer mb-4"></div>
+							<span class="state-label" style="color: <?= esc_attr( $stateColors[$c_state]['textColor'] ); ?>;">
+								<span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: 2px; margin-left: 2px; background-color: <?= esc_attr( $stateColors[$c_state]['textColor'] ); ?>;"></span>
+								<?= esc_html( $stateLabels[$c_state]['label'] ); ?>
+							</span>
+							<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
+							<?php if ( $page_atts['subtitle'] != '' ) echo '<h5 class="opacity-75 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h5>'; ?>
+							<?php
+								$competition_date = get_post_meta(get_the_ID(), 'c_date', true); 
+								$competition_date_string = wp_kses(
+									sprintf(
+										'<time datetime="%1$s">%2$s</time>',
+										esc_attr($competition_date),
+										sprintf(
+											__('<strong>Le %1$s</strong>, à %2$s', 'waff'),
+											date_i18n(get_option('date_format'), strtotime($competition_date)),
+											date_i18n(get_option('time_format'), strtotime($competition_date))
+										)
+									),
+									array_merge(
+										wp_kses_allowed_html('post'),
+										array(
+											'time' => array(
+												'datetime' => true,
+											),
+										)
+									)
+								);
+								echo '<p class="competition-date muted">' . $competition_date_string . '</p>';
+							?>
+						</hgroup>
+					</div>
+				</div>
+				<div class="row <?= (( has_post_thumbnail() )?'mt-n':'mt-15') ?> align-items-end g-0 f-w">
+					<div class="col-sm-5 col-6 delayed-anchors-aos" data-aos="fade-right" data-aos-delay="200">
+						<?php if ( !empty($page_atts['anchors']) ): ?>
+						<ul class="p-gutter-l list-unstyled pb-8 <?= $header_section_title_color ?>">
+							<?php
+								foreach ($page_atts['anchors'] as $key => $value) {
+									echo '<li class="lead '.$header_link_color.' animated-underline"><a href="#'.sanitize_title($value).'">'.$value.'</a></li>';
+								}
+							?>
+						</ul>
+						<?php endif; ?>
+					</div>
+					<div class="col-sm-7 col-6 h-600-px h-sm-600-px rounded-start-4 rounded-bottom-left-0" > <!-- data-aos="show-lazy" data-aos-delay="1000" data-aos-duration="3000" -->
+						<?php if ( has_post_thumbnail() ): ?>
+						<figure title="<?php echo esc_attr($featured_img_description); ?>" style="background-color:<?= $page_atts['header_color'] ?>;">
+							<picture class="lazy show-img-when-loaded duotone-<?= get_post_thumbnail_id() ?>">
+							<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
+							<data-src media="(min-width: 990px)"
+									srcset="<?= $featured_img_urls['page-featured-image-modern-x2']; ?> 2x,
+											<?= $featured_img_urls['page-featured-image-modern']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 590px)"
+									srcset="<?= $featured_img_urls['page-featured-image-modern-m-x2']; ?> 2x,
+											<?= $featured_img_urls['page-featured-image-modern-m']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 380px)"
+									srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
+											<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px rounded-start-4 rounded-bottom-left-0" style="object-fit: cover; width: 100%;"></data-img>
+							</picture>
+							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+							<?php endif; /* If captions */ ?>
+							<!--
+							Sizes :
+							<?php print_r($featured_img_urls); ?>  
+							-->
+						</figure>
+						<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
+						<style scoped>
+							.duotone-<?= get_post_thumbnail_id() ?> img {
+								filter: grayscale(1);
+								mix-blend-mode: screen;
+								background-color: <?= $page_atts['header_color'] ?>;
+								opacity: 0;
+							}
+						</style>
+						<?php } ?>
+						<?php else: ?>
+							<div class="alert alert-warning" role="alert"><?= esc_html__( 'You need to choose a thumbnail image', 'waff' ); ?></div>
+						<?php endif; ?>				
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END: #pagetitle -->
+
+<?php elseif ( $args == 'course' ) : ?>
 
 	<?php 
 		$prefix = 'd_';
@@ -245,10 +380,10 @@ if ( is_singular() && has_post_thumbnail() ) {
 		// $d_medias_video 						= get_post_meta( $post->ID, 'd_medias_video', true );
 
 		$d_medias_video_links 				= rwmb_meta( $prefix . 'medias_video_link', array('limit' => 1), $post->ID);
-		$d_medias_video_link 				= reset($d_medias_video_links); // Recursive field
+		$d_medias_video_link 				= $d_medias_video_links ? reset($d_medias_video_links) : false; // Recursive field
 
 		$d_medias_videos 					= rwmb_meta( $prefix . 'medias_video', array('limit' => 1), $post->ID);
-		$d_medias_video 					= reset($d_medias_videos); // Recursive field
+		$d_medias_video 					= $d_medias_videos ? reset($d_medias_videos) : false; // Recursive field
 
 
 		$_d_stage_opentostage   			= rwmb_get_field_settings( $prefix . 'stage_opentostage' );

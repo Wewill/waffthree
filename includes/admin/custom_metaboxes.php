@@ -271,6 +271,16 @@ function waff_page_register_meta_boxes( $meta_boxes ) {
                 'desc' => __( 'Show a subtitle if filled', 'waff' ),
             ],
             [
+                'id'      => $prefix . 'content',
+				'type' => 'wysiwyg', //textarea
+                'name'    => esc_html__( 'Page head content', 'waff' ) . ' *',
+                'desc'    => __( 'Fill the Page head content showing after title and before regular content (optionnal)', 'waff' ),
+                'visible' => [
+                    'when'     => [['page_template', '=', 'template-navlist.php']],
+                    'relation' => 'and',
+                ],
+            ],
+            [
                 'id'         => $prefix . 'anchors',
                 'type'       => 'text',
                 'name'       => esc_html__( 'Page anchors', 'waff' ),

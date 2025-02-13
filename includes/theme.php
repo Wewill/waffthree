@@ -152,13 +152,18 @@ function waff_child_enqueue_styles() {
     wp_enqueue_style( 'fancybox', 		'https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css', 	array(), '3.5.7'); 
     wp_enqueue_style( 'fontawesome',	'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css', 			array(), '5.13.0'); 
 	//
-    wp_enqueue_style( 'waff-style', get_stylesheet_directory_uri() . '/dist/css/style-'.WAFF_STYLES.'.css', 				array(), WAFF_THEME_VERSION); // Will import framework.css
-    //wp_enqueue_style( 'waff-logo', get_stylesheet_directory_uri() . '/css/logo-invert.css', 										array(), '1.0.0'); 	    
+    wp_enqueue_style( 'waff-style', get_stylesheet_directory_uri() . '/dist/css/style-'.WAFF_STYLES.'.css', 					array(), WAFF_THEME_VERSION); // Will import framework.css
+    //wp_enqueue_style( 'waff-logo', get_stylesheet_directory_uri() . '/css/logo-invert.css', 									array(), '1.0.0'); 	    
+
+	// Competitions only
+	if ( is_singular( 'competitions' ) ) {
+		// wp_enqueue_style( 'gridjs', 'https://unpkg.com/gridjs/dist/theme/mermaid.min.css', 										array(), '1.0.0' );
+	}
 }
 
 function waff_child_enqueue_scripts() {
 	// Jquery
-    wp_enqueue_script( 'modernizer', 			get_stylesheet_directory_uri() . '/dist/js/theme/vendor/modernizr-2.8.3-respond-1.4.2.min.js', 	array(), '2.8.3',true);
+    // wp_enqueue_script( 'modernizer', 			get_stylesheet_directory_uri() . '/dist/js/theme/vendor/modernizr-2.8.3-respond-1.4.2.min.js', 	array(), '2.8.3',true);
 	// Distant 
 	wp_enqueue_script( 'bootstrap', 			'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js',			array(), '5.3.2',true);
     wp_enqueue_script( 'slick', 				'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js',					array(), '1.8.1',true);
@@ -168,14 +173,20 @@ function waff_child_enqueue_scripts() {
 	wp_enqueue_script( 'jquery-lazy-plugins', 	'https://cdn.jsdelivr.net/npm/jquery-lazy@1.7.11/jquery.lazy.plugins.min.js',			array(), '1.7.11',true);
     // wp_enqueue_script( 'color-thief', 		'https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js',			array(), '2.3.0',true); // Done w/ php
 	// Local
-	wp_enqueue_script( 'fitty', 				get_stylesheet_directory_uri() . '/dist/js/theme/vendor/fitty.min.js', 					array(), '1.0.0',true);
 	wp_enqueue_script( 'waff-logo', 			get_stylesheet_directory_uri() . '/dist/js/theme/logo-invert.js', 						array(), WAFF_THEME_VERSION,true); // Passer dans le header
 	wp_enqueue_script( 'waff-main', 			get_stylesheet_directory_uri() . '/dist/js/theme/main.js', 								array('jquery'), WAFF_THEME_VERSION,true);
 	wp_enqueue_script( 'waff-custom', 			get_stylesheet_directory_uri() . '/dist/js/theme/custom.js', 							array('jquery'), '1.0.0',true);
 	//wp_enqueue_script( 'countdown', 			get_stylesheet_directory_uri() . '/dist/js/theme/countdown.js', 						array(),'1.0.0',true); // Passer dans le block
 
-	if( true === WAFF_ISFILM_VERSION )
+	if( true === WAFF_ISFILM_VERSION ) {
+		wp_enqueue_script( 'fitty', 				get_stylesheet_directory_uri() . '/dist/js/theme/vendor/fitty.min.js', 				array(), '1.0.0',true);
 		wp_enqueue_script( 'waff-programmation-ajax', get_stylesheet_directory_uri() . '/dist/js/theme/programmation-ajax.js', 			array('jquery'), WAFF_THEME_VERSION,true); //#43 New ajax version 
+	}
+
+	// Competitions only
+	if ( is_singular( 'competitions' ) ) {
+		wp_enqueue_script( 'gridjs', 'https://unpkg.com/gridjs/dist/gridjs.umd.js', 													array(), '1.0.0', true );
+	}
 }
 
 // Add attributes / integrity check

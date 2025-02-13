@@ -120,21 +120,26 @@ jQuery(document).ready(function () {
 		-------------------------------------------------
 		https://npm.io/package/fitty
 	*/
-  var fitEditionBadge = fitty(".edition-badge");
-  if (fitEditionBadge.length) {
-    // Add Listener
-    fitEditionBadge.forEach((fits) =>
-      fits.element.addEventListener("fit", function (e) {
-        console.log("#FITTY: Fit Edition badges");
-        document.querySelectorAll(".fit-hide").forEach((el) => el.remove());
-      })
-    );
+  if (typeof fitty !== "undefined") {
+    var fitEditionBadge = fitty(".edition-badge");
+    if (fitEditionBadge.length) {
+      // Add Listener
+      fitEditionBadge.forEach((fits) =>
+        fits.element.addEventListener("fit", function (e) {
+          console.log("#FITTY: Fit Edition badges");
+          document.querySelectorAll(".fit-hide").forEach((el) => el.remove());
+        })
+      );
 
-    // In a popup > force refit
-    jQuery("#navbarToggleExternalContent").on("show.bs.collapse", function () {
-      console.log("#FITTY: Show edition badge");
-      fitEditionBadge.forEach((fits) => fits.fit());
-    });
+      // In a popup > force refit
+      jQuery("#navbarToggleExternalContent").on(
+        "show.bs.collapse",
+        function () {
+          console.log("#FITTY: Show edition badge");
+          fitEditionBadge.forEach((fits) => fits.fit());
+        }
+      );
+    }
   }
 
   /*
