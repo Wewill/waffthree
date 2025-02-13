@@ -91,6 +91,13 @@ function setup() {
 		}
 	}
 
+	// Custom Backend Footer diaplying WAFF version 
+	add_filter('admin_footer_text', function() {
+		if (defined('WAFF_VERSION')) {
+			echo 'WAFF V' . WAFF_VERSION . ' — ';
+		}
+	});
+
 }
 
 /**
