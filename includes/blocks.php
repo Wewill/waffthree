@@ -4268,7 +4268,7 @@ function wa_insights_callback( $attributes ) {
 
 					<p class="lead mb-3"><?= waff_do_markdown(mb_get_block_field( 'waff_i_leadcontent' )) ?></p>
 
-					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+					<div class="row row-cols-1 row-cols-md-3 mb-3 text-center" <?= $is_preview ? 'style="display:flex;"' : ''; ?>>
 						<?php 
 						foreach( mb_get_block_field( 'waff_i_lists' ) as $list ) : 
 							echo sprintf('<div class="col">
