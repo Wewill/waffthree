@@ -3879,7 +3879,7 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 			break;
 		case 'center': 
 			$b_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'align-items-lg-center align-items-start' : 'align-items-end';
-			$f_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'top-50 end-0 translate-middle-y lg-transform-0' : 'bottom-0';
+			$f_position 	= mb_get_block_field('waff_m_alignment') === 'shifted' ? 'top-50 end-0 translate-middle-y lg-transform-0' : '--bottom-0 top-50 translate-middle-y';
 			$aos_position 	= 'fade-up';
 			if (mb_get_block_field('waff_m_alignment') === 'aligned') { $f_alignment 	= 'align-items-center'; }
 			break;
