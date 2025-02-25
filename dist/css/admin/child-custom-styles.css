@@ -50,3 +50,8 @@
 .editor-sidebar .mb-block-edit .rwmb-field .rwmb-label {
   width: 100%;
 }
+
+/* Fix text list when it's not readable */
+.row-list .rwmb-text_list-clone {
+  flex-direction: column;
+}

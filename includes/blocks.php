@@ -1226,23 +1226,24 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
             //     'desc' => esc_html__( 'Markdown is available.', 'waff' ),
             // ],
 			[
-                'id'                => $prefix . 'i_lists',
-                'type'              => 'text_list',
-                'name'              => __( 'List.s', 'waff' ),
-                'label_description' => __( '<span class="label">INFO</span> Fill to create a list of items.', 'wa-rsfp' ),
-                'options'           => [
-                    'Title'       	=> 'Title (optionnal)',
-                    'Label'       	=> 'Label',
-                    'Suffix'       	=> 'Suffix (optionnal)',
-                    'Description' 	=> 'Description',
-                    'Icon <i>'       	=> 'Fill here an css icon (optionnal)',
-                    'Link'       	=> 'http://www.google.fr (optionnal)',
-                    // 'Value'       	=> 'Value',
-                ],
-                'clone'             => true,
-                'sort_clone'        => true,
-                'max_clone'         => 100,
-            ],
+				'id'                => $prefix . 'i_lists',
+				'type'              => 'text_list',
+				'name'              => __( 'List.s', 'waff' ),
+				'label_description' => __( '<span class="label">INFO</span> Fill to create a list of items.', 'wa-rsfp' ),
+				'options'           => [
+					'Title'       	=> 'Title (optionnal)',
+					'Label'       	=> 'Label',
+					'Suffix'       	=> 'Suffix (optionnal)',
+					'Description' 	=> 'Description',
+					'Class'       	=> 'Fill here an css class (optionnal)',
+					'Link'       	=> 'http://www.google.fr (optionnal)',
+					// 'Value'       	=> 'Value',
+				],
+				'clone'             => true,
+				'sort_clone'        => true,
+				'max_clone'         => 100,
+				'class'             => 'row-list',
+			],
             [	
                 'id'   => $prefix . 'i_image',
                 'type' => 'image_advanced',
@@ -3827,7 +3828,7 @@ function wa_sections_callback( $attributes ) {
 
 function wa_mission_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
-	// print_r($is_preview);
+	print_r($is_preview);
 
 
 	// Fields data.
