@@ -139,6 +139,79 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 					),
 					$d_last_updated
 				);
+			elseif ( get_post_type(get_the_ID()) === 'competitions' ) : 
+				
+				$c_introduction 			= get_post_meta( get_the_ID(), 'c_introduction', true );
+				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
+				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+
+				printf('<div class="card border-0">
+						<div class="d-flex g-0 align-items-center">
+							<div class="w-150-px order-first">
+								%s
+							</div>
+							<div class="">
+								<div class="card-body">', 
+					$c_image
+				);
+				WaffTwo\waff_entry_meta_header();
+				printf('
+									%s
+									%s
+									<p class="card-text fs-sm mb-0">%s</p>
+									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+								</div>
+							</div>
+						</div>
+						</div>', 
+					sprintf( '<h6 class="mb-0 muted subline">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
+					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false),
+					wp_trim_words(
+						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
+						15,
+						' &hellip;'
+					),
+					$c_last_updated
+				);
+
+			elseif ( get_post_type(get_the_ID()) === 'course' ) : 
+				$c_introduction 			= get_post_meta( get_the_ID(), 'c_introduction', true );
+				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
+				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+
+				printf('<div class="card border-0">
+						<div class="d-flex g-0 align-items-center">
+							<div class="w-150-px order-first">
+								%s
+							</div>
+							<div class="">
+								<div class="card-body">', 
+					$c_image
+				);
+				WaffTwo\waff_entry_meta_header();
+				printf('
+									%s
+									%s
+									<p class="card-text fs-sm mb-0">%s</p>
+									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+								</div>
+							</div>
+						</div>
+						</div>', 
+					sprintf( '<h6 class="mb-0 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'go' ) ),
+					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false ),
+					wp_trim_words(
+						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
+						15,
+						' &hellip;'
+					),
+					$c_last_updated
+				);
+			//		
 			else :
 				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 			endif;
@@ -152,7 +225,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 	</header>
 
 
-	<?php if ( get_post_type(get_the_ID()) !== 'operation' && get_post_type(get_the_ID()) !== 'directory') : ?>
+	<?php if ( get_post_type(get_the_ID()) !== 'operation' && get_post_type(get_the_ID()) !== 'directory' && get_post_type(get_the_ID()) !== 'competitions' && get_post_type(get_the_ID()) !== 'course') : ?>
 	<div class="<?php Go\content_wrapper_class( 'content-area__wrapper' );?>">
 		<div class="content-area entry-content">
 			<?php 

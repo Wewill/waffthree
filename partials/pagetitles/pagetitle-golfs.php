@@ -71,12 +71,18 @@ switch (get_post_type()) {
 	case ( 'page' ) :
 	    	$selected_featured_sizes = $page_featured_sizes;
 	break;
-	case ( 'directory' ) :
-			$selected_featured_sizes = $post_featured_sizes;
-	break;
+	// case ( 'directory' ) :
+	// 		$selected_featured_sizes = $post_featured_sizes;
+	// break;
 	/*case ( 'homeslide' === $pt ) :
 	    	$selected_featured_sizes = 
 	break;*/
+	case ( 'competitions' ) :
+		$selected_featured_sizes = $post_featured_sizes;
+	break;
+	case ( 'course' ) :
+		$selected_featured_sizes = $post_featured_sizes;
+	break;
 	default:
 	    	$selected_featured_sizes = $page_featured_sizes;
 	break;
@@ -369,41 +375,41 @@ if ( is_singular() && has_post_thumbnail() ) {
 <?php elseif ( $args == 'course' ) : ?>
 
 	<?php 
-		$prefix = 'd_';
+		$prefix = 'c_';
 
-		$d_general_subtitle 				= get_post_meta( $post->ID, $prefix . 'general_subtitle', true ); 
-		$d_general_introduction 			= get_post_meta( $post->ID, $prefix . 'general_introduction', true ); 
-		/* <?php if ( $args != '' ) printf('<h5 class="subline text-muted mb-1">%s</h5>', sanitize_text_field(ucfirst($args)));?> 
-		esc_html(__('[:fr]De[:en]From[:]')) */
+		$c_number 							= get_post_meta( $post->ID, $prefix . 'number', true ); 
+		$c_distances 						= get_post_meta( $post->ID, $prefix . 'distances', true ); 
+		$c_number_of_strokes 				= get_post_meta( $post->ID, $prefix . 'number_of_strokes', true ); 
+		$c_handicap 						= get_post_meta( $post->ID, $prefix . 'handicap', true ); 
+		$c_green 							= get_post_meta( $post->ID, $prefix . 'green', true ); 
+		$c_altitude 						= get_post_meta( $post->ID, $prefix . 'altitude', true ); 
 
-		// $d_medias_video_link 				= get_post_meta( $post->ID, 'd_medias_video_link', true ); 
-		// $d_medias_video 						= get_post_meta( $post->ID, 'd_medias_video', true );
+		$c_medias_video_links 				= rwmb_meta( $prefix . 'medias_video_link', array('limit' => 1), $post->ID);
+		$c_medias_video_link 				= $c_medias_video_links ? reset($c_medias_video_links) : false; // Recursive field
 
-		$d_medias_video_links 				= rwmb_meta( $prefix . 'medias_video_link', array('limit' => 1), $post->ID);
-		$d_medias_video_link 				= $d_medias_video_links ? reset($d_medias_video_links) : false; // Recursive field
+		$c_medias_videos 					= rwmb_meta( $prefix . 'medias_video', array('limit' => 1), $post->ID);
+		$c_medias_video 					= $c_medias_videos ? reset($d_medias_videos) : false; // Recursive field
 
-		$d_medias_videos 					= rwmb_meta( $prefix . 'medias_video', array('limit' => 1), $post->ID);
-		$d_medias_video 					= $d_medias_videos ? reset($d_medias_videos) : false; // Recursive field
+		$c_course_maps 						= rwmb_meta( $prefix . 'course_map', array('limit' => 1), $post->ID);
+		$c_course_map 						= $c_course_maps ? reset($c_course_maps) : false; // Recursive field
 
+		$c_medias_galleries					= rwmb_meta( $prefix . 'medias_gallery', array('limit' => 1), $post->ID);
+		$c_medias_gallery 					= $c_medias_galleries ? reset($c_medias_galleries) : false; // Recursive field
 
-		$_d_stage_opentostage   			= rwmb_get_field_settings( $prefix . 'stage_opentostage' );
-		$options_d_stage_opentostage 		= $_d_stage_opentostage['options'];
-		$d_stage_opentostage 				= rwmb_meta( $prefix . 'stage_opentostage', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
+		$c_medias_files						= rwmb_meta( $prefix . 'medias_files', array('limit' => 1), $post->ID);
+		$c_medias_file 						= $c_medias_files ? reset($c_medias_files) : false; // Recursive field
 
-		$_d_stage_opentovisit  				= rwmb_get_field_settings( $prefix . 'stage_opentovisit' );
-		$options_d_stage_opentovisit 		= $_d_stage_opentovisit['options'];
-		$d_stage_opentovisit 				= rwmb_meta( $prefix . 'stage_opentovisit', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
-		
-		/* Contact form link */
-		$contact_slug = "contact";
-		$contact_page_object = get_page_by_path( $contact_slug );
-		$contact_permalink = get_permalink( $contact_page_object->ID );
+		$c_introduction 					= get_post_meta( $post->ID, $prefix . 'introduction', true ); 
+
+		// $_d_stage_opentostage   			= rwmb_get_field_settings( $prefix . 'stage_opentostage' );
+		// $options_d_stage_opentostage 	= $_d_stage_opentostage['options'];
+		// $d_stage_opentostage 			= rwmb_meta( $prefix . 'stage_opentostage', $post->ID); // Array ( [0] => visite_libre [1] => visite_collective )
 	?>
 	
 	<!-- #pageheader -->
-	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-100 position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
+	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-50 position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
 		<div class="container-fluid px-0">
-			<div class="row g-0 justify-content-between align-items-center vh-100"><!-- .vh-100 hack >> see styles.css / specific-rsfp > vh-50 until md -->
+			<div class="row g-0 justify-content-between align-items-center vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
 				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
@@ -422,7 +428,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<data-src media="(min-width: 380px)"
 									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
 											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-100 fit-image w-100"></data-img>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-50 fit-image w-100"></data-img>
 							</picture>
 							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -451,27 +457,30 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
-				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-md-17 pt-lg-20" data-aos="fade-left">
+				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-5" data-aos="fade-left">
 					
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
-						<h2 class="my-3"><?php single_post_title(); ?></h2>
+						<h6 class="headline d-inline-block my-3"><?php single_post_title(); ?></h6>
+						<div class="d-flex align-items-center justify-content-center">
+							<?php if ($c_number) printf('<div class="display-1 text-action-2 me-4">%s</div>', esc_html($c_number)); ?>
+							<div>
+								<?php if ($c_number_of_strokes) printf('<p class="lead fw-bold lg-reset-fontsize mb-0"><span class="muted">PAR</span> %s</p>', esc_html($c_number_of_strokes)); ?>
+								<?php if ($c_handicap) printf('<p class="lead fw-bold lg-reset-fontsize mb-0"><span class="muted">HCP</span> %s</p>', esc_html($c_handicap)); ?>
+							</div>
+						</div>
 					</hgroup>
-					
-					<div>
-						<?php if ($d_general_subtitle) printf('<p class="lead fw-bold lg-reset-fontsize mb-1 mb-lg-3 mb-xl-5">%s</p>', esc_html($d_general_subtitle)); ?>
-						<?php if ($d_general_introduction) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($d_general_introduction)))); ?>
-					</div>
 
-					<?php if (!empty($d_stage_opentovisit) || !empty($d_stage_opentostage)) { ?>
+					<?php if ($c_introduction) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($c_introduction)))); ?>
+
+					<?php if (!empty($c_green) || !empty($c_altitude)) { ?>
 						<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
-							<?php if (!empty($d_stage_opentovisit)): ?>
+							<?php if (!empty($c_green)): ?>
 							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-house-heart flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
+								<i class="bi bi-binoculars flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 								<div>
-								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Visit farm', 'waff' ); ?></h6>
-								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to visit :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options($d_stage_opentovisit, $options_d_stage_opentovisit, ', '); ?></p>
-								<a class="btn btn-action-1 btn-sm btn-transition-scale mt-3 --flex-fill --w-100 px-2 py-0" href="<?= esc_url(add_query_arg(array('form_type' => 'visit', 'ID' => $post->ID),$contact_permalink)) ?>"><?= esc_html__( 'Book a visit', 'wa-rsfp' ); ?></a>
+								<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Green', 'waff' ); ?></h6>
+								<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_green); ?></p>
 								</div>
 							</div>
 							<div class="d-none d-lg-flex align-items-center justify-content-center px-2 px-md-4 px-xl-5">
@@ -479,13 +488,12 @@ if ( is_singular() && has_post_thumbnail() ) {
 							</div>
 							<?php endif; ?>
 
-							<?php if (!empty($d_stage_opentostage)): ?>
+							<?php if (!empty($c_altitude)): ?>
 							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-highlighter flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
+								<i class="bi bi-capslock flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 								<div>
-								<h6 class="fw-bold text-action-1 my-2 my-lg-3"><?= esc_html__( 'Open to stage', 'waff' ); ?></h6>
-								<p class="mb-0 small-lg"><span class="visually-hidden"><?= esc_html__( 'Farm is open to stage :', 'waff' ); ?></span><?= WaffTwo\Core\waff_implode_options($d_stage_opentostage, $options_d_stage_opentostage, ', '); ?></p>
-								<a class="btn btn-action-1 btn-sm btn-transition-scale mt-3 --flex-fill --w-100 px-2 py-0" href="<?= esc_url(add_query_arg(array('form_type' => 'stage', 'ID' => $post->ID),$contact_permalink)) ?>"><?= esc_html__( 'Apply to a stage', 'wa-rsfp' ); ?></a>
+								<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Altitude', 'waff' ); ?></h6>
+								<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_altitude); ?>m</p>
 								</div>
 							</div>
 							<!-- <div class="d-none d-lg-flex align-items-center justify-content-center px-5">
@@ -516,6 +524,34 @@ if ( is_singular() && has_post_thumbnail() ) {
 		</div>
 	</section>
 	<!-- END: #pageheader -->
+
+	<section id="pagetitle" class="mt-0 mb-0 contrast--light  position-relative fancy-header is-formatted" data-aos="fade-up" data-aos-id="pagetitle">
+		<div class="container-fluid px-0">
+			<div class="row g-0 justify-content-between align-items-center "><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
+				
+					<div class="col-md-6 col-lg-5 --bg-action-2">
+						<?php if ( $c_distances ) : ?>
+							<ul class="list-group list-group-flush m-4">
+								<?php foreach ($c_distances as $distance) : ?>
+									<li class="fs-5 list-group-item"><i class="bi bi-flag-fill"></i> <strong><?= $distance[0]; ?></strong> <?= $distance[1]; ?></li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+
+					</div>
+
+					<div class="col-md-6 col-lg-7 bg-action-1">
+
+					@TODO 
+
+					</div>
+
+
+			</div>
+		</div>
+	</section>
+
+
 
 <?php else: ?>	
 

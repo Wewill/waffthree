@@ -9,8 +9,10 @@ class WP_Widget_CallToAction extends WP_Widget {
         'text_end'   		=> '<p class="card-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>',
 		'classes' 			=> 'mt-10 mb-n8 contrast--dark z-2',
 		'inside_classes' 	=> 'ms-1 me-1 ms-lg-10 me-lg-10',
-		'card_classes_start'=> 'justify-content-between',
-		'card_classes_end' 	=> 'justify-content-center',
+		'card_position_start'=> 'justify-content-between',
+		'card_position_end' => 'justify-content-center',
+		'card_classes_start'=> 'text-white',
+		'card_classes_end' 	=> 'text-white',
 		'fullwitdh' 		=> 'no',
     );  
 
@@ -62,8 +64,11 @@ class WP_Widget_CallToAction extends WP_Widget {
 		$url_start             	= ! empty( $instance['url_start'] ) ? $instance['url_start'] : '';
 		$url_end               	= ! empty( $instance['url_end'] ) ? $instance['url_end'] : '';
 
-		$card_classes_start          = ! empty( $instance['url_start'] ) ? $instance['url_start'] : '';
-		$card_classes_start          = ! empty( $instance['url_end'] ) ? $instance['url_end'] : '';
+		$card_position_start          = ! empty( $instance['card_position_start'] ) ? $instance['card_position_start'] : '';
+		$card_position_end          = ! empty( $instance['card_position_end'] ) ? $instance['card_position_end'] : '';
+
+		$card_classes_start          = ! empty( $instance['card_classes_start'] ) ? $instance['card_classes_start'] : '';
+		$card_classes_end          = ! empty( $instance['card_classes_end'] ) ? $instance['card_classes_end'] : '';
 
 		$bg_image_start             = ! empty( $instance['bg_image_start'] ) ? $instance['bg_image_start'] : '';
 		$bg_image_end               = ! empty( $instance['bg_image_end'] ) ? $instance['bg_image_end'] : '';
@@ -114,11 +119,17 @@ class WP_Widget_CallToAction extends WP_Widget {
 					<!-- First col -->
 					<div class="col-md-6 h-250-px bg-color-layout img-shifted <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-start-4 md-rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
-						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_start']; ?>">
-							<h6 class="display d-inline action-2"><?= $label_start ?></h6>
+						<div class="card bg-transparent border-0 --text-white h-100 p-4 d-flex flex-column <?= $card_position_start; ?> <?= $card_classes_start; ?>">
+							<?php if ( ! empty( $label_start ) ) : ?>
+								<h6 class="display d-inline action-2"><?= $label_start ?></h6>
+							<?php endif; ?>
 							<hgroup>
-								<p class="card-date text-muted mt-1 mb-0"><?= $subtitle_start ?></p>
-								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_start ?>"><?= $title_start ?></a></h3>
+								<?php if ( ! empty( $subtitle_start ) ) : ?>
+									<p class="card-date muted --text-muted mt-1 mb-0 headflat"><?= $subtitle_start ?></p>
+								<?php endif; ?>
+								<?php if ( ! empty( $title_start ) ) : ?>
+									<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_start ?>"><?= $title_start ?></a></h3>
+								<?php endif; ?>
 							</hgroup>
 							<?= $text_start ?>
 							<?= $url_start != '' ? '<div><a href="'.$url_start.'" class="btn btn-sm btn-inverse-action-2" alt="'.$title_start.'">En savoir plus...</a></div>':'' ?>
@@ -128,11 +139,17 @@ class WP_Widget_CallToAction extends WP_Widget {
 					<!-- Last col -->
 					<div class="col-md-6 d-none d-md-block h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
-						<div class="card bg-transparent border-0 text-white h-100 p-4 d-flex flex-column <?= $instance['card_classes_end']; ?>">
-							<h6 class="display d-inline action-2"><?= $label_end ?></h6>
+						<div class="card bg-transparent border-0 --text-white h-100 p-4 d-flex flex-column <?= $card_position_end; ?> <?= $card_classes_end; ?>">
+						<?php if ( ! empty( $label_end ) ) : ?>
+								<h6 class="display d-inline action-2"><?= $label_end ?></h6>
+							<?php endif; ?>
 							<hgroup>
-								<p class="card-date text-muted mt-1 mb-0"><?= $subtitle_end ?></p>
-								<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_end ?>"><?= $title_end ?></a></h3>
+								<?php if ( ! empty( $subtitle_end ) ) : ?>
+									<p class="card-date muted --text-muted mt-1 mb-0 headflat"><?= $subtitle_end ?></p>
+								<?php endif; ?>
+								<?php if ( ! empty( $title_end ) ) : ?>
+									<h3 class="card-title w-60"><a class="stretched-link link-white" href="<?= $url_end ?>"><?= $title_end ?></a></h3>
+								<?php endif; ?>
 							</hgroup>
 							<?= $text_end ?>
 							<?= $url_end != '' ? '<div><a href="'.$url_end.'" class="btn btn-sm btn-inverse-action-2" alt="'.$title_end.'">En savoir plus...</a></div>':'' ?>
@@ -244,25 +261,29 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<input style="width: 19%;" class="button remove-media" id="buttonremove" name="buttonremove" type="button" value="<?php _e( 'Clear', 'waff' ); ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('card_classes_start'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?>
-					<select class='widefat' id="<?php echo $this->get_field_id('card_classes_start'); ?>"
-					name="<?php echo $this->get_field_name('card_classes_start'); ?>" type="text">
-						<option value='justify-content-top' <?php echo ($instance['card_classes_start']=='justify-content-top')?'selected':''; ?>>
+				<label for="<?php echo $this->get_field_id('card_position_start'); ?>"><?php esc_html_e('Card content position:', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('card_position_start'); ?>"
+					name="<?php echo $this->get_field_name('card_position_start'); ?>" type="text">
+						<option value='justify-content-top' <?php echo ($instance['card_position_start']=='justify-content-top')?'selected':''; ?>>
 							<?php _e( 'Top', 'waff' ); ?>
 						</option>
-						<option value='justify-content-center' <?php echo ($instance['card_classes_start']=='justify-content-center')?'selected':''; ?>>
+						<option value='justify-content-center' <?php echo ($instance['card_position_start']=='justify-content-center')?'selected':''; ?>>
 							<?php _e( 'Center', 'waff' ); ?>
 						</option> 
-						<option value='justify-content-bottom' <?php echo ($instance['card_classes_start']=='justify-content-bottom')?'selected':''; ?>>
+						<option value='justify-content-bottom' <?php echo ($instance['card_position_start']=='justify-content-bottom')?'selected':''; ?>>
 							<?php _e( 'Bottom', 'waff' ); ?>
 						</option>
-						<option value='justify-content-between' <?php echo ($instance['card_classes_start']=='justify-content-between')?'selected':''; ?>>
+						<option value='justify-content-between' <?php echo ($instance['card_position_start']=='justify-content-between')?'selected':''; ?>>
 							<?php _e( 'Between', 'waff' ); ?>
 						</option> 
-					</select>                
+					</select>
 				</label>
-				<!-- <input type="text" id="<?php echo $this->get_field_id( 'card_classes_start' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_start' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_start'] ); ?>" /> -->
-			</p>			
+				<!-- <input type="text" id="<?php echo $this->get_field_id( 'card_position_start' ); ?>" name="<?php echo $this->get_field_name( 'card_position_start' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_position_start'] ); ?>" /> -->
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('card_classes_start'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?></label>
+				<input type="text" id="<?php echo $this->get_field_id( 'card_classes_start' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_start' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_start'] ); ?>" />
+			</p>
 		</div>
 		<div style="float:right; width:49%">
 			<h6><?php _e( 'Right column:', 'waff' ); ?></h6>
@@ -296,25 +317,29 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<input style="width: 19%;" class="button remove-media" id="buttonremove" name="buttonremove" type="button" value="<?php _e( 'Clear', 'waff' ); ?>" />
 			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id('card_classes_end'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?>
-					<select class='widefat' id="<?php echo $this->get_field_id('card_classes_end'); ?>"
-					name="<?php echo $this->get_field_name('card_classes_end'); ?>" type="text">
-						<option value='justify-content-top' <?php echo ($instance['card_classes_end']=='justify-content-top')?'selected':''; ?>>
+				<label for="<?php echo $this->get_field_id('card_position_end'); ?>"><?php esc_html_e('Card content position:', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('card_position_end'); ?>"
+					name="<?php echo $this->get_field_name('card_position_end'); ?>" type="text">
+						<option value='justify-content-top' <?php echo ($instance['card_position_end']=='justify-content-top')?'selected':''; ?>>
 							<?php _e( 'Top', 'waff' ); ?>
 						</option>
-						<option value='justify-content-center' <?php echo ($instance['card_classes_end']=='justify-content-center')?'selected':''; ?>>
+						<option value='justify-content-center' <?php echo ($instance['card_position_end']=='justify-content-center')?'selected':''; ?>>
 							<?php _e( 'Center', 'waff' ); ?>
 						</option> 
-						<option value='justify-content-bottom' <?php echo ($instance['card_classes_end']=='justify-content-bottom')?'selected':''; ?>>
+						<option value='justify-content-bottom' <?php echo ($instance['card_position_end']=='justify-content-bottom')?'selected':''; ?>>
 							<?php _e( 'Bottom', 'waff' ); ?>
 						</option>
-						<option value='justify-content-between' <?php echo ($instance['card_classes_end']=='justify-content-between')?'selected':''; ?>>
+						<option value='justify-content-between' <?php echo ($instance['card_position_end']=='justify-content-between')?'selected':''; ?>>
 							<?php _e( 'Between', 'waff' ); ?>
 						</option> 
-					</select>                
+					</select>
 				</label>
-				<!-- <input type="text" id="<?php echo $this->get_field_id( 'card_classes_end' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_end' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_end'] ); ?>" /> -->
-			</p>			
+				<!-- <input type="text" id="<?php echo $this->get_field_id( 'card_position_end' ); ?>" name="<?php echo $this->get_field_name( 'card_position_end' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_position_end'] ); ?>" /> -->
+			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('card_classes_end'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?></label>
+				<input type="text" id="<?php echo $this->get_field_id( 'card_classes_end' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_end' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_end'] ); ?>" />
+			</p>
 		</div>
 
 		<div class="clearfix clear"></div>
@@ -382,6 +407,9 @@ class WP_Widget_CallToAction extends WP_Widget {
 
         $instance['url_start'] = sanitize_text_field( $new_instance['url_start'] );
         $instance['url_end'] = sanitize_text_field( $new_instance['url_end'] );
+
+		$instance['card_position_start'] = sanitize_text_field( $new_instance['card_position_start'] );
+        $instance['card_position_end'] = sanitize_text_field( $new_instance['card_position_end'] );
 
 		$instance['card_classes_start'] = sanitize_text_field( $new_instance['card_classes_start'] );
         $instance['card_classes_end'] = sanitize_text_field( $new_instance['card_classes_end'] );
