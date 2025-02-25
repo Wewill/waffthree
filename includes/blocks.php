@@ -4276,14 +4276,14 @@ function wa_insights_callback( $attributes ) {
 									%s
 									<div class="card-body">
 										<h1 class="card-title %s %s %s">%s<small class="text-body-secondary fw-light">%s</small></h1>
-										<p class="mt-3 mb-4">%s</p>
+										<p class="mt-3 mb-2">%s</p>
 										%s
 									</div>
 								</div>
 							</div>',
 							$list[4]?$list[4]:'bg-color-layout',
 							$list[0]?'<div class="card-header py-3"><h4 class="my-0 fw-normal">'.$list[0].'</h4></div>':'',
-							$list[4]?'heading-2':'',
+							$list[4]?'heading-2 mt-2':'',
 							$list[6]?$list[6]:'', // TextColor
 							$list[7]?$list[7]:'fw-medium', // FontWeight
 							$list[1],
