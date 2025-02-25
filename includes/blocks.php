@@ -1237,6 +1237,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 					'Description' 	=> 'Description',
 					'Class'       	=> 'Fill here an css class (optionnal)',
 					'Link'       	=> 'http://www.google.fr (optionnal)',
+					'TextColor'    => 'Override here text color (optionnal)',
+					'FontWeight'   => 'Override here font weight (optionnal)',
 					// 'Value'       	=> 'Value',
 				],
 				'clone'             => true,
@@ -4273,7 +4275,7 @@ function wa_insights_callback( $attributes ) {
 								<div class="card mb-4 rounded-3 --shadow-sm border-0 text-start %s text-color-main">
 									%s
 									<div class="card-body">
-										<h1 class="card-title %s">%s<small class="text-body-secondary fw-light">%s</small></h1>
+										<h1 class="card-title %s %s %s">%s<small class="text-body-secondary fw-light">%s</small></h1>
 										<p class="mt-3 mb-4">%s</p>
 										%s
 									</div>
@@ -4281,7 +4283,9 @@ function wa_insights_callback( $attributes ) {
 							</div>',
 							$list[4]?$list[4]:'bg-color-layout',
 							$list[0]?'<div class="card-header py-3"><h4 class="my-0 fw-normal">'.$list[0].'</h4></div>':'',
-							$list[4]?'heading-2':'fw-medium',
+							$list[4]?'heading-2':'',
+							$list[6]?$list[6]:'', // TextColor
+							$list[7]?$list[7]:'fw-medium', // FontWeight
 							$list[1],
 							$list[2],
 							$list[3],
