@@ -1316,7 +1316,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
     return $meta_boxes;
 }
 
-function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = null ) {
+function wa_latest_posts_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	if ( $is_preview === true ) {
 		?>
@@ -1962,7 +1963,8 @@ function wa_latest_posts_callback( $attributes, $is_preview = false, $post_id = 
 	endif;
 }
 
-function wa_partners_callback( $attributes, $is_preview = false, $post_id = null ) {
+function wa_partners_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	$partner_post_type 	= ( post_type_exists('partenaire') )?'partenaire':'partner'; // Depreciated WAFFTWO V1 
 	$partner_category 	= ( post_type_exists('partenaire') )?'partenaire-category':'partner-category'; // Depreciated WAFFTWO V1 
@@ -2136,8 +2138,9 @@ function wa_partners_callback( $attributes, $is_preview = false, $post_id = null
 	<?php
 }
 
-function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_edito_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	// print_r($attributes);
 
 	// Fields data.
@@ -2282,8 +2285,9 @@ function wa_edito_callback( $attributes, $is_preview = false, $post_id = null ) 
 
 }
 
-function wa_awards_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_awards_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	//print_r($attributes);
 	//global $current_edition_id, $current_edition_films_are_online;
 
@@ -2560,6 +2564,8 @@ function wa_awards_callback( $attributes, $is_preview = false, $post_id = null )
 }
 
 function wa_awards_get_films( $films, $master = true ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+	
 	$html = '<div class="row award-list ' . (($master == true)?'master-':'') . 'awards">';
 	$counter=0;
 	$idx=0;
@@ -2802,8 +2808,9 @@ function edit_posts_orderby_award_clauses( $clauses, $wp_query ) {
     return $clauses;
 }*/
 
-function wa_playlist_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_playlist_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	//print_r($attributes);
 	//global $current_edition_id, $current_edition_films_are_online;
 	//https://codepen.io/tommydunn/pen/rNxQLNq?editors=1010
@@ -3099,8 +3106,9 @@ function wa_playlist_callback( $attributes, $is_preview = false, $post_id = null
 	<?php
 }
 
-function wa_contact_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_contact_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	if ( $is_preview === true ) {
 		?>
 		<section style="text-align: center; padding-left: 20%; padding-right: 20%;">
@@ -3260,8 +3268,9 @@ function wa_contact_callback( $attributes, $is_preview = false, $post_id = null 
 
 }
 
-function wa_film_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_film_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	// if ( $is_preview ) 
 	// 	print_r($attributes);
 
@@ -3361,8 +3370,9 @@ function wa_film_callback( $attributes, $is_preview = false, $post_id = null ) {
 	endif;
 }
 
-function wa_section_callback( $attributes, $is_preview = false, $post_id = null ) {
+function wa_section_callback( $attributes ) {
 	global $current_edition_slug; 
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	
 	// if ( $is_preview ) 
 	// 	print_r($attributes);
@@ -3550,9 +3560,10 @@ function wa_section_callback( $attributes, $is_preview = false, $post_id = null 
 	endif;
 }
 
-function wa_sections_callback( $attributes, $is_preview = false, $post_id = null ) {
+function wa_sections_callback( $attributes ) {
 	global $current_edition_id, $current_edition_slug; 
-	
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
 	// if ( $is_preview ) 
 	 	//print_r($attributes);
 
@@ -3814,9 +3825,10 @@ function wa_sections_callback( $attributes, $is_preview = false, $post_id = null
 		<?php
 }
 
-function wa_mission_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_mission_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
+
 
 	// Fields data.
 	if ( empty( $attributes['data'] ) ) {
@@ -3976,8 +3988,8 @@ function wa_mission_callback( $attributes, $is_preview = false, $post_id = null 
 	
 }
 
-function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_cols_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
 	// Fields data.
@@ -4076,8 +4088,8 @@ function wa_cols_callback( $attributes, $is_preview = false, $post_id = null ) {
 	
 }
 
-function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_breaking_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
 	// Fields data.
@@ -4197,8 +4209,8 @@ function wa_breaking_callback( $attributes, $is_preview = false, $post_id = null
 	
 }
 
-function wa_insights_callback( $attributes, $is_preview = false, $post_id = null ) {
-	
+function wa_insights_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
 	// Fields data.
