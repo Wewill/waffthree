@@ -10,7 +10,7 @@ namespace WaffTwo\Core;
 use function Go\hex_to_hsl;
 use function Go\load_inline_svg;
 //use function Go\AMP\is_amp;
-//use function Go\get_palette_color;
+// use function Go\get_palette_color;
 
 use function Go\Core\fonts_url as fonts_url;
 
@@ -114,7 +114,7 @@ function waff_i18n() {
 }
 
 /*
-	Used for custom meta blocks functions to retrieve colors 
+	Used for custom meta blocks functions to retrieve colors ( print colors )
 */ 
 function get_palette() {
 	//$color_schemes = WaffTwo\Core\get_design_style()['color_schemes']['one'];
@@ -247,9 +247,9 @@ function waff_design_styles( $default_design_styles = '' ) {
 					'label'             => _x( 'Original', 'color palette name', 'go' ), // possibly for alternative (in the future)
 				), (array)WAFF_COLORS ),
 				// Double because of an error of sibling the right 'one' color schemes instead on waff-one ( new IN WP ? .. )
-				// 'waff-one'   => array_merge( array(
-				// 	'label'             => _x( 'Original', 'color palette name', 'go' ), // possibly for alternative (in the future)
-				// ), (array)WAFF_COLORS ),
+				'waff-one'   => array_merge( array(
+					'label'             => _x( 'Child', 'color palette name', 'go' ), // possibly for alternative (in the future)
+				), (array)WAFF_COLORS ),
 			),
 			/* > No google fonts
 			'fonts' => array(
@@ -462,32 +462,72 @@ function waff_theme_setup() {
 			// 	),
 			// ));
 
+			// wp_die("quaternary=====" . \Go\get_palette_color( 'quaternary', 'RGB'));
+			// wp_die("quinary=====" . \Go\get_palette_color( 'quinary', 'RGB'));
+
 			$color_palette = array_merge( $editorColorPalette[0], array(
-				array(
-					'name'  => esc_html_x( 'Primary', 'name of the first color palette selection', 'go' ),
-					'slug'  => 'primary',
-					'color' => \Go\get_palette_color( 'primary' ),
-				),
-				array(
-					'name'  => esc_html_x( 'Secondary', 'name of the second color palette selection', 'go' ),
-					'slug'  => 'secondary',
-					'color' => \Go\get_palette_color( 'secondary' ),
-				),
-				array(
-					'name'  => esc_html_x( 'Tertiary', 'name of the third color palette selection', 'go' ),
-					'slug'  => 'tertiary',
-					'color' => \Go\get_palette_color( 'tertiary' ),
-				),
+				// array(
+				// 	'name'  => esc_html_x( 'Primary', 'name of the first color palette selection', 'go' ),
+				// 	'slug'  => 'primary',
+				// 	'color' => \Go\get_palette_color( 'primary' ),
+				// ),
+				// array(
+				// 	'name'  => esc_html_x( 'Secondary', 'name of the second color palette selection', 'go' ),
+				// 	'slug'  => 'secondary',
+				// 	'color' => \Go\get_palette_color( 'secondary' ),
+				// ),
+				// array(
+				// 	'name'  => esc_html_x( 'Tertiary', 'name of the third color palette selection', 'go' ),
+				// 	'slug'  => 'tertiary',
+				// 	'color' => \Go\get_palette_color( 'tertiary' ),
+				// ),
 				array(
 					'name'  => esc_html_x( 'Quaternary', 'name of the fourth color palette selection', 'go' ),
 					'slug'  => 'quaternary',
-					'color' => '#ffffff',
+					'color' => \Go\get_palette_color( 'quaternary', 'RGB' ),
 				),
 				array(
 					'name'  => esc_html_x( 'Quinary', 'name of the fifth color palette selection', 'go' ),
 					'slug'  => 'quinary',
-					'color' => '#FF00AA',
+					'color' => \Go\get_palette_color( 'quinary', 'RGB' ),
 				),
+				array(
+					'name'  => esc_html_x( 'Gray', 'name of the gray color palette selection', 'go' ),
+					'slug'  => 'gray',
+					'color' => \Go\get_palette_color( 'gray' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Gray var', 'name of the gray var color palette selection', 'go' ),
+					'slug'  => 'gray2',
+					'color' => \Go\get_palette_color( 'gray2' ),
+				),
+				array(
+					'name'  => esc_html_x( 'More', 'name of the more color palette selection', 'go' ),
+					'slug'  => 'more1',
+					'color' => \Go\get_palette_color( 'more1' ),
+				),
+				array(
+					'name'  => esc_html_x( 'More var', 'name of the more var color palette selection', 'go' ),
+					'slug'  => 'more1',
+					'color' => \Go\get_palette_color( 'more1' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Header background', 'name of the Header background color palette selection', 'go' ),
+					'slug'  => 'header_background',
+					'color' => \Go\get_palette_color( 'header_background' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Footer background', 'name of the Footer background color palette selection', 'go' ),
+					'slug'  => 'footer_background',
+					'color' => \Go\get_palette_color( 'footer_background' ),
+				),
+				// [quinary] => #01012a
+				// [gray] => #EAEFF0
+				// [gray2] => #BFBFBF
+				// [more1] => #cfffec
+				// [more2] => #cb4000
+				// [header_background] => #ffffff
+				// [footer_background] => #2f4d42
 			));
 
 			add_theme_support( 'editor-color-palette', $color_palette );
@@ -1308,4 +1348,4 @@ function waff_get_attachment( $attachment_id ) {
         'src' => $attachment->guid,
         'title' => $attachment->post_title
     );
-}	
+}
