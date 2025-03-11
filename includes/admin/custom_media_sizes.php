@@ -8,14 +8,13 @@ if ( ! class_exists( 'Custom_Media_Sizes' ) ):
 		private $allowed_post_type = array('post', 'page', 'homeslide', 'film');
 	   	private $_generated_sizes;
 	   	private $_aborded_sizes;
-	   	private $_attachement_id;
-	
-	
+	   	private $_attachment_id;
+		
 		public function __construct(){
-	        $this->_generated_sizes = array();
-	        $this->_aborded_sizes = array();
-	        $this->_attachment_id = 0;
-
+			$this->_generated_sizes = array();
+			$this->_aborded_sizes = array();
+			$this->_attachment_id = 0;
+			
 			add_action( 'after_setup_theme',  array( $this, 'waff_add_image_sizes') , 110);
 			add_action( 'admin_init',  array( $this, 'init') );
 		}
