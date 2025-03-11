@@ -1091,8 +1091,9 @@ svg.duotone-filters {
 }
 
 /* Do not put a margin if first of columns */
-.wp-block-columns .wp-block-column > :first-child {
-  margin-top: 0;
+:where(.editor-styles-wrapper)
+  .block-editor-block-list__block.wp-block.wp-block-heading:first-child {
+  margin-top: 0 !important;
 }
 
 /**
