@@ -153,7 +153,6 @@
   /* Footer  */
   --go-footer--color--text: var(--go-heading--color--text);
   /* --go-footer--color--background: var(--go--color--white) !important; NOt needed > Edited waff_colors > footer_background + personalize /* Dinard */
-  --go-footer-navigation--line-height: 1.5; /* Dinard */
 
   /* Images */
   --go-featured-image--height: 720px; /*680px*/
@@ -170,6 +169,14 @@
   --go-heading--color--text: hsl(0, 0%, 100%);
   --go-caption--color--text: var(--go-heading--color--text);
   --go--hyperlink--color--text: var(--go-heading--color--text);
+}
+
+.waff-theme-dinard {
+  --go-footer-navigation--line-height: 1.5; /* Dinard */
+}
+
+.waff-theme-golfs {
+  --go-footer-navigation--line-height: 2; /* GOLFS */
 }
 
 /* @group Utility */
