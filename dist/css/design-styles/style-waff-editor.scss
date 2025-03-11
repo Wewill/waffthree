@@ -1083,6 +1083,18 @@ svg.duotone-filters {
   color: var(--go--color--quaternary);
 }
 
+/* Do not add a margin bottom between h* and p */
+:where(.editor-styles-wrapper)
+  .block-editor-block-list__layout
+  > .wp-block:not(.wp-social-link):nth-last-child(2) {
+  margin-bottom: 1rem;
+}
+
+/* Do not put a margin if first of columns */
+.wp-block-columns .wp-block-column > :first-child {
+  margin-top: 0;
+}
+
 /**
 TEST SPECIFIC RSFP 
 To get the bootstrap specific and theme specific into blocks ? 
