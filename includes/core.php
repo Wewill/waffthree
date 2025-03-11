@@ -454,11 +454,39 @@ function waff_theme_setup() {
 
 		if ( $editorColorPalette ) {
 			
+			// $color_palette = array_merge( $editorColorPalette[0], array(
+			// 	array(
+			// 		'name'  => esc_html_x( 'Quinary', 'name of the fifth color palette selection', 'go' ),
+			// 		'slug'  => 'quinary',
+			// 		'color' => '#000000',
+			// 	),
+			// ));
+
 			$color_palette = array_merge( $editorColorPalette[0], array(
+				array(
+					'name'  => esc_html_x( 'Primary', 'name of the first color palette selection', 'go' ),
+					'slug'  => 'primary',
+					'color' => \Go\get_palette_color( 'primary' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Secondary', 'name of the second color palette selection', 'go' ),
+					'slug'  => 'secondary',
+					'color' => \Go\get_palette_color( 'secondary' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Tertiary', 'name of the third color palette selection', 'go' ),
+					'slug'  => 'tertiary',
+					'color' => \Go\get_palette_color( 'tertiary' ),
+				),
+				array(
+					'name'  => esc_html_x( 'Quaternary', 'name of the fourth color palette selection', 'go' ),
+					'slug'  => 'quaternary',
+					'color' => '#ffffff',
+				),
 				array(
 					'name'  => esc_html_x( 'Quinary', 'name of the fifth color palette selection', 'go' ),
 					'slug'  => 'quinary',
-					'color' => '#000000',
+					'color' => '#FF00AA',
 				),
 			));
 
