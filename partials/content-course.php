@@ -20,7 +20,6 @@ $next_post = get_adjacent_post(false, '', false);
 
 ?>
 <!-- Begin: SINGLE COURSE-->
- #COURSE ? 
 <article <?php post_class(); ?> id="course-<?php the_ID(); ?>">
 
 	<?php
