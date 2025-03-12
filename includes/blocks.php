@@ -15,6 +15,9 @@ use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB;
 use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
 use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
 use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
+
+use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
+
 //use function Go\hex_to_rgb as hex_to_rgb; 
 
 /**
@@ -4048,7 +4051,7 @@ function wa_cols_callback( $attributes ) {
 	$bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 
 	// Homeslide background image
-	$homeslide_images = WaffTwo\Theme\waff_get_theme_homeslide_background();
+	$homeslide_images = waff_get_theme_homeslide_background();
 	$homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : false;
 
 	?>
