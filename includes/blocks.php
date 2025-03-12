@@ -1013,6 +1013,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
 			],
 			[
+				'id'   => $prefix . 'c_subtitle_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle class', 'waff' ),
+				'std' => 'text-action-3',
+                'desc' => esc_html__( 'Fill the subtitle class.', 'waff' ),
+			],
+			[
 				'id'   => $prefix . 'c_leadcontent',
 				'type' => 'textarea',
 				'name' => esc_html__( 'Lead content', 'waff' ),
@@ -4043,7 +4050,7 @@ function wa_cols_callback( $attributes ) {
 			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
-					<h6 class="subline text-action-3" style="<?=!$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
+					<h6 class="subline <?= mb_get_block_field( 'waff_c_subtitle_class' ) ?>" style="<?=!$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
 					<h2 class="text-white" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_title' ) ?></h2>
 				</div>
 				<div class="col-4 d-flex align-items-start justify-content-end">
