@@ -473,44 +473,6 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 					<?php if ($c_introduction) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($c_introduction)))); ?>
 
-					<?php if (!empty($c_green) || !empty($c_altitude)) { ?>
-						<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
-							<?php if (!empty($c_green)): ?>
-							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-binoculars flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
-								<div>
-								<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Green', 'waff' ); ?></h6>
-								<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_green); ?></p>
-								</div>
-							</div>
-							<div class="d-none d-lg-flex align-items-center justify-content-center px-2 px-md-4 px-xl-5">
-								<span class="bullet bullet-action-2 ms-0"></span>
-							</div>
-							<?php endif; ?>
-
-							<?php if (!empty($c_altitude)): ?>
-							<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
-								<i class="bi bi-capslock flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
-								<div>
-								<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Altitude', 'waff' ); ?></h6>
-								<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_altitude); ?>m</p>
-								</div>
-							</div>
-							<!-- <div class="d-none d-lg-flex align-items-center justify-content-center px-5">
-								<span class="bullet bullet-action-2 ms-0"></span>
-							</div> -->
-							<?php endif; ?>
-
-							<!-- <div class="d-lg-flex d-inline-block align-items-center">
-								<i class="bi bi-cloud-arrow-down flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
-								<div>
-								<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
-								<p class="mb-0 small-lg"><span class="badge bg-action-2">Bientôt disponible...</span></p>
-								</div>
-							</div> -->
-						</div>
-					<?php } ?>
-
 				</div>
 		
 				<!-- Mouse down -->
@@ -529,7 +491,75 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<div class="container-fluid px-0">
 			<div class="row g-0 justify-content-between align-items-center "><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
-					<div class="col-md-6 col-lg-5 --bg-action-2">
+					<div class="col-md-6 col-lg-5">
+
+						<!-- Course map -->
+						<?php $course_map = rwmb_meta( $prefix . 'course_map', ['size' => 'large'] ); ?>
+						<?php if (!empty($course_map)): ?>
+						<h6 class="subline --text-action-1 mt-5"><?= /*translators:Galerie */ __('Gallery', 'wa-rsfp'); ?></h6>
+						<!-- Begin: Map row -->
+						<div class="row row-cols-sm-2 row-cols-lg-3 mt-2 mb-6 g-4">
+							<?php foreach ( $course_map as $image ) : ?>
+								<a class="col" href="javascript:;">
+									<figure id="<?= $image['ID'] ?>">
+										<picture class="lazy" data-fancybox="gallery" data-loader="pic" data-src="<?= $image['full_url'] ?>">
+											<!--<data-src media="(min-width: 576px)" srcset="https://placehold.co/600x600/AA0000/808080?text=1200x1200" type="image/jpeg"></data-src> -->
+											<data-src media="(min-width: 150px)" srcset="<?= $image['sizes']['page-featured-image-s']['url']; ?>" type="image/jpeg"></data-src>
+											<data-img src="<?= $image['url']; ?>" alt="<?= esc_html($image['alt']); ?>" class="img-fluid rounded-4 --h-300-px fit-image w-100 img-transition-scale" style="" title="<?= $image['title']; ?>"></data-img>
+										</picture>
+										<?php if ( $image['alt'] || $image['description'] ) : ?>
+										<figcaption><strong>© <?= esc_html($image['alt']); ?></strong> <?= esc_html($image['description']); ?></figcaption>
+										<?php endif; /* If captions */ ?>
+									</figure>
+								</a>
+							<?php endforeach ?>
+						</div>
+						<!-- End: Map row -->
+						<?php endif; ?>
+
+						
+						<?php if (!empty($c_green) || !empty($c_altitude)) { ?>
+							<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow m-6">
+								<?php if (!empty($c_green)): ?>
+								<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
+									<i class="bi bi-binoculars flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
+									<div>
+									<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Green', 'waff' ); ?></h6>
+									<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_green); ?></p>
+									</div>
+								</div>
+								<div class="d-none d-lg-flex align-items-center justify-content-center px-2 px-md-4 px-xl-5">
+									<span class="bullet bullet-action-2 ms-0"></span>
+								</div>
+								<?php endif; ?>
+
+								<?php if (!empty($c_altitude)): ?>
+								<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
+									<i class="bi bi-capslock flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
+									<div>
+									<h6 class="fw-bold text-action-2 my-2 my-lg-3"><?= esc_html__( 'Altitude', 'waff' ); ?></h6>
+									<p class="mb-0 small-lg fs-4 text-action-3"><?= esc_html($c_altitude); ?>m</p>
+									</div>
+								</div>
+								<!-- <div class="d-none d-lg-flex align-items-center justify-content-center px-5">
+									<span class="bullet bullet-action-2 ms-0"></span>
+								</div> -->
+								<?php endif; ?>
+
+								<!-- <div class="d-lg-flex d-inline-block align-items-center">
+									<i class="bi bi-cloud-arrow-down flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-1"></i>
+									<div>
+									<h6 class="fw-bold --text-action-1"><?= esc_html__( 'Download', 'waff' ); ?></h6>
+									<p class="mb-0 small-lg"><span class="badge bg-action-2">Bientôt disponible...</span></p>
+									</div>
+								</div> -->
+							</div>
+						<?php } ?>
+
+					</div>
+
+					<div class="col-md-6 col-lg-7">
+
 						<?php if ( $c_distances ) : ?>
 							<ul class="list-group list-group-flush m-4">
 								<?php foreach ($c_distances as $distance) : ?>
@@ -537,12 +567,6 @@ if ( is_singular() && has_post_thumbnail() ) {
 								<?php endforeach; ?>
 							</ul>
 						<?php endif; ?>
-
-					</div>
-
-					<div class="col-md-6 col-lg-7 bg-action-1">
-
-					@TODO 
 
 					</div>
 
