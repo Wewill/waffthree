@@ -49,11 +49,11 @@ $next_post = get_adjacent_post(false, '', false);
 
 <!-- #medias -->
 <!-- Gallery -->
-	<?php $medias_gallery = rwmb_meta( $prefix . 'medias_gallery', ['size' => 'thumbnail'] ); ?>
+<?php $medias_gallery = rwmb_meta( $prefix . 'medias_gallery', ['size' => 'large'] ); ?>
 <?php if (!empty($medias_gallery)): ?>
 <h6 class="subline --text-action-1 mt-5"><?= /*translators:Galerie */ __('Gallery', 'wa-rsfp'); ?></h6>
 <!-- Begin: Gallery row -->
-<div class="row row-cols-sm-2 row-cols-lg-3 mt-2 mb-6 g-4">
+<div class="row row-cols-sm-2 row-cols-lg-4 mt-2 mb-6 g-4">
 	<?php foreach ( $medias_gallery as $image ) : ?>
 		<a class="col" href="javascript:;">
 			<figure id="<?= $image['ID'] ?>">
@@ -78,7 +78,7 @@ $next_post = get_adjacent_post(false, '', false);
 <?php if (!empty($d_medias_videos) || !empty($d_medias_video_links)): ?>
 <h6 class="subline --text-action-1 mt-5"><?= /*translators:Vidéo */ __('Video', 'wa-rsfp'); ?></h6>
 <!-- Begin: Video row -->
-<div class="row row-cols-sm-2 row-cols-lg-3 mt-2 mb-6 g-4">
+<div class="row row-cols-sm-2 row-cols-lg-4 mt-2 mb-6 g-4">
 	<?php foreach ( $d_medias_videos as $d_medias_video ) : ?>
 		<a class="col" href="javascript:;">
 			<figure class="wp-block-video position-relative d-flex flex-center" id="<?= $d_medias_video['ID'] ?>" data-fancybox="gallery" data-loader="pic" data-src="<?= $d_medias_video['src'] ?>">

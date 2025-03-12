@@ -496,30 +496,25 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<!-- Course map -->
 						<?php $course_map = rwmb_meta( $prefix . 'course_map', ['size' => 'large'] ); ?>
 						<?php if (!empty($course_map)): ?>
-						<h6 class="subline --text-action-1 mt-5"><?= /*translators:Galerie */ __('Gallery', 'wa-rsfp'); ?></h6>
-						<!-- Begin: Map row -->
-						<div class="row row-cols-sm-2 row-cols-lg-3 mt-2 mb-6 g-4">
-							<?php foreach ( $course_map as $image ) : ?>
-								<a class="col" href="javascript:;">
-									<figure id="<?= $image['ID'] ?>">
-										<picture class="lazy" data-fancybox="gallery" data-loader="pic" data-src="<?= $image['full_url'] ?>">
-											<!--<data-src media="(min-width: 576px)" srcset="https://placehold.co/600x600/AA0000/808080?text=1200x1200" type="image/jpeg"></data-src> -->
-											<data-src media="(min-width: 150px)" srcset="<?= $image['sizes']['page-featured-image-s']['url']; ?>" type="image/jpeg"></data-src>
-											<data-img src="<?= $image['url']; ?>" alt="<?= esc_html($image['alt']); ?>" class="img-fluid rounded-4 --h-300-px fit-image w-100 img-transition-scale" style="" title="<?= $image['title']; ?>"></data-img>
-										</picture>
-										<?php if ( $image['alt'] || $image['description'] ) : ?>
-										<figcaption><strong>© <?= esc_html($image['alt']); ?></strong> <?= esc_html($image['description']); ?></figcaption>
-										<?php endif; /* If captions */ ?>
-									</figure>
-								</a>
-							<?php endforeach ?>
-						</div>
-						<!-- End: Map row -->
+						<!-- Begin: Map  -->
+						<?php $image = reset($course_map); ?>
+						<a href="javascript:;">
+							<figure id="<?= $image['ID'] ?>">
+								<picture class="lazy" data-fancybox="gallery" data-loader="pic" data-src="<?= $image['full_url'] ?>">
+									<!--<data-src media="(min-width: 576px)" srcset="https://placehold.co/600x600/AA0000/808080?text=1200x1200" type="image/jpeg"></data-src> -->
+									<data-src media="(min-width: 150px)" srcset="<?= $image['sizes']['page-featured-image-s']['url']; ?>" type="image/jpeg"></data-src>
+									<data-img src="<?= $image['url']; ?>" alt="<?= esc_html($image['alt']); ?>" class="img-fluid --rounded-4 --h-300-px fit-image w-100 --img-transition-scale" style="" title="<?= $image['title']; ?>"></data-img>
+								</picture>
+								<?php if ( $image['alt'] || $image['description'] ) : ?>
+								<figcaption><strong>© <?= esc_html($image['alt']); ?></strong> <?= esc_html($image['description']); ?></figcaption>
+								<?php endif; /* If captions */ ?>
+							</figure>
+						</a>
+						<!-- End: Map  -->
 						<?php endif; ?>
 
-						
 						<?php if (!empty($c_green) || !empty($c_altitude)) { ?>
-							<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow m-6">
+							<div class="d-flex align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow m-6 --- position-absolute bottom-0 start-0">
 								<?php if (!empty($c_green)): ?>
 								<div class="d-lg-flex d-inline-block align-items-center px-1 px-lg-0">
 									<i class="bi bi-binoculars flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
