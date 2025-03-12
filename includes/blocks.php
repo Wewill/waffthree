@@ -1042,6 +1042,19 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'max_file_uploads' => 1,
 			],
 			[
+                'id'		=> $prefix . 'c_image_style',
+                'name'		=> esc_html__( 'Select an image style', 'waff' ),
+                'type'		=> 'select',
+                'desc'		=> esc_html__( 'Choose image position and style.', 'waff' ),
+                'std'		=> 'full',
+                'options'           => [
+                    'full' 		=> esc_html__( 'Full w/ gradient', 'waff' ),
+                    'masked' 	=> esc_html__( 'Masked w/ blocks pattern', 'waff' ),
+                ],
+                // 'required'          => 1,
+                'key'               => 'value',
+			],
+			[
 				'id'    => $prefix . 'c_morelink',
 				'type'  => 'switch',
 				'name'  => esc_html__( 'Display more link ?', 'waff' ),
@@ -4034,6 +4047,10 @@ function wa_cols_callback( $attributes ) {
 	$bg_images 		= waff_get_blocks_transition();
 	$bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 
+	// Homeslide background image
+	$homeslide_images = WaffTwo\Theme\waff_get_theme_homeslide_background();
+	$homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : false;
+
 	?>
 	<!-- #cols -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
@@ -4080,6 +4097,12 @@ function wa_cols_callback( $attributes ) {
 					</figcaption>
 				<?php endif; /* If captions */ ?>
 			</figure>
+
+			<!-- Special GOLFS -->
+			<?php if ( $homeslide_image && mb_get_block_field( 'waff_c_image_style' ) === 'masked' ) : ?>
+				<div class="position-absolute top-50 start-0 translate-middle-y h-100 no-drag"><img class="h-100 bg-cover bg-position-center-center img-fluid no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
+			<?php endif; ?>
+
 		</div>
 
 		<!-- Background image-->
