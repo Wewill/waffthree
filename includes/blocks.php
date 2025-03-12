@@ -4082,10 +4082,12 @@ function wa_cols_callback( $attributes ) {
 					echo '<div class="col-12"><p class="lead mb-4 text-center fw-bold">'.waff_do_markdown(mb_get_block_field( 'waff_c_leadcontent' )).'</p></div>';
 				} ?>
 			</div>
-			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?> m-gutter-l m-gutter-r">
+			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?> m-gutter-l m-gutter-r" <?= $is_preview ? 'style="display:flex;"' : ''; ?>>
 				<?php 
+				$i = 0;
 				foreach( mb_get_block_field( 'waff_c_contents' ) as $content ) : 
-					echo '<div class="col" style="' .( $is_preview ? 'display: inline-block; width: calc(24% - 10px); margin-right: 10px;' : '' ). '"><div class="lead">'.waff_do_markdown($content).'</div></div>';
+					echo '<div class="col" style="' .( $is_preview ? 'margin-right: 10px;' : '' ). '" data-aos="flip-down" data-aos-delay="'.($i*200).'" ><div class="lead">'.waff_do_markdown($content).'</div></div>';
+					$i++;
 				endforeach;
 				?>
 			</div>
