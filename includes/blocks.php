@@ -891,6 +891,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
 			],
 			[
+				'id'   => $prefix . 'm_subtitle_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle class', 'waff' ),
+				'std' => 'text-action-1',
+                'desc' => esc_html__( 'Fill the subtitle class.', 'waff' ),
+			],
+			[
                 'id'   => $prefix . 'm_leadcontent',
                 'type' => 'textarea',
                 'name' => esc_html__( 'Lead content', 'waff' ),
@@ -952,7 +959,14 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 ],
                 // 'required'          => 1,
                 'key'               => 'value',
-			],	
+			],
+			[
+				'id'   => $prefix . 'm_bg_color',
+				'type' => 'text',
+				'name' => esc_html__( 'Override background color', 'waff' ),
+				'std' => '',
+                'desc' => esc_html__( 'Fill a color.', 'waff' ),
+			],
             [
                 'id'    => $prefix . 'm_morelink',
                 'type'  => 'switch',
@@ -1302,7 +1316,14 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
             //     ],
             //     // 'required'          => 1,
             //     'key'               => 'value',
-			// ],	
+			// ],
+			[
+				'id'   => $prefix . 'i_bg_color',
+				'type' => 'text',
+				'name' => esc_html__( 'Override background color', 'waff' ),
+				'std' => '',
+                'desc' => esc_html__( 'Fill a color.', 'waff' ),
+			],
             [
                 'id'    => $prefix . 'i_morelink',
                 'type'  => 'switch',
@@ -3889,19 +3910,23 @@ function wa_mission_callback( $attributes ) {
 	// Image 
 	$image 					= mb_get_block_field('waff_m_image');
 
+	// Background color 
+	$bg_color_aligned 		= mb_get_block_field('waff_m_bg_color') ? mb_get_block_field('waff_m_bg_color') : 'bg-action-1';
+	$bg_color_shifted 		= mb_get_block_field('waff_m_bg_color') ? mb_get_block_field('waff_m_bg_color') : 'bg-action-2';
+
 	// print_r(mb_get_block_field('waff_m_alignment'));
 	// print_r(mb_get_block_field('waff_m_position'));
 	// Alignment 
 	switch(mb_get_block_field('waff_m_alignment')) {
 		case 'aligned': 
 			$r_alignment 	= '';
-			$b_alignment 	= 'col-12 col-lg-4 bg-action-1 h-850-px h-lg-850-px'; // col-4
+			$b_alignment 	= $bg_color_aligned . ' col-12 col-lg-4 --bg-action-1 h-850-px h-lg-850-px'; // col-4
 			//$f_alignment 	= 'align-items-end';
 			$i_alignment 	= 'h-700-px h-lg-700-px'; // h-700-px
 			break;
 		case 'shifted': 
 			$r_alignment 	= 'vh-100';
-			$b_alignment 	= 'col-lg-5 col-xl-5 bg-action-2 vh-75';
+			$b_alignment 	= $bg_color_shifted . 'col-lg-5 col-xl-5 --bg-action-2 vh-75';
 			$f_alignment 	= 'lg-vh-75 h-100'; // h-100 pose soucis. 
 			$i_alignment 	= 'vh-75 --h-100';
 			break;
@@ -3972,7 +3997,7 @@ function wa_mission_callback( $attributes ) {
 				<!-- Begin: Content -->
 				<div class="col-12 col-lg-6 col-xl-5 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
 					<div>
-						<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
+						<h6 class="subline <?= mb_get_block_field( 'waff_m_subtitle_class' ) ?>"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
 						<h2><?= mb_get_block_field( 'waff_m_title' ) ?></h2>
 						<p class="lead mb-3"><?= waff_do_markdown(mb_get_block_field( 'waff_m_leadcontent' )) ?></p>
 						<?= waff_do_markdown(mb_get_block_field( 'waff_m_content' )) ?>
@@ -4291,6 +4316,9 @@ function wa_insights_callback( $attributes ) {
 	$pat_images = waff_get_blocks_pattern();
 	$pat_image 		= ( !empty($pat_images) ) ? reset( $pat_images ) : false;
 	
+	// Background color 
+	$bg_color 		= mb_get_block_field('waff_i_bg_color') ? mb_get_block_field('waff_i_bg_color') : 'bg-color-layout';
+	
 	?>
 	<!-- #Insights -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
@@ -4337,7 +4365,7 @@ function wa_insights_callback( $attributes ) {
 					
 				</div>
 
-				<div class="col-12 col-lg-4 bg-color-layout <?= $attributes['align'] === 'full' ? 'rounded-start-4':'rounded-4'; ?> d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
+				<div class="col-12 col-lg-4 <?= $bg_color; ?> --bg-color-layout <?= $attributes['align'] === 'full' ? 'rounded-start-4':'rounded-4'; ?> d-flex align-items-end justify-content-end ---- bg-position-center-center bg-repeat" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?> background-image: url('<?= $pat_image['url']; ?>');">
 
 					<!-- Figure -->
 					<?php if ( count($image) > 0 ) : ?>
