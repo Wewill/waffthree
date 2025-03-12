@@ -4066,7 +4066,7 @@ function wa_cols_callback( $attributes ) {
 		</figure>
 		<?php endif; ?>
 
-		<div class="container-fluid p-4 p-md-8 z-2 position-relative <?= $bg_image ? 'bg-v-plain-gradient-action-2' : 'bg-v-gradient-action-2 z'?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-4 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image ? 'bg-v-plain-gradient-action-2' : 'bg-v-gradient-action-2' ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
@@ -4082,7 +4082,7 @@ function wa_cols_callback( $attributes ) {
 					echo '<div class="col-12"><p class="lead mb-4 text-center fw-bold">'.waff_do_markdown(mb_get_block_field( 'waff_c_leadcontent' )).'</p></div>';
 				} ?>
 			</div>
-			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?>">
+			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?> m-gutter-l m-gutter-r">
 				<?php 
 				foreach( mb_get_block_field( 'waff_c_contents' ) as $content ) : 
 					echo '<div class="col" style="' .( $is_preview ? 'display: inline-block; width: calc(24% - 10px); margin-right: 10px;' : '' ). '"><div class="lead">'.waff_do_markdown($content).'</div></div>';
@@ -4101,10 +4101,6 @@ function wa_cols_callback( $attributes ) {
 				<?php endif; /* If captions */ ?>
 			</figure>
 
-			<!-- Special GOLFS -->
-			<?php if ( $homeslide_image && mb_get_block_field( 'waff_c_image_style' ) === 'masked' ) : ?>
-				<div class="position-absolute top-50 start-0 translate-middle-y h-100 no-drag"><img class="h-100 bg-cover bg-position-center-center img-fluid no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
-			<?php endif; ?>
 
 		</div>
 
@@ -4117,6 +4113,15 @@ function wa_cols_callback( $attributes ) {
 				</picture>
 			</figure>
 		<?php endif; ?>
+
+		<!-- Background image mask : special GOLFS -->
+		<?php if ( $homeslide_image && mb_get_block_field( 'waff_c_image_style' ) === 'masked' ) : ?>
+			<div class="position-absolute top-50 start-0 translate-middle-y h-100 w-100 no-drag d-flex">
+				<div class="bg-action-2 w-50"></div>
+				<img class="h-100 bg-cover bg-position-center-center img-fluid no-drag" src="<?= $homeslide_image['url']; ?>" />
+			</div>
+		<?php endif; ?>
+
 
 	</section>
 	<!-- END: #cols -->
