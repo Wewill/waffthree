@@ -1251,6 +1251,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
 			],
 			[
+				'id'   => $prefix . 'i_subtitle_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Subtitle class', 'waff' ),
+				'std' => 'text-action-1',
+                'desc' => esc_html__( 'Fill the subtitle class.', 'waff' ),
+			],
+			[
                 'id'   => $prefix . 'i_leadcontent',
                 'type' => 'textarea',
                 'name' => esc_html__( 'Lead content', 'waff' ),
@@ -4326,7 +4333,7 @@ function wa_insights_callback( $attributes ) {
 			<div class="row">
 				<div class="col-12 col-lg-8 ps-4 pe-4 ps-lg-10 pe-lg-10" ---data-aos="fade-left" style="<?= !$is_preview ?: 'display:inline-block; width:49%;' ?>">
 
-					<h6 class="subline text-action-1"><?= mb_get_block_field( 'waff_i_subtitle' ) ?></h6>
+					<h6 class="subline <?= mb_get_block_field( 'waff_i_subtitle_class' ) ?>"><?= mb_get_block_field( 'waff_i_subtitle' ) ?></h6>
 					<hgroup class="pt-8 pb-4 d-flex justify-content-between align-items-center">
 						<h2><?= mb_get_block_field( 'waff_i_title' ) ?></h2>
 						<?php if ( mb_get_block_field( 'waff_i_morelink' ) == 1 ) : ?>
