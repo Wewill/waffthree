@@ -477,14 +477,14 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 			[
 				'id'   => $prefix . 'c_form',
 				'type' => 'number',
-				'name' => esc_html__( 'Contact form id', 'waff' ),
-                'desc' => esc_html__( 'Fill the Gravity form id.', 'waff' ),
+				'name' => esc_html__( 'Contact GravityForm id', 'waff' ),
+                'desc' => esc_html__( 'Fill the GravityForm form id.', 'waff' ),
 			],
 			[
 				'id'   => $prefix . 'c_ws_form',
 				'type' => 'number',
-				'name' => esc_html__( 'Contact form id', 'waff' ),
-                'desc' => esc_html__( 'Fill the WS form id.', 'waff' ),
+				'name' => esc_html__( 'Contact WSform id', 'waff' ),
+                'desc' => esc_html__( 'Fill the WSform form id.', 'waff' ),
 			],
 
 			[
