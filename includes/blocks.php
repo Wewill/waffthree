@@ -3320,18 +3320,17 @@ function wa_contact_callback( $attributes ) {
 
 					
 				</div>
-				<div class="col-10 col-md-8 offset-1 offset-md-2 <?= mb_get_block_field( 'waff_c_second_color_class' ) && mb_get_block_field( 'waff_c_second_color_class' ) !== '' ? mb_get_block_field( 'waff_c_second_color_class' ) : 'bg-light' ?> p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
+				<div class="col-10 col-md-8 offset-1 offset-md-2 <?= mb_get_block_field( 'waff_c_form_color_class' ) ?: 'bg-light' ?> p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
 					<?php
-					if ( mb_get_block_field( 'waff_c_form' ) ) {
-						echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
+					$form_id = mb_get_block_field( 'waff_c_form' );
+					$ws_form_id = mb_get_block_field( 'waff_c_ws_form' );
+					if ( $form_id ) {
+						echo do_shortcode('[gravityform id="'.$form_id.'" title="false" description="false" ajax="true" field_values=""]');
+					}
+					if ( $ws_form_id ) {
+						echo do_shortcode('[ws_form id="'.$ws_form_id.'"]');
 					}
 					?>
-					<?php
-					if ( mb_get_block_field( 'waff_c_ws_form' ) ) {
-						echo do_shortcode('[ws_form id="'.mb_get_block_field( 'waff_c_ws_form' ).'"]');
-					}
-					?>
-
 				</div>
 		</div>
 	</section>
