@@ -486,7 +486,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'name' => esc_html__( 'Contact WSform id', 'waff' ),
                 'desc' => esc_html__( 'Fill the WSform form id.', 'waff' ),
 			],
-
+			[
+				'id'   => $prefix . 'c_form_color_class',
+				'type' => 'text',
+				'name' => esc_html__( 'Form class', 'waff' ),
+				'std' => 'bg-secondary',
+                'desc' => esc_html__( 'Fill the background color class ( or more ).', 'waff' ),
+			],
 			[
                 'type' => 'heading',
                 'name' => __( 'Style', 'waff' ),
@@ -3314,7 +3320,7 @@ function wa_contact_callback( $attributes ) {
 
 					
 				</div>
-				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-light p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
+				<div class="col-10 col-md-8 offset-1 offset-md-2 <?= mb_get_block_field( 'waff_c_second_color_class' ) && mb_get_block_field( 'waff_c_second_color_class' ) !== '' ? mb_get_block_field( 'waff_c_second_color_class' ) : 'bg-light' ?> p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
 					<?php
 					if ( mb_get_block_field( 'waff_c_form' ) ) {
 						echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
