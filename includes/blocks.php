@@ -481,6 +481,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'desc' => esc_html__( 'Fill the Gravity form id.', 'waff' ),
 			],
 			[
+				'id'   => $prefix . 'c_ws_form',
+				'type' => 'number',
+				'name' => esc_html__( 'Contact form id', 'waff' ),
+                'desc' => esc_html__( 'Fill the WS form id.', 'waff' ),
+			],
+
+			[
                 'type' => 'heading',
                 'name' => __( 'Style', 'waff' ),
 			],
@@ -3309,8 +3316,16 @@ function wa_contact_callback( $attributes ) {
 				</div>
 				<div class="col-10 col-md-8 offset-1 offset-md-2 bg-light p-4 p-md-5 <?= mb_get_block_field( 'waff_c_rounded' ) ? 'rounded-bottom-4' :'' ?>" style="height: 740px;">
 					<?php
-					echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
+					if ( mb_get_block_field( 'waff_c_form' ) ) {
+						echo do_shortcode('[gravityform id="'.mb_get_block_field( 'waff_c_form' ).'" title="false" description="false" ajax="true" field_values=""]');
+					}
 					?>
+					<?php
+					if ( mb_get_block_field( 'waff_c_ws_form' ) ) {
+						echo do_shortcode('[wsform id="'.mb_get_block_field( 'waff_c_ws_form' ).'"]');
+					}
+					?>
+
 				</div>
 		</div>
 	</section>
