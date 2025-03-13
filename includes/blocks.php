@@ -3322,7 +3322,7 @@ function wa_contact_callback( $attributes ) {
 					?>
 					<?php
 					if ( mb_get_block_field( 'waff_c_ws_form' ) ) {
-						echo do_shortcode('[wsform id="'.mb_get_block_field( 'waff_c_ws_form' ).'"]');
+						echo do_shortcode('[ws_form id="'.mb_get_block_field( 'waff_c_ws_form' ).'"]');
 					}
 					?>
 
