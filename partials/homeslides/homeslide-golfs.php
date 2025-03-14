@@ -167,13 +167,13 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						<!-- Slide <?= $slide_nb ?> -->
 						<div class="d-flex flex-column justify-content-center vh-75" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>">
 							<?php if ( $label != '' ) : ?>
-							<div class="ps-6 ps-lg-9 px-3 px-lg-6 pt-3 pb-4"><?= (($label != '')?'<h6 class="headline d-inline fw-light '.$class.'" '.$style.'>'.$label.'</h6>':''); ?></div>
+							<div class="ps-6 ps-lg-9 pe-3 pe-lg-6 pt-3 pb-4"><?= (($label != '')?'<h6 class="headline d-inline fw-light '.$class.'" '.$style.'>'.$label.'</h6>':''); ?></div>
 							<?php endif; ?>
-							<div class="ps-6 ps-lg-9 px-3 px-lg-6 py-2">
+							<div class="ps-6 ps-lg-9 pe-3 pe-lg-6 py-2">
 								<h1 class="h2 fw-semibold <?= $class ?>" <?= $style ?>><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
 							</div>
 							<?php if ( $content != '' ) : ?>
-							<div class="ps-6 ps-lg-9 px-3 px-lg-6 pt-4 pb-3">
+							<div class="ps-6 ps-lg-9 pe-3 pe-lg-6 pt-4 pb-3">
 								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= do_shortcode($content); ?></div>
 								<?= (($url != '')?'<a href="'.$url.'" class="card-link '.$class.' stretched-link d-block"><i class="icon icon-arrow"></i></a>':''); ?>
 							</div>
