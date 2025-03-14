@@ -11,6 +11,7 @@
   --go--color--inverse-quaternary: var(--go--color--black);
   --go--color--quinary: var(--go--color--black);
   --go--color--inverse-quinary: var(--go--color--white);
+  // @TODO dynamically edited in customizer
 
   --editor-title-block--alignment: left; /* Dynamically edited in setup.php > customizer */
   --waff--layout--left-alignement: 0; /* Dynamically edited in setup.php > customizer */
@@ -2381,7 +2382,7 @@ p.has-drop-cap:not(:focus):first-letter {
 
 .pagination .nav-links > * {
   background-color: var(--waff-color-layout);
-  color: black;
+  color: var(--waff-color-layout-inverse);
   padding: 2.1rem 4.2rem;
   margin: 0;
 }
@@ -2404,7 +2405,7 @@ p.has-drop-cap:not(:focus):first-letter {
 
 .pagination .nav-links > *.current {
   background-color: var(--go--color--secondary, --waff-action-2);
-  color: black;
+  color: var(--go--color--inverse-secondary, --waff-action-2-inverse);
 }
 
 .pagination .nav-links > a:hover {
@@ -2421,7 +2422,7 @@ p.has-drop-cap:not(:focus):first-letter {
 .pagination .next:hover,
 .pagination .prev:hover {
   background-color: var(--go--color--secondary, --waff-action-2);
-  color: black;
+  color: var(--go--color--inverse-secondary, --waff-action-2-inverse);
 }
 
 /* 

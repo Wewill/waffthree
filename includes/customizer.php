@@ -482,7 +482,7 @@ function waff_inline_css() {
 	$tertiary_color   	= get_palette_color( 'tertiary', 'HSL' );
 
 	// Additionnal color palette.
-	$quarternary_color  = get_palette_color( 'quarternary', 'HSL' );
+	$quaternary_color  	= get_palette_color( 'quaternary', 'HSL' );
 	$quinary_color  	= get_palette_color( 'quinary', 'HSL' );
 
 	// WAFF Special.
@@ -567,8 +567,12 @@ function waff_inline_css() {
 	/* Generic theme */
 	/* --go--color--white: hsl(0, 0%, 100%); */
 	--go--color--black: hsl(0, 0%, 0%);
-<?php if ( $quarternary_color ) : ?>
-	--go--color--quarternary: hsl(<?php echo esc_attr( $quarternary_color[0] ) . ', ' . esc_attr( $quarternary_color[1] ) . '%, ' . esc_attr( $quarternary_color[2] ) . '%'; ?>);
+	--go--color--inverse-primary: var(--waff-action-1-inverse);
+	--go--color--inverse-secondary: var(--waff-action-2-inverse);
+	--go--color--inverse-tertiary: var(--waff-action-3-inverse);
+
+	<?php if ( $quaternary_color ) : ?>
+	--go--color--quaternary: hsl(<?php echo esc_attr( $quaternary_color[0] ) . ', ' . esc_attr( $quaternary_color[1] ) . '%, ' . esc_attr( $quaternary_color[2] ) . '%'; ?>);
 <?php endif; ?>
 <?php if ( $quinary_color ) : ?>
 	--go--color--quinary: hsl(<?php echo esc_attr( $quinary_color[0] ) . ', ' . esc_attr( $quinary_color[1] ) . '%, ' . esc_attr( $quinary_color[2] ) . '%'; ?>);
