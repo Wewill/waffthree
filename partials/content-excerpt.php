@@ -18,6 +18,9 @@ if ( get_post_type(get_the_ID()) === 'post' ) {
 	$excerpt_atts['article_class']			= ( $excerpt_atts['post_color'] )?'f-w-gutter p-gutter-sm-r p-gutter-sm-l has-color excerpt':'excerpt';	
 }
 
+// if ( get_post_type(get_the_ID()) === 'competitions' || get_post_type(get_the_ID()) === 'course' )
+	$excerpt_atts['article_class'] .= ' border-0 p-2 m-0';
+
 //DEBUG
 echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 ?>
@@ -32,7 +35,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 		</div>
 	<?php endif;?>
 
-	<header class="entry-header m-auto px">
+	<!--<header class="entry-header m-auto px">-->
 		<?php
 		if ( is_sticky() && is_home() && ! is_paged() ) {
 			printf( '<span class="sticky-post">%s</span>', esc_html_x( 'Featured', 'post', 'go' ) );
@@ -42,6 +45,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 			the_title( '<h1 class="post__title entry-title m-0">', '</h1>' );
 		else :
 			if ( get_post_type(get_the_ID()) === 'film' ) : 
+
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Film', 'post', 'go' ) );
 				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true );
 				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true );
@@ -56,15 +60,36 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						sprintf('</a> <span class="length light">%s\'</span></h2>', $film_length) 
 					);
 				}
+
+				$film_punchline_french 			= get_post_meta( get_the_ID(), 'wpcf-f-punchline-french', true );
+				$film_punchline_english 		= get_post_meta( get_the_ID(), 'wpcf-f-punchline-english', true );
+				$film_short_synopsis_french 	= get_post_meta( get_the_ID(), 'wpcf-f-short-synopsis-french', true );
+				$film_short_synopsis_english 	= get_post_meta( get_the_ID(), 'wpcf-f-short-synopsis-english', true );
+				$film_synopsis_french 			= get_post_meta( get_the_ID(), 'wpcf-f-synopsis-french', true );
+				$film_synopsis_english 			= get_post_meta( get_the_ID(), 'wpcf-f-synopsis-english', true );
+				if ( $film_punchline_french !== '' ) {
+					printf('<p class="--lead --light pt-0 pb-4 punchlines"><!-- French : f-punchline-french -->%s<!-- .sep -->	· <!-- English : f-punchline-english --><em class="italics">%s</em></p>',
+						$film_punchline_french, $film_punchline_english
+					);
+				} else {
+					printf('<p class="--lead --light pt-0 pb-4 punchlines"><!-- French : f-punchline-french -->%s<!-- .sep -->	· <!-- English : f-punchline-english --><em class="italics">%s</em></p>',
+						waff_do_markdown(waff_trim(waff_clean_alltags( $film_short_synopsis_french !== '' ? $film_short_synopsis_french:$film_synopsis_french), 150)),
+						waff_do_markdown(waff_trim(waff_clean_alltags( $film_short_synopsis_english !== '' ? $film_short_synopsis_english:$film_synopsis_english), 150)),
+					);
+				}
+
 			elseif ( get_post_type(get_the_ID()) === 'jury' ) : 
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Jury', 'post', 'go' ) );
 				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'go' ) );
 				the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'structure' ) : 
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Structure', 'post', 'go' ) );
 				the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Operation', 'post', 'go' ) );
 				// Get operation content
@@ -140,24 +165,52 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 					$d_last_updated
 				);
 			elseif ( get_post_type(get_the_ID()) === 'competitions' ) : 
+				// Use constants defined by plugin wa-golfs
+				$stateColors = STATE_COLORS;
+				$stateLabels = STATE_LABELS;
 				
 				$c_introduction 			= get_post_meta( get_the_ID(), 'c_introduction', true );
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
 				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
-				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px w-150-px h-auto"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				$c_last_updated 			=  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				$c_date 					= get_post_meta( get_the_ID(), 'c_date', true );
+				$c_state 					= get_post_meta( get_the_ID(), 'c_state', true );
 
-				printf('<div class="card border-0">
+				$competition_date = get_post_meta(get_the_ID(), 'c_date', true); 
+				$competition_date_string = wp_kses(
+					sprintf(
+						'<time datetime="%1$s">%2$s</time>',
+						esc_attr($competition_date),
+						sprintf(
+							__('<strong>Le %1$s</strong>, à %2$s', 'waff'),
+							date_i18n(get_option('date_format'), strtotime($competition_date)),
+							date_i18n(get_option('time_format'), strtotime($competition_date))
+						)
+					),
+					array_merge(
+						wp_kses_allowed_html('post'),
+						array(
+							'time' => array(
+								'datetime' => true,
+							),
+						)
+					)
+				);
+
+				printf('<div class="card border-0 p-4 h-100" style="background-color:var(--waff-action-3-lighten-3);">
 						<div class="d-flex g-0 align-items-center">
 							<div class="w-150-px order-first">
 								%s
 							</div>
-							<div class="">
+							<div class="w-100">
 								<div class="card-body">', 
 					$c_image
 				);
 				WaffTwo\waff_entry_meta_header();
 				printf('
+									%s
+									%s
 									%s
 									%s
 									<p class="card-text fs-sm mb-0">%s</p>
@@ -166,8 +219,14 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							</div>
 						</div>
 						</div>', 
-					sprintf( '<h6 class="mb-0 muted subline">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
-					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false),
+					sprintf( '<h6 class="mb-2 muted subline text-action-3 ">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
+					sprintf( '<span class="state-label" style="color:%s;"><span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%%; vertical-align: 2px; margin-left: 2px; background-color:%s;"></span> %s</span>',
+						esc_attr( $stateColors[$c_state]['textColor'] ),
+						esc_attr( $stateColors[$c_state]['textColor'] ),
+						esc_html( $stateLabels[$c_state]['label'] )
+					),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					sprintf( '<p class="competition-date muted">%s</p>', $competition_date_string),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
 						15,
@@ -177,43 +236,81 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				);
 
 			elseif ( get_post_type(get_the_ID()) === 'course' ) : 
-				$c_introduction 			= get_post_meta( get_the_ID(), 'c_introduction', true );
-				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
-				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
-				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+
+				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'large' );
+				// $c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
+				// $c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
 				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
 
-				printf('<div class="card border-0">
-						<div class="d-flex g-0 align-items-center">
-							<div class="w-150-px order-first">
-								%s
-							</div>
-							<div class="">
-								<div class="card-body">', 
-					$c_image
+				$c_number_of_strokes = get_post_meta( get_the_ID(), 'c_number_of_strokes', true );
+				$c_handicap = get_post_meta( get_the_ID(), 'c_handicap', true );
+				$c_green = get_post_meta( get_the_ID(), 'c_green', true );
+				$c_altitude = get_post_meta( get_the_ID(), 'c_altitude', true );
+				$content = get_the_content();
+				$content = wp_trim_words( $content, 10, '...' ); // Limit content to 200 characters
+
+
+				printf('<div class="col mb-4 bg-color-layout-2 p-4 rounded-2 h-100">
+							<div class="card c-card overflow-hidden rounded-4 shadow-lg border-0 mb-4 ---- bg-cover bg-position-center-center min-h-400-px" style="background-image: url(\'%s\');">
+								<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
+									<div class="d-flex justify-content-between p-4 rounded-4 fw-bold framefilter">
+										%s
+										%s
+										%s
+										%s
+									</div>
+								</div>
+								<a href="%s" class="stretched-link"></a>
+							</div>', 
+						$c_media_url,
+						( $c_number_of_strokes ) ? sprintf( '<p class="mb-0">Par | %s</p>', esc_html( $c_number_of_strokes )) : '',
+						( $c_handicap ) ? sprintf( '<p class="mb-0">Handicap | %s</p>', esc_html( $c_handicap )) : '',
+						( $c_green ) ? sprintf( '<p class="mb-0">Green | %s</p>', esc_html( $c_green )) : '',
+						( $c_altitude ) ? sprintf( '<p class="mb-0">Altitude | %s</p>', esc_html( $c_altitude )) : '',
+						esc_url(get_permalink()),
 				);
 				WaffTwo\waff_entry_meta_header();
 				printf('
-									%s
-									%s
-									<p class="card-text fs-sm mb-0">%s</p>
-									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
-								</div>
-							</div>
-						</div>
+							%s
+							%s
+							<p class="card-text fs-sm mb-0">%s</p>
+							<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
 						</div>', 
-					sprintf( '<h6 class="mb-0 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'go' ) ),
-					the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false ),
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'go' ) ),
+					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mb-2 text-dark fw-normal mb-3" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false ),
 					wp_trim_words(
-						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
+						get_the_excerpt() != ''?get_the_excerpt():$content,
 						15,
 						' &hellip;'
 					),
 					$c_last_updated
 				);
-			//		
+			elseif ( get_post_type(get_the_ID()) === 'testimony' ) : 
+
+				printf('<div class="card overflow-hidden rounded-2 bg-action-1 border-0 h-100 p-4 --mb-4">
+					%s
+					<div class="text-dark default subline-3 lh-base h2">« %s »</div>
+					</div>',
+					sprintf( '<h6 class="mb-2 muted subline text-black">%s</h6>', esc_html_x( 'Testimony', 'post', 'go' ) ),
+					// the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false),
+					wp_trim_words(
+						get_the_excerpt(),
+						15,
+						' &hellip;'
+					),
+
+				);
+	//		
 			else :
-				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4">
+						%s
+						%s
+						%s
+					</div>',
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Page', 'post', 'go' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					get_the_excerpt()
+				);
 			endif;
 		endif;
 
@@ -222,36 +319,6 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 
 		WaffTwo\waff_post_meta( get_the_ID(), 'top' );
 		?>
-	</header>
-
-
-	<?php if ( get_post_type(get_the_ID()) !== 'operation' && get_post_type(get_the_ID()) !== 'directory' && get_post_type(get_the_ID()) !== 'competitions' && get_post_type(get_the_ID()) !== 'course') : ?>
-	<div class="<?php Go\content_wrapper_class( 'content-area__wrapper' );?>">
-		<div class="content-area entry-content">
-			<?php 
-				if ( get_post_type(get_the_ID()) === 'film' ) { 
-					$film_punchline_french 			= get_post_meta( get_the_ID(), 'wpcf-f-punchline-french', true );
-					$film_punchline_english 		= get_post_meta( get_the_ID(), 'wpcf-f-punchline-english', true );
-					$film_short_synopsis_french 	= get_post_meta( get_the_ID(), 'wpcf-f-short-synopsis-french', true );
-					$film_short_synopsis_english 	= get_post_meta( get_the_ID(), 'wpcf-f-short-synopsis-english', true );
-					$film_synopsis_french 			= get_post_meta( get_the_ID(), 'wpcf-f-synopsis-french', true );
-					$film_synopsis_english 			= get_post_meta( get_the_ID(), 'wpcf-f-synopsis-english', true );
-					if ( $film_punchline_french !== '' ) {
-						printf('<p class="--lead --light pt-0 pb-4 punchlines"><!-- French : f-punchline-french -->%s<!-- .sep -->	· <!-- English : f-punchline-english --><em class="italics">%s</em></p>',
-							$film_punchline_french, $film_punchline_english
-						);
-					} else {
-						printf('<p class="--lead --light pt-0 pb-4 punchlines"><!-- French : f-punchline-french -->%s<!-- .sep -->	· <!-- English : f-punchline-english --><em class="italics">%s</em></p>',
-							waff_do_markdown(waff_trim(waff_clean_alltags( $film_short_synopsis_french !== '' ? $film_short_synopsis_french:$film_synopsis_french), 150)),
-							waff_do_markdown(waff_trim(waff_clean_alltags( $film_short_synopsis_english !== '' ? $film_short_synopsis_english:$film_synopsis_english), 150)),
-						);
-					}
-				} else {
-					the_excerpt();
-				}
-			?>
-		</div>
-	</div>
-	<?php endif;?>
+	<!-- </header> -->
 
 </article>
