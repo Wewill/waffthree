@@ -531,11 +531,12 @@ if ( ! function_exists( 'waff_is_sticky' ) ) {
 				
 				$html .= sprintf(
 					/* translators: %s author name. */
-					'<mark class="post-sticky meta-wrapper subline align-text-bottom">
+					'<mark class="post-sticky meta-wrapper --subline --align-text-bottom ms-1 rounded-2 pe-1 vh-1 fs-xs">
 						<span class="meta-icon">%s</span>
 						%s
 					</mark>',
-					esc_html__(load_inline_svg( 'bookmark.svg' )),
+					//esc_html__(load_inline_svg( 'bookmark.svg' )),
+					'<i class="bi bi-bookmark-fill"></i>',
 					esc_html__( 'Featured', 'waff' )
 				); 
 
