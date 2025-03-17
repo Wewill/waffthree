@@ -176,8 +176,8 @@ function get_ended_signup_block() {
 					<?php
 					if (shortcode_exists('ws_form')) {
 						add_filter('wsf_pre_render_2', function($form) {
-							$field = wsf_form_get_field($form, 25);
-							$field->meta->default_value = get_the_title() . ' (#' . get_the_ID() . ')';
+							$field = wsf_form_get_field($form, 8);
+							if ($field) $field->meta->default_value = get_the_title() . ' (#' . get_the_ID() . ')';
 							return $form;
 						});
 						echo do_shortcode('[ws_form id="2"]');
