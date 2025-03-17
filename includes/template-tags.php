@@ -52,9 +52,9 @@ function waff_display_site_description( $wrapper = 'span' ) {
  * @param int    $post_id The ID of the post for which the post meta should be output.
  * @param string $location Which post meta location to output.
  */
-function waff_post_meta( $post_id = null, $location = 'top' ) {
+function waff_post_meta( $post_id = null, $location = 'top', $do_not_print = false ) {
 
-	echo waff_get_post_meta( $post_id, $location ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_post_meta().
+	echo waff_get_post_meta( $post_id, $location, $do_not_print); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_post_meta().
 
 }
 
@@ -65,7 +65,7 @@ function waff_post_meta( $post_id = null, $location = 'top' ) {
  * @param int    $post_id The iD of the post.
  * @param string $location The location where the meta is shown.
  */
-function waff_get_post_meta( $post_id = null, $location = 'top' ) {
+function waff_get_post_meta( $post_id = null, $location = 'top', $do_not_print = false ) {
 
 	// Require post ID.
 	if ( ! $post_id ) {
@@ -85,220 +85,8 @@ function waff_get_post_meta( $post_id = null, $location = 'top' ) {
 
 	if ( in_array( get_post_type( $post_id ), $overallowed_post_types, true ) ) {
 		printf('<span class="badge rounded-pill bg-dark mr-1 d-none">%s</span>', get_post_type( $post_id ));
-		return waff_entry_meta_header();
+		return waff_entry_meta_header(null , $do_not_print);
 	}
-	
-
-
-	/* ON SUPPRIME TOUT CE QUI EST EN DESSOUS */
-/*
-
-	$post_meta                 = false;
-	$post_meta_wrapper_classes = '';
-	$post_meta_classes         = '';
-
-	// Get the post meta settings for the location specified.
-	if ( 'top' === $location ) {
-
-		$post_meta                 = apply_filters(
-			'go_post_meta_location_single_top',
-			array(
-				'author',
-				'post-date',
-				'comments',
-				'sticky',
-			)
-		);
-		$post_meta_wrapper_classes = ' post__meta--single post__meta--top';
-
-	} elseif ( 'single-bottom' === $location ) {
-
-		$post_meta                 = apply_filters(
-			'go_post_meta_location_single_bottom',
-			array(
-				'tags',
-			)
-		);
-		$post_meta_wrapper_classes = ' post__meta--single post__meta--single-bottom';
-
-	}
-
-	// If the post meta setting has the value 'empty', it's explicitly empty and the default post meta shouldn't be output.
-	if ( ! $post_meta || in_array( 'empty', $post_meta, true ) ) {
-
-		return;
-
-	}
-
-	// Make sure we don't output an empty container.
-	$has_meta = false;
-
-	global $post;
-	$the_post = get_post( $post_id );
-	setup_postdata( $the_post );
-
-	ob_start();
-
-	?>
-
-	<div class="post__meta--wrapper<?php echo esc_attr( $post_meta_wrapper_classes ); ?>">
-
-		<ul class="post__meta list-reset<?php echo esc_attr( $post_meta_classes ); ?>">
-
-			<?php
-
-			// Allow output of additional meta items to be added by child themes and plugins.
-			do_action( 'go_start_of_post_meta_list', $post_meta, $post_id );
-
-			// Author.
-			if ( in_array( 'author', $post_meta, true ) ) {
-
-				$has_meta = true;
-				?>
-				<li class="post-author meta-wrapper">
-					<span class="meta-icon">
-						<span class="screen-reader-text"><?php esc_html_e( 'Post author', 'go' ); ?></span>
-						<?php load_inline_svg( 'author.svg' ); ?>
-					</span>
-					<span class="meta-text">
-						<?php
-						// Translators: %s = the author name.
-						printf( esc_html_x( 'By %s', '%s = author name', 'go' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author_meta( 'display_name' ) ) . '</a>' );
-						?>
-					</span>
-				</li>
-				<?php
-
-			}
-
-			// Post date.
-			if ( in_array( 'post-date', $post_meta, true ) ) {
-				$has_meta = true;
-
-				?>
-				<li class="post-date">
-					<a class="meta-wrapper" href="<?php the_permalink(); ?>">
-						<span class="meta-icon">
-							<span class="screen-reader-text"><?php esc_html_e( 'Post date', 'go' ); ?></span>
-							<?php load_inline_svg( 'calendar.svg' ); ?>
-						</span>
-						<span class="meta-text">
-							<?php
-							echo wp_kses(
-								sprintf(
-									'<time datetime="%1$s">%2$s</time>',
-									esc_attr( get_the_date( DATE_W3C ) ),
-									esc_html( get_the_date() )
-								),
-								array_merge(
-									wp_kses_allowed_html( 'post' ),
-									array(
-										'time' => array(
-											'datetime' => true,
-										),
-									)
-								)
-							);
-							?>
-						</span>
-					</a>
-				</li>
-				<?php
-
-			}
-
-			// Categories.
-			if ( in_array( 'categories', $post_meta, true ) && has_category() ) {
-
-				$has_meta = true;
-				?>
-				<li class="post-categories meta-wrapper">
-					<span class="meta-icon">
-						<span class="screen-reader-text"><?php esc_html_e( 'Categories', 'go' ); ?></span>
-						<?php load_inline_svg( 'categories.svg' ); ?>
-					</span>
-					<span class="meta-text">
-						<?php esc_html_e( 'In', 'go' ); ?> <?php the_category( ', ' ); ?>
-					</span>
-				</li>
-				<?php
-
-			}
-
-			// Tags.
-			if ( in_array( 'tags', $post_meta, true ) && has_tag() ) {
-
-				$has_meta = true;
-				?>
-				<li class="post-tags meta-wrapper">
-					<span class="meta-icon">
-						<span class="screen-reader-text"><?php esc_html_e( 'Tags', 'go' ); ?></span>
-						<?php load_inline_svg( 'tags.svg' ); ?>
-					</span>
-					<span class="meta-text">
-						<?php the_tags( '', ', ', '' ); ?>
-					</span>
-				</li>
-				<?php
-
-			}
-
-			// Comments link.
-			if ( in_array( 'comments', $post_meta, true ) && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-
-				$has_meta = true;
-				?>
-				<li class="post-comment-link meta-wrapper">
-					<span class="meta-icon">
-						<?php load_inline_svg( 'comments.svg' ); ?>
-					</span>
-					<span class="meta-text">
-						<?php comments_popup_link(); ?>
-					</span>
-				</li>
-				<?php
-
-			}
-
-			// Sticky.
-			if ( in_array( 'sticky', $post_meta, true ) && is_sticky() ) {
-
-				$has_meta = true;
-				?>
-				<li class="post-sticky meta-wrapper">
-					<span class="meta-icon">
-						<?php load_inline_svg( 'bookmark.svg' ); ?>
-					</span>
-					<span class="meta-text">
-						<?php esc_html_e( 'Featured', 'go' ); ?>
-					</span>
-				</li>
-				<?php
-
-			}
-
-			// Allow output of additional post meta types to be added by child themes and plugins.
-			do_action( 'go_end_of_post_meta_list', $post_meta, $post_id );
-			?>
-
-		</ul>
-
-	</div>
-
-	<?php
-
-	wp_reset_postdata();
-
-	$meta_output = ob_get_clean();
-
-	if ( ! $has_meta || empty( $meta_output ) ) {
-
-		return;
-
-	}
-
-	return '#DEBUGGETPOSTMETA'.$meta_output;
-	*/
 
 }
 
@@ -894,8 +682,9 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 	 *
 	 * @return void
 	 */
-	function waff_entry_meta_header($post = null) {
+	function waff_entry_meta_header($post = null, $do_not_print = false) {
 		global $current_edition_id;
+		$html = '';
 
 		// echo 'TOREMOVE/AFTER/MERGED';
 		$__post_type = get_post_type(); 
@@ -918,7 +707,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 		// Early exit if not a post, film.
 		if ( !in_array( $__post_type, array('post', 'film'), true ) ) {
-			echo ((true === WAFF_DEBUG)?'<code> #NOTPOSTorFILM</code>':'');
+			$html .= ((true === WAFF_DEBUG)?'<code> #NOTPOSTorFILM</code>':'');
 			//return;
 		}
 				
@@ -926,7 +715,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 		if ( !is_single($__ID) ) {
 
 			// DEBUG
-			echo ((true === WAFF_DEBUG)?'<code> #NOTSINGLE</code>':'');
+			$html .= ((true === WAFF_DEBUG)?'<code> #NOTSINGLE</code>':'');
 
 			// Render top parent terms for current term
 			$taxonomy = 'section';
@@ -939,8 +728,8 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				if ( ! empty( $term ) && $term->parent != '0') :
 					//get top level parent
 					//DEBUG
-					echo ((true === WAFF_DEBUG)?'<code> #GETTOPLEVELPARENT</code>':'');
-					echo ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($term,1).'</pre>':'');
+					$html .= ((true === WAFF_DEBUG)?'<code> #GETTOPLEVELPARENT</code>':'');
+					$html .= ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($term,1).'</pre>':'');
 
 					$top_parent = get_term_top_most_parent( $term, $taxonomy );
 					//check if you have it in your array to only add it once
@@ -980,20 +769,20 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 
 
 			//DEBUG
-			echo ((true === WAFF_DEBUG)?'<code> #ISTAX '.is_tax().'</code>':'');
-			echo ((true === WAFF_DEBUG)?'<code> #ISTAXSECTION '.is_tax('section').'</code>':'');
-			echo ((true === WAFF_DEBUG)?'<code> #HASTERMSECTION '.has_term('', 'section').'</code>':'');
-			echo ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($terms_list,1).'</pre>':'');
+			$html .= ((true === WAFF_DEBUG)?'<code> #ISTAX '.is_tax().'</code>':'');
+			$html .= ((true === WAFF_DEBUG)?'<code> #ISTAXSECTION '.is_tax('section').'</code>':'');
+			$html .= ((true === WAFF_DEBUG)?'<code> #HASTERMSECTION '.has_term('', 'section').'</code>':'');
+			$html .= ((true === WAFF_DEBUG)?'<pre class="p-3">'.print_r($terms_list,1).'</pre>':'');
 			
 			// All top parents 
 			// CATEGORY >> all TAXs 
 			if ( is_tax('category') || is_tax('tag')) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #ISaTAX(generic)</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #ISaTAX(generic)</code>':'');		
 				
 				if ( $terms_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Categorized as', 'waff' ),
@@ -1008,10 +797,10 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( is_tax('section') || is_tax( 'room' ) ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #ISaSECTIONorROOM</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #ISaSECTIONorROOM</code>':'');		
 				
 				if ( $terms_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Categorized as', 'waff' ),
@@ -1025,10 +814,10 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( !is_tax('section') && has_term('', 'section') ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #HAVEaSECTIONinaFILM</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #HAVEaSECTIONinaFILM</code>':'');		
 				
 				if ( $terms_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Categorized as', 'waff' ),
@@ -1042,13 +831,13 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'film' == $__post_type && !is_tax() ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #ISaFILM</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #ISaFILM</code>':'');		
 
 				// Render sections
 				if ( has_term('', 'section') ) {
 
 					//DEBUG
-					echo ((true === WAFF_DEBUG)?'<code> #HAVEaFILMSECTION</code>':'');		
+					$html .= ((true === WAFF_DEBUG)?'<code> #HAVEaFILMSECTION</code>':'');		
 
 					/* translators: used between list items, there is a space after the comma. */
 					/* $terms_list = preg_replace('/<a 
@@ -1074,7 +863,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					endif;
 					
 					if ( $terms_list ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1096,21 +885,21 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				endif;
 
 				// Finally print
-				if ( $film_type != '' ) printf('<div class="type-list d-inline"><a class="type-item link-disabled">%s</a></div>', sanitize_text_field($film_type) );
-				if ( $film_category != '' ) printf('<div class="category-list d-inline"><a class="category-item link-disabled">%s</a></div>', sanitize_text_field($film_category) );
+				if ( $film_type != '' ) $html .= sprintf('<div class="type-list d-inline"><a class="type-item link-disabled">%s</a></div>', sanitize_text_field($film_type) );
+				if ( $film_category != '' ) $html .= sprintf('<div class="category-list d-inline"><a class="category-item link-disabled">%s</a></div>', sanitize_text_field($film_category) );
 				
 				// POST ???
 				if ( has_category() || has_tag() ) {
 
 					//DEBUG
-					echo ((true === WAFF_DEBUG)?'<code> #HAVECAT&TAGinaFILM?</code>':'');		
+					$html .= ((true === WAFF_DEBUG)?'<code> #HAVECAT&TAGinaFILM?</code>':'');		
 
 					/* translators: used between list items, there is a space after the comma. */
 					$category_color = ( defined('WAFF_SECONDARY_COLOR') )?WAFF_SECONDARY_COLOR:'action-3';
 					$categories_list = preg_replace('/<a /', '<a class="section-item" style="background-color:var(--waff-'.$category_color.');border-color:var(--waff-'.$category_color.');"', get_the_category_list( __( '&#8203;', 'waff' ) ) );
 					//$categories_list = get_the_category_list( __( ', ', 'waff' ) );
 					if ( $categories_list ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1121,7 +910,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					/* translators: used between list items, there is a space after the comma. */
 					$tags_list = preg_replace('/<a /', '<a class="category-item"', get_the_tag_list( '', __( '&#8203;', 'waff' ) ) );
 					if ( $tags_list ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of tags. */
 							'<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Taggued', 'waff' ),
@@ -1135,30 +924,30 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'post' == $__post_type ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #ISPOST</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #ISPOST</code>':'');		
 
 				// Post Archive ? 
-				echo '<span class="posted-by">';
+				$html .= '<span class="posted-by">';
 				// Posted by.
 				waff_posted_by();
 				// Posted on.
 				waff_posted_on();		
 				// Sticky
-				echo '<span class="float-right">';
-				echo waff_is_sticky();
-				echo '</span>';
+				$html .= '<span class="float-right">';
+				$html .= waff_is_sticky();
+				$html .= '</span>';
 
 	
 				if ( has_category() || has_tag() ) {
 
-					echo '<span class="sep"> </span>';
+					$html .= '<span class="sep"> </span>';
 
 					/* translators: used between list items, there is a space after the comma. */
 					$category_color = ( defined('WAFF_SECONDARY_COLOR') )?WAFF_SECONDARY_COLOR:'action-3';
 					$categories_list = preg_replace('/<a /', '<a class="section-item" style="background-color:var(--waff-'.$category_color.');border-color:var(--waff-'.$category_color.');"', get_the_category_list( __( '&#8203;', 'waff' ) ) );
 					//$categories_list = get_the_category_list( __( ', ', 'waff' ) );
 					if ( $categories_list ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1169,7 +958,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					/* translators: used between list items, there is a space after the comma. */
 					$tags_list = preg_replace('/<a /', '<a class="category-item"', get_the_tag_list( '', __( '&#8203;', 'waff' ) ) );
 					if ( $tags_list ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of tags. */
 							'<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Taggued', 'waff' ),
@@ -1187,7 +976,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'directory' == $__post_type ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
 
 				$meta_output = '';
 				$terms_list = array('production','thematic','geography');
@@ -1217,19 +1006,19 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 						}
 					} else {
 						// Handle the error
-						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+						if ( is_wp_error( $terms ) ) $html .= 'Error retrieving terms: ' . $terms->get_error_message();
 					}
 				}
 
 				// Finally print
-				if ( $meta_output != '' ) echo $meta_output;
+				if ( $meta_output != '' ) $html .= $meta_output;
 			
 			}
 
 		} else {
 
 			//DEBUG
-			echo ((true === WAFF_DEBUG)?'<code> #SINGLE</code>':'');		
+			$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE</code>':'');		
 
 			// FILM / IN SECTION ? 
 			if ( 'film' == $__post_type && has_term('','section') ) {
@@ -1256,7 +1045,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				endif;
 				
 				if ( $terms_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Categorized as', 'waff' ),
@@ -1269,7 +1058,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'film' == $__post_type ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #SINGLE FILM</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE FILM</code>':'');		
 				
 				// Render film movie types and categories
 				if (function_exists('types_render_field')) :
@@ -1284,8 +1073,8 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				endif;
 
 				// Finally print
-				if ( $film_type != '' ) printf('<div class="type-list d-inline"><a class="type-item link-disabled">%s</a></div>', sanitize_text_field($film_type) );
-				if ( $film_category != '' ) printf('<div class="category-list d-inline"><a class="category-item link-disabled">%s</a></div>', sanitize_text_field($film_category) );
+				if ( $film_type != '' ) $html .= sprintf('<div class="type-list d-inline"><a class="type-item link-disabled">%s</a></div>', sanitize_text_field($film_type) );
+				if ( $film_category != '' ) $html .= sprintf('<div class="category-list d-inline"><a class="category-item link-disabled">%s</a></div>', sanitize_text_field($film_category) );
 			
 			}
 
@@ -1293,7 +1082,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( in_array($__post_type, array('jury','partenaire','projection')) ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #SINGLE JURY PARTNAIRE PROJECTION</code>':'');	
+				$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE JURY PARTNAIRE PROJECTION</code>':'');	
 
 
 				if ( $__post_type !== 'partenaire' ):
@@ -1326,7 +1115,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 					}
 
 					if ( $terms_list_section_edition ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1353,7 +1142,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 						endif;
 					endif;
 					if ( $terms_list_edition ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1381,7 +1170,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 						endif;
 					endif;
 					if ( $terms_list_movie_type ) {
-						printf(
+						$html .= sprintf(
 							/* translators: %s: list of categories. */
 							'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 							esc_html__( 'Categorized as', 'waff' ),
@@ -1396,14 +1185,14 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( has_category() || has_tag() ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #HAVECAT&TAGinaPOST?</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #HAVECAT&TAGinaPOST?</code>':'');		
 				
 				/* translators: used between list items, there is a space after the comma. */
 				$category_color = ( defined('WAFF_SECONDARY_COLOR') )?WAFF_SECONDARY_COLOR:'action-3';
 				$categories_list = preg_replace('/<a /', '<a class="section-item" style="background-color:var(--waff-'.$category_color.');border-color:var(--waff-'.$category_color.');"', get_the_category_list( __( '&#8203;', 'waff' ) ) );
 				//$categories_list = get_the_category_list( __( ', ', 'waff' ) );
 				if ( $categories_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<div class="section-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Categorized as', 'waff' ),
@@ -1414,7 +1203,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				/* translators: used between list items, there is a space after the comma. */
 				$tags_list = preg_replace('/<a /', '<a class="category-item"', get_the_tag_list( '', __( '&#8203;', 'waff' ) ) );
 				if ( $tags_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of tags. */
 						'<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>',
 						esc_html__( 'Taggued', 'waff' ),
@@ -1427,7 +1216,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'directory' == $__post_type ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE DIRECTORY</code>':'');		
 
 				$meta_output = '';
 				$terms_list = array('production','thematic','geography');
@@ -1457,12 +1246,12 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 						}
 					} else {
 						// Handle the error
-						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+						if ( is_wp_error( $terms ) ) $html .= 'Error retrieving terms: ' . $terms->get_error_message();
 					}
 				}
 
 				// Finally print
-				if ( $meta_output != '' ) echo $meta_output;
+				if ( $meta_output != '' ) $html .= $meta_output;
 			
 			}
 
@@ -1470,7 +1259,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			if ( 'competitions' == $__post_type ) {
 
 				//DEBUG
-				echo ((true === WAFF_DEBUG)?'<code> #SINGLE COMPETITIONS</code>':'');		
+				$html .= ((true === WAFF_DEBUG)?'<code> #SINGLE COMPETITIONS</code>':'');		
 
 				$meta_output = '';
 				$terms_list = array('competition-category');
@@ -1492,15 +1281,16 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 						}
 					} else {
 						// Handle the error
-						if ( is_wp_error( $terms ) ) echo 'Error retrieving terms: ' . $terms->get_error_message();
+						if ( is_wp_error( $terms ) ) $html .= 'Error retrieving terms: ' . $terms->get_error_message();
 					}
 				}
 
 				// Finally print
-				if ( $meta_output != '' ) echo $meta_output;
+				if ( $meta_output != '' ) $html .= $meta_output;
 			
 			}
 		}
+		if ( $do_not_print ) return $html else echo $html;
 	}
 endif;
 
@@ -1553,7 +1343,7 @@ if ( ! function_exists( 'waff_entry_meta_footer' ) ) :
 				/* translators: used between list items, there is a space after the comma. */
 				$categories_list = get_the_category_list( __( ', ', 'waff' ) );
 				if ( $categories_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of categories. */
 						'<span class="cat-links">' . esc_html__( 'Categorized as %s', 'waff' ) . ' </span>',
 						$categories_list // phpcs:ignore WordPress.Security.EscapeOutput
@@ -1563,7 +1353,7 @@ if ( ! function_exists( 'waff_entry_meta_footer' ) ) :
 				/* translators: used between list items, there is a space after the comma. */
 				$tags_list = get_the_tag_list( '', __( ', ', 'waff' ) );
 				if ( $tags_list ) {
-					printf(
+					$html .= sprintf(
 						/* translators: %s: list of tags. */
 						'<span class="tags-links">' . esc_html__( 'Tagged %s', 'waff' ) . '</span>',
 						$tags_list // phpcs:ignore WordPress.Security.EscapeOutput

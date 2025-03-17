@@ -320,7 +320,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 						%s
 						%s
-					</div>',
+					',
 					$excerpt_atts['post_color_class'],
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Post', 'post', 'go' ) ),
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
@@ -333,16 +333,17 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 						%s
 						%s
-					</div>',
+					',
 					$excerpt_atts['post_color_class'],
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
 					WaffTwo\waff_get_post_meta( get_the_ID(), 'top' ),
-					get_the_excerpt(),
+					get_the_excerpt()
 				);
 				// //DEBUG
 				// echo ((true === WAFF_DEBUG)?'<code> ##META'.is_singular().'</code>':'');
 				// WaffTwo\waff_post_meta( get_the_ID(), 'top' );
 			endif;
+			print('</div>');
 		endif;
 		?>
 	<!-- </header> -->
