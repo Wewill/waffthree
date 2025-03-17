@@ -1290,6 +1290,7 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 			
 			}
 		}
+		// Render
 		if ( $do_not_print === true ) {
 			return $html;
 		} else {
