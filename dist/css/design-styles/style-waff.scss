@@ -2583,9 +2583,10 @@ input[type="checkbox"]:checked + label:before {
 //   -webkit-transform: translateX(0px);
 //   transform: translateX(0px);
 //   width: 0;
-//   background-color: var(--waff-action-1);
+//   // background-color: var(--waff-action-1);
 //   transition: width 0.25s ease-out;
-// }>> Added to waff-theme styles
+// }
+// // >> Added to waff-theme styles
 
 .primary-menu > li:hover > .sub-menu:hover:before,
 ul.qtranxs_language_chooser:hover:before {
