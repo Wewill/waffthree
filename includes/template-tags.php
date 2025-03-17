@@ -54,7 +54,7 @@ function waff_display_site_description( $wrapper = 'span' ) {
  */
 function waff_post_meta( $post_id = null, $location = 'top', $do_not_print = false ) {
 
-	echo waff_get_post_meta( $post_id, $location, $do_not_print); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_post_meta().
+	return waff_get_post_meta( $post_id, $location, $do_not_print); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_post_meta().
 
 }
 
@@ -84,8 +84,8 @@ function waff_get_post_meta( $post_id = null, $location = 'top', $do_not_print =
 	$overallowed_post_types = apply_filters( 'waff_overallowed_post_types_for_meta_output', array( 'page', 'post', 'film', 'jury') );
 
 	if ( in_array( get_post_type( $post_id ), $overallowed_post_types, true ) ) {
-		printf('<span class="badge rounded-pill bg-dark mr-1 d-none">%s</span>', get_post_type( $post_id ));
-		return waff_entry_meta_header(null , $do_not_print);
+		$html = sprintf('<span class="badge rounded-pill bg-dark mr-1 d-none">%s</span>', get_post_type( $post_id ));
+		return $html . waff_entry_meta_header(null , $do_not_print);
 	}
 
 }
@@ -435,8 +435,8 @@ if ( ! function_exists( 'waff_posted_on' ) ) {
 	 *
 	 * @return void
 	 */
-	function waff_posted_on() {
-		
+	function waff_posted_on($do_not_print = false) {
+		$html = '';
 		$author_meta = get_theme_mod( 'author_meta', waff_defaults( 'author_meta' ) );
 
 		//$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
@@ -462,14 +462,17 @@ if ( ! function_exists( 'waff_posted_on' ) ) {
 			)
 		);
 		$color = ( defined('WAFF_SECONDARY_COLOR') )?WAFF_SECONDARY_COLOR:'action-3';
-		echo '<span class="subline posted-on '.$color.'">';
-		echo ((int)$author_meta === 1)?'— ':'';
-		printf(
+		$html .= '<span class="subline posted-on '.$color.'">';
+		$html .= ((int)$author_meta === 1)?'— ':'';
+		$html .= sprintf(
 			/* translators: %s: publish date. */
 			esc_html__( 'Published %s', 'waff' ),
 			$time_string // phpcs:ignore WordPress.Security.EscapeOutput
 		);
-		echo '</span>';
+		$html .= '</span>';
+
+		if ( $do_not_print ) return $html;
+		else echo $html;
 	}
 }
 
@@ -481,13 +484,13 @@ if ( ! function_exists( 'waff_posted_by' ) ) {
 	 *
 	 * @return void
 	 */
-	function waff_posted_by() {
-
+	function waff_posted_by($do_not_print = false) {
+		$html = '';
 		$author_meta = get_theme_mod( 'author_meta', waff_defaults( 'author_meta' ) );
 
 		if ( ! get_the_author_meta( 'description' ) && post_type_supports( get_post_type(), 'author' ) && (int)$author_meta === 1) {
 			//echo '<span class="subline byline">';
-			printf(
+			$html .= sprintf(
 				/* translators: %s author name. */
 				'<span class="subline">%s</span> %s ',
 				esc_html__( 'By', 'waff' ),
@@ -495,6 +498,9 @@ if ( ! function_exists( 'waff_posted_by' ) ) {
 			);
 			//echo '</span>';
 		}
+
+		if ( $do_not_print === true ) return $html;
+		else echo $html;
 	}
 }
 
@@ -506,7 +512,8 @@ if ( ! function_exists( 'waff_is_sticky' ) ) {
 	 *
 	 * @return void
 	 */
-	function waff_is_sticky() {
+	function waff_is_sticky($do_not_print = false) {
+			$html = '';
 			// Reprise de Go + reprise de twenty twenty > il faudra uniqformiser avec tout venant de Go.. 
 			$post_meta                 = apply_filters(
 				'go_post_meta_location_single_top',
@@ -522,7 +529,7 @@ if ( ! function_exists( 'waff_is_sticky' ) ) {
 
 				$has_meta = true;
 				
-				printf(
+				$html .= sprintf(
 					/* translators: %s author name. */
 					'<mark class="post-sticky meta-wrapper subline align-text-bottom">
 						<span class="meta-icon">%s</span>
@@ -533,6 +540,9 @@ if ( ! function_exists( 'waff_is_sticky' ) ) {
 				); 
 
 			}
+				
+			if ( $do_not_print ) return $html;
+			else echo $html;
 	}
 }
 
@@ -929,12 +939,12 @@ if ( ! function_exists( 'waff_entry_meta_header' ) ) :
 				// Post Archive ? 
 				$html .= '<span class="posted-by">';
 				// Posted by.
-				waff_posted_by();
+				$html .= waff_posted_by($do_not_print);
 				// Posted on.
-				waff_posted_on();		
+				$html .= waff_posted_on($do_not_print);		
 				// Sticky
 				$html .= '<span class="float-right">';
-				$html .= waff_is_sticky();
+				$html .= waff_is_sticky($do_not_print);
 				$html .= '</span>';
 
 	
