@@ -25,7 +25,7 @@ if ( get_post_type(get_the_ID()) === 'post' ) {
 echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 ?>
 
-<article <?php post_class($excerpt_atts['article_class']);?> id="post-<?php the_ID();?>" <?= $excerpt_atts['post_color_class'] ?>>
+<article <?php post_class($excerpt_atts['article_class']);?> id="post-<?php the_ID();?>">
 
 	<?php if ( is_singular() && has_post_thumbnail() ) : ?>
 		<div class="post__thumbnail">
@@ -300,14 +300,36 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 					),
 
 				);
-	//		
-			else :
-				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4">
+			// Standard post		
+			elseif ( get_post_type(get_the_ID()) === 'page' ) :
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
 						%s
 						%s
 						%s
 					</div>',
+					$excerpt_atts['post_color_class'],
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Page', 'post', 'go' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					get_the_excerpt()
+				);
+			elseif ( get_post_type(get_the_ID()) === 'post' ) :
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+					</div>',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Post', 'post', 'go' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					get_the_excerpt()
+				);
+			// Default
+			else :
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+					</div>',
+					$excerpt_atts['post_color_class'],
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
 					get_the_excerpt()
 				);
