@@ -2571,21 +2571,22 @@ input[type="checkbox"]:checked + label:before {
   Animated submenu / coblocks + Dinard 
 */
 
-.primary-menu > li > .sub-menu:before,
-ul.qtranxs_language_chooser:before {
-  content: "";
-  border: 0;
-  display: inline-block;
-  height: 2px;
-  left: 0px;
-  position: absolute;
-  top: -2px;
-  -webkit-transform: translateX(0px);
-  transform: translateX(0px);
-  width: 0;
-  background-color: var(--waff-action-1);
-  transition: width 0.25s ease-out;
-}
+// .primary-menu > li > .sub-menu:before,
+// ul.qtranxs_language_chooser:before {
+//   content: "";
+//   border: 0;
+//   display: inline-block;
+//   height: 2px;
+//   left: 0px;
+//   position: absolute;
+//   top: -2px;
+//   -webkit-transform: translateX(0px);
+//   transform: translateX(0px);
+//   width: 0;
+//   background-color: var(--waff-action-1);
+//   transition: width 0.25s ease-out;
+// }>> Added to waff-theme styles
+
 .primary-menu > li:hover > .sub-menu:hover:before,
 ul.qtranxs_language_chooser:hover:before {
   width: 100%;
