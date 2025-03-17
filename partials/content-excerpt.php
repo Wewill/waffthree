@@ -116,7 +116,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 								</div>
 							</div>
 						</div>
-						</div>', 
+						<!-- </div> -->', 
 					the_title( sprintf( '<h5 class="post__title entry-title card-title mt-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h5>', false),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$o_more_description,
@@ -155,7 +155,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 								</div>
 							</div>
 						</div>
-						</div>', 
+						<!-- </div> -->', 
 					the_title( sprintf( '<h5 class="post__title entry-title card-title mt-2"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h5>', false),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$d_general_introduction,
@@ -218,7 +218,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 								</div>
 							</div>
 						</div>
-						</div>', 
+						<!-- </div> -->', 
 					sprintf( '<h6 class="mb-2 muted subline text-action-3 ">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
 					sprintf( '<span class="state-label" style="color:%s;"><span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%%; vertical-align: 2px; margin-left: 2px; background-color:%s;"></span> %s</span>',
 						esc_attr( $stateColors[$c_state]['textColor'] ),
@@ -275,7 +275,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							%s
 							<p class="card-text fs-sm mb-0">%s</p>
 							<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
-						</div>', 
+						<!-- </div> -->', 
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'go' ) ),
 					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mb-2 text-dark fw-normal mb-3" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false ),
 					wp_trim_words(
@@ -290,7 +290,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				printf('<div class="card overflow-hidden rounded-2 bg-action-1 border-0 h-100 p-4 --mb-4">
 					%s
 					<div class="text-dark default subline-3 lh-base h2">« %s »</div>
-					</div>',
+					<!-- </div> -->',
 					sprintf( '<h6 class="mb-2 muted subline text-black">%s</h6>', esc_html_x( 'Testimony', 'post', 'go' ) ),
 					// the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false),
 					wp_trim_words(
@@ -307,7 +307,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 						%s
 						%s
-					</div>',
+					<!-- </div> -->',
 					$excerpt_atts['post_color_class'],
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Page', 'post', 'go' ) ),
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
@@ -320,7 +320,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 						%s
 						%s
-					',
+					<!-- </div> -->',
 					$excerpt_atts['post_color_class'],
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Post', 'post', 'go' ) ),
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
@@ -333,7 +333,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 						%s
 						%s
-					',
+					<!-- </div> -->',
 					$excerpt_atts['post_color_class'],
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
 					WaffTwo\waff_get_post_meta( get_the_ID(), 'top', false ),
