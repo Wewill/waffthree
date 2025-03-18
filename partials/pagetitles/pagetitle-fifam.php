@@ -427,7 +427,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 		<style scoped>
 			.duotone-<?= get_post_thumbnail_id() ?> img {
-				filter: grayscale(1);
+				filter: grayscale(100%) contrast(1);
 				mix-blend-mode: screen;
 				background-color: <?= $page_atts['header_color'] ?>;
 			}
@@ -669,7 +669,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</figure>
 					<style scoped>
 						.duotone-<?= $room_id ?> img {
-							filter: grayscale(1);
+							filter: grayscale(100%) contrast(1);
 							mix-blend-mode: screen;
 							background-color: <?= $_room_color ?>;
 						}
@@ -738,7 +738,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 						<style scoped>
 							.duotone-<?= get_post_thumbnail_id() ?> img {
-								filter: grayscale(1);
+								filter: grayscale(100%) contrast(1);
 								mix-blend-mode: screen;
 								background-color: <?= $page_atts['header_color'] ?>;
 								opacity: 0;
@@ -786,7 +786,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 		<style scoped>
 			.duotone-<?= get_post_thumbnail_id() ?> img {
-				filter: grayscale(1);
+				filter: grayscale(100%) contrast(1);
 				mix-blend-mode: screen;
 				background-color: <?= $page_atts['header_color'] ?>;
 			}
@@ -831,7 +831,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 		<style scoped>
 			.duotone-<?= get_post_thumbnail_id() ?> img {
-				filter: grayscale(1);
+				filter: grayscale(100%) contrast(1);
 				mix-blend-mode: screen;
 				background-color: <?= $page_atts['header_color'] ?>;
 			}

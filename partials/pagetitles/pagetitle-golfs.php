@@ -355,7 +355,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 						<style scoped>
 							.duotone-<?= get_post_thumbnail_id() ?> img {
-								filter: grayscale(1);
+								filter: grayscale(100%) contrast(1);
 								mix-blend-mode: screen;
 								background-color: <?= $page_atts['header_color'] ?>;
 								opacity: 0;
@@ -629,7 +629,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 						<style scoped>
 							.duotone-<?= get_post_thumbnail_id() ?> img {
-								filter: grayscale(1);
+								filter: grayscale(100%) contrast(1);
 								mix-blend-mode: screen;
 								background-color: <?= $page_atts['header_color'] ?>;
 								opacity: 0;
@@ -677,7 +677,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 		<style scoped>
 			.duotone-<?= get_post_thumbnail_id() ?> img {
-				filter: grayscale(1);
+				filter: grayscale(100%) contrast(1);
 				mix-blend-mode: screen;
 				background-color: <?= $page_atts['header_color'] ?>;
 			}
@@ -709,7 +709,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 			<data-src media="(min-width: 380px)"
 					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
 							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
-			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px" style="object-fit: cover; width: 100%;"></data-img>
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid --h-600-px h-sm-600-px" style="max-height:60vh; object-fit: cover; width: 100%;"></data-img>
 			</picture>
 			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
 			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
@@ -722,9 +722,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
 		<style scoped>
 			.duotone-<?= get_post_thumbnail_id() ?> img {
-				filter: grayscale(1);
-				mix-blend-mode: screen;
 				background-color: <?= $page_atts['header_color'] ?>;
+				filter: grayscale(100%) contrast(1);
+				mix-blend-mode: screen;
 			}
 		</style>
 		<?php } ?>
