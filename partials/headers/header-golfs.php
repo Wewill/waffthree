@@ -43,7 +43,7 @@ global $page_atts;
 
 			<!-- Logotype -->
 			<?php //Go\display_site_branding(); ?>
-			<a class="navbar-brand flex-fill d-flex align-items-center justify-content-center pt-3 pb-3 m-0 ms-0 ms-sm-5 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>"> <!--  Removed height="100%" : Attribute height not allowed on element a at this point. -->
+			<a class="navbar-brand flex-grow flex-sm-shrink-1 d-flex align-items-center justify-content-center justify-content-sm-start pt-3 pb-3 m-0 ms-0 ms-sm-5 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>"> <!--  Removed height="100%" : Attribute height not allowed on element a at this point. -->
 			    <div class="header__logo js-replace">
 				      <!-- item to replace -->
 				      <div class="js-replace__item  js-replace__item--active">
