@@ -137,7 +137,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 					</div>
 
 					<!-- Last col -->
-					<div class="col-md-6 d-none d-md-block h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 --d-none --d-md-block h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 --text-white h-100 p-4 d-flex flex-column <?= $card_position_end; ?> <?= $card_classes_end; ?>">
 						<?php if ( ! empty( $label_end ) ) : ?>

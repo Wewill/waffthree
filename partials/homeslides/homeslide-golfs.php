@@ -136,7 +136,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					
 			</div>
 
-			<div class="col-lg-5 col-xl-5 position-lg-absolute top-0 left-0 z-1 order-1 order-lg-first zi-5" data-aos="fade-up">
+			<div class="col-lg-5 col-xl-5 position-absolute top-0 left-0 z-1 order-1 order-lg-first zi-5" data-aos="fade-up">
 
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
@@ -186,9 +186,9 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 				
 			</div>
 			
-			<div class="zi-5 position-absolute top-50 left-0 translate-middle-y order-last d-flex flex-column slick-homeslide-list-items justify-content-end" data-aos="fade-left">
+			<div class="zi-5 position-absolute top-50 left-0 translate-middle-y order-last d-flex flex-column slick-homeslide-list-position --slick-homeslide-list-items justify-content-end" data-aos="fade-left">
 				<div class="p-0 m-0 --mt-auto">
-					<ul class="--list-group list-group-flush m-0 slider-list">
+					<ul class="--list-group list-group-flush ps-4 m-0 slider-list">
 						<?php 
 						$slide_nb 			= 0;
 						while ( $homeslide_slides->have_posts() ) : $homeslide_slides->the_post(); 
@@ -258,10 +258,10 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 			
 			<!-- Mouse down -->
 			<!-- <div class="scroll-downs"><div class="mousey"><div class="scroller"></div></div></div> -->
-			<div class="scroll-downs position-absolute bottom-0 start-50 mb-4 zi-5"><div class="mousey"><div class="scroller"></div></div></div>
+			<div class="scroll-downs position-absolute bottom-0 start-50 translate-middle-x mb-4 zi-5"><div class="mousey"><div class="scroller"></div></div></div>
 
 			<!-- Contextual menu -->
-			<div class="position-absolute mb-10 bottom-0 start-50 translate-middle-x d-flex justify-content-between px-3 px-lg-6 pe-lg-20 zi-5">
+			<div class="position-absolute mb-10 bottom-0 start-50 translate-middle-x d-none d-sm-flex justify-content-between px-3 px-lg-6 pe-lg-20 zi-5">
 
 				<?php if ( WaffTwo\Theme\waff_get_theme_homeslide_content() ) :  ?>
 			
@@ -288,7 +288,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 </section>
 
 <!-- #slick-breaking -->
-<section id="slick-breaking" class="mt-0 mb-10 mb-lg-7 contrast--light ---- mt-n2 pt-2">
+<section id="slick-breaking" class="mt-0 mb-0 mb-lg-7 contrast--light ---- mt-n2 pt-2">
 	<div class="container-fluid px-0">
 		<style scoped>
 			@media (max-width: 768px) {
@@ -353,7 +353,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 				<h6 class="headflat text-white m-0 text-center">Dernières actualités</h6>
 			</div>
 
-			<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2">
+			<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2 overflow-scroll">
 				<?php
 				$categories = get_categories();
 				foreach ($categories as $category) {

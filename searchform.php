@@ -37,7 +37,7 @@ itemtype="http://schema.org/WebSite"
 	<?php elseif ( defined('WAFF_PARTIALS') && 'golfs' === WAFF_PARTIALS ) : /* GOLFS */ ?>
 
 		<form role="search" id="searchform" class="search-form is-formatted mt-0" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<div class="form-group g-0 w-100 bg-color-bg color-action-2 p-5">
+			<div class="form-group g-0 w-100 bg-color-bg color-action-2 py-5 px-2 px-sm-5">
 				<label for="search-field" class="--visually-hidden">
 					<span class="headflat ms-2 --screen-reader-text"><?php echo esc_html_x( 'Search', 'label', 'waff' ); ?></span>
 				</label>

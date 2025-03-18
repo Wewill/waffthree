@@ -4022,7 +4022,7 @@ function wa_mission_callback( $attributes ) {
 
 				<!-- Col 3 -->
 				<!-- Begin: Content -->
-				<div class="col-12 col-lg-6 col-xl-5 ps-5 d-flex flex-column justify-content-between --align-items-end" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
+				<div class="col-12 col-lg-6 col-xl-5 ps-5 d-flex flex-column justify-content-between --align-items-end --- mt-10 mt-sm-0" data-aos="fade-left" data-aos-delay="400" style="<?= $is_preview ? 'float:right; width:49%;' : '' ?>">
 					<div>
 						<h6 class="subline <?= mb_get_block_field( 'waff_m_subtitle_class' ) ?>"><?= mb_get_block_field( 'waff_m_subtitle' ) ?></h6>
 						<h2><?= mb_get_block_field( 'waff_m_title' ) ?></h2>
@@ -4118,7 +4118,7 @@ function wa_cols_callback( $attributes ) {
 		</figure>
 		<?php endif; ?>
 
-		<div class="container-fluid p-4 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image ? 'bg-v-plain-gradient-action-2' : 'bg-v-gradient-action-2' ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-2 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image ? 'bg-v-plain-gradient-action-2' : 'bg-v-gradient-action-2' ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">

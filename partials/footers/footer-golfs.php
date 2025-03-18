@@ -23,7 +23,7 @@ $bg_image 		= ( !empty($bg_images) ) ? reset( $bg_images ) : false;
 <footer id="colophon" class="site-footer site-footer--waff mt-0 pt-13 pt-md-20 pb-10 pb-md-18 bg-action-3 --text-light --link-light contrast--dark ---- bg-image bg-cover bg-position-center-center position-relative <?php echo esc_attr( $has_background ); ?>" <?php ($bg_image ? 'style="background-image: url('.$bg_image['url'].');"' : ''); ?>>
 	<div class="container-fluid --px-0">
 
-		<h2 class="w-70 heading-4 text-color-main lh-sm mb-4">Nous proposons un golf de qualité, des compétitions, et de l'entrainement</h2>
+		<h2 class="--w-70 w-sm-75 heading-4 text-color-main lh-sm mb-4">Nous proposons un golf de qualité, des compétitions, et de l'entrainement</h2>
 
 		<!-- First row -->
 		<div class="row g-4">

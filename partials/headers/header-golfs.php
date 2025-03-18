@@ -43,7 +43,7 @@ global $page_atts;
 
 			<!-- Logotype -->
 			<?php //Go\display_site_branding(); ?>
-			<a class="navbar-brand --w-13 --w-sm-15 d-flex align-items-center justify-content-start pt-3 pb-3 m-0 ms-0 ms-sm-5 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>"> <!--  Removed height="100%" : Attribute height not allowed on element a at this point. -->
+			<a class="navbar-brand flex-fill d-flex align-items-center justify-content-center pt-3 pb-3 m-0 ms-0 ms-sm-5 overflow-hidden" href="<?= esc_url( home_url( '/' ) ); ?>" title="<?= get_bloginfo('description'); ?>"> <!--  Removed height="100%" : Attribute height not allowed on element a at this point. -->
 			    <div class="header__logo js-replace">
 				      <!-- item to replace -->
 				      <div class="js-replace__item  js-replace__item--active">
@@ -66,7 +66,7 @@ global $page_atts;
 			</a>
 					
 			<!-- Nav -->
-			<div class="navbar-menu col d-flex align-items-center <?= esc_attr($navbarborder); ?>">
+			<div class="navbar-menu col d-none d-sm-flex align-items-center <?= esc_attr($navbarborder); ?>">
 
 				<!-- Mobile nav -->
 				<!-- Burger -->
@@ -112,7 +112,7 @@ global $page_atts;
 			</div>
 				
 			<!-- Toolbar and Page title -->
-			<div class="navbar-text --w-13 d-flex align-items-center justify-content-end me-3 me-sm-5 ms-3 ms-sm-5">
+			<div class="navbar-text d-flex align-items-center justify-content-end me-3 me-sm-5 ms-3 ms-sm-5">
 
 				<div class="d-flex col flex-column justify-content-center position-relative">
 

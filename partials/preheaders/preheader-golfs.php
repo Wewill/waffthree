@@ -40,7 +40,7 @@ $page_atts = $args;
 						<!-- Menu footer 2 -->
 						<div class="d-flex me-5 --justify-content-between align-items-center">
 						<?php if ( has_nav_menu( 'preheader-1' ) || is_customize_preview() ) : ?>
-							<nav class="nav --link-dark font-weight-bold preheader-navigation--1 nav-md w-auto" aria-label="<?php esc_attr_e( 'Preheader Menu', 'go' ); ?>">
+							<nav class="nav font-weight-bold preheader-navigation--1 lh-xs mt-2 mb-2 small-sm" aria-label="<?php esc_attr_e( 'Preheader Menu', 'go' ); ?>">
 								<span class="screen-reader-text preheader-navigation__title"><?php echo esc_html( wp_get_nav_menu_name( 'preheader-1' ) ); ?></span>
 			
 								<?php
