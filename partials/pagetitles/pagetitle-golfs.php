@@ -407,9 +407,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 	?>
 	
 	<!-- #pageheader -->
-	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-50 position-relative split-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
+	<section id="pageheader" class="mt-0 mb-0 contrast--light h-100 lg-vh-50 position-relative split-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
 		<div class="container-fluid px-0">
-			<div class="row g-0 justify-content-between align-items-center vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
+			<div class="row g-0 justify-content-between align-items-center lg-h-100 lg-vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
 				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
 				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
@@ -650,7 +650,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 	<!-- NO #pagetitle : Split -->
 	<!-- #pageheader : Split -->
-	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-50 position-relative split-header is-formatted" data-aos="fade-down" data-aos-id="pageheader">
+	<section id="pageheader" class="mt-0 mb-0 contrast--light h-100 lg-vh-50 position-relative split-header is-formatted" data-aos="fade-down" data-aos-id="pageheader">
 		<div class="container-fluid px-0">
 			<div class="row g-0 justify-content-between align-items-center vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
 				
