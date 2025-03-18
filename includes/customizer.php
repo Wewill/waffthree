@@ -510,17 +510,26 @@ function waff_inline_css() {
 <?php if ( $primary_color ) : ?>
 	--waff-action-1-h: <?php echo esc_attr( $primary_color[0] ) ?> !important;
 	--waff-action-1-s: <?php echo esc_attr( $primary_color[1] ) ?>% !important;
-	--waff-action-1-l: <?php echo esc_attr( $primary_color[2] ) ?>% !important;
+	--waff-action-1-l: <?php echo esc_attr( $primary_color[2] ) ?>% !important; /* Light 2024 CSS Fallback > TO REMOVE ! */
+	--action-1-h: <?php echo esc_attr( $primary_color[0] ) ?> !important;
+	--action-1-s: <?php echo esc_attr( $primary_color[1] ) ?>% !important;
+	--action-1-l: <?php echo esc_attr( $primary_color[2] ) ?>% !important;
 <?php endif; ?>
 <?php if ( $secondary_color ) : ?>
 	--waff-action-2-h: <?php echo esc_attr( $secondary_color[0] ) ?> !important;
 	--waff-action-2-s: <?php echo esc_attr( $secondary_color[1] ) ?>% !important;
-	--waff-action-2-l: <?php echo esc_attr( $secondary_color[2] ) ?>% !important;
+	--waff-action-2-l: <?php echo esc_attr( $secondary_color[2] ) ?>% !important; /* Light 2024 CSS Fallback > TO REMOVE ! */
+	--action-2-h: <?php echo esc_attr( $secondary_color[0] ) ?> !important;
+	--action-2-s: <?php echo esc_attr( $secondary_color[1] ) ?>% !important;
+	--action-2-l: <?php echo esc_attr( $secondary_color[2] ) ?>% !important;
 <?php endif; ?>
 <?php if ( $tertiary_color ) : ?>
 	--waff-action-3-h: <?php echo esc_attr( $tertiary_color[0] ) ?> !important;
 	--waff-action-3-s: <?php echo esc_attr( $tertiary_color[1] ) ?>% !important;
-	--waff-action-3-l: <?php echo esc_attr( $tertiary_color[2] ) ?>% !important;
+	--waff-action-3-l: <?php echo esc_attr( $tertiary_color[2] ) ?>% !important; /* Light 2024 CSS Fallback > TO REMOVE ! */
+	--action-3-h: <?php echo esc_attr( $tertiary_color[0] ) ?> !important;
+	--action-3-s: <?php echo esc_attr( $tertiary_color[1] ) ?>% !important;
+	--action-3-l: <?php echo esc_attr( $tertiary_color[2] ) ?>% !important;
 <?php endif; ?>
 
 	/* If film as a color > if we have a film_id & a post_type */
@@ -536,7 +545,14 @@ function waff_inline_css() {
 		--waff-action-1-l: <?php echo esc_attr( $film_color[2] ) ?>% !important;
 		--waff-action-1-r: <?php echo esc_attr( $film_color_rgb[0] ) ?> !important;
 		--waff-action-1-g: <?php echo esc_attr( $film_color_rgb[1] ) ?> !important;
-		--waff-action-1-b: <?php echo esc_attr( $film_color_rgb[2] ) ?> !important;
+		--waff-action-1-b: <?php echo esc_attr( $film_color_rgb[2] ) ?> !important; /* Light 2024 CSS Fallback > TO REMOVE ! */
+		--action-1-h: <?php echo esc_attr( $film_color[0] ) ?> !important;
+		--action-1-s: <?php echo esc_attr( $film_color[1] ) ?>% !important;
+		--action-1-l: <?php echo esc_attr( $film_color[2] ) ?>% !important;
+		--action-1-r: <?php echo esc_attr( $film_color_rgb[0] ) ?> !important;
+		--action-1-g: <?php echo esc_attr( $film_color_rgb[1] ) ?> !important;
+		--action-1-b: <?php echo esc_attr( $film_color_rgb[2] ) ?> !important;
+
 <?php else:
 			if ( defined('WAFF_USE_DOMINANT_FILM_COLOR') && true == WAFF_USE_DOMINANT_FILM_COLOR ) :
 				if ( is_singular() && has_post_thumbnail() ) { 
@@ -557,7 +573,13 @@ function waff_inline_css() {
 						--waff-action-1-l: <?php echo esc_attr( $film_color['l'] ) ?>% !important;
 						--waff-action-1-r: <?php echo esc_attr( $dominant_color[0] ) ?> !important;
 						--waff-action-1-g: <?php echo esc_attr( $dominant_color[1] ) ?> !important;
-						--waff-action-1-b: <?php echo esc_attr( $dominant_color[2] ) ?> !important;
+						--waff-action-1-b: <?php echo esc_attr( $dominant_color[2] ) ?> !important; /* Light 2024 CSS Fallback > TO REMOVE ! */
+						--action-1-h: <?php echo esc_attr( $film_color['h'] ) ?> !important;
+						--action-1-s: <?php echo esc_attr( $film_color['s'] ) ?>% !important;
+						--action-1-l: <?php echo esc_attr( $film_color['l'] ) ?>% !important;
+						--action-1-r: <?php echo esc_attr( $dominant_color[0] ) ?> !important;
+						--action-1-g: <?php echo esc_attr( $dominant_color[1] ) ?> !important;
+						--action-1-b: <?php echo esc_attr( $dominant_color[2] ) ?> !important;
 					<?php endif; ?>
 				<?php endif; ?>
 			<?php endif; ?>
