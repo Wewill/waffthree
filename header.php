@@ -134,6 +134,9 @@
 	//$page_atts = array();
 	//$page_atts['post_color'] 			= rwmb_meta( $prefix . 'color', $args, $post->ID );
 
+	// Define default fallback values
+	$page_atts['header_style'] = 'normal'; // >> 180325 : better to set a default value ? 
+
 	// Get page meta fields 
 	if ( is_singular(array('post', 'page')) || true === $is_blog ) {
 		// Get page meta fields
@@ -157,7 +160,7 @@
 
 	// Force some page headers
 	if ( is_tax('room') ) { $page_atts['header_style'] = 'modern'; }
-	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS || is_singular() ) { $page_atts['header_style'] = 'normal';  } // @TODO / @TOCHECK 060624 if no particular case, header_style has to be normal
+	// if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS || is_singular() ) { $page_atts['header_style'] = 'normal';  } // @TODO / @TOCHECK 060624 if no particular case, header_style has to be normal >> 180325 : better to set a default value ? 
 
 	?>
 
