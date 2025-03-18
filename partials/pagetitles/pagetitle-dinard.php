@@ -17,7 +17,7 @@ $lightness_threshold = 130;
 $title 							= ( isset($page_atts['title']) && $page_atts['title'] != '' )?do_shortcode($page_atts['title']):single_post_title('', false);
 $header_color 					= ( isset($page_atts['header_color']) && $page_atts['header_color'] != '' )?'style="background-color:'. $page_atts['header_color'].'!important;"':'';
 $header_color_class				= 'contrast--light';
-$header_section_title_color 	= 'color-dark';
+$header_section_title_color 	= 'text-dark color-dark';
 $header_link_color 				= 'link-dark';
 
 if ( isset($page_atts['header_color']) && $page_atts['header_color'] != '' ) {
@@ -642,6 +642,80 @@ if ( is_singular() && has_post_thumbnail() ) {
 		</div>
 	</section>
 	<!-- END: #pagetitle -->
+
+	<?php elseif ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('split') ) ): ?>
+
+	<!-- NO #pagetitle : Split -->
+	<!-- #pageheader : Split -->
+	<section id="pageheader" class="mt-0 mb-0 contrast--light vh-50 position-relative split-header is-formatted" data-aos="fade-down" data-aos-id="pageheader">
+		<div class="container-fluid px-0">
+			<div class="row g-0 justify-content-between align-items-center vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
+				
+				<?php if ( is_singular() && has_post_thumbnail() ) : ?>
+				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right <?= $header_color_class ?>" <?= $header_color ?>>
+					<!-- Image -->  
+					<figure title="<?php echo esc_attr($featured_img_description); ?>">
+						<picture class="contrast--light overflow-hidden h-100 lazy show-img-when-loaded duotone-<?= get_post_thumbnail_id() ?>">
+						<!-- 3800x1200 > 1900x600 -->
+						<data-src media="(min-width: 990px)"
+								srcset="<?= $featured_img_urls['page-featured-image-x2']; ?> 2x,
+										<?= $featured_img_urls['page-featured-image']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 590px)"
+								srcset="<?= $featured_img_urls['page-featured-image-m-x2']; ?> 2x,
+										<?= $featured_img_urls['page-featured-image-m']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 380px)"
+								srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
+										<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
+						<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-50 fit-image w-100"></data-img>
+						</picture>
+						<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+						<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						<!--
+						Sizes :
+						<?php print_r($featured_img_urls); ?>  
+						-->
+					</figure>
+					<?php if ( $page_atts['header_color'] != '' && $page_atts['header_image_style'] != '' && $page_atts['header_image_style'] == 1 ) { ?>
+					<style scoped>
+						.duotone-<?= get_post_thumbnail_id() ?> img {
+							filter: grayscale(100%) contrast(1);
+							mix-blend-mode: screen;
+							background-color: <?= $page_atts['header_color'] ?>;
+							opacity: 0;
+						}
+					</style>
+					<?php } ?>
+					<?php else: ?>
+						<div class="alert alert-warning" role="alert"><?= esc_html__( 'You need to choose a thumbnail image', 'waff' ); ?></div>
+					<?php endif;  /* is_singular + has_post_thumbnail */?>				
+				</div>
+
+				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-5 <?= $header_color_class ?>" <?= $header_color ?> --data-aos="fade-left">
+					<!-- Titles -->
+					<hgroup>
+						<?= WaffTwo\waff_entry_meta_header(); ?>
+						<?php if ( $page_atts['subtitle'] != '' ) echo '<h6 class="headline d-inline-block my-3 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h6>'; ?>
+						<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
+					</hgroup>
+
+					<!--  Anchors -->
+					<div class="col-sm-5 col-6 delayed-anchors-aos" data-aos="fade-right" data-aos-delay="200">
+						<?php if ( !empty($page_atts['anchors']) ): ?>
+						<ul class="list-unstyled pb-0 <?= $header_section_title_color ?>">
+							<?php
+								foreach ($page_atts['anchors'] as $key => $value) {
+									echo '<li class="lead '.$header_link_color.' animated-underline"><a href="#'.sanitize_title($value).'">'.$value.'</a></li>';
+								}
+							?>
+						</ul>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END: #pageheader -->	
 
 	<?php elseif ( !empty($page_atts['header_style']) && in_array($page_atts['header_style'], array('fancy') ) ): ?>
 

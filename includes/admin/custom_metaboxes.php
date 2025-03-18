@@ -298,9 +298,10 @@ function waff_page_register_meta_boxes( $meta_boxes ) {
                 'options' => [
                     'normal' => esc_html__( 'Normal', 'waff' ), // Logo sans intitulé
                     'full' 	 => esc_html__( 'Full', 'waff' ), // Logo entier
-                    'fancy'  => esc_html__( 'Fancy', 'waff' ), // Logo sur image
+                    'fancy'  => esc_html__( 'Fancy', 'waff' ), // Logo en défonce sur image
                     //'naked'  => esc_html__( 'Naked', 'waff' ),
                     'modern' => esc_html__( 'Modern', 'waff' ), // Image décalé et ancres
+                    'split'  => esc_html__( 'Split', 'waff' ), // Moitié image moitié texte
                 ],
             ],
             /*[
