@@ -32,7 +32,7 @@ global $page_atts;
 			<!-- Burger -->
 			<?php // Go\navigation_toggle(); ?>
 
-			<button class="navbar-toggler collapsed px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler collapsed mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 				<span class="navbar-close-icon my-1 mx-0 --color-black color-dark">
 				<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
