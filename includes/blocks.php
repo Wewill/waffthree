@@ -1425,23 +1425,28 @@ function wa_latest_posts_callback( $attributes ) {
 
 	// print_r($attributes);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
+
 
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
 	$themeClass = 'featured mt-md-5 mb-md-5 mt-2 mb-2 contrast--dark fix-vh-50'; // Responsive issue fix
 	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-6 contrast--light';
 	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-6 contrast--light overflow-visible';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -2044,20 +2049,24 @@ function wa_partners_callback( $attributes ) {
 
 	global $current_edition_id, $current_edition_films_are_online;
 
-	// Fields data.
-	if ( empty( $attributes['name'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
-
+	
 	// Custom CSS class name.
 	$themeClass = 'partners mt-1 mb-1 contrast--light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -2069,7 +2078,6 @@ function wa_partners_callback( $attributes ) {
 	}
 
 	?>
-	<!-- #Partners -->
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="container-fluid px-0">
 
@@ -2173,21 +2181,18 @@ function wa_partners_callback( $attributes ) {
 							<a href="<?= esc_url($link) ?>" class="color-black link link-dark" title="<?php echo $post->post_title; ?>">
 								<figure title="<?php echo esc_attr($featured_img_description); ?>">
 									<picture class="lazy">
-									<!-- Breakpoint : xl -->
+									<?php // Breakpoint : xl ?>
 									<data-src media="(min-width: 767px)"
 											srcset="<?= $featured_img_urls['medium_large']; ?>" type="image/jpeg"></data-src>
-									<!-- Breakpoint : lg -->
+									<?php // Breakpoint : lg ?>
 									<data-src media="(min-width: 299px)"
 											srcset="<?= $featured_img_urls['medium']; ?>" type="image/jpeg"></data-src>
-									<!-- Breakpoint : sm -->
+									<?php // Breakpoint : sm ?>
 									<data-src media="(min-width: 149px)"
 											srcset="<?= $featured_img_urls['partenaire-featured-image']; ?>" type="image/jpeg"></data-src>
-									<data-img src="<?= $featured_img_urls['partenaire-featured-image']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+									<data-img src="<?= $featured_img_urls['partenaire-featured-image']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid" style="object-fit: cover; width: 100%;"></data-img>
 									</picture>
-									<!--
-									Sizes :
-									<?php print_r($featured_img_urls); ?>  
-									-->
+									<?php // Sizes : print_r($featured_img_urls); ?>  
 								</figure>
 							</a>
 						</div>
@@ -2201,7 +2206,6 @@ function wa_partners_callback( $attributes ) {
 			?>
 		</div>
 	</section>
-	<!-- END: #Partners -->
 	<?php
 }
 
@@ -2210,13 +2214,17 @@ function wa_edito_callback( $attributes ) {
 
 	// print_r($attributes);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
@@ -2225,7 +2233,7 @@ function wa_edito_callback( $attributes ) {
 	//$themeClass = 'edito mt-10 mb-10 contrast--light'; 
 	//$themeClass = 'edito mt-10 mb-10 contrast--light fix-vh-100';
 	$themeClass = 'edito mt-md-10 mb-md-10 mt-5 mb-5 contrast--light fix-vh-100'; // Responsive issue fix
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -2358,20 +2366,25 @@ function wa_awards_callback( $attributes ) {
 	//print_r($attributes);
 	//global $current_edition_id, $current_edition_films_are_online;
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'awards mt-5 mt-sm-10 mb-5 mb-sm-10 contrast--light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );	
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -2882,20 +2895,25 @@ function wa_playlist_callback( $attributes ) {
 	//global $current_edition_id, $current_edition_films_are_online;
 	//https://codepen.io/tommydunn/pen/rNxQLNq?editors=1010
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'playlist mt-5 mt-sm-10 mb-5 mb-sm-10 contrast--light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -3185,20 +3203,25 @@ function wa_contact_callback( $attributes ) {
 		return;
 	}
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'contact mb-10 container-fluid contrast--light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -3348,20 +3371,25 @@ function wa_film_callback( $attributes ) {
 	// if ( $is_preview ) 
 	// 	print_r($attributes);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'single-film --alignwide contrast--light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );	
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -3451,20 +3479,25 @@ function wa_section_callback( $attributes ) {
 	// if ( $is_preview ) 
 	// 	print_r($attributes);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'section-slideshow caroussel mt-10 mb-10 bg-dark contrast--dark color-light';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -3641,20 +3674,25 @@ function wa_sections_callback( $attributes ) {
 	// if ( $is_preview ) 
 	 	//print_r($attributes);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'sections-list mt-10 mb-10 contrast--dark';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	$subclass = ( $attributes['name'] ?? '' ) . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
@@ -3904,16 +3942,21 @@ function wa_mission_callback( $attributes ) {
 	print_r($is_preview);
 
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
+
 
 	// Custom CSS class name.
 	if ( mb_get_block_field( 'waff_m_blockmargin' ) == 1 ) {
@@ -3923,7 +3966,7 @@ function wa_mission_callback( $attributes ) {
 	}
 
 	$themeClass = 'mission '.$blockmargin.' pt-10 pb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -4070,20 +4113,25 @@ function wa_cols_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'cols mt-10 mb-0 contrast--dark text-white';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );	
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -4187,20 +4235,25 @@ function wa_breaking_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'breaking mt-0 mb-10 contrast--dark';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -4308,20 +4361,25 @@ function wa_insights_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	// print_r($is_preview);
 
-	// Fields data.
-	if ( empty( $attributes['data'] ) ) {
-		return;
-	}
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
-	$id = ( $attributes['name'] ?? '' ) . '-' . ( $attributes['id'] ?? '' );
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
 	if ( ! empty( $attributes['anchor'] ) ) {
 		$id = $attributes['anchor'];
 	}
 
+
 	// Custom CSS class name.
 	$themeClass = 'insights mt-10 mb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
-	$class = ( $attributes['name'] ?? '' ) . ' ' . $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );	
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
