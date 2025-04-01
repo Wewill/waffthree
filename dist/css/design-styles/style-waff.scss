@@ -2382,7 +2382,7 @@ p.has-drop-cap:not(:focus):first-letter {
 }
 
 /*
-  Pagination
+  Pagination generic
 */
 
 .pagination .nav-links > * {
@@ -2428,6 +2428,51 @@ p.has-drop-cap:not(:focus):first-letter {
 .pagination .prev:hover {
   background-color: var(--go--color--secondary, --waff-action-2);
   color: var(--go--color--inverse-secondary, --waff-action-2-inverse);
+}
+
+/*
+  Pagination specific RSFP
+*/
+
+.waff-theme-rsfp .pagination {
+  --go-navigation--font-size: 0.8rem;
+  --go-navigation--font-weight: 700;
+  --go-navigation--text-transform: uppercase;
+}
+.waff-theme-rsfp .pagination .nav-links > * {
+  background-color: var(--waff-color-layout);
+  color: var(--waff-color-layout-inverse);
+  padding: 1rem 2rem;
+  margin: 0 0.15rem;
+  border-radius: 2rem;
+}
+
+@media (max-width: 767.98px) {
+  .waff-theme-rsfp .pagination .nav-links > * {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.waff-theme-rsfp .pagination .nav-links > *.current {
+  background-color: var(--waff-action-2);
+  color: var(--waff-action-2-inverse);
+}
+
+.waff-theme-rsfp .pagination .nav-links > a:hover {
+  background-color: var(--waff-color-main);
+  color: var(--waff-color-light);
+}
+
+.waff-theme-rsfp .pagination .next,
+.waff-theme-rsfp .pagination .prev {
+  background-color: var(--waff-color-main);
+  color: var(--waff-color-light);
+}
+
+.waff-theme-rsfp .pagination .next:hover,
+.waff-theme-rsfp .pagination .prev:hover {
+  background-color: var(--waff-action-2);
+  color: var(--waff-action-2-inverse);
 }
 
 /* 
