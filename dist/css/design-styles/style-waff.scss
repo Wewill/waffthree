@@ -2445,6 +2445,8 @@ p.has-drop-cap:not(:focus):first-letter {
   padding: 1rem 2rem;
   margin: 0 0.15rem;
   border-radius: 2rem;
+
+  font-size: var(--go-navigation--font-size) !important;
 }
 
 @media (max-width: 767.98px) {
@@ -2459,8 +2461,6 @@ p.has-drop-cap:not(:focus):first-letter {
 }
 
 .waff-theme-rsfp .pagination .nav-links > a {
-  background-color: var(--waff-color-main);
-  color: var(--waff-color-light);
 }
 
 .waff-theme-rsfp .pagination .nav-links > a:hover {
