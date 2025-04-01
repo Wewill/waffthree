@@ -2458,6 +2458,11 @@ p.has-drop-cap:not(:focus):first-letter {
   color: var(--waff-action-2-inverse);
 }
 
+.waff-theme-rsfp .pagination .nav-links > a {
+  background-color: var(--waff-color-main);
+  color: var(--waff-color-light);
+}
+
 .waff-theme-rsfp .pagination .nav-links > a:hover {
   background-color: var(--waff-color-main);
   color: var(--waff-color-light);
