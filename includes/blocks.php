@@ -17,6 +17,7 @@ use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
 use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
 
 use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
+use function WaffTwo\Theme\waff_get_theme_homeslide_content as waff_get_theme_homeslide_content;
 
 //use function Go\hex_to_rgb as hex_to_rgb; 
 
@@ -1380,6 +1381,49 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		//'Keyattrs'       => 'Value',
 	];
  
+	// WA Keywords ( #RSFP )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Key messages', 'waff' ),
+		'id'             => 'wa-keymessages',
+		'fields'         => [
+			[
+                'id'   => $prefix . 'k_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Title', 'waff' ),
+                // 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+                'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'k_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Subtitle', 'waff' ),
+                // 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'format-quote',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'editor-paragraph',
+		],
+		'description'     => esc_html__( 'Display homeslide key messages / contextual / engagement in content with a block', 'waff' ),
+		'keywords'       => ['homeslide', 'content', 'text', 'insight', 'data', 'bloc'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_keymessages_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
     return $meta_boxes;
 }
 
@@ -4482,6 +4526,94 @@ function wa_insights_callback( $attributes ) {
 	
 }
 
+function wa_keymessages_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
+	// No data no render.
+	if ( empty( $attributes['data'] ) ) return;
+	
+	// Unique HTML ID if available.
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+	
+	// Custom CSS class name.
+	$themeClass = 'partners mt-1 mb-1 contrast--light';
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	?>
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid px-0">
+
+				<?php if ( mb_get_block_field( 'waff_k_subtitle' ) || mb_get_block_field( 'waff_k_title' ) ) : ?>
+					<hgroup class="">
+						<?php if ( mb_get_block_field( 'waff_k_subtitle' ) ) : ?>
+							<h6 class="subline" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_k_subtitle' ) ?></h6>
+						<?php endif; ?>
+						<?php if ( mb_get_block_field( 'waff_k_title' ) ) : ?>
+							<h4 class="" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_k_title' ) ?></h4>
+						<?php endif; ?>
+					</hgroup>
+				<?php endif; ?>
+
+				<div class="col-12 d-flex justify-content-between">
+
+					<?php if ( waff_get_theme_homeslide_content() ) :  ?>
+
+						<?php foreach (waff_get_theme_homeslide_content() as $contents) : ?>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm"><?= esc_html($contents[0]); ?><br/>
+									<?= esc_html($contents[1]); ?></h5>
+							</div>
+						<?php endforeach; ?>
+
+						<?php else :  ?>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">S'installer paysan.ne,<br/>
+									pourquoi pas moi ?</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Découvrir<br/>
+									des savoir-faire</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Visiter une ferme</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Se faire<br/>
+									accompagner</h5>
+							</div>
+							<div>
+								&nbsp;
+							</div>
+					<?php endif;  ?>
+
+				</div>
+		</div>
+	</section>
+	<?php
+}
 
 /**
  * Disallow some blocks 
@@ -4763,6 +4895,8 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 			"meta-box/wa-cols",
 			"meta-box/wa-breaking",
 			"meta-box/wa-insights",
+			"meta-box/wa-keymessages",
+			// coblocks
 			"coblocks/accordion",
 			"coblocks/accordion-item",
 			"coblocks/alert",

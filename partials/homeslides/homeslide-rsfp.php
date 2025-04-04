@@ -30,7 +30,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <!-- #slick-homeslide -->
 <section id="slick-homeslide" class="mb-0 mb-sm-10 mb-lg-7 contrast--light ">
 	<div class="container-fluid px-0">
-		<div class="row g-0 align-items-center vh-100"> <!-- .vh-100 hack--> 
+		<div class="row g-0 align-items-center vh-50"> <!-- .vh-50 hack--> 
 			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden" data-aos="fade-right">
 				
 				<!-- slick-homeslide images-->
@@ -69,7 +69,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						$video 			= reset($videos);
 					?>
 					<!-- Slide <?= $slide_nb ?> -->
-					<div class="img-shifted shift-left vh-100 <?= $mode; ?>">
+					<div class="img-shifted shift-left vh-50 <?= $mode; ?>">
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100">
@@ -156,7 +156,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					?>
 		
 						<!-- Slide <?= $slide_nb ?> -->
-						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-100 position-relative rounded-bottom-4 rounded-bottom-right-0 lg-rounded-0" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
+						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-50 position-relative rounded-bottom-4 rounded-bottom-right-0 lg-rounded-0" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="px-3 px-lg-6 pt-16"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="px-3 px-lg-6 py-2">
 								<h1 class="h2 --display-3 <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
@@ -173,7 +173,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 				
 			</div>
 			
-			<!-- Items list <div class="col-lg-2 --vh-100 h-100 order-last d-flex flex-column slick-homeslide-list-items justify-content-end" --data-aos="fade-left" --data-aos-offset="-40">
+			<!-- Items list <div class="col-lg-2 --vh-50 h-100 order-last d-flex flex-column slick-homeslide-list-items justify-content-end" --data-aos="fade-left" --data-aos-offset="-40">
 				<div class="p-0 m-0 --mt-auto">
 					<ul class="list-group list-group-flush m-0 slider-list">
 						<?php 
@@ -201,48 +201,6 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 			<!-- Mouse down -->
 			<!-- <div class="scroll-downs"><div class="mousey"><div class="scroller"></div></div></div> -->
 			<div class="scroll-downs position-absolute bottom-0 start-45 mb-4 zi-5"><div class="mousey"><div class="scroller"></div></div></div>
-
-			<!-- Contextual menu -->
-			<div class="position-absolute --top-50 bottom-10 start-50 translate-middle d-flex justify-content-between px-3 px-lg-6 pe-lg-20 zi-5">
-
-				<?php if ( WaffTwo\Theme\waff_get_theme_homeslide_content() ) :  ?>
-			
-				<?php foreach (WaffTwo\Theme\waff_get_theme_homeslide_content() as $contents) : ?>
-					<div>
-						<span class="bullet bullet-light ms-0"></span>
-						<h5 class="color-light small-sm"><?= esc_html($contents[0]); ?><br/>
-							<?= esc_html($contents[1]); ?></h5>
-					</div>
-				<?php endforeach; ?>
-
-				<?php else :  ?>
-
-				<div>
-					<span class="bullet bullet-light ms-0"></span>
-					<h5 class="color-light small-sm">S'installer paysan.ne,<br/>
-						pourquoi pas moi ?</h5>
-				</div>
-				<div>
-					<span class="bullet bullet-light ms-0"></span>
-					<h5 class="color-light small-sm">Découvrir<br/>
-						des savoir-faire</h5>
-				</div>
-				<div>
-					<span class="bullet bullet-light ms-0"></span>
-					<h5 class="color-light small-sm">Visiter une ferme</h5>
-				</div>
-				<div>
-					<span class="bullet bullet-light ms-0"></span>
-					<h5 class="color-light small-sm">Se faire<br/>
-						accompagner</h5>
-				</div>
-				<div>
-					&nbsp;
-				</div>
-				
-				<?php endif;  ?>
-
-			</div>
 
 		</div>
 	</div>
