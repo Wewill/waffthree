@@ -72,7 +72,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100 bg-action-1">
-								<video class="w-100 h-auto bg-cover" autoplay loop playsinline src="<?= $video['src']; ?>" style="filter: grayscale(100%) lightness(0.5) contrast(1); mix-blend-mode: screen;"></video>
+								<video class="w-100 h-auto bg-cover" autoplay loop playsinline src="<?= $video['src']; ?>" style="filter: grayscale(100%) brightness(0.6) contrast(1); mix-blend-mode: screen;"></video>
 							</figure>
 						<?php endif; ?>
 						</div>
