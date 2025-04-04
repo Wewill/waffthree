@@ -3,7 +3,6 @@ $prefix 	= 'waff_homeslide_';
 $random = 0;
 $slide_count    = intval( 10 );
 
-
 $slide_order_by 	= $random == '1' ? 'rand' : 'menu_order, post_date';
 $args             = array(
     'post_type'             => 'homeslide',
@@ -73,7 +72,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100">
-								<video class="w-auto h-100 bg-cover" autoplay loop playsinline src="<?= $video['src']; ?>"></video>
+								<video class="w-100 h-auto bg-cover" autoplay loop playsinline src="<?= $video['src']; ?>"></video>
 							</figure>
 						<?php endif; ?>
 						</div>
@@ -84,7 +83,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 
 				<!-- Special RSFP -->
 				<?php if ( $homeslide_image ) : ?>
-					<div class="position-absolute top-50 end-0 translate-middle-y no-drag"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
+					<div class="position-absolute top-50 end-0 translate-middle-y no-drag opacity-25"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
 				<?php endif; ?>
 
 				<!-- Images sources-->
@@ -130,7 +129,6 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 			</div>
 
 			<div class="col-lg-5 col-xl-5 --order-first order-1 order-lg-first zi-5" data-aos="fade-down">
-
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
 					
@@ -171,10 +169,10 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 		            <?php endwhile; ?>
 
 				</div>
-				
 			</div>
 
 			<!-- Progress bar -->
+			<?php if ($slide_nb > 1): ?>
 			<div class="zi-5 position-absolute top-50 left-0 mt-7 translate-middle-y order-last d-flex flex-column slick-homeslide-list-position --slick-homeslide-list-items justify-content-end" data-aos="fade-left">
 				<div class="p-0 m-0 --mt-auto">
 					<ul class="--list-group list-group-flush ps-4 m-0 slider-list">
@@ -247,6 +245,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					</style>
 				</div>
 			</div>
+			<?php endif; ?>
 
 			<!-- Mouse down -->
 			<div class="scroll-downs position-absolute bottom-0 start-45 mb-4 zi-5 d-none"><div class="mousey"><div class="scroller"></div></div></div>
