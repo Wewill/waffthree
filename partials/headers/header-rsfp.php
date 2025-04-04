@@ -81,12 +81,65 @@ global $page_atts;
 				<!-- Burger .navbar-toggler -->
 				<?php // Go\navigation_toggle(); ?>
 				<button class="navbar-toggler collapsed px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					<span class="navbar-close-icon my-1 mx-0 color-dark">
-					<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-					</svg>
+					<span class="navbar-toggler-icon">
+						<div class="lineburger">
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+						</div>
 					</span>
+					<span class="navbar-close-icon my-1 mx-0 color-dark">
+						<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+						</svg>
+					</span>
+
+						<style scoped>
+						.lineburger {
+							display: flex;
+							flex-direction: column;
+							gap: 7px;
+							cursor: pointer;
+							width: 35px;
+							position: relative;
+						}
+						.lineburger .line {
+							height: 3px;
+							background-color: black;
+							border-radius: 3px;
+							transition: all .5s ease-in-out;
+						}
+						
+						.lineburger .line:nth-child(1) {
+							width: 100%;
+							animation: move1 6s infinite alternate linear;
+						}
+						.lineburger .line:nth-child(2) {
+							width: 60%;
+							animation: move2 6s infinite alternate linear;
+						}
+						.lineburger .line:nth-child(3) {
+							width: 80%;
+							animation: move3 6s infinite alternate linear;
+						}
+
+						@keyframes move1 {
+							0% { transform: translateX(0)  scaleX(1); }
+							100% { transform: translateX(-12.5%) scaleX(0.75); }
+						}
+						
+						@keyframes move2 {
+							0% { transform: translateX(0)  scaleX(1); }
+							100% { transform: translateX(12.5%) scaleX(1.25); }
+						}
+						
+						@keyframes move3 {
+							0% { transform: translateX(0)  scaleX(1); }
+							100% { transform: translateX(-12.5%) scaleX(0.75); }
+						}
+					</style>
+
+
 				</button>
 
 
