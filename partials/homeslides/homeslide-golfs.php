@@ -186,6 +186,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 				
 			</div>
 			
+			<!-- Progress bar -->
 			<div class="zi-5 position-absolute top-50 left-0 translate-middle-y order-last d-flex flex-column slick-homeslide-list-position --slick-homeslide-list-items justify-content-end" data-aos="fade-left">
 				<div class="p-0 m-0 --mt-auto">
 					<ul class="--list-group list-group-flush ps-4 m-0 slider-list">

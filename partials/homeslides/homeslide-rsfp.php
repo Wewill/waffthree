@@ -31,7 +31,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <section id="slick-homeslide" class="mb-0 mb-sm-10 mb-lg-7 contrast--light ">
 	<div class="container-fluid px-0">
 		<div class="row g-0 align-items-center vh-50"> <!-- .vh-50 hack--> 
-			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden" data-aos="fade-right">
+			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
 				
 				<!-- slick-homeslide images-->
 				<div class="slider-nav">
@@ -84,50 +84,51 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 
 				<!-- Special RSFP -->
 				<?php if ( $homeslide_image ) : ?>
-					<div class="position-absolute top-50 end-0 translate-middle-y opacity-50 --op-2 --zi-5 no-drag"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
+					<div class="position-absolute top-50 end-0 translate-middle-y no-drag"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
 				<?php endif; ?>
 
 				<!-- Images sources-->
 				<style scoped type="text/css">
-					/*S = 798x755 */
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s']; ?>') }
-					<?php endforeach; ?>
-				@media (min-resolution: 192dpi) {
-					/*Sx2 = 1596x1510 */
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s-x2']; ?>') }
-					<?php endforeach; ?>
-				}
-				
-				@media (min-width: 769px) {
-					/*M = 1400x1325 */
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m']; ?>') }
-					<?php endforeach; ?>
-				}
-				@media (min-width: 769px) and (min-resolution: 192dpi) {
-					/*Mx2 = 2800x2650 */
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m-x2']; ?>') }
-					<?php endforeach; ?>
-				}
-				
-				@media (min-width: 1400px) {
-					/*XL = 1960x1855*/
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image']; ?>') }
-					<?php endforeach; ?>
-				}
-				@media (min-width: 1400px) and (min-resolution: 192dpi) {
-					/*XLx2 = 3920x3710 */
-					<?php foreach ($slide_images as $slide => $image) : ?>
-					.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-x2']; ?>') }
-					<?php endforeach; ?>
-				}
-			</style>	
+						/*S = 798x755 */
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s']; ?>') }
+						<?php endforeach; ?>
+					@media (min-resolution: 192dpi) {
+						/*Sx2 = 1596x1510 */
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-s-x2']; ?>') }
+						<?php endforeach; ?>
+					}
+					
+					@media (min-width: 769px) {
+						/*M = 1400x1325 */
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m']; ?>') }
+						<?php endforeach; ?>
+					}
+					@media (min-width: 769px) and (min-resolution: 192dpi) {
+						/*Mx2 = 2800x2650 */
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-m-x2']; ?>') }
+						<?php endforeach; ?>
+					}
+					
+					@media (min-width: 1400px) {
+						/*XL = 1960x1855*/
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image']; ?>') }
+						<?php endforeach; ?>
+					}
+					@media (min-width: 1400px) and (min-resolution: 192dpi) {
+						/*XLx2 = 3920x3710 */
+						<?php foreach ($slide_images as $slide => $image) : ?>
+						.slider-nav .slider-item-<?= $slide ?>.bg-image { background-image: url('<?= $image['homeslide-featured-image-x2']; ?>') }
+						<?php endforeach; ?>
+					}
+				</style>	
 					
 			</div>
+
 			<div class="col-lg-5 col-xl-5 --order-first order-1 order-lg-first zi-5" data-aos="fade-down">
 
 				<!-- slick-homeslide content -->
@@ -157,11 +158,11 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 		
 						<!-- Slide <?= $slide_nb ?> -->
 						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-50 position-relative rounded-bottom-4 rounded-bottom-right-0 lg-rounded-0" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
-							<div class="px-3 px-lg-6 pt-16"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
+							<div class="px-3 px-lg-6 pt-18"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="px-3 px-lg-6 py-2">
 								<h1 class="h2 --display-3 <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
 							</div>
-							<div class="px-3 px-lg-6 pb-3">
+							<div class="px-3 px-lg-6 pb-6">
 								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= do_shortcode($content); ?></div>
 								<?= (($url != '')?'<a href="'.$url.'" class="card-link '.$class.' stretched-link d-block"><i class="icon icon-arrow"></i></a>':''); ?>
 							</div>
@@ -172,35 +173,83 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 				</div>
 				
 			</div>
-			
-			<!-- Items list <div class="col-lg-2 --vh-50 h-100 order-last d-flex flex-column slick-homeslide-list-items justify-content-end" --data-aos="fade-left" --data-aos-offset="-40">
+
+			<!-- Progress bar -->
+			<div class="zi-5 position-absolute top-50 left-0 mt-7 translate-middle-y order-last d-flex flex-column slick-homeslide-list-position --slick-homeslide-list-items justify-content-end" data-aos="fade-left">
 				<div class="p-0 m-0 --mt-auto">
-					<ul class="list-group list-group-flush m-0 slider-list">
+					<ul class="--list-group list-group-flush ps-4 m-0 slider-list">
 						<?php 
 						$slide_nb 			= 0;
 						while ( $homeslide_slides->have_posts() ) : $homeslide_slides->the_post(); 
 							$slide_nb ++; 
 							$slide_id 	= $post->ID;
-					    	$slide_title = get_the_title();
-					    	$slide_title = str_replace('<br/>', ' ', $slide_title);
-					    	$color 		= rwmb_meta( $prefix . 'slide_color' , array(), $slide_id);
-							$slide_colors[$slide_nb] = $color;
-					    	$style 		= ( $color )?'style="background-color:'.$color.'!important;"':'';
-					    ?>
-						<li id="slide-list-<?= $slide_nb ?>" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" class="list-group-item"><i class="icon icon-down-left"></i> <?= $slide_title; ?></li>
+							$slide_title = get_the_title();
+							$slide_title = str_replace('<br/>', ' ', $slide_title);
+						?>
+						<li id="slide-list-<?= $slide_nb ?>" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" class="list-group-item position-relative">
+							<i class="icon icon-down-left"></i>
+							<div class="progress-bar"></div>
+							<span class="slide-title bg-gradient-color-main text-light"><?= $slide_title; ?></span>
+						</li>
 						<?php endwhile; ?>
 					</ul>
 					<style type="text/css">
-						<?php foreach ($slide_colors as $slide => $color) : ?>
-						#slide-list-<?= $slide; ?>.active {color: <?= $color ?> !important;}
-						<?php endforeach; ?>
+						.slider-list {
+							display:inline-block;
+						}
+						.slider-list .list-group-item {
+							position: relative;
+							padding: 0;
+							margin: 0;
+							/* height: 20px; */
+							cursor: pointer;
+							padding: 0.75rem 0.75rem !important;
+						}
+						.slider-list .list-group-item .progress-bar {
+							position: absolute;
+							top: 0;
+							left: 0;
+							width: 5px;
+							height: 100%;
+							background-color: rgba(255, 255, 255, 0.2);
+							transition: background-color 0.3s;
+						}
+						.slider-list .list-group-item:first-of-type .progress-bar {
+							border-top-left-radius: 5px;
+							border-top-right-radius: 5px;
+						}
+						.slider-list .list-group-item:last-child .progress-bar{
+							border-bottom-left-radius: 5px;
+							border-bottom-right-radius: 5px;
+						}
+						.slider-list .list-group-item.active .progress-bar {
+							background-color: rgba(255, 255, 255, 1);
+						}
+
+						.slider-list .list-group-item .slide-title {
+							position: absolute;
+							top: 50%;
+							left: 10px;
+							transform: translateY(-50%);
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+							max-width: 0;
+							transition: max-width 0.3s, padding-left 0.3s, padding-right 0.3s;
+							font-size: 0.8rem;
+							font-weight: 800;
+						}
+						.slider-list .list-group-item:hover .slide-title {
+							padding-left:10px;
+							padding-right:10px;
+							max-width: 200px;
+						}
 					</style>
 				</div>
-			</div> -->
-			
+			</div>
+
 			<!-- Mouse down -->
-			<!-- <div class="scroll-downs"><div class="mousey"><div class="scroller"></div></div></div> -->
-			<div class="scroll-downs position-absolute bottom-0 start-45 mb-4 zi-5"><div class="mousey"><div class="scroller"></div></div></div>
+			<div class="scroll-downs position-absolute bottom-0 start-45 mb-4 zi-5 d-none"><div class="mousey"><div class="scroller"></div></div></div>
 
 		</div>
 	</div>
