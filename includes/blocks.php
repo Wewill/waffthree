@@ -4598,7 +4598,7 @@ function wa_keymessages_callback( $attributes ) {
 
 	?>
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
-		<div class="container-fluid px-0">
+		<div class="container-fluid --px-0">
 
 				<?php if ( mb_get_block_field( 'waff_k_subtitle' ) || mb_get_block_field( 'waff_k_title' ) ) : ?>
 					<hgroup class="">
