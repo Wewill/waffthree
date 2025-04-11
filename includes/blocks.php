@@ -4569,7 +4569,7 @@ function wa_keymessages_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	// No data no render.
-	if ( empty( $attributes['data'] ) ) return;
+	// if ( empty( $attributes['data'] ) ) return;
 	
 	// Unique HTML ID if available.
 	$id = '';
@@ -4584,7 +4584,7 @@ function wa_keymessages_callback( $attributes ) {
 	}
 	
 	// Custom CSS class name.
-	$themeClass = 'partners mt-1 mb-1 contrast--light';
+	$themeClass = 'keymessages mt-2 mb-4 contrast--light';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
