@@ -193,7 +193,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 //'after'             => 'html after',
                 //'class'             => 'Customcss',
                 'key'               => 'value',
-			],	
+			],
+			( 'RSFP' === WAFF_THEME ) ? [
+                'id'    => $prefix . 'lp_containsvideo',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Filter only posts w/ a video', 'waff' ),
+                'style' => 'rounded',
+			] : [],
 			[
                 'id'         => $prefix . 'lp_categories',
                 'type'       => 'taxonomy_advanced',
@@ -1488,8 +1494,8 @@ function wa_latest_posts_callback( $attributes ) {
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
 	$themeClass = 'featured mt-md-5 mb-md-5 mt-2 mb-2 contrast--dark fix-vh-50'; // Responsive issue fix
-	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-6 contrast--light';
-	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-6 contrast--light overflow-visible';
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-2 contrast--light';
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-4 contrast--light overflow-visible';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
@@ -1507,6 +1513,7 @@ function wa_latest_posts_callback( $attributes ) {
 	<?php
 	endif;
 
+	$meta_queries 	= array();
 	$sticky_posts 	= array();
 	$categories 	= array();
 	$categories_id	= array();
@@ -1515,6 +1522,23 @@ function wa_latest_posts_callback( $attributes ) {
 	// $morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
 	$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' ));
 	$meta 			= esc_attr(mb_get_block_field( 'waff_lp_meta' ));
+	$containsvideo 	= esc_attr(mb_get_block_field( 'waff_lp_containsvideo' ));
+
+	if ( $containsvideo == 1 ) {
+		$meta_queries[] = array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'd_medias_video',
+				'value'   => '',
+				'compare' => '!=',
+			),
+			array(
+				'key'     => 'd_medias_video_link',
+				'value'   => '',
+				'compare' => '!=',
+			),
+		);
+	}
 
 	if ( $posttype === 'post' ) {
 		//$categories 	= $attributes['data']['waff_lp_categories'];
@@ -1536,6 +1560,7 @@ function wa_latest_posts_callback( $attributes ) {
 			'ignore_sticky_posts' => true,
 			// Limit to selected cats 
 			'category'			=> $categories_id,
+			'meta_query'		=> $meta_queries,
 		));
 	} else {
 		$sticky_posts = get_posts(array(
@@ -1547,6 +1572,7 @@ function wa_latest_posts_callback( $attributes ) {
 			// No limit to sticky if not, only the last one if featured 
 			// Limit to selected cats 
 			'category'			=> $categories_id,
+			'meta_query'		=> $meta_queries,
 		));
 	}
 
@@ -1560,6 +1586,7 @@ function wa_latest_posts_callback( $attributes ) {
 		'post__not_in'  	=> get_option( 'sticky_posts' ),
 		// Limit to selected cats 
 		'category'			=> $categories_id,
+		'meta_query'		=> $meta_queries,
 	);
 
 	$all_posts = array(
@@ -1570,6 +1597,7 @@ function wa_latest_posts_callback( $attributes ) {
 		'order'				=> 'DESC',
 		// Limit to selected cats 
 		'category'			=> $categories_id,
+		'meta_query'		=> $meta_queries,
 	);
 
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' ) :
@@ -1600,10 +1628,16 @@ function wa_latest_posts_callback( $attributes ) {
 					$excerpt = '';
 					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
 					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
-					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true)); // RSFP only 
+
+					// RSFP
+					$d_general_introduction 	= wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true)); // RSFP only 
+					$d_medias_videos 			= get_post_meta( $post_id, 'd_medias_video', true ); // RSFP only 
+					$d_medias_video_links 		= get_post_meta( $post_id, 'd_medias_video_link', true ); // RSFP only 
+					$d_have_videos 				= !empty($d_medias_videos) || !empty($d_medias_video_links); // RSFP only 
+				
 					// echo $post_id;
 					// echo $the_content; 
-					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
+					$the_content = ( $d_general_introduction !== '' )?$d_general_introduction:$the_content;
 					$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
 					if ( strlen($excerpt) > 140 ) {
 						$excerpt = substr($excerpt, 0, 140);
@@ -1616,14 +1650,22 @@ function wa_latest_posts_callback( $attributes ) {
 				<div class="col">
 					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>" data-aos="fade-up" data-aos-delay="<?= $index*100; ?>">
 						<div class="row g-0">
-							<div class="col-md-4">
+							<div class="col-md-4 position-relative mh-150-px">
 								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+								<?php if ($containsvideo == 1 || $d_have_videos) : ?>
+									<div class="position-absolute top-0 h-100 w-100 btn_holder">
+										<span class="btn --action-3 color-light play play-xs d-flex flex-center"><i class="bi bi-play-fill h5 m-0 p-0 ms-1 mt-1"></i></span>
+									</div>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-8">
 								<div class="card-body py-0">
 								
 									<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
-									
+									<?php if ( $meta == 1 ) : ?>
+										<?= waff_entry_meta_header($post_item); ?>
+									<?php endif; ?>
+
 									<h5 class="card-title mt-2">
 										<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link">
 											<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
@@ -1631,14 +1673,11 @@ function wa_latest_posts_callback( $attributes ) {
 										</a>
 									</h5>
 
-									<p class="card-text"><?= $excerpt; ?></p>
+									<p class="card-text mb-3"><?= $excerpt; ?></p>
 
 									<?php if ( $meta == 1 ) : ?>
-									<?= waff_entry_meta_header($post_item); ?>
-									<?php else : ?>
-									<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
+										<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
 									<?php endif; ?>
-
 								</div>
 							</div>
 						</div>
