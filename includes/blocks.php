@@ -1673,10 +1673,10 @@ function wa_latest_posts_callback( $attributes ) {
 										</a>
 									</h5>
 
-									<p class="card-text mb-3"><?= $excerpt; ?></p>
+									<p class="card-text fs-sm mb-0"><?= $excerpt; ?></p>
 
 									<?php if ( $meta == 1 ) : ?>
-										<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
+										<p class="card-text --mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
 									<?php endif; ?>
 								</div>
 							</div>
