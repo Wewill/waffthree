@@ -27,7 +27,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 
 <?php if ( $homeslide_slides->have_posts() ) : ?>
 <!-- #slick-homeslide -->
-<section id="slick-homeslide" class="mb-0 mb-sm-10 mb-lg-7 contrast--light ">
+<section id="slick-homeslide" class="mb-0 --mb-sm-10 --mb-lg-7 contrast--light">
 	<div class="container-fluid px-0">
 		<div class="row g-0 align-items-center vh-50"> <!-- .vh-50 hack--> 
 			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
