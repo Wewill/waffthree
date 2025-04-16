@@ -135,8 +135,8 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$d_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
 				
-				$d_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
-
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$d_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
 
 				printf('<div class="card my-2 border-0">
 						<div class="row g-0 align-items-center">
@@ -173,7 +173,10 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
 				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px w-150-px h-auto"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated 			=  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$c_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
+
 				$c_date 					= get_post_meta( get_the_ID(), 'c_date', true );
 				$c_state 					= get_post_meta( get_the_ID(), 'c_state', true );
 
@@ -240,7 +243,9 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'large' );
 				// $c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				// $c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$c_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
 
 				$c_number_of_strokes = get_post_meta( get_the_ID(), 'c_number_of_strokes', true );
 				$c_handicap = get_post_meta( get_the_ID(), 'c_handicap', true );
