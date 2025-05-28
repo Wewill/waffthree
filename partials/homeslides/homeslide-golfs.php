@@ -322,7 +322,6 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					}
 					// Post Thumbnail
 					$thumbnail_url = get_the_post_thumbnail_url($post_id, 'large');
-					echo $thumbnail_url;
 					$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
 			?>
 					<div class="col <?php if ($delay === 600) echo 'd-none d-md-block'; ?> <?php if ($delay === 800) echo 'd-none d-lg-block'; ?> <?php if ($delay === 1000) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
