@@ -164,12 +164,27 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 <?php elseif ( $args == 'post' ) : ?>
 
+	<?php
+
+	$post_color 		= rwmb_meta( '_waff_bg_color_metafield', array(), $post->ID );
+	$rgb_post_color				= WaffTwo\Core\waff_HTMLToRGB($post_color);
+	$post_title_color 			= $post_color && $post_color != '' ? 'text-white' : '';
+	// Check if the color is dark or light
+	if ( $post_color && $post_color != '') { // Si $post_color n'est pas vide
+		$hsl = WaffTwo\Core\waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
+		if($hsl->lightness > $lightness_threshold) {
+			$post_title_color 			=  'text-heading';
+		}
+	}
+
+	?>
+
 	<!-- #pagetitle : Post -->
 	<section id="pagetitle" class="pt-10 --pt-md-20 pt-md-14 pb-10 contrast--light --container-10 --container-left " <?= $page_atts['post_color_class']?>>
 		<div class="jumbotron">
 		    <div class="container-fluid --container-10 --container-left">
 				<hgroup data-aos="fade-down">
-					<h1 class="title mb-0 <?= $header_section_title_color; ?>"><?php single_post_title(); ?></h1>
+					<h1 class="title mb-0 <?= $post_title_color; ?>"><?php single_post_title(); ?></h1>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
 				</hgroup>
 		    </div>

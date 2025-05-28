@@ -20,7 +20,7 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 
 // $post_color 				= ($post_color != '') ? $post_color : 'var(--waff-action-2)';
 $rgb_post_color				= waff_HTMLToRGB($post_color);
-$post_title_color 			= $post_color && $post_color != '' ? 'link-white text-white-i' : '';
+$post_title_color 			= $post_color && $post_color != '' ? 'link-white text-white' : '';
 // Check if the color is dark or light
 if ( $post_color && $post_color != '' && $post_color != 'var(--waff-action-2)' ) { // Si $post_color n'est pas vide
 	$hsl = waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
