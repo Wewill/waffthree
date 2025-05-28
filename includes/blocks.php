@@ -1624,6 +1624,10 @@ function wa_latest_posts_callback( $attributes ) {
 				<div class="col mb-4 mb-md-0">
 
 				<?php 
+					if ( !empty( $sticky_posts ) && is_array( $sticky_posts ) && count( $sticky_posts ) > 1 ) {
+						$sticky_posts = reset( $sticky_posts ); // Reset the array to get the first sticky post only
+					}
+
 					foreach( $sticky_posts as $post_item ) : 
 						$post_id 				= esc_attr($post_item->ID);
 						$the_categories 		= get_the_category($post_id);
