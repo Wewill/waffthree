@@ -2,12 +2,17 @@
  * Admin javascript functions file.
  */
 
-( function( $ ) {
-	"use strict";
+// document.addEventListener("DOMContentLoaded", function () {
+// 	"use strict";
+// 	console.log('Ready');
+// });
 
-	/* Document Ready */
-	$( document ).ready( function () {
-		console.log('Ready');
-	});
+document.addEventListener("DOMContentLoaded", function () {
+  const notices = document.querySelectorAll(".notice");
 
-} )( jQuery );
+  notices.forEach(function (notice) {
+    if (notice.textContent.includes("Meta Box")) {
+      notice.style.display = "none";
+    }
+  });
+});
