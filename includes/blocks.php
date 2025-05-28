@@ -1625,17 +1625,34 @@ function wa_latest_posts_callback( $attributes ) {
 
 				<?php 
 					if ( !empty( $sticky_posts ) && is_array( $sticky_posts ) && count( $sticky_posts ) > 1 ) {
-						$sticky_posts = reset( $sticky_posts ); // Reset the array to get the first sticky post only
+						$sticky_posts = array_slice($sticky_posts, 0, 1); // Only the first sticky post
 					}
 
 					foreach( $sticky_posts as $post_item ) : 
 						$post_id 				= esc_attr($post_item->ID);
 						$the_categories 		= get_the_category($post_id);
+
+						// Post Color
+						$post_color 				= rwmb_meta('_waff_bg_color_metafield', array(), $post_id);
+						$post_color 				= ($post_color != '') ? $post_color : 'var(--waff-action-2)';
+						$rgb_post_color				= waff_HTMLToRGB($post_color);
+						$post_title_color 			= 'text-white';
+						// Check if the color is dark or light
+						if ( $post_color && $post_color != '' && $post_color != 'var(--waff-action-2)' ) { // Si $post_color n'est pas vide
+							$hsl = waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
+							if($hsl->lightness > $lightness_threshold) {
+								$post_title_color 			= 'text-dark';
+							}
+						}
+						// Post Thumbnail
+						$thumbnail_url = get_the_post_thumbnail_url($post_id, 'large');
+						$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
+
 						?>
 					<div class="card min-h-250-px h-100 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center"
 					id="<?= $post_id; ?>" 
-					style="background-image: url('<?= get_the_post_thumbnail_url($post_id, 'large'); ?>');" data-aos="fade-right">
-						<div class="card-img-overlay bg-gradient-action-2">
+					style="<?= $background_style; ?>" data-aos="fade-right">
+						<div class="card-img-overlay <?= $thumbnail_url ? 'bg-gradient-action-2' : '' ?>">
 							<div class="d-flex flex-column justify-content-between h-100 p-4 pb-3 text-white text-shadow-1">
 								<div>
 									<h6 class="subline text-action-1"><?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?> En avant</h6>
