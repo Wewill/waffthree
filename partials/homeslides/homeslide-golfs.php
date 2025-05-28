@@ -322,14 +322,15 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					}
 					// Post Thumbnail
 					$thumbnail_url = get_the_post_thumbnail_url($post_id, 'large');
+					echo $thumbnail_url;
 					$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
 			?>
 					<div class="col <?php if ($delay === 600) echo 'd-none d-md-block'; ?> <?php if ($delay === 800) echo 'd-none d-lg-block'; ?> <?php if ($delay === 1000) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
 						<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="<?= $background_style; ?>">
 							<div class="card-img-overlay <?= $thumbnail_url ? 'bg-gradient-action-2' : '' ?>">
-								<div class="d-flex flex-column justify-content-between h-100 p-3 pb-2 text-shadow-1 <?= $thumbnail_url ? $post_title_color : '' ?>">
+								<div class="d-flex flex-column justify-content-between h-100 p-3 pb-2 text-shadow-1 <?= $thumbnail_url ? $post_title_color : 'text-white' ?>">
 									<div></div>
-									<h5 class="<?= $thumbnail_url ? $post_title_color : '' ?>>"><a href="<?php the_permalink(); ?>" class="stretched-link"><?php the_title(); ?></a></h5>
+									<h5 class="<?= $thumbnail_url ? $post_title_color : 'text-white' ?>>"><a href="<?php the_permalink(); ?>" class="stretched-link"><?php the_title(); ?></a></h5>
 									<ul class="d-flex list-unstyled m-0">
 										<li class="me-auto subline"><a href="<?php the_permalink(); ?>">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
 										<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?php echo str_replace('minutes', 'mins', human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'); ?></small></li>
