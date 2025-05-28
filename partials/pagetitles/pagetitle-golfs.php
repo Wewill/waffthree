@@ -147,7 +147,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<div class="row g-0 align-items-between justify-content-start vh-25 bg-color-main position-relative"> <!-- .vh-100 hack--> 
 
 		<div class="col-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
-			<h6 class="headflat text-white m-0 text-center">Dernières actualités</h6>
+			<h6 class="headflat text-white m-0 text-center">Les catégories</h6>
 		</div>
 
 		<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2 overflow-scroll">
