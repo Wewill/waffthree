@@ -118,7 +118,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	$prefix = 'waff_';
 	// global $current_edition_id; // Not working
 	global $ccp_editions_filter; // Working 
-
+	
 	// WA Latest posts
     $meta_boxes[] = [
         'title'           => esc_html__( '(WA) Latest posts', 'waff' ),
@@ -4958,10 +4958,11 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 
 	// error_log($advanced_blocks);
 	// error_log(print_r($allowed_blocks, true));
+	// wp_die(print_r($allowed_blocks, true));
 
 	//if ( $advanced_blocks !== true && isset( $editor_context->post ) && $editor_context->post->post_type === 'page' ) { // Only page or a custom post_type 
 	if ( $advanced_blocks !== true && isset( $editor_context->post ) ) { // All post_type blocks 
-			return array(
+		return array(
 			// 'core/image', 
 			// 'core/heading', 
 			// 'core/paragraph', 
