@@ -7,6 +7,12 @@
  * @package Go
  */
 
+use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
+use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
+
+// Lightness threshold
+$lightness_threshold = 130;
+
 //DEBUG
 echo ((true === WAFF_DEBUG)?'<code> ##CONTENTPOST (updated merge 2022 > not sure )</code>':'');
 $post_color 		= rwmb_meta( '_waff_bg_color_metafield', array(), $post->ID );
