@@ -169,7 +169,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		<div class="jumbotron">
 		    <div class="container-fluid --container-10 --container-left">
 				<hgroup data-aos="fade-down">
-					<h1 class="title mb-0"><?php single_post_title(); ?></h1>
+					<h1 class="title mb-0 <?= $header_section_title_color; ?>"><?php single_post_title(); ?></h1>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
 				</hgroup>
 		    </div>
