@@ -298,7 +298,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 			}
 		</style>
 		<!-- News -->
-		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 align-items-stretch gx-4 --py-5 offset-3 position-absolute top-0 start-0 w-90 z-2" style="height:calc(80% + 3.5rem)!important;">
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 align-items-stretch gx-4 --py-5 offset-3 position-absolute top-0 start-0 w-90 z-2" style="height:calc(100% - 3.5rem + .5rem)!important;">
 			<?php
 			$recent_posts = new WP_Query(array(
 				'posts_per_page' => 4,
@@ -325,7 +325,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					$background_style = $thumbnail_url ? "background-image: url('$thumbnail_url');" : "background-color: $post_color;";
 			?>
 					<div class="col <?php if ($delay === 600) echo 'd-none d-md-block'; ?> <?php if ($delay === 800) echo 'd-none d-lg-block'; ?> <?php if ($delay === 1000) echo 'd-none d-xl-block'; ?>" data-aos="fade-down" data-aos-delay="<?= $delay; ?>">
-						<div class="card h-80 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="<?= $background_style; ?>">
+						<div class="card h-100 overflow-hidden rounded-4 shadow-lg border-0 ---- bg-cover bg-position-center-center" style="<?= $background_style; ?>">
 							<div class="card-img-overlay <?= $thumbnail_url ? 'bg-gradient-action-2' : '' ?>">
 								<div class="d-flex flex-column justify-content-between h-100 p-3 pb-2 text-shadow-1 <?= !$thumbnail_url ? $post_title_color : 'text-white' ?>">
 									<div></div>
