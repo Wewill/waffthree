@@ -128,7 +128,6 @@ if ( is_singular() && has_post_thumbnail() ) {
 */
 ?>
 
-<!-- @TODO Farmers / structures / etc -->
 <?php if ( $args == 'blog' ) : ?>
 
 	<!-- #pagetitle : Blog -->
@@ -143,6 +142,25 @@ if ( is_singular() && has_post_thumbnail() ) {
 		</div>
 	</section>
 	<!-- END: #pagetitle -->
+
+	<!-- Categories -->
+	<div class="row g-0 align-items-between justify-content-start vh-25 bg-color-main position-relative"> <!-- .vh-100 hack--> 
+
+		<div class="col-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
+			<h6 class="headflat text-white m-0 text-center">Dernières actualités</h6>
+		</div>
+
+		<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2 overflow-scroll">
+			<?php
+			$categories = get_categories();
+			foreach ($categories as $category) {
+				echo '<li class="list-group-item text-center"><a class="headflat" href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';
+			}
+			?>
+		</ul>
+
+	</div>
+	<!-- END: #Categories -->
 
 <?php elseif ( $args == 'post' ) : ?>
 
