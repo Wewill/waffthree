@@ -81,14 +81,14 @@ function get_ended_signup_block() {
 	<!-- Departures -->
 	<section id="departures">
 		<h3><?= __('Departures', 'waff'); ?></h3>
-		<?php
+		<?php		
 		if ($csv_departures_url) {
 			$csv = file_get_contents($csv_departures_url);
 			if ($csv) {
 				echo '<div id="departures-wrapper" data-fetch="'.$csv_departures_url.'"></div>
 				<script>
 					document.addEventListener("DOMContentLoaded", function () {
-						loadDatatable("'. esc_url($csv_departures_url) .'", "departures-wrapper");
+						loadDatatable("'. esc_url($csv_departures_url) .'", "departures-wrapper", "0,1,2,6,7,8");
 					});
 				</script>';
 		} else {
@@ -107,16 +107,11 @@ function get_ended_signup_block() {
 			if ($csv_results_brut_url) {
 				$csv = file_get_contents($csv_results_brut_url);
 				if ($csv) {
+					echo '<h6>Brut</h6>';
 					echo '<div id="results-wrapper" data-fetch="'.$csv_results_brut_url.'"></div>
 					<script>
 						document.addEventListener("DOMContentLoaded", function () {
-							loadDatatable("'. esc_url($csv_results_brut_url) .'", "results-wrapper");
-						});
-					</script>';
-					echo '<div id="results-net-wrapper" data-fetch="'.$csv_results_net_url.'"></div>
-					<script>
-						document.addEventListener("DOMContentLoaded", function () {
-							loadDatatable("'. esc_url($csv_results_net_url) .'", "results-net-wrapper");
+							loadDatatable("'. esc_url($csv_results_brut_url) .'", "results-wrapper", "6,5,7,8,13,14");
 						});
 					</script>';
 				} else {
@@ -125,7 +120,25 @@ function get_ended_signup_block() {
 			} else {
 				echo get_empty_results_block();
 			}
-			?>
+		?>
+		<?php
+			if ($csv_results_net_url) {
+				$csv = file_get_contents($csv_results_net_url);
+				if ($csv) {
+					echo '<h6>Net</h6>';
+					echo '<div id="results-net-wrapper" data-fetch="'.$csv_results_net_url.'"></div>
+					<script>
+						document.addEventListener("DOMContentLoaded", function () {
+							loadDatatable("'. esc_url($csv_results_net_url) .'", "results-net-wrapper", "6,5,7,8,13,14");
+						});
+					</script>';
+				} else {
+					echo get_empty_results_block();
+				}
+			} else {
+				echo get_empty_results_block();
+			}
+		?>
 	</section>
 
 	<!-- Results -->
@@ -142,7 +155,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-house-heart flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3 my-2 my-lg-3">Inscriptions ouvertes</h6>
-								<p class="mb-0 small-lg">Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
 							</div>
 						</div>
 
@@ -154,7 +167,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-highlighter flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3 my-2 my-lg-3">Remplissez vos coordonnées</h6>
-								<p class="mb-0 small-lg">Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
 							</div>
 						</div>
 
@@ -166,7 +179,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3">Attendez la confirmation</h6>
-								<p class="mb-0 small-lg">Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
 							</div>
 						</div>
 					</div>
@@ -194,8 +207,15 @@ function get_ended_signup_block() {
 
 	<!-- Datatables -->
 	<script>
-		function loadDatatable(url, id) {
-			console.log('loadDatatable', url );
+		function loadDatatable(url, id, columnsToKeep = "4, 5, 6, 7, 8, 9, 10") {
+			// console.log('loadDatatable', url, id, columnsToKeep);
+
+			// Transform columnsToKeep into an array of integers if it's a string
+			if (typeof columnsToKeep === "string") {
+				columnsToKeep = columnsToKeep.split(',').map(s => parseInt(s.trim(), 10));
+			}
+
+			// Fetch the CSV file
 			fetch(url)
 				.then(response => response.text())
 				.then(csvText => {
@@ -203,25 +223,32 @@ function get_ended_signup_block() {
 					const columns = rows[0];
 					const data = rows.slice(1);
 
-					// Specify the indices of the columns you want to keep
-					const columnsToKeep = [4, 5, 6, 7, 8, 9, 10]; // Example: keep columns 0, 2, and 3
+					// If columnsToKeep is empty, use all columns
+					let filteredColumns, filteredData;
+					if (!columnsToKeep || columnsToKeep.length === 0) {
+						filteredColumns = columns;
+						filteredData = data;
+					} else {
+						filteredColumns = columnsToKeep.map((index, i) => {
+							if (i === 3) { // Assuming column 7 is the fourth column in the filtered array
+								return {
+									name: columns[index],
+									formatter: (cell) => gridjs.html(`<b>${cell}</b>`)
+								};
+							}
+							return columns[index];
+						});
+						filteredData = data.map(row => columnsToKeep.map(index => row[index]));
+					}
 
-					const filteredColumns = columnsToKeep.map((index, i) => {
-						if (i === 3) { // Assuming column 7 is the fourth column in the filtered array
-							return {
-								name: columns[index],
-								formatter: (cell) => gridjs.html(`<b>${cell}</b>`)
-							};
-						}
-						return columns[index];
-					});
-					const filteredData = data.map(row => columnsToKeep.map(index => row[index]));
+								 console.log('loadDatatable :: data', filteredColumns, filteredData, columnsToKeep);
+
 
 					new gridjs.Grid({
 						search: true,
 						pagination: {
 							enabled: true,
-							limit: 10
+							limit: 20
 						},
 						sort: true,
 						resizable: true,
@@ -257,7 +284,7 @@ function get_ended_signup_block() {
 								showing: 'Affichage de',
 								of: 'sur',
 								to: 'à',
-								results: '',
+								results: 'résultats',
 							},
 							loading: 'Chargement...',
 							noRecordsFound: 'Aucun résultat trouvé',
