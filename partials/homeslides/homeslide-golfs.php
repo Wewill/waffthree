@@ -332,7 +332,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 									<h5 class="<?= !$thumbnail_url ? $post_title_color : 'text-white' ?>"><a href="<?php the_permalink(); ?>" class="stretched-link"><?php the_title(); ?></a></h5>
 									<ul class="d-flex list-unstyled m-0">
 										<li class="me-auto subline"><a href="<?php the_permalink(); ?>">Lire la suite <i class="bi bi-chevron-right"></i></a></li>
-										<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?php echo str_replace('minutes', 'mins', human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ago'); ?></small></li>
+										<li class="d-flex align-items-center"><i class="bi bi-calendar3 me-2"></i> <small><?php echo str_replace('minutes', 'mins', human_time_diff(get_the_time('U'), current_time('timestamp')) . ' ' . __('ago', 'waff') ); ?></small></li>
 									</ul>
 								</div>
 							</div>
