@@ -223,7 +223,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							</div>
 						</div>
 						<!-- </div> -->', 
-					sprintf( '<h6 class="mb-2 muted subline text-action-3 d-none">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline text-action-3">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
 					sprintf( '<span class="state-label" style="color:%s;"><span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%%; vertical-align: 2px; margin-left: 2px; background-color:%s;"></span> %s</span>',
 						esc_attr( $stateColors[$c_state]['textColor'] ),
 						esc_attr( $stateColors[$c_state]['textColor'] ),
