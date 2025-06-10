@@ -16,12 +16,11 @@ if( true === WAFF_DEBUG ){
 	print_r( get_queried_object()); 
 }
 
-$archive_post_type = is_archive() ? get_queried_object()->name : false;
-$allowed_post_type = array('film', 'client', 'accreditation', 'contact', 'projection', 'jury', 'directory', 'competitions', 'course');	
+$archive_post_type = is_archive() ? get_queried_object()->slug : false;
+$allowed_post_type = array('film', 'client', 'accreditation', 'contact', 'projection', 'jury', 'directory', 'competitions', 'course', 'nouvelles');	
 
 $archive_taxonomy = ( is_archive() && is_tax() ) ? get_queried_object()->taxonomy : false;
 $allowed_taxonomy = array('function', 'movie-type', 'partenaire-category', 'category', 'thematic', 'operation', 'competition-category',); // 'edition' => taxonomy-edition.php 'section' => taxonomy-section.php 'room' => taxonomy-room.php 
-
 
 // Redirect if archive_post_type don't fit 
 if( in_array($archive_post_type, $allowed_post_type) ){
