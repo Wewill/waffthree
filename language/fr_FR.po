@@ -4,7 +4,7 @@ msgstr ""
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 13:44+0000\n"
-"PO-Revision-Date: 2025-06-10 10:24+0000\n"
+"PO-Revision-Date: 2025-06-10 19:36+0000\n"
 "Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -217,7 +217,7 @@ msgstr ""
 "class=\"label\">FR</span > <em>Saisir un lien de site internet pour le "
 "partenaire (si vous souhaitez qu'il soit cliquable)</em>"
 
-#: partials/content-excerpt.php:186 partials/pagetitles/pagetitle-golfs.php:333
+#: partials/content-excerpt.php:190 partials/pagetitles/pagetitle-golfs.php:333
 #, php-format
 msgid "<strong>Le %1$s</strong>, à %2$s"
 msgstr ""
@@ -333,6 +333,11 @@ msgstr "Block avancé"
 #: includes/admin/custom_metaboxes.php:338
 msgid "Advanced page class"
 msgstr "Classe de page avancée"
+
+#: partials/content-excerpt.php:138 partials/content-excerpt.php:176
+#: partials/content-excerpt.php:249
+msgid "ago"
+msgstr ""
 
 # @ waff
 #: includes/admin/custom_post_types.php:44
@@ -1131,11 +1136,16 @@ msgstr "Recherche"
 #: includes/template-tags.php:1334
 msgctxt "Label for sticky posts"
 msgid "Featured post"
-msgstr "Article collant"
+msgstr "En avant"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:236
 #: includes/admin/widgets/custom-wp-widget-twocols.php:292
 msgid "Label:"
+msgstr ""
+
+#: partials/content-excerpt.php:138 partials/content-excerpt.php:176
+#: partials/content-excerpt.php:249
+msgid "Last update"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:233
@@ -1491,6 +1501,61 @@ msgstr "Veuillez définir un nom d'icône."
 msgid "Please define default parameters in the form of an array."
 msgstr "Veuillez définir les paramètres par défaut sous la forme d'un tableau."
 
+#: partials/content-excerpt.php:226
+msgctxt "post"
+msgid "Competitions"
+msgstr "Compétitions"
+
+#: partials/content-excerpt.php:285
+msgctxt "post"
+msgid "Course"
+msgstr "Parcours"
+
+#: partials/content-excerpt.php:86
+msgctxt "post"
+msgid "Farm"
+msgstr "Ferme"
+
+#: partials/content-excerpt.php:41
+msgctxt "post"
+msgid "Featured"
+msgstr "En avant"
+
+#: partials/content-excerpt.php:49
+msgctxt "post"
+msgid "Film"
+msgstr "Film"
+
+#: partials/content-excerpt.php:82
+msgctxt "post"
+msgid "Jury"
+msgstr "Jury"
+
+#: partials/content-excerpt.php:94
+msgctxt "post"
+msgid "Operation"
+msgstr "Opération"
+
+#: partials/content-excerpt.php:318
+msgctxt "post"
+msgid "Page"
+msgstr "Page"
+
+#: partials/content-excerpt.php:331
+msgctxt "post"
+msgid "Post"
+msgstr "Article"
+
+#: partials/content-excerpt.php:90
+msgctxt "post"
+msgid "Structure"
+msgstr "Structure"
+
+#: partials/content-excerpt.php:300
+msgctxt "post"
+msgid "Testimony"
+msgstr "Témoignage"
+
 #: includes/theme.php:284
 msgid "Preheader Menu"
 msgstr ""
@@ -1565,8 +1630,8 @@ msgstr "Section de programmation (modale)"
 #: taxonomy-room.php:147
 msgid "projection screened in this room"
 msgid_plural "projections screened in this room"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "projection projetée dans cette salle"
+msgstr[1] "projections projetées dans cette salle"
 
 # @ waff
 #. %s: publish date.
@@ -1597,7 +1662,7 @@ msgstr "Résultats"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:289
 msgid "Right column:"
-msgstr ""
+msgstr "Colonne de droite:"
 
 # @ waff
 #: includes/admin/widgets/custom-wp-widget-section.php:330
@@ -1635,7 +1700,7 @@ msgstr "Classes de seconde colonne:"
 
 #: includes/theme.php:278
 msgid "Secondary Menu"
-msgstr ""
+msgstr "Menu secondaire"
 
 # @ waff
 #: includes/admin/widgets/custom-wp-widget-categories.php:81
@@ -1990,7 +2055,7 @@ msgstr "Jeune public"
 
 #: includes/customizer.php:438
 msgid "Young public booklet file URL (*.pdf)"
-msgstr ""
+msgstr "URL du fichier du livret jeune public (*.pdf)"
 
 # @ waff
 #: includes/admin/custom_metaboxes.php:39

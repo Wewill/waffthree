@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WaffThree Theme : the WA Three template based on godaddy "
 "go theme and WA Frontal Theme V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-10 10:15+0000\n"
+"POT-Creation-Date: 2025-06-10 19:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -188,7 +188,7 @@ msgid ""
 "soit cliquable)</em>"
 msgstr ""
 
-#: partials/content-excerpt.php:186 partials/pagetitles/pagetitle-golfs.php:333
+#: partials/content-excerpt.php:190 partials/pagetitles/pagetitle-golfs.php:333
 #, php-format
 msgid "<strong>Le %1$s</strong>, à %2$s"
 msgstr ""
@@ -281,6 +281,11 @@ msgstr ""
 
 #: includes/admin/custom_metaboxes.php:338
 msgid "Advanced page class"
+msgstr ""
+
+#: partials/content-excerpt.php:138 partials/content-excerpt.php:176
+#: partials/content-excerpt.php:249
+msgid "ago"
 msgstr ""
 
 #: includes/admin/custom_post_types.php:44
@@ -966,6 +971,11 @@ msgstr ""
 msgid "Label:"
 msgstr ""
 
+#: partials/content-excerpt.php:138 partials/content-excerpt.php:176
+#: partials/content-excerpt.php:249
+msgid "Last update"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:233
 msgid "Left column:"
 msgstr ""
@@ -1272,6 +1282,61 @@ msgstr ""
 
 #: includes/theme.php:440
 msgid "Please define default parameters in the form of an array."
+msgstr ""
+
+#: partials/content-excerpt.php:226
+msgctxt "post"
+msgid "Competitions"
+msgstr ""
+
+#: partials/content-excerpt.php:285
+msgctxt "post"
+msgid "Course"
+msgstr ""
+
+#: partials/content-excerpt.php:86
+msgctxt "post"
+msgid "Farm"
+msgstr ""
+
+#: partials/content-excerpt.php:41
+msgctxt "post"
+msgid "Featured"
+msgstr ""
+
+#: partials/content-excerpt.php:49
+msgctxt "post"
+msgid "Film"
+msgstr ""
+
+#: partials/content-excerpt.php:82
+msgctxt "post"
+msgid "Jury"
+msgstr ""
+
+#: partials/content-excerpt.php:94
+msgctxt "post"
+msgid "Operation"
+msgstr ""
+
+#: partials/content-excerpt.php:318
+msgctxt "post"
+msgid "Page"
+msgstr ""
+
+#: partials/content-excerpt.php:331
+msgctxt "post"
+msgid "Post"
+msgstr ""
+
+#: partials/content-excerpt.php:90
+msgctxt "post"
+msgid "Structure"
+msgstr ""
+
+#: partials/content-excerpt.php:300
+msgctxt "post"
+msgid "Testimony"
 msgstr ""
 
 #: includes/theme.php:284
