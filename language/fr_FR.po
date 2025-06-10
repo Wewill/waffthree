@@ -4,7 +4,7 @@ msgstr ""
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 13:44+0000\n"
-"PO-Revision-Date: 2025-06-10 19:36+0000\n"
+"PO-Revision-Date: 2025-06-10 19:42+0000\n"
 "Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -337,7 +337,7 @@ msgstr "Classe de page avancée"
 #: partials/content-excerpt.php:138 partials/content-excerpt.php:176
 #: partials/content-excerpt.php:249
 msgid "ago"
-msgstr ""
+msgstr " "
 
 # @ waff
 #: includes/admin/custom_post_types.php:44
@@ -399,13 +399,13 @@ msgstr "En haut"
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:155
 msgid "Background image url:"
-msgstr ""
+msgstr "URL de l'image d'arrière-plan:"
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:159
 #: includes/admin/widgets/custom-wp-widget-twocols.php:257
 #: includes/admin/widgets/custom-wp-widget-twocols.php:313
 msgid "Background image:"
-msgstr ""
+msgstr "Image d'arrière-plan:"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:277
 #: includes/admin/widgets/custom-wp-widget-twocols.php:333
@@ -440,7 +440,7 @@ msgstr "Brochure"
 
 #: includes/customizer.php:396
 msgid "Booklet file URL (*.pdf)"
-msgstr ""
+msgstr "URL du fichier brochure (*.pdf)"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:274
 #: includes/admin/widgets/custom-wp-widget-twocols.php:330
@@ -484,11 +484,11 @@ msgstr "Classes card:"
 #: includes/admin/widgets/custom-wp-widget-twocols.php:264
 #: includes/admin/widgets/custom-wp-widget-twocols.php:320
 msgid "Card content position:"
-msgstr ""
+msgstr "Position du contenu de la carte:"
 
 #: includes/customizer.php:417
 msgid "Catalog file URL (*.pdf)"
-msgstr ""
+msgstr "URL du fichier catalogue (*.pdf)"
 
 # @ waff
 # @ go
@@ -615,7 +615,7 @@ msgstr "Email de contact"
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:151
 msgid "Contact page url:"
-msgstr ""
+msgstr "URL de la page de contact:"
 
 # @ go
 #: includes/admin/widgets/custom-wp-widget-contact.php:75
@@ -630,7 +630,7 @@ msgstr "Contactez-nous"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:361
 msgid "Container width :"
-msgstr ""
+msgstr "Largeur de container:"
 
 #: includes/admin/widgets/custom-wp-widget-partners.php:200
 msgid "Container-fluid"
@@ -639,7 +639,7 @@ msgstr ""
 #. Name of the template
 #: template-navlist.php:2
 msgid "Content or subpage nav"
-msgstr ""
+msgstr "Contenu ou sous-menu navigation"
 
 # @ waff
 #: includes/admin/widgets/custom-wp-widget-contact.php:147
@@ -1146,11 +1146,11 @@ msgstr ""
 #: partials/content-excerpt.php:138 partials/content-excerpt.php:176
 #: partials/content-excerpt.php:249
 msgid "Last update"
-msgstr ""
+msgstr "Il y a"
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:233
 msgid "Left column:"
-msgstr ""
+msgstr "Colonne gauche:"
 
 #: partials/content-competitions.php:46
 msgid ""
@@ -2014,10 +2014,9 @@ msgstr "Lorsque vous utilisez un clavier pour naviguer:"
 
 # @ go
 #: includes/admin/widgets/custom-wp-widget-partners.php:197
-#, fuzzy
 #| msgid "Width"
 msgid "Width:"
-msgstr ""
+msgstr "Largeur:"
 
 #. Author of the theme
 msgid "Wilhem Arnoldy"
@@ -2075,4 +2074,4 @@ msgstr "⚡︎ Lien du Flash"
 # @ waff
 #: includes/admin/custom_metaboxes.php:16
 msgid "⚡︎ Flash › General"
-msgstr ""
+msgstr "⚡︎ Flash › Général"
