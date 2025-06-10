@@ -135,7 +135,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$d_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
 				
-				$d_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				$d_last_updated =  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
 
 
 				printf('<div class="card my-2 border-0">
@@ -173,9 +173,13 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
 				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px w-150-px h-auto"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated 			=  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				$c_last_updated 			=  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
 				$c_date 					= get_post_meta( get_the_ID(), 'c_date', true );
 				$c_state 					= get_post_meta( get_the_ID(), 'c_state', true );
+
+				$c_competition_departures 	= get_post_meta( get_the_ID(), 'c_competition_departures', true );
+				$c_competition_results_brut = get_post_meta( get_the_ID(), 'c_competition_results_brut', true );
+				$c_competition_results_net 	= get_post_meta( get_the_ID(), 'c_competition_results_net', true );
 
 				$competition_date = get_post_meta(get_the_ID(), 'c_date', true); 
 				$competition_date_string = wp_kses(
@@ -210,23 +214,25 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				WaffTwo\waff_entry_meta_header();
 				printf('
 									%s
-									%s
+									<span class="fs-xs">%s %s %s</span>
 									%s
 									%s
 									<p class="card-text fs-sm mb-0">%s</p>
-									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+									<p class="card-text --mt-n2 mt-3"><small class="text-body-secondary">%s</small></p>
 								</div>
 							</div>
 						</div>
 						<!-- </div> -->', 
-					sprintf( '<h6 class="mb-2 muted subline text-action-3 ">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline text-action-3 d-none">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
 					sprintf( '<span class="state-label" style="color:%s;"><span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%%; vertical-align: 2px; margin-left: 2px; background-color:%s;"></span> %s</span>',
 						esc_attr( $stateColors[$c_state]['textColor'] ),
 						esc_attr( $stateColors[$c_state]['textColor'] ),
 						esc_html( $stateLabels[$c_state]['label'] )
 					),
-					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
-					sprintf( '<p class="competition-date muted">%s</p>', $competition_date_string),
+					$c_competition_departures?'<i class="bi bi-person-lines-fill ms-1"></i> Départs':'',
+					$c_competition_results_brut || $c_competition_results_net? '<i class="bi bi-check-circle-fill ms-1"></i> Résultats':'',
+					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mt-2 mb-1 fw-bold" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false),
+					sprintf( '<p class="competition-date --muted mb-0"><i class="bi bi-calendar-event"></i> %s</p>', $competition_date_string),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
 						15,
@@ -240,7 +246,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'large' );
 				// $c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				// $c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated =  __('Last update') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago');
+				$c_last_updated =  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
 
 				$c_number_of_strokes = get_post_meta( get_the_ID(), 'c_number_of_strokes', true );
 				$c_handicap = get_post_meta( get_the_ID(), 'c_handicap', true );
