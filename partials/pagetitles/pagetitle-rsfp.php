@@ -382,6 +382,72 @@ if ( is_singular() && has_post_thumbnail() ) {
 	</section>
 	<!-- END: #pageheader -->
 
+<?php elseif ( $args == 'farm' ) : ?>
+
+	<?php 
+		$prefix = 'f_';
+		$f_more_testimony 					= get_post_meta( $post->ID, $prefix . 'more_testimony', true ); 
+	?>
+	
+	<!-- #pageheader -->
+	<section id="pageheader" class="mt-0 mb-0 contrast--light h-100 lg-vh-50 position-relative split-header is-formatted" data-aos="fade-up" data-aos-id="pageheader">
+		<div class="container-fluid px-0">
+			<div class="row g-0 justify-content-between align-items-center h-100 lg-vh-50"><!-- .vh-50 hack >> see styles.css / specific-rsfp > vh-50 until md -->
+				
+				<?php if ( is_singular() && has_post_thumbnail() ) { ?>
+				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
+					
+					<!-- Image -->  
+					<?php if (empty($d_medias_video)): ?>
+						<figure title="<?php echo esc_attr($featured_img_description); ?>">
+							<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
+							<!-- 3800x1200 > 1900x600 -->
+							<data-src media="(min-width: 990px)"
+									srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 590px)"
+									srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
+							<data-src media="(min-width: 380px)"
+									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
+							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-50 fit-image w-100"></data-img>
+							</picture>
+							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+							<?php endif; /* If captions */ ?>
+							<!--
+							Sizes :
+							<?php print_r($featured_img_urls); ?>  
+							-->
+						</figure>
+					<?php endif; ?>
+				</div>
+				<?php } /* is_singular + has_post_thumbnail */ ?>
+
+				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-5" data-aos="fade-left">
+					
+					<hgroup>
+						<?= WaffTwo\waff_entry_meta_header(); ?>
+						<h3 class="headline d-inline-block my-3"><?php single_post_title(); ?></h3>
+					</hgroup>
+
+					<?php if ($f_more_testimony) printf('<div class="lead lg-reset-fontsize">“ %s ”</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($f_more_testimony)))); ?>
+
+				</div>
+		
+				<!-- Mouse down -->
+				<!-- <div class="scroll-downs position-absolute bottom-0 start-45 mb-4">
+					<div class="mousey">
+						<div class="scroller"></div>
+					</div>
+				</div> -->
+
+			</div>
+		</div>
+	</section>
+	<!-- END: #pageheader -->
+
 <?php else: ?>	
 
 	<!-- #NOARGS ( ≠ film / post / section ... ) / Header style : <?= $page_atts['header_style'] ?> -->

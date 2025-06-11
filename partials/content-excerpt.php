@@ -83,13 +83,37 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'go' ) );
-				the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				the_excerpt();
+				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'go' ) );
+				// the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				// the_excerpt();
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+						%s
+					<!-- </div> -->',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Farm', 'post', 'waff' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
+					get_the_excerpt()
+				);
 			elseif ( get_post_type(get_the_ID()) === 'structure' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Structure', 'post', 'go' ) );
-				the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				the_excerpt();
+				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Structure', 'post', 'go' ) );
+				// the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				// the_excerpt();
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+						%s
+					<!-- </div> -->',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Structure', 'post', 'waff' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
+					get_the_excerpt()
+				);
 			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Operation', 'post', 'go' ) );
 				// Get operation content
