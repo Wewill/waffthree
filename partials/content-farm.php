@@ -47,16 +47,18 @@ $next_post = get_adjacent_post(false, '', false);
 <!-- Belongs to -->
  <?php
 
- 	$post_id = get_the_ID();
-	echo $post_id;
-	$datas = get_belongs('farm', $post_id);
-	print_r($datas);
-	if ( $datas ) {
-		foreach ( $datas as $directory_post ) {
-			setup_postdata( $directory_post );
-			get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post ) );
+	if ( function_exists( 'get_belongs' ) ) {
+		$post_id = get_the_ID();
+		echo $post_id;
+		$datas = get_belongs('farm', $post_id);
+		print_r($datas[$post_id]);
+		if ( $datas[$post_id] ) {
+			foreach ( $datas[$post_id] as $directory_post ) {
+				setup_postdata( $directory_post );
+				get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post ) );
+			}
+			wp_reset_postdata();
 		}
-		wp_reset_postdata();
 	}
 
 ?>
