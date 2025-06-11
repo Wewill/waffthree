@@ -211,6 +211,7 @@
 		<?php elseif ( is_singular('directory') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'directory'); ?>
 		<?php elseif ( is_singular('competitions') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'competitions'); ?>
 		<?php elseif ( is_singular('course') ) : 			get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'course'); ?>
+		<?php elseif ( is_singular('farm') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'farm'); ?>
 		<?php elseif ( is_tax('section') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'section'); ?>
 		<?php elseif ( is_tax('room') ) : 					get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'room'); ?>
 		<?php elseif ( is_page() && false === $is_home ) :  get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS); ?>
