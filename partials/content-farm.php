@@ -56,7 +56,7 @@ $next_post = get_adjacent_post(false, '', false);
 			foreach ( $datas[$post_id] as $directory_post ) {
 			print_r($directory_post['ID']);
 				setup_postdata( $directory_post['ID'] );
-				get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post['ID'] ) );
+				get_template_part( 'partials/content', 'excerpt', array( 'post' => $directory_post['ID'] ) );
 			}
 			wp_reset_postdata();
 		}
