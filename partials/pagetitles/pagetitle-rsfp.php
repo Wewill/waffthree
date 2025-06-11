@@ -398,41 +398,39 @@ if ( is_singular() && has_post_thumbnail() ) {
 				<div class="header-image col-md-6 col-lg-5 bg-color-layout h-100 ---- img-shifted shift-right" data-aos="fade-down" data-aos-delay="200">
 					
 					<!-- Image -->  
-					<?php if (empty($d_medias_video)): ?>
-						<figure title="<?php echo esc_attr($featured_img_description); ?>">
-							<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
-							<!-- 3800x1200 > 1900x600 -->
-							<data-src media="(min-width: 990px)"
-									srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
-											<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
-							<data-src media="(min-width: 590px)"
-									srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
-											<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
-							<data-src media="(min-width: 380px)"
-									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
-											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
-							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-50 fit-image w-100"></data-img>
-							</picture>
-							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
-							<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
-							<?php endif; /* If captions */ ?>
-							<!--
-							Sizes :
-							<?php print_r($featured_img_urls); ?>  
-							-->
-						</figure>
-					<?php endif; ?>
+					<figure title="<?php echo esc_attr($featured_img_description); ?>">
+						<picture class="contrast--light overflow-hidden h-100 lazy" data-aos="fade-up" data-aos-delay="200">
+						<!-- 3800x1200 > 1900x600 -->
+						<data-src media="(min-width: 990px)"
+								srcset="<?= $featured_img_urls['post-featured-image-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 590px)"
+								srcset="<?= $featured_img_urls['post-featured-image-m-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image-m']; ?>" type="image/jpeg"></data-src>
+						<data-src media="(min-width: 380px)"
+								srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
+										<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
+						<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid vh-50 fit-image w-100"></data-img>
+						</picture>
+						<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+						<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+						<?php endif; /* If captions */ ?>
+						<!--
+						Sizes :
+						<?php print_r($featured_img_urls); ?>  
+						-->
+					</figure>
 				</div>
 				<?php } /* is_singular + has_post_thumbnail */ ?>
 
 				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-5" data-aos="fade-left">
 					
-					<hgroup>
+					<hgroup class="mt-10">
 						<?= WaffTwo\waff_entry_meta_header(); ?>
-						<h3 class="headline d-inline-block my-3"><?php single_post_title(); ?></h3>
+						<h2 class=""><?php single_post_title(); ?></h2>
 					</hgroup>
 
-					<?php if ($f_more_testimony) printf('<div class="lead lg-reset-fontsize">“ %s ”</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($f_more_testimony)))); ?>
+					<?php if ($f_more_testimony) printf('<div class="lead lg-reset-fontsize">%s</div>', preg_replace('/<p>\s*<\/p>/', '', apply_filters('the_content', WaffTwo\Core\waff_do_markdown($f_more_testimony)))); ?>
 
 				</div>
 		
