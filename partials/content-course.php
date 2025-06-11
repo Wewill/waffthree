@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying films
+ * Template part for displaying courses
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
