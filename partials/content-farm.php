@@ -57,8 +57,8 @@ $next_post = get_adjacent_post(false, '', false);
 				// Get directory content
 				$d_general_introduction 	= get_post_meta( $directory_post['ID'], 'd_general_introduction', true );
 				$d_media_url 				= get_the_post_thumbnail_url( $directory_post['ID'], 'medium' );
-				$d_media_thumbnail_url		= get_the_post_thumbnail_url( $directory_post['ID'], 'thumbnail' );
-				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				// $d_media_thumbnail_url		= get_the_post_thumbnail_url( $directory_post['ID'], 'thumbnail' );
+				$d_image = $d_media_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
 				
 				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
 				$d_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
