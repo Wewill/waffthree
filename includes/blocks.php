@@ -1379,6 +1379,8 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		'context'        => 'side',
 		//'Keyattrs'       => 'Value',
 	];
+
+	// wp_die( print_r($meta_boxes, true) );
  
     return $meta_boxes;
 }
@@ -4509,90 +4511,6 @@ function wa_insights_callback( $attributes ) {
  * 
  */
 
-/*
-	core/embed
-	core-embed/twitter
-	core-embed/youtube
-	core-embed/facebook
-	core-embed/instagram
-	core-embed/wordpress
-	core-embed/soundcloud
-	core-embed/spotify
-	core-embed/flickr
-	core-embed/vimeo
-	core-embed/animoto
-	core-embed/cloudup
-	core-embed/collegehumor
-	core-embed/dailymotion
-	core-embed/funnyordie
-	core-embed/hulu
-	core-embed/imgur
-	core-embed/issuu
-	core-embed/kickstarter
-	core-embed/meetup-com
-	core-embed/mixcloud
-	core-embed/photobucket
-	core-embed/polldaddy
-	core-embed/reddit
-	core-embed/reverbnation
-	core-embed/screencast
-	core-embed/scribd
-	core-embed/slideshare
-	core-embed/smugmug
-	core-embed/speaker
-	core-embed/ted
-	core-embed/tumblr
-	core-embed/videopress
-	core-embed/wordpress-tv
-*/
-
-/*
-    [0] => complianz/document
-    [1] => toolset-views/view-editor
-    [2] => toolset-views/wpa-editor
-    [3] => toolset-views/sorting
-    [4] => toolset-views/view-pagination-block
-    [5] => core/archives
-    [6] => core/block
-    [7] => core/calendar
-    [8] => core/categories
-    [9] => core/latest-comments
-    [10] => core/latest-posts
-    [11] => core/rss
-    [12] => core/search
-    [13] => core/shortcode
-    [14] => core/social-link
-    [15] => core/tag-cloud
-    [16] => gravityforms/form
-    [17] => coblocks/form
-    [18] => coblocks/field-name
-    [19] => coblocks/field-email
-    [20] => coblocks/field-textarea
-    [21] => coblocks/field-text
-    [22] => coblocks/field-date
-    [23] => coblocks/field-phone
-    [24] => coblocks/field-radio
-    [25] => coblocks/field-select
-    [26] => coblocks/field-submit-button
-    [27] => coblocks/field-checkbox
-    [28] => coblocks/field-website
-    [29] => coblocks/field-hidden
-    [30] => coblocks/events
-    [31] => coblocks/post-carousel
-    [32] => coblocks/posts
-    [33] => coblocks/social
-    [34] => coblocks/social-profiles
-    [35] => wp-bootstrap-blocks/container
-    [36] => wp-bootstrap-blocks/row
-    [37] => wp-bootstrap-blocks/column
-    [38] => wp-bootstrap-blocks/button
-    [39] => bcn/breadcrumb-trail
-    [40] => meta-box/wa-latest-posts
-    [41] => meta-box/wa-partners
-    [42] => meta-box/wa-edito
-    [43] => toolset/map
-*/
-
 // function waff_allowed_block_types( $allowed_block_types, $post ) {
 // 	/* OLD WAY > use JS now */
 
@@ -4612,100 +4530,8 @@ function wa_insights_callback( $attributes ) {
 // 	//https://github.com/WordPress/gutenberg/issues/27913
 // 	//https://github.com/WordPress/gutenberg/issues/27708
 // 	$core = array( 
-// 		// General
 // 		'core/paragraph',
-// 		'core/image',
-// 		'core/heading',
-// 		'core/gallery',
-// 		'core/list',
-// 		'core/quote',
-// 		'core/audio',
-// 		'core/cover',
-// 		'core/file',
-// 		'core/video',
-// 		'core/html', // Added #43
-
-// 		// Embed 
-// 		'core/embed',
-// 		'core-embed/twitter',
-// 		'core-embed/youtube',
-// 		'core-embed/facebook',
-// 		'core-embed/instagram',
-// 		// core-embed/wordpress
-// 		// core-embed/soundcloud
-// 		// core-embed/spotify
-// 		'core-embed/flickr',
-// 		'core-embed/vimeo',
-// 		// core-embed/animoto
-// 		// core-embed/cloudup
-// 		// core-embed/collegehumor
-// 		// core-embed/dailymotion
-// 		// core-embed/funnyordie
-// 		// core-embed/hulu
-// 		// core-embed/imgur
-// 		'core-embed/issuu',
-// 		// core-embed/kickstarter
-// 		// core-embed/meetup-com
-// 		// core-embed/mixcloud
-// 		// core-embed/photobucket
-// 		// core-embed/polldaddy
-// 		// core-embed/reddit
-// 		// core-embed/reverbnation
-// 		// core-embed/screencast
-// 		// core-embed/scribd
-// 		// core-embed/slideshare
-// 		// core-embed/smugmug
-// 		// core-embed/speaker
-// 		// core-embed/ted
-// 		// core-embed/tumblr
-// 		// core-embed/videopress
-// 		// core-embed/wordpress-tv
-
-// 		//
-// 		// complianz/document
-// 		// toolset-views/view-editor
-// 		// toolset-views/wpa-editor
-// 		// toolset-views/sorting
-// 		// toolset-views/view-pagination-block
-// 		// core/archives
-// 		// core/block
-// 		// core/calendar
-// 		// core/categories
-// 		// core/latest-comments
-// 		// core/latest-posts
-// 		// core/rss
-// 		// core/search
-// 		// core/shortcode
-// 		// core/social-link
-// 		// core/tag-cloud
-// 		// gravityforms/form
-// 		// coblocks/form
-// 		// coblocks/field-name
-// 		// coblocks/field-email
-// 		// coblocks/field-textarea
-// 		// coblocks/field-text
-// 		// coblocks/field-date
-// 		// coblocks/field-phone
-// 		// coblocks/field-radio
-// 		// coblocks/field-select
-// 		// coblocks/field-submit-button
-// 		// coblocks/field-checkbox
-// 		// coblocks/field-website
-// 		// coblocks/field-hidden
-// 		// coblocks/events
-// 		// coblocks/post-carousel
-// 		// coblocks/posts
-// 		// coblocks/social
-// 		// coblocks/social-profiles
-// 		// wp-bootstrap-blocks/container
-// 		// wp-bootstrap-blocks/row
-// 		// wp-bootstrap-blocks/column
-// 		// wp-bootstrap-blocks/button
-// 		// bcn/breadcrumb-trail
-// 		// meta-box/wa-latest-posts
-// 		// meta-box/wa-partners
-// 		// meta-box/wa-edito
-// 		// toolset/map
+// ....
 // 	);
 	
 // 	return array_merge($core,get_dynamic_block_names());
@@ -4718,14 +4544,14 @@ function wa_insights_callback( $attributes ) {
  * https://github.com/WordPress/gutenberg/issues/25676
  */
 
-function waff_reset_blocks_enqueue_block_editor_assets() {
-	// Get theme option
-	$advanced_blocks = (bool) get_theme_mod( 'advanced_blocks', waff_defaults( 'advanced_blocks' ) );
+// function waff_reset_blocks_enqueue_block_editor_assets() {
+// 	// Get theme option
+// 	$advanced_blocks = (bool) get_theme_mod( 'advanced_blocks', waff_defaults( 'advanced_blocks' ) );
 
-	// If the option is not checked, return.
-	if ( $advanced_blocks !== true )
-		wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true ); // Script solution > only remove blocks but not in list
-}
+// 	// If the option is not checked, return.
+// 	if ( $advanced_blocks !== true )
+// 		wp_enqueue_script( 'wp-bootstrap-block-reset', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-reset.js', array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ), '1.0.0', true ); // Script solution > only remove blocks but not in list
+// }
 
 /**
  * Disallow some blocks 
@@ -4734,43 +4560,20 @@ function waff_reset_blocks_enqueue_block_editor_assets() {
 
 function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 
+	// error_log( "waff_allowed_block_types :: allowed_blocks :: " . print_r($allowed_blocks, true)  );
+	// error_log( "waff_allowed_block_types :: editor_context :: " . print_r($editor_context, true)  );
+
 	// Get theme option
 	$advanced_blocks = (bool) get_theme_mod( 'advanced_blocks', waff_defaults( 'advanced_blocks' ) );
 
+	// error_log('BEFORE::');
 	// error_log($advanced_blocks);
 	// error_log(print_r($allowed_blocks, true));
 
-	//if ( $advanced_blocks !== true && isset( $editor_context->post ) && $editor_context->post->post_type === 'page' ) { // Only page or a custom post_type 
-	if ( $advanced_blocks !== true && isset( $editor_context->post ) ) { // All post_type blocks 
-			return array(
-			// 'core/image', 
-			// 'core/heading', 
-			// 'core/paragraph', 
-			// 'core/list', 
-			// 'core/quote', 
-			// 'core/pullquote', 
-			// 'core/block', 
-			// 'core/button', 
-			// 'core/buttons', 
-			// 'core/column', 
-			// 'core/columns', 
-			// 'core/table', 
-			// 'core/text-columns', 
-			// //
-			// 'coblocks/accordion',
-			// 'coblocks/accordion-item',
-			// 'coblocks/alert',
-			// 'coblocks/counter',
-			// 'coblocks/column',
-			// 'coblocks/row',
-			// 'coblocks/dynamic-separator',
-			// 'coblocks/logos',
-			// 'coblocks/icon',
-			// 'coblocks/buttons',	
-			
-			
-			//"toolset/ct",
-			//"bcn/breadcrumb-trail",
+	if ( $advanced_blocks !== true && isset( $editor_context->post ) && !empty( $editor_context->post ) ) { // All post_type blocks
+
+		// The blocks I want to enable for sure
+		$blocks_to_enable = array(
 			"meta-box/wa-latest-posts",
 			"meta-box/wa-partners",
 			"meta-box/wa-edito",
@@ -4784,167 +4587,131 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 			"meta-box/wa-cols",
 			"meta-box/wa-breaking",
 			"meta-box/wa-insights",
-			"coblocks/accordion",
-			"coblocks/accordion-item",
-			"coblocks/alert",
-			"coblocks/author",
-			"coblocks/gallery-carousel",
-			// "coblocks/shape-divider",
-			"coblocks/social",
-			"coblocks/social-profiles",
-			"coblocks/gallery-stacked",
-			"coblocks/posts",
-			"coblocks/post-carousel",
-			"coblocks/map",
-			"coblocks/counter",
-			"coblocks/column",
-			"coblocks/dynamic-separator",
-			// "coblocks/events",
-			// "coblocks/event-item",
-			"coblocks/faq",
-			"coblocks/faq-item",
-			"coblocks/feature",
-			"coblocks/features",
-			// "coblocks/form",
-			// "coblocks/field-date",
-			// "coblocks/field-email",
-			// "coblocks/field-name",
-			// "coblocks/field-radio",
-			// "coblocks/field-phone",
-			// "coblocks/field-textarea",
-			// "coblocks/field-text",
-			// "coblocks/field-select",
-			// "coblocks/field-submit-button",
-			// "coblocks/field-checkbox",
-			// "coblocks/field-website",
-			// "coblocks/field-hidden",
-			// "coblocks/click-to-tweet",
-			"coblocks/gallery-collage",
-			// "coblocks/food-and-drinks",
-			// "coblocks/food-item",
-			"coblocks/logos",
-			"coblocks/gallery-masonry",
-			// "coblocks/pricing-table",
-			// "coblocks/pricing-table-item",
-			"coblocks/row",
-			"coblocks/service",
-			"coblocks/services",
-			"coblocks/gallery-offset",
-			// "coblocks/opentable",
-			"coblocks/icon",
-			"coblocks/gif",
-			"coblocks/gist",
-			"coblocks/hero",
-			"coblocks/highlight",
-			// "complianz/document",
-			// "complianz/consent-area",
-			"wp-bootstrap-blocks/container",
-			"wp-bootstrap-blocks/column",
-			"wp-bootstrap-blocks/row",
-			"wp-bootstrap-blocks/button",
-			"gravityforms/form",
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/list-item",
-			"core/quote",
-			// "core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			// "core/calendar",
-			// "core/categories",
-			// "core/code",
-			"core/column",
-			"core/columns",
-			"core/cover",
-			"core/details",
-			// "core/embed",
-			"core/file",
-			"core/group",
-			"core/html",
-			// "core/latest-comments",
-			// "core/latest-posts",
-			"core/media-text",
-			"core/missing",
-			// "core/more",
-			// "core/nextpage",
-			// "core/page-list",
-			// "core/page-list-item",
-			"core/pattern",
-			// "core/preformatted",
-			"core/pullquote",
-			"core/block",
-			// "core/rss",
-			// "core/search",
-			"core/separator",
-			"core/shortcode",
-			"core/social-link",
-			// "core/social-links",
-			"core/spacer",
-			"core/table",
-			// "core/tag-cloud",
-			"core/text-columns",
-			// "core/verse",
-			"core/video",
-			"core/footnotes",
-			// "core/navigation",
-			// "core/navigation-link",
-			// "core/navigation-submenu",
-			// "core/site-logo",
-			// "core/site-title",
-			// "core/site-tagline",
-			// "core/query",
-			"core/template-part",
-			// "core/avatar",
-			// "core/post-title",
-			// "core/post-excerpt",
-			// "core/post-featured-image",
-			// "core/post-content",
-			// "core/post-author",
-			// "core/post-author-name",
-			// "core/post-date",
-			// "core/post-terms",
-			// "core/post-navigation-link",
-			// "core/post-template",
-			// "core/query-pagination",
-			// "core/query-pagination-next",
-			// "core/query-pagination-numbers",
-			// "core/query-pagination-previous",
-			// "core/query-no-results",
-			// "core/read-more",
-			// "core/comments",
-			// "core/comment-author-name",
-			// "core/comment-content",
-			// "core/comment-date",
-			// "core/comment-edit-link",
-			// "core/comment-reply-link",
-			// "core/comment-template",
-			// "core/comments-title",
-			// "core/comments-pagination",
-			// "core/comments-pagination-next",
-			// "core/comments-pagination-numbers",
-			// "core/comments-pagination-previous",
-			// "core/post-comments-form",
-			"core/home-link",
-			// "core/loginout",
-			// "core/term-description",
-			// "core/query-title",
-			// "core/post-author-biography",
-			// "core/freeform",
-			"core/legacy-widget",
-			"core/widget-group",
-			"coblocks/buttons",
-			"coblocks/media-card",
-
-			// Remplacez ceci par l'identifiant du bloc que vous souhaitez autoriser
-			// Ajoutez d'autres identifiants de blocs au besoin
-			// 'directory/wa-rsfp-directory-block', // See plugins
-			// 'meta-box/wa-golfs-testimony', // See plugins	
 		);
+	
+		// The blocks I want to disable
+		$blocks_to_disable = array(
+
+			// core/
+			"core/loginout",
+			"core/term-description",
+			"core/query-title",
+			"core/post-author-biography",
+			"core/freeform",
+			"core/avatar",
+			"core/post-title",
+			"core/post-excerpt",
+			"core/post-featured-image",
+			"core/post-content",
+			"core/post-author",
+			"core/post-author-name",
+			"core/post-date",
+			"core/post-terms",
+			"core/post-navigation-link",
+			"core/post-template",
+			"core/query-pagination",
+			"core/query-pagination-next",
+			"core/query-pagination-numbers",
+			"core/query-pagination-previous",
+			"core/query-no-results",
+			"core/read-more",
+			"core/comments",
+			"core/comment-author-name",
+			"core/comment-content",
+			"core/comment-date",
+			"core/comment-edit-link",
+			"core/comment-reply-link",
+			"core/comment-template",
+			"core/comments-title",
+			"core/comments-pagination",
+			"core/comments-pagination-next",
+			"core/comments-pagination-numbers",
+			"core/comments-pagination-previous",
+			"core/post-comments-form",
+			"core/navigation",
+			"core/navigation-link",
+			"core/navigation-submenu",
+			"core/site-logo",
+			"core/site-title",
+			"core/site-tagline",
+			"core/query",
+			"core/archives",
+			"core/calendar",
+			"core/categories",
+			"core/code",
+			"core/embed",
+			"core/latest-comments",
+			"core/latest-posts",
+			"core/more",
+			"core/nextpage",
+			"core/page-list",
+			"core/page-list-item",
+			"core/preformatted",
+			"core/rss",
+			"core/search",
+			"core/social-links",
+			"core/tag-cloud",
+			"core/verse",
+			// "core/details",
+
+			// coblocks/
+			'coblocks/accordion',
+			'coblocks/accordion-item',
+			'coblocks/alert',
+			'coblocks/counter',
+			'coblocks/column',
+			'coblocks/row',
+			'coblocks/dynamic-separator',
+			'coblocks/logos',
+			'coblocks/icon',
+			'coblocks/buttons',	
+			"coblocks/shape-divider",
+			"coblocks/events",
+			"coblocks/event-item",
+			"coblocks/form",
+			"coblocks/field-date",
+			"coblocks/field-email",
+			"coblocks/field-name",
+			"coblocks/field-radio",
+			"coblocks/field-phone",
+			"coblocks/field-textarea",
+			"coblocks/field-text",
+			"coblocks/field-select",
+			"coblocks/field-submit-button",
+			"coblocks/field-checkbox",
+			"coblocks/field-website",
+			"coblocks/field-hidden",
+			"coblocks/click-to-tweet",
+			"coblocks/food-and-drinks",
+			"coblocks/food-item",
+			"coblocks/pricing-table",
+			"coblocks/pricing-table-item",
+			"coblocks/opentable",
+			"coblocks/gist",
+
+			// toolset/
+			"toolset/ct",
+
+			// bcn/
+			"bcn/breadcrumb-trail",
+
+			// complianz/
+			"complianz/document",
+			"complianz/consent-area",
+
+		);
+		
+		// The list of active blocks in WordPress
+		$active_blocks = array_keys(
+			\WP_Block_Type_Registry::get_instance()->get_all_registered()
+		);
+		// error_log('active_blocks ::' . print_r($active_blocks, true));
+
+		// The new list without the unwanted blocks
+		return array_values(array_merge(array_diff($active_blocks, $blocks_to_disable), $blocks_to_enable));
 	}
+
+	// Or nothing, return the default allowed blocks.
 	return $allowed_blocks;
 }
 
