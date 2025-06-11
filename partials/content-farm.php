@@ -55,10 +55,11 @@ $next_post = get_adjacent_post(false, '', false);
 		if ( $datas[$post_id] ) {
 			foreach ( $datas[$post_id] as $directory_post ) {
 			print_r($directory_post['ID']);
-				setup_postdata( $directory_post['ID'] );
+				$directory_post_obj = get_post( $directory_post['ID'] );
+				setup_postdata( $directory_post_obj );
 				get_template_part( 'partials/content', 'excerpt', array( 'post' => $directory_post['ID'] ) );
+				wp_reset_postdata();
 			}
-			wp_reset_postdata();
 		}
 	}
 
