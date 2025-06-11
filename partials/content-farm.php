@@ -44,6 +44,23 @@ $next_post = get_adjacent_post(false, '', false);
 </article>
 <!-- End: SINGLE COURSE-->
 
+<!-- Belongs to -->
+ <?php
+
+ 	$post_id = get_the_ID();
+	echo $post_id;
+	$datas = get_belongs('farm', $post_id);
+	print_r($datas);
+	if ( $datas ) {
+		foreach ( $datas as $directory_post ) {
+			setup_postdata( $directory_post );
+			get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post ) );
+		}
+		wp_reset_postdata();
+	}
+
+?>
+
 <!-- #navigation -->
 <?php if ( is_a( $previous_post, 'WP_Post' ) || is_a( $next_post, 'WP_Post' ) ) {  ?>
 	<section id="navigation" class="mt-3 mb-3 mt-lg-10 mb-lg-10 contrast--light">
