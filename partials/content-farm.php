@@ -54,8 +54,9 @@ $next_post = get_adjacent_post(false, '', false);
 		print_r($datas[$post_id]);
 		if ( $datas[$post_id] ) {
 			foreach ( $datas[$post_id] as $directory_post ) {
-				setup_postdata( $directory_post );
-				get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post ) );
+			print_r($directory_post['ID']);
+				setup_postdata( $directory_post['ID'] );
+				get_template_part( 'partials/content', 'directory', array( 'post' => $directory_post['ID'] ) );
 			}
 			wp_reset_postdata();
 		}
