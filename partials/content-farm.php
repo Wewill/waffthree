@@ -54,7 +54,7 @@ $next_post = get_adjacent_post(false, '', false);
 				<div class="col d-flex align-items-center">
 					<a href="<?= esc_url(get_permalink($previous_post)) ?>"><i class="bi bi-arrow-left-short h1 text-transparent-action-2 p-4 mt-4"></i></a>
 					<div class="flex-fill pe-7 pe-md-0">
-						<h6 class="d-none d-md-block subline text-transparent-action-2 text-start"><?= __('Previous course', 'wa-golfs'); ?></h6>
+						<h6 class="d-none d-md-block subline text-transparent-action-2 text-start"><?= __('Previous', 'waff'); ?></h6>
 
 						<?php // Get directory card content
 						$previous_post_media_url 				= get_the_post_thumbnail_url( $previous_post, 'medium' );
@@ -98,7 +98,7 @@ $next_post = get_adjacent_post(false, '', false);
 				<?php if ( is_a( $next_post, 'WP_Post' ) ) : ?>
 				<div class="col d-flex align-items-center">
 					<div class="flex-fill ps-7 ps-md-0">
-						<h6 class="d-none d-md-block subline text-transparent-action-2 text-end"><?= __('Next course', 'wa-golfs'); ?></h6>
+						<h6 class="d-none d-md-block subline text-transparent-action-2 text-end"><?= __('Next', 'waff'); ?></h6>
 
 						<?php // Get directory card content
 						$next_post_media_url 				= get_the_post_thumbnail_url( $next_post, 'medium' );
