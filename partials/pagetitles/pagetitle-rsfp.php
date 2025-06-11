@@ -74,6 +74,9 @@ switch (get_post_type()) {
 	case ( 'directory' ) :
 			$selected_featured_sizes = $post_featured_sizes;
 	break;
+	case ( 'farm' ) :
+			$selected_featured_sizes = $post_featured_sizes;
+	break;
 	/*case ( 'homeslide' === $pt ) :
 	    	$selected_featured_sizes = 
 	break;*/
