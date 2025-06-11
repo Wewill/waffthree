@@ -45,24 +45,54 @@ $next_post = get_adjacent_post(false, '', false);
 <!-- End: SINGLE COURSE-->
 
 <!-- Belongs to -->
- <?php
+<?php
 
 	if ( function_exists( 'get_belongs' ) ) {
 		$post_id = get_the_ID();
-		echo $post_id;
 		$datas = get_belongs('farm', $post_id);
-		print_r($datas[$post_id]);
 		if ( $datas[$post_id] ) {
 			foreach ( $datas[$post_id] as $directory_post ) {
-			print_r($directory_post['ID']);
-				$directory_post_obj = get_post( $directory_post['ID'] );
-				setup_postdata( $directory_post_obj );
-				get_template_part( 'partials/content', 'excerpt', array( 'post' => $directory_post['ID'] ) );
-				wp_reset_postdata();
+				// $directory_post_obj = get_post( $directory_post['ID'] );
+
+				// Get directory content
+				$d_general_introduction 	= get_post_meta( $directory_post['ID'], 'd_general_introduction', true );
+				$d_media_url 				= get_the_post_thumbnail_url( $directory_post['ID'], 'medium' );
+				$d_media_thumbnail_url		= get_the_post_thumbnail_url( $directory_post['ID'], 'thumbnail' );
+				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
+				
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$d_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
+
+				printf('<div class="card my-2 border-0">
+						<div class="row g-0 align-items-center">
+							<div class="col-md-3 order-first">
+								%s
+							</div>
+							<div class="col-md-9">
+								<div class="card-body">', 
+					$d_image
+				);
+				WaffTwo\waff_entry_meta_header($directory_post['ID']);
+				printf('
+									%s
+									<p class="card-text fs-sm mb-0">%s</p>
+									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+								</div>
+							</div>
+						</div>
+						<!-- </div> -->', 
+					sprintf( '<h5 class="post__title entry-title card-title mt-2"><a href="%s" rel="bookmark">%s</a></h5>', esc_url(get_permalink($directory_post['ID'])), get_the_title($directory_post['ID'])),
+					wp_trim_words(
+						get_the_excerpt() != ''?get_the_excerpt():$d_general_introduction,
+						15,
+						' &hellip;'
+					),
+					$d_last_updated
+				);
+
 			}
 		}
 	}
-
 ?>
 
 <!-- #navigation -->
