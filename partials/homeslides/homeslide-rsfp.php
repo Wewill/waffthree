@@ -29,7 +29,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <!-- #slick-homeslide -->
 <section id="slick-homeslide" class="mb-0 mb-sm-1 mb-lg-2 contrast--light">
 	<div class="container-fluid px-0">
-		<div class="row g-0 align-items-center vh-50" style="min-height: 460px;"> <!-- .vh-50 hack--> 
+		<div class="row g-0 align-items-center vh-50" style="@media (min-width:768px){ min-height: 460px; }"> <!-- .vh-50 hack--> 
 			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
 				
 				<!-- slick-homeslide images-->
@@ -68,7 +68,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						$video 			= reset($videos);
 					?>
 					<!-- Slide <?= $slide_nb ?> -->
-					<div class="img-shifted shift-left vh-50 <?= $mode; ?>" style="min-height: 460px;">
+					<div class="img-shifted shift-left vh-50 <?= $mode; ?>" style="@media (min-width:768px){ min-height: 460px; }>
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100 bg-action-1">
@@ -150,7 +150,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					    	$class 			= ( $mode == 'dark' || $color == '' )?'text-light color-light link-light':'text-dark color-dark link-dark';
 							$url			= rwmb_meta( $prefix . 'slide_url' , array(), $slide_id);
 					    	$color 			= rwmb_meta( $prefix . 'slide_color' , array(), $slide_id);
-					    	$style 			= ( $color )?'style="background-color:'.$color.'!important;min-height: 460px;"':'style="min-height: 460px;"'; // style="min-height: 460px;"
+					    	$style 			= ( $color )?'style="background-color:'.$color.'!important;min-height: 460px;"':'style="@media (min-width:768px){ min-height: 460px; }'; // style="@media (min-width:768px){ min-height: 460px; }
 					    	// $show_content	= rwmb_meta( $prefix . 'show_content' , array(), $slide_id);
 					?>
 		
