@@ -168,7 +168,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 								%s
 							</div>
 							<div class="col-10 col-md-9">
-								<div class="card-body pt-0">', 
+								<div class="card-body pt-0 pb-0">', 
 					$d_image
 				);
 				WaffTwo\waff_entry_meta_header();
