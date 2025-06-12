@@ -33,7 +33,7 @@
 
 	?> 
 	<!-- Header -->
-	<section class="mt-n10 --mb-10 --mb-lg-7  f-w" id="productionhero"> <!-- .contrast--dark : do not color contrast because its insided a contrast-light section, too close -->
+	<section class="mt-n10 --mb-10 --mb-lg-7  f-w" id="hero"> <!-- .contrast--dark : do not color contrast because its insided a contrast-light section, too close -->
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center h-400-px"><!-- .vh-100 hack-->
 
@@ -114,7 +114,7 @@
 	<!-- Related posts -->
 	<section class="contrast--light f-w">
 	<div class="container-fluid --px-0">
-	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-8">
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4 mt-md-8">
 	<?php
 	 // Start the Loop.
 	 while ( have_posts() ) :
