@@ -33,7 +33,7 @@
 
 	?> 
 	<!-- Header -->
-	<section class="mt-n10 --mb-10 --mb-lg-7 contrast--dark f-w" id="geographyhero">
+	<section class="mt-n10 --mb-10 --mb-lg-7 f-w" id="geographyhero"> <!-- .contrast--dark : do not color contrast because its insided a contrast-light section, too close -->
 		<div class="container-fluid px-0">
 			<div class="row g-0 align-items-center h-400-px"><!-- .vh-100 hack-->
 
