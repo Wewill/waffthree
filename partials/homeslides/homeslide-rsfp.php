@@ -83,7 +83,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 
 				<!-- Special RSFP -->
 				<?php if ( $homeslide_image ) : ?>
-					<div class="position-absolute top-50 end-0 translate-middle-y no-drag opacity-25"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
+					<div class="position-absolute top-50 end-0 translate-middle-y no-drag opacity-25 d-none d-md-block"><img class="no-drag" src="<?= $homeslide_image['url']; ?>" /></div>
 				<?php endif; ?>
 
 				<!-- Images sources-->
