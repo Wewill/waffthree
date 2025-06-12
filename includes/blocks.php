@@ -1650,7 +1650,7 @@ function wa_latest_posts_callback( $attributes ) {
 				<div class="col">
 					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>" data-aos="fade-up" data-aos-delay="<?= $index*100; ?>">
 						<div class="row g-0">
-							<div class="col-md-4 position-relative mh-150-px">
+							<div class="col-2 col-md-4 position-relative mh-150-px">
 								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
 								<?php if ($containsvideo == 1 || $d_have_videos) : ?>
 									<div class="position-absolute top-0 h-100 w-100 btn_holder">
@@ -1658,7 +1658,7 @@ function wa_latest_posts_callback( $attributes ) {
 									</div>
 								<?php endif; ?>
 							</div>
-							<div class="col-md-8">
+							<div class="col-10 col-md-8">
 								<div class="card-body py-0">
 								
 									<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
