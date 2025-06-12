@@ -1651,10 +1651,10 @@ function wa_latest_posts_callback( $attributes ) {
 					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>" data-aos="fade-up" data-aos-delay="<?= $index*100; ?>">
 						<div class="row g-0">
 							<div class="col-2 col-md-4 position-relative mh-150-px">
-								<div class="img-holder position-relative h-100">
+								<div class="img_holder position-relative">
 									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
 									<?php if ($containsvideo == 1 || $d_have_videos) : ?>
-										<div class="position-absolute top-0 h-100 w-100 btn_holder">
+										<div class="position-absolute top-50 h-100 w-100 btn_holder">
 											<span class="btn --action-3 color-light play play-xs d-flex flex-center"><i class="bi bi-play-fill h5 m-0 p-0 ms-1 mt-1"></i></span>
 										</div>
 									<?php endif; ?>
