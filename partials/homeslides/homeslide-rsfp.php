@@ -30,7 +30,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <section id="slick-homeslide" class="mb-0 mb-sm-1 mb-lg-2 contrast--light">
 	<div class="container-fluid px-0">
 		<div class="row g-0 align-items-center vh-50" style="@media (min-width:768px){ min-height: 460px; }"> <!-- .vh-50 hack--> 
-			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
+			<div class="col-lg order-1 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
 				
 				<!-- slick-homeslide images-->
 				<div class="slider-nav">
@@ -128,7 +128,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					
 			</div>
 
-			<div class="col-lg-5 col-xl-5 --order-first order-1 order-lg-first zi-5" data-aos="fade-down">
+			<div class="col-lg-5 col-xl-5 order-2 order-lg-first zi-5" data-aos="fade-down">
 				<!-- slick-homeslide content -->
 				<div class="slider-for">
 					
