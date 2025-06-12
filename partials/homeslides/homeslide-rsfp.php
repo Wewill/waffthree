@@ -158,7 +158,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						<div class="d-flex flex-column justify-content-center justify-content-lg-between bg-color-dark text-white vh-50 position-relative rounded-bottom-4 rounded-bottom-right-0 lg-rounded-0" data-post-id="<?= $slide_id; ?>" data-slide-id="<?= $slide_nb; ?>" data-slide-title="<?= $slide_title; ?>" <?= $style; ?>>
 							<div class="px-3 px-lg-6 pt-18 d-none d-md-block"><?= (($label != '')?'<h6 class="headline d-inline '.$class.'">'.$label.'</h6>':''); ?></div>
 							<div class="px-3 px-lg-6 py-2">
-								<h1 class="h2 --display-3 <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
+								<h2 class="fw-medium <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h2>
 							</div>
 							<div class="px-3 px-lg-6 pb-6 d-none d-md-block">
 								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= do_shortcode($content); ?></div>
