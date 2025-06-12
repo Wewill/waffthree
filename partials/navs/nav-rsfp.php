@@ -5,7 +5,7 @@ $page_atts = $args;
 
 ?>
 	<!-- Toggle External nav -->
-	<div class="collapse --sticky-top position-fixed zi-5 top-0 left-0 w-100 navbar-external shadow-sm" id="navbarToggleExternalContent">
+	<div class="collapse --sticky-top position-fixed --zi-5 zi-10 top-0 left-0 w-100 navbar-external shadow-sm" id="navbarToggleExternalContent">
 		<div class="bg-color-bg text-light px-3 px-md-6 py-4">
 
 			<div class="d-md-none d-flex mb-2 justify-content-end align-items-end">
