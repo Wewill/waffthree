@@ -14,6 +14,8 @@ class WP_Widget_CallToAction extends WP_Widget {
 		'card_classes_start'=> 'text-white',
 		'card_classes_end' 	=> 'text-white',
 		'fullwitdh' 		=> 'no',
+		'card_display_on_mobile_start' => 'yes',
+		'card_display_on_mobile_end'   => 'yes',
     );  
 
 	private function is_widget_preview() {
@@ -74,10 +76,16 @@ class WP_Widget_CallToAction extends WP_Widget {
 		$bg_image_end               = ! empty( $instance['bg_image_end'] ) ? $instance['bg_image_end'] : '';
 
 		$fullwidth          		= ! empty( $instance['fullwidth'] ) ? $instance['fullwidth'] : '';
+		
+		$card_display_on_mobile_start = ! empty( $instance['card_display_on_mobile_start'] ) ? $instance['card_display_on_mobile_start'] : 'yes';
+		$card_display_on_mobile_end   = ! empty( $instance['card_display_on_mobile_end'] ) ? $instance['card_display_on_mobile_end'] : 'yes';
 
 		// Inject the Text widget's container class name alongside this widget's class name for theme styling compatibility.
         //$args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_section ', $args['before_widget'] ); // Adds classes too
         $args['before_widget'] = preg_replace( '/(?<=\sclass=["\'])/', 'widget_calltoaction '.$instance['classes'].' ', $args['before_widget'] ); // Adds classes too
+
+		// Add class to hide widget on mobile if display_on_mobile is 'no'
+		$mobile_class = ($display_on_mobile === 'no') ? ' d-none d-md-block' : '';
 
 		// before and after widget arguments are defined by themes
 		echo $args['before_widget'];
@@ -117,7 +125,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<div class="row g-0 align-items-top <?= $instance['inside_classes']; ?>" <?php echo $this->is_widget_preview() ? 'style="margin:0!important;"' : ''; ?>>
 
 					<!-- First col -->
-					<div class="col-md-6 h-250-px bg-color-layout img-shifted <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-start-4 md-rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 h-250-px bg-color-layout img-shifted <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-start-4 md-rounded-end-4' ?><?= $card_display_on_mobile_start === 'no' ? ' d-none d-md-block' : '' ?>" data-aos="fade-up" data-aos-delay="0" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_start ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 --text-white h-100 p-4 d-flex flex-column <?= $card_position_start; ?> <?= $card_classes_start; ?>">
 							<?php if ( ! empty( $label_start ) ) : ?>
@@ -137,7 +145,7 @@ class WP_Widget_CallToAction extends WP_Widget {
 					</div>
 
 					<!-- Last col -->
-					<div class="col-md-6 --d-none --d-md-block h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
+					<div class="col-md-6 h-250-px bg-color-layout img-shifted  <?= $fullwidth === 'yes' ? 'ps-1 ps-lg-10':'rounded-end-4' ?><?= $card_display_on_mobile_end === 'no' ? ' d-none d-md-block' : '' ?>" data-aos="fade-up" data-aos-delay="100" <?php echo $this->is_widget_preview() ? 'style="width: 50%;"' : ''; ?>>
 						<div id="calltoaction_<?= $bg_image_end ?>" class="bg-image bg-cover bg-position-center-center"></div>
 						<div class="card bg-transparent border-0 --text-white h-100 p-4 d-flex flex-column <?= $card_position_end; ?> <?= $card_classes_end; ?>">
 						<?php if ( ! empty( $label_end ) ) : ?>
@@ -284,6 +292,19 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<label for="<?php echo $this->get_field_id('card_classes_start'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?></label>
 				<input type="text" id="<?php echo $this->get_field_id( 'card_classes_start' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_start' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_start'] ); ?>" />
 			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('card_display_on_mobile_start'); ?>"><?php esc_html_e('Display on mobile devices (left card):', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('card_display_on_mobile_start'); ?>"
+					name="<?php echo $this->get_field_name('card_display_on_mobile_start'); ?>">
+						<option value='yes' <?php echo ($instance['card_display_on_mobile_start']=='yes')?'selected':''; ?>>
+							<?php _e( 'Yes', 'waff' ); ?>
+						</option>
+						<option value='no' <?php echo ($instance['card_display_on_mobile_start']=='no')?'selected':''; ?>>
+							<?php _e( 'No', 'waff' ); ?>
+						</option>
+					</select>
+				</label>
+			</p>
 		</div>
 		<div style="float:right; width:49%">
 			<h6><?php _e( 'Right column:', 'waff' ); ?></h6>
@@ -340,6 +361,19 @@ class WP_Widget_CallToAction extends WP_Widget {
 				<label for="<?php echo $this->get_field_id('card_classes_end'); ?>"><?php esc_html_e('Card classes:', 'waff'); ?></label>
 				<input type="text" id="<?php echo $this->get_field_id( 'card_classes_end' ); ?>" name="<?php echo $this->get_field_name( 'card_classes_end' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['card_classes_end'] ); ?>" />
 			</p>
+			<p>
+				<label for="<?php echo $this->get_field_id('card_display_on_mobile_end'); ?>"><?php esc_html_e('Display on mobile devices (right card):', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('card_display_on_mobile_end'); ?>"
+					name="<?php echo $this->get_field_name('card_display_on_mobile_end'); ?>">
+						<option value='yes' <?php echo ($instance['card_display_on_mobile_end']=='yes')?'selected':''; ?>>
+							<?php _e( 'Yes', 'waff' ); ?>
+						</option>
+						<option value='no' <?php echo ($instance['card_display_on_mobile_end']=='no')?'selected':''; ?>>
+							<?php _e( 'No', 'waff' ); ?>
+						</option>
+					</select>
+				</label>
+			</p>
 		</div>
 
 		<div class="clearfix clear"></div>
@@ -371,6 +405,19 @@ class WP_Widget_CallToAction extends WP_Widget {
 				</label>
 				<!-- <input type="text" id="<?php echo $this->get_field_id( 'fullwidth' ); ?>" name="<?php echo $this->get_field_name( 'fullwidth' ); ?>" class="widefat url sync-input" value="<?php echo esc_attr( $instance['fullwidth'] ); ?>" /> -->
 			</p>			
+			<p>
+				<label for="<?php echo $this->get_field_id('display_on_mobile'); ?>"><?php esc_html_e('Display on mobile devices:', 'waff'); ?>
+					<select class='widefat' id="<?php echo $this->get_field_id('display_on_mobile'); ?>"
+					name="<?php echo $this->get_field_name('display_on_mobile'); ?>">
+						<option value='yes' <?php echo ($instance['display_on_mobile']=='yes')?'selected':''; ?>>
+							<?php _e( 'Yes', 'waff' ); ?>
+						</option>
+						<option value='no' <?php echo ($instance['display_on_mobile']=='no')?'selected':''; ?>>
+							<?php _e( 'No', 'waff' ); ?>
+						</option>
+					</select>
+				</label>
+			</p>
 
 		<?php 
 	}
@@ -418,6 +465,8 @@ class WP_Widget_CallToAction extends WP_Widget {
 		$instance['bg_image_end'] = ( ! empty( $new_instance['bg_image_end'] ) ) ? strip_tags( $new_instance['bg_image_end'] ) : '';
 
 		$instance['fullwidth'] = sanitize_text_field( $new_instance['fullwidth'] );
+		$instance['card_display_on_mobile_start'] = sanitize_text_field( $new_instance['card_display_on_mobile_start'] );
+		$instance['card_display_on_mobile_end'] = sanitize_text_field( $new_instance['card_display_on_mobile_end'] );
 
 		return $instance;
 	}
