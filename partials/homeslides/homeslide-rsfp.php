@@ -68,7 +68,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						$video 			= reset($videos);
 					?>
 					<!-- Slide <?= $slide_nb ?> -->
-					<div class="img-shifted shift-left vh-50 <?= $mode; ?>" style="@media (min-width:768px){ min-height: 460px; }>
+					<div class="img-shifted shift-left vh-50 <?= $mode; ?>" style="@media (min-width:768px){ min-height: 460px; }">
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100 bg-action-1">
