@@ -167,7 +167,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							<div class="col-2 col-md-3 order-first">
 								%s
 							</div>
-							<div class="col-12 col-md-9">
+							<div class="col-10 col-md-9">
 								<div class="card-body">', 
 					$d_image
 				);
