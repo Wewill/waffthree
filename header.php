@@ -100,7 +100,7 @@
 	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) : 
 		// Type always transparent header 
 		$page_atts['post_class'] 			= 'pt-5 pt-md-10 pb-3 pb-sm-5 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-3 pb-sm-5'
-		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page pt-15 pt-md-20  pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page --pt-15 pt-8 pt-md-20  pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 	else : 
 		// Type plain header 
