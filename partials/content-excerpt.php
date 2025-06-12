@@ -163,12 +163,12 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$d_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
 
 				printf('<div class="card my-2 border-0">
-						<div class="row g-0 align-items-center">
+						<div class="row g-0 align-items-start">
 							<div class="col-2 col-md-3 order-first">
 								%s
 							</div>
 							<div class="col-10 col-md-9">
-								<div class="card-body">', 
+								<div class="card-body pt-0">', 
 					$d_image
 				);
 				WaffTwo\waff_entry_meta_header();
