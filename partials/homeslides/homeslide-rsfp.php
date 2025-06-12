@@ -30,7 +30,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 <section id="slick-homeslide" class="mb-0 mb-sm-1 mb-lg-2 contrast--light">
 	<div class="container-fluid px-0">
 		<div class="row g-0 align-items-center vh-50" style="@media (min-width:768px){ min-height: 460px; }"> <!-- .vh-50 hack--> 
-			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative" data-aos="fade-right">
+			<div class="col-lg --order-last order-2 order-lg-last overflow-hidden position-relative pt-10 pt-md-0" data-aos="fade-right">
 				
 				<!-- slick-homeslide images-->
 				<div class="slider-nav">
@@ -150,7 +150,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					    	$class 			= ( $mode == 'dark' || $color == '' )?'text-light color-light link-light':'text-dark color-dark link-dark';
 							$url			= rwmb_meta( $prefix . 'slide_url' , array(), $slide_id);
 					    	$color 			= rwmb_meta( $prefix . 'slide_color' , array(), $slide_id);
-					    	$style 			= ( $color )?'style="background-color:'.$color.'!important;min-height: 460px;"':'style="@media (min-width:768px){ min-height: 460px; }'; // style="@media (min-width:768px){ min-height: 460px; }
+					    	$style 			= ( $color )?'style="background-color:'.$color.'!important; @media (min-width:768px){ min-height: 460px; }"':'style="@media (min-width:768px){ min-height: 460px; }'; // style="@media (min-width:768px){ min-height: 460px; }
 					    	// $show_content	= rwmb_meta( $prefix . 'show_content' , array(), $slide_id);
 					?>
 		
