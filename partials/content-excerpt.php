@@ -164,10 +164,10 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 
 				printf('<div class="card my-2 border-0">
 						<div class="row g-0 align-items-center">
-							<div class="col-md-3 order-first">
+							<div class="col-2 col-md-3 order-first">
 								%s
 							</div>
-							<div class="col-md-9">
+							<div class="col-12 col-md-9">
 								<div class="card-body">', 
 					$d_image
 				);
