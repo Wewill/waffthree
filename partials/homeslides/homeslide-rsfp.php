@@ -68,7 +68,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 						$video 			= reset($videos);
 					?>
 					<!-- Slide <?= $slide_nb ?> -->
-					<div class="img-shifted shift-left vh-50 <?= $mode; ?>">
+					<div class="img-shifted shift-left vh-50 <?= $mode; ?>" style="min-height: 460px;">
 						<div data-index="<?= $slide_nb ?>" class="slider-item-<?= $slide_nb ?> bg-image bg-cover bg-position-center-center rounded-top-4 rounded-top-left-0 lg-rounded-0" data-style="background-image: url('<?= $featured_img_url; ?>');">
 						<?php if (!empty($video)): ?>
 							<figure class="wp-block-video h-100 bg-action-1">
@@ -150,7 +150,7 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 					    	$class 			= ( $mode == 'dark' || $color == '' )?'text-light color-light link-light':'text-dark color-dark link-dark';
 							$url			= rwmb_meta( $prefix . 'slide_url' , array(), $slide_id);
 					    	$color 			= rwmb_meta( $prefix . 'slide_color' , array(), $slide_id);
-					    	$style 			= ( $color )?'style="background-color:'.$color.'!important;"':'';
+					    	$style 			= ( $color )?'style="background-color:'.$color.'!important;min-height: 460px;"':'style="min-height: 460px;"'; // style="min-height: 460px;"
 					    	// $show_content	= rwmb_meta( $prefix . 'show_content' , array(), $slide_id);
 					?>
 		
