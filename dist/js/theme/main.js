@@ -838,12 +838,13 @@ jQuery(document).ready(function () {
 	-------------------------------------------------
 	*/
 
-  // Tag first word on H2 to css styling it / added .site > only FRONT / added .waff-theme-rsfp only RSFP
-  jQuery(".waff-theme-rsfp .site .is-formatted h2").each(function () {
-    jQuery(this).html(
-      jQuery(this)
-        .html()
-        .replace(/(^\w+)/, '<span class="first-word">$1</span>')
-    );
-  });
+  // // Tag first word on H2 to css styling it / added .site > only FRONT / added .waff-theme-rsfp only RSFP
+  // jQuery(".waff-theme-rsfp .site .is-formatted h2").each(function () {
+  //   jQuery(this).html(
+  //     jQuery(this)
+  //       .html()
+  //       .replace(/(^\w+)/, '<span class="first-word">$1</span>')
+  //   );
+  // });
+
 }); // End dom ready
