@@ -280,6 +280,17 @@ function waff_page_register_meta_boxes( $meta_boxes ) {
                     'relation' => 'and',
                 ],
             ],
+                        [
+                'id'      => $prefix . 'public_content',
+				'type' => 'wysiwyg', //textarea
+                'name'    => esc_html__( 'Page public content', 'waff' ) . ' *',
+                'desc'    => __( 'Fill the public content showing after title when logged out (optionnal)', 'waff' ),
+                'visible' => [
+                    'when'     => [['page_template', '=', '../templates/template-client-portal.php']],
+                    'relation' => 'and',
+                ],
+            ],
+
             [
                 'id'         => $prefix . 'anchors',
                 'type'       => 'text',
