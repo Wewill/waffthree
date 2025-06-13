@@ -83,13 +83,37 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'waff' ) );
-				the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				the_excerpt();
+				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'go' ) );
+				// the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				// the_excerpt();
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+						%s
+					<!-- </div> -->',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Farm', 'post', 'waff' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
+					get_the_excerpt()
+				);
 			elseif ( get_post_type(get_the_ID()) === 'structure' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Structure', 'post', 'waff' ) );
-				the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				the_excerpt();
+				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Structure', 'post', 'go' ) );
+				// the_title( sprintf( 'TODOSTRUCTURE# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				// the_excerpt();
+				printf('<div class="card overflow-hidden rounded-2 bg-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+						%s
+					<!-- </div> -->',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Structure', 'post', 'waff' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
+					get_the_excerpt()
+				);
 			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
 				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Operation', 'post', 'waff' ) );
 				// Get operation content
@@ -135,16 +159,16 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$d_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$d_image = $d_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$d_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
 				
-				$d_last_updated =  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
-
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$d_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
 
 				printf('<div class="card my-2 border-0">
-						<div class="row g-0 align-items-center">
-							<div class="col-md-3 order-first">
+						<div class="row g-0 align-items-start">
+							<div class="col-2 col-md-3 order-first">
 								%s
 							</div>
-							<div class="col-md-9">
-								<div class="card-body">', 
+							<div class="col-10 col-md-9">
+								<div class="card-body pt-0 pb-0">', 
 					$d_image
 				);
 				WaffTwo\waff_entry_meta_header();
@@ -173,7 +197,10 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'medium' );
 				$c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				$c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px w-150-px h-auto"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated 			=  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
+
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$c_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
+
 				$c_date 					= get_post_meta( get_the_ID(), 'c_date', true );
 				$c_state 					= get_post_meta( get_the_ID(), 'c_state', true );
 
@@ -246,7 +273,9 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_media_url 				= get_the_post_thumbnail_url( get_the_ID(), 'large' );
 				// $c_media_thumbnail_url		= get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 				// $c_image = $c_media_thumbnail_url ? '<div class="d-flex flex-center rounded-4 bg-color-layout overflow-hidden"><img decoding="async" src="'.$c_media_thumbnail_url.'" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px"></div>' : '<div class="d-flex flex-center rounded-4 bg-color-layout"><img decoding="async" src="https://placehold.co/300x300/white/white" class="img-fluid fit-image rounded-4 img-transition-scale --h-100-px --w-100-px op-0"><i class="position-absolute bi bi-image text-action-3"></i></div>';
-				$c_last_updated =  __('Last update', 'waff') . " " . human_time_diff(get_post_time('U'), current_time('timestamp')) . " " . __('ago', 'waff');
+
+				$time_diff = human_time_diff(get_post_time('U'), current_time('timestamp'));
+				$c_last_updated = sprintf(__('Last update %s ago', 'waff'), $time_diff);
 
 				$c_number_of_strokes = get_post_meta( get_the_ID(), 'c_number_of_strokes', true );
 				$c_handicap = get_post_meta( get_the_ID(), 'c_handicap', true );

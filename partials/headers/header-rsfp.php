@@ -29,7 +29,7 @@ global $page_atts;
 	$navbarborder = '';
 	?>
 
-	<header id="site-header" class="site-header header masthead navbar navbar-light classic-navbar bg-transparent container-fluid p-0 --zi-5 zi-max <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($sticky) ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+	<header id="site-header" class="site-header header masthead navbar navbar-light classic-navbar bg-transparent container-fluid p-0 --zi-5 --zi-max <?= esc_attr($headerbackgroundcolor); ?> <?= esc_attr($headerborder); ?> <?= esc_attr($sticky) ?> <?= esc_attr($affix) ?> <?php echo esc_attr( Go\has_header_background() ); ?>" data-bs-toggle="<?= esc_attr($toggleaffix) ?>" role="banner" itemscope itemtype="http://schema.org/WPHeader">
 
 		<nav class="w-100 sticky-top row g-0">
 			<!-- Filled col 1 -->
@@ -80,13 +80,62 @@ global $page_atts;
 				<!-- Mobile nav -->
 				<!-- Burger .navbar-toggler -->
 				<?php // Go\navigation_toggle(); ?>
-				<button class="navbar-toggler collapsed px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-					<span class="navbar-close-icon my-1 mx-0 color-dark">
-					<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-					</svg>
-					</span>
+				<button class="navbar-toggler collapsed px-3 d-flex flex-center" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+					<div class="lineburger">
+						<div class="line"></div>
+						<div class="line"></div>
+						<div class="line"></div>
+					</div>
+					<style scoped>
+						.lineburger {
+							display: flex;
+							flex-direction: column;
+							gap: 7px;
+							cursor: pointer;
+							width: 30px;
+							position: relative;
+						}
+						.lineburger .line {
+							height: 3px;
+							background-color: black;
+							border-radius: 3px;
+							transition: all .2s ease-in-out;
+						}
+
+						.navbar-dark .lineburger .line {
+							background-color: var(--waff-color-bg)
+						}
+
+						.navbar-light .lineburger .line {
+							background-color: var(--waff-color-main);
+						}
+						
+						/* Dancing */
+						.navbar-toggler.collapsed .lineburger .line:nth-child(1) {
+							width: 100%;
+						}
+						.navbar-toggler.collapsed .lineburger .line:nth-child(2) {
+							width: 60%;
+						}
+						.navbar-toggler.collapsed .lineburger .line:nth-child(3) {
+							width: 80%;
+						}
+
+						/* Close */
+						.navbar-toggler:not(.collapsed) .lineburger .line:nth-child(1) {
+							transform: translateX(0) scaleX(1) translateY(10px) rotate(45deg);
+							width: 100%;
+						}
+						.navbar-toggler:not(.collapsed) .lineburger .line:nth-child(2) {
+							opacity: 0;
+						}
+						.navbar-toggler:not(.collapsed) .lineburger .line:nth-child(3) {
+							transform: translateY(-10px) rotate(-45deg);
+							width: 100%;
+						}
+					</style>
+
+
 				</button>
 
 

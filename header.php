@@ -100,7 +100,7 @@
 	if ( defined('WAFF_PARTIALS') && 'rsfp' === WAFF_PARTIALS ) : 
 		// Type always transparent header 
 		$page_atts['post_class'] 			= 'pt-5 pt-md-10 pb-3 pb-sm-5 container-fluid'; //'mt-10 mb-10 --pt-10 --pb-3 pb-sm-5'
-		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page pt-15 pt-md-20  pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
+		$page_atts['post_class'] 			= ( true === is_singular('page') && !has_post_thumbnail() )?'is-page --pt-15 pt-8 pt-md-20  pt-md-10 pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 		$page_atts['post_class'] 			= ( is_singular() && true === is_front_page() )?'is-home pb-3 pb-sm-5 container-fluid':$page_atts['post_class'];
 	else : 
 		// Type plain header 
@@ -211,6 +211,7 @@
 		<?php elseif ( is_singular('directory') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'directory'); ?>
 		<?php elseif ( is_singular('competitions') ) : 		get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'competitions'); ?>
 		<?php elseif ( is_singular('course') ) : 			get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'course'); ?>
+		<?php elseif ( is_singular('farm') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'farm'); ?>
 		<?php elseif ( is_tax('section') ) : 				get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'section'); ?>
 		<?php elseif ( is_tax('room') ) : 					get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS, '', 'room'); ?>
 		<?php elseif ( is_page() && false === $is_home ) :  get_template_part( 'partials/pagetitles/pagetitle-'.WAFF_PARTIALS); ?>

@@ -248,7 +248,7 @@ jQuery(document).ready(function () {
   // Function
   var toggleAffix = function (affixElement, scrollElement, wrapper) {
     var height = affixElement.outerHeight(),
-      top = wrapper.offset().top + window.innerHeight / 2 - height;
+      top = (wrapper && wrapper.length ? wrapper.offset().top : 0) + window.innerHeight / 2 - height;
 
     if (scrollElement.scrollTop() >= top) {
       //wrapper.height(height);
@@ -266,7 +266,7 @@ jQuery(document).ready(function () {
       wrapper = jQuery("<div></div>");
     ele.before(wrapper);
 
-    var wrapper = jQuery("#slick-homeslide, #pagetitle, #pageheader");
+    var wrapper = jQuery("#slick-homeslide, #pagetitle, #pageheader", "#hero");
     jQuery(window).on("scroll resize", function () {
       toggleAffix(ele, jQuery(this), wrapper);
     });
@@ -838,12 +838,13 @@ jQuery(document).ready(function () {
 	-------------------------------------------------
 	*/
 
-  // Tag first word on H2 to css styling it / added .site > only FRONT / added .waff-theme-rsfp only RSFP
-  jQuery(".waff-theme-rsfp .site .is-formatted h2").each(function () {
-    jQuery(this).html(
-      jQuery(this)
-        .html()
-        .replace(/(^\w+)/, '<span class="first-word">$1</span>')
-    );
-  });
+  // // Tag first word on H2 to css styling it / added .site > only FRONT / added .waff-theme-rsfp only RSFP
+  // jQuery(".waff-theme-rsfp .site .is-formatted h2").each(function () {
+  //   jQuery(this).html(
+  //     jQuery(this)
+  //       .html()
+  //       .replace(/(^\w+)/, '<span class="first-word">$1</span>')
+  //   );
+  // });
+
 }); // End dom ready

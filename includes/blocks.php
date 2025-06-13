@@ -17,6 +17,7 @@ use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
 use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
 
 use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
+use function WaffTwo\Theme\waff_get_theme_homeslide_content as waff_get_theme_homeslide_content;
 
 //use function Go\hex_to_rgb as hex_to_rgb; 
 
@@ -117,7 +118,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 	$prefix = 'waff_';
 	// global $current_edition_id; // Not working
 	global $ccp_editions_filter; // Working 
-
+	
 	// WA Latest posts
     $meta_boxes[] = [
         'title'           => esc_html__( '(WA) Latest posts', 'waff' ),
@@ -192,7 +193,13 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 //'after'             => 'html after',
                 //'class'             => 'Customcss',
                 'key'               => 'value',
-			],	
+			],
+			( 'RSFP' === WAFF_THEME ) ? [
+                'id'    => $prefix . 'lp_containsvideo',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Filter only posts w/ a video', 'waff' ),
+                'style' => 'rounded',
+			] : [],
 			[
                 'id'         => $prefix . 'lp_categories',
                 'type'       => 'taxonomy_advanced',
@@ -1379,9 +1386,50 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		'context'        => 'side',
 		//'Keyattrs'       => 'Value',
 	];
-
-	// wp_die( print_r($meta_boxes, true) );
  
+	// WA Keywords ( #RSFP )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Key messages', 'waff' ),
+		'id'             => 'wa-keymessages',
+		'fields'         => [
+			[
+                'id'   => $prefix . 'k_title',
+                'type' => 'text',
+                'name' => esc_html__( 'Title', 'waff' ),
+                // 'std'  => esc_html__( 'An awesome edition', 'waff' ),
+                'placeholder' => esc_html__( 'An awesome title', 'waff' ),
+            ],
+            [
+                'id'   => $prefix . 'k_subtitle',
+                'type' => 'text',
+                'name' => esc_html__( 'Subtitle', 'waff' ),
+                // 'std'  => esc_html__( 'Edito', 'waff' ),
+				'placeholder' => esc_html__( 'An awesome subtitle', 'waff' ),
+			],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'format-quote',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'editor-paragraph',
+		],
+		'description'     => esc_html__( 'Display homeslide key messages / contextual / engagement in content with a block', 'waff' ),
+		'keywords'       => ['homeslide', 'content', 'text', 'insight', 'data', 'bloc'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\wa_keymessages_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
     return $meta_boxes;
 }
 
@@ -1446,8 +1494,8 @@ function wa_latest_posts_callback( $attributes ) {
 	// Custom CSS class name.
 	//$themeClass = 'featured mt-10 mb-10 contrast--dark fix-vh-50';
 	$themeClass = 'featured mt-md-5 mb-md-5 mt-2 mb-2 contrast--dark fix-vh-50'; // Responsive issue fix
-	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-6 contrast--light';
-	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-6 contrast--light overflow-visible';
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'normal') $themeClass = 'mt-2 mb-2 contrast--light';
+	if ( mb_get_block_field( 'waff_lp_style' ) == 'classic') $themeClass = 'mt-2 mb-4 contrast--light overflow-visible';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
@@ -1465,6 +1513,7 @@ function wa_latest_posts_callback( $attributes ) {
 	<?php
 	endif;
 
+	$meta_queries 	= array();
 	$sticky_posts 	= array();
 	$categories 	= array();
 	$categories_id	= array();
@@ -1473,6 +1522,23 @@ function wa_latest_posts_callback( $attributes ) {
 	// $morelink 		= esc_attr(mb_get_block_field( 'waff_lp_morelink' ));
 	$posttype 		= esc_attr(mb_get_block_field( 'waff_lp_posttype' ));
 	$meta 			= esc_attr(mb_get_block_field( 'waff_lp_meta' ));
+	$containsvideo 	= esc_attr(mb_get_block_field( 'waff_lp_containsvideo' ));
+
+	if ( $containsvideo == 1 ) {
+		$meta_queries[] = array(
+			'relation' => 'OR',
+			array(
+				'key'     => 'd_medias_video',
+				'value'   => '',
+				'compare' => '!=',
+			),
+			array(
+				'key'     => 'd_medias_video_link',
+				'value'   => '',
+				'compare' => '!=',
+			),
+		);
+	}
 
 	if ( $posttype === 'post' ) {
 		//$categories 	= $attributes['data']['waff_lp_categories'];
@@ -1494,6 +1560,7 @@ function wa_latest_posts_callback( $attributes ) {
 			'ignore_sticky_posts' => true,
 			// Limit to selected cats 
 			'category'			=> $categories_id,
+			'meta_query'		=> $meta_queries,
 		));
 	} else {
 		$sticky_posts = get_posts(array(
@@ -1505,6 +1572,7 @@ function wa_latest_posts_callback( $attributes ) {
 			// No limit to sticky if not, only the last one if featured 
 			// Limit to selected cats 
 			'category'			=> $categories_id,
+			'meta_query'		=> $meta_queries,
 		));
 	}
 
@@ -1518,6 +1586,7 @@ function wa_latest_posts_callback( $attributes ) {
 		'post__not_in'  	=> get_option( 'sticky_posts' ),
 		// Limit to selected cats 
 		'category'			=> $categories_id,
+		'meta_query'		=> $meta_queries,
 	);
 
 	$all_posts = array(
@@ -1528,6 +1597,7 @@ function wa_latest_posts_callback( $attributes ) {
 		'order'				=> 'DESC',
 		// Limit to selected cats 
 		'category'			=> $categories_id,
+		'meta_query'		=> $meta_queries,
 	);
 
 	if ( mb_get_block_field( 'waff_lp_style' ) === 'normal' ) :
@@ -1558,10 +1628,16 @@ function wa_latest_posts_callback( $attributes ) {
 					$excerpt = '';
 					$the_excerpt = wp_strip_all_tags(get_the_excerpt($post_id));
 					$the_content = wp_strip_all_tags(get_the_content('...', true, $post_id));
-					$the_introduction = wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true)); // RSFP only 
+
+					// RSFP
+					$d_general_introduction 	= wp_strip_all_tags(get_post_meta($post_id, 'd_general_introduction', true)); // RSFP only 
+					$d_medias_videos 			= get_post_meta( $post_id, 'd_medias_video', true ); // RSFP only 
+					$d_medias_video_links 		= get_post_meta( $post_id, 'd_medias_video_link', true ); // RSFP only 
+					$d_have_videos 				= !empty($d_medias_videos) || !empty($d_medias_video_links); // RSFP only 
+				
 					// echo $post_id;
 					// echo $the_content; 
-					$the_content = ( $the_introduction !== '' )?$the_introduction:$the_content;
+					$the_content = ( $d_general_introduction !== '' )?$d_general_introduction:$the_content;
 					$excerpt = ( $the_excerpt !== '' )?$the_excerpt:$the_content;
 					if ( strlen($excerpt) > 140 ) {
 						$excerpt = substr($excerpt, 0, 140);
@@ -1574,14 +1650,24 @@ function wa_latest_posts_callback( $attributes ) {
 				<div class="col">
 					<div class="card mb-1 mb-md-2 border-0" id="<?= $post_id; ?>" data-aos="fade-up" data-aos-delay="<?= $index*100; ?>">
 						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+							<div class="col-2 col-md-4 position-relative mh-150-px">
+								<div class="img_holder position-relative">
+									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
+									<?php if ($containsvideo == 1 || $d_have_videos) : ?>
+										<div class="position-absolute top-50 --h-100 w-100 btn_holder">
+											<span class="btn --action-3 color-light play play-xs d-flex flex-center"><i class="bi bi-play-fill h5 m-0 p-0 ms-1 mt-1"></i></span>
+										</div>
+									<?php endif; ?>
+								</div> <!-- #Added RSFP -->
 							</div>
-							<div class="col-md-8">
+							<div class="col-10 col-md-8">
 								<div class="card-body py-0">
 								
 									<?php if ( ! empty( $the_categories ) ) { echo '<a class="badge rounded-pill bg-action-2 position-relative zi-2" href="' . esc_url( get_category_link( $the_categories[0]->term_id ) ) . '">' . esc_html( $the_categories[0]->name ) . '</a>'; } ?>
-									
+									<?php if ( $meta == 1 ) : ?>
+										<?= waff_entry_meta_header($post_item); ?>
+									<?php endif; ?>
+
 									<h5 class="card-title mt-2">
 										<a href="<?= get_permalink( $post_id ) ?>" class="stretched-link">
 											<?= is_sticky( $post_id ) ? '<i class="bi bi-pin"></i>' : '' ?>
@@ -1589,14 +1675,11 @@ function wa_latest_posts_callback( $attributes ) {
 										</a>
 									</h5>
 
-									<p class="card-text"><?= $excerpt; ?></p>
+									<p class="card-text fs-sm mb-0"><?= $excerpt; ?></p>
 
 									<?php if ( $meta == 1 ) : ?>
-									<?= waff_entry_meta_header($post_item); ?>
-									<?php else : ?>
-									<p class="card-text mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
+										<p class="card-text --mt-n2"><small class="text-body-secondary"><?= get_the_date('j F Y', $post_id); ?></small></p>
 									<?php endif; ?>
-
 								</div>
 							</div>
 						</div>
@@ -4505,6 +4588,163 @@ function wa_insights_callback( $attributes ) {
 	
 }
 
+function wa_keymessages_callback( $attributes ) {
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
+
+	// No data no render.
+	// if ( empty( $attributes['data'] ) ) return;
+	
+	// Unique HTML ID if available.
+	$id = '';
+	if ( $attributes['name'] ) {
+		$id = $attributes['name'] . '-';
+	} elseif (  $attributes['data']['name'] ) {
+		$id = $attributes['data']['name'] . '-';
+	}
+	$id .= ( $attributes['id'] && $attributes['id'] !== $attributes['name']) ? $attributes['id'] : wp_generate_uuid4();
+	if ( ! empty( $attributes['anchor'] ) ) {
+		$id = $attributes['anchor'];
+	}
+	
+	// Custom CSS class name.
+	$themeClass = 'keymessages mt-2 mb-4 contrast--light';
+	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	if ( ! empty( $attributes['align'] ) ) {
+		$class .= " align{$attributes['align']}";
+	}
+	$data = '';
+	$animation_class = '';
+	if ( ! empty( $attributes['animation'] ) ) {
+		$animation_class .= " coblocks-animate";
+		$data .= " data-coblocks-animation='{$attributes['animation']}'";
+	}
+
+	?>
+	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<div class="container-fluid --px-0">
+
+				<?php if ( mb_get_block_field( 'waff_k_subtitle' ) || mb_get_block_field( 'waff_k_title' ) ) : ?>
+					<hgroup class="">
+						<?php if ( mb_get_block_field( 'waff_k_subtitle' ) ) : ?>
+							<h6 class="subline" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_k_subtitle' ) ?></h6>
+						<?php endif; ?>
+						<?php if ( mb_get_block_field( 'waff_k_title' ) ) : ?>
+							<h4 class="" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_k_title' ) ?></h4>
+						<?php endif; ?>
+					</hgroup>
+				<?php endif; ?>
+
+				<div class="col-12 d-flex justify-content-between">
+
+					<?php if ( waff_get_theme_homeslide_content() ) :  ?>
+
+						<?php foreach (waff_get_theme_homeslide_content() as $contents) : ?>
+							<div data-aos="fade-up">
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm animated-title"><?= esc_html($contents[0]); ?><br/>
+									<?= esc_html($contents[1]); ?></h5>
+							</div>
+						<?php endforeach; ?>
+
+						<style type="text/css" scoped>
+							.animated-title span {
+								opacity: 0;
+								animation: fadeInUp 0.5s forwards ease-out;
+							}
+
+							.animated-title:not(.animated) span {
+								animation: none;
+							}
+
+							@keyframes fadeInUp {
+								from {
+								opacity: 0;
+								}
+								to {
+								opacity: 1;
+								}
+							}
+						</style>
+
+						<script type="text/javascript">
+							document.addEventListener("DOMContentLoaded", function () {
+								const titles = document.querySelectorAll(".animated-title");
+
+								// Fonction pour animer un titre
+								function animateTitle(title) {
+									if (title.classList.contains("animated")) return; // Evite de réanimer un titre déjà animé
+									title.classList.add("animated");
+
+									const fragments = document.createDocumentFragment();
+									let letterIndex = 0;
+
+									// Parcourt chaque nœud (y compris <br>) et anime chaque caractère
+									Array.from(title.childNodes).forEach((node) => {
+										if (node.nodeType === Node.TEXT_NODE) {
+											node.textContent.split("").forEach((char) => {
+												let span = document.createElement("span");
+												span.textContent = char;
+												span.style.animationDelay = `${letterIndex * 0.05}s`;
+												fragments.appendChild(span);
+												letterIndex++;
+											});
+										} else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "BR") {
+											fragments.appendChild(document.createElement("br"));
+										}
+									});
+
+									title.innerHTML = "";
+									title.appendChild(fragments);
+								}
+
+								// Vérifier si un parent contient la classe "aos-animate"
+								function checkAOSAnimation() {
+									titles.forEach((title) => {
+										const parent = title.closest('[data-aos]'); // Trouve le parent qui contient l'attribut "data-aos"
+										if (parent && parent.classList.contains("aos-animate")) {
+											animateTitle(title); // Lance l'animation lorsque le parent a la classe "aos-animate"
+										}
+									});
+								}
+
+								// Vérifie au moment du chargement et au moment du scroll
+								checkAOSAnimation();
+
+								// Écouter l'événement AOS pour appliquer l'animation dès qu'un parent devient visible
+								document.addEventListener("aos:in", checkAOSAnimation);
+							});
+						</script>
+
+						<?php else :  ?>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">S'installer paysan.ne,<br/>
+									pourquoi pas moi ?</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Découvrir<br/>
+									des savoir-faire</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Visiter une ferme</h5>
+							</div>
+							<div>
+								<span class="bullet bullet-action-1 ms-0"></span>
+								<h5 class="color-action-1 small-sm">Se faire<br/>
+									accompagner</h5>
+							</div>
+							<div>
+								&nbsp;
+							</div>
+					<?php endif;  ?>
+
+				</div>
+		</div>
+	</section>
+	<?php
+}
 
 /**
  * Disallow some blocks 
@@ -4714,6 +4954,7 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 	// Or nothing, return the default allowed blocks.
 	return $allowed_blocks;
 }
+
 
 /**
  * Define new colors for wp-bootstrap-blocks 
