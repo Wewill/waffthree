@@ -20,7 +20,7 @@ if ( post_password_required() ) {
 }
 ?>
 
-<section class="comments-area bg-color-bg p-4 p-lg-5 rounded-end-4 rounded-bottom-right-0">
+<section class="comments-area bg-color-bg p-4 p-lg-5 mb-0 rounded-end-4 rounded-bottom-right-0">
 	<div class="comments-area__wrapper ms-0">
 		<div id="comments" class="comments-area max-w-base m-auto">
 

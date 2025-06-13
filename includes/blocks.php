@@ -1654,7 +1654,7 @@ function wa_latest_posts_callback( $attributes ) {
 								<div class="img_holder position-relative">
 									<img src="<?php echo get_the_post_thumbnail_url($post_id, 'thumbnail'); ?>" class="img-fluid rounded-4">
 									<?php if ($containsvideo == 1 || $d_have_videos) : ?>
-										<div class="position-absolute top-50 h-100 w-100 btn_holder">
+										<div class="position-absolute top-50 --h-100 w-100 btn_holder">
 											<span class="btn --action-3 color-light play play-xs d-flex flex-center"><i class="bi bi-play-fill h5 m-0 p-0 ms-1 mt-1"></i></span>
 										</div>
 									<?php endif; ?>

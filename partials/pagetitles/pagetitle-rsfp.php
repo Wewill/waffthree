@@ -312,7 +312,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 					<!-- Play -->
 					<?php if (!empty($d_medias_video_link)): ?>
-						<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
+						<div class="absolute position-absolute top-50 --h-100 w-100 btn_holder">
 							<a class="btn action-1 --color-light play" data-fancybox="pagetitle_fancybox_<?= $post->ID; ?>" href="<?= $d_medias_video_link; ?>" target="_blank"><i class="bi bi-play-fill h3 ms-1"></i></a>
 						</div>
 					<?php endif; ?>
