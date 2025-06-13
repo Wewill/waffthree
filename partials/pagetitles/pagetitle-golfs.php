@@ -128,7 +128,6 @@ if ( is_singular() && has_post_thumbnail() ) {
 */
 ?>
 
-<!-- @TODO Farmers / structures / etc -->
 <?php if ( $args == 'blog' ) : ?>
 
 	<!-- #pagetitle : Blog -->
@@ -144,14 +143,48 @@ if ( is_singular() && has_post_thumbnail() ) {
 	</section>
 	<!-- END: #pagetitle -->
 
+	<!-- Categories -->
+	<div class="row g-0 align-items-between justify-content-start vh-25 bg-color-main position-relative"> <!-- .vh-100 hack--> 
+
+		<div class="col-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
+			<h6 class="headflat text-white m-0 text-center">Les catégories</h6>
+		</div>
+
+		<ul class="d-flex justify-content-around list-group list-group-horizontal --list-group-flush list-breaking m-0 w-100 bg-white pt-2 overflow-scroll">
+			<?php
+			$categories = get_categories();
+			foreach ($categories as $category) {
+				echo '<li class="list-group-item text-center"><a class="headflat" href="' . get_category_link($category->term_id) . '">' . $category->name . '</a></li>';
+			}
+			?>
+		</ul>
+
+	</div>
+	<!-- END: #Categories -->
+
 <?php elseif ( $args == 'post' ) : ?>
+
+	<?php
+
+	$post_color 		= rwmb_meta( '_waff_bg_color_metafield', array(), $post->ID );
+	$rgb_post_color				= WaffTwo\Core\waff_HTMLToRGB($post_color);
+	$post_title_color 			= $post_color && $post_color != '' ? 'text-white' : '';
+	// Check if the color is dark or light
+	if ( $post_color && $post_color != '') { // Si $post_color n'est pas vide
+		$hsl = WaffTwo\Core\waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
+		if($hsl->lightness > $lightness_threshold) {
+			$post_title_color 			=  'text-heading';
+		}
+	}
+
+	?>
 
 	<!-- #pagetitle : Post -->
 	<section id="pagetitle" class="pt-10 --pt-md-20 pt-md-14 pb-10 contrast--light --container-10 --container-left " <?= $page_atts['post_color_class']?>>
 		<div class="jumbotron">
 		    <div class="container-fluid --container-10 --container-left">
 				<hgroup data-aos="fade-down">
-					<h1 class="title mb-0"><?php single_post_title(); ?></h1>
+					<h1 class="title mb-0 <?= $post_title_color; ?>"><?php single_post_title(); ?></h1>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
 				</hgroup>
 		    </div>

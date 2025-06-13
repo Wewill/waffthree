@@ -7,10 +7,29 @@
  * @package Go
  */
 
+use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
+use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
+
+// Lightness threshold
+$lightness_threshold = 130;
+
 //DEBUG
 echo ((true === WAFF_DEBUG)?'<code> ##CONTENTPOST (updated merge 2022 > not sure )</code>':'');
 $post_color 		= rwmb_meta( '_waff_bg_color_metafield', array(), $post->ID );
 $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!important;"':'';
+
+// $post_color 				= ($post_color != '') ? $post_color : 'var(--waff-action-2)';
+$rgb_post_color				= waff_HTMLToRGB($post_color);
+$post_title_color 			= $post_color && $post_color != '' ? 'link-white text-white' : '';
+// Check if the color is dark or light
+if ( $post_color && $post_color != '' && $post_color != 'var(--waff-action-2)' ) { // Si $post_color n'est pas vide
+	$hsl = waff_RGBToHSL($rgb_post_color); // Accepte un INTEGER
+	if($hsl->lightness > $lightness_threshold) {
+		$post_title_color 			= 'link-heading text-heading';
+	}
+}
+
+
 ?>
 
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -35,12 +54,12 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 			<!-- Title -->
 			<?php
 				// Archives 
-				the_title( sprintf( '<h2 class="subline-3 post__title entry-title m-0"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
+				the_title( sprintf( '<h2 class="subline-3 post__title entry-title m-0 %s"><a class="" href="%s" rel="bookmark">', $post_title_color, esc_url( get_permalink() ) ), '</a></h2>' );
 			?>
 
 			<!-- Metas -->
 			<?php //Go\post_meta( get_the_ID(), 'top' ); ?>
-			<div class="post-meta">
+			<div class="post-meta <?= $post_title_color; ?>">
 				<?php
 					// Archives > totalité 
 					print(WaffTwo\waff_entry_meta_header());
@@ -48,7 +67,7 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 			</div>
 
 			<!-- Contents -->
-			<div class="content <?php Go\content_wrapper_class( 'content-area__wrapper' ); ?>">
+			<div class="content <?php Go\content_wrapper_class( 'content-area__wrapper' ); ?> <?= $post_title_color; ?>">
 
 				<div class="pt-4 pb-0 content-area entry-content">
 					<!-- Content -->
@@ -89,12 +108,12 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 					//the_title( '<h1 class="post__title entry-title m-0">', '</h1>' );
 				else :
 					// Archives > un titre 
-					the_title( sprintf( '<h2 class="post__title entry-title m-0"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' );
+					the_title( sprintf( '<h2 class="post__title entry-title m-0 %s"><a class="" href="%s" rel="bookmark">', $post_title_color, esc_url( get_permalink() ) ), '</a></h2>' );
 				endif;
 				?>
 				
 				<?php //Go\post_meta( get_the_ID(), 'top' ); ?>
-				<div class="post-meta">
+				<div class="post-meta <?= $post_title_color; ?>">
 					<?php
 					if ( is_singular() ) :
 						// Partiel car deja dans le header
@@ -110,7 +129,7 @@ $post_color_class	= ( $post_color )?'style="background-color:'.$post_color.'!imp
 		</header>
 
 		<!-- Contents -->
-		<div class="row content contrast--light <?php Go\content_wrapper_class( 'content-area__wrapper' ); ?>">
+		<div class="row content contrast--light <?php Go\content_wrapper_class( 'content-area__wrapper' ); ?> <?= $post_title_color; ?>">
 
 			<div class="<?php echo (( is_singular() )?'col-12 col-sm-9 pt-8 pb-8 --pb-md-8':'col-12 is-style-wide pt-4 pb-0' ) ?> content-area entry-content">
 				<!-- Content -->

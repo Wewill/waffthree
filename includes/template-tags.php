@@ -462,6 +462,7 @@ if ( ! function_exists( 'waff_posted_on' ) ) {
 			)
 		);
 		$color = ( defined('WAFF_SECONDARY_COLOR') )?WAFF_SECONDARY_COLOR:'action-3';
+		if ( defined('WAFF_PARTIALS') && 'golfs' === WAFF_PARTIALS ) $color = '';
 		$html .= '<span class="subline posted-on '.$color.'">';
 		$html .= ((int)$author_meta === 1)?'— ':'';
 		$html .= sprintf(

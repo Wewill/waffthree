@@ -38,7 +38,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 	<!--<header class="entry-header m-auto px">-->
 		<?php
 		if ( is_sticky() && is_home() && ! is_paged() ) {
-			printf( '<span class="sticky-post">%s</span>', esc_html_x( 'Featured', 'post', 'go' ) );
+			printf( '<span class="sticky-post">%s</span>', esc_html_x( 'Featured', 'post', 'waff' ) );
 		}
 
 		if ( is_singular() ) :
@@ -46,7 +46,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 		else :
 			if ( get_post_type(get_the_ID()) === 'film' ) : 
 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Film', 'post', 'go' ) );
+				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Film', 'post', 'waff' ) );
 				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true );
 				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true );
 				if ( $film_french_title != "" ) {
@@ -79,7 +79,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				}
 
 			elseif ( get_post_type(get_the_ID()) === 'jury' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Jury', 'post', 'go' ) );
+				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Jury', 'post', 'waff' ) );
 				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
 				the_excerpt();
 			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
@@ -115,7 +115,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 					get_the_excerpt()
 				);
 			elseif ( get_post_type(get_the_ID()) === 'operation' ) :
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Operation', 'post', 'go' ) );
+				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Operation', 'post', 'waff' ) );
 				// Get operation content
 				$o_more_description 		= get_post_meta( get_the_ID(), 'o_more_description', true );
 				$o_general_links 			= get_post_meta( get_the_ID(), 'o_general_links', true );
@@ -204,6 +204,10 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$c_date 					= get_post_meta( get_the_ID(), 'c_date', true );
 				$c_state 					= get_post_meta( get_the_ID(), 'c_state', true );
 
+				$c_competition_departures 	= get_post_meta( get_the_ID(), 'c_competition_departures', true );
+				$c_competition_results_brut = get_post_meta( get_the_ID(), 'c_competition_results_brut', true );
+				$c_competition_results_net 	= get_post_meta( get_the_ID(), 'c_competition_results_net', true );
+
 				$competition_date = get_post_meta(get_the_ID(), 'c_date', true); 
 				$competition_date_string = wp_kses(
 					sprintf(
@@ -237,23 +241,25 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				WaffTwo\waff_entry_meta_header();
 				printf('
 									%s
-									%s
+									<span class="fs-xs">%s %s %s</span>
 									%s
 									%s
 									<p class="card-text fs-sm mb-0">%s</p>
-									<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+									<p class="card-text --mt-n2 mt-3"><small class="text-body-secondary">%s</small></p>
 								</div>
 							</div>
 						</div>
 						<!-- </div> -->', 
-					sprintf( '<h6 class="mb-2 muted subline text-action-3 ">%s</h6>', esc_html_x( 'Competitions', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline text-action-3">%s</h6>', esc_html_x( 'Competitions', 'post', 'waff' ) ),
 					sprintf( '<span class="state-label" style="color:%s;"><span class="dot" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%%; vertical-align: 2px; margin-left: 2px; background-color:%s;"></span> %s</span>',
 						esc_attr( $stateColors[$c_state]['textColor'] ),
 						esc_attr( $stateColors[$c_state]['textColor'] ),
 						esc_html( $stateLabels[$c_state]['label'] )
 					),
-					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
-					sprintf( '<p class="competition-date muted">%s</p>', $competition_date_string),
+					$c_competition_departures?'<i class="bi bi-person-lines-fill ms-1"></i> Départs':'',
+					$c_competition_results_brut || $c_competition_results_net? '<i class="bi bi-check-circle-fill ms-1"></i> Résultats':'',
+					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mt-2 mb-1 fw-bold" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false),
+					sprintf( '<p class="competition-date --muted mb-0"><i class="bi bi-calendar-event"></i> %s</p>', $competition_date_string),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$c_introduction,
 						15,
@@ -305,7 +311,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							<p class="card-text fs-sm mb-0">%s</p>
 							<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
 						<!-- </div> -->', 
-					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'waff' ) ),
 					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mb-2 text-dark fw-normal mb-3" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false ),
 					wp_trim_words(
 						get_the_excerpt() != ''?get_the_excerpt():$content,
@@ -320,7 +326,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 					%s
 					<div class="text-dark default subline-3 lh-base h2">« %s »</div>
 					<!-- </div> -->',
-					sprintf( '<h6 class="mb-2 muted subline text-black">%s</h6>', esc_html_x( 'Testimony', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline text-black">%s</h6>', esc_html_x( 'Testimony', 'post', 'waff' ) ),
 					// the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>', false),
 					wp_trim_words(
 						get_the_excerpt(),
@@ -338,7 +344,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 					<!-- </div> -->',
 					$excerpt_atts['post_color_class'],
-					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Page', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Page', 'post', 'waff' ) ),
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
 					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
 					get_the_excerpt()
@@ -351,7 +357,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						%s
 					<!-- </div> -->',
 					$excerpt_atts['post_color_class'],
-					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Post', 'post', 'go' ) ),
+					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Post', 'post', 'waff' ) ),
 					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
 					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
 					get_the_excerpt()
