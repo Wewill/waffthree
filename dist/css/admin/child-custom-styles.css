@@ -52,6 +52,6 @@
 }
 
 /* Fix text list when it's not readable */
-.row-list .rwmb-text_list-clone {
+.rwmb-field .rwmb-text_list-clone {
   flex-direction: column;
 }
