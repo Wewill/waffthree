@@ -20,6 +20,9 @@ function setup() {
 	// Register Custom Post Types
 	require_once get_theme_file_path( 'includes/admin/custom_post_types.php' );
 
+	// Adds custom order for * post type 
+	require_once get_theme_file_path( 'includes/admin/custom_post_menuorder.php' );
+
 	// Set meta boxes
 	require_once get_theme_file_path( 'includes/admin/custom_metaboxes.php' );
 
