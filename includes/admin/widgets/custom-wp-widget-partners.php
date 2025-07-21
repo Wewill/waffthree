@@ -54,7 +54,14 @@ class WP_Widget_Partners extends WP_Widget {
 							$partner_field 		= ( post_type_exists('partenaire') )?'p-link':'waff_partner_link'; // Depreciated WAFFTWO V1 
 							$partner_field 		= ( defined('WAFF_THEME') && 'RSFP' === WAFF_THEME && post_type_exists('partner') )?'p_general_link':$partner_field; // Special RSFP 
 
-							$partners = new WP_Query( array( 'post_type' => $post_type, 'posts_per_page' => 200 ) );
+							$partners = new WP_Query( array(
+								'post_type'      => $post_type,
+								'posts_per_page' => 200,
+								'orderby'        => array(
+									'menu_order' => 'ASC',
+									'date'       => 'DESC',
+								),
+							) );
 							
 							while ( !is_admin() && $partners->have_posts() ) : $partners->the_post(); 
 							
