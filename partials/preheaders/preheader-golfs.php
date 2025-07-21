@@ -14,10 +14,10 @@ $page_atts = $args;
 				<div class="col-12">
 					<!-- Flex -->
 					<div class="d-flex justify-content-between align-items-center">
-						<div class="ms-5 me-2 --m-gutter-l flash-title headline font-weight-bold text-nowrap badge badge-sm rounded-pill bg-color-bg color-color-main d-none d-sm-block border border-2 border-color-main"><?= esc_html__( 'Breaking', 'waff' ) ?><!-- Le flash--> <span class="sr-only"><?= esc_html__( 'Breaking news', 'waff' ) ?></span></div> <!-- <?= esc_html__( 'Read More', 'waff' ) ?> -->
+						<div class="ms-5 me-2 --m-gutter-l flash-title headline font-weight-bold text-nowrap badge badge-sm rounded-pill bg-color-bg color-color-main d-none d-sm-block border-2 border-color-main"><?= esc_html__( 'Breaking', 'waff' ) ?><!-- Le flash--> <span class="sr-only"><?= esc_html__( 'Breaking news', 'waff' ) ?></span></div> <!-- <?= esc_html__( 'Read More', 'waff' ) ?> -->
 						
-						<div class="flex-fill d-none d-sm-block">
-							<ul id="flash" class="w-70 p-2 mb-0" style="display: none;">
+						<div class="--flex-fill d-none d-sm-block justify-self-start" style="max-width: 70%;">
+							<ul id="flash" class="--w-70 p-2 mb-0" style="display: none;">
 							<?php $flashes = new WP_Query( array( 'post_type' => 'flash', 'posts_per_page' => 20 ) ); ?>
 	
 							<?php while ( $flashes->have_posts() ) : $flashes->the_post(); ?>
@@ -38,7 +38,7 @@ $page_atts = $args;
 						</div>
 
 						<!-- Menu footer 2 -->
-						<div class="d-flex me-5 --justify-content-between align-items-center">
+						<div class="d-flex ms-auto me-5 justify-content-end align-items-center">
 						<?php if ( has_nav_menu( 'preheader-1' ) || is_customize_preview() ) : ?>
 							<nav class="nav font-weight-bold preheader-navigation--1 lh-xs mt-2 mb-2 small-sm" aria-label="<?php esc_attr_e( 'Preheader Menu', 'go' ); ?>">
 								<span class="screen-reader-text preheader-navigation__title"><?php echo esc_html( wp_get_nav_menu_name( 'preheader-1' ) ); ?></span>
