@@ -66,8 +66,9 @@ function setup() {
 	add_filter( 'body_class', $n( 'body_classes' ) );
 	add_filter( 'go_page_title_args', $n( 'waff_filter_page_titles' ), 20, 1);
 	
-	remove_filter( 'nav_menu_item_title', 'Go\Core\\add_dropdown_icons');
-	add_filter( 'nav_menu_item_title', $n( 'waff_add_dropdown_icons' ), 10, 4 );
+	// remove_filter( 'nav_menu_item_title', 'Go\Core\\add_dropdown_icons');
+	// add_filter( 'nav_menu_item_title', $n( 'waff_add_dropdown_icons' ), 10, 4 );
+	// Removed since 1.8.16 new menu walker version on https://github.com/godaddy-wordpress/go
 
 	add_filter( 'comment_form_defaults', $n( 'waff_comment_form_reply_title' ), 20);
 
