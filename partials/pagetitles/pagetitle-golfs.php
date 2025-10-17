@@ -144,9 +144,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<!-- END: #pagetitle -->
 
 	<!-- Categories -->
-	<div class="row g-0 align-items-between justify-content-start vh-25 bg-color-main position-relative"> <!-- .vh-100 hack--> 
+	<div class="row g-0 align-items-between justify-content-start vh-10 bg-color-main position-relative"> <!-- .vh-100 hack--> 
 
-		<div class="col-3 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
+		<div class="col-12 d-flex flex-center h-75" data-aos="fade-down" data-aos-delay="200">
 			<h6 class="headflat text-white m-0 text-center">Les catégories</h6>
 		</div>
 
