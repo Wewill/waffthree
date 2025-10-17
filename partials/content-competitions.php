@@ -43,7 +43,7 @@ function get_ended_signup_block() {
 		<div class="p-5 text-center bg-body-tertiary rounded-4">
 			<i class="bi bi-trophy mt-2 mb-0 h2 text-muted muted d-inline-block"></i>
 			<h6 class="text-muted muted fw-semibold">' . __('It\'s done', 'waff') . '</h6>
-			<p class="col-lg-8 mx-auto text-muted muted fs-sm">' . __('Les inscriptions pour cette compétition sont terminées. Please contact us to get more informations.', 'waff') . '</p>
+			<p class="col-lg-8 mx-auto text-muted muted fs-sm">' . __('Registrations for this competition are closed. Please contact us to get more informations.', 'waff') . '</p>
 			<div class="d-inline-flex gap-2 mb-2">
 				<!--<button class="d-inline-flex align-items-center btn btn-secondary btn-lg px-4 rounded-pill" type="button">Contact us <i class="bi bi-arrow-right-short ms-2"></i></button>--> <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill fw-bold" type="button">' . __('Contact-us', 'waff') . '</button>
 			</div>
@@ -155,7 +155,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-house-heart flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3 my-2 my-lg-3">Inscriptions ouvertes</h6>
-								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">Choisissez votre compétition dans le calendrier et inscrivez-vous dès maintenant, les places sont limitées !</p>
 							</div>
 						</div>
 
@@ -167,7 +167,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-highlighter flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3 my-2 my-lg-3">Remplissez vos coordonnées</h6>
-								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">Renseignez vos informations personnelles et précisez vos éventuelles préférences avant de valider votre inscription.</p>
 							</div>
 						</div>
 
@@ -179,7 +179,7 @@ function get_ended_signup_block() {
 							<i class="bi bi-cloud-arrow-down flex-shrink-0 me-2 me-md-3 h2 md-reset-fontsize text-action-2"></i>
 							<div>
 								<h6 class="fw-bold text-action-3">Attendez la confirmation</h6>
-								<p class="mb-0 small-lg">#TODO Lorem ipsum dolor sit amet</p>
+								<p class="mb-0 small-lg">Vous recevrez un e-mail de confirmation dès que votre participation aura été validée par notre équipe.</p>
 							</div>
 						</div>
 					</div>
@@ -217,8 +217,43 @@ function get_ended_signup_block() {
 
 			// Fetch the CSV file
 			fetch(url)
-				.then(response => response.text())
-				.then(csvText => {
+				.then(response => response.arrayBuffer())
+				.then(buffer => {
+
+				// 🧩 1️⃣ Essaye de décoder en UTF-8
+				let text = new TextDecoder('utf-8').decode(buffer);
+
+				// 🧠 2️⃣ Vérifie si le texte contient des caractères illisibles ("�")
+				// ou des séquences UTF-8 invalides → on suppose ISO-8859-1
+				if (/[�]/.test(text)) {
+				const textIso = new TextDecoder('iso-8859-1').decode(buffer);
+
+				// On garde la version qui contient le moins d’erreurs de décodage
+				if ((textIso.match(/[�]/g) || []).length < (text.match(/[�]/g) || []).length) {
+					text = textIso;
+				}
+				}
+
+				// 4️⃣ Nettoyage : suppression des lignes vides ou quasi vides
+				text = text
+				.split(/\r?\n/)
+				.filter(line => {
+					const trimmed = line.trim();
+					if (!trimmed) return false; // ligne complètement vide
+					if (/^(;|,)+$/.test(trimmed)) return false; // uniquement des séparateurs
+
+					// Vérifie combien de colonnes sont non vides
+					const fields = trimmed.split(';').map(f => f.trim());
+					const nonEmptyCount = fields.filter(f => f.length > 0).length;
+
+					// On garde la ligne seulement si au moins 3 champs sont remplis
+					return nonEmptyCount >= 3;
+				})
+				.join("\n");
+
+				const csvText = text;
+				console.log("✅ CSV nettoyé :", buffer, csvText);
+				
 					const rows = csvText.split('\n').map(row => row.split(';'));
 					const columns = rows[0];
 					const data = rows.slice(1);
@@ -241,7 +276,10 @@ function get_ended_signup_block() {
 						filteredData = data.map(row => columnsToKeep.map(index => row[index]));
 					}
 
-								 console.log('loadDatatable :: data', filteredColumns, filteredData, columnsToKeep);
+					// If filteredData have empty rows, remove them
+					filteredData = filteredData.filter(row => row.some(cell => cell && cell.trim() !== ''));
+
+					console.log('loadDatatable :: data', filteredColumns, filteredData, columnsToKeep, csvText);
 
 
 					new gridjs.Grid({
