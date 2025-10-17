@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WaffThree Theme : the WA Three template based on godaddy "
 "go theme and WA Frontal Theme V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-17 07:56+0000\n"
+"POT-Creation-Date: 2025-10-17 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1622,15 +1622,10 @@ msgid_plural "There are %d errors which must be fixed before you can save."
 msgstr[0] ""
 msgstr[1] ""
 
-#: partials/content-competitions.php:22
+#: partials/content-competitions.php:22 partials/content-competitions.php:34
 msgid ""
 "There is no departure defined yet. Please contact us to get more "
 "informations."
-msgstr ""
-
-#: partials/content-competitions.php:34
-msgid ""
-"There is no results defined yet. Please contact us to get more informations."
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-counter.php:178
