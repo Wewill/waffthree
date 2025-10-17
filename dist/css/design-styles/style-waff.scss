@@ -3052,17 +3052,3 @@ aside.widget-area h6:first-of-type {
   font-weight: 600;
   opacity: 0.8;
 }
-
-
-/* Specific golf  > A REPORTER !!! */
-
-@media (max-width: 768px) {
-
-  .headflat, .headline:not(.flash-title), .subline {
-    letter-spacing: 0.1rem;
-  }
-
-  .slick-breaking .headflat {
-    font-size: 9px !important;
-  }
-}
