@@ -13,6 +13,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTCOMPETITIONS</code>':'');
 $csv_departures_url 	= get_post_meta(get_the_ID(), 'c_competition_departures', true);
 $csv_results_brut_url 	= get_post_meta(get_the_ID(), 'c_competition_results_brut', true);
 $csv_results_net_url 	= get_post_meta(get_the_ID(), 'c_competition_results_net', true);
+$close_registration 	= get_post_meta(get_the_ID(), 'c_competition_close_registration', true);
 
 function get_empty_departures_block() {
 	return '<div class="container my-5 px-0 px-md-10 px-lg-15">
@@ -147,7 +148,8 @@ function get_ended_signup_block() {
 
 		<div class="row">
 			<?php
-			if (empty($csv_results_brut_url) || empty($csv_results_net_url)) {
+			var_dump($close_registration);
+			if ( ( empty($csv_results_brut_url) || empty($csv_results_net_url) ) &&  !$close_registration ) {
 			?>
 				<div class="col-3">
 					<div class="d-flex flex-column align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
