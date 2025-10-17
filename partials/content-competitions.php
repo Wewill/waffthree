@@ -31,7 +31,7 @@ function get_empty_results_block() {
 		<div class="p-5 text-center bg-body-tertiary rounded-4">
 			<i class="bi bi-list-columns-reverse mt-2 mb-0 h2 text-muted muted d-inline-block"></i>
 			<h6 class="text-muted muted fw-semibold">' . __('No results yet! Please come back', 'waff') . '</h6>
-			<p class="col-lg-8 mx-auto text-muted muted fs-sm">' . __('There is no departure defined yet. Please contact us to get more informations.', 'waff') . '</p>
+			<p class="col-lg-8 mx-auto text-muted muted fs-sm">' . __('There is no results defined yet. Please contact us to get more informations.', 'waff') . '</p>
 			<div class="d-inline-flex gap-2 mb-2">
 				<!--<button class="d-inline-flex align-items-center btn btn-secondary btn-lg px-4 rounded-pill" type="button">Contact us <i class="bi bi-arrow-right-short ms-2"></i></button>--> <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill fw-bold" type="button">' . __('Contact-us', 'waff') . '</button>
 			</div>
