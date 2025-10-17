@@ -148,8 +148,8 @@ function get_ended_signup_block() {
 
 		<div class="row">
 			<?php
-			var_dump($close_registration);
-			if ( ( empty($csv_results_brut_url) || empty($csv_results_net_url) ) &&  $close_registration == '') {
+			// var_dump($close_registration);
+			if ( ( empty($csv_results_brut_url) || empty($csv_results_net_url) ) &&  $close_registration != '1') {
 			?>
 				<div class="col-3">
 					<div class="d-flex flex-column align-items-center justify-content-center p-2 py-md-3 px-md-4 py-xl-4 px-xl-5 bg-body rounded-4 shadow">
