@@ -803,12 +803,13 @@ if ( is_singular() && has_post_thumbnail() ) {
 					<?php endif;  /* is_singular + has_post_thumbnail */?>				
 				</div>
 
-				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-5 <?= $header_color_class ?>" <?= $header_color ?> --data-aos="fade-left">
+				<div class="header-content col-md overflow-hidden bg-color-bg h-100 d-flex flex-column justify-content-between align-items-start p-3 ps-lg-5 pe-lg-5 pb-lg-5 pt-lg-20 <?= $header_color_class ?>" <?= $header_color ?> --data-aos="fade-left">
 					<!-- Titles -->
 					<hgroup>
 						<?= WaffTwo\waff_entry_meta_header(); ?>
-						<?php if ( $page_atts['subtitle'] != '' ) echo '<h6 class="headline d-inline-block my-3 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h6>'; ?>
+						<!-- <?php if ( $page_atts['subtitle'] != '' ) echo '<h6 class="headline d-inline-block my-3 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h6>'; ?> -->
 						<h1 class="<?= $header_section_title_color ?>"><?= sanitize_text_field($title) ?></h1>
+						<?php if ( $page_atts['subtitle'] != '' ) echo '<h5 class="opacity-75 '.$header_section_title_color.'">'.do_shortcode(sanitize_text_field($page_atts['subtitle'])).'</h5>'; ?>
 					</hgroup>
 
 					<!--  Anchors -->
