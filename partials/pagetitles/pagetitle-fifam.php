@@ -375,37 +375,28 @@ if ( is_singular() && has_post_thumbnail() ) {
 			</div>
 		<?php endif; /* If film_awards */ ?>
 
-
 		<!-- Ticketing -->
 		<?php if ( $film_ticketing_url != '' ) : ?>
-			<div class="absolute position-absolute bottom-0 end-0 right-0 mb-4 mr-6 me-6">
-				<a href="<?= esc_url($film_ticketing_url) ?>" class="btn btn-primary" target="_blank"><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a>
-			</div>
-
-
-			<div class="container-fluid px-0">
+			<div class="absolute position-absolute top-0 end-0 right-0 container-fluid px-0">
 				<div class="row g-0 align-items-center">
 					
 					<!-- Col -->
 					<div class="col-12 col-xl-10">
 						<!-- Flex -->
 						<div class="d-flex justify-content-between--- align-items-center">
-							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Le flash<!-- Le flash--> <span class="sr-only">Les informations de dernière minute du festival</span></div> <!-- Lire la suite -->
+							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Billeterie <span class="sr-only">Réserver ma place grâce à la billeterie en ligne</span></div> <!-- Lire la suite -->
 						</div>
 						<!-- End Flex -->
 					</div>
 					
 					<!-- Col -->
-					<div class="col-auto col-xl-2 d-none d-xl-block bg-primary--- bg-action-1 text-center text-light link-light">
-						<div class="p-2"><a href="" class="prog-title headline link" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> Grille horaire</a></div>
+					<div class="col-auto col-xl-2 d-none d-xl-block bg-action-2 text-center text-light link-light">
+						<div class="p-2"><a href="<?= esc_url($film_ticketing_url) ?>" target="_blank" class="prog-title --headline h5 link my-2"><i class="fas fa-bolt px-1 d-none"></i><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a></div>
 					</div>	
 				
 				</div> 
 			</div>
 		<?php endif; /* If film_ticketing_url */ ?>	
-
-
-
 		
 	</section>
 	<!-- END: #pageheader -->
