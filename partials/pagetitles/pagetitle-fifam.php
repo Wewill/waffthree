@@ -391,7 +391,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					
 					<!-- Col -->
 					<div class="col-auto col-xl-2 d-none d-xl-block bg-action-2 text-center text-light link-light">
-						<div class="p-2"><a href="<?= esc_url($film_ticketing_url) ?>" target="_blank" class="prog-title --headline h5 link my-2"><i class="fas fa-bolt px-1 d-none"></i><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a></div>
+						<div class="p-2"><a href="<?= esc_url($film_ticketing_url) ?>" target="_blank" class="prog-title --headline h5 link my-2"><i class="bi bi-ticket me-2"></i><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a></div>
 					</div>	
 				
 				</div> 
