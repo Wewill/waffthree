@@ -993,7 +993,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'type' => 'text',
 				'name' => esc_html__( 'Override background color', 'waff' ),
 				'std' => '',
-                'desc' => esc_html__( 'Fill a color.', 'waff' ),
+                'desc' => esc_html__( 'Fill a color class.', 'waff' ),
 			],
             [
                 'id'    => $prefix . 'm_morelink',
@@ -1357,7 +1357,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'type' => 'text',
 				'name' => esc_html__( 'Override background color', 'waff' ),
 				'std' => '',
-                'desc' => esc_html__( 'Fill a color.', 'waff' ),
+                'desc' => esc_html__( 'Fill a color class.', 'waff' ),
 			],
             [
                 'id'    => $prefix . 'i_morelink',
@@ -2394,7 +2394,7 @@ function wa_edito_callback( $attributes ) {
 								<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 								<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
+									<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
 									<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
 										<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 									</span>
@@ -2426,7 +2426,7 @@ function wa_edito_callback( $attributes ) {
 									<img class="w-100" src="<?php echo $im['full_url'] ?>" />
 									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
+										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
@@ -2436,7 +2436,7 @@ function wa_edito_callback( $attributes ) {
 									<div class="bg-image bg-cover bg-position-top-center" style="background-image: url('<?php echo $im['full_url'] ?>');">
 									<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
+										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
@@ -4167,7 +4167,7 @@ function wa_mission_callback( $attributes ) {
 							<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 								<!-- <figcaption> -->
 								<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-									<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
+									<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
 									<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
 										<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 									</span>
@@ -4309,7 +4309,7 @@ function wa_cols_callback( $attributes ) {
 				<?php $im[0]['alt'] = 'DR'; if ( $im[0]['alt'] || $im[0]['description'] || wp_get_attachment_caption($im[0]['ID']) ) : ?>
 					<!-- <figcaption> -->
 					<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 zi-max">
-						<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id  ?>">©</span>
+						<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id  ?>">©</span>
 						<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id  ?>">
 							<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im[0]['ID']) ? wp_get_attachment_caption($im[0]['ID']) : esc_html($im[0]['alt'] ? $im[0]['alt'] : 'DR'); ?></strong> <?= esc_html($im[0]['description']); ?></span>
 						</span>
@@ -4399,7 +4399,7 @@ function wa_breaking_callback( $attributes ) {
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<!-- <figcaption> -->
 									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseA-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapseA-<?= $id  ?>">©</span>
+										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapseA-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapseA-<?= $id  ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseA-<?= $id  ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
@@ -4436,7 +4436,7 @@ function wa_breaking_callback( $attributes ) {
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<!-- <figcaption> -->
 									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapseB-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseB-<?= $id ?>">©</span>
+										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapseB-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseB-<?= $id ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseB-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
@@ -4576,7 +4576,7 @@ function wa_insights_callback( $attributes ) {
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<!-- <figcaption> -->
 									<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2">
-										<span class="collapse-hover bg-white text-action-2 p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
+										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
