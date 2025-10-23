@@ -65,7 +65,7 @@ $slide_colors 		= array();
 								<h1 class="f-20 <?= $class ?> w-60"><?= WaffTwo\Core\waff_do_markdown($_slide_title); ?></h1>
 							</div>
 							<div class="ps-3 ps-md-5 pb-3 --pt-1 opacity-50">
-								<div class="mb-1 d-none d-sm-block <?= $class ?> w-60"><?= $content; ?></div>
+								<div class="mb-1 d-none d-sm-block <?= $class ?> w-60"><?= do_shortcode($content); ?></div>
 								<?= (($url != '')?'<a href="'.$url.'" class="card-link '.$class.' stretched-link d-block pt-3"><i class="icon icon-arrow"></i></a>':''); ?>
 							</div>
 						</div>	
