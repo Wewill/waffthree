@@ -156,7 +156,7 @@ $margin_classes = ( $remove_homeslide_margins ) ? 'mb-0' : 'mb-0 mb-sm-10 mb-lg-
 								<h1 class="display-3 <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown($slide_title); ?></h1>
 							</div>
 							<div class="px-4 pb-3">
-								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= do_shortcode($content); ?></div>
+								<div class="mb-1 d-none d-sm-block <?= $class ?>"><?= WaffTwo\Core\waff_do_markdown(do_shortcode($content)); ?></div>
 								<?= (($url != '')?'<a href="'.$url.'" class="card-link '.$class.' stretched-link d-block"><i class="icon icon-arrow"></i></a>':''); ?>
 							</div>
 						</div>	
