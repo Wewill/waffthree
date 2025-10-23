@@ -20,12 +20,14 @@ $slide_nb 			= 0;
 $slide_images 		= array();
 $slide_colors 		= array();
 
+$remove_homeslide_margins = get_theme_mod( 'remove_homeslide_margins', waff_defaults( 'remove_homeslide_margins' ) );
+$margin_classes = ( $remove_homeslide_margins ) ? 'mb-0' : 'mb-0 mb-sm-10 mb-lg-7';
 
 ?>
 
 <?php if ( $homeslide_slides->have_posts() ) : ?>
 <!-- #slick-homeslide -->
-<section id="slick-homeslide" class="mb-0 mb-sm-10 mb-lg-7 contrast--light ">
+<section id="slick-homeslide" class="<?= $margin_classes; ?>  contrast--light ">
 	<div class="container-fluid px-0">
 		<div class="row g-0 align-items-center vh-100"> <!-- .vh-100 hack--> 
 			<div class="col-lg order-2 order-lg-first overflow-hidden" data-aos="fade-right">
