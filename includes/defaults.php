@@ -42,8 +42,11 @@ function waff_defaults( $name ) {
 				'categories'                   => true,
 				'tags'                         => true,
 				'author_meta'                  => true,
-				'mailchimp_popup'              => false,
 				'advanced_blocks'              => false,
+
+				// Fifam specific
+				'mailchimp_popup'              => false,
+				'remove_homeslide_margins'    	=> false,
 			)
 		);
 	}

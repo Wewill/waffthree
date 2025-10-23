@@ -377,6 +377,14 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'desc'  => esc_html__( 'Hide the empty column between the content and the image.', 'waff' ),
                 'style' => 'rounded',
 			],
+			// Remove top margin class
+			[
+				'id'    => $prefix . 'e_remove_topmargin',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Remove top margin ?', 'waff' ),
+				'desc'  => esc_html__( 'Removes the top margin of the block.', 'waff' ),
+				'style' => 'rounded',
+			],
 		],
 		'category'       => 'layout',
         // 'icon'           => 'format-quote',
@@ -2338,8 +2346,9 @@ function wa_edito_callback( $attributes ) {
 	// Custom CSS class name.
 	//$themeClass = 'edito mt-10 mb-10 contrast--light'; 
 	//$themeClass = 'edito mt-10 mb-10 contrast--light fix-vh-100';
-	$themeClass = 'edito mt-md-10 mb-md-10 mt-5 mb-5 contrast--light fix-vh-100'; // Responsive issue fix
-	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
+	$marginClass = ( mb_get_block_field( 'waff_e_remove_topmargin' ) ) ? 'mt-0 mb-md-10 mb-5' : 'mt-md-10 mb-md-10 mt-5 mb-5';
+	$themeClass = 'edito contrast--light fix-vh-100'; // Responsive issue fix
+	$class = $themeClass . ' ' . $marginClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
 	}
@@ -2353,7 +2362,6 @@ function wa_edito_callback( $attributes ) {
 	$image = mb_get_block_field('waff_e_image');
 
 	$hide_center_column				= (mb_get_block_field( 'waff_e_hide_center_column' ))?'1':'0'; 
-
 
 	if ( mb_get_block_field( 'waff_e_framed' ) == 0 || mb_get_block_field( 'waff_e_framed' ) == null ) :
 	?>

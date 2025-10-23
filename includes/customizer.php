@@ -209,6 +209,25 @@ function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
 				'settings' 	  => 'mailchimp_popup'
 			)
 		);
+
+		// Remove homeslide margins for FIFAM
+		$wp_customize->add_setting(
+			'remove_homeslide_margins', array(
+				'default'           => false,
+				'transport'         => 'postMessage',
+				'sanitize_callback' => 'absint',
+			)
+		);
+		$wp_customize->add_control(
+			'remove_homeslide_margins_control',
+			array(
+				'type'        => 'checkbox',
+				'label'       => esc_html__( 'Remove homeslide margins', 'waff' ),
+				'description' => esc_html__( 'Remove the default top and bottom margins of the homeslide section.', 'waff' ),
+				'section'     => 'go_site_settings',
+				'settings' 	  => 'remove_homeslide_margins'
+			)
+		);
 	endif;
 
 	// Add settings 
