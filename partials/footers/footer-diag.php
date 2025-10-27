@@ -117,6 +117,12 @@ $has_background   = Go\has_footer_background();
 					<div id="socials" class="d-inline-block socials p-0 m-0 ms-2 ms-sm-5 ml-3 --ml-4 list-inline reset-fontsize">
 						<?= WaffTwo\Theme\waff_get_social_menu(); ?>
 					</div>
+
+					<!-- Footer partners logos -->
+					<div>
+						<img src="https://www.diag-imagerie.fr/wp-content/uploads/2025/10/LOGO_RIDF_2019_BLANC.png" alt="Région Île-de-France" width="150" height="auto" class="mt-4 mb-2"/>
+						<span class="subline">Action financée par la Région Île-de-France</span>
+					</div>
 		
 					<!-- Go social options -->
 					<?php if ( $has_social_icons ) : ?>
