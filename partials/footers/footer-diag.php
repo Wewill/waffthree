@@ -119,9 +119,9 @@ $has_background   = Go\has_footer_background();
 					</div>
 
 					<!-- Footer partners logos -->
-					<div>
-						<img src="https://www.diag-imagerie.fr/wp-content/uploads/2025/10/LOGO_RIDF_2019_BLANC.png" alt="Région Île-de-France" width="150" height="auto" class="mt-4 mb-2"/>
-						<span class="subline">Action financée par la Région Île-de-France</span>
+					<div class="d-flex align-items-center mt-3">
+						<img src="https://www.diag-imagerie.fr/wp-content/uploads/2025/10/LOGO_RIDF_2019_BLANC.png" alt="Région Île-de-France" width="150" height="auto" class="d-inline-block socials p-0 m-0 ms-2 ms-sm-5 ml-3 --ml-4 list-inline reset-fontsize">
+						<span class="--h6 headline-length ms-2 ms-sm-5 m-0">Action financée par la Région Île-de-France</span>
 					</div>
 		
 					<!-- Go social options -->
