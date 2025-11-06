@@ -247,7 +247,7 @@ if ( have_posts() ) {
 				<a href="<?= get_site_url().'/festival-programmation'; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play me-2"></i> <?= __('Full programmation', 'waff') ?></a>
 				<?php else : ?>
 				<!-- Standard buttons -->
-				<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="#" class="btn btn-action-1 rounded-0"><i class="bi bi-calendar3 me-2"></i> <?= __('Planning', 'waff') ?></a>
+				<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="#" class="btn btn-action-1 rounded-0"><i class="fas fa-bolt px-1 --d-none"></i> <?= __('Planning', 'waff') ?></a>
 				<a href="<?= $top_parent_section_permalink; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play me-2"></i> <?= __('Full programmation', 'waff') ?></a>
 				<?php endif; ?>
 			</p>
