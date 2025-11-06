@@ -720,7 +720,7 @@ class WP_Widget_Programmation extends WP_Widget {
 				<?php if (get_theme_mod( 'catalog_url')) : ?><div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="<?php WaffTwo\display_catalog_url(); ?>" class="link"><i class="icon icon-catalogue pr-0 f-12"></i> <?= esc_html__( 'Book', 'waff' ) ?></a></div><?php endif; ?>
 			</div>
 			<div class="bg-action-1 text-center text-white link-light d-inline-block">
-				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="bi bi-calendar3 me-2"></i><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Planning', 'waff' ) ?></a></div>
 			</div>	
 		</div>
 		<!-- END: .programmation-button  -->

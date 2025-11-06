@@ -3700,7 +3700,7 @@ function wa_section_callback( $attributes ) {
 			// section : film
 			// Projection in fiche film : projection
 			// Related-sections : film
-			'class' 		=> '###CAROUSEL### card film-card flex-row flex-wrap col-md-10 h-sm-600-px --h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
+			'class' 		=> '###CAROUSEL### card film-card flex-row flex-wrap col-md-10 h-sm-600-px h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
 			// section : card film-card flex-row flex-wrap col-md-6 bg-light my-2 border-0 h-280-px shadow-sm card-dark
 			// Projection in fiche film : card film-card flex-row flex-wrap col-4 --bg-custom mx-2 my-0 border-0 h-300-px shadow-sm --card-white --p-0
 			// Related-sections : card film-card --flex-row flex-wrap bg-light border-0 h-200-px shadow-sm card-dark
@@ -3962,7 +3962,7 @@ function wa_sections_callback( $attributes ) {
 						'size' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'post-featured-image-xs':'post-featured-image', //post-featured-image-x2
 						'alt' => esc_html($featured_img_caption),
 						'style' => 'object-fit: cover; width: 100%;',
-						'class' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'img-fluid h-100-px':'img-fluid h-sm-600-px --h-600-px')
+						'class' => ( isset( $show_tiny_list ) && $show_tiny_list == '1' )?'img-fluid h-100-px':'img-fluid h-sm-600-px h-600-px')
 					);
 				}
 				$section_credits_image 				= get_term_meta( $section_id, 'wpcf-s-credits-image', true ); 
@@ -3972,7 +3972,7 @@ function wa_sections_callback( $attributes ) {
 		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?>" <?= $data ?>>
 			<div class="--card border-0 rounded-0 row" <?= (($section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
 				<?php if ( $section_image != '' ) : ?> 
-				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-sm-600-px --h-600-px col-12 col-sm-6">
+				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-sm-600-px h-600-px col-12 col-sm-6">
 					<picture class="lazy">
 					<!-- 3800x1200 > 1900x600 -->
 					<?= $section_image ?>
@@ -3984,7 +3984,7 @@ function wa_sections_callback( $attributes ) {
 					<?php endif; /* If captions */ ?>
 				</figure>
 				<?php endif; ?>
-				<div class="<?= (($section_image!='')?'col-12 col-sm-6':'p-3 h-sm-600-px --h-600-px'); ?> p-5 p-sm-2 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-start align-items-sm-center" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
+				<div class="<?= (($section_image!='')?'col-12 col-sm-6':'p-3 h-sm-600-px h-600-px'); ?> p-5 p-sm-2 d-flex flex-column flex-sm-row justify-content-center justify-content-sm-between align-items-start align-items-sm-center" <?= (($section_image=='' && $section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
 					<div class="w-sm-50">
 						<h2 class="--pt-4 heading-4 heading-sm card-title <?= $section_title_color ?>"><?= sanitize_text_field($section->name) ?></h2>
 						<!-- Edition-->
