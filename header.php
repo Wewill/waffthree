@@ -192,8 +192,13 @@
 		<?php  if ( defined('WAFF_PARTIALS') && 'golfs' === WAFF_PARTIALS ) { get_template_part( 'partials/navs/nav-'.WAFF_PARTIALS ); } ?>
 
 		<?php if ( true === WAFF_HAS_ADVERT ) : ?>
-		<!-- Preheader -->
+		<!-- Adverts -->
 		<?php  get_template_part( 'partials/adverts/advert-'.WAFF_PARTIALS ); ?>
+		<?php endif; ?>
+
+		<?php if ( true === WAFF_HAS_QUICKLINK ) : ?>
+		<!-- Quicklinks -->
+		<?php  get_template_part( 'partials/quicklinks/quicklink-'.WAFF_PARTIALS ); ?>
 		<?php endif; ?>
 		
 		<!-- Homeslide -->
