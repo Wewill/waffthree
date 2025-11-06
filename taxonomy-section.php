@@ -133,6 +133,11 @@ if ( have_posts() ) {
 
 	$section_godparents					= get_term_meta( $section_id, 'wpcf-s-godparent', false ); 
 
+	// Get top parent section from this section_id 
+	$top_parent_section = WaffTwo\Theme\waff_get_top_parent_term( $section_id );
+	// Then get this term permalink
+	$top_parent_section_permalink = get_term_link( $top_parent_section->term_id, 'section' );
+
 	?>
 	<!-- Punchlines -->
 	<?php if ( $section->parent != 0 ) : ?> 
@@ -236,7 +241,8 @@ if ( have_posts() ) {
 			<?php if ( $section_additionnal_content != '' ) : ?> 
 			<a href="<?= $section_additionnal_content ?>" class="btn btn-outline-dark rounded-0"><?= __('Download in', 'waff') ?> *.pdf</a>
 			<?php endif; ?>
-			<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':'#'; ?>" class="btn btn-action-1 rounded-0"><?= __('Planning', 'waff') ?></a>
+			<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':'#'; ?>" class="btn btn-action-1 rounded-0"><i class="bi bi-calendar3"></i> <?= __('Planning', 'waff') ?></a>
+			<a href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':$top_parent_section_permalink; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play h5"></i> <?= __('Full programmation', 'waff') ?></a>
 			</p>
 
 			<!-- Section content -->

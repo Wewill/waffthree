@@ -722,3 +722,20 @@ function waff_get_languages() {
 
 	}
 }
+
+/**	
+ * Return top parent term of a given term
+ */
+function waff_get_top_parent_term( $term_id, $taxonomy ) {
+	$term = get_term( $term_id, $taxonomy );
+	if ( is_wp_error( $term ) ) {
+		return null;
+	}
+	while ( $term->parent != 0 ) {
+		$term = get_term( $term->parent, $taxonomy );
+		if ( is_wp_error( $term ) ) {
+			return null;
+		}
+	}
+	return $term;
+}
