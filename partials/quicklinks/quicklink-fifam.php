@@ -80,11 +80,11 @@ $quicklinks = array(
 ?>
 
 <section id="quicklink" class="mt-0 mb-0 --contrast--light position-fixed bottom-0 start-0 zi-100">
-	<ul class="quicklink-list list-unstyled d-flex flex-column flex-md-row justify-content-center align-items-stretch gap-2 p-4 m-0">
+	<ul class="quicklink-list list-unstyled d-flex flex-column flex-md-row justify-content-center align-items-stretch --gap-2 p-4 m-0">
 		<?php foreach ( $quicklinks as $link ) : ?>
 		<li class="quicklink-item">
 			<a 	href="<?php echo esc_url( $link['url'] ); ?>" 
-				class="link d-flex flex-row justify-content-center align-items-center gap-2 text-center <?php echo esc_attr( $link['link_class'] ); ?> p-2 px-3 p-md-3 px-md-4 rounded-full shadow-lg bg-<?php echo esc_attr( $link['bg_color'] ); ?>" 
+				class="link d-flex flex-row justify-content-center align-items-center gap-2 text-center <?php echo esc_attr( $link['link_class'] ); ?> p-2 px-3 p-md-3 px-md-4 --rounded-full shadow-lg bg-<?php echo esc_attr( $link['bg_color'] ); ?>" 
 				data-bs-toggle="tooltip" data-toggle="tooltip" title="<?= $link['description']; ?>">
 				<?php if ( ! empty( $link['icon'] ) ) : ?>
 					<i class="<?php echo esc_attr( $link['icon'] ); ?> h5 mb-0" aria-hidden="true"></i>
