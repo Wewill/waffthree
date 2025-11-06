@@ -235,14 +235,21 @@ if ( have_posts() ) {
 				
 			<!-- Buttons -->
 			<p class="mb-0 mb-sm-4">
-			<?php if ( strlen(strip_tags($section_content)) > 0 && strlen(strip_tags($section_description)) > 0 ) : ?> 
-			<a class="btn btn-outline-dark rounded-0" data-toggle="collapse" data-bs-toggle="collapse" href="#collapseContent" role="button" aria-expanded="false" aria-controls="collapseContent"><i class="fas fa-ellipsis-h"></i> <?= __('Read more', 'waff') ?></a>
-			<?php endif; ?>
-			<?php if ( $section_additionnal_content != '' ) : ?> 
-			<a href="<?= $section_additionnal_content ?>" class="btn btn-outline-dark rounded-0"><?= __('Download in', 'waff') ?> *.pdf</a>
-			<?php endif; ?>
-			<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':'#'; ?>" class="btn btn-action-1 rounded-0"><i class="bi bi-calendar3"></i> <?= __('Planning', 'waff') ?></a>
-			<a href="<?= (defined('WAFF_THEME') && WAFF_THEME == 'DINARD')?get_site_url().'/festival-programmation':$top_parent_section_permalink; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play h5"></i> <?= __('Full programmation', 'waff') ?></a>
+				<?php if ( strlen(strip_tags($section_content)) > 0 && strlen(strip_tags($section_description)) > 0 ) : ?> 
+				<a class="btn btn-outline-dark rounded-0" data-toggle="collapse" data-bs-toggle="collapse" href="#collapseContent" role="button" aria-expanded="false" aria-controls="collapseContent"><i class="fas fa-ellipsis-h"></i> <?= __('Read more', 'waff') ?></a>
+				<?php endif; ?>
+				<?php if ( $section_additionnal_content != '' ) : ?> 
+				<a href="<?= $section_additionnal_content ?>" class="btn btn-outline-dark rounded-0"><?= __('Download in', 'waff') ?> *.pdf</a>
+				<?php endif; ?>
+
+				<?php if (defined('WAFF_THEME') && WAFF_THEME == 'DINARD') : ?> 
+				<!-- Dinard specific buttons -->
+				<a href="<?= get_site_url().'/festival-programmation'; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play me-2"></i> <?= __('Full programmation', 'waff') ?></a>
+				<?php else : ?>
+				<!-- Standard buttons -->
+				<a data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal" href="#" class="btn btn-action-1 rounded-0"><i class="bi bi-calendar3 me-2"></i> <?= __('Planning', 'waff') ?></a>
+				<a href="<?= $top_parent_section_permalink; ?>" class="btn btn-dark rounded-0 f-heading"><i class="bi bi-collection-play me-2"></i> <?= __('Full programmation', 'waff') ?></a>
+				<?php endif; ?>
 			</p>
 
 			<!-- Section content -->

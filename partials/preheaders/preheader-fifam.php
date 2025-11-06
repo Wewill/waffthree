@@ -50,7 +50,7 @@ $page_atts = $args;
 				
 				<!-- Col -->
 				<div class="col-auto col-xl-2 d-none d-xl-block bg-primary--- bg-action-1 text-center text-light link-light">
-					<div class="p-2"><a href="" class="prog-title headline link" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+					<div class="p-2"><a href="" class="prog-title headline link" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Planning', 'waff' ) ?></a></div>
 				</div>	
 			
 			</div> 

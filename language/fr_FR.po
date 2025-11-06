@@ -4,7 +4,7 @@ msgstr ""
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 13:44+0000\n"
-"PO-Revision-Date: 2025-10-17 07:57+0000\n"
+"PO-Revision-Date: 2025-11-06 11:21+0000\n"
 "Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -29,14 +29,14 @@ msgid_plural "%s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: taxonomy-room.php:180 taxonomy-room.php:274 taxonomy-section.php:291
+#: taxonomy-room.php:180 taxonomy-room.php:274 taxonomy-section.php:304
 #, php-format
 msgid "%s avant-premiere"
 msgid_plural "%s avant-premieres"
 msgstr[0] ""
 msgstr[1] ""
 
-#: taxonomy-room.php:163 taxonomy-room.php:257 taxonomy-section.php:274
+#: taxonomy-room.php:163 taxonomy-room.php:257 taxonomy-section.php:287
 #, php-format
 msgid "%s event"
 msgid_plural "%s events"
@@ -44,7 +44,7 @@ msgstr[0] "%s event"
 msgstr[1] ""
 
 # @ waff
-#: taxonomy-room.php:175 taxonomy-room.php:269 taxonomy-section.php:286
+#: taxonomy-room.php:175 taxonomy-room.php:269 taxonomy-section.php:299
 #, php-format
 msgid "%s favorite"
 msgid_plural "%s favorites"
@@ -52,7 +52,7 @@ msgstr[0] "%s coup de coeur"
 msgstr[1] "%s coups de coeur"
 
 # @ waff
-#: taxonomy-room.php:159 taxonomy-room.php:253 taxonomy-section.php:270
+#: taxonomy-room.php:159 taxonomy-room.php:253 taxonomy-section.php:283
 #, php-format
 msgid "%s film"
 msgid_plural "%s films"
@@ -60,7 +60,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 # @ waff
-#: taxonomy-room.php:173 taxonomy-room.php:267 taxonomy-section.php:284
+#: taxonomy-room.php:173 taxonomy-room.php:267 taxonomy-section.php:297
 #, php-format
 msgid "%s highlight"
 msgid_plural "%s highlights"
@@ -68,14 +68,14 @@ msgstr[0] "%s temps-fort"
 msgstr[1] "%s temps-forts"
 
 # @ waff
-#: taxonomy-room.php:171 taxonomy-room.php:265 taxonomy-section.php:282
+#: taxonomy-room.php:171 taxonomy-room.php:265 taxonomy-section.php:295
 #, php-format
 msgid "%s parent-children"
 msgid_plural "%s parent-children's"
 msgstr[0] "%s parent-enfant"
 msgstr[1] "%s parents-enfants"
 
-#: taxonomy-room.php:178 taxonomy-room.php:272 taxonomy-section.php:289
+#: taxonomy-room.php:178 taxonomy-room.php:272 taxonomy-section.php:302
 #, php-format
 msgid "%s premiere"
 msgid_plural "%s premieres"
@@ -83,7 +83,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 # @ waff
-#: taxonomy-room.php:165 taxonomy-room.php:259 taxonomy-section.php:276
+#: taxonomy-room.php:165 taxonomy-room.php:259 taxonomy-section.php:289
 #, php-format
 msgid "%s program"
 msgid_plural "%s programs"
@@ -97,7 +97,7 @@ msgid_plural "%s projections"
 msgstr[0] ""
 msgstr[1] ""
 
-#: taxonomy-room.php:169 taxonomy-room.php:263 taxonomy-section.php:280
+#: taxonomy-room.php:169 taxonomy-room.php:263 taxonomy-section.php:293
 #, php-format
 msgid "%s with debate"
 msgid_plural "%s with debate's"
@@ -105,7 +105,7 @@ msgstr[0] "%s avec débat"
 msgstr[1] "%s avec débats"
 
 # @ waff
-#: taxonomy-room.php:167 taxonomy-room.php:261 taxonomy-section.php:278
+#: taxonomy-room.php:167 taxonomy-room.php:261 taxonomy-section.php:291
 #, php-format
 msgid "%s with guest"
 msgid_plural "%s with guest's"
@@ -325,7 +325,7 @@ msgstr ""
 "Ajoute un filtre à l'image sélectionnée (si la couleur d'arrière-plan de "
 "l'en-tête de couleur est remplie)"
 
-#: includes/customizer.php:247
+#: includes/customizer.php:266
 msgid "Advanced blocks"
 msgstr "Block avancé"
 
@@ -391,7 +391,7 @@ msgstr ""
 
 # @ waff
 #: partials/footers/footer-golfs.php:139 partials/footers/footer-rsfp.php:127
-#: partials/footers/footer-diag.php:143 partials/footers/footer-fifam.php:138
+#: partials/footers/footer-diag.php:149 partials/footers/footer-fifam.php:138
 #: partials/footers/footer-dinard.php:137
 msgid "Back to top"
 msgstr "En haut"
@@ -412,7 +412,7 @@ msgid "Between"
 msgstr "Entre"
 
 # @ waff
-#: taxonomy-section.php:199
+#: taxonomy-section.php:204
 msgid "Birthdate"
 msgstr "Date de naissance"
 
@@ -437,7 +437,7 @@ msgstr "Catalogue"
 msgid "Booklet"
 msgstr "Brochure"
 
-#: includes/customizer.php:396
+#: includes/customizer.php:415
 msgid "Booklet file URL (*.pdf)"
 msgstr "URL du fichier brochure (*.pdf)"
 
@@ -485,7 +485,7 @@ msgstr "Classes card:"
 msgid "Card content position:"
 msgstr "Position du contenu de la carte:"
 
-#: includes/customizer.php:417
+#: includes/customizer.php:436
 msgid "Catalog file URL (*.pdf)"
 msgstr "URL du fichier catalogue (*.pdf)"
 
@@ -599,7 +599,7 @@ msgid "Comedy"
 msgstr "Comédie"
 
 # @ waff
-#: includes/customizer.php:330
+#: includes/customizer.php:349
 msgid "Company address"
 msgstr "Adresse"
 
@@ -608,7 +608,7 @@ msgid "Competition"
 msgstr "Compétition"
 
 # @ waff
-#: includes/customizer.php:288
+#: includes/customizer.php:307
 msgid "Contact email"
 msgstr "Email de contact"
 
@@ -622,8 +622,8 @@ msgstr "URL de la page de contact:"
 msgid "Contact us"
 msgstr "Contactez-nous"
 
-#: partials/content-competitions.php:24 partials/content-competitions.php:36
-#: partials/content-competitions.php:48
+#: partials/content-competitions.php:25 partials/content-competitions.php:37
+#: partials/content-competitions.php:49
 msgid "Contact-us"
 msgstr "Contactez-nous"
 
@@ -661,13 +661,13 @@ msgid "Continue reading %s"
 msgstr "Lire la suite %s"
 
 # @ waff
-#: taxonomy-section.php:203
+#: taxonomy-section.php:208
 msgid "Country"
 msgstr "Pays"
 
 # @ waff
 #: includes/theme.php:283 partials/footers/footer-golfs.php:138
-#: partials/footers/footer-rsfp.php:126 partials/footers/footer-diag.php:142
+#: partials/footers/footer-rsfp.php:126 partials/footers/footer-diag.php:148
 #: partials/footers/footer-fifam.php:137 partials/footers/footer-dinard.php:136
 msgid "Credits Menu"
 msgstr "Menu crédits"
@@ -693,14 +693,14 @@ msgstr "Jours"
 msgid "Default"
 msgstr "Default"
 
-#: partials/content-competitions.php:83
+#: partials/content-competitions.php:84
 #: partials/pagetitles/pagetitle-golfs.php:304
 msgid "Departures"
 msgstr "Départs"
 
 # @ waff
 #: partials/footers/footer-golfs.php:162 partials/footers/footer-rsfp.php:150
-#: partials/footers/footer-diag.php:141 partials/footers/footer-fifam.php:160
+#: partials/footers/footer-diag.php:147 partials/footers/footer-fifam.php:160
 #: partials/footers/footer-dinard.php:159
 #, php-format
 msgid "Designed w/ <3 by %1$s using WordPress"
@@ -757,7 +757,7 @@ msgid "Download"
 msgstr "Télécharger"
 
 # @ waff
-#: taxonomy-section.php:237
+#: taxonomy-section.php:242
 msgid "Download in"
 msgstr "Télécharger en"
 
@@ -803,7 +803,7 @@ msgstr "Modifier Partenaire"
 msgid "Edition"
 msgstr "Édition"
 
-#: includes/customizer.php:248
+#: includes/customizer.php:267
 msgid "Enable all the advanced blocks for gutenberg or a usefull selection."
 msgstr "Activer tous les blocs avancés pour Gutenberg ou une sélection utile."
 
@@ -1004,18 +1004,22 @@ msgstr ""
 msgid "Full"
 msgstr "Plein"
 
+#: taxonomy-section.php:247 taxonomy-section.php:251
+msgid "Full programmation"
+msgstr "Programmation complète"
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:402
 #: includes/admin/widgets/custom-wp-widget-partners.php:210
 msgid "Full-width"
 msgstr "Plein largeur"
 
 # @ waff
-#: taxonomy-section.php:168
+#: taxonomy-section.php:173
 msgid "Godfather"
 msgstr "Parrain"
 
 # @ waff
-#: taxonomy-section.php:168
+#: taxonomy-section.php:173
 msgid "Godmother"
 msgstr "Parraine"
 
@@ -1053,7 +1057,7 @@ msgstr ""
 
 # @ waff
 #: partials/footers/footer-golfs.php:139 partials/footers/footer-rsfp.php:127
-#: partials/footers/footer-diag.php:143 partials/footers/footer-fifam.php:138
+#: partials/footers/footer-diag.php:149 partials/footers/footer-fifam.php:138
 #: partials/footers/footer-dinard.php:137
 msgid "Home"
 msgstr "Accueil"
@@ -1130,7 +1134,7 @@ msgstr "Classes intérieures:"
 msgid "It started !"
 msgstr "Ça a commencé !"
 
-#: partials/content-competitions.php:45
+#: partials/content-competitions.php:46
 msgid "It's done"
 msgstr "C'est terminé"
 
@@ -1352,7 +1356,7 @@ msgstr "Mode nuit"
 msgid "No"
 msgstr "Non"
 
-#: partials/content-competitions.php:21
+#: partials/content-competitions.php:22
 msgid "No departures yet! Please come back"
 msgstr "Aucun départ pour le moment ! Revenez bientôt"
 
@@ -1386,7 +1390,7 @@ msgstr "Pas de partenaires"
 msgid "No Partners found in Trash"
 msgstr "Pas de partenaires dans la corbeille"
 
-#: partials/content-competitions.php:33
+#: partials/content-competitions.php:34
 msgid "No results yet! Please come back"
 msgstr "Aucun résultats pour le moment ! Revenez bientôt"
 
@@ -1490,7 +1494,7 @@ msgid "Partners"
 msgstr "Partenaires"
 
 # @ waff
-#: includes/customizer.php:267
+#: includes/customizer.php:286
 msgid "Phone number"
 msgstr "Numéro de téléphone"
 
@@ -1501,15 +1505,15 @@ msgid "Planner"
 msgstr "Grille"
 
 # @ waff
-#: taxonomy-section.php:239
+#: taxonomy-section.php:250
 #: includes/admin/widgets/custom-wp-widget-programmation.php:660
 #: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:718
 msgid "Planning"
-msgstr "Programmation"
+msgstr "Grille-horaire"
 
-#: includes/customizer.php:375
+#: includes/customizer.php:394
 msgid "Planning file URL (*.pdf)"
-msgstr "URL du fichier du planning (*.pdf)"
+msgstr "URL du fichier de la grille-horaire (*.pdf)"
 
 # @ waff
 #: includes/theme.php:448
@@ -1624,7 +1628,7 @@ msgid "Print projections block."
 msgstr "Afficher le bloc projections"
 
 # @ waff
-#: includes/customizer.php:351
+#: includes/customizer.php:370
 msgid "Privacy Statement"
 msgstr "Déclaration de confidentialité "
 
@@ -1644,7 +1648,7 @@ msgstr "Programme"
 #: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:744
 #: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:753
 msgid "Programmation"
-msgstr "Grille horaire"
+msgstr "Programmation"
 
 # @ waff
 #: includes/theme.php:332
@@ -1675,11 +1679,11 @@ msgid "Read More"
 msgstr "Lire la suite"
 
 # @ waff
-#: taxonomy-section.php:234
+#: taxonomy-section.php:239
 msgid "Read more"
 msgstr "Lire la suite"
 
-#: partials/content-competitions.php:46
+#: partials/content-competitions.php:47
 msgid ""
 "Registrations for this competition are closed. Please contact us to get more "
 "informations."
@@ -1687,7 +1691,15 @@ msgstr ""
 "Les inscriptions pour cette compétition sont terminées. Veuillez nous "
 "contacter pour obtenir plus d’informations."
 
-#: partials/content-competitions.php:105
+#: includes/customizer.php:225
+msgid "Remove homeslide margins"
+msgstr ""
+
+#: includes/customizer.php:226
+msgid "Remove the default top and bottom margins of the homeslide section."
+msgstr ""
+
+#: partials/content-competitions.php:106
 #: partials/pagetitles/pagetitle-golfs.php:305
 msgid "Results"
 msgstr "Résultats"
@@ -1740,7 +1752,7 @@ msgid "Select Category"
 msgstr "Sélectionner la catégorie"
 
 # @ waff
-#: taxonomy-section.php:300
+#: taxonomy-section.php:313
 msgid "Selective filmography"
 msgstr "Filmographie sélective"
 
@@ -1765,7 +1777,7 @@ msgid "Show a subtitle if filled"
 msgstr "Affiche un sous-titre si rempli"
 
 # @ waff
-#: includes/customizer.php:227
+#: includes/customizer.php:246
 msgid "Show author name in single posts ?"
 msgstr "Afficher le nom de l'auteur dans les messages individuels ?"
 
@@ -1775,7 +1787,7 @@ msgid "Show hierarchy"
 msgstr "Afficher la hiérarchie"
 
 # @ waff
-#: includes/customizer.php:228
+#: includes/customizer.php:247
 msgid "Show or hide author name in post metas."
 msgstr "Afficher ou masquer le nom de l'auteur dans les métas de publication."
 
@@ -1794,13 +1806,13 @@ msgstr "Symbole sombre url ( *.svg )"
 msgid "Sign light url ( *.svg )"
 msgstr "Symbole clair url ( *.svg )"
 
-#: partials/content-competitions.php:24 partials/content-competitions.php:146
+#: partials/content-competitions.php:25 partials/content-competitions.php:147
 #: partials/pagetitles/pagetitle-golfs.php:306
 msgid "Sign-up"
 msgstr "Inscriptions"
 
 # @ waff
-#: includes/customizer.php:309
+#: includes/customizer.php:328
 msgid "Site message"
 msgstr "Message du site"
 
@@ -1895,7 +1907,7 @@ msgstr[1] ""
 "Il y a des erreurs %d qui doivent être corrigées avant de pouvoir "
 "enregistrer."
 
-#: partials/content-competitions.php:22
+#: partials/content-competitions.php:23
 msgid ""
 "There is no departure defined yet. Please contact us to get more "
 "informations."
@@ -1903,7 +1915,7 @@ msgstr ""
 "Aucun départ n'est encore prévu. Veuillez nous contacter pour plus "
 "d'informations."
 
-#: partials/content-competitions.php:34
+#: partials/content-competitions.php:35
 msgid ""
 "There is no results defined yet. Please contact us to get more informations."
 msgstr ""
@@ -1916,17 +1928,17 @@ msgid "Third column classes:"
 msgstr "Classes de troisième colonne:"
 
 # @ waff
-#: includes/customizer.php:329 includes/customizer.php:350
+#: includes/customizer.php:348 includes/customizer.php:369
 msgid "This will appear in the footer at the bottom of the site."
 msgstr "Cela apparaîtra dans le pied de page en bas du site."
 
 # @ waff
-#: includes/customizer.php:308
+#: includes/customizer.php:327
 msgid "This will appear in the header at the top of the site."
 msgstr "Cela apparaîtra dans l'en-tête en haut du site."
 
-#: includes/customizer.php:374 includes/customizer.php:395
-#: includes/customizer.php:416 includes/customizer.php:437
+#: includes/customizer.php:393 includes/customizer.php:414
+#: includes/customizer.php:435 includes/customizer.php:456
 msgid "This will appear in the programmation modal."
 msgstr "Ceci apparaîtra dans le modal de programmation."
 
@@ -2072,9 +2084,9 @@ msgstr ""
 #: partials/pagetitles/pagetitle-dinard.php:637
 #: partials/pagetitles/pagetitle-dinard.php:690
 #: partials/pagetitles/pagetitle-dinard.php:758
-#: partials/pagetitles/pagetitle-fifam.php:749
-#: partials/pagetitles/pagetitle-fifam.php:802
-#: partials/pagetitles/pagetitle-fifam.php:870
+#: partials/pagetitles/pagetitle-fifam.php:773
+#: partials/pagetitles/pagetitle-fifam.php:826
+#: partials/pagetitles/pagetitle-fifam.php:895
 #: partials/pagetitles/pagetitle-golfs.php:399
 #: partials/pagetitles/pagetitle-golfs.php:673
 #: partials/pagetitles/pagetitle-golfs.php:726
@@ -2087,7 +2099,7 @@ msgstr "Vous devez choisir une image miniature"
 msgid "Young public"
 msgstr "Jeune public"
 
-#: includes/customizer.php:438
+#: includes/customizer.php:457
 msgid "Young public booklet file URL (*.pdf)"
 msgstr "Fichier du livret pour le jeune public URL (*.pdf)"
 
