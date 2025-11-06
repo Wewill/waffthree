@@ -53,7 +53,7 @@ class WP_Widget_Newsletter extends WP_Widget {
 						</div>
 						<div class="col-4 d-flex flex-center" data-aos="fade-down" data-aos-delay="200">								
 							<!-- Url  -->
-							<a class="btn btn-outline-color-main btn-lg" href="<?= $url; ?>" title="Go to newsletter">S'inscrire à la newsletter</a>
+							<a class="btn btn-outline-color-main btn-lg" href="<?= $url; ?>" title="Go to newsletter">S'inscrire<span class="d-none d-sm-inline"> à la newsletter<span></a>
 						</div>
 					</div>
 				</div>
