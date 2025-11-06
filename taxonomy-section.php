@@ -134,7 +134,7 @@ if ( have_posts() ) {
 	$section_godparents					= get_term_meta( $section_id, 'wpcf-s-godparent', false ); 
 
 	// Get top parent section from this section_id 
-	$top_parent_section = WaffTwo\Theme\waff_get_top_parent_term( $section_id );
+	$top_parent_section = WaffTwo\Theme\waff_get_top_parent_term( $section_id, 'section' );
 	// Then get this term permalink
 	$top_parent_section_permalink = get_term_link( $top_parent_section->term_id, 'section' );
 
