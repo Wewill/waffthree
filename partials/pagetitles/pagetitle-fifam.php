@@ -381,16 +381,16 @@ if ( is_singular() && has_post_thumbnail() ) {
 				<div class="row g-0 align-items-center">
 					
 					<!-- Col -->
-					<div class="col-12 col-xl-10">
+					<div class="col-12 col-md-10 d-none d-sm-block">
 						<!-- Flex -->
 						<div class="d-flex justify-content-between--- align-items-center">
-							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Billeterie <span class="sr-only">Réserver ma place grâce à la billeterie en ligne</span></div> <!-- Lire la suite -->
+							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Billetterie <span class="sr-only">Réserver ma place grâce à la billeterie en ligne</span></div> <!-- Lire la suite -->
 						</div>
 						<!-- End Flex -->
 					</div>
 					
 					<!-- Col -->
-					<div class="col-auto col-xl-2 d-none d-xl-block bg-action-2 text-center text-light link-light">
+					<div class="col-12 col-md-2 d-none d-xl-block bg-action-2 text-center text-dark link-dark">
 						<div class="p-2"><a href="<?= esc_url($film_ticketing_url) ?>" target="_blank" class="prog-title --headline h5 link my-2"><i class="bi bi-ticket me-2"></i><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a></div>
 					</div>	
 				
