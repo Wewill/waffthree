@@ -359,14 +359,14 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 		<!-- Play -->
 		<?php if ( $film_teaser_url != '' ) : ?>
-			<div class="absolute position-absolute top-0 h-100 w-100 btn_holder">
+			<div class="position-absolute top-0 h-100 w-100 btn_holder">
 				<a href="<?= esc_url($film_teaser_url) ?>?rel=0&amp;showinfo=0" class="btn white play" target="_blank" data-fancybox="header_<?= $post->ID; ?>_fancybox"><i class="fas fa-play"></i></a>
 			</div>
 		<?php endif; /* If film_teaser_url */ ?>
 
 		<!-- Awards image -->
 		<?php if ( count($film_awards) > 0 ) : ?>
-			<div class="absolute position-absolute top-0 end-0 right-0 mt-4 mr-6 me-6">
+			<div class="position-absolute top-0 end-0 mt-4 mr-6 me-6">
 				<?php foreach( $film_awards as $award ) :
 					$award_image 						= get_term_meta( $award->term_id, 'wpcf-a-light-image', true ); 
 				?>
@@ -377,7 +377,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 
 		<!-- Ticketing -->
 		<?php if ( $film_ticketing_url != '' ) : ?>
-			<div class="absolute position-absolute top-0 end-0 right-0 container-fluid px-0">
+			<div class="position-absolute top-0 end-0 container-fluid px-0">
 				<div class="row g-0 align-items-center">
 					
 					<!-- Col -->
@@ -390,7 +390,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					</div>
 					
 					<!-- Col -->
-					<div class="col-12 col-md-2 d-none d-xl-block bg-action-2 text-center text-dark link-dark">
+					<div class="col-12 col-md-2 bg-action-2 text-center text-dark link-dark">
 						<div class="p-2"><a href="<?= esc_url($film_ticketing_url) ?>" target="_blank" class="prog-title --headline h5 link my-2"><i class="bi bi-ticket me-2"></i><?= esc_html(__('[:fr]Réserver ma place[:en]Book my ticket[:]')); ?></a></div>
 					</div>	
 				
