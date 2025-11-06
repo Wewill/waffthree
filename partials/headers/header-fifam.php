@@ -58,7 +58,7 @@ global $page_atts;
 			</a>
 			
 			<!-- Page title -->
-			<span class="navbar-text page-title --pr-3 text-end w-40">
+			<span class="navbar-text page-title --pr-3 text-end w-40 d-flex align-items-center justify-content-end" style="max-height: 35px;">
 				
 				<?php
 				if ( !is_front_page() ) { 
@@ -75,6 +75,70 @@ global $page_atts;
 				<?php // Go\navigation_toggle(); ?>
 	
 				<?php WaffTwo\waff_night_toggle(); ?>
+
+				<!-- If exists add here account menu walker -->
+				<?php if ( has_nav_menu( 'account' ) || is_customize_preview() ) : ?>
+					<div class="font-weight-bold account-nav" aria-label="<?php esc_attr_e( 'Account Menu', 'go' ); ?>">	
+						<?php
+							/*print ( preg_replace( '/(<a )/', '<a class="nav-link text-action-2" ', strip_tags( wp_nav_menu(
+								array(
+									'theme_location' => 'account',
+									'items_wrap'      => '%3$s',
+									'container'       => false,
+									'echo'            => false,
+									'depth'          => '2',
+								)
+							), '<a><span><i><title><desc>' ) ) );*/
+							wp_nav_menu(
+								array(
+									'theme_location' => 'account',
+									'menu_class'     => 'nav-link subline fs-5',
+									'depth'          => 2,
+								)
+							);
+						?>
+					</div>
+				<?php endif; ?>
+
+				<style type="text/css">
+					.account-nav {
+						display: inline-block;
+						padding: .75rem;
+						/* position: relative; */
+					}
+					.account-nav ul {
+						margin: 0;
+						padding: 0;
+						list-style: none;
+					}
+					.account-nav ul li {
+						display: inline-block;
+					}
+					.account-nav ul li a {
+						color: var(--color-black);
+						text-decoration: none;	
+					}
+					.account-nav ul li a i {
+						position: relative;
+						color: black;
+						top: 1px;
+					}
+					.account-nav ul li ul.sub-menu {
+						position: absolute;
+						top: 32px;
+						right: 10px;
+					}
+					.account-nav ul li ul.sub-menu li {
+						margin-left:.5rem;
+					}
+					.account-nav ul li ul.sub-menu {
+						opacity: 0;
+						transition: all .3s ease-in-out;
+					}
+					.account-nav ul li:hover ul.sub-menu {
+						opacity: 1;
+					} 
+				</style>
 	
 			</span>
 		</nav>	
