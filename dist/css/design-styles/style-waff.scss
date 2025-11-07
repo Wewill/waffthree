@@ -3052,3 +3052,14 @@ aside.widget-area h6:first-of-type {
   font-weight: 600;
   opacity: 0.8;
 }
+
+
+/**
+Adds to fifam specific styles.css
+*/
+
+.has-sublines td:first-child {
+  font-family: Bureau Grot Condensed,Roboto,Helvetica,Arial,sans-serif;
+  text-transform: uppercase;
+  font-size: 1.25rem!important;
+}
