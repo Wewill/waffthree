@@ -3053,13 +3053,16 @@ aside.widget-area h6:first-of-type {
   opacity: 0.8;
 }
 
-
 /**
 Adds to fifam specific styles.css
 */
 
+
 .has-sublines td:first-child {
-  font-family: Bureau Grot Condensed,Roboto,Helvetica,Arial,sans-serif;
+  font-family: "Bureau Grot Condensed", Roboto, Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 1.25rem!important;
+  font-weight: bold;
+  width: 40%;
+  line-height: 1;
+  font-size: 2.25rem !important;
 }
