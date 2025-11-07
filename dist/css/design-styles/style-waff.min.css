@@ -68,4 +68,5 @@ Adds to fifam specific styles.css
       -webkit-text-stroke: 2px #2e2e2e;  /* Contour noir */
     text-stroke: 2px #2e2e2e;
     color: white;
+    margin-top: 0;
 }
