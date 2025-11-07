@@ -3066,3 +3066,9 @@ Adds to fifam specific styles.css
   line-height: 1;
   font-size: 2.25rem !important;
 }
+
+.status-private .page-header h1 {
+      -webkit-text-stroke: 2px #2e2e2e;  /* Contour noir */
+    text-stroke: 2px #2e2e2e;
+    color: white;
+}
