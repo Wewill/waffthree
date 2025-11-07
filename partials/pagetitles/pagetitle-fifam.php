@@ -322,6 +322,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					<h1 class="title mb-0"><?= (( $film_french_title != '' )?sanitize_text_field($film_french_title):sanitize_text_field($title)); ?><?= $film_length ?></h1>
 					<?php if ( $film_french_title != '' ) printf('<h5 class="subline-4 text-muted mb-1">%s</h5>', sanitize_text_field($title)); ?>
 					<?= WaffTwo\waff_entry_meta_header(); ?>
+					<?php echo do_shortcode('[wacp_favorite_star film_id="'.$post->ID.'"]'); ?>
 				</hgroup>
 		    </div>
 		</div>
