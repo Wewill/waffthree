@@ -5,14 +5,16 @@ jQuery(document).ready(function() {
 			var programmationModalAjax = document.querySelector('#programmationModalAjax');	
 			if (programmationModalAjax) {
 			    var useCache = false;
-			    //const durationCache = 30 * 60 * 1000; // 30 minutes
-				const durationCache = 24 * 60 * 60 * 1000; // 24 heures
+/*
+			    const durationCache = 30 * 60 * 1000; // 30 minutes
+			//	const durationCache = 24 * 60 * 60 * 1000; // 24 heures
 			    let programmationTimeout = localStorage.getItem('programmationTimeout');
 			    if (programmationTimeout) {
 				    if (programmationTimeout >= new Date().getTime())
 					    useCache = true;
 			    }
-			    // useCache = False; // @Wilhem si tu veux forcer à toujour charger
+//			    useCache = false; // @Wilhem si tu veux forcer à toujour charger
+*/
 			    if (useCache) {
 				programmationModalAjax.innerHTML = localStorage.getItem('programmationHtml');
 				const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
@@ -20,7 +22,9 @@ jQuery(document).ready(function() {
 		            } else {
 				    const data = {
 					'action': 'widget_programmation_ajax_html',
+//					'force': 1,
 				    };
+/*
 				    fetch('/wp-admin/admin-ajax.php', {
 					method: 'POST',
 					headers: {
@@ -29,6 +33,9 @@ jQuery(document).ready(function() {
 					},
 					body: new URLSearchParams(data),
 				    })
+*/
+				    fetch('/wp-content/themes/waffthree/includes/admin/widgets/programmation_ajax_cache.html', {
+				   })
 				    .then(response => response.text())
 				    .then(response => {
 					programmationModalAjax.innerHTML = response;
