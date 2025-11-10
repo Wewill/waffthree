@@ -208,6 +208,7 @@ class WP_Widget_Programmation extends WP_Widget {
 						$origin = ( $parent == $forposttype ) ? 'parent' : 'child';
 						// Get connected posts
 						$connections = toolset_get_related_posts( $id, array($relationship,$forposttype), $origin, 9999, 0, array(), 'post_id', 'other', null, 'ASC', true, $count_connections );
+						//print( '<pre>##connections::' . print_r($connections, 1) . '</pre>');
 						if ( !empty($connections) )  $has_film = true;
 					}
 
