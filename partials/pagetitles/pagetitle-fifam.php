@@ -385,7 +385,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 					<div class="col-12 col-md-10 d-none d-sm-block">
 						<!-- Flex -->
 						<div class="d-flex justify-content-between--- align-items-center">
-							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Billetterie <span class="sr-only">Réserver ma place grâce à la billeterie en ligne</span></div> <!-- Lire la suite -->
+							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap ">Billetterie <span class="sr-only">Réserver ma place grâce à la billeterie en ligne</span></div>
 						</div>
 						<!-- End Flex -->
 					</div>
@@ -398,6 +398,39 @@ if ( is_singular() && has_post_thumbnail() ) {
 				</div> 
 			</div>
 		<?php endif; /* If film_ticketing_url */ ?>	
+
+		<!-- Vote -->
+		<?php 
+		/* Get film section terms */ 
+		$film_sections = get_the_terms( $post->ID, 'section' );
+		// Get section get_term_link
+		if ( $film_sections && ! is_wp_error( $film_sections ) ) {
+			$film_section = $film_sections[0]; // Get first term only
+			$film_section_link = get_term_link( $film_section->term_id, 'section' );
+		}
+		?>
+		<?php if ( strpos( $film_section_link, 'long' ) !== false && strpos( $film_section_link, 'competition' ) !== false ) : ?>
+			<div class="position-absolute top-0 end-0 container-fluid px-0">
+				<div class="row g-0 align-items-center">
+					
+					<!-- Col -->
+					<div class="col-12 col-md-10 d-none d-sm-block">
+						<!-- Flex -->
+						<div class="d-flex justify-content-between--- align-items-center">
+							<div class="mr-2 me-2 --ml-3 --ms-3 m-gutter-l flash-title headline text-nowrap">Vote du public <span class="sr-only">Voter et noter votre film préféré en compétition </span></div>
+						</div>
+						<!-- End Flex -->
+					</div>
+					
+					<!-- Col -->
+					<div class="col-12 col-md-2 bg-black text-center text-light link-light">
+						<div class="p-2"><a href="http://vote.fifam.fr" target="_blank" class="prog-title --headline h5 link my-2"><i class="icon icon-premiere-2 me-2"></i><?= esc_html(__('[:fr]Voter pour ce film[:en]Vote for this film[:]')); ?></a></div>
+					</div>	
+				
+				</div> 
+			</div>
+		<?php endif; /* If vote */ ?>	
+
 		
 	</section>
 	<!-- END: #pageheader -->
