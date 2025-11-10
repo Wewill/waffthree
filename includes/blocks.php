@@ -4905,7 +4905,7 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 			// coblocks/
 			'coblocks/accordion',
 			'coblocks/accordion-item',
-			'coblocks/alert',
+			//'coblocks/alert', > Used for fifam #45
 			'coblocks/counter',
 			'coblocks/column',
 			'coblocks/row',
