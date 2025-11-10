@@ -8,11 +8,15 @@ function waffColumnBgColorOptions( bgColorOptions ) {
 		{name:'action-1', 		color:'#9600ff'},
 		{name:'action-2', 		color:'#00ff97'},
 		{name:'action-3', 		color:'#0032FF'},
+		{name:'secondary', 		color:'#6c757d'},	
 		{name:'dark', 			color:'#000000'},
-		{name:'light', 			color:'#FFFFFF'},
+		{name:'light', 			color:'rgb(248, 249, 250)'},
 		{name:'bgcolor', 		color:'hsl(191,15%,93%)'},
 		{name:'layoutcolor', 	color:'hsl(0,0%,75%)'},
-		{name:'secondary', 		color:'#6c757d'},	
+		{name:'outline-color-main', 		color:'#000000'},
+		{name:'outline-action-1', 			color:'#9600ff'},
+		{name:'outline-action-2', 			color:'#00ff97'},
+		{name:'outline-action-3', 			color:'#0032FF'},
     ];
 }
 
@@ -59,8 +63,28 @@ function waffButtonColorOptions( styleOptions ) {
 		},
 		{
 			label: 'Layout color',
-			value: 'layoutcolor',
-		},		
+			value: 'color-layout',
+		},
+		{
+			label: 'Main color',
+			value: 'color-main',
+		},
+		{
+			label: 'Outline',
+			value: 'outline-color-main',
+		},
+		{
+			label: 'Outline action 1',
+			value: 'outline-action-1',
+		},	
+		{
+			label: 'Outline action 2',
+			value: 'outline-action-2',
+		},	
+		{
+			label: 'Outline action 3',
+			value: 'outline-action-3',
+		},	
 	];
 }
 
