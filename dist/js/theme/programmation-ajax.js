@@ -20,10 +20,19 @@ jQuery(document).ready(function() {
 				const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
 				modal.handleUpdate();
 		            } else {
+				    // Check if programmation-modal-favorited exists in localStorage
+				    let forceRegeneration = localStorage.getItem('programmation-modal-favorited') === 'true';
+
 				    const data = {
 					'action': 'widget_programmation_ajax_html',
-//					'force': 1,
+					//					'force': 1,
+
 				    };
+
+				    // Add force parameter if favorited condition is met
+				    if (forceRegeneration) {
+					data.force = 1;
+				    }
 /*
 				    fetch('/wp-admin/admin-ajax.php', {
 					method: 'POST',
