@@ -967,7 +967,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 			'src' 			=> 'calendar-alt',
 		],
 		'description'     => esc_html__( 'Display the programmation filtered by edition', 'waff' ),
-		'keywords'       => ['wa', 'planning', 'programmation' 'film'],
+		'keywords'       => ['wa', 'planning', 'programmation', 'film'],
 		'supports'       => [
 			'anchor'          => true,
 			'customClassName' => true,
