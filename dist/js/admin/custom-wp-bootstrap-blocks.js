@@ -35,7 +35,7 @@ wp.hooks.addFilter(
 function waffButtonColorOptions( styleOptions ) {
 	// Si wpBootstrapBlockFilterOptions existe, transformer le format ancien vers le nouveau
 	if ( wpBootstrapBlockFilterOptions ) {
-		return wpBootstrapBlockFilterOptions.map( function( option ) {
+		var transformedOptions = wpBootstrapBlockFilterOptions.map( function( option ) {
 			// Déterminer la couleur de texte selon la luminosité de la couleur de fond
 			var textColor = '#ffffff'; // Par défaut blanc
 
@@ -59,6 +59,52 @@ function waffButtonColorOptions( styleOptions ) {
 				textColor: textColor
 			};
 		} );
+
+		// Ajouter les options manquantes si elles n'existent pas déjà
+		var additionalOptions = [
+			{
+				label: 'Main color',
+				value: 'color-main',
+				bgColor: '#000000',
+				textColor: '#ffffff'
+			},
+			{
+				label: 'Outline',
+				value: 'outline-color-main',
+				bgColor: 'transparent',
+				textColor: '#000000'
+			},
+			{
+				label: 'Outline action 1',
+				value: 'outline-action-1',
+				bgColor: 'transparent',
+				textColor: '#9600ff'
+			},
+			{
+				label: 'Outline action 2',
+				value: 'outline-action-2',
+				bgColor: 'transparent',
+				textColor: '#00ff97'
+			},
+			{
+				label: 'Outline action 3',
+				value: 'outline-action-3',
+				bgColor: 'transparent',
+				textColor: '#0032FF'
+			}
+		];
+
+		// Vérifier et ajouter chaque option si elle n'existe pas
+		additionalOptions.forEach( function( newOption ) {
+			var exists = transformedOptions.some( function( option ) {
+				return option.value === newOption.value;
+			} );
+			if ( ! exists ) {
+				transformedOptions.push( newOption );
+			}
+		} );
+
+		return transformedOptions;
 	}
 
 	// Version statique fallback
