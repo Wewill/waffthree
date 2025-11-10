@@ -4969,6 +4969,6 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
  */
 
 function waff_wp_boostrap_enqueue_block_editor_assets() {
-	wp_enqueue_script( 'wp-bootstrap-block-filter', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-blocks.js', array( 'wp-hooks' ), '1.0.0', true );
+	wp_enqueue_script( 'wp-bootstrap-block-filter', get_stylesheet_directory_uri() . '/dist/js/admin/custom-wp-bootstrap-blocks.js', array( 'wp-hooks' ), '1.1.0', true );
     if ( defined( 'WAFF_THEME_COLORS' ) ) wp_localize_script( 'wp-bootstrap-block-filter', 'wpBootstrapBlockFilterOptions', WAFF_THEME_COLORS );
 }
