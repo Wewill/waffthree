@@ -3,7 +3,7 @@ class WP_Widget_Programmation extends WP_Widget {
 
 	protected $registered = false;
 	public $useCache = True;
-	private $cacheFilename = __DIR__.'/programmation_ajax_cache.html';
+	private $cacheFilename = __DIR__.'/../../../../../cache/programmation_ajax_cache.html';
 
     protected $default_instance = array(
         'title'   	=> '',

@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 					body: new URLSearchParams(data),
 				    })
 */
-				    fetch('/wp-content/themes/waffthree/includes/admin/widgets/programmation_ajax_cache.html', {
+				    fetch('/wp-content/cache/programmation_ajax_cache.html', {
 				   })
 				    .then(response => response.text())
 				    .then(response => {
@@ -43,8 +43,8 @@ jQuery(document).ready(function() {
 					// programmationModalAjax.remove();
 					const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
 					modal.handleUpdate();
-					localStorage.setItem('programmationTimeout', new Date().getTime() + durationCache);
-					localStorage.setItem('programmationHtml', response);
+//					localStorage.setItem('programmationTimeout', new Date().getTime() + durationCache);
+//					localStorage.setItem('programmationHtml', response);
 					// modal.dispose(); 
 					// modal.show(); 
 				    });
