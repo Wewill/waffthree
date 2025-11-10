@@ -4919,6 +4919,7 @@ function waff_allowed_block_types( $allowed_blocks, $editor_context ) {
 			"meta-box/wa-cols",
 			"meta-box/wa-breaking",
 			"meta-box/wa-insights",
+			"meta-box/wa-programmation",
 		);
 	
 		// The blocks I want to disable
