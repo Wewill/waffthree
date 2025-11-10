@@ -19,6 +19,8 @@ use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
 use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
 use function WaffTwo\Theme\waff_get_theme_homeslide_content as waff_get_theme_homeslide_content;
 
+require_once get_theme_file_path( 'includes/blocks/block-programmation.php' );
+
 //use function Go\hex_to_rgb as hex_to_rgb; 
 
 /**
@@ -894,6 +896,88 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 		//'enqueue_script' => 'CustomJS',
 		//'enqueue_assets' => 'CustomCallback',
 		'render_callback' => 'WaffTwo\Blocks\wa_sections_callback',
+		'type'           => 'block',
+		'context'        => 'side',
+		//'Keyattrs'       => 'Value',
+	];
+
+	// WA Programmation
+	if( true === WAFF_ISFILM_VERSION )
+	$meta_boxes[] = [
+		'title'          => esc_html__( '(WA) Programmation', 'waff' ),
+		'id'             => 'wa-programmation',
+		'fields'         => [
+			[
+				'id'   => $prefix . 'p_title',
+				'type' => 'text',
+				'name' => esc_html__( 'Title', 'waff' ),
+				'std'  => esc_html__( 'Sections', 'waff' ),
+				'placeholder' => esc_html__( 'Title', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'p_leadcontent',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Lead content', 'waff' ),
+				'desc' => esc_html__( 'Displayed in a bigger size. Markdown is available.', 'waff' ),
+			],
+			[
+				'id'   => $prefix . 'p_content',
+				'type' => 'textarea',
+				'name' => esc_html__( 'Content', 'waff' ),
+				'desc' => esc_html__( 'Markdown is available.', 'waff' ),
+			],
+			[
+				'id'         => $prefix . 'p_edition',
+				'type'       => 'taxonomy_advanced',
+				'name'       => esc_html__( 'Select edition', 'waff' ),
+				'taxonomy'   => 'edition',
+				'desc'       => esc_html__( 'Filter sections by edition. If empty, none of the sections will be displayed.', 'waff' ),
+				'field_type' => 'radio_list',
+				'multiple' => false,
+				'select_all_none' => false,
+				'query_args'  => array(
+					'post_status'    => 'publish',
+					'posts_per_page' => - 1,
+				),
+				//'hidden' => array( 'waff_lp_posttype', '!=', 'post' ),
+			],
+			// [
+            //     'id'    => $prefix . 'p_show_introduction',
+            //     'type'  => 'switch',
+            //     'name'  => esc_html__( 'Display introduction content ?', 'waff' ),
+            //     'style' => 'rounded',
+			// ],
+			// [
+            //     'id'    => $prefix . 'p_show_parent_section',
+            //     'type'  => 'switch',
+            //     'name'  => esc_html__( 'Display parent edition section of sections ?', 'waff' ),
+            //     'style' => 'rounded',
+			// ],
+			// [
+            //     'id'    => $prefix . 'p_show_tiny_list',
+            //     'type'  => 'switch',
+            //     'name'  => esc_html__( 'Display as a tiny list?', 'waff' ),
+            //     'style' => 'rounded',
+			// ],
+		],
+		'category'       => 'layout',
+		// 'icon'           => 'list-view',
+		'icon'            => [
+			'foreground' 	=> '#9500ff',
+			'src' 			=> 'calendar-alt',
+		],
+		'description'     => esc_html__( 'Display the programmation filtered by edition', 'waff' ),
+		'keywords'       => ['wa', 'planning', 'programmation' 'film'],
+		'supports'       => [
+			'anchor'          => true,
+			'customClassName' => true,
+			'align'           => ['wide', 'full'],
+		],
+		//'render_code'    => '{{Twix}}',
+		//'enqueue_style'  => 'customCSS',
+		//'enqueue_script' => 'CustomJS',
+		//'enqueue_assets' => 'CustomCallback',
+		'render_callback' => 'WaffTwo\Blocks\Block\wa_programmation_callback',
 		'type'           => 'block',
 		'context'        => 'side',
 		//'Keyattrs'       => 'Value',
