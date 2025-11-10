@@ -2,6 +2,8 @@
 class WP_Widget_Programmation extends WP_Widget {
 
 	protected $registered = false;
+	public $useCache = True;
+	private $cacheFilename = __DIR__.'/programmation_ajax_cache.html';
 
     protected $default_instance = array(
         'title'   	=> '',
@@ -25,8 +27,14 @@ class WP_Widget_Programmation extends WP_Widget {
 	}
 	  
 	public function widget_programmation_ajax_html() {
-
 		global $current_edition, $previous_editions, $current_edition_id, $current_edition_films_are_online;
+		$force = False;
+
+		if (array_key_exists('force', $_POST))
+			$force = True;
+		if (!$this->useCache || $force || !file_exists($this->cacheFilename)) {
+			$beginTimer = mktime();
+			ob_start();
 			// Rooms
 			$args = array(
 				'taxonomy' => 'room',
@@ -591,6 +599,13 @@ class WP_Widget_Programmation extends WP_Widget {
 					}
 				}
 				print('<!-- End: Modal AJAX -->');
+				$html = ob_get_clean();
+				$html .= sprintf("\n\n<!-- generated at %s in %s seconds -->\n", date('Y-m-d H:i:s'), mktime() - $beginTimer);
+				file_put_contents($this->cacheFilename, $html);
+				print $html;
+			} else {
+				print(file_get_contents($this->cacheFilename));
+			}
 		?>
 												
 		<?php 
@@ -720,7 +735,7 @@ class WP_Widget_Programmation extends WP_Widget {
 				<?php if (get_theme_mod( 'catalog_url')) : ?><div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="<?php WaffTwo\display_catalog_url(); ?>" class="link"><i class="icon icon-catalogue pr-0 f-12"></i> <?= esc_html__( 'Book', 'waff' ) ?></a></div><?php endif; ?>
 			</div>
 			<div class="bg-action-1 text-center text-white link-light d-inline-block">
-				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt me-2 --d-none"></i> <?= esc_html__( 'Planning', 'waff' ) ?></a></div>
+				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
 			</div>	
 		</div>
 		<!-- END: .programmation-button  -->
@@ -741,7 +756,7 @@ class WP_Widget_Programmation extends WP_Widget {
 								</div>
 								<div class="col-md-7 col-lg-5 p-0 col-days order-1">
 									<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
-										<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><i class="fas fa-bolt me-2 --d-none"></i> <?= esc_html__( 'Planning', 'waff' ) ?></a></div>
+										<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
 									</div>	
 								</div>
 							</div>
