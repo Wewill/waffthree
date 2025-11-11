@@ -756,11 +756,11 @@ class WP_Widget_Programmation extends WP_Widget {
 								</div>
 								<!-- Switch pour toggle entre planning complet et favoris -->
 								<div class="d-flex bg-dark-action-1 p-3 align-items-center justify-content-center">
-									<h6 class="mb-0 me-4 text-light"><span class="h5">Nouveau !</span> Votre grille-horaire personnalisée</h6>
+									<h5 class="mb-0 me-4 text-light"><span class="headflat">Nouveau !</span> Votre grille-horaire personnalisée</h5>
 									<div class="toggle-wrapper">
 										<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
 										<label class="toggle-switch">
-											<input type="checkbox" id="programmation-favorited-toggle" />
+											<input type="checkbox" class="programmation-favorited-toggle"/>
 											<span class="toggle-slider"></span>
 										</label>
 										<span class="toggle-label"><?php _e('Mes favoris', 'waff'); ?></span>
