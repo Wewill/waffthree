@@ -752,7 +752,7 @@ class WP_Widget_Programmation extends WP_Widget {
 							</div>
 							<div class="col-md-10 --col-md-7 --col-lg-5 p-0 col-days order-1">
 								<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
-									<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+									<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Planning', 'waff' ) ?></a></div>
 								</div>
 								<!-- Switch pour toggle entre planning complet et favoris -->
 								<div class="d-flex bg-dark-action-1 p-3 align-items-center justify-content-center">
@@ -795,7 +795,7 @@ class WP_Widget_Programmation extends WP_Widget {
 					<!-- End: Modal body -->
 
 					<div class="modal-footer container-fluid d-none d-xl-flex">
-					<div class="ml-4 flex-grow-1"><span class="headline"><?= esc_html__( 'Programmation', 'waff' ) ?></span></div>
+					<div class="ml-4 flex-grow-1"><span class="headline"><?= esc_html__( 'Planning', 'waff' ) ?></span></div>
 						<?php if (get_theme_mod( 'planning_url')) : ?><a href="<?php WaffTwo\display_planning_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-time f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Planner', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
 						<?php if (get_theme_mod( 'booklet_url')) : ?><a href="<?php WaffTwo\display_booklet_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-brochure f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Booklet', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
 						<?php if (get_theme_mod( 'catalog_url')) : ?><a href="<?php WaffTwo\display_catalog_url(); ?>" class="btn btn-link text-decoration-none link-light color-light mx-4 d-flex align-items-center"><i class="icon icon-catalogue f-24 lh-48"></i> <span class="subline --d-block ml-2 mb-1"><?= esc_html__( 'Book', 'waff' ) ?> *.pdf</span></a><?php endif; ?>
@@ -819,7 +819,7 @@ class WP_Widget_Programmation extends WP_Widget {
 				<?php if (get_theme_mod( 'catalog_url')) : ?><div class="prog-title p-2 px-2 headline light border-0 d-inline-block"><a href="<?php WaffTwo\display_catalog_url(); ?>" class="link"><i class="icon icon-catalogue pr-0 f-12"></i> <?= esc_html__( 'Book', 'waff' ) ?></a></div><?php endif; ?>
 			</div>
 			<div class="bg-action-1 text-center text-white link-light d-inline-block">
-				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+				<div class="prog-title p-2 px-3 headline border-0"><a class="link toggle-programmation" data-bs-toggle="modal" data-bs-target="#programmationModal" aria-expanded="false" aria-controls="programmationModal"><i class="fas fa-bolt px-1 d-none"></i> <?= esc_html__( 'Planning', 'waff' ) ?></a></div>
 			</div>	
 		</div>
 		<!-- END: .programmation-button  -->
@@ -840,7 +840,7 @@ class WP_Widget_Programmation extends WP_Widget {
 								</div>
 								<div class="col-md-7 col-lg-5 p-0 col-days order-1">
 									<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
-										<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
+										<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Planning', 'waff' ) ?></a></div>
 									</div>	
 								</div>
 							</div>
@@ -849,7 +849,7 @@ class WP_Widget_Programmation extends WP_Widget {
 							<p><?= $text ?></p>
 						</div>
 						<div class="modal-footer">
-							<div class="ml-4 flex-grow-1"><span class="headline"><?= esc_html__( 'Programmation', 'waff' ) ?></span></div>
+							<div class="ml-4 flex-grow-1"><span class="headline"><?= esc_html__( 'Planning', 'waff' ) ?></span></div>
 							<button type="button" class="btn btn-light mr-2 mb-2"><?= esc_html__( 'View archives', 'waff' ) ?></button>
 							<button type="button" class="btn btn-light mr-2 mb-2"><?= esc_html__( 'View blog', 'waff' ) ?></button>
 							<button type="button" class="btn btn-outline-light mr-4 mb-2" data-bs-dismiss="modal"><?= esc_html__( 'Close', 'waff' ) ?></button>
