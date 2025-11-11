@@ -28,6 +28,17 @@ jQuery(document).ready(function() {
 						const modal = bootstrap.Modal.getOrCreateInstance(programmationModal);
 						modal.handleUpdate();
 					} else {
+						// Vider le modal-body 
+						programmationModalAjax.innerHTML = '<div id="programmationModalAjax">\
+							<div class="d-flex flex-center vh-70">\
+								<div class="d-flex flex-column align-items-center">\
+									<div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status">\
+										<span class="visually-hidden">Loading...</span>\
+									</div>\
+									<div class="subline-4 text-center d-block mt-4">Nous préparons votre grille...</div>\
+								</div>\
+							</div>\
+						</div>';
 					    const data = {
 							'action': 'widget_programmation_ajax_html',
 							'noCache': true,
