@@ -2956,7 +2956,7 @@ function wa_awards_get_films( $films, $master = true ) {
 					$f_section_edition 	= get_term_meta( $f_section->term_id, 'wpcf-select-edition', true );
 					
 					if ($master == true)
-						$html_f_section .= sprintf('<a href="%s" %s class="dot-section" data-toggle="tooltip" data-container=".modal" data-title="%s" data-original-title="" title="">•</a>',
+						$html_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container=".modal" data-title="%s" data-original-title="" title="">•</a>',
 							esc_url(get_term_link($f_section->slug, 'section')),
 							(( $f_section_color != '' )?'style="color: '.$f_section_color.';"':''),
 							esc_html__($f_section->name)
