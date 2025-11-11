@@ -167,10 +167,9 @@ jQuery(document).ready(function () {
       document.cookie = `programmation-modal-favorited=${state}; path=/; max-age=31536000`;
 
       // Synchroniser tous les autres toggles
-      toggles.forEach(otherToggle => {
-        if (otherToggle !== this) {
-          otherToggle.checked = state;
-        }
+      const toggles = document.querySelectorAll('.programmation-favorited-toggle');
+      toggles.forEach(toggle => {
+          toggle.checked = state;
       });
       
       // Ouvrir la modale via le bouton trigger
