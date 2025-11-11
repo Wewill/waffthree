@@ -739,7 +739,7 @@ function wa_programmation_callback( $attributes ) {
 												// Print film
 												// //if ( $has_film_favorited || $has_film_favorited_in_program ) : 
 												printf('
-												<dd class="col-10 mb-3 ps-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
+												<dd class="col-10 mb-3 ps-3 ps-sm-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
 													<p class="length text-black"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p class="text-black">
 														<span class="last_f_section_color" %s>
