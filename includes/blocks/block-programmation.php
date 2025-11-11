@@ -129,17 +129,21 @@ function wa_programmation_callback( $attributes ) {
 		
 		<!-- Switch pour toggle entre planning complet et favoris -->
 		<!-- Script du switch > voir main.js du theme -->
-		<div class="d-flex p-3 align-items-center --justify-content-center">
-			<h6 class="m-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
-			<div class="toggle-wrapper">
-				<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
-				<label class="toggle-switch">
-					<input type="checkbox" class="programmation-favorited-toggle"/>
-					<span class="toggle-slider"></span>
-				</label>
-				<span class="toggle-label"><?php _e('Mes favoris', 'waff'); ?></span>
+			<div class="d-flex p-3 align-items-center --justify-content-center">
+				<h6 class="m-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
+				<?php if ( is_user_logged_in() ) : ?>
+					<div class="toggle-wrapper">
+						<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
+						<label class="toggle-switch">
+							<input type="checkbox" class="programmation-favorited-toggle"/>
+							<span class="toggle-slider"></span>
+						</label>
+						<span class="toggle-label"><?php _e('Mes favoris', 'waff'); ?></span>
+					</div>
+				<?php else : ?>
+					<?php echo do_shortcode('[wacp_login_links]'); ?>
+				<?php endif; ?>
 			</div>
-		</div>
 
 		<script>
 		// (function() {
