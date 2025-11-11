@@ -58,6 +58,10 @@ jQuery(document).ready(function() {
 							modal.handleUpdate();
 	//						localStorage.setItem('programmationFromCache', true);
 	//						localStorage.setItem('programmationFavorited', false);
+
+							// Dispatch custom event to notify that AJAX HTML has been loaded
+							// This allows the favorites plugin to sync UI state for logged-in users
+							//jQuery(document).trigger('wacp:programmation-html-loaded');
 						});
 					}
 				} else {
@@ -69,6 +73,10 @@ jQuery(document).ready(function() {
 						modal.handleUpdate();
 //						localStorage.setItem('programmationFromCache', true);
 //						localStorage.setItem('programmationFavorited', false);
+
+						// Dispatch custom event to notify that HTML cache has been loaded
+						// This allows the favorites plugin to sync UI state for logged-in users
+						jQuery(document).trigger('wacp:programmation-html-loaded');
 					});
 				}
 			}
