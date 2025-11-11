@@ -29,25 +29,39 @@ class WP_Widget_Programmation extends WP_Widget {
 	public function widget_programmation_ajax_html() {
 		global $current_edition, $previous_editions, $current_edition_id, $current_edition_films_are_online;
 		$force = False;
-
-		/* If user is loggued in : get his favorited films */
-		$favs = array();
-		if ( is_user_logged_in()){
-			$user_id = get_current_user_id();
-			$prefix = 'wacp-';
-			$favs = get_user_meta( $user_id, $prefix . 'favorite_films', true );
-			if ( ! is_array( $favs ) ) {
-				$favs = array();
-			}
-			// normalize ints
-			$favs = array_map( 'intval', $favs );
-		}
+		$noCache = False;
 
 		if (array_key_exists('force', $_POST))
 			$force = True;
+		if (array_key_exists('noCache', $_POST)) {
+			$noCache= True;
+			$force = True;
+		}
+
+		// Display programmation filtered by favorited films OR full ? // #45
+		//$favorited_display = true;
+		$favorited_display = isset($_COOKIE['programmation-modal-favorited']) ? $_COOKIE['programmation-modal-favorited'] === 'true' : false;
+
 		if (!$this->useCache || $force || !file_exists($this->cacheFilename)) {
 			$beginTimer = mktime();
-			ob_start();
+			if (! $noCache)
+				ob_start();
+
+			// Debut block programmation
+			/* If user is loggued in : get his favorited films */
+			$favs = array();
+			if ( is_user_logged_in() && $favorited_display){
+				$user_id = get_current_user_id();
+				$prefix = 'wacp-';
+				$favs = get_user_meta( $user_id, $prefix . 'favorite_films', true );
+				if ( ! is_array( $favs ) ) {
+					$favs = array();
+				}
+				// normalize ints
+				$favs = array_map( 'intval', $favs );
+				//print_r($favs);
+			} // #45
+
 			// Rooms
 			$args = array(
 				'taxonomy' => 'room',
@@ -167,12 +181,16 @@ class WP_Widget_Programmation extends WP_Widget {
 				'meta_key' => 'wpcf-p-start-and-stop-time__begin',		
 			);
 			$the_projections = array();
-			$projections = new WP_Query( $args ); 
-?>
+			$projections = new \WP_Query( $args ); 
+			//echo '<pre>',print_r($projections,1),'</pre>';
+			?>
 
 			<?php while ( $projections->have_posts() ) : $projections->the_post(); ?>
 			
 				<?php 
+
+
+
 					$id 					= (( isset($post->ID) )?$post->ID:get_the_ID());
 					$title 					= (( isset($post->post_title) )?$post->post_title:get_the_title());
 					$p_date 				= types_render_field( 'p-date', array() );
@@ -201,7 +219,10 @@ class WP_Widget_Programmation extends WP_Widget {
 					$count_connections 		= 0;
 					$has_relationship 		= toolset_get_relationship( array( $relationship, $forposttype ) );
 					$has_film 				= false;
+					$has_film_favorited		= false;
+					$has_film_favorited_in_program		= false;
 
+					// First check for a film in projection
 					if ( $has_relationship ) {
 						$parent = $has_relationship['roles']['parent']['types'][0];
 						$child = $has_relationship['roles']['child']['types'][0];
@@ -210,8 +231,29 @@ class WP_Widget_Programmation extends WP_Widget {
 						$connections = toolset_get_related_posts( $id, array($relationship,$forposttype), $origin, 9999, 0, array(), 'post_id', 'other', null, 'ASC', true, $count_connections );
 						//print( '<pre>##connections::' . print_r($connections, 1) . '</pre>');
 						if ( !empty($connections) )  $has_film = true;
+						
+						// Check if we can find a favorited film in a program >> We continue so we don't process the data 
+						// IF we need a favorited display of films // #45
+						if ( $favorited_display && !empty($connections) && in_array( $connections[0], $favs ) ) $has_film_favorited = true;
 					}
 
+					// Then check if we can find a favorited film in a program >> We continue so we don't process the data 
+					// IF we need a favorited display of films 
+					if ( function_exists('func_get_programs') && $id && $favorited_display) {
+						$films = func_get_programs(array('output' => 'array'), '', '', $id);
+						if ( !empty($films) ) {
+							//print_r(!array_intersect( $films, $favs ));
+							if ( array_intersect( $films, $favs ) ) $has_film_favorited_in_program = true;
+						}
+					} // #45
+
+					// Finally, process or continue to next projection IF we need a favorited display of films 
+					if ( $favorited_display ) {
+						if ( $has_film_favorited === true || $has_film_favorited_in_program === true) {
+							// Do nothing, continue to process while
+						} else continue;
+					} // #45
+					
 					// Get film meta values
 					$f_id						= (( true === $has_film )?$connections[0]:0);
 					$f_title 					= (( get_the_title($f_id) && true === $has_film )?get_the_title($f_id):'');
@@ -232,7 +274,7 @@ class WP_Widget_Programmation extends WP_Widget {
 					$f_catalog_tag 				= types_render_field( 'f-catalog-tag', array('item' => $f_id) ); //#43
 
 					$f_poster 						= get_post_meta( $f_id, 'wpcf-f-film-poster', true ); //#43
-					$f_poster_id 					= WaffTwo\Core\waff_get_image_id_by_url($f_poster);
+					$f_poster_id 					= \WaffTwo\Core\waff_get_image_id_by_url($f_poster);
 					$f_poster_url 					= wp_get_attachment_image_url( $f_poster_id, "film-poster" ); // OK
 					$f_poster_img 					= wp_get_attachment_image( $f_poster_id, "film-poster", "", array( "class" => "img-responsive" ) ); // OK
 
@@ -246,12 +288,6 @@ class WP_Widget_Programmation extends WP_Widget {
 					// Get terms
 					$f_sections 				= get_the_terms( $f_id, 'section' );
 					//echo '<pre>',print_r(array($id,$title,$p_date,$p_timestamp,$p_start_and_stop_time,$p_start_and_stop_time_raw,$p_start_and_stop_time__begin,$p_rooms,$p_is_guest,$p_e_guest_contact,$p_e_guest_contact_raw,$p_young_public,$p_highlights,$p_translator,$p_tag,$has_film,$count_connections,$connections,$f_id,$f_title,$f_french_operating_title,$f_movie_length,$f_sections),1),'</pre>';
-
-					// Check if single film is favorited
-					$is_favorited = false;
-					if ( $f_id != 0 && in_array( $f_id, $favs ) ) {
-						$is_favorited = true;
-					}
 
 					$the_projections[$id] = array(
 						'p_id' 								=> $id,
@@ -276,7 +312,6 @@ class WP_Widget_Programmation extends WP_Widget {
 						'p_has_film' 						=> $has_film,
 						'p_count_connections' 				=> $count_connections,
 						'p_connections' 					=> $connections, // 0
-						'f_is_favorited'					=> $is_favorited,
 						'f_id' 								=> $f_id,
 						'f_title' 							=> $f_title,
 						'f_french_operating_title' 			=> $f_french_operating_title,
@@ -316,7 +351,7 @@ class WP_Widget_Programmation extends WP_Widget {
 				//echo '<pre>',print_r($the_days,1),'</pre>';
 
 				// Render HTML 
-				print('<!--BEGIN: Modal AJAX-->');
+				print('<!--BEGIN: Render-->');
 				
 				foreach($the_days as $key => $the_day) {
 
@@ -378,11 +413,6 @@ class WP_Widget_Programmation extends WP_Widget {
 										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
 											//if ( $the_day_room_projections['has_films'] === true ) {
 
-												// Skip non-favorited projections if user has favorites
-												if ( !empty($favs) && !$the_day_room_projections['p_is_favorited'] ) {
-													continue;
-												}
-
 												// Tags
 												$html_p_tags = '';
 												if (array_key_exists('p_tags', $the_day_room_projections) && is_array($the_day_room_projections['p_tags'])) foreach($the_day_room_projections['p_tags'] as $p_tag) {
@@ -400,9 +430,10 @@ class WP_Widget_Programmation extends WP_Widget {
 													if ( $f_section_color != '' ) $last_f_section_color = $f_section_color;
 													$f_section_edition = get_term_meta( $f_section->term_id, 'wpcf-select-edition', true );
 													if ( $current_edition_id == $f_section_edition ) // Only current edition sections
-													$html_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container=".modal" data-bs-title="%s" data-bs-original-title="" title="">•</a>',
+													$html_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container="body" data-bs-title="%s" data-bs-original-title="" title="%s">•</a>',
 													get_term_link($f_section->slug, 'section'),
 													(( $f_section_color != '' )?'style="color: '.$f_section_color.';"':''),
+													$f_section->name,
 													$f_section->name
 													);
 												}
@@ -425,12 +456,12 @@ class WP_Widget_Programmation extends WP_Widget {
 													}
 												
 												// Icons 
-												if ( $the_day_room_projections['p_young_public'] != '' ) 	$html_f_tags .= ' <i class="icon icon-young" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Parents-enfants"></i>'; 
-												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="<em>En présence de</em> ・ '.esc_html( $contact_list ).'"></i>'; 
-												if ( $the_day_room_projections['p_is_debate'] != '' ) 		$html_f_tags .= ' <i class="icon icon-mic" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Séance avec débat"></i>'; 
-												if ( $the_day_room_projections['p_highlights'] != '' )		$html_f_tags .= ' <i class="icon icon-sun" data-bs-toggle="tooltip" data-bs-container=".modal-body" title="Temps-fort"></i>'; 
-												if ( $the_day_room_projections['f_premiere_'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
-												if ( $the_day_room_projections['f_catalog_tag_'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
+												if ( $the_day_room_projections['p_young_public'] != '' ) 	$html_f_tags .= ' <i class="icon icon-young" data-bs-toggle="tooltip" data-bs-container="body" title="Parents-enfants"></i>'; 
+												if ( $the_day_room_projections['p_is_guest'] != '' ) 		$html_f_tags .= ' <i class="icon icon-guest" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" data-bs-html="En présence de ・ '.esc_html( $contact_list ).' "></i>'; // Correction bug tooltip html KO #45
+												if ( $the_day_room_projections['p_is_debate'] != '' ) 		$html_f_tags .= ' <i class="icon icon-mic" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="Séance avec débat"></i>'; 
+												if ( $the_day_room_projections['p_highlights'] != '' )		$html_f_tags .= ' <i class="icon icon-sun" data-bs-toggle="tooltip" data-bs-container="body" title="Temps-fort"></i>'; 
+												if ( $the_day_room_projections['f_premiere_'] != '' ) 		$html_f_tags .= ' <i class="icon icon-premiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="Première '.$the_day_room_projections['f_premiere'].'"></i>'; 
+												if ( $the_day_room_projections['f_catalog_tag_'] == 7 )		$html_f_tags .= ' <i class="icon icon-avantpremiere" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="'.$the_day_room_projections['f_catalog_tag'].'"></i>'; 
 												
 												// Formats 
 												//print_r($the_day_room_projections['f_available_formats']);
@@ -439,16 +470,16 @@ class WP_Widget_Programmation extends WP_Widget {
 													$format = $the_day_room_projections['f_available_formats'];
 
 													if ($format['vost'] == 'en' && $format['vost'] != '' && $format['vost'] != 'N/A') {
-														$html_f_tags .= ' <i class="icon icon-vosta text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="VOSTA"></i>'; 
+														$html_f_tags .= ' <i class="icon icon-vosta text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="VOSTA"></i>'; 
 													}
 
 													if ($format['vo'] != '' && $format['vo'] != 'N/A') {
-														$html_f_tags .= ' <i class="icon icon-vo text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="VO"></i> <span class="article text-action-3" style="line-height:1;">' . strtoupper($format['vo']) . '</span>'; 
+														$html_f_tags .= ' <i class="icon icon-vo text-action-3" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="VO"></i> <span class="article text-action-3" style="line-height:1;">' . strtoupper($format['vo']) . '</span>'; 
 													}
 												}
 
 												// Projection tag
-												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container=".modal-body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
+												if ( $the_day_room_projections['p_tag'] != '' ) 			$html_f_tags .= ' <i class="icon icon-warning text-danger" data-bs-toggle="tooltip" data-bs-html="true" data-bs-container="body" title="'.$the_day_room_projections['p_tag'].'"></i>'; 
 
 												// Get films to create programs
 												// > see waff_functions
@@ -459,16 +490,6 @@ class WP_Widget_Programmation extends WP_Widget {
 													$films = func_get_programs(array('output' => 'array'), '', '', $the_day_room_projections['p_id']);
 													if ( !empty($films) ) {
 														$has_program = true;
-
-														// Check if any film in the program is favorited
-														if ( !$the_day_room_projections['f_is_favorited'] ) {
-															foreach( $films as $program_film_id ) {
-																if ( in_array( $program_film_id, $favs ) ) {
-																	$the_day_room_projections['f_is_favorited'] = true;
-																	break;
-																}
-															}
-														}
 
 														foreach( $films as $k => $p_f_id ) {
 															$p_f_title 						= (( get_the_title($p_f_id) )?get_the_title($p_f_id):'');
@@ -489,7 +510,7 @@ class WP_Widget_Programmation extends WP_Widget {
 															$p_f_catalog_tag 				= types_render_field( 'f-catalog-tag', array('item' => $p_f_id) ); //#43
 										
 															$p_f_poster 					= get_post_meta( $p_f_id, 'wpcf-f-film-poster', true ); //#43
-															$p_f_poster_id 					= WaffTwo\Core\waff_get_image_id_by_url($p_f_poster);
+															$p_f_poster_id 					= \WaffTwo\Core\waff_get_image_id_by_url($p_f_poster);
 															$p_f_poster_url 				= wp_get_attachment_image_url( $p_f_poster_id, "film-poster" ); // OK
 															$p_f_poster_img 				= wp_get_attachment_image( $p_f_poster_id, "film-poster", "", array( "class" => "img-responsive" ) ); // OK
 										
@@ -505,7 +526,7 @@ class WP_Widget_Programmation extends WP_Widget {
 																if ( $p_f_section_color != '' ) $last_p_f_section_color = $p_f_section_color;
 																$p_f_section_edition = get_term_meta( $p_f_section->term_id, 'wpcf-select-edition', true );
 																if ( $current_edition_id == $p_f_section_edition ) // Only current edition sections
-																$html_p_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container=".modal" data-bs-title="%s" data-bs-original-title="" title="">•</a>',
+																$html_p_f_section .= sprintf('<a href="%s" %s class="dot-section" data-bs-toggle="tooltip" data-bs-container="body" data-bs-title="%s" data-bs-original-title="" title="">•</a>',
 																get_term_link($p_f_section->slug, 'section'),
 																(( $p_f_section_color != '' )?'style="color: '.$p_f_section_color.';"':''),
 																$p_f_section->name
@@ -513,7 +534,7 @@ class WP_Widget_Programmation extends WP_Widget {
 															}																		
 															$program .= sprintf('
 																	<span class="last_f_section_color" %s>
-																		<a href="%s" class="title %s">%s</a>
+																		<a href="%s" class="title %s" %s>%s</a>
 																		%s
 																	</span>
 																	%s
@@ -521,18 +542,23 @@ class WP_Widget_Programmation extends WP_Widget {
 																	%s
 																	%s
 																	%s
+																	<!-- Favorite --> %s
 																	<!-- Program sep-->
 																	%s',
 															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''),
 															(( $p_f_title != '' )?get_permalink( $p_f_id ):'#debug'),
 															(( $p_f_title != '' )?'text-link btn-link disabled':'text-link'),
+															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''), // #45
 															esc_html(( $p_f_french_operating_title != '' )?$p_f_french_operating_title.' ('.$p_f_title.')':$p_f_title),
+															//
 															(( $p_f_author != '' )?'&nbsp;<span class="article">DE</span>&nbsp;<span class="director">'.$p_f_author['lastname'].' '.$p_f_author['firstname'].'</span>':''),
 															(( $p_f_country != '' )?'・ <span class="country">'.$p_f_country.'</span>':''),
 															(( $p_f_co_production_country != '' )?'・ <span class="co_production_country">'.$p_f_co_production_country.'</span>':''),
 															(( $p_f_production_year != '' )?'・ <span class="year muted">'.$p_f_production_year.'</span>':''),
 															(( $p_f_movie_length != '' )?'・ <span class="length">'.$p_f_movie_length.'\'</span>':''),
 															$html_p_f_section,
+															//
+															do_shortcode('[wacp_favorite_star film_id="'.$p_f_id.'"]'), // #45
 															// Program sep 
 															( $k < (count($films)) )?' <span class="sep display h5 bold op-5">+</span> ':'',
 															);
@@ -560,12 +586,13 @@ class WP_Widget_Programmation extends WP_Widget {
 												//echo '#_p_title=' . $_p_title;
 
 												// Print film
+												// //if ( $has_film_favorited || $has_film_favorited_in_program ) : 
 												printf('
 												<dd class="col-10 mb-3 ps-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
-													<p class="length"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
-													<p>
+													<p class="length text-black"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
+													<p class="text-black">
 														<span class="last_f_section_color" %s>
-															<a href="%s" class="title %s">%s</a>
+															<a href="%s" class="title %s" %s>%s</a>
 															%s
 														</span>
 														%s
@@ -578,18 +605,22 @@ class WP_Widget_Programmation extends WP_Widget {
 														<!-- Section & tag -->
 														%s
 														%s
+														<!-- Favorite --> %s
 														<!-- Post tag -->
-														<div class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</div>
+														<span class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</span>
 													</p>
 												</dd>
 												<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
 												<hr class="--bg-light op-1 %s"/>',
 												esc_attr( $the_day_room_projections['p_id'] ),
+												//
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['end'] ),
+												//
 												(( $last_f_section_color != '' )?'style="color: '.$last_f_section_color.';"':''),
 												(( $the_day_room_projections['f_id'] != 0 )?get_permalink( $the_day_room_projections['f_id'] ):get_permalink( $the_day_room_projections['p_id'] )),
 												(( $the_day_room_projections['f_id'] != 0 )?'text-link btn-link disabled':'text-link'),
+												(( $last_f_section_color != '' )?'style="color: '.$last_f_section_color.';"':''), // #45
 												// Film title or projection title
 												(( $has_program === true )?'<i class="icon icon-play me-2 f-12"></i>':'') .
 												(( $the_day_room_projections['f_id'] != 0  )?$_f_title:$_p_title.( ( $has_program === false )?'<i class="icon icon-down-right-light me-2 ms-2"></i>':'' ) ),
@@ -606,6 +637,8 @@ class WP_Widget_Programmation extends WP_Widget {
 												$html_f_section,
 												$html_f_tags,
 												//
+												do_shortcode('[wacp_favorite_star film_id="'.$the_day_room_projections['f_id'].'"]'), // #45
+												//
 												esc_html__( 'Taggued', 'waff' ),
 												$html_p_tags,
 												//
@@ -615,8 +648,7 @@ class WP_Widget_Programmation extends WP_Widget {
 												$the_day_room_projections['f_poster_img'],
 												($key == count($the_day_room['projections'])-1)?'d-none':''
 												);
-												
-
+												// // endif; // if  $has_film_favorited || $has_film_favorited_in_program
 											//}
 										}
 
@@ -635,10 +667,13 @@ class WP_Widget_Programmation extends WP_Widget {
 
 					}
 				}
-				print('<!-- End: Modal AJAX -->');
-				$html = ob_get_clean();
-				$html .= sprintf("\n\n<!-- generated at %s in %s seconds -->\n", date('Y-m-d H:i:s'), mktime() - $beginTimer);
-				file_put_contents($this->cacheFilename, $html);
+				print('<!-- END: RENDER -->');
+				// FIN block programmation
+				if (! $noCache) {
+					$html = ob_get_clean();
+					$html .= sprintf("\n\n<!-- generated at %s in %s seconds -->\n", date('Y-m-d H:i:s'), mktime() - $beginTimer);
+					file_put_contents($this->cacheFilename, $html);
+				}
 				print $html;
 			} else {
 				print(file_get_contents($this->cacheFilename));
