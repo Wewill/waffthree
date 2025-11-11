@@ -786,20 +786,9 @@ jQuery(document).ready(function () {
 
   /*
 		-------------------------------------------------
-		Collapse on hover main-nav
+		Collapse on hover main-nav  
 		-------------------------------------------------
 	*/
-  // Initialize Bootstrap 5 Collapse instances for sub-nav items
-  const collapseMenuInstances = {};
-  jQuery("#sub-nav .collapse-menu").each(function() {
-    const menuId = jQuery(this).attr('id');
-    if (menuId) {
-      collapseMenuInstances[menuId] = new bootstrap.Collapse(this, {
-        toggle: false
-      });
-    }
-  });
-
   function toggleCollapseNav(e) {
     const _d = jQuery(e.target),
       _t = jQuery(e.target).attr("aria-controls"),
@@ -822,12 +811,7 @@ jQuery(document).ready(function () {
 
     if (_h > 0 && _rp.is(":hover") && e.type === "mouseenter") {
       //console.log('##DOIT DISPARAITRE');
-      _a.each(function() {
-        const menuId = jQuery(this).attr('id');
-        if (menuId && collapseMenuInstances[menuId]) {
-          collapseMenuInstances[menuId].hide();
-        }
-      });
+      _a.toggleClass("show", false);
     }
 
     time = setTimeout(
@@ -843,36 +827,16 @@ jQuery(document).ready(function () {
         if (shouldOpen === true) {
           //console.log('expanded:' + expanded);
           if (expanded === false && _h < 0) {
-            if (_t && collapseMenuInstances[_t]) {
-              collapseMenuInstances[_t].show();
-            }
+            _m.collapse("show");
             _d.toggleClass("show", true);
           } else {
-            _a.each(function() {
-              const menuId = jQuery(this).attr('id');
-              if (menuId && collapseMenuInstances[menuId]) {
-                collapseMenuInstances[menuId].hide();
-              }
-            });
-            if (_t && collapseMenuInstances[_t]) {
-              if (shouldOpen) {
-                collapseMenuInstances[_t].show();
-              } else {
-                collapseMenuInstances[_t].hide();
-              }
-            }
+            _a.toggleClass("show", false);
+            _m.toggleClass("show", shouldOpen);
             _d.toggleClass("show", shouldOpen);
           }
         } else {
-          _a.each(function() {
-            const menuId = jQuery(this).attr('id');
-            if (menuId && collapseMenuInstances[menuId]) {
-              collapseMenuInstances[menuId].hide();
-            }
-          });
-          if (_t && collapseMenuInstances[_t]) {
-            collapseMenuInstances[_t].hide();
-          }
+          _a.toggleClass("show", false);
+          _m.collapse("hide");
           _d.toggleClass("show", false);
         }
         jQuery(_d).attr("aria-expanded", shouldOpen);
@@ -895,12 +859,8 @@ jQuery(document).ready(function () {
       //console.log('isRowHover:timeout:' + _h + ' / ' + e.type + ' / ' + _rp.is(':hover'));
       if (_h > 0 && _rp.is(":hover") === false && e.type === "mouseout") {
         //console.log('##DOIT DISPARAITRE DEFINITIF');
-        _a.each(function() {
-          const menuId = jQuery(this).attr('id');
-          if (menuId && collapseMenuInstances[menuId]) {
-            collapseMenuInstances[menuId].hide();
-          }
-        });
+        //_a.toggleClass('show', false);
+        _a.collapse("hide");
       }
     }, 3000);
   }
