@@ -140,7 +140,8 @@ jQuery(document).ready(function () {
         // Synchroniser tous les autres toggles
         toggles.forEach(otherToggle => {
           if (otherToggle !== this) {
-            otherToggle.checked = newState;
+            //otherToggle.checked = newState;
+            otherToggle.checked = newState === 'true';
           }
         });
         
@@ -167,10 +168,14 @@ jQuery(document).ready(function () {
       document.cookie = `programmation-modal-favorited=${state}; path=/; max-age=31536000`;
 
       // Synchroniser tous les autres toggles
+        setTimeout(() => {
       const toggles = document.querySelectorAll('.programmation-favorited-toggle');
       toggles.forEach(toggle => {
-          toggle.checked = state;
+          //console.log("toggle",toggle, state);
+          //toggle.checked = state;
+          toggle.checked = state === 'true';
       });
+        }, 350);
       
       // Ouvrir la modale via le bouton trigger
       const triggerBtn = document.querySelector('.toggle-programmation');
