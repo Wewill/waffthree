@@ -114,6 +114,98 @@ jQuery(document).ready(function () {
     });
   });
 
+  // Favorites
+  (function() {
+    /*
+      -------------------------------------------------
+      Switch programmation favorite ≠ full modal 
+      -------------------------------------------------
+    */
+    // Utiliser un sélecteur de classe au lieu d'un ID
+    const toggles = document.querySelectorAll('.programmation-favorited-toggle');
+    const STORAGE_KEY = 'programmation-modal-favorited';
+    
+    // Récupérer l'état depuis le localStorage au chargement
+    const savedState = localStorage.getItem(STORAGE_KEY);
+    const favoritedDisplay = savedState === 'true';
+    
+    // Appliquer l'état initial à tous les toggles
+    toggles.forEach(toggle => {
+      toggle.checked = favoritedDisplay;
+      
+      // Écouter les changements du toggle
+      toggle.addEventListener('change', function() {
+        const newState = this.checked;
+        
+        // Synchroniser tous les autres toggles
+        toggles.forEach(otherToggle => {
+          if (otherToggle !== this) {
+            otherToggle.checked = newState;
+          }
+        });
+        
+        // Sauvegarder dans le localStorage & cookie php
+        localStorage.setItem(STORAGE_KEY, newState);
+        document.cookie = `programmation-modal-favorited=${newState}; path=/; max-age=31536000`;
+        
+        // Recharger la page
+        setTimeout(() => {
+          window.location.reload();
+        }, 350);
+      });
+    });
+
+    /*
+      -------------------------------------------------
+      Open programmation via admin account fifam buttons  
+      -------------------------------------------------
+    */
+    function openProgrammationModal(isFavorite) {
+      // Enregistrer l'état dans le localStorage
+      const state = isFavorite ? 'true' : 'false';
+      localStorage.setItem(STORAGE_KEY, state);
+      document.cookie = `programmation-modal-favorited=${state}; path=/; max-age=31536000`;
+      
+      // Ouvrir la modale via le bouton trigger
+      const triggerBtn = document.querySelector('.toggle-programmation');
+      if (triggerBtn) {
+        triggerBtn.click();
+      } else {
+        console.warn('Aucun bouton avec la classe .toggle-programmation trouvé.');
+      }
+    }
+    
+    // Attendre que le DOM soit prêt
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initModalLinks);
+    } else {
+      initModalLinks();
+    }
+    
+    function initModalLinks() {
+      // Liens "favorite"
+      document.querySelectorAll('a[rel="open-favorite-prog"]').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          openProgrammationModal(true);
+        });
+      });
+      
+      // Liens "full"
+      document.querySelectorAll('a[rel="open-full-prog"]').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          openProgrammationModal(false);
+        });
+      });
+    }
+
+  })();
+
+
+
+
+
   /*
 		-------------------------------------------------
 		Init fit content via fitty v2.3.2 / Edition Badge

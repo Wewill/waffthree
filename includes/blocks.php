@@ -911,7 +911,7 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'id'   => $prefix . 'p_title',
 				'type' => 'text',
 				'name' => esc_html__( 'Title', 'waff' ),
-				'std'  => esc_html__( 'Sections', 'waff' ),
+				'std'  => esc_html__( 'Programmation', 'waff' ),
 				'placeholder' => esc_html__( 'Title', 'waff' ),
 			],
 			[
