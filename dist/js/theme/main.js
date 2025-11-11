@@ -877,9 +877,9 @@ jQuery(document).ready(function () {
 
   // #43 Added to prevent clickable link that block collapse submenu to open for android + add icon
   jQuery("#main-nav ul > li > a").each(function () {
-    console.log(jQuery(this).attr("data-target"));
+    console.log(jQuery(this).attr("data-bs-target"));
     var $t = jQuery(this);
-    if ($t.attr("data-target"))
+    if ($t.attr("data-bs-target"))
       $t.attr({ href_disabled: $t.attr("href") })
         .removeAttr("href")
         .parent()
