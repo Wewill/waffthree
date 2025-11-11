@@ -754,6 +754,18 @@ class WP_Widget_Programmation extends WP_Widget {
 								<div class="bg-action-1 text-center text-white link-light d-none d-xl-block">
 									<div class="p-2"><a class="prog-title headline" data-bs-dismiss="modal" aria-label="Close" id="programmationModalLabel"><?= esc_html__( 'Programmation', 'waff' ) ?></a></div>
 								</div>
+								<!-- Switch pour toggle entre planning complet et favoris -->
+								<div class="d-flex bg-dark-action-1 p-3 align-items-center justify-content-center">
+									<h6 class="mb-0 me-4 text-light"><span class="h5">Nouveau !</span> Votre grille-horaire personnalisée</h6>
+									<div class="toggle-wrapper">
+										<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
+										<label class="toggle-switch">
+											<input type="checkbox" id="programmation-favorited-toggle" />
+											<span class="toggle-slider"></span>
+										</label>
+										<span class="toggle-label"><?php _e('Mes favoris', 'waff'); ?></span>
+									</div>
+								</div>
 								<div class="d-flex justify-content-between align-items-stretch align-self-stretch days nav" id="navProgrammationModal" role="tablist">
 									<?php foreach($the_days as $the_day) {
 										printf('<a data-scroll="day%s" href="#day%s" class="flex-fill display text-center bg-white color-dark day nav-item nav-link active">%s<i class="icon icon-down"></i></a>',
