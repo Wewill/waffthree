@@ -588,7 +588,7 @@ class WP_Widget_Programmation extends WP_Widget {
 												// Print film
 												// //if ( $has_film_favorited || $has_film_favorited_in_program ) : 
 												printf('
-												<dd class="col-10 mb-3 ps-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
+												<dd class="col-10 mb-3 ps-3 ps-sm-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
 													<p class="length text-black"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p class="text-black">
 														<span class="last_f_section_color" %s>
@@ -756,7 +756,7 @@ class WP_Widget_Programmation extends WP_Widget {
 								</div>
 								<!-- Switch pour toggle entre planning complet et favoris -->
 								<div class="d-flex bg-dark-action-1 p-3 align-items-center justify-content-center">
-									<h5 class="mb-0 me-4 text-light"><span class="headflat">Nouveau !</span> Votre grille-horaire personnalisée</h5>
+									<h5 class="mb-0 me-2 me-sm-4 text-light"><span class="headflat">Nouveau !</span> Votre grille-horaire personnalisée</h5>
 									<div class="toggle-wrapper">
 										<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
 										<label class="toggle-switch">
