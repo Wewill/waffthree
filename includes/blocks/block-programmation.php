@@ -129,8 +129,8 @@ function wa_programmation_callback( $attributes ) {
 		
 		<!-- Switch pour toggle entre planning complet et favoris -->
 		<!-- Script du switch > voir main.js du theme -->
-		<div class="d-flex p-3 align-items-center justify-content-center">
-			<h6 class="mb-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
+		<div class="d-flex p-3 align-items-center --justify-content-center">
+			<h6 class="m-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
 			<div class="toggle-wrapper">
 				<span class="toggle-label"><?php _e('Planning complet', 'waff'); ?></span>
 				<label class="toggle-switch">
