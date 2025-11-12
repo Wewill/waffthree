@@ -3926,7 +3926,7 @@ function wa_sections_callback( $attributes ) {
 	}
 
 	// Params
-	print_r($attributes['data']);
+	// print_r($attributes['data']);
 	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ) || 
 								( isset( $attributes['data']['waff_sl_show_introduction'] ) && $attributes['data']['waff_sl_show_introduction'] == 1 )
 							  )?'1':'0';
