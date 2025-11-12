@@ -2483,7 +2483,7 @@ function wa_edito_callback( $attributes ) {
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
 							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-								<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
+								<a class="btn btn-outline-dark mt-4" href="<?php echo esc_url( mb_get_block_field( 'waff_e_moreurl' )); ?>"><?php esc_html_e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -2562,7 +2562,7 @@ function wa_edito_callback( $attributes ) {
 							<p class="lead mb-5"><span class="h6 headline d-inline"><?= mb_get_block_field( 'waff_e_subtitle' ) ?></span> <?= waff_do_markdown(mb_get_block_field( 'waff_e_leadcontent' )) ?></p>
 							<?= waff_do_markdown(mb_get_block_field( 'waff_e_content' )) ?>
 							<?php if ( mb_get_block_field( 'waff_e_morelink' ) == 1 ) : ?>
-								<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_e_moreurl' ) ?>"><?php _e('Discover...', 'waff'); ?></a>
+								<a class="btn btn-outline-dark mt-4" href="<?php echo esc_url( mb_get_block_field( 'waff_e_moreurl' )); ?>"><?php esc_html_e('Discover...', 'waff'); ?></a>
 							<?php endif; ?>
 						</article>
 					</div>
@@ -2849,7 +2849,7 @@ function wa_awards_callback( $attributes ) {
 			<!-- More button-->
 			<?php if ( mb_get_block_field( 'waff_a_morelink' ) == 1 ) : ?>
 			<div class="--d-grid --gap-2 mt-2 mt-sm-6 mb-2 mb-sm-6 text-center">
-				<a class="btn btn-outline-dark mt-4" href="<?= mb_get_block_field( 'waff_a_moreurl' ) ?>"><?= esc_html__( 'All the awards', 'waff' ); ?></a>
+				<a class="btn btn-outline-dark mt-4" href="<?php echo esc_url( mb_get_block_field( 'waff_a_moreurl' )); ?>"><?php esc_html_e( 'All the awards', 'waff' ); ?></a>
 			</div>
 			<?php endif; ?>
 
@@ -4003,7 +4003,7 @@ function wa_sections_callback( $attributes ) {
 		<!-- #Sections list -->
 		<?php if ( isset( $show_introduction ) && $show_introduction == '1' ) : ?>
 		<!-- BEGIN:Introduction -->
-		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?> mb-4" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="margin-bottom: 1.5rem!important;background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 			<div class="container-fluid px-0">
 				<hgroup class="text-center">
 					<h6 class="headline d-inline-block"><?= esc_html(mb_get_block_field( 'waff_sl_title' )) ?></h6>
@@ -4328,7 +4328,7 @@ function wa_mission_callback( $attributes ) {
 						</div>
 
 						<?php if ( mb_get_block_field( 'waff_m_morelink' ) == 1 ) : ?>
-						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_m_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?php echo esc_url( mb_get_block_field( 'waff_m_moreurl' )); ?>"><?php esc_html_e( 'More...', 'waff' ); ?></a>
 						<?php endif; ?>
 
 					</div>
@@ -4410,7 +4410,7 @@ function wa_cols_callback( $attributes ) {
 				</div>
 				<div class="col-4 d-flex align-items-start justify-content-end">
 					<?php if ( mb_get_block_field( 'waff_c_morelink' ) == 1 ) : ?>
-					<a class="btn btn-action-3 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_c_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+					<a class="btn btn-action-3 btn-lg btn-transition-scale" href="<?php echo esc_url( mb_get_block_field( 'waff_c_moreurl' )); ?>"><?php esc_html_e( 'More...', 'waff' ); ?></a>
 					<?php endif; ?>
 				</div>
 				<?php if (mb_get_block_field( 'waff_c_leadcontent' ) != "") {
@@ -4539,7 +4539,7 @@ function wa_breaking_callback( $attributes ) {
 							</div>
 							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_1' )) ?></div>
 							<?php if ( mb_get_block_field( 'waff_b_morelink_1' ) == 1 ) : ?>
-							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?= mb_get_block_field( 'waff_b_moreurl_1' ) ?>"><?php _e('More...', 'waff'); ?></a>
+							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?php echo esc_url( mb_get_block_field( 'waff_b_moreurl_1' )); ?>"><?php esc_html_e( 'More...', 'waff' ); ?></a>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -4576,7 +4576,7 @@ function wa_breaking_callback( $attributes ) {
 							</div>
 							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_2' )) ?></div>
 							<?php if ( mb_get_block_field( 'waff_b_morelink_2' ) == 1 ) : ?>
-							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?= mb_get_block_field( 'waff_b_moreurl_2' ) ?>"><?php _e('More...', 'waff'); ?></a>
+							<a class="btn btn-action-3 btn-lg mt-4 btn-transition-scale" href="<?php echo esc_url( mb_get_block_field( 'waff_b_moreurl_2' )); ?>"><?php esc_html_e( 'More...', 'waff' ); ?></a>
 							<?php endif; ?>
 						</div>
 					</div>
@@ -4650,7 +4650,7 @@ function wa_insights_callback( $attributes ) {
 					<hgroup class="pt-8 pb-4 d-flex justify-content-between align-items-center">
 						<h2><?= mb_get_block_field( 'waff_i_title' ) ?></h2>
 						<?php if ( mb_get_block_field( 'waff_i_morelink' ) == 1 ) : ?>
-						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?= mb_get_block_field( 'waff_i_moreurl' ) ?>"><?php _e('More...', 'waff'); ?></a>
+						<a class="btn btn-action-2 btn-lg btn-transition-scale" href="<?php echo esc_url( mb_get_block_field( 'waff_i_moreurl' )); ?>"><?php esc_html_e( 'More...', 'waff' ); ?></a>
 						<?php endif; ?>
 					</hgroup>
 
