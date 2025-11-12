@@ -3904,9 +3904,9 @@ function wa_sections_callback( $attributes ) {
 	}
 
 	// Params
-	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ))?'1':'0';
-	$show_parent_section 	= (mb_get_block_field( 'waff_sl_show_parent_section' ))?'1':'0';
-	$show_tiny_list 		= (mb_get_block_field( 'waff_sl_show_tiny_list' ))?'1':'0';
+	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ) || isset( $attributes['data']['waff_sl_show_introduction'] ))?'1':'0';
+	$show_parent_section 	= (mb_get_block_field( 'waff_sl_show_parent_section' ) || isset( $attributes['data']['waff_sl_show_parent_section'] ))?'1':'0';
+	$show_tiny_list 		= (mb_get_block_field( 'waff_sl_show_tiny_list' ) || isset( $attributes['data']['waff_sl_show_tiny_list'] ))?'1':'0';
 
 	// Get sections filter (for favorite sections feature)
 	$sections_in = isset( $attributes['data']['waff_sl_sections_in'] ) ? (array) $attributes['data']['waff_sl_sections_in'] : array();
