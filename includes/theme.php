@@ -184,6 +184,13 @@ function waff_child_enqueue_scripts() {
 	if( true === WAFF_ISFILM_VERSION ) {
 		wp_enqueue_script( 'fitty', 				get_stylesheet_directory_uri() . '/dist/js/theme/vendor/fitty.min.js', 				array(), '1.0.0',true);
 		wp_enqueue_script( 'waff-programmation-ajax', get_stylesheet_directory_uri() . '/dist/js/theme/programmation-ajax.js', 			array('jquery'), WAFF_THEME_VERSION,true); //#43 New ajax version 
+
+		// Pass user status to JavaScript
+		wp_localize_script('waff-programmation-ajax', 'programmationData', array(
+			'isUserOnline' => is_user_logged_in(),
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('programmation_nonce')
+		));
 	}
 
 	// Competitions only

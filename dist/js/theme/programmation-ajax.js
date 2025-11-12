@@ -16,8 +16,13 @@ window.reloadProgrammationModalContent = function() {
 	// 	    useCache = true;
 	// }
 	// // useCache = false; // @wilhem si tu veux forcer à toujour charger
+
+    // Access the user status from localized data
+    let isUserOnline = programmationData.isUserOnline;
 	let isModalFavorited = localStorage.getItem('programmation-modal-favorited') === 'true';
-	if (isModalFavorited) {
+	console.log("isUserOnline::", isUserOnline);
+	console.log("isModalFavorited::", isModalFavorited);
+	if (isUserOnline && isModalFavorited) {
 		var useCache = false;
 		// const durationCache = 30 * 60 * 1000; // 30 minutes
 		// // const durationCache = 24 * 60 * 60 * 1000; // 24 heures
