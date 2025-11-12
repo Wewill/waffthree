@@ -67,6 +67,9 @@ function setup() {
 	
 	// Stop cache SC
 	add_shortcode('stop_cache', 			$n( 'waff_shortcode_no_cache') );
+
+	// Add to calendar SC
+	add_shortcode('add_to_calendar', 		$n( 'waff_shortcode_add_to_calendar') );
 	
 	// Remove comments 
 	add_action('init', 						$n( 'waff_remove_comment_support' ), 100);
@@ -358,6 +361,106 @@ function waff_remove_page_templates( $templates ) {
 // Créer le shortcode [stop_cache] à mettre dans les pages ne devant pas être mise en cache.
 function waff_shortcode_no_cache($atts){
     define('DONOTCACHEPAGE',1);
+}
+
+/* ADD TO CALENDAR SHORTCODE
+================================================== */
+function waff_shortcode_add_to_calendar($atts) {
+	// Shortcode attributes
+	$atts = shortcode_atts(
+		array(
+			'title' => '',
+			'description' => '',
+			'location' => '',
+			'start' => '', // Format: YYYY-MM-DD HH:MM
+			'end' => '',   // Format: YYYY-MM-DD HH:MM
+			'timezone' => 'Europe/Paris',
+		),
+		$atts,
+		'add_to_calendar'
+	);
+
+	// Validate required fields
+	if (empty($atts['title']) || empty($atts['start'])) {
+		return '<!-- Add to Calendar: title and start date are required -->';
+	}
+
+	// Convert dates to timestamps
+	$start_time = strtotime($atts['start']);
+	$end_time = !empty($atts['end']) ? strtotime($atts['end']) : $start_time + 3600; // Default 1 hour duration
+
+	// Format dates for different calendar services
+	$google_start = gmdate('Ymd\THis\Z', $start_time);
+	$google_end = gmdate('Ymd\THis\Z', $end_time);
+
+	$ical_start = gmdate('Ymd\THis\Z', $start_time);
+	$ical_end = gmdate('Ymd\THis\Z', $end_time);
+
+	// Encode values for URLs
+	$title_encoded = urlencode($atts['title']);
+	$description_encoded = urlencode($atts['description']);
+	$location_encoded = urlencode($atts['location']);
+
+	// Generate Google Calendar URL
+	$google_url = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
+	$google_url .= '&text=' . $title_encoded;
+	$google_url .= '&dates=' . $google_start . '/' . $google_end;
+	if (!empty($atts['description'])) {
+		$google_url .= '&details=' . $description_encoded;
+	}
+	if (!empty($atts['location'])) {
+		$google_url .= '&location=' . $location_encoded;
+	}
+
+	// Generate iCal data
+	$ical_data = "BEGIN:VCALENDAR\n";
+	$ical_data .= "VERSION:2.0\n";
+	$ical_data .= "BEGIN:VEVENT\n";
+	$ical_data .= "DTSTART:" . $ical_start . "\n";
+	$ical_data .= "DTEND:" . $ical_end . "\n";
+	$ical_data .= "SUMMARY:" . $atts['title'] . "\n";
+	if (!empty($atts['description'])) {
+		$ical_data .= "DESCRIPTION:" . $atts['description'] . "\n";
+	}
+	if (!empty($atts['location'])) {
+		$ical_data .= "LOCATION:" . $atts['location'] . "\n";
+	}
+	$ical_data .= "END:VEVENT\n";
+	$ical_data .= "END:VCALENDAR";
+
+	$ical_url = 'data:text/calendar;charset=utf8,' . urlencode($ical_data);
+
+	// Get multilingual text
+	$button_text = '[:fr]Ajouter au calendrier[:en]Add to calendar[:]';
+	if (function_exists('qtranxf_split') && function_exists('qtranxf_getLanguage')) {
+		$locale = qtranxf_getLanguage();
+		$texts = qtranxf_split($button_text);
+		$button_text = isset($texts[$locale]) ? $texts[$locale] : $texts['fr'];
+	} else {
+		// Fallback without qtranslate
+		$button_text = 'Ajouter au calendrier';
+	}
+
+	// Generate dropdown HTML
+	ob_start();
+	?>
+	<div class="add-to-calendar-wrapper">
+		<span class="badge rounded-pill bg-action-2 text-dark subline mt-2 dropdown">
+			<a href="#" class="color-dark link-dark dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="noopener">
+				<i class="bi bi-calendar-plus me-2"></i> <?php echo esc_html($button_text); ?>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="<?php echo esc_url($google_url); ?>" target="_blank" rel="noopener">
+					<i class="bi bi-google me-2"></i> Google Calendar
+				</a></li>
+				<li><a class="dropdown-item" href="<?php echo esc_url($ical_url); ?>" download="event.ics">
+					<i class="bi bi-calendar-event me-2"></i> iCal / Outlook
+				</a></li>
+			</ul>
+		</span>
+	</div>
+	<?php
+	return ob_get_clean();
 }
 
 /* REMOVE COMMENTS from post and pages 
