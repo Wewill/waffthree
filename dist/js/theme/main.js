@@ -786,9 +786,39 @@ jQuery(document).ready(function () {
 
   /*
 		-------------------------------------------------
-		Collapse on hover main-nav  
+		Collapse on hover main-nav
 		-------------------------------------------------
 	*/
+  // Initialize Bootstrap 5 Collapse instances for sub-nav items
+  const collapseMenuInstances = {};
+  jQuery("#sub-nav .collapse-menu").each(function() {
+    const menuId = jQuery(this).attr('id');
+    if (menuId) {
+      collapseMenuInstances[menuId] = new bootstrap.Collapse(this, {
+        toggle: false
+      });
+    }
+  });
+
+  // Variable globale pour tracker si on est dans la zone du menu
+  let isInMenuZone = false;
+  let menuZoneTimeout = null;
+
+  // Tracker le hover sur toute la zone du menu (main-nav + sub-nav)
+  jQuery("#navbarToggleExternalContent .row").on("mouseenter", function() {
+    isInMenuZone = true;
+    if (menuZoneTimeout) {
+      clearTimeout(menuZoneTimeout);
+      menuZoneTimeout = null;
+    }
+  }).on("mouseleave", function() {
+    isInMenuZone = false;
+    // Délai avant de considérer qu'on a vraiment quitté la zone
+    menuZoneTimeout = setTimeout(function() {
+      isInMenuZone = false;
+    }, 100);
+  });
+
   function toggleCollapseNav(e) {
     const _d = jQuery(e.target),
       _t = jQuery(e.target).attr("aria-controls"),
@@ -800,7 +830,7 @@ jQuery(document).ready(function () {
     const _a = jQuery("nav .collapse-menu.show"),
       _h = _a.length;
 
-    //console.log('toggleCollapse:' + _t + ' / '+ e.type + ' how many hover ? ' + _h + ' row is hover ? '+ _rp.is(':hover') + ' / ' + _d.is(':hover'));
+    console.log('toggleCollapse:' + _t + ' / '+ e.type + ' how many hover ? ' + _h + ' row is hover ? '+ _rp.is(':hover') + ' / ' + _d.is(':hover'));
     /*console.log( _d );
 		console.log( _m );
 		console.log( _mp );
@@ -809,25 +839,34 @@ jQuery(document).ready(function () {
 		console.log( _a );
 		console.log( _h );*/
 
-    if (_h > 0 && _rp.is(":hover") && e.type === "mouseenter") {
+    if (_h > 0 && isInMenuZone && e.type === "mouseenter") {
       //console.log('##DOIT DISPARAITRE');
       _a.toggleClass("show", false);
     }
 
     time = setTimeout(
       function () {
-        //console.log('toggleCollapse:timeout:' + _h + ' / ' + e.type + ' / ' + _rp.is(':hover') + ' / ' + _d.is(':hover'));
+        // Réévaluer l'état hover dans le timeout pour plus de précision
+        const isRowHovered = _rp.is(":hover");
+        const isLinkHovered = _d.is(":hover");
+        const isSubNavHovered = _sp.is(":hover");
+
+        console.log('toggleCollapse:timeout:' + _h + ' / ' + e.type + ' / ' + isRowHovered + ' / ' + isLinkHovered);
+
         const shouldOpen =
-          e.type !== "click" && (_d.is(":hover") || _rp.is(":hover"));
+          e.type !== "click" && (isLinkHovered || isInMenuZone || isSubNavHovered);
         const expanded =
           _d.attr("aria-expanded") == "true" &&
-          (_d.is(":hover") || _rp.is(":hover"));
+          (isLinkHovered || isInMenuZone || isSubNavHovered);
         //_m.toggleClass('show', shouldOpen);
-        //console.log('shouldOpen:' + shouldOpen );
+        console.log('shouldOpen:' + shouldOpen );
         if (shouldOpen === true) {
-          //console.log('expanded:' + expanded);
+          console.log('expanded:' + expanded);
           if (expanded === false && _h < 0) {
-            _m.collapse("show");
+            // Utiliser Bootstrap 5 API
+            if (_t && collapseMenuInstances[_t]) {
+              collapseMenuInstances[_t].show();
+            }
             _d.toggleClass("show", true);
           } else {
             _a.toggleClass("show", false);
@@ -836,13 +875,16 @@ jQuery(document).ready(function () {
           }
         } else {
           _a.toggleClass("show", false);
-          _m.collapse("hide");
+          // Utiliser Bootstrap 5 API
+          if (_t && collapseMenuInstances[_t]) {
+            collapseMenuInstances[_t].hide();
+          }
           _d.toggleClass("show", false);
         }
         jQuery(_d).attr("aria-expanded", shouldOpen);
         jQuery(_rp).on("mouseleave", isRowHover);
       },
-      e.type === "mouseleave" && !_rp.is(":hover") ? 3000 : 10
+      e.type === "mouseleave" && !isInMenuZone ? 3000 : 10
     );
 
     //( e.type === 'mouseleave' && _rp.is(':hover') && _h > 0 )
@@ -860,7 +902,13 @@ jQuery(document).ready(function () {
       if (_h > 0 && _rp.is(":hover") === false && e.type === "mouseout") {
         //console.log('##DOIT DISPARAITRE DEFINITIF');
         //_a.toggleClass('show', false);
-        _a.collapse("hide");
+        // Utiliser Bootstrap 5 API
+        _a.each(function() {
+          const menuId = jQuery(this).attr('id');
+          if (menuId && collapseMenuInstances[menuId]) {
+            collapseMenuInstances[menuId].hide();
+          }
+        });
       }
     }, 3000);
   }
@@ -876,16 +924,27 @@ jQuery(document).ready(function () {
   //.on('click', '.dropdown-menu a', toggleCollapse);
 
   // #43 Added to prevent clickable link that block collapse submenu to open for android + add icon
+  // #45 Issued now, because on some pages, makes the sub-nav not appear on hover main-nav 
+  // jQuery("#main-nav ul > li > a").each(function () {
+  //   console.log(jQuery(this).attr("data-bs-target"));
+  //   var $t = jQuery(this);
+  //   if ($t.attr("data-bs-target"))
+  //     $t.attr({ href_disabled: $t.attr("href") })
+  //       .removeAttr("href")
+  //       .parent()
+  //       .append('<i class="icon icon-down-right"></i>');
+  // });
+
+  // #45 Hotfix 
   jQuery("#main-nav ul > li > a").each(function () {
     console.log(jQuery(this).attr("data-bs-target"));
     var $t = jQuery(this);
     if ($t.attr("data-bs-target"))
-      $t.attr({ href_disabled: $t.attr("href") })
-        .removeAttr("href")
+      $t/*.attr({ href_disabled: $t.attr("href") })
+        .removeAttr("href")*/
         .parent()
         .append('<i class="icon icon-down-right"></i>');
   });
-
   /*
 		-------------------------------------------------
 		Collapse on hover main-nav  
