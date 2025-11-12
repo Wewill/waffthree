@@ -976,7 +976,8 @@ body:not(.waff-theme-fifam) .contrast--reverse .aux-languages*/ {
   body:not(.home) .navbar-dark .header__button--night-mode,
   body:not(.home) .navbar-dark .header__search-toggle,
   body:not(.home) .navbar-dark .aux-languages,
-  body:not(.home) .navbar-dark .navbar-text a /* #45,
+  body:not(.home) .navbar-dark .navbar-text a,
+  body:not(.home) .navbar-dark .account-nav ul li a i /* #45,
   body:not(.home) .contrast--reverse .header__button--night-mode,
   body:not(.home) .contrast--reverse .header__search-toggle, 
   body:not(.home) .contrast--reverse .aux-languages*/ {
