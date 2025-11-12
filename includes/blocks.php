@@ -795,6 +795,12 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'name'  => esc_html__( 'Use section color ?', 'waff' ),
 				'style' => 'rounded',
 			],
+			[
+				'id'    => $prefix . 'ss_showonly_when_edition_is_online',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Show only when edition is online ?', 'waff' ),
+				'style' => 'rounded',
+			],
 		],
 		'category'        => 'layout',
 		// 'icon'            => 'images-alt',
@@ -940,6 +946,18 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 					'posts_per_page' => - 1,
 				),
 				//'hidden' => array( 'waff_lp_posttype', '!=', 'post' ),
+			],
+			[
+                'id'    => $prefix . 'p_show_gazette',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display Gazette mode ?', 'waff' ),
+                'style' => 'rounded',
+			],
+			[
+				'id'    => $prefix . 'p_showonly_when_edition_is_online',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Show only when edition is online ?', 'waff' ),
+				'style' => 'rounded',
 			],
 			// [
             //     'id'    => $prefix . 'p_show_introduction',
@@ -3671,7 +3689,7 @@ function wa_film_callback( $attributes ) {
 }
 
 function wa_section_callback( $attributes ) {
-	global $current_edition_slug; 
+	global $current_edition_slug, $current_edition_films_are_online; 
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 	
 	// if ( $is_preview ) 
@@ -3710,6 +3728,10 @@ function wa_section_callback( $attributes ) {
 	$section_id 			= $attributes['data']['waff_ss_section'];
 	$section_slug 			= $section[0]->slug;
 	$use_section_color 		= (mb_get_block_field( 'waff_ss_section_color' ))?'1':'0'; 
+
+	// Do not show if option is selected and edition is offline
+	$showonly_when_edition_is_online 		= (mb_get_block_field( 'waff_ss_showonly_when_edition_is_online' ))?'1':'0'; 
+	if ( $showonly_when_edition_is_online == '1' && $current_edition_films_are_online == false ) return;
 
 	if ( $section_id != "" ) :
 
@@ -3904,6 +3926,7 @@ function wa_sections_callback( $attributes ) {
 	}
 
 	// Params
+	print_r($attributes['data']);
 	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ) || 
 								( isset( $attributes['data']['waff_sl_show_introduction'] ) && $attributes['data']['waff_sl_show_introduction'] == 1 )
 							  )?'1':'0';
@@ -3980,7 +4003,7 @@ function wa_sections_callback( $attributes ) {
 		<!-- #Sections list -->
 		<?php if ( isset( $show_introduction ) && $show_introduction == '1' ) : ?>
 		<!-- BEGIN:Introduction -->
-		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
+		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?> mb-4" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 			<div class="container-fluid px-0">
 				<hgroup class="text-center">
 					<h6 class="headline d-inline-block"><?= esc_html(mb_get_block_field( 'waff_sl_title' )) ?></h6>
