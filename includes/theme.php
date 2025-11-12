@@ -380,6 +380,17 @@ function waff_shortcode_add_to_calendar($atts) {
 		'add_to_calendar'
 	);
 
+	// Exemple basique :
+	// [add_to_calendar title="Mon événement" start="2025-01-15 14:00"]
+	// Exemple complet :
+	// [add_to_calendar 
+	//     title="Conférence annuelle" 
+	//     description="Conférence sur le développement web" 
+	//     location="Paris, France" 
+	//     start="2025-01-15 14:00" 
+	//     end="2025-01-15 17:00"
+	// ]
+
 	// Validate required fields
 	if (empty($atts['title']) || empty($atts['start'])) {
 		return '<!-- Add to Calendar: title and start date are required -->';
