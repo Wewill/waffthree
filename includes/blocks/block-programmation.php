@@ -8,7 +8,7 @@
 namespace WaffTwo\Blocks\Block;
 
 function wa_programmation_callback( $attributes ) {
-	global $current_edition_id, $current_edition_slug; 
+	global $current_edition_id, $current_edition_slug, $current_edition_films_are_online; 
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	// if ( $is_preview ) 
@@ -49,6 +49,14 @@ function wa_programmation_callback( $attributes ) {
 	// $show_introduction 		= (mb_get_block_field( 'waff_p_show_introduction' ))?'1':'0'; 
 	// $show_parent_section 	= (mb_get_block_field( 'waff_p_show_parent_section' ))?'1':'0'; 
 	// $show_tiny_list 		= (mb_get_block_field( 'waff_p_show_tiny_list' ))?'1':'0'; 
+
+	// Show gazette mode ? Day by day 
+	$show_gazette 		= (mb_get_block_field( 'waff_p_show_gazette' ))?'1':'0'; 
+
+	// Do not show if option is selected and edition is offline
+	$showonly_when_edition_is_online 		= (mb_get_block_field( 'waff_p_showonly_when_edition_is_online' ))?'1':'0'; 
+	if ( $showonly_when_edition_is_online == '1' && $current_edition_films_are_online == false ) return;
+
 
 	// Get edition metas
 	$edition 			= mb_get_block_field( 'waff_p_edition' ); // WP_Term Object
@@ -144,44 +152,7 @@ function wa_programmation_callback( $attributes ) {
 					<?php echo do_shortcode('[wacp_login_links]'); ?>
 				<?php endif; ?>
 			</div>
-
-		<script>
-		// (function() {
-		// // Utiliser un sélecteur de classe au lieu d'un ID
-		// const toggles = document.querySelectorAll('.programmation-favorited-toggle');
-		// const STORAGE_KEY = 'programmation-modal-favorited';
-		
-		// // Récupérer l'état depuis le localStorage au chargement
-		// const savedState = localStorage.getItem(STORAGE_KEY);
-		// const favoritedDisplay = savedState === 'true';
-		
-		// // Appliquer l'état initial à tous les toggles
-		// toggles.forEach(toggle => {
-		// 	toggle.checked = favoritedDisplay;
-			
-		// 	// Écouter les changements du toggle
-		// 	toggle.addEventListener('change', function() {
-		// 	const newState = this.checked;
-			
-		// 	// Synchroniser tous les autres toggles
-		// 	toggles.forEach(otherToggle => {
-		// 		if (otherToggle !== this) {
-		// 		otherToggle.checked = newState;
-		// 		}
-		// 	});
-			
-		// 	// Sauvegarder dans le localStorage & cookie php
-		// 	localStorage.setItem(STORAGE_KEY, newState);
-		// 	document.cookie = `programmation-modal-favorited=${newState}; path=/; max-age=31536000`;
-			
-		// 	// Recharger la page
-		// 	setTimeout(() => {
-		// 		window.location.reload();
-		// 	}, 300);
-		// 	});
-		// });
-		// })();
-		</script>
+		<!-- Scripts > moved to main.js -->
 
 		<section id="<?= $id ?>-programmation" class="<?= $class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="modal-dialog m-0 --max-w-100 --ml-auto" role="document">
