@@ -3904,9 +3904,12 @@ function wa_sections_callback( $attributes ) {
 	}
 
 	// Params
-	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ))?'1':'0'; 
-	$show_parent_section 	= (mb_get_block_field( 'waff_sl_show_parent_section' ))?'1':'0'; 
-	$show_tiny_list 		= (mb_get_block_field( 'waff_sl_show_tiny_list' ))?'1':'0'; 
+	$show_introduction 		= (mb_get_block_field( 'waff_sl_show_introduction' ))?'1':'0';
+	$show_parent_section 	= (mb_get_block_field( 'waff_sl_show_parent_section' ))?'1':'0';
+	$show_tiny_list 		= (mb_get_block_field( 'waff_sl_show_tiny_list' ))?'1':'0';
+
+	// Get sections filter (for favorite sections feature)
+	$sections_in = isset( $attributes['data']['waff_sl_sections_in'] ) ? (array) $attributes['data']['waff_sl_sections_in'] : array();
 
 	// Get edition metas
 	$edition 			= mb_get_block_field( 'waff_sl_edition' ); // WP_Term Object
@@ -4027,6 +4030,11 @@ function wa_sections_callback( $attributes ) {
 						$section_title_color = 'color-light link-light';
 					}
 				}
+				// Apply opacity for sections not in favorites (if sections_in filter is set)
+				$section_opacity_style = '';
+				if ( ! empty( $sections_in ) && ! in_array( $section_id, $sections_in, true ) ) {
+					$section_opacity_style = 'opacity: 0.15;';
+				}
 				// Counts
 				if ( function_exists('get_counts') )
 					$counts = get_counts('section', $section_id, null);
@@ -4054,7 +4062,7 @@ function wa_sections_callback( $attributes ) {
 		<!-- BEGIN:Sections list-->
 		<?php if ( isset( $show_tiny_list ) && $show_tiny_list == '0' ) : ?>
 		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?>" <?= $data ?>>
-			<div class="--card border-0 rounded-0 row" <?= (($section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?>>
+			<div class="--card border-0 rounded-0 row" style="<?= (($section_color!='')?'background-color:'.$section_color.' !important;':'') ?><?= $section_opacity_style ?>">
 				<?php if ( $section_image != '' ) : ?> 
 				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-sm-600-px h-600-px col-12 col-sm-6">
 					<picture class="lazy">
@@ -4100,7 +4108,7 @@ function wa_sections_callback( $attributes ) {
 		</section>
 		<?php else: ?>
 		<!-- BEGIN:Sections list tiny-->
-		<div class="card border-0 rounded-0 flex-sm-equal col-4 col-sm-12" <?= (($section_color!='')?'style="background-color:'.$section_color.' !important;"':'')?> >
+		<div class="card border-0 rounded-0 flex-sm-equal col-4 col-sm-12" style="<?= (($section_color!='')?'background-color:'.$section_color.' !important;':'') ?><?= $section_opacity_style ?>">
 			<?php if ( $section_image != '' ) : ?> 
 			<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="">
 				<picture class="lazy">
