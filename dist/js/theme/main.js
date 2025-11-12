@@ -136,7 +136,7 @@ jQuery(document).ready(function () {
       // Écouter les changements du toggle
       toggle.addEventListener('change', function() {
         const newState = this.checked;
-        
+
         // Synchroniser tous les autres toggles
         toggles.forEach(otherToggle => {
           if (otherToggle !== this) {
@@ -144,15 +144,26 @@ jQuery(document).ready(function () {
             otherToggle.checked = newState === 'true';
           }
         });
-        
+
         // Sauvegarder dans le localStorage & cookie php
         localStorage.setItem(STORAGE_KEY, newState);
         document.cookie = `programmation-modal-favorited=${newState}; path=/; max-age=31536000`;
-        
-        // Recharger la page
-        setTimeout(() => {
-          window.location.reload();
-        }, 350);
+
+        // Vérifier si le toggle est dans la modal
+        const isInModal = this.closest('#programmationModal') !== null;
+
+        if (isInModal) {
+          // Si dans la modal, recharger le contenu via AJAX au lieu de recharger la page
+          // Utiliser la fonction définie dans programmation-ajax.js
+          if (typeof window.reloadProgrammationModalContent === 'function') {
+            window.reloadProgrammationModalContent();
+          }
+        } else {
+          // Si hors de la modal, recharger la page comme avant
+          setTimeout(() => {
+            window.location.reload();
+          }, 350);
+        }
       });
     });
 
