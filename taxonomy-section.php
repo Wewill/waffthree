@@ -405,7 +405,7 @@ if ( have_posts() ) {
 				'data' => array(
 					'waff_sl_title' => 'Sections', 
 					'waff_sl_edition' => $current_edition_id,
-					'waff_sl_show_introduction' => 1,
+					'waff_sl_show_introduction' => 0,
 					'waff_sl_show_parent_section' => 0,
 					'waff_sl_show_tiny_list' => 0,
 				),
