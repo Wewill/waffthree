@@ -1096,7 +1096,36 @@ svg.duotone-filters {
   margin-top: 0 !important;
 }
 
+/* Bullet fallback */
+.bullet {
+  height: 2px;
+  width: 17px;
+  margin-left: 3.4px;
+  margin-right: 3.4px;
+  vertical-align: middle!important;
+  display: inline-block;
+  background-color: var(--go--color--black);
+}
+
+/* Theme alert fallback */
+
+.alert {
+  position: relative;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: var(--go--color--black);
+  background-color: transparent;
+  border: 2px solid var(--go--color--black);
+  border-radius: 0.375rem;
+}
+
+.alert.alert-error {
+  border-color: rgb(176, 0, 0);;
+  color: rgb(176, 0, 0);
+}
+
 /**
 TEST SPECIFIC RSFP 
 To get the bootstrap specific and theme specific into blocks ? 
 */
+
