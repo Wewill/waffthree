@@ -102,8 +102,9 @@ function wa_section_callback( $attributes ) {
 
 		global $attributes;
 
+		// Exemple : 
 		// <div class="card film-card flex-row flex-wrap col-10 bg-custom my-0 border-0 h-600-px shadow-sm card-white p-0" style="background-color: #d54100 !important;">
-		// 	<?php /* Film */ ?>
+		// 	<!-- Film -->
 		// 	<div class="card-featured overflow-hidden w-50 float-start">
 		// 		<a class="d-flex flex-column flex-wrap align-items-start justify-content-middle h-100 w-100 bg-secondary">
 		// 			<img data-srcset="img/carousel/1-1200x1200.jpg 2x, img/carousel/1-600x600.jpg" data-lazy="img/carousel/1-600x600.jpg" data-sizes="" class="w-100 h-600-px fit-image" alt="">
