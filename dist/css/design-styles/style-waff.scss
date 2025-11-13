@@ -2184,6 +2184,15 @@ td.room {
   opacity: 0.95;
 }
 
+/**
+#45 Carousel section
+*/
+
+.carousel-card .card-text:not(.card-more-text) small {
+  font-size: 1.1em!important;
+  opacity: 1!important;
+}
+
 /* .film-card .time-wrapper .time {
   // Unchanged
 } */
