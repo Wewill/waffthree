@@ -433,7 +433,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 		}
 		?>
 		<?php if ( strpos( $film_section_link, 'long' ) !== false && strpos( $film_section_link, 'competition' ) !== false ) : ?>
-			<div class="position-absolute top-0 end-0 container-fluid px-0">
+			<div class="position-absolute bottom-0 end-0 container-fluid px-0">
 				<div class="row g-0 align-items-center">
 					
 					<!-- Col -->
