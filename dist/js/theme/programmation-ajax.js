@@ -71,7 +71,7 @@ window.reloadProgrammationModalContent = function() {
 			});
 		}
 	} else {
-		fetch('/wp-content/cache/programmation_ajax_cache.html', {})
+		fetch('/wp-content/uploads/programmation_ajax_cache.html', {})
 		.then(response => response.text())
 		.then(response => {
 			programmationModalAjax.innerHTML = response;
