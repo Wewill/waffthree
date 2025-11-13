@@ -189,6 +189,10 @@ function wa_programmation_callback( $attributes ) {
 		//$favorited_display = true;
 		$favorited_display = isset($_COOKIE['programmation-modal-favorited']) ? $_COOKIE['programmation-modal-favorited'] === 'true' : false;
 
+		// If gazette, no matter what, film have to be shown 
+		if ( $show_gazette == '1' )
+			$favorited_display = false;
+
 		if ( $current_edition_films_are_online || !empty(array_intersect($allowed_roles, $user->roles )) ) :	
 
 			// Debut block programmation
@@ -513,6 +517,8 @@ function wa_programmation_callback( $attributes ) {
 				// Render HTML
 				print('<!--  BEGIN: Render -->');
 				
+				// Test >
+				// $gazette_day_to_show = 2;
 				// Gazette mode: Display header with stats
 				if ( $show_gazette == '1' && $gazette_day_to_show !== null ) {
 					// Find the day to display and get projection IDs
@@ -522,22 +528,23 @@ function wa_programmation_callback( $attributes ) {
 					foreach($the_days as $key => $the_day) {
 						if ( $the_day['day_count'] == $gazette_day_to_show ) {
 							$gazette_day_data = $the_day;
-							// echo '<pre style="color:blue;">',print_r($the_day,1),'</pre>';
+							//  echo '<pre style="color:blue;">',print_r($the_day,1),'</pre>';
 
-							// Collect all projection IDs for this day
-							if ( isset($the_day['rooms']) && is_array($the_day['rooms']) ) {
-								foreach($the_day['rooms'] as $room_key => $room) {
-									if ( isset($room['room']) && is_array($room['room']) ) {
-										foreach($room['room'] as $subroom_key => $subroom) {
-											if ( isset($subroom['projections']) && is_array($subroom['projections']) ) {
-												// Extract p_id from each projection
-												$projection_ids = array_column($subroom['projections'], 'p_id');
-												$gazette_projection_ids = array_merge($gazette_projection_ids, $projection_ids);
-											}
-										}
-									}
-								}
-							}
+							// #45 No counts for now, because its broken
+							// // Collect all projection IDs for this day
+							// if ( isset($the_day['rooms']) && is_array($the_day['rooms']) ) {
+							// 	foreach($the_day['rooms'] as $room_key => $room) {
+							// 		if ( isset($room['room']) && is_array($room['room']) ) {
+							// 			foreach($room['room'] as $subroom_key => $subroom) {
+							// 				if ( isset($subroom['projections']) && is_array($subroom['projections']) ) {
+							// 					// Extract p_id from each projection
+							// 					$projection_ids = array_column($subroom['projections'], 'p_id');
+							// 					$gazette_projection_ids = array_merge($gazette_projection_ids, $projection_ids);
+							// 				}
+							// 			}
+							// 		}
+							// 	}
+							// }
 							break;
 						}
 					}
@@ -549,10 +556,11 @@ function wa_programmation_callback( $attributes ) {
 						$gazette_day_timestamp = $gazette_day_data['day'];
 
 
-						// Use get_counts function to get statistics
-						// echo '<pre style="color:green;">',print_r($gazette_projection_ids,1),'</pre>';
-						$counts = get_counts('', array(), $gazette_projection_ids);
-						// echo '<pre style="color:blue;">',print_r($counts,1),'</pre>';
+						// #45 No counts for now, because its broken
+						// // Use get_counts function to get statistics
+						// // echo '<pre style="color:green;">',print_r($gazette_projection_ids,1),'</pre>';
+						// $counts = get_counts('', array(), $gazette_projection_ids);
+						// // echo '<pre style="color:blue;">',print_r($counts,1),'</pre>';
 
 						printf('
 						<section class="contrast--light bg-bgcolor --f-w" id="gazette-header">
@@ -565,7 +573,7 @@ function wa_programmation_callback( $attributes ) {
 									<div class="col-md-7"></div>
 									<div class="col-md-2"></div>
 								</div>
-								<div class="row g-0 align-items-center">
+								<div class="row g-0 align-items-center d-none">
 									<div class="col-md-3 p-4 aos-init aos-animate" data-aos="fade-right">
 										<p class="--text-muted text-black position-sticky sticky-top mb-0">
 											%s
@@ -891,7 +899,7 @@ function wa_programmation_callback( $attributes ) {
 												esc_html__( 'Taggued', 'waff' ),
 												$html_p_tags,
 												//
-												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-0',
+												($the_day_room_projections['f_poster_img'] == '' || $show_gazette == '1')?'d-none':'col-2 mb-0',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												get_permalink( $the_day_room_projections['f_id'] ),
 												$the_day_room_projections['f_poster_img'],
