@@ -120,7 +120,7 @@ function wa_breaking_callback( $attributes ) {
 						<div class="w-100">
 							<div class="w-100 w-lg-50">
 								<p class="card-date fw-bold <?= mb_get_block_field( 'waff_b_subtitle_1_class' )?mb_get_block_field( 'waff_b_subtitle_1_class' ):'text-transparent-color-layout'; ?> mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_1' ) ?></p>
-								<h2 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_1' ) ?></a></h2>
+								<h2 class="card-title"><a href="#" class="stretched-link link-white text-hover-color-light"><?= mb_get_block_field( 'waff_b_title_1' ) ?></a></h2>
 							</div>
 							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_1' )) ?></div>
 							<?php if ( mb_get_block_field( 'waff_b_morelink_1' ) == 1 ) : ?>
@@ -157,7 +157,7 @@ function wa_breaking_callback( $attributes ) {
 						<div class="w-100">
 							<div class="w-100 w-lg-50">
 								<p class="card-date fw-bold <?= mb_get_block_field( 'waff_b_subtitle_2_class' )?mb_get_block_field( 'waff_b_subtitle_2_class' ):'text-transparent-color-layout'; ?> mt-1 mb-0"><?= mb_get_block_field( 'waff_b_subtitle_2' ) ?></p>
-								<h3 class="card-title"><a href="#" class="stretched-link link-white"><?= mb_get_block_field( 'waff_b_title_2' ) ?></a></h3>
+								<h3 class="card-title"><a href="#" class="stretched-link link-white text-hover-color-light"><?= mb_get_block_field( 'waff_b_title_2' ) ?></a></h3>
 							</div>
 							<div class="card-text fw-bold"><?= waff_do_markdown(mb_get_block_field( 'waff_b_content_2' )) ?></div>
 							<?php if ( mb_get_block_field( 'waff_b_morelink_2' ) == 1 ) : ?>
