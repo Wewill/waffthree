@@ -7,12 +7,30 @@
 
 namespace WaffTwo\Blocks\Block;
 
+use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
+
 function wa_programmation_callback( $attributes ) {
 	global $current_edition_id, $current_edition_slug, $current_edition_films_are_online; 
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	// if ( $is_preview ) 
 	 	//print_r($attributes);
+
+	// No post type no render.
+	if ( ! post_type_exists( 'film' ) ) {
+		//if ( $is_preview ) {
+			echo '<div class="alert alert-dismissible alert-danger fade show" role="alert"><strong>Heads up!</strong> The <strong>film</strong> post type does not exist. Please check your configuration. <button aria-label="Close" class="btn-close" data-dismiss="alert" type="button"></button></div>';
+		//}
+		return;
+	}
+
+	// No post type no render.
+	if ( ! post_type_exists( 'projection' ) ) {
+		//if ( $is_preview ) {
+			echo '<div class="alert alert-dismissible alert-danger fade show" role="alert"><strong>Heads up!</strong> The <strong>projection</strong> post type does not exist. Please check your configuration. <button aria-label="Close" class="btn-close" data-dismiss="alert" type="button"></button></div>';
+		//}
+		return;
+	}
 
 	// No data no render.
 	if ( empty( $attributes['data'] ) ) return;
@@ -99,9 +117,9 @@ function wa_programmation_callback( $attributes ) {
 	endif;
 
 	?>
-		<!-- #programmation list -->
+		<?php /* #programmation list */ ?>
 		<?php if ( isset( $show_introduction ) && $show_introduction == '1' ) : ?>
-		<!-- BEGIN:Introduction -->
+		<?php /* BEGIN:Introduction */ ?>
 		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 			<div class="container-fluid px-0">
 				<hgroup class="text-center">
@@ -129,14 +147,14 @@ function wa_programmation_callback( $attributes ) {
 				<?php endif; ?>
 			</div>
 		</section>
-		<!-- END:Introduction -->
+		<?php /* END:Introduction */ ?>
 		<?php endif; ?>
 
-		<!-- BEGIN:programmation -->
+		<?php /* BEGIN:programmation */ ?>
 
 		
-		<!-- Switch pour toggle entre planning complet et favoris -->
-		<!-- Script du switch > voir main.js du theme -->
+		<?php /* Switch pour toggle entre planning complet et favoris */ ?>
+		<?php /* Script du switch > voir main.js du theme */ ?>
 			<div class="d-flex p-3 align-items-center --justify-content-center">
 				<h6 class="m-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
 				<?php if ( is_user_logged_in() ) : ?>
@@ -152,7 +170,7 @@ function wa_programmation_callback( $attributes ) {
 					<?php echo do_shortcode('[wacp_login_links]'); ?>
 				<?php endif; ?>
 			</div>
-		<!-- Scripts > moved to main.js -->
+		<?php /* Scripts > moved to main.js */ ?>
 
 		<section id="<?= $id ?>-programmation" class="<?= $class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="modal-dialog m-0 --max-w-100 --ml-auto" role="document">
@@ -477,7 +495,7 @@ function wa_programmation_callback( $attributes ) {
 				//echo '<pre>',print_r($the_days,1),'</pre>';
 
 				// Render HTML 
-				print('<!--BEGIN: Render-->');
+				print('<?php /* BEGIN: Render */ ?>');
 				
 				foreach($the_days as $key => $the_day) {
 
@@ -486,7 +504,7 @@ function wa_programmation_callback( $attributes ) {
 					//Days 
 					if ( $the_day['has_films'] === true ) {
 
-						printf('<!-- Day -->
+						printf('<?php /* Day */ ?>
 						<div class="row g-0 --mb-4">
 							<div class="col-md-2 col-day bg-color-dark px-2 px-sm-6 --py-4 pt-3 pb-3 w-sm-100">
 								<a class="scrollspy text-white" id="day%d" data-count="%d" data-ts="%d">
@@ -501,7 +519,7 @@ function wa_programmation_callback( $attributes ) {
 							esc_html($the_day['day_number'])
 						);
 
-						print('<!-- Rooms -->
+						print('<?php /* Rooms */ ?>
 							<div class="col-md-10 p-0">');
 
 						// Rooms
@@ -518,7 +536,7 @@ function wa_programmation_callback( $attributes ) {
 										$r_use_parent_room_title = get_term_meta( $the_day_room['term_id'], 'wpcf-r-use-parent-room-title', true );
 										$r_use_parent_room_title = ($r_use_parent_room_title == '1')?true:false;
 										
-										printf('<!-- Room  -->
+										printf('<?php /* Room */ ?>
 										<div class="d-flex flex-column flex-lg-row w-100">
 											<div class="col-md-3 col-room bg-color-gray px-6 py-4 pt-4 pb-2" style="min-height: 150px;">
 												<div class="room-list">
@@ -533,7 +551,7 @@ function wa_programmation_callback( $attributes ) {
 											(($the_day_rooms['name'])?esc_html($the_day_rooms['name']):'ERROR')
 										);
 
-										print('<!-- Film --><div class="col-md-9 col-films bg-light text-black text-dark color-dark">
+										print('<?php /* Film */ ?><div class="col-md-9 col-films bg-light text-black text-dark color-dark">
 													<dl class="row">');
 										// Film
 										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
@@ -668,8 +686,8 @@ function wa_programmation_callback( $attributes ) {
 																	%s
 																	%s
 																	%s
-																	<!-- Favorite --> %s
-																	<!-- Program sep-->
+																	<?php /* Favorite */ ?> %s
+																	<?php /* Program sep */ ?>
 																	%s',
 															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''),
 															(( $p_f_title != '' )?get_permalink( $p_f_id ):'#debug'),
@@ -725,14 +743,14 @@ function wa_programmation_callback( $attributes ) {
 														%s
 														%s
 														%s
-														<!-- Program -->
+														<?php /* Program */ ?>
 														%s
 														%s
-														<!-- Section & tag -->
+														<?php /* Section & tag */ ?>
 														%s
 														%s
-														<!-- Favorite --> %s
-														<!-- Post tag -->
+														<?php /* Favorite */ ?> %s
+														<?php /* Post tag */ ?>
 														<span class="category-list d-inline cat-links"><span class="screen-reader-text">%s </span>%s</span>
 													</p>
 												</dd>
@@ -781,21 +799,21 @@ function wa_programmation_callback( $attributes ) {
 										}
 
 										print('</dl>
-												</div><!-- END: Film -->');
+												</div><?php /* END: Film */ ?>');
 
-										print('</div><!-- END: Room -->');
+										print('</div><?php /* END: Room */ ?>');
 
 									}
 								}
 							}
 						}
 
-						print('</div><!-- END: Rooms --> ');
-						print('</div><!-- END: Day-->');
+						print('</div><?php /* END: Rooms */ ?> ');
+						print('</div><?php /* END: Day */ ?>');
 
 					}
 				}
-			print('<!-- END: RENDER -->');
+			print('<?php /* END: RENDER */ ?>');
 			?>
 		
 		</div>
@@ -840,7 +858,7 @@ function wa_programmation_callback( $attributes ) {
 
 
 
-		<!-- END:programmation -->
-		<!-- END: #programmation list -->
+		<?php /* END:programmation */ ?>
+		<?php /* END: #programmation list */ ?>
 		<?php
 }
