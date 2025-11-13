@@ -68,7 +68,7 @@ function wa_cols_callback( $attributes ) {
 	<?php /* #cols */ ?>
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
 
-		<?php if ( $bg_image ) : ?>
+		<?php if ( $bg_image && is_array($bg_image) ) : ?>
 		<figure class="m-0 p-0 overflow-hidden mb-n1 z-2" <?= $is_preview ? 'style="display:none;"' : '' ?>>
 			<picture class="">
 				<img src="<?= $bg_image['url']; ?>" alt="Image de transition" class="img-fluid fit-image w-100">
@@ -76,7 +76,7 @@ function wa_cols_callback( $attributes ) {
 		</figure>
 		<?php endif; ?>
 
-		<div class="container-fluid p-2 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image ? 'bg-v-plain-gradient-'.$gradient_color : 'bg-v-gradient-'.$gradient_color ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-2 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image && is_array($bg_image) ? 'bg-v-plain-gradient-'.$gradient_color : 'bg-v-gradient-'.$gradient_color ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
@@ -92,7 +92,7 @@ function wa_cols_callback( $attributes ) {
 					echo '<div class="col-12"><p class="lead mb-4 text-center fw-bold">'.waff_do_markdown(mb_get_block_field( 'waff_c_leadcontent' )).'</p></div>';
 				} ?>
 			</div>
-			<div class="row <?= $bg_image ? 'mb-15' : 'mb-5' ?> m-gutter-l m-gutter-r" <?= $is_preview ? 'style="display:flex;"' : ''; ?>>
+			<div class="row <?= $bg_image && is_array($bg_image) ? 'mb-15' : 'mb-5' ?> m-gutter-l m-gutter-r" <?= $is_preview ? 'style="display:flex;"' : ''; ?>>
 				<?php
 				$i = 0;
 				foreach( mb_get_block_field( 'waff_c_contents' ) as $content ) :
@@ -101,7 +101,7 @@ function wa_cols_callback( $attributes ) {
 				endforeach;
 				?>
 			</div>
-			<?php if ( $im && is_array($im) ) : ?>
+			<?php if ( $im && is_array($im) && !empty($im[0]) ) : ?>
 			<figure class="bg-image h-100 m-0 position-absolute">
 				<?php $im[0]['alt'] = 'DR'; if ( $im[0]['alt'] || $im[0]['description'] || wp_get_attachment_caption($im[0]['ID']) ) : ?>
 					<?php /* <figcaption> */ ?>
@@ -118,8 +118,7 @@ function wa_cols_callback( $attributes ) {
 
 		<?php /* Background image */ ?>
 		<?php if ( $im && is_array($im) && !$is_preview ) : ?>
-			<?php  ?>
-			<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" <?=  $bg_image ? 'style="height: calc(100% - 112px);  margin-top: 112px;"':'' ?>>
+			<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" <?=  $bg_image && is_array($bg_image) ? 'style="height: calc(100% - 112px);  margin-top: 112px;"':'' ?>>
 				<picture class="">
 						<img src="<?= $im['full_url'] ?>" alt="<?= $im['alt'] ?>" class="img-fluid fit-image h-100 w-100">
 				</picture>
