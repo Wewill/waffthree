@@ -398,19 +398,26 @@ if ( have_posts() ) {
 	<!-- Section list -->
 	<?php else: ?>
 		<section id="sections" class="mt-0 mt-n10 mb-0 contrast--light f-w">
-		<?php print(WaffTwo\Blocks\wa_sections_callback(
-			array(
-				'id' => 'called-from-taxonomy-section',
-				'name' => 'wa-sections',
-				'data' => array(
-					'waff_sl_title' => 'Sections', 
-					'waff_sl_edition' => $current_edition_id,
-					'waff_sl_show_introduction' => 0,
-					'waff_sl_show_parent_section' => 0,
-					'waff_sl_show_tiny_list' => 0,
-				),
-			)
-		)); ?>
+		<?php
+		// Check if the theme function exists
+		if ( function_exists( 'WaffTwo\Blocks\Block\wa_sections_callback' ) ) {
+			print(WaffTwo\Blocks\Block\wa_sections_callback(
+				array(
+					'id' => 'called-from-taxonomy-section',
+					'name' => 'wa-sections',
+					'data' => array(
+						'waff_sl_title' => 'Sections',
+						'waff_sl_edition' => $current_edition_id,
+						'waff_sl_show_introduction' => 0,
+						'waff_sl_show_parent_section' => 0,
+						'waff_sl_show_tiny_list' => 0,
+					),
+				)
+			));
+		} else {
+			echo '<p class="alert alert-danger">' . esc_html__( 'The wa-sections block is not available in your theme.', 'waff' ) . '</p>';
+		}
+		?>
 		</section>
 	<?php endif; ?>
 
