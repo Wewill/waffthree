@@ -127,17 +127,17 @@ global $page_atts;
 						position: absolute;
 						top: 32px;
 						right: 10px;
-					}
-					.account-nav ul li ul.sub-menu li {
-						margin-left:.5rem;
-					}
-					.account-nav ul li ul.sub-menu {
+						background-color: white;
+						padding: 3px 8px;
 						opacity: 0;
 						transition: all .3s ease-in-out;
 					}
 					.account-nav ul li:hover ul.sub-menu {
 						opacity: 1;
 					} 
+					.account-nav ul li ul.sub-menu li {
+						margin-left:.5rem;
+					}
 				</style>
 	
 			</span>
