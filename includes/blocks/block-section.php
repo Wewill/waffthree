@@ -138,7 +138,7 @@ function wa_section_callback( $attributes ) {
 			// section : film
 			// Projection in fiche film : projection
 			// Related-sections : film
-			'class' 		=> '###CAROUSEL### card film-card flex-row flex-wrap col-md-10 h-sm-600-px h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
+			'class' 		=> 'card film-card carousel-card flex-row flex-wrap col-md-10 h-sm-600-px h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
 			// section : card film-card flex-row flex-wrap col-md-6 bg-light my-2 border-0 h-280-px shadow-sm card-dark
 			// Projection in fiche film : card film-card flex-row flex-wrap col-4 --bg-custom mx-2 my-0 border-0 h-300-px shadow-sm --card-white --p-0
 			// Related-sections : card film-card --flex-row flex-wrap bg-light border-0 h-200-px shadow-sm card-dark
@@ -161,7 +161,7 @@ function wa_section_callback( $attributes ) {
 			'show_sections' => 'false', // string = false / true
 			'show_cats' 	=> 'true', // string = false / true
 			'show_excerpt' 	=> 'true', // string = false / true
-			'excerpt_length' => '100',
+			'excerpt_length' => '400',
 			// section = room : 100
 			// Projection in fiche film : 80
 			// Related-sections : 60
