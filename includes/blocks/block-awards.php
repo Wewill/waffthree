@@ -340,6 +340,8 @@ function wa_awards_get_films( $films, $master = true ) {
 			if ( has_post_thumbnail($f_id) ) {
 				$post_featured_sizes = array(
 					'thumbnail',
+					'post-featured-image-xs',
+					'post-featured-image-xs-x2',
 					'post-featured-image-s',
 					'post-featured-image-s-x2',
 					'post-featured-image-m',
