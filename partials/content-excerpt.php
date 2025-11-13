@@ -45,21 +45,24 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 			the_title( '<h1 class="post__title entry-title m-0">', '</h1>' );
 		else :
 			if ( get_post_type(get_the_ID()) === 'film' ) : 
-
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Film', 'post', 'waff' ) );
+				print('<div class="card overflow-hidden rounded-2 bg-color-light border-0 h-100 p-4 --mb-4">');
+				printf( '<h6 class="mb-0 muted"><i class="bi bi-film"></i> %s</h6> ', esc_html_x( 'Film', 'post', 'waff' ) );
 				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true );
 				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true );
 				if ( $film_french_title != "" ) {
 					the_title( 
-						sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length ), 
-						'</span></h2>'
+						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length ), 
+						'</span></h3>'
 					);
 				} else {
 					the_title( 
-						sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
-						sprintf('</a> <span class="length light">%s\'</span></h2>', $film_length) 
+						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
+						sprintf('</a> <span class="length light">%s\'</span></h3>', $film_length) 
 					);
 				}
+				// Metas 
+				print( '<div>' . WaffTwo\waff_post_meta( get_the_ID(), 'top', true ) . '</div>' );
+				print('<br/>');
 
 				$film_punchline_french 			= get_post_meta( get_the_ID(), 'wpcf-f-punchline-french', true );
 				$film_punchline_english 		= get_post_meta( get_the_ID(), 'wpcf-f-punchline-english', true );
@@ -77,11 +80,23 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 						waff_do_markdown(waff_trim(waff_clean_alltags( $film_short_synopsis_english !== '' ? $film_short_synopsis_english:$film_synopsis_english), 150)),
 					);
 				}
-
+				print('<!-- </div> -->');
 			elseif ( get_post_type(get_the_ID()) === 'jury' ) : 
-				printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Jury', 'post', 'waff' ) );
-				the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
-				the_excerpt();
+				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Jury', 'post', 'waff' ) );
+				// the_title( sprintf( '<h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
+				// the_excerpt();
+				printf('<div class="card overflow-hidden rounded-2 bg-light-color-layout border-0 h-100 p-4 --mb-4" %s>
+						%s
+						%s
+						%s
+						%s
+					<!-- </div> -->',
+					$excerpt_atts['post_color_class'],
+					sprintf( '<h6 class="mb-2 muted subline"><i class="bi bi-award-fill"></i> %s</h6> ', esc_html_x( 'Jury', 'post', 'waff' ) ),
+					the_title( sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-4"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h3>', false),
+					WaffTwo\waff_post_meta( get_the_ID(), 'top', true ),
+					get_the_excerpt()
+				);
 			elseif ( get_post_type(get_the_ID()) === 'farm' ) : 
 				// printf( '<h6 class="mb-0 muted">%s</h6>', esc_html_x( 'Farm', 'post', 'go' ) );
 				// the_title( sprintf( 'TODOFARM# <h2 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h2>' );
