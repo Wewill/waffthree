@@ -125,12 +125,17 @@ global $page_atts;
 					}
 					.account-nav ul li ul.sub-menu {
 						position: absolute;
-						top: 32px;
-						right: 10px;
-						background-color: white;
-						padding: 3px 8px;
+						top: 0px;
+						right: 35px;
+						background-color: rgba(255, 255, 255, 0.75);
+						padding: 4px 6px;
 						opacity: 0;
 						transition: all .3s ease-in-out;
+					}
+					@media (max-width:576px) {
+						.account-nav ul li ul.sub-menu {
+							top: 5px;
+						}
 					}
 					.account-nav ul li:hover ul.sub-menu {
 						opacity: 1;
