@@ -18,6 +18,7 @@ function wa_cols_callback( $attributes ) {
 	// No data no render.
 	if ( empty( $attributes['data'] ) ) return;
 
+
 	// Unique HTML ID if available.
 	$id = '';
 	if ( $attributes['name'] ) {
@@ -50,6 +51,7 @@ function wa_cols_callback( $attributes ) {
 		$data .= " data-coblocks-animation='{$attributes['animation']}'";
 	}
 
+
 	// Image
 	$image 			= mb_get_block_field('waff_c_image');
 	$im 			= ( !empty($image) ) ? reset( $image ) : false;
@@ -70,8 +72,18 @@ function wa_cols_callback( $attributes ) {
 		$gradient_color = 'action-2';
 	}
 
+	// Final class
+	$gradient_class = '';
+	if ( mb_get_block_field( 'waff_c_image_style' ) === 'full' ) {
+		if ( $bg_image && is_array($bg_image) ) {
+			$gradient_class = 'bg-v-plain-gradient-'.$gradient_color;
+		} else {
+			$gradient_class = 'bg-v-gradient-'.$gradient_color;
+		}
+	} else {
+		$gradient_class = 'mask no-gradient';
+	}
 	?>
-	<?php /* #cols */ ?>
 	<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>;">
 
 		<?php if ( $bg_image && is_array($bg_image) ) : ?>
@@ -82,12 +94,12 @@ function wa_cols_callback( $attributes ) {
 		</figure>
 		<?php endif; ?>
 
-		<div class="container-fluid p-2 p-md-8 z-2 position-relative <?= mb_get_block_field( 'waff_c_image_style' ) === 'full' ? ( $bg_image && is_array($bg_image) ? 'bg-v-plain-gradient-'.$gradient_color : 'bg-v-gradient-'.$gradient_color ) : 'mask no-gradient' ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
+		<div class="container-fluid p-2 p-md-8 z-2 position-relative <?= $gradient_class; ?>" style="<?= !$is_preview ? '' : 'color:white; background-color:var(--go--color--secondary, --wp--preset--color--secondary);' ?>">
 			<div class="row mb-10 <?= $bg_image ? 'mt-5' : '' ?>">
 				<div class="col-4"></div>
 				<div class="col-4 text-center">
-					<h6 class="subline <?= mb_get_block_field( 'waff_c_subtitle_class' ) ?>" style="<?=!$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
-					<h2 class="text-white" style="<?= !$is_preview ?: 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_title' ) ?></h2>
+					<h6 class="subline <?= mb_get_block_field( 'waff_c_subtitle_class' ) ?>" style="<?=!$is_preview ? '' : 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_subtitle' ) ?></h6>
+					<h2 class="text-white" style="<?= !$is_preview ? '' : 'color:white;' ?>"><?= mb_get_block_field( 'waff_c_title' ) ?></h2>
 				</div>
 				<div class="col-4 d-flex align-items-start justify-content-end">
 					<?php if ( mb_get_block_field( 'waff_c_morelink' ) == 1 ) : ?>
