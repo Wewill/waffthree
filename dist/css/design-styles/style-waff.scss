@@ -3054,3 +3054,27 @@ aside.widget-area h6:first-of-type {
   font-weight: 600;
   opacity: 0.8;
 }
+
+/**
+Fix floating labels 
+*/
+
+.form-floating>.form-control-plaintext~label::after, 
+.form-floating>.form-control:focus~label::after, 
+.form-floating>.form-control:not(:placeholder-shown)~label::after, 
+.form-floating>.form-select~label::after {
+  background: transparent !important;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext {
+    padding: 1rem .6rem 0.6rem .6rem !important;
+}
+
+body .gform_wrapper label.gfield_label,
+body .gform_wrapper legend.gfield_label {
+    font-family: var(
+      --waff-font-headline,
+      "Arial, sans-serif"
+    ) !important; /* FIFAM = "Bureau Grot Condensed", Arial, sans-serif; */
+}
