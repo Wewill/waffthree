@@ -124,7 +124,7 @@ function wa_cols_callback( $attributes ) {
 				<?php $im[0]['alt'] = 'DR'; if ( $im[0]['alt'] || $im[0]['description'] || wp_get_attachment_caption($im[0]['ID']) ) : ?>
 					<?php /* <figcaption> */ ?>
 					<figcaption class="d-flex align-items-center bg-transparent pb-2 ps-2 zi-max">
-						<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id  ?>">©</span>
+						<span class="collapse-hover bg-<?= mb_get_block_field( 'waff_c_gradient_color_class' )?$gradient_color:'white' ?> text-color-main p-1 lh-1 rounded-pill z-2" href="#collapse-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapse-<?= $id  ?>">©</span>
 						<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapse-<?= $id  ?>">
 							<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im[0]['ID']) ? wp_get_attachment_caption($im[0]['ID']) : esc_html($im[0]['alt'] ? $im[0]['alt'] : 'DR'); ?></strong> <?= esc_html($im[0]['description']); ?></span>
 						</span>
