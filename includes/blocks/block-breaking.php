@@ -30,7 +30,13 @@ function wa_breaking_callback( $attributes ) {
 
 
 	// Custom CSS class name.
-	$themeClass = 'breaking mt-0 mb-10 contrast--dark';
+	if ( mb_get_block_field( 'waff_b_blockmargin' ) == 1 ) {
+		$blockmargin = 'mt-0 mb-lg-10 mb-5';
+	} else {
+		$blockmargin = 'mt-0 mb-0';
+	}
+
+	$themeClass = 'breaking '.$blockmargin.' contrast--dark';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
