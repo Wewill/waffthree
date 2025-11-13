@@ -101,6 +101,7 @@ function wa_cols_callback( $attributes ) {
 				endforeach;
 				?>
 			</div>
+			<?php if ( $im && is_array($im) ) : ?>
 			<figure class="bg-image h-100 m-0 position-absolute">
 				<?php $im[0]['alt'] = 'DR'; if ( $im[0]['alt'] || $im[0]['description'] || wp_get_attachment_caption($im[0]['ID']) ) : ?>
 					<?php /* <figcaption> */ ?>
@@ -112,12 +113,11 @@ function wa_cols_callback( $attributes ) {
 					</figcaption>
 				<?php endif; /* If captions */ ?>
 			</figure>
-
-
+			<?php endif; ?>
 		</div>
 
 		<?php /* Background image */ ?>
-		<?php if ( $im && !$is_preview ) : ?>
+		<?php if ( $im && is_array($im) && !$is_preview ) : ?>
 			<?php  ?>
 			<figure class="overflow-hidden h-100 w-100 position-absolute top-0 start-0 z-0" <?=  $bg_image ? 'style="height: calc(100% - 112px);  margin-top: 112px;"':'' ?>>
 				<picture class="">
@@ -138,5 +138,4 @@ function wa_cols_callback( $attributes ) {
 	</section>
 	<?php /* END: #cols */ ?>
 	<?php
-
 }
