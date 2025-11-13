@@ -1,0 +1,4 @@
+# ignore setups
+*.setup.*
+setup.*
+.DS_Store

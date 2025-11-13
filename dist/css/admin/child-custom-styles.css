@@ -1,0 +1,57 @@
+/* Remove unneeded ( for wafftwo ) elmts in customizer */
+
+#customize-control-title_header_colors,
+#customize-control-header_background_color,
+#customize-control-header_text_color,
+#customize-control-title_footer_colors,
+#customize-control-footer_background_color,
+#customize-control-footer_text_color {
+  display: none;
+}
+
+/* Fix MetaBox blocks On the right sidebar design issue */
+
+.mb-block-edit .rwmb-field {
+  display: block !important;
+}
+
+/* Hide Metabox no licence notification */
+
+#meta-box-notification {
+  display: none;
+}
+
+/* Make long text_list readable */
+
+.edit-post-sidebar .rwmb-text_list-non-cloneable > .rwmb-input,
+.edit-post-sidebar .rwmb-text_list-clone {
+  flex-direction: column;
+}
+
+.post-type-homeslide #titlewrap::after {
+  content: "Vous pouvez utiliser <br> pour forcer un retour à la ligne / You can use <br> to force a newline";
+  display: block;
+  padding-left: 10px;
+  margin-top: 0px;
+  height: 20px;
+  color: #5085b3;
+}
+
+/* Fix the issue with rwmb no padding & swith width > fixed since MB blocks updated */
+/* .editor-sidebar .mb-block-edit .rwmb-meta-box {
+  padding: 16px;
+  background-color: #fbf5fb;
+} */
+
+.editor-sidebar .mb-block-edit .rwmb-meta-box .rwmb-switch-label {
+  --color: #9500ff !important;
+}
+
+.editor-sidebar .mb-block-edit .rwmb-field .rwmb-label {
+  width: 100%;
+}
+
+/* Fix text list when it's not readable */
+.rwmb-field .rwmb-text_list-clone {
+  flex-direction: column;
+}

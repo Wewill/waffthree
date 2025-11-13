@@ -1,0 +1,10 @@
+<?php
+/**
+ * The template used for displaying single page
+ */
+
+
+header("HTTP/1.1 301 Moved Permanently");
+header("Location: ".get_bloginfo('url'));
+exit();
+?>

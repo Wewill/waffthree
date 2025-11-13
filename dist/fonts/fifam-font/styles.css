@@ -1,0 +1,244 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "fifam-font";
+  src:url("fonts/fifam-font.eot");
+  src:url("fonts/fifam-font.eot?#iefix") format("embedded-opentype"),
+    url("fonts/fifam-font.woff") format("woff"),
+    url("fonts/fifam-font.ttf") format("truetype"),
+    url("fonts/fifam-font.svg#fifam-font") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "fifam-font" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "fifam-font" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+/* */
+	display: inline-block;
+	text-rendering: auto;
+}
+
+.icon-info:before {
+  content: "\69";
+}
+.icon-time:before {
+  content: "\74";
+}
+.icon-vip:before {
+  content: "\76";
+}
+.icon-arrow:before {
+  content: "\61";
+	font-size: 3.5em;
+	vertical-align: middle;
+	line-height: 0.1;
+}
+.icon-without:before {
+  content: "\64";
+	font-size: 1.1em;
+  vertical-align: middle;
+  line-height: 0.1;
+}
+.icon-alert:before {
+  content: "\6e";
+}
+.icon-warning:before {
+  content: "\77";
+}
+.icon-access:before {
+  content: "\78";
+}
+.icon-sun:before {
+  content: "\73";
+}
+.icon-young:before {
+  content: "\79";
+}
+.icon-3d:before {
+  content: "\33";
+  font-size: 1.8em;
+  vertical-align: middle;
+  line-height: 0.1;
+}
+.icon-vonst:before {
+  content: "\4e";
+  font-size: 170%;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.icon-vosta:before {
+  content: "\41";
+  font-size: 170%;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.icon-brochure:before {
+  content: "\42";
+}
+.icon-prev:before {
+  content: "\3c";
+}
+.icon-next:before {
+  content: "\3e";
+}
+.icon-up:before {
+  content: "\e003";
+  font-size: 3em;
+  vertical-align: middle;
+  /*line-height: 0.1; Removed #42 since issue in related films UI */
+}
+.icon-down:before {
+  content: "\e004";
+  font-size: 3em;
+  vertical-align: middle;
+  /*line-height: 0.1; Removed #42 since issue in related films UI */
+}
+.icon-left:before {
+  content: "\23";
+  font-size: 3em;
+  vertical-align: middle;
+  line-height: 0.1;
+}
+.icon-down-right:before {
+  content: "\e006";
+  font-size: .85em;
+}
+.icon-down-left:before {
+  content: "\e007";
+  font-size: .85em;
+}
+.icon-links:before {
+  content: "\4c";
+}
+.icon-ok:before {
+  content: "\6c";
+}
+.icon-pic:before {
+  content: "\63";
+}
+.icon-catalogue:before {
+  content: "\62";
+}
+.icon-right-light:before {
+  content: "\22";
+}
+.icon-left-light:before {
+  content: "\27";
+}
+.icon-pin:before {
+  content: "\72";
+}
+.icon-play:before {
+  content: "\70";
+}
+.icon-download:before {
+  content: "\44";
+}
+.icon-down-right-light:before {
+  content: "\28";
+  font-size: 65%;
+}
+.icon-down-left-light:before {
+  content: "\29";
+}
+.icon-right:before {
+  content: "\2a";
+  font-size: 3em;
+  vertical-align: middle;
+  line-height: 0.1;
+}
+.icon-unlimited:before {
+  content: "\49";
+}
+.icon-ticket:before {
+  content: "\54";
+}
+.icon-mouse:before {
+  content: "\53";
+}
+.icon-flag:before {
+  content: "\66";
+}
+.icon-quote:before {
+  content: "\51";
+}
+.icon-plus:before {
+  content: "\2b";
+  font-size: 95%;
+  vertical-align: -.15rem;
+}
+.icon-mic:before {
+  content: "\6d";
+}
+.icon-guest:before {
+  content: "\67";
+}
+.icon-mic-alt:before {
+  content: "\4d";
+}
+.icon-gratuit:before {
+  content: "\31";
+}
+.icon-special:before {
+  content: "\32";
+}
+.icon-vo:before {
+  content: "\56";
+  top: 1px; /*#43*/
+  position: relative; /*#43*/
+}
+.icon-avantpremiere:before {
+  content: "\35";
+}
+.icon-premiereint:before {
+  content: "\36";
+}
+.icon-premierefr:before {
+  content: "\37";
+}
+.icon-premiere-1:before {
+  content: "\38";
+}
+.icon-vosta-2:before {
+  content: "\4f";
+  font-size: 170%;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.icon-premiere:before {
+  content: "\39";
+}
+.icon-premiere-2:before {
+  content: "\30";
+}

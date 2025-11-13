@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 554 623.55">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fdfeff;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #555d66;
+      }
+
+      .cls-4 {
+        fill: #dee0e2;
+      }
+
+      .cls-5 {
+        fill: #6f7a84;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-4" x="13.45" y="11.15" width="282.35" height="166.02"/>
+    <rect class="cls-4" x="255.15" y="442.58" width="282.35" height="166.02"/>
+    <rect class="cls-4" x="394.46" y="109.41" width="143.04" height="166.02"/>
+    <rect class="cls-4" x="18.32" y="316.09" width="132.83" height="166.02"/>
+  </g>
+  <path class="cls-3" d="M160.74,67.2h224.95c4.87,0,8.83,3.96,8.83,8.83v152.39h-242.61V76.03c0-4.87,3.96-8.83,8.83-8.83Z"/>
+  <g>
+    <path class="cls-1" d="M165.02,131.42h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M164.76,158.99h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M164.76,147.99h28v4h-28v-4Z"/>
+    <path class="cls-1" d="M278.08,161.63h101.82v4h-101.82v-4Z"/>
+    <path class="cls-1" d="M278.08,150.63h79.19v4h-79.19v-4Z"/>
+  </g>
+  <rect class="cls-5" x="151.91" y="228.7" width="242.61" height="161.22"/>
+  <path class="cls-6" d="M151.91,389.08h242.61v152.39c0,4.87-3.96,8.83-8.83,8.83h-224.95c-4.87,0-8.83-3.96-8.83-8.83v-152.39h0Z"/>
+  <g>
+    <path class="cls-2" d="M165.02,408.88h50v4h-50v-4Z"/>
+    <path class="cls-2" d="M164.76,438.77h36v4h-36v-4Z"/>
+    <path class="cls-2" d="M164.76,450.95h45.35v4h-45.35v-4Z"/>
+    <path class="cls-2" d="M164.76,463.14h25.77v4h-25.77v-4Z"/>
+    <path class="cls-2" d="M164.76,475.32h36v4h-36v-4Z"/>
+    <path class="cls-2" d="M164.76,487.51h58.9v4h-58.9v-4Z"/>
+    <path class="cls-2" d="M164.76,499.7h36v4h-36v-4Z"/>
+    <path class="cls-2" d="M164.76,426.58h28v4h-28v-4Z"/>
+  </g>
+  <g>
+    <path class="cls-1" d="M165.02,290.29h50v4h-50v-4Z"/>
+    <path class="cls-1" d="M164.76,317.86h36v4h-36v-4Z"/>
+    <path class="cls-1" d="M164.76,306.86h28v4h-28v-4Z"/>
+    <path class="cls-1" d="M278.08,320.5h101.82v4h-101.82v-4Z"/>
+    <path class="cls-1" d="M278.08,309.5h79.19v4h-79.19v-4Z"/>
+  </g>
+</svg>

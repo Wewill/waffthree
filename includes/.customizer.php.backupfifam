@@ -1,0 +1,164 @@
+<?php
+/**
+ * Customizer setup
+ *
+ * @package WaffTwo
+ */
+
+namespace WaffTwo\Customizer;
+
+use function Go\get_palette_color;
+use function Go\hex_to_hsl;
+
+/**
+ * Set up Customizer hooks
+ *
+ * @return void
+ */
+function setup() {
+	$n = function( $function ) {
+		return __NAMESPACE__ . "\\$function";
+	};
+	
+	add_action( 'customize_preview_init', $n( 'customize_preview_init' ) );
+	add_action( 'customize_controls_enqueue_scripts', $n( 'customize_preview_init' ) );
+	
+	add_action( 'customize_register', $n( 'register_waff_site_controls' ) );
+}
+
+/**
+ * Enqueues the preview js for the customizer.
+ *
+ * @return void
+ */
+function customize_preview_init() {
+
+	$suffix = WAFF_SCRIPT_DEBUG ? '' : '.min';
+
+	wp_enqueue_script(
+		'go-customize-preview',
+		get_theme_file_uri( "dist/js/admin/child-customize-preview{$suffix}.js" ), //{$suffix}
+		array( 'jquery', 'wp-autop' ),
+		GO_VERSION,
+		true
+	);
+
+	wp_localize_script(
+		'go-customize-preview',
+		'GoPreviewData',
+		array(
+			'design_styles' => \Go\Core\get_available_design_styles(),
+		)
+	);
+}
+
+/**
+ * Add telephone control to Go's existing Site Settings section.
+ *
+ * @param \WP_Customize_Manager $wp_customize The customize manager object.
+ *
+ * @return void
+ */
+function register_waff_site_controls( \WP_Customize_Manager $wp_customize ) {
+
+	// Add settings 
+	$wp_customize->add_setting(
+		'night_mode', array(
+			'default'           => true,
+			'transport'         => 'postMessage',
+			'sanitize_callback' => 'sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		'night_mode',
+		array(
+			'type'        => 'checkbox',
+			'label'       => esc_html__( 'Night Mode', 'waff' ),
+			'description' => esc_html__( 'Enable for readers to view content easily while in the dark.', 'waff' ),
+			'section'     => 'go_site_settings',
+		)
+	);
+	
+	// Phone 
+	$wp_customize->add_setting(
+		'telephone',
+		array(
+			'default'           => '1.800.555.5555',
+			'transport'         => 'postMessage',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+
+	$wp_customize->add_control(
+		'telephone_control',
+		array(
+			'label'    => esc_html__( 'Phone number', 'waff' ),
+			'priority' => 80,
+			'section'  => 'go_site_settings', // Here we referece Go's origin section ID.
+			'settings' => 'telephone',
+			'type'     => 'text',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'site_message',
+		array(
+			'default'           => '',
+			'transport'         => 'postMessage',
+		)
+	);
+	
+
+	$wp_customize->add_control(
+		'site_message_control',
+		array(
+			'description' => esc_html__( 'This will appear in the header at the top of the site.', 'waff' ),
+			'label'    => esc_html__( 'Site message', 'waff' ),
+			'priority' => 90,
+			'section'  => 'go_site_settings', // Here we referece Go's origin section ID.
+			'settings' => 'site_message',
+			'type'     => 'textarea',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'company_address',
+		array(
+			'default'           => '',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		'company_address_control',
+		array(
+			'description' => esc_html__( 'This will appear in the footer at the bottom of the site.', 'waff' ),
+			'label'    => esc_html__( 'Company address', 'waff' ),
+			'priority' => 100,
+			'section'  => 'go_site_settings', // Here we referece Go's origin section ID.
+			'settings' => 'company_address',
+			'type'     => 'textarea',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'privacy_statement',
+		array(
+			'default'           => '',
+			'transport'         => 'postMessage', //refresh
+		)
+	);
+
+	$wp_customize->add_control(
+		'personal_privacy_control',
+		array(
+			'description' => esc_html__( 'This will appear in the footer at the bottom of the site.', 'waff' ),
+			'label'    => esc_html__( 'Privacy Statement', 'waff' ),
+			'priority' => 110,
+			'section'  => 'go_site_settings', // Here we referece Go's origin section ID.
+			'settings' => 'privacy_statement',
+			'type'     => 'textarea',
+		)
+	);
+}
