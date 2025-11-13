@@ -105,8 +105,8 @@ function wa_breaking_callback( $attributes ) {
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<?php /* figcaption */ ?>
 									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
-										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapseA-<?= $id  ?>" role="button" aria-expanded="false" aria-controls="collapseA-<?= $id  ?>">©</span>
-										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseA-<?= $id  ?>">
+										<span class="collapse-hover bg-<?= mb_get_block_field( 'waff_b_gradient_color_class' )?$gradient_color:'white' ?> <?= mb_get_block_field( 'waff_b_label_1_class' )?mb_get_block_field( 'waff_b_label_1_class' ):'text-color-main' ?> p-1 lh-1 rounded-pill z-2" href="#collapseA-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseA-<?= $id ?>">©</span>
+										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseA-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
 									</figcaption>
@@ -142,7 +142,7 @@ function wa_breaking_callback( $attributes ) {
 								<?php $im['alt'] = 'DR'; if ( $im['alt'] || $im['description'] || wp_get_attachment_caption($im['ID']) ) : ?>
 									<?php /* figcaption */ ?>
 									<figcaption class="top-0 bottom-auto d-flex align-items-center bg-transparent pt-2 ps-2 zi-5">
-										<span class="collapse-hover bg-white text-color-main p-1 lh-1 rounded-pill z-2" href="#collapseB-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseB-<?= $id ?>">©</span>
+										<span class="collapse-hover bg-<?= mb_get_block_field( 'waff_b_gradient_color_class' )?$gradient_color:'white' ?> <?= mb_get_block_field( 'waff_b_label_2_class' )?mb_get_block_field( 'waff_b_label_2_class' ):'text-color-main' ?> p-1 lh-1 rounded-pill z-2" href="#collapseB-<?= $id ?>" role="button" aria-expanded="false" aria-controls="collapseB-<?= $id ?>">©</span>
 										<span class="collapse collapse-horizontal p-1 lh-1 bg-color-layout rounded-end-pill ms-n2" id="collapseB-<?= $id ?>">
 											<span class="text-nowrap p-1 lh-1 m-0 ps-2 fw-semibold"><strong><?= wp_get_attachment_caption($im['ID']) ? wp_get_attachment_caption($im['ID']) : esc_html($im['alt'] ? $im['alt'] : 'DR'); ?></strong> <?= esc_html($im['description']); ?></span>
 										</span>
