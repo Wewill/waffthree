@@ -49,7 +49,7 @@ function wa_programmation_callback( $attributes ) {
 
 
 	// Custom CSS class name.
-	$themeClass = 'programmation-list mt-10 mb-10 contrast--dark';
+	$themeClass = 'programmation-list mt-0 mb-0 contrast--dark';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	$subclass = ( $attributes['name'] ?? '' ) . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
