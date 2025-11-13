@@ -642,7 +642,7 @@ function wa_programmation_callback( $attributes ) {
 										
 										printf('<!--  Room -->
 										<div class="d-flex flex-column flex-lg-row w-100">
-											<div class="col-md-3 col-room bg-color-gray px-6 py-4 pt-4 pb-2" style="min-height: 150px;">
+											<div class="col-md-3 col-room bg-color-gray px-4 py-4 pt-4 pb-2" style="min-height: 150px;">
 												<div class="room-list">
 													<a href="%s" class="room-item">%s</a>
 													<a href="%s" class="parentroom-item %s">%s</a>

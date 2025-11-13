@@ -3087,3 +3087,13 @@ body .gform_wrapper legend.gfield_label {
       "Arial, sans-serif"
     ) !important; /* FIFAM = "Bureau Grot Condensed", Arial, sans-serif; */
 }
+
+/**
+#45 Blocks 
+*/
+// Reduce lead size from wa-cols blocks 
+@media (max-width: 575.98px) {
+  .cols .col .lead p {
+    font-size: 1rem;
+  }
+}
