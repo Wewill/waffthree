@@ -971,6 +971,15 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				//'hidden' => array( 'waff_lp_posttype', '!=', 'post' ),
 			],
 			[
+				'type' => 'divider',
+			],
+			[
+                'id'    => $prefix . 'p_show_introduction',
+                'type'  => 'switch',
+                'name'  => esc_html__( 'Display introduction content ?', 'waff' ),
+                'style' => 'rounded',
+			],
+			[
                 'id'    => $prefix . 'p_show_gazette',
                 'type'  => 'switch',
                 'name'  => esc_html__( 'Display Gazette mode ?', 'waff' ),
