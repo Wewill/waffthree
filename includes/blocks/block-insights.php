@@ -31,7 +31,13 @@ function wa_insights_callback( $attributes ) {
 
 
 	// Custom CSS class name.
-	$themeClass = 'insights mt-10 mb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
+	if ( mb_get_block_field( 'waff_i_blockmargin' ) == 1 ) {
+		$blockmargin = 'mt-lg-10 mb-lg-10 mt-5 mb-5';
+	} else {
+		$blockmargin = 'mt-0 mb-0';
+	}
+
+	$themeClass = 'insights '.$blockmargin.' contrast--light bg-image bg-cover bg-position-center-center position-relative';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";

@@ -33,7 +33,15 @@ function wa_edito_callback( $attributes ) {
 	// Custom CSS class name.
 	//$themeClass = 'edito mt-10 mb-10 contrast--light';
 	//$themeClass = 'edito mt-10 mb-10 contrast--light fix-vh-100';
-	$marginClass = ( mb_get_block_field( 'waff_e_remove_topmargin' ) ) ? 'mt-0 mb-md-10 mb-5' : 'mt-md-10 mb-md-10 mt-5 mb-5';
+	//$marginClass = ( mb_get_block_field( 'waff_e_remove_topmargin' ) ) ? 'mt-0 mb-md-10 mb-5' : 'mt-md-10 mb-md-10 mt-5 mb-5';
+	$remove_top = mb_get_block_field( 'waff_e_remove_topmargin' );
+	$remove_bottom = mb_get_block_field( 'waff_e_remove_bottommargin' );
+
+	// Build margin classes based on top/bottom removal flags
+	$mt_class = $remove_top ? 'mt-0' : 'mt-md-10 mt-5';
+	$mb_class = $remove_bottom ? 'mb-0' : 'mb-md-10 mb-5';
+	$marginClass = $mt_class . ' ' . $mb_class;
+
 	$themeClass = 'edito contrast--light fix-vh-100'; // Responsive issue fix
 	$class = $themeClass . ' ' . $marginClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {

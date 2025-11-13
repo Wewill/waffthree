@@ -391,12 +391,23 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'desc'  => esc_html__( 'Hide the empty column between the content and the image.', 'waff' ),
                 'style' => 'rounded',
 			],
-			// Remove top margin class
+			// Remove top / bottom margin class
+			[
+                'type' => 'heading',
+                'name' => __( 'Block margins', 'waff' ),
+			],
 			[
 				'id'    => $prefix . 'e_remove_topmargin',
 				'type'  => 'switch',
 				'name'  => esc_html__( 'Remove top margin ?', 'waff' ),
 				'desc'  => esc_html__( 'Removes the top margin of the block.', 'waff' ),
+				'style' => 'rounded',
+			],
+			[
+				'id'    => $prefix . 'e_remove_bottommargin',
+				'type'  => 'switch',
+				'name'  => esc_html__( 'Remove bottom margin ?', 'waff' ),
+				'desc'  => esc_html__( 'Removes the bottom margin of the block.', 'waff' ),
 				'style' => 'rounded',
 			],
 		],
@@ -1121,9 +1132,16 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'name'  => esc_html__( 'More URL', 'waff' ),
                 'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
             ],
+			// Block margin
+			// Remove top / bottom margin class
+			[
+                'type' => 'heading',
+                'name' => __( 'Block margins', 'waff' ),
+			],
 			[
                 'id'    => $prefix . 'm_blockmargin',
 				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
+                'desc'  => esc_html__( 'Removes both top & bottom block margin.', 'waff' ),
                 'type'  => 'switch',
                 'style' => 'rounded',
                 'std'   => true,
@@ -1239,6 +1257,21 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
 				'name'  => esc_html__( 'More URL', 'waff' ),
 				'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
 			],
+			// Block margin
+			// Remove top / bottom margin class
+			[
+                'type' => 'heading',
+                'name' => __( 'Block margins', 'waff' ),
+			],
+			[
+                'id'    => $prefix . 'c_blockmargin',
+				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
+                'desc'  => esc_html__( 'Removes both top & bottom block margin.', 'waff' ),
+                'type'  => 'switch',
+                'style' => 'rounded',
+                'std'   => true,
+            ],
+
 		],
 		'category'       => 'layout',
 		// 'icon'           => 'format-quote',
@@ -1419,6 +1452,20 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 // 'required'          => 1,
                 'key'               => 'value',
 			],
+			// Block margin
+			// Remove top / bottom margin class
+			[
+                'type' => 'heading',
+                'name' => __( 'Block margins', 'waff' ),
+			],
+			[
+                'id'    => $prefix . 'b_blockmargin',
+				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
+                'desc'  => esc_html__( 'Removes both top & bottom block margin.', 'waff' ),
+                'type'  => 'switch',
+                'style' => 'rounded',
+                'std'   => true,
+            ],			
 		],
 		'category'       => 'layout',
 		// 'icon'           => 'format-quote',
@@ -1554,6 +1601,20 @@ function waff_blocks_register_meta_boxes( $meta_boxes ) {
                 'type' => 'url',
                 'name'  => esc_html__( 'More URL', 'waff' ),
                 'desc'  => esc_html__( 'Fill an absolute link. Can be internal or external, e.g. : http://www.google.com', 'waff' ),
+            ],
+			// Block margin
+			// Remove top / bottom margin class
+			[
+                'type' => 'heading',
+                'name' => __( 'Block margins', 'waff' ),
+			],
+			[
+                'id'    => $prefix . 'i_blockmargin',
+				'name'  => esc_html__( 'Block have margin ?', 'waff' ),
+                'desc'  => esc_html__( 'Removes both top & bottom block margin.', 'waff' ),
+                'type'  => 'switch',
+                'style' => 'rounded',
+                'std'   => true,
             ],
 		],
 		'category'       => 'layout',

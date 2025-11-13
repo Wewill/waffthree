@@ -32,7 +32,13 @@ function wa_cols_callback( $attributes ) {
 
 
 	// Custom CSS class name.
-	$themeClass = 'cols mt-10 mb-0 contrast--dark text-white';
+	if ( mb_get_block_field( 'waff_c_blockmargin' ) == 1 ) {
+		$blockmargin = 'mb-0 mt-lg-10 mt-5';
+	} else {
+		$blockmargin = 'mt-0 mb-0';
+	}
+
+	$themeClass = 'cols '.$blockmargin.' contrast--dark text-white';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
