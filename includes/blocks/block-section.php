@@ -215,8 +215,8 @@ function wa_section_callback( $attributes ) {
 			</div>
 		</section>
 		<?php if ($use_section_color=='1') : ?>
-		<style>
-			.section-card .section-list .section-item {
+		<style scoped type="text/css">
+			.section-card .card-title .section-item {
 				color: white !important;
 			}
 		</style>
