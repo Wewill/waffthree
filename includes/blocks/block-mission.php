@@ -36,12 +36,12 @@ function wa_mission_callback( $attributes ) {
 
 	// Custom CSS class name.
 	if ( mb_get_block_field( 'waff_m_blockmargin' ) == 1 ) {
-		$blockmargin = 'mt-lg-10 mb-lg-10 mt-5 mb-5';
+		$blockmargin = 'mt-lg-10 mb-lg-10 mt-0 mb-0';
 	} else {
 		$blockmargin = 'mt-n10 mb-0';
 	}
 
-	$themeClass = 'mission '.$blockmargin.' pt-10 pb-10 contrast--light bg-image bg-cover bg-position-center-center position-relative';
+	$themeClass = 'mission '.$blockmargin.' pt-5 pt-lg-10 pb-0 pb-md-5 contrast--light bg-image bg-cover bg-position-center-center position-relative';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
 		$class .= " align{$attributes['align']}";
