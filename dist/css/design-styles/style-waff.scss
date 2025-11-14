@@ -2188,9 +2188,15 @@ td.room {
 #45 Carousel section
 */
 
-.carousel-card .card-text:not(.card-more-text) small {
-  font-size: 1.1em!important;
-  opacity: 1!important;
+@media only screen and (min-width: 767px) {
+  .carousel-card .card-text:not(.card-more-text) small {
+    font-size: 1.1em!important;
+    opacity: 1!important;
+  }
+}
+
+.carousel-card .card-text:not(.card-more-text) {
+    opacity: 1!important;
 }
 
 /* .film-card .time-wrapper .time {
@@ -3094,6 +3100,6 @@ body .gform_wrapper legend.gfield_label {
 // Reduce lead size from wa-cols blocks 
 @media (max-width: 575.98px) {
   .cols .col .lead p {
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
 }
