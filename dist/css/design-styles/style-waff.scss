@@ -11,7 +11,7 @@
   --go--color--inverse-quaternary: var(--go--color--black);
   --go--color--quinary: var(--go--color--black);
   --go--color--inverse-quinary: var(--go--color--white);
-  // @TODO dynamically edited in customizer
+  /* @TODO dynamically edited in customizer */
 
   --editor-title-block--alignment: left; /* Dynamically edited in setup.php > customizer */
   --waff--layout--left-alignement: 0; /* Dynamically edited in setup.php > customizer */
@@ -181,8 +181,8 @@
   --go-submenu--color--background: var(--waff-color-bg);
   --go-submenu--color--text: var(--waff-action-2);
 
-  // --bs-nav-link-color: var(--waff-action-2);
-  // --bs-nav-link-hover-color: var(--waff-action-2-hover);
+  /* --bs-nav-link-color: var(--waff-action-2);
+   --bs-nav-link-hover-color: var(--waff-action-2-hover);*/
 }
 
 .waff-theme-rsfp {
@@ -2645,7 +2645,7 @@ input[type="checkbox"]:checked + label:before {
   Animated submenu / coblocks + Dinard 
 */
 
-// .primary-menu > li > .sub-menu:before,
+/* .primary-menu > li > .sub-menu:before,
 // ul.qtranxs_language_chooser:before {
 //   content: "";
 //   border: 0;
@@ -2661,6 +2661,7 @@ input[type="checkbox"]:checked + label:before {
 //   transition: width 0.25s ease-out;
 // }
 // // >> Added to waff-theme styles
+*/
 
 .primary-menu > li:hover > .sub-menu:hover:before,
 ul.qtranxs_language_chooser:hover:before {
@@ -3097,7 +3098,7 @@ body .gform_wrapper legend.gfield_label {
 /**
 #45 Blocks 
 */
-// Reduce lead size from wa-cols blocks 
+/* Reduce lead size from wa-cols blocks */
 @media (max-width: 575.98px) {
   .cols .col .lead p {
     font-size: 1rem !important;
