@@ -138,7 +138,7 @@ function wa_section_callback( $attributes ) {
 			// section : film
 			// Projection in fiche film : projection
 			// Related-sections : film
-			'class' 		=> 'card film-card carousel-card flex-row flex-wrap col-md-10 h-sm-600-px h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
+			'class' 		=> 'section-card card film-card carousel-card flex-row flex-wrap col-md-10 h-sm-600-px h-600-px bg-light my-0 p-0 border-0 shadow-sm '.$section_color_class,
 			// section : card film-card flex-row flex-wrap col-md-6 bg-light my-2 border-0 h-280-px shadow-sm card-dark
 			// Projection in fiche film : card film-card flex-row flex-wrap col-4 --bg-custom mx-2 my-0 border-0 h-300-px shadow-sm --card-white --p-0
 			// Related-sections : card film-card --flex-row flex-wrap bg-light border-0 h-200-px shadow-sm card-dark
@@ -214,6 +214,13 @@ function wa_section_callback( $attributes ) {
 				<?php /* End : Slick slide */ ?>
 			</div>
 		</section>
+		<?php if ($use_section_color=='1') : ?>
+		<style>
+			.section-card .section-list .section-item {
+				color: white !important;
+			}
+		</style>
+		<?php endif; ?>
 		<?php /* END: #Carrousel section */ ?>
 		<?php
 	endif;
