@@ -99,52 +99,7 @@ global $page_atts;
 						?>
 					</div>
 				<?php endif; ?>
-
-				<style type="text/css">
-					.account-nav {
-						display: inline-block;
-						padding: .75rem;
-						/* position: relative; */
-					}
-					.account-nav ul {
-						margin: 0;
-						padding: 0;
-						list-style: none;
-					}
-					.account-nav ul li {
-						display: inline-block;
-					}
-					.account-nav ul li a {
-						color: var(--color-black);
-						text-decoration: none;	
-					}
-					.account-nav ul li a i {
-						position: relative;
-						color: black;
-						top: 1px;
-					}
-					.account-nav ul li ul.sub-menu {
-						position: absolute;
-						top: 0px;
-						right: 35px;
-						background-color: rgba(255, 255, 255, 0.75);
-						padding: 4px 6px;
-						opacity: 0;
-						transition: all .3s ease-in-out;
-					}
-					@media (max-width:576px) {
-						.account-nav ul li ul.sub-menu {
-							top: 5px;
-						}
-					}
-					.account-nav ul li:hover ul.sub-menu {
-						opacity: 1;
-					} 
-					.account-nav ul li ul.sub-menu li {
-						margin-left:.5rem;
-					}
-				</style>
-	
+				<!-- Styles > now in wacp_client_portal : public css -->	
 			</span>
 		</nav>	
 
