@@ -49,7 +49,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				printf( '<h6 class="mb-0 muted"><i class="bi bi-film"></i> %s</h6> ', esc_html_x( 'Film', 'post', 'waff' ) );
 				$film_french_title 	= get_post_meta( get_the_ID(), 'wpcf-f-french-operating-title', true );
 				$film_length 		= get_post_meta( get_the_ID(), 'wpcf-f-movie-length', true );
-				$favorites 			= do_shortcode('[wacp_favorite_star film_id="'.$get_the_ID().'"]');
+				$favorites 			= do_shortcode('[wacp_favorite_star film_id="'.get_the_ID().'"]');
 				if ( $film_french_title != "" ) {
 					the_title( 
 						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span>%s <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length, $favorites ), 
