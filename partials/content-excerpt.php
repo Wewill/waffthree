@@ -52,13 +52,13 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 				$favorites 			= do_shortcode('[wacp_favorite_star film_id="'.get_the_ID().'"]');
 				if ( $film_french_title != "" ) {
 					the_title( 
-						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span>%s <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length, $favorites ), 
+						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">%s</a> <span class="length light">%s\'</span> %s <span class="subline-4 text-muted mb-1">', esc_url(get_permalink()), $film_french_title, $film_length, $favorites ), 
 						'</span></h3>'
 					);
 				} else {
 					the_title( 
 						sprintf( '<h3 class="post__title entry-title m-0 lh-1 mb-2" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), 
-						sprintf('</a> <span class="length light">%s\'</span>%s</h3>', $film_length, $favorites) 
+						sprintf('</a> <span class="length light">%s\'</span> %s</h3>', $film_length, $favorites) 
 					);
 				}
 				// Metas 
