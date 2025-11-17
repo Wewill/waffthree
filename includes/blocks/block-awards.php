@@ -123,65 +123,101 @@ function wa_awards_callback( $attributes ) {
 		echo esc_html__( 'Please choose an edition', 'waff' );*/
 	$edition = ( isset($edition) && $edition != null && $edition != 0 )?$edition:$current_edition_id;
 
-	// Master awards Films
-	foreach( $master_awards_id as $a_id ) {
-		$master_awards_films_args = array(
-			'post_type' => 'film',
-			'posts_per_page' => -1,
-			'post_status' => 'publish',
-			// In edition
-			'tax_query' => array(
-				'relation' => 'AND',
-				array (
-					'taxonomy' => 'award',
-					'field' => 'term_id',
-					'terms' => $a_id, //array_values($mai)
-				),
-				array (
-					'taxonomy' => 'edition',
-					'field' => 'term_id',
-					'terms' => array($edition),
-				),
+	// Master awards Films - Get all films with master awards
+	$master_awards_films_args = array(
+		'post_type' => 'film',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		// In edition
+		'tax_query' => array(
+			'relation' => 'AND',
+			array (
+				'taxonomy' => 'award',
+				'field' => 'term_id',
+				'terms' => $master_awards_id,
 			),
-			// Order by
-			'orderby'  => array( 'menu_order' => 'DESC', 'date' => 'DESC' ),
-		);
-		// Filter to order by taxonomy
-		//add_filter('posts_orderby', __NAMESPACE__ . "\\edit_posts_orderby_award" );
-		//add_filter('posts_clauses', __NAMESPACE__ . "\\edit_posts_orderby_award_clauses", 10, 2);
-		$master_awards_films[] = get_posts( $master_awards_films_args );
+			array (
+				'taxonomy' => 'edition',
+				'field' => 'term_id',
+				'terms' => array($edition),
+			),
+		),
+		// Order by
+		'orderby'  => array( 'menu_order' => 'DESC', 'date' => 'DESC' ),
+	);
+	$master_awards_films_raw = get_posts( $master_awards_films_args );
+
+	// Create one entry per film-award combination
+	$master_awards_films_expanded = array();
+	foreach( $master_awards_films_raw as $film ) {
+		$film_awards = get_the_terms( $film->ID, 'award' );
+		if ( ! empty( $film_awards ) && ! is_wp_error( $film_awards ) ) {
+			// For each master award this film has, create a separate entry
+			foreach( $film_awards as $award ) {
+				$is_master = get_term_meta( $award->term_id, 'wpcf-a-master', true );
+				if ( $is_master == '1' && in_array( $award->term_id, $master_awards_id ) ) {
+					// Clone the film object and attach the specific award
+					$film_clone = clone $film;
+					$film_clone->master_award_data = array(
+						'term_id' => $award->term_id,
+						'name' => $award->name,
+						'light_img' => get_term_meta( $award->term_id, 'wpcf-a-light-image', true ),
+						'dark_img' => get_term_meta( $award->term_id, 'wpcf-a-dark-image', true ),
+					);
+					$master_awards_films_expanded[] = $film_clone;
+				}
+			}
+		}
 	}
-	//remove_filter('posts_orderby',  __NAMESPACE__ . "\\edit_posts_orderby_award" );
+	$master_awards_films = array( $master_awards_films_expanded ); // Wrap in array to maintain compatibility
 	//echo "blocks.php:: Films IDs"; echo '<pre>'.print_r($master_awards_films, true).'</pre>';
 
-	// Awards Films
-	foreach( $awards_id as $a_id ) {
-		$awards_films_args = array(
-			'post_type' => 'film',
-			'posts_per_page' => -1,
-			'post_status' => 'publish',
-			// In edition
-			'tax_query' => array(
-				'relation' => 'AND',
-				array (
-					'taxonomy' => 'award',
-					'field' => 'term_id',
-					'terms' => $a_id, //array_values($awards_id),
-				),
-				array (
-					'taxonomy' => 'edition',
-					'field' => 'term_id',
-					'terms' => array($edition),
-				),
+	// Awards Films - Get all films with any award (to avoid duplicates)
+	$awards_films_args = array(
+		'post_type' => 'film',
+		'posts_per_page' => -1,
+		'post_status' => 'publish',
+		// In edition
+		'tax_query' => array(
+			'relation' => 'AND',
+			array (
+				'taxonomy' => 'award',
+				'field' => 'term_id',
+				'terms' => $awards_id, // All awards at once
 			),
-			// Order by
-			'orderby'  => array( 'term_order' => 'DESC', 'menu_order' => 'DESC', 'date' => 'DESC' ), //'term_taxonomy_id' => 'DESC',
-		);
-		// Filter to order by taxonomy
-		//add_filter('posts_orderby', __NAMESPACE__ . "\\edit_posts_orderby_award" );
-		$awards_films[] = get_posts( $awards_films_args );
+			array (
+				'taxonomy' => 'edition',
+				'field' => 'term_id',
+				'terms' => array($edition),
+			),
+		),
+		// Order by
+		'orderby'  => array( 'term_order' => 'DESC', 'menu_order' => 'DESC', 'date' => 'DESC' ),
+	);
+	$awards_films_raw = get_posts( $awards_films_args );
+
+	// Group films and collect their awards
+	$awards_films_grouped = array();
+	foreach( $awards_films_raw as $film ) {
+		$film_awards = get_the_terms( $film->ID, 'award' );
+		if ( ! empty( $film_awards ) && ! is_wp_error( $film_awards ) ) {
+			// Only include awards that are in our awards list (not master awards)
+			$film->awards_data = array();
+			foreach( $film_awards as $award ) {
+				$is_master = get_term_meta( $award->term_id, 'wpcf-a-master', true );
+				if ( $is_master == '0' && in_array( $award->term_id, $awards_id ) ) {
+					$film->awards_data[] = array(
+						'term_id' => $award->term_id,
+						'name' => $award->name,
+						'light_img' => get_term_meta( $award->term_id, 'wpcf-a-light-image', true ),
+						'dark_img' => get_term_meta( $award->term_id, 'wpcf-a-dark-image', true ),
+					);
+				}
+			}
+		}
+		$awards_films_grouped[] = $film;
 	}
-	//remove_filter('posts_orderby',  __NAMESPACE__ . "\\edit_posts_orderby_award" );
+	$awards_films = array( $awards_films_grouped ); // Wrap in array to maintain compatibility with foreach structure
 	//echo "blocks.php:: Films IDs"; echo '<pre>'.print_r($awards_films, true).'</pre>';
 
 	$empty_awards = '';
@@ -313,11 +349,12 @@ function wa_awards_get_films( $films, $master = true ) {
 	//echo"<pre>".print_r($films, true)."</pre>";
 
 	// Count array films
-	array_walk_recursive($films, function($value, $key) use (&$counter) {
-		$counter++;
-		//echo print_r($value,true) . " : " . $counter;
-	 }, $counter);
-	 //echo "counter : " . $counter;
+	foreach($films as $_films) {
+		if (is_array($_films)) {
+			$counter += count($_films);
+		}
+	}
+	//echo "counter : " . $counter;
 
 	foreach($films as $_films) { // Foreach 1
 		foreach($_films as $film) { // Foreach 2 Object/Array in array fix
@@ -357,6 +394,13 @@ function wa_awards_get_films( $films, $master = true ) {
 				$featured_img_caption = wp_get_attachment_caption($featured_img_id); // ADD WIL
 				$thumb_img = get_post( $featured_img_id ); // Get post by ID
 				$featured_img_description =  $thumb_img->post_content; // Display Description
+
+				// Clean caption: remove © if already present at the beginning
+				$caption_prefix = '';
+				if ( $featured_img_caption && strpos(trim($featured_img_caption), '©') !== 0 ) {
+					$caption_prefix = '© ';
+				}
+
 				// Render image
 				$f_image = sprintf('<figure class="w-100 %s fit-image" %s>
 						<picture class="lazy">
@@ -379,7 +423,7 @@ function wa_awards_get_films( $films, $master = true ) {
 					$featured_img_urls['thumbnail'],
 					($master == true)?'h-340-px':'h-200-px',
 					( $featured_img_caption )?esc_html($featured_img_caption):esc_html($f_title),
-					( $featured_img_caption || $featured_img_description )?'<figcaption><strong>© '. esc_html($featured_img_caption) .'</strong> '. esc_html($featured_img_description) .'</figcaption>':'',
+					( $featured_img_caption || $featured_img_description )?'<figcaption><strong>'. $caption_prefix . esc_html($featured_img_caption) .'</strong> '. esc_html($featured_img_description) .'</figcaption>':'',
 				);
 			}
 
@@ -392,6 +436,13 @@ function wa_awards_get_films( $films, $master = true ) {
 				$featured_img_caption 				= wp_get_attachment_caption($f_poster_ID); // ADD WIL
 				$thumb_img 							= get_post($f_poster_ID); // Get post by ID
 				$featured_img_description 			= $thumb_img->post_content; // Display Description
+
+				// Clean caption: remove © if already present at the beginning
+				$caption_prefix = '';
+				if ( $featured_img_caption && strpos(trim($featured_img_caption), '©') !== 0 ) {
+					$caption_prefix = '© ';
+				}
+
 				if ( function_exists( 'types_render_field' ) ) {
 					$f_poster 						= types_render_field( 'f-film-poster',
 						array( 'item' => $f_id, 'size' => 'medium_large', 'alt' => esc_html($featured_img_caption), 'class' => 'w-100 img-fluid fit-image ' . (($master == true)?'h-340-px':'h-200-px' ) )
@@ -407,7 +458,7 @@ function wa_awards_get_films( $films, $master = true ) {
 					($master == true)?'h-340-px':'h-200-px',
 					( $featured_img_description )?'title="'.esc_html($featured_img_description).'"':'title="'.esc_html($f_title).'"',
 					$f_poster,
-					( $featured_img_caption || $featured_img_description )?'<figcaption><strong>© '. esc_html($featured_img_caption) .'</strong> '. esc_html($featured_img_description) .'</figcaption>':'',
+					( $featured_img_caption || $featured_img_description )?'<figcaption><strong>'. $caption_prefix . esc_html($featured_img_caption) .'</strong> '. esc_html($featured_img_description) .'</figcaption>':'',
 				);
 			}
 
@@ -445,31 +496,35 @@ function wa_awards_get_films( $films, $master = true ) {
 			}
 
 			// Get award
-			$f_awards 				= get_the_terms( $f_id, 'award' );
-			$f_award_light_img = '';
-			$f_award_dark_img = '';
-			$f_award_name = '';
 			$html_award_img = '';
 			$html_award_title = '';
-			$f_awards_count = count($f_awards);
-			if ( ! empty( $f_awards ) && ! is_wp_error( $f_awards ) ) foreach ($f_awards as $f_award) {
-				$f_award_name 		= $f_award->name;
-				$f_awards_is_master = get_term_meta( $f_award->term_id, 'wpcf-a-master', true );
-				if ( $f_awards_is_master == (int)$master) {
-					$f_award_light_img 	= get_term_meta( $f_award->term_id, 'wpcf-a-light-image', true );
-					$f_award_dark_img 	= get_term_meta( $f_award->term_id, 'wpcf-a-dark-image', true );
-					// print_r('MASTER:'.(int)$master);
-					// print_r('IS_MASTER:'.$f_awards_is_master);
-					$html_award_img 	.= '<img src="'.(($master == true)?$f_award_light_img:$f_award_dark_img).'" class="w-100 '.(($f_awards_count>2)?'mw-80-px':'mw-180-px').' fit-image mb-4 mb-sm-3" alt="'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'">';
-					$html_award_title 	.= '<h6>'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'</h6>';
+			$f_awards_count = 0;
+
+			// Use pre-collected master award data if available (for master awards)
+			if ( $master == true && isset($film->master_award_data) && !empty($film->master_award_data) ) {
+				$f_awards_count = 1; // Always 1 since we show one award per card for master awards
+				$award_data = $film->master_award_data;
+				$f_award_name = $award_data['name'];
+				$f_award_light_img = $award_data['light_img'];
+
+				if ( $f_award_light_img != '' ) {
+					$html_award_img .= '<img src="'.$f_award_light_img.'" class="w-100 mw-180-px fit-image mb-4 mb-sm-3" alt="'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'">';
 				}
-				//if ( in_array( $f_award->term_id, $master_awards) )
-					//print_r($f_award->term_id);
+				$html_award_title .= '<h6>'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'</h6>';
 			}
-			// print_r($html_award_img);
-			// print_r($html_award_title);
-			//var_dump($f_award_light_img);
-			//print_r($counter);//count($films)
+			// Use pre-collected awards data if available (for non-master awards)
+			elseif ( $master == false && isset($film->awards_data) && !empty($film->awards_data) ) {
+				$f_awards_count = count($film->awards_data);
+				foreach ($film->awards_data as $award_data) {
+					$f_award_name = $award_data['name'];
+					$f_award_dark_img = $award_data['dark_img'];
+
+					if ( $f_award_dark_img != '' ) {
+						$html_award_img .= '<img src="'.$f_award_dark_img.'" class="w-100 '.(($f_awards_count>=2)?'mw-80-px':'mw-180-px').' fit-image mb-4 mb-sm-3" alt="'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'">';
+					}
+					$html_award_title .= '<h6>'.(($f_award_name)?$f_award_name:__( 'Award', 'waff' )).'</h6>';
+				}
+			}
 
 			$html .= '<div class="col-12 col-md-' . ( ($master == true)?ceil(12/$counter):3 ) . ' award-item ' . (($master == true)?'master-':'') . 'award">';
 
@@ -509,8 +564,8 @@ function wa_awards_get_films( $films, $master = true ) {
 				//
 				(count($films) > 3)?'p-3':'p-4',
 				($master == true)?'w-55':'h-50',
-				( $f_award_light_img != '' && $f_award_dark_img != '' )?$html_award_img:'',
-				( $f_award_light_img == '' && $f_award_dark_img == '' )?$html_award_title:'',
+				( $html_award_img != '' )?$html_award_img:'',
+				( $html_award_img == '' )?$html_award_title:'',
 				esc_url(get_permalink( $f_id )),
 				( $f_french_operating_title != '' )?$f_french_operating_title.' <span class="muted">('.$f_title.')</span>':$f_title,
 				( $f_movie_length != '' )?'<span class="length">'.$f_movie_length.'\'</span>':'',
