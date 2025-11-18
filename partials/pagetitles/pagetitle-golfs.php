@@ -360,7 +360,7 @@ if ( is_singular() && has_post_thumbnail() ) {
 						<ul class="p-gutter-l list-unstyled pb-8 <?= $header_section_title_color ?>">
 							<?php
 								foreach ($page_atts['anchors'] as $key => $value) {
-									echo '<li class="lead '.(!empty($page_atts['colors'][$key]))?$page_atts['colors'][$key]:$header_link_color.' animated-underline"><a href="#'.sanitize_title($value).'">'.$value.'</a></li>';
+									echo '<li class="lead '.(!empty($page_atts['colors'][$key])?$page_atts['colors'][$key]:$header_link_color).' animated-underline"><a href="#'.sanitize_title($value).'">'.$value.'</a></li>';
 								}
 							?>
 						</ul>
