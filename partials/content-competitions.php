@@ -80,8 +80,8 @@ function get_ended_signup_block() {
 
 
 	<!-- Departures -->
-	<section id="departures">
-		<h3><?= __('Departures', 'waff'); ?></h3>
+	<section id="<?= sanitize_key(__('Departures', 'waff')); ?>">
+		<h3 class="<?= (!empty($page_atts['colors'][0]))?$page_atts['colors'][0]:''; ?>"><?= __('Departures', 'waff'); ?></h3>
 		<?php		
 		if ($csv_departures_url) {
 			$csv = file_get_contents($csv_departures_url);
@@ -102,8 +102,8 @@ function get_ended_signup_block() {
 	</section>
 	
 	<!-- Results -->
-	<section id="results">
-		<h3><?= __('Results', 'waff'); ?></h3>
+	<section id="<?= sanitize_key(__('Results', 'waff')); ?>">
+		<h3 class="<?= (!empty($page_atts['colors'][1]))?$page_atts['colors'][1]:''; ?>"><?= __('Results', 'waff'); ?></h3>
 		<?php
 			if ($csv_results_brut_url) {
 				$csv = file_get_contents($csv_results_brut_url);
@@ -143,8 +143,8 @@ function get_ended_signup_block() {
 	</section>
 
 	<!-- Results -->
-	<section id="sign-up">
-		<h3><?= __('Sign-up', 'waff'); ?></h3>
+	<section id="<?= sanitize_key(__('Sign-up', 'waff')); ?>">
+		<h3 class="<?= (!empty($page_atts['colors'][2]))?$page_atts['colors'][2]:''; ?>"><?= __('Sign-up', 'waff'); ?></h3>
 
 		<div class="row">
 			<?php
