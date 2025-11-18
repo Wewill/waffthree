@@ -305,9 +305,9 @@ if ( is_singular() && has_post_thumbnail() ) {
 	$page_atts['anchors'][] = __('Results', 'waff');
 	$page_atts['anchors'][] = __('Sign-up', 'waff');
 
+	$page_atts['colors'][] = 'text-action-3';
 	$page_atts['colors'][] = 'text-action-1';
-	$page_atts['colors'][] = 'text-action-2';
-	$page_atts['colors'][] = 'text-accent-1';
+	$page_atts['colors'][] = 'text-color-accent-1';
 
 	?>
 
