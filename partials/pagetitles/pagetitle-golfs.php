@@ -372,14 +372,14 @@ if ( is_singular() && has_post_thumbnail() ) {
 							<picture class="lazy show-img-when-loaded duotone-<?= get_post_thumbnail_id() ?>">
 							<!-- 1200x900 > 800x600 (1600x1100 > 800x550) -->
 							<data-src media="(min-width: 990px)"
-									srcset="<?= $featured_img_urls['page-featured-image-modern-x2']; ?> 2x,
-											<?= $featured_img_urls['page-featured-image-modern']; ?>" type="image/jpeg"></data-src>
+									srcset="<?= $featured_img_urls['post-featured-image-modern-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-modern']; ?>" type="image/jpeg"></data-src>
 							<data-src media="(min-width: 590px)"
-									srcset="<?= $featured_img_urls['page-featured-image-modern-m-x2']; ?> 2x,
-											<?= $featured_img_urls['page-featured-image-modern-m']; ?>" type="image/jpeg"></data-src>
+									srcset="<?= $featured_img_urls['post-featured-image-modern-m-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-modern-m']; ?>" type="image/jpeg"></data-src>
 							<data-src media="(min-width: 380px)"
-									srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
-											<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
+									srcset="<?= $featured_img_urls['post-featured-image-s-x2']; ?> 2x,
+											<?= $featured_img_urls['post-featured-image-s']; ?>" type="image/jpeg"></data-src>
 							<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-sm-600-px rounded-start-4 rounded-bottom-left-0" style="object-fit: cover; width: 100%;"></data-img>
 							</picture>
 							<?php if ( $featured_img_caption || $featured_img_description ) : ?>
