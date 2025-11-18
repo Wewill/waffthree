@@ -307,7 +307,9 @@ $homeslide_image = ( !empty($homeslide_images) ) ? reset($homeslide_images) : fa
 			));
 			if ($recent_posts->have_posts()) :
 				$delay = 400;
-				while ($recent_posts->have_posts()) : $recent_posts->the_post(); 
+				$count = 0; // Limit to 4 posts 
+				while ($recent_posts->have_posts() && $count < 4) : $recent_posts->the_post(); 
+					$count++;
 					$post_id 					= get_the_ID();
 					// Post Color
 					$post_color 				= rwmb_meta('_waff_bg_color_metafield', array(), $post_id);
