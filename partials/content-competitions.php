@@ -7,6 +7,8 @@
  * @package Go
  */
 
+global $page_atts;
+
 //DEBUG
 echo ((true === WAFF_DEBUG)?'<code> ##CONTENTCOMPETITIONS</code>':'');
 
@@ -80,7 +82,7 @@ function get_ended_signup_block() {
 
 
 	<!-- Departures -->
-	<section id="<?= sanitize_key(__('Departures', 'waff')); ?>">
+	<section id="<?= sanitize_title(__('Departures', 'waff')); ?>">
 		<h3 class="<?= (!empty($page_atts['colors'][0]))?$page_atts['colors'][0]:''; ?>"><?= __('Departures', 'waff'); ?></h3>
 		<?php		
 		if ($csv_departures_url) {
@@ -102,7 +104,7 @@ function get_ended_signup_block() {
 	</section>
 	
 	<!-- Results -->
-	<section id="<?= sanitize_key(__('Results', 'waff')); ?>">
+	<section id="<?= sanitize_title(__('Results', 'waff')); ?>">
 		<h3 class="<?= (!empty($page_atts['colors'][1]))?$page_atts['colors'][1]:''; ?>"><?= __('Results', 'waff'); ?></h3>
 		<?php
 			if ($csv_results_brut_url) {
@@ -143,7 +145,7 @@ function get_ended_signup_block() {
 	</section>
 
 	<!-- Results -->
-	<section id="<?= sanitize_key(__('Sign-up', 'waff')); ?>">
+	<section id="<?= sanitize_title(__('Sign-up', 'waff')); ?>">
 		<h3 class="<?= (!empty($page_atts['colors'][2]))?$page_atts['colors'][2]:''; ?>"><?= __('Sign-up', 'waff'); ?></h3>
 
 		<div class="row">
