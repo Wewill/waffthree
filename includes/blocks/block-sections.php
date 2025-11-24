@@ -170,7 +170,7 @@ function wa_sections_callback( $attributes ) {
 
 		<?php /* #BEGIN: Sections tiny list */ ?>
 		<?php if ( isset( $show_tiny_list ) && $show_tiny_list == '1' ) : ?>
-		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?> tiny-list" <?= $data ?>>
+		<section class="<?= $subclass ?> mt-0 mb-0 <?= $animation_class ?> tiny-list" <?= $data ?>>
 			<div class="d-sm-flex row g-0">
 		<?php endif; ?>
 
