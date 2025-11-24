@@ -169,6 +169,14 @@ function wa_awards_callback( $attributes ) {
 			}
 		}
 	}
+
+	// Sort master awards films by taxonomy order
+	usort($master_awards_films_expanded, function($a, $b) use ($master_awards_id) {
+		$pos_a = array_search($a->master_award_data['term_id'], $master_awards_id);
+		$pos_b = array_search($b->master_award_data['term_id'], $master_awards_id);
+		return $pos_a - $pos_b;
+	});
+
 	$master_awards_films = array( $master_awards_films_expanded ); // Wrap in array to maintain compatibility
 	//echo "blocks.php:: Films IDs"; echo '<pre>'.print_r($master_awards_films, true).'</pre>';
 
@@ -214,9 +222,34 @@ function wa_awards_callback( $attributes ) {
 					);
 				}
 			}
+			// Sort awards_data by taxonomy order
+			if (!empty($film->awards_data)) {
+				usort($film->awards_data, function($a, $b) use ($awards_id) {
+					$pos_a = array_search($a['term_id'], $awards_id);
+					$pos_b = array_search($b['term_id'], $awards_id);
+					return $pos_a - $pos_b;
+				});
+			}
 		}
 		$awards_films_grouped[] = $film;
 	}
+
+	// Sort awards films by the first award in their awards_data (using taxonomy order)
+	usort($awards_films_grouped, function($a, $b) use ($awards_id) {
+		// Get the first award's position for each film
+		$first_award_a = !empty($a->awards_data) ? $a->awards_data[0]['term_id'] : PHP_INT_MAX;
+		$first_award_b = !empty($b->awards_data) ? $b->awards_data[0]['term_id'] : PHP_INT_MAX;
+
+		$pos_a = array_search($first_award_a, $awards_id);
+		$pos_b = array_search($first_award_b, $awards_id);
+
+		// If positions are not found, put them at the end
+		if ($pos_a === false) $pos_a = PHP_INT_MAX;
+		if ($pos_b === false) $pos_b = PHP_INT_MAX;
+
+		return $pos_a - $pos_b;
+	});
+
 	$awards_films = array( $awards_films_grouped ); // Wrap in array to maintain compatibility with foreach structure
 	//echo "blocks.php:: Films IDs"; echo '<pre>'.print_r($awards_films, true).'</pre>';
 
