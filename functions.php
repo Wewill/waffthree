@@ -133,7 +133,7 @@ require_once get_theme_file_path( 'includes/blocks.php' );
 /**
  * Run setup functions.
  */
-add_action( 'init', function() {
+//add_action( 'init', function() {
 	WaffTwo\Core\setup();
 	WaffTwo\Theme\setup();
 	WaffTwo\Customizer\setup();
@@ -141,4 +141,4 @@ add_action( 'init', function() {
 	WaffTwo\Dark_Meta\setup();
 	WaffTwo\Blocks\setup();
 	if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }
-} );
+//} );
