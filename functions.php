@@ -29,7 +29,9 @@ if ( isset($_SERVER['SERVER_NAME']) && !file_exists(get_theme_file_path( '../'.p
 *	You can uncomment the line below to include your own translations
 *	into your child theme, simply create a "language" folder and add your po/mo files
 */
-load_child_theme_textdomain('waff', get_theme_file_path('language/'));
+add_action( 'init', function() {
+	load_child_theme_textdomain('waff', get_theme_file_path('language/'));
+} );
 
 /**
  * i18n : Qtranslate XT.
@@ -131,10 +133,12 @@ require_once get_theme_file_path( 'includes/blocks.php' );
 /**
  * Run setup functions.
  */
-WaffTwo\Core\setup();
-WaffTwo\Theme\setup();
-WaffTwo\Customizer\setup();
-WaffTwo\Wide_Meta\setup();
-WaffTwo\Dark_Meta\setup();
-WaffTwo\Blocks\setup();
-if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }
+add_action( 'init', function() {
+	WaffTwo\Core\setup();
+	WaffTwo\Theme\setup();
+	WaffTwo\Customizer\setup();
+	WaffTwo\Wide_Meta\setup();
+	WaffTwo\Dark_Meta\setup();
+	WaffTwo\Blocks\setup();
+	if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }
+} );
