@@ -11,7 +11,7 @@
   --go--color--inverse-quaternary: var(--go--color--black);
   --go--color--quinary: var(--go--color--black);
   --go--color--inverse-quinary: var(--go--color--white);
-  // @TODO dynamically edited in customizer
+  /* @TODO dynamically edited in customizer */
 
   --editor-title-block--alignment: left; /* Dynamically edited in setup.php > customizer */
   --waff--layout--left-alignement: 0; /* Dynamically edited in setup.php > customizer */
@@ -181,8 +181,8 @@
   --go-submenu--color--background: var(--waff-color-bg);
   --go-submenu--color--text: var(--waff-action-2);
 
-  // --bs-nav-link-color: var(--waff-action-2);
-  // --bs-nav-link-hover-color: var(--waff-action-2-hover);
+  /* --bs-nav-link-color: var(--waff-action-2);
+   --bs-nav-link-hover-color: var(--waff-action-2-hover);*/
 }
 
 .waff-theme-rsfp {
@@ -1876,7 +1876,9 @@ span.label {
     "Arial, sans-serif"
   ); /* FIFAM = "Bureau Grot Condensed", Arial, sans-serif; */
   font-weight: 400;
-  font-size: 82%;
+  /* font-size: 82%; */
+  font-size: 90%;
+  text-transform: uppercase;
 }
 
 .waff-theme-dinard span.label {
@@ -2182,6 +2184,21 @@ td.room {
 .film-card .card-more-text small {
   font-size: 0.655em;
   opacity: 0.95;
+}
+
+/**
+#45 Carousel section
+*/
+
+@media only screen and (min-width: 767px) {
+  .carousel-card .card-text:not(.card-more-text) small {
+    font-size: 1.1em!important;
+    opacity: 1!important;
+  }
+}
+
+.carousel-card .card-text:not(.card-more-text) {
+    opacity: 1!important;
 }
 
 /* .film-card .time-wrapper .time {
@@ -2630,7 +2647,7 @@ input[type="checkbox"]:checked + label:before {
   Animated submenu / coblocks + Dinard 
 */
 
-// .primary-menu > li > .sub-menu:before,
+/* .primary-menu > li > .sub-menu:before,
 // ul.qtranxs_language_chooser:before {
 //   content: "";
 //   border: 0;
@@ -2646,6 +2663,7 @@ input[type="checkbox"]:checked + label:before {
 //   transition: width 0.25s ease-out;
 // }
 // // >> Added to waff-theme styles
+*/
 
 .primary-menu > li:hover > .sub-menu:hover:before,
 ul.qtranxs_language_chooser:hover:before {
@@ -3053,4 +3071,38 @@ aside.widget-area h6:first-of-type {
 .comments-area .logged-in-as a {
   font-weight: 600;
   opacity: 0.8;
+}
+
+/**
+Fix floating labels 
+*/
+
+.form-floating>.form-control-plaintext~label::after, 
+.form-floating>.form-control:focus~label::after, 
+.form-floating>.form-control:not(:placeholder-shown)~label::after, 
+.form-floating>.form-select~label::after {
+  background: transparent !important;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext {
+    padding: 1rem .6rem 0.6rem .6rem !important;
+}
+
+body .gform_wrapper label.gfield_label,
+body .gform_wrapper legend.gfield_label {
+    font-family: var(
+      --waff-font-headline,
+      "Arial, sans-serif"
+    ) !important; /* FIFAM = "Bureau Grot Condensed", Arial, sans-serif; */
+}
+
+/**
+#45 Blocks 
+*/
+/* Reduce lead size from wa-cols blocks */
+@media (max-width: 575.98px) {
+  .cols .col .lead p {
+    font-size: 1rem !important;
+  }
 }

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: WaffThree Theme : the WA Three template based on godaddy "
 "go theme and WA Frontal Theme V2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-06 11:20+0000\n"
+"POT-Creation-Date: 2025-11-12 17:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -109,6 +109,10 @@ msgstr[1] ""
 #: includes/template-tags.php:1064 includes/template-tags.php:1134
 #: includes/template-tags.php:1161 includes/template-tags.php:1189
 #: includes/template-tags.php:1204 includes/template-tags.php:1216
+#: includes/blocks/block-sections.php:137
+#: includes/blocks/block-sections.php:238
+#: includes/blocks/block-programmation.php:116
+#: includes/blocks/block-awards.php:236
 msgid "&#8203;"
 msgstr ""
 
@@ -133,8 +137,24 @@ msgstr ""
 msgid "(Unused)"
 msgstr ""
 
+#: includes/blocks.php:639
+msgid "(WA) Awards"
+msgstr ""
+
+#: includes/blocks.php:1254
+msgid "(WA) Breaking"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-categories.php:31
 msgid "(WA) Categories"
+msgstr ""
+
+#: includes/blocks.php:1157
+msgid "(WA) Cols"
+msgstr ""
+
+#: includes/blocks.php:437
+msgid "(WA) Contact"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:22
@@ -145,21 +165,56 @@ msgstr ""
 msgid "(WA) Counter"
 msgstr ""
 
+#: includes/blocks.php:320
+msgid "(WA) Edito"
+msgstr ""
+
+#: includes/blocks.php:728
+msgid "(WA) Film"
+msgstr ""
+
+#: includes/blocks.php:1378
+msgid "(WA) Insights"
+msgstr ""
+
+#: includes/blocks.php:1514
+msgid "(WA) Key messages"
+msgstr ""
+
+#: includes/blocks.php:138
+msgid "(WA) Latest posts"
+msgstr ""
+
+#: includes/blocks.php:1018
+msgid "(WA) Mission"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-newsletter.php:22
 msgid "(WA) Newsletter"
 msgstr ""
 
+#: includes/blocks.php:275
 #: includes/admin/widgets/custom-wp-widget-partners.php:23
 msgid "(WA) Partners"
 msgstr ""
 
+#: includes/blocks.php:561
+msgid "(WA) Playlist"
+msgstr ""
+
+#: includes/blocks.php:925
 #: includes/admin/widgets/custom-wp-widget-programmation.php:21
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:21
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:23
 msgid "(WA) Programmation"
 msgstr ""
 
+#: includes/blocks.php:772
 #: includes/admin/widgets/custom-wp-widget-section.php:47
 msgid "(WA) Section"
+msgstr ""
+
+#: includes/blocks.php:843
+msgid "(WA) Sections list"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:37
@@ -169,6 +224,32 @@ msgstr ""
 #. used between list items, there is a space after the comma.
 #: includes/template-tags.php:1361 includes/template-tags.php:1371
 msgid ", "
+msgstr ""
+
+#: includes/blocks.php:162
+msgid "3"
+msgstr ""
+
+#: includes/blocks.php:163
+msgid "4"
+msgstr ""
+
+#: includes/blocks.php:164
+msgid "5"
+msgstr ""
+
+#: includes/blocks.php:165
+msgid "6"
+msgstr ""
+
+#: includes/blocks.php:786
+msgid "</em>"
+msgstr ""
+
+#: includes/blocks.php:1068
+msgid ""
+"<br/><span class=\"label\">TIPS</span> You can use Boostrap icons, ex : bi "
+"bi-bookmark ( https://icons.getbootstrap.com )."
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:25
@@ -205,6 +286,10 @@ msgstr ""
 msgid "A section arbitrary HTML code."
 msgstr ""
 
+#: includes/blocks.php:1262 includes/blocks.php:1311
+msgid "A top label"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:30
 msgid "A two cols call-to-action widget."
 msgstr ""
@@ -239,6 +324,10 @@ msgctxt "abbreviation of the font size option label"
 msgid "XS"
 msgstr ""
 
+#: includes/theme.php:295
+msgid "Account Menu"
+msgstr ""
+
 #: includes/admin/custom_post_types.php:38
 msgid "Add Flash"
 msgstr ""
@@ -251,6 +340,10 @@ msgstr ""
 #: includes/admin/widgets/custom-wp-widget-twocols.php:268
 #: includes/admin/widgets/custom-wp-widget-twocols.php:337
 msgid "Add media"
+msgstr ""
+
+#: includes/blocks.php:592
+msgid "Add more video to the playlist"
 msgstr ""
 
 #: includes/admin/custom_post_types.php:39
@@ -275,6 +368,10 @@ msgid ""
 "filled )"
 msgstr ""
 
+#: includes/blocks.php:384
+msgid "Adds a frame around the content."
+msgstr ""
+
 #: includes/customizer.php:266
 msgid "Advanced blocks"
 msgstr ""
@@ -285,6 +382,14 @@ msgstr ""
 
 #: partials/homeslides/homeslide-golfs.php:336
 msgid "ago"
+msgstr ""
+
+#: includes/blocks.php:1085
+msgid "Aligned"
+msgstr ""
+
+#: includes/blocks.php:683
+msgid "All"
 msgstr ""
 
 #: includes/admin/custom_post_types.php:44
@@ -299,8 +404,26 @@ msgstr ""
 msgid "All Partner"
 msgstr ""
 
+#: includes/blocks/block-awards.php:283
+msgid "All the awards"
+msgstr ""
+
 #: partials/pagetitles/pagetitle-golfs.php:569
 msgid "Altitude"
+msgstr ""
+
+#: includes/blocks.php:328
+msgid "An awesome edition"
+msgstr ""
+
+#: includes/blocks.php:1033 includes/blocks.php:1172 includes/blocks.php:1276
+#: includes/blocks.php:1325 includes/blocks.php:1393 includes/blocks.php:1529
+msgid "An awesome subtitle"
+msgstr ""
+
+#: includes/blocks.php:1026 includes/blocks.php:1165 includes/blocks.php:1269
+#: includes/blocks.php:1318 includes/blocks.php:1386 includes/blocks.php:1522
+msgid "An awesome title"
 msgstr ""
 
 #: includes/template-tags.php:638
@@ -311,24 +434,36 @@ msgstr ""
 msgid "Animation documentary"
 msgstr ""
 
-#: includes/theme.php:300
+#: includes/theme.php:308
 msgid "Appears in the blog."
 msgstr ""
 
-#: includes/theme.php:335
+#: includes/theme.php:343
 msgid "Appears in the programmation modal."
 msgstr ""
 
-#: includes/theme.php:322
+#: includes/theme.php:330
 msgid "Appears in the site footer after the footer menu."
 msgstr ""
 
-#: includes/theme.php:311
+#: includes/theme.php:319
 msgid "Appears in the site footer before the footer menu."
 msgstr ""
 
 #: partials/headers/header-rsfp.php:69
 msgid "ARDEAR"
+msgstr ""
+
+#: includes/blocks.php:602
+msgid "Autoplay videos ?"
+msgstr ""
+
+#: includes/blocks/block-awards.php:440 includes/blocks/block-awards.php:441
+msgid "Award"
+msgstr ""
+
+#: includes/blocks.php:646 includes/blocks/block-awards.php:273
+msgid "Awards"
 msgstr ""
 
 #: partials/footers/footer-golfs.php:139 partials/footers/footer-rsfp.php:127
@@ -347,6 +482,10 @@ msgstr ""
 msgid "Background image:"
 msgstr ""
 
+#: includes/blocks/block-awards.php:182
+msgid "Be patient ! Awards has not been published yet"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:285
 #: includes/admin/widgets/custom-wp-widget-twocols.php:354
 msgid "Between"
@@ -356,21 +495,45 @@ msgstr ""
 msgid "Birthdate"
 msgstr ""
 
-#: includes/theme.php:298
+#: includes/blocks.php:1126
+msgid "Block have margin ?"
+msgstr ""
+
+#: includes/blocks.php:72
+msgid "Blocks"
+msgstr ""
+
+#: includes/blocks.php:93
+msgid "Blocks background"
+msgstr ""
+
+#: includes/blocks.php:98
+msgid "Blocks pattern"
+msgstr ""
+
+#: includes/blocks.php:103
+msgid "Blocks transition"
+msgstr ""
+
+#: includes/theme.php:306
 msgid "Blog sidebar"
+msgstr ""
+
+#: includes/blocks.php:242
+msgid "Bold"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-programmation.php:650
 #: includes/admin/widgets/custom-wp-widget-programmation.php:662
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:702
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:720
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:805
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:823
 msgid "Book"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-programmation.php:649
 #: includes/admin/widgets/custom-wp-widget-programmation.php:661
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:701
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:719
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:804
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:822
 msgid "Booklet"
 msgstr ""
 
@@ -378,9 +541,14 @@ msgstr ""
 msgid "Booklet file URL (*.pdf)"
 msgstr ""
 
+#: includes/blocks.php:1100
 #: includes/admin/widgets/custom-wp-widget-twocols.php:282
 #: includes/admin/widgets/custom-wp-widget-twocols.php:351
 msgid "Bottom"
+msgstr ""
+
+#: includes/blocks.php:780
+msgid "Break into the competition"
 msgstr ""
 
 #: partials/preheaders/preheader-golfs.php:17
@@ -389,7 +557,7 @@ msgstr ""
 msgid "Breaking"
 msgstr ""
 
-#: partials/preheaders/preheader-golfs.php:17
+#: includes/blocks.php:146 partials/preheaders/preheader-golfs.php:17
 msgid "Breaking news"
 msgstr ""
 
@@ -431,7 +599,10 @@ msgstr ""
 #: includes/template-tags.php:917 includes/template-tags.php:965
 #: includes/template-tags.php:1063 includes/template-tags.php:1133
 #: includes/template-tags.php:1160 includes/template-tags.php:1188
-#: includes/template-tags.php:1210
+#: includes/template-tags.php:1210 includes/blocks/block-sections.php:136
+#: includes/blocks/block-sections.php:237
+#: includes/blocks/block-programmation.php:115
+#: includes/blocks/block-awards.php:235
 msgid "Categorized as"
 msgstr ""
 
@@ -446,14 +617,28 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
+#: includes/blocks.php:1099
+msgid "Centered"
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:218
 msgid "Choose a color for the film page"
+msgstr ""
+
+#: includes/blocks.php:733
+msgid ""
+"Choose a film to display a single film card. If empty, none of the "
+"categories will be displayed."
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:143
 msgid ""
 "Choose a video. It will autoplay and loop it in slide. Squared format "
 "recommanded. 20 Mo maximum recommanded."
+msgstr ""
+
+#: includes/blocks.php:678
+msgid "Choose display"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:90
@@ -465,6 +650,18 @@ msgid ""
 "Choose if the slide text mode is light or dark. Overrides slider color mode."
 msgstr ""
 
+#: includes/blocks.php:1207
+msgid "Choose image position and style."
+msgstr ""
+
+#: includes/blocks.php:1095
+msgid "Choose image position."
+msgstr ""
+
+#: includes/blocks.php:1082
+msgid "Choose the aligment beetween background and image."
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:328
 msgid "Choose the header background color"
 msgstr ""
@@ -473,15 +670,43 @@ msgstr ""
 msgid "Choose the header style (default: normal)"
 msgstr ""
 
+#: includes/blocks.php:445
+msgid "Choose the images"
+msgstr ""
+
+#: includes/blocks.php:159
+msgid "Choose the number of latest posts to show"
+msgstr ""
+
+#: includes/blocks.php:236
+msgid "Choose the style of the latest posts block"
+msgstr ""
+
+#: includes/blocks.php:680
+msgid "Choose to display all the awards or selected awards"
+msgstr ""
+
+#: includes/blocks.php:185
+msgid "Choose which post is the latest post. Default : posts"
+msgstr ""
+
+#: includes/blocks.php:469 includes/blocks.php:492
+msgid "Class"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-counter.php:165
 #: includes/admin/widgets/custom-wp-widget-newsletter.php:153
 #: includes/admin/widgets/custom-wp-widget-contact.php:166
 #: includes/admin/widgets/custom-wp-widget-section.php:253
 #: includes/admin/widgets/custom-wp-widget-twocols.php:386
 #: includes/admin/widgets/custom-wp-widget-programmation.php:739
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:798
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:901
 #: includes/admin/widgets/custom-wp-widget-partners.php:196
 msgid "Classes:"
+msgstr ""
+
+#: includes/blocks.php:240
+msgid "Classic"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:163
@@ -498,9 +723,10 @@ msgstr ""
 msgid "Click here to crop new image sizes"
 msgstr ""
 
+#: includes/blocks/block-programmation.php:833
 #: includes/admin/widgets/custom-wp-widget-programmation.php:697
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:704
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:756
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:807
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:859
 msgid "Close"
 msgstr ""
 
@@ -520,8 +746,20 @@ msgstr ""
 msgid "Competition"
 msgstr ""
 
+#: includes/blocks.php:442
+msgid "Contact block gallery"
+msgstr ""
+
 #: includes/customizer.php:307
 msgid "Contact email"
+msgstr ""
+
+#: includes/blocks.php:499
+msgid "Contact form"
+msgstr ""
+
+#: includes/blocks.php:509
+msgid "Contact GravityForm id"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:151
@@ -530,6 +768,10 @@ msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-contact.php:75
 msgid "Contact us"
+msgstr ""
+
+#: includes/blocks.php:515
+msgid "Contact WSform id"
 msgstr ""
 
 #: partials/content-competitions.php:25 partials/content-competitions.php:37
@@ -545,9 +787,27 @@ msgstr ""
 msgid "Container-fluid"
 msgstr ""
 
+#: includes/blocks.php:346 includes/blocks.php:580 includes/blocks.php:658
+#: includes/blocks.php:862 includes/blocks.php:944 includes/blocks.php:1051
+#: includes/blocks.php:1190
+msgid "Content"
+msgstr ""
+
+#: includes/blocks.php:1281
+msgid "Content (first)"
+msgstr ""
+
+#: includes/blocks.php:1330
+msgid "Content (last)"
+msgstr ""
+
 #. Name of the template
 #: template-navlist.php:2
 msgid "Content or subpage nav"
+msgstr ""
+
+#: includes/blocks.php:1191 includes/blocks.php:1282 includes/blocks.php:1331
+msgid "Content will be displayed as cols. Markdown is available."
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-counter.php:161
@@ -557,7 +817,7 @@ msgstr ""
 #: includes/admin/widgets/custom-wp-widget-twocols.php:256
 #: includes/admin/widgets/custom-wp-widget-twocols.php:325
 #: includes/admin/widgets/custom-wp-widget-programmation.php:735
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:794
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:897
 #: includes/admin/widgets/custom-wp-widget-partners.php:192
 msgid "Content:"
 msgstr ""
@@ -572,7 +832,7 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: includes/theme.php:283 partials/footers/footer-golfs.php:138
+#: includes/theme.php:290 partials/footers/footer-golfs.php:138
 #: partials/footers/footer-rsfp.php:126 partials/footers/footer-diag.php:148
 #: partials/footers/footer-fifam.php:137 partials/footers/footer-dinard.php:136
 msgid "Credits Menu"
@@ -607,13 +867,108 @@ msgstr ""
 msgid "Designed w/ <3 by %1$s using WordPress"
 msgstr ""
 
+#: includes/blocks.php:609
+msgid "Diplayed in thumbnails by default."
+msgstr ""
+
+#: includes/blocks.php:197
+msgid "directory"
+msgstr ""
+
+#: includes/blocks/block-edito.php:68 includes/blocks/block-edito.php:147
+msgid "Discover..."
+msgstr ""
+
 #: includes/admin/custom_media_sizes.php:601
 #: includes/admin/custom_media_sizes.php:609
 msgid "Dismiss this notice."
 msgstr ""
 
+#: includes/blocks.php:905
+msgid "Display a list of sections filtered by edition"
+msgstr ""
+
+#: includes/blocks.php:752
+msgid "Display a single film"
+msgstr ""
+
+#: includes/blocks.php:823
+msgid "Display a single section slideshow"
+msgstr ""
+
+#: includes/blocks.php:619
+msgid "Display a video playlist block ( better with youtube )"
+msgstr ""
+
+#: includes/blocks.php:895
+msgid "Display as a tiny list?"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-categories.php:174
 msgid "Display as dropdown"
+msgstr ""
+
+#: includes/blocks.php:1359 includes/blocks.php:1495
+msgid "Display breaking bloc with two cols"
+msgstr ""
+
+#: includes/blocks.php:430
+msgid "Display edition badge ?"
+msgstr ""
+
+#: includes/blocks.php:409 includes/blocks.php:542
+msgid "Display edito bloc"
+msgstr ""
+
+#: includes/blocks.php:708
+msgid "Display film awards block"
+msgstr ""
+
+#: includes/blocks.php:383
+msgid "Display framed version ?"
+msgstr ""
+
+#: includes/blocks.php:608
+msgid "Display fullwidth videos ?"
+msgstr ""
+
+#: includes/blocks.php:965
+msgid "Display Gazette mode ?"
+msgstr ""
+
+#: includes/blocks.php:1538
+msgid ""
+"Display homeslide key messages / contextual / engagement in content with a "
+"block"
+msgstr ""
+
+#: includes/blocks.php:883
+msgid "Display introduction content ?"
+msgstr ""
+
+#: includes/blocks.php:253
+msgid "Display latest posts"
+msgstr ""
+
+#: includes/blocks.php:178
+msgid "Display meta infos ( posted by, posted at, catégories ... ) ?"
+msgstr ""
+
+#: includes/blocks.php:1138
+msgid "Display mission bloc"
+msgstr ""
+
+#: includes/blocks.php:371 includes/blocks.php:692 includes/blocks.php:1115
+#: includes/blocks.php:1219 includes/blocks.php:1479
+msgid "Display more link ?"
+msgstr ""
+
+#: includes/blocks.php:1294
+msgid "Display more link ? (first)"
+msgstr ""
+
+#: includes/blocks.php:1343
+msgid "Display more link ? (last)"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:296
@@ -632,12 +987,34 @@ msgstr ""
 msgid "Display only if user is loggued"
 msgstr ""
 
+#: includes/blocks.php:889
+msgid "Display parent edition section of sections ?"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-newsletter.php:158
 msgid "Display reduced in two columns"
 msgstr ""
 
+#: includes/blocks.php:1235
+msgid "Display text bloc with cols"
+msgstr ""
+
+#: includes/blocks.php:301
+msgid "Display the current edition partners"
+msgstr ""
+
+#: includes/blocks.php:999
+msgid "Display the programmation filtered by edition"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-newsletter.php:162
 msgid "Display url button only"
+msgstr ""
+
+#: includes/blocks.php:341 includes/blocks.php:575 includes/blocks.php:653
+#: includes/blocks.php:857 includes/blocks.php:939 includes/blocks.php:1046
+#: includes/blocks.php:1185 includes/blocks.php:1406
+msgid "Displayed in a bigger size. Markdown is available."
 msgstr ""
 
 #: includes/template-tags.php:635
@@ -694,6 +1071,10 @@ msgstr ""
 msgid "Edition"
 msgstr ""
 
+#: includes/blocks.php:334
+msgid "Edito"
+msgstr ""
+
 #: includes/customizer.php:267
 msgid "Enable all the advanced blocks for gutenberg or a usefull selection."
 msgstr ""
@@ -714,6 +1095,10 @@ msgstr ""
 msgid "Fancy"
 msgstr ""
 
+#: includes/blocks.php:198
+msgid "farm"
+msgstr ""
+
 #: partials/pagetitles/pagetitle-rsfp.php:355
 msgid "Farm is open to stage :"
 msgstr ""
@@ -726,8 +1111,17 @@ msgstr ""
 msgid "Feature film"
 msgstr ""
 
-#: includes/template-tags.php:541 includes/admin/custom_post_types.php:13
+#: includes/template-tags.php:541 includes/blocks/block-latest-posts.php:317
+#: includes/admin/custom_post_types.php:13
 msgid "Featured"
+msgstr ""
+
+#: includes/blocks.php:778
+msgid "Featured section title"
+msgstr ""
+
+#: includes/blocks.php:144
+msgid "Featured title"
 msgstr ""
 
 #: includes/template-tags.php:634
@@ -738,12 +1132,23 @@ msgstr ""
 msgid "Fiction documentary"
 msgstr ""
 
+#: includes/blocks.php:1110 includes/blocks.php:1474
+msgid "Fill a color class."
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:350
 msgid "Fill a custom class for the main page wrapper. Advanced feature."
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:81
 msgid "Fill a label in upper position (optionnal)."
+msgstr ""
+
+#: includes/blocks.php:378 includes/blocks.php:1122 includes/blocks.php:1226
+#: includes/blocks.php:1301 includes/blocks.php:1350 includes/blocks.php:1486
+msgid ""
+"Fill an absolute link. Can be internal or external, e.g. : http://www.google."
+"com"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:32
@@ -756,8 +1161,16 @@ msgid ""
 "Fill anchors by name serialized for id ( works only with Modern header style)"
 msgstr ""
 
+#: includes/blocks.php:471 includes/blocks.php:494 includes/blocks.php:523
+msgid "Fill the background color class ( or more )."
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:25
 msgid "Fill the flash content"
+msgstr ""
+
+#: includes/blocks.php:510
+msgid "Fill the GravityForm form id."
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:277
@@ -770,6 +1183,22 @@ msgstr ""
 msgid "Fill the public content showing after title when logged out (optionnal)"
 msgstr ""
 
+#: includes/blocks.php:1040 includes/blocks.php:1179 includes/blocks.php:1400
+msgid "Fill the subtitle class."
+msgstr ""
+
+#: includes/blocks.php:516
+msgid "Fill the WSform form id."
+msgstr ""
+
+#: includes/blocks.php:597
+msgid "Fill youtube playlist ID here if you want to show it"
+msgstr ""
+
+#: includes/blocks.php:193
+msgid "film"
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:208
 msgid "Film color"
 msgstr ""
@@ -778,8 +1207,42 @@ msgstr ""
 msgid "Films"
 msgstr ""
 
+#: includes/blocks.php:666
+msgid ""
+"Filter awards by edition. If empty, none of the editions will be displayed."
+msgstr ""
+
+#: includes/blocks.php:214
+msgid "Filter only posts w/ a video"
+msgstr ""
+
+#: includes/blocks.php:870 includes/blocks.php:952
+msgid ""
+"Filter sections by edition. If empty, none of the sections will be displayed."
+msgstr ""
+
+#: includes/blocks.php:222
+msgid ""
+"Filter to those categories. If empty, all the categories will be showed. "
+"Only works with posts."
+msgstr ""
+
+#: includes/blocks.php:283
+msgid ""
+"Filter to those categories. If empty, none of the categories will be "
+"displayed."
+msgstr ""
+
+#: includes/blocks.php:453
+msgid "First block"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-counter.php:170
 msgid "First column classes:"
+msgstr ""
+
+#: includes/blocks.php:359
+msgid "Fit image size or limit block ?"
 msgstr ""
 
 #: includes/admin/custom_post_types.php:37
@@ -823,28 +1286,32 @@ msgctxt "font size option label"
 msgid "Subline"
 msgstr ""
 
-#: includes/theme.php:284
+#: includes/theme.php:291
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/theme.php:285
+#: includes/theme.php:292
 msgid "Footer Secondary Menu"
 msgstr ""
 
-#: includes/theme.php:320
+#: includes/theme.php:328
 msgid "Footer section (after)"
 msgstr ""
 
-#: includes/theme.php:309
+#: includes/theme.php:317
 msgid "Footer section (before)"
 msgstr ""
 
-#: includes/theme.php:286
+#: includes/theme.php:293
 msgid "Footer Third Menu"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:84
 msgid "For the content (below), it's better to not exceed <u>160 signs.</u>"
+msgstr ""
+
+#: includes/blocks.php:521
+msgid "Form class"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:311
@@ -855,9 +1322,17 @@ msgstr ""
 msgid "Full programmation"
 msgstr ""
 
+#: includes/blocks.php:1210
+msgid "Full w/ gradient"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:402
 #: includes/admin/widgets/custom-wp-widget-partners.php:210
 msgid "Full-width"
+msgstr ""
+
+#: includes/blocks.php:459 includes/blocks.php:482
+msgid "Get in touch !"
 msgstr ""
 
 #: taxonomy-section.php:173
@@ -891,6 +1366,14 @@ msgstr ""
 
 #: includes/admin/custom_metaboxes.php:305
 msgid "Header style"
+msgstr ""
+
+#: includes/blocks.php:390
+msgid "Hide center column ?"
+msgstr ""
+
+#: includes/blocks.php:391
+msgid "Hide the empty column between the content and the image."
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-counter.php:101
@@ -943,6 +1426,19 @@ msgstr ""
 msgid "http://www.google.fr"
 msgstr ""
 
+#: includes/blocks.php:352 includes/blocks.php:1073 includes/blocks.php:1199
+#: includes/blocks.php:1438
+msgid "Image"
+msgstr ""
+
+#: includes/blocks.php:1287
+msgid "Image (first)"
+msgstr ""
+
+#: includes/blocks.php:1336
+msgid "Image (last)"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-section.php:328
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr ""
@@ -963,9 +1459,25 @@ msgstr ""
 msgid "It's done"
 msgstr ""
 
+#: includes/blocks.php:194
+msgid "jury"
+msgstr ""
+
+#: includes/blocks.php:205
+msgid "Label"
+msgstr ""
+
 #: searchform.php:42
 msgctxt "label"
 msgid "Search"
+msgstr ""
+
+#: includes/blocks.php:1260
+msgid "Label (first)"
+msgstr ""
+
+#: includes/blocks.php:1309
+msgid "Label (last)"
 msgstr ""
 
 #: includes/template-tags.php:1334
@@ -982,6 +1494,12 @@ msgstr ""
 #: partials/content-excerpt.php:278 partials/content-farm.php:64
 #, php-format
 msgid "Last update %s ago"
+msgstr ""
+
+#: includes/blocks.php:340 includes/blocks.php:574 includes/blocks.php:652
+#: includes/blocks.php:856 includes/blocks.php:938 includes/blocks.php:1045
+#: includes/blocks.php:1184 includes/blocks.php:1405
+msgid "Lead content"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:241
@@ -1001,12 +1519,20 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
+#: includes/blocks.php:157
+msgid "Limit posts to ?"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:261
 #: includes/admin/widgets/custom-wp-widget-twocols.php:330
 msgid "Link to page url:"
 msgstr ""
 
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:691
+#: includes/blocks.php:1057 includes/blocks.php:1417
+msgid "List.s"
+msgstr ""
+
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:794
 msgid "Loading..."
 msgstr ""
 
@@ -1102,8 +1628,29 @@ msgstr ""
 msgid "Looking for: "
 msgstr ""
 
+#: includes/blocks.php:241
+msgid "Magazine"
+msgstr ""
+
 #: includes/customizer.php:206
 msgid "Mailchimp popup"
+msgstr ""
+
+#: includes/blocks.php:347 includes/blocks.php:581 includes/blocks.php:659
+#: includes/blocks.php:863 includes/blocks.php:945 includes/blocks.php:1052
+msgid "Markdown is available."
+msgstr ""
+
+#: includes/blocks.php:1211
+msgid "Masked w/ blocks pattern"
+msgstr ""
+
+#: includes/blocks/block-awards.php:262
+msgid "Master awards"
+msgstr ""
+
+#: includes/blocks.php:684
+msgid "Master awards only"
 msgstr ""
 
 #: includes/template-tags.php:670
@@ -1123,12 +1670,36 @@ msgstr ""
 msgid "Menu item is muted ?"
 msgstr ""
 
+#: includes/blocks/block-programmation.php:149
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:767
+msgid "Mes favoris"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-counter.php:81
 msgid "Minutes"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:314
 msgid "Modern"
+msgstr ""
+
+#: includes/blocks.php:377 includes/blocks.php:698 includes/blocks.php:1121
+#: includes/blocks.php:1225 includes/blocks.php:1485
+msgid "More URL"
+msgstr ""
+
+#: includes/blocks.php:1300
+msgid "More URL (first)"
+msgstr ""
+
+#: includes/blocks.php:1349
+msgid "More URL (last)"
+msgstr ""
+
+#: includes/blocks/block-mission.php:166 includes/blocks/block-breaking.php:83
+#: includes/blocks/block-breaking.php:120 includes/blocks/block-insights.php:68
+#: includes/blocks/block-cols.php:76
+msgid "More..."
 msgstr ""
 
 #: includes/template-tags.php:643
@@ -1145,6 +1716,10 @@ msgstr ""
 
 #: includes/admin/custom_post_types.php:128
 msgid "New Partner"
+msgstr ""
+
+#: includes/blocks.php:153
+msgid "News"
 msgstr ""
 
 #: partials/content-farm.php:152
@@ -1193,13 +1768,21 @@ msgstr ""
 msgid "No results yet! Please come back"
 msgstr ""
 
-#: includes/admin/custom_metaboxes.php:310
+#: includes/blocks.php:239 includes/admin/custom_metaboxes.php:310
 #: includes/admin/widgets/custom-wp-widget-twocols.php:399
 msgid "Normal"
 msgstr ""
 
+#: includes/blocks/block-latest-posts.php:486
+msgid "Now"
+msgstr ""
+
 #: partials/pagetitles/pagetitle-rsfp.php:354
 msgid "Open to stage"
+msgstr ""
+
+#: includes/blocks.php:200
+msgid "operation"
 msgstr ""
 
 #: includes/admin/custom_post_menuorder.php:94
@@ -1210,8 +1793,16 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
+#: includes/blocks.php:1108 includes/blocks.php:1472
+msgid "Override background color"
+msgstr ""
+
 #: includes/admin/custom_metaboxes.php:265
 msgid "Overrides default page title if filled"
+msgstr ""
+
+#: includes/blocks.php:190
+msgid "page"
 msgstr ""
 
 #: includes/admin/custom_metaboxes.php:297
@@ -1255,6 +1846,10 @@ msgstr ""
 msgid "Partner"
 msgstr ""
 
+#: includes/blocks.php:201
+msgid "partner"
+msgstr ""
+
 #: includes/admin/custom_post_types.php:155
 msgid "Partner categories"
 msgstr ""
@@ -1282,26 +1877,49 @@ msgid "Phone number"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-programmation.php:648
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:700
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:803
 msgid "Planner"
 msgstr ""
 
-#: taxonomy-section.php:250
+#: taxonomy-section.php:250 partials/preheaders/preheader-fifam.php:53
 #: includes/admin/widgets/custom-wp-widget-programmation.php:660
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:718
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:755
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:802
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:821
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:826
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:847
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:856
 msgid "Planning"
+msgstr ""
+
+#: includes/blocks/block-programmation.php:144
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:762
+msgid "Planning complet"
 msgstr ""
 
 #: includes/customizer.php:394
 msgid "Planning file URL (*.pdf)"
 msgstr ""
 
-#: includes/theme.php:448
+#: includes/blocks/block-sections.php:70
+#: includes/blocks/block-programmation.php:68
+msgid "Please choose an edition"
+msgstr ""
+
+#: includes/theme.php:456
 msgid "Please define an icon name."
 msgstr ""
 
-#: includes/theme.php:443
+#: includes/theme.php:451
 msgid "Please define default parameters in the form of an array."
+msgstr ""
+
+#: includes/blocks/block-latest-posts.php:86
+msgid "Please define style to continue"
+msgstr ""
+
+#: includes/blocks.php:189
+msgid "post"
 msgstr ""
 
 #: partials/content-excerpt.php:253
@@ -1359,7 +1977,11 @@ msgctxt "post"
 msgid "Testimony"
 msgstr ""
 
-#: includes/theme.php:287
+#: includes/blocks.php:151
+msgid "Posts title"
+msgstr ""
+
+#: includes/theme.php:294
 msgid "Preheader Menu"
 msgstr ""
 
@@ -1371,7 +1993,7 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
-#: includes/theme.php:280 partials/navs/nav-golfs.php:28
+#: includes/theme.php:287 partials/navs/nav-golfs.php:28
 #: partials/navs/nav-fifam.php:30 partials/navs/nav-rsfp.php:29
 #: partials/navs/nav-diag.php:13 partials/navs/nav-dinard.php:13
 #: partials/headers/header-diag.php:97 partials/headers/header-rsfp.php:152
@@ -1396,7 +2018,7 @@ msgid "Print partners form."
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-programmation.php:14
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:14
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:16
 msgid "Print projections block."
 msgstr ""
 
@@ -1408,19 +2030,14 @@ msgstr ""
 msgid "Program"
 msgstr ""
 
-#: partials/preheaders/preheader-fifam.php:53
+#: includes/blocks.php:932 includes/blocks/block-programmation.php:822
 #: includes/admin/widgets/custom-wp-widget-programmation.php:162
 #: includes/admin/widgets/custom-wp-widget-programmation.php:665
 #: includes/admin/widgets/custom-wp-widget-programmation.php:686
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:668
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:699
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:723
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:744
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:753
 msgid "Programmation"
 msgstr ""
 
-#: includes/theme.php:332
+#: includes/theme.php:340
 msgid "Programmation section (modal)"
 msgstr ""
 
@@ -1445,7 +2062,10 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: taxonomy-section.php:239
+#: taxonomy-section.php:239 includes/blocks/block-latest-posts.php:326
+#: includes/blocks/block-latest-posts.php:378
+#: includes/blocks/block-latest-posts.php:455
+#: includes/blocks/block-latest-posts.php:540
 msgid "Read more"
 msgstr ""
 
@@ -1463,13 +2083,29 @@ msgstr ""
 msgid "Remove the default top and bottom margins of the homeslide section."
 msgstr ""
 
+#: includes/blocks.php:398
+msgid "Remove top margin ?"
+msgstr ""
+
+#: includes/blocks.php:399
+msgid "Removes the top margin of the block."
+msgstr ""
+
 #: partials/content-competitions.php:106
 #: partials/pagetitles/pagetitle-golfs.php:305
 msgid "Results"
 msgstr ""
 
+#: includes/blocks.php:464 includes/blocks.php:487
+msgid "Rich content"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-twocols.php:310
 msgid "Right column:"
+msgstr ""
+
+#: includes/blocks.php:532
+msgid "Rounded elements ?"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-section.php:330
@@ -1494,16 +2130,64 @@ msgstr ""
 msgid "Search Partner"
 msgstr ""
 
+#: includes/blocks.php:476
+msgid "Second block"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-counter.php:174
 msgid "Second column classes:"
 msgstr ""
 
-#: includes/theme.php:281
+#: includes/theme.php:288
 msgid "Secondary Menu"
+msgstr ""
+
+#: includes/blocks.php:850
+msgid "Sections"
+msgstr ""
+
+#: includes/blocks/block-playlist.php:75
+msgid "See video"
+msgstr ""
+
+#: includes/blocks.php:732
+msgid "Select a film"
+msgstr ""
+
+#: includes/blocks.php:1093
+msgid "Select a position"
+msgstr ""
+
+#: includes/blocks.php:785
+msgid "Select a section"
+msgstr ""
+
+#: includes/blocks.php:1080
+msgid "Select an alignment"
+msgstr ""
+
+#: includes/blocks.php:1205
+msgid "Select an image style"
+msgstr ""
+
+#: includes/blocks.php:220 includes/blocks.php:281
+msgid "Select categories"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-categories.php:81
 msgid "Select Category"
+msgstr ""
+
+#: includes/blocks.php:664 includes/blocks.php:868 includes/blocks.php:950
+msgid "Select edition"
+msgstr ""
+
+#: includes/blocks.php:183
+msgid "Select post type"
+msgstr ""
+
+#: includes/blocks.php:234
+msgid "Select style"
 msgstr ""
 
 #: taxonomy-section.php:313
@@ -1519,6 +2203,10 @@ msgctxt "settings button"
 msgid "Settings"
 msgstr ""
 
+#: includes/blocks.php:1086
+msgid "Shifted"
+msgstr ""
+
 #: includes/template-tags.php:667
 msgid "Short film"
 msgstr ""
@@ -1527,12 +2215,20 @@ msgstr ""
 msgid "Show a subtitle if filled"
 msgstr ""
 
+#: includes/blocks.php:742
+msgid "Show as promotted film ?"
+msgstr ""
+
 #: includes/customizer.php:246
 msgid "Show author name in single posts ?"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-categories.php:180
 msgid "Show hierarchy"
+msgstr ""
+
+#: includes/blocks.php:813 includes/blocks.php:971
+msgid "Show only when edition is online ?"
 msgstr ""
 
 #: includes/customizer.php:247
@@ -1580,7 +2276,7 @@ msgstr ""
 msgid "Slider text color mode"
 msgstr ""
 
-#: includes/theme.php:282 partials/preheaders/preheader-golfs.php:69
+#: includes/theme.php:289 partials/preheaders/preheader-golfs.php:69
 #: partials/preheaders/preheader-fifam.php:39
 #: partials/preheaders/preheader-diag.php:69
 #: partials/headers/header-rsfp.php:64 partials/headers/header-dinard.php:93
@@ -1593,6 +2289,35 @@ msgstr ""
 
 #: includes/admin/custom_metaboxes.php:315
 msgid "Split"
+msgstr ""
+
+#: includes/blocks.php:685
+msgid "Standard awards only"
+msgstr ""
+
+#: includes/blocks.php:199
+msgid "structure"
+msgstr ""
+
+#: includes/blocks.php:527
+msgid "Style"
+msgstr ""
+
+#: includes/blocks.php:333 includes/blocks.php:1031 includes/blocks.php:1170
+#: includes/blocks.php:1391 includes/blocks.php:1527
+msgid "Subtitle"
+msgstr ""
+
+#: includes/blocks.php:1274
+msgid "Subtitle (first)"
+msgstr ""
+
+#: includes/blocks.php:1323
+msgid "Subtitle (last)"
+msgstr ""
+
+#: includes/blocks.php:1038 includes/blocks.php:1177 includes/blocks.php:1398
+msgid "Subtitle class"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:252
@@ -1608,9 +2333,9 @@ msgstr ""
 
 #. %s: list of tags.
 #: includes/template-tags.php:928 includes/template-tags.php:976
-#: includes/template-tags.php:1221
+#: includes/template-tags.php:1221 includes/blocks/block-programmation.php:768
 #: includes/admin/widgets/custom-wp-widget-programmation.php:615
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:564
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:642
 msgid "Taggued"
 msgstr ""
 
@@ -1662,6 +2387,23 @@ msgstr ""
 msgid "This will appear in the programmation modal."
 msgstr ""
 
+#: includes/blocks.php:326 includes/blocks.php:458 includes/blocks.php:481
+#: includes/blocks.php:567 includes/blocks.php:568 includes/blocks.php:569
+#: includes/blocks.php:645 includes/blocks.php:647 includes/blocks.php:849
+#: includes/blocks.php:851 includes/blocks.php:931 includes/blocks.php:933
+#: includes/blocks.php:1024 includes/blocks.php:1163 includes/blocks.php:1384
+#: includes/blocks.php:1520
+msgid "Title"
+msgstr ""
+
+#: includes/blocks.php:1267
+msgid "Title (first)"
+msgstr ""
+
+#: includes/blocks.php:1316
+msgid "Title (last)"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-counter.php:157
 #: includes/admin/widgets/custom-wp-widget-newsletter.php:145
 #: includes/admin/widgets/custom-wp-widget-contact.php:143
@@ -1670,7 +2412,7 @@ msgstr ""
 #: includes/admin/widgets/custom-wp-widget-twocols.php:317
 #: includes/admin/widgets/custom-wp-widget-twocols.php:382
 #: includes/admin/widgets/custom-wp-widget-programmation.php:731
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:790
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:893
 #: includes/admin/widgets/custom-wp-widget-partners.php:188
 #: includes/admin/widgets/custom-wp-widget-categories.php:170
 msgid "Title:"
@@ -1689,6 +2431,7 @@ msgstr ""
 msgid "Toggle Night Mode"
 msgstr ""
 
+#: includes/blocks.php:1098
 #: includes/admin/widgets/custom-wp-widget-twocols.php:276
 #: includes/admin/widgets/custom-wp-widget-twocols.php:345
 msgid "Top"
@@ -1706,6 +2449,10 @@ msgstr ""
 msgid "Url:"
 msgstr ""
 
+#: includes/blocks.php:807
+msgid "Use section color ?"
+msgstr ""
+
 #: includes/admin/widgets/custom-wp-widget-section.php:308
 msgid ""
 "Use the Custom HTML widget to add arbitrary HTML code to your widget areas."
@@ -1720,13 +2467,19 @@ msgstr ""
 msgid "Video"
 msgstr ""
 
+#: includes/blocks.php:586
+msgid "Video(s)"
+msgstr ""
+
+#: includes/blocks/block-programmation.php:831
 #: includes/admin/widgets/custom-wp-widget-programmation.php:695
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:754
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:857
 msgid "View archives"
 msgstr ""
 
+#: includes/blocks/block-programmation.php:832
 #: includes/admin/widgets/custom-wp-widget-programmation.php:696
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:755
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:858
 msgid "View blog"
 msgstr ""
 
@@ -1780,9 +2533,9 @@ msgstr ""
 #: partials/pagetitles/pagetitle-dinard.php:637
 #: partials/pagetitles/pagetitle-dinard.php:690
 #: partials/pagetitles/pagetitle-dinard.php:758
-#: partials/pagetitles/pagetitle-fifam.php:773
-#: partials/pagetitles/pagetitle-fifam.php:826
-#: partials/pagetitles/pagetitle-fifam.php:895
+#: partials/pagetitles/pagetitle-fifam.php:830
+#: partials/pagetitles/pagetitle-fifam.php:883
+#: partials/pagetitles/pagetitle-fifam.php:952
 #: partials/pagetitles/pagetitle-golfs.php:399
 #: partials/pagetitles/pagetitle-golfs.php:673
 #: partials/pagetitles/pagetitle-golfs.php:726
@@ -1791,7 +2544,7 @@ msgid "You need to choose a thumbnail image"
 msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-counter.php:109
-#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:703
+#: includes/admin/widgets/custom-wp-widget-programmation-ajax.php:806
 msgid "Young public"
 msgstr ""
 

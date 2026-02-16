@@ -7,12 +7,30 @@
 
 namespace WaffTwo\Blocks\Block;
 
+use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
+
 function wa_programmation_callback( $attributes ) {
 	global $current_edition_id, $current_edition_slug, $current_edition_films_are_online; 
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
 
 	// if ( $is_preview ) 
 	 	//print_r($attributes);
+
+	// No post type no render.
+	if ( ! post_type_exists( 'film' ) ) {
+		//if ( $is_preview ) {
+			echo '<div class="alert alert-dismissible alert-danger fade show" role="alert"><strong>Heads up!</strong> The <strong>film</strong> post type does not exist. Please check your configuration. <button aria-label="Close" class="btn-close" data-dismiss="alert" type="button"></button></div>';
+		//}
+		return;
+	}
+
+	// No post type no render.
+	if ( ! post_type_exists( 'projection' ) ) {
+		//if ( $is_preview ) {
+			echo '<div class="alert alert-dismissible alert-danger fade show" role="alert"><strong>Heads up!</strong> The <strong>projection</strong> post type does not exist. Please check your configuration. <button aria-label="Close" class="btn-close" data-dismiss="alert" type="button"></button></div>';
+		//}
+		return;
+	}
 
 	// No data no render.
 	if ( empty( $attributes['data'] ) ) return;
@@ -31,7 +49,7 @@ function wa_programmation_callback( $attributes ) {
 
 
 	// Custom CSS class name.
-	$themeClass = 'programmation-list mt-10 mb-10 contrast--dark';
+	$themeClass = 'programmation-list mt-0 mb-0 contrast--dark';
 	$class = $themeClass . ' ' . ( $attributes['className'] ?? '' );
 	$subclass = ( $attributes['name'] ?? '' ) . ' ' . ( $attributes['className'] ?? '' );
 	if ( ! empty( $attributes['align'] ) ) {
@@ -46,12 +64,13 @@ function wa_programmation_callback( $attributes ) {
 	}
 
 	// Params
-	// $show_introduction 		= (mb_get_block_field( 'waff_p_show_introduction' ))?'1':'0'; 
+	$show_introduction 		= (mb_get_block_field( 'waff_p_show_introduction' ))?'1':'0'; 
 	// $show_parent_section 	= (mb_get_block_field( 'waff_p_show_parent_section' ))?'1':'0'; 
 	// $show_tiny_list 		= (mb_get_block_field( 'waff_p_show_tiny_list' ))?'1':'0'; 
 
 	// Show gazette mode ? Day by day 
 	$show_gazette 		= (mb_get_block_field( 'waff_p_show_gazette' ))?'1':'0'; 
+	
 
 	// Do not show if option is selected and edition is offline
 	$showonly_when_edition_is_online 		= (mb_get_block_field( 'waff_p_showonly_when_edition_is_online' ))?'1':'0'; 
@@ -99,9 +118,10 @@ function wa_programmation_callback( $attributes ) {
 	endif;
 
 	?>
-		<!-- #programmation list -->
+		<?php /* #programmation list */ ?>
+
 		<?php if ( isset( $show_introduction ) && $show_introduction == '1' ) : ?>
-		<!-- BEGIN:Introduction -->
+		<?php /* BEGIN:Introduction */ ?>
 		<section id="<?= $id ?>" class="<?= $class ?> <?= $animation_class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 			<div class="container-fluid px-0">
 				<hgroup class="text-center">
@@ -129,14 +149,11 @@ function wa_programmation_callback( $attributes ) {
 				<?php endif; ?>
 			</div>
 		</section>
-		<!-- END:Introduction -->
+		<?php /* END:Introduction */ ?>
 		<?php endif; ?>
 
-		<!-- BEGIN:programmation -->
-
-		
-		<!-- Switch pour toggle entre planning complet et favoris -->
-		<!-- Script du switch > voir main.js du theme -->
+		<?php /* Switch pour toggle entre planning complet et favoris */ ?>
+		<?php if ( $show_gazette != '1' ) : /* Script du switch > voir main.js du theme */ ?>
 			<div class="d-flex p-3 align-items-center --justify-content-center">
 				<h6 class="m-0 me-4 --text-light"><span class="">Nouveau !</span> Votre grille-horaire personnalisée</h6>
 				<?php if ( is_user_logged_in() ) : ?>
@@ -152,8 +169,9 @@ function wa_programmation_callback( $attributes ) {
 					<?php echo do_shortcode('[wacp_login_links]'); ?>
 				<?php endif; ?>
 			</div>
-		<!-- Scripts > moved to main.js -->
+		<?php endif; /* Scripts > moved to main.js */ ?>
 
+		<?php /* BEGIN:programmation */ ?>
 		<section id="<?= $id ?>-programmation" class="<?= $class ?>" <?= $data ?> style="background-color: <?= mb_get_block_field( 'background_color' ) ?>">
 		<div class="modal-dialog m-0 --max-w-100 --ml-auto" role="document">
 		<div class="modal-content bg-transparent border-0 rounded-0 color-light text-white" style="position: relative;">
@@ -170,6 +188,10 @@ function wa_programmation_callback( $attributes ) {
 		// Display programmation filtered by favorited films OR full ? // #45
 		//$favorited_display = true;
 		$favorited_display = isset($_COOKIE['programmation-modal-favorited']) ? $_COOKIE['programmation-modal-favorited'] === 'true' : false;
+
+		// If gazette, no matter what, film have to be shown 
+		if ( $show_gazette == '1' )
+			$favorited_display = false;
 
 		if ( $current_edition_films_are_online || !empty(array_intersect($allowed_roles, $user->roles )) ) :	
 
@@ -268,6 +290,22 @@ function wa_programmation_callback( $attributes ) {
 			$edition_end_date = date('d', $edition_end_date_meta);
 			$count = 1;
 			$the_days = array();
+
+			// Gazette mode: Calculate which day to show
+			$gazette_day_to_show = null;
+			if ( $show_gazette == '1' ) {
+				if ( $today[0] < $edition_start_date_meta ) {
+					// Before festival: show first day
+					$gazette_day_to_show = 1;
+				} elseif ( $today[0] >= $edition_start_date_meta && $today[0] <= $edition_end_date_meta ) {
+					// During festival: show current day
+					$gazette_day_to_show = floor(($today[0] - $edition_start_date_meta) / 86400) + 1;
+				} else {
+					// After festival: show last day
+					$gazette_day_to_show = $edition_end_date - $edition_start_date + 1;
+				}
+			}
+
 			for ($day = $edition_start_date; $day <= $edition_end_date; $day++) { //$day <= $edition_end_date+1
 				$d = (($edition_start_date_meta-82800) + (60 * 60 * (24 * $count-1)));
 				$d1 = (($edition_start_date_meta-82800) + (60 * 60 * (24 * $count)));
@@ -474,26 +512,116 @@ function wa_programmation_callback( $attributes ) {
 
 				<?php endwhile; wp_reset_postdata();
 				//echo '<pre>',print_r($the_projections,1),'</pre>';
-				//echo '<pre>',print_r($the_days,1),'</pre>';
+				// echo '<pre>',print_r($the_days,1),'</pre>';
 
-				// Render HTML 
-				print('<!--BEGIN: Render-->');
+				// Render HTML
+				print('<!--  BEGIN: Render -->');
 				
+				// Test >
+				// $gazette_day_to_show = 2;
+				// Gazette mode: Display header with stats
+				if ( $show_gazette == '1' && $gazette_day_to_show !== null ) {
+					// Find the day to display and get projection IDs
+					$gazette_day_data = null;
+					$gazette_projection_ids = array();
+
+					foreach($the_days as $key => $the_day) {
+						if ( $the_day['day_count'] == $gazette_day_to_show ) {
+							$gazette_day_data = $the_day;
+							//  echo '<pre style="color:blue;">',print_r($the_day,1),'</pre>';
+
+							// #45 No counts for now, because its broken
+							// // Collect all projection IDs for this day
+							// if ( isset($the_day['rooms']) && is_array($the_day['rooms']) ) {
+							// 	foreach($the_day['rooms'] as $room_key => $room) {
+							// 		if ( isset($room['room']) && is_array($room['room']) ) {
+							// 			foreach($room['room'] as $subroom_key => $subroom) {
+							// 				if ( isset($subroom['projections']) && is_array($subroom['projections']) ) {
+							// 					// Extract p_id from each projection
+							// 					$projection_ids = array_column($subroom['projections'], 'p_id');
+							// 					$gazette_projection_ids = array_merge($gazette_projection_ids, $projection_ids);
+							// 				}
+							// 			}
+							// 		}
+							// 	}
+							// }
+							break;
+						}
+					}
+
+					// Display gazette header
+					if ( $gazette_day_data !== null && function_exists('get_counts') ) {
+						$gazette_weekday = $gazette_day_data['weekday'];
+						$gazette_day_number = $gazette_day_data['day_number'];
+						$gazette_day_timestamp = $gazette_day_data['day'];
+
+
+						// #45 No counts for now, because its broken
+						// // Use get_counts function to get statistics
+						// // echo '<pre style="color:green;">',print_r($gazette_projection_ids,1),'</pre>';
+						// $counts = get_counts('', array(), $gazette_projection_ids);
+						// // echo '<pre style="color:blue;">',print_r($counts,1),'</pre>';
+
+						printf('
+						<section class="contrast--light bg-bgcolor --f-w" id="gazette-header">
+							<div class="container-fluid px-0">
+								<div class="row g-0 align-items-center">
+									<div class="col-md-3 bg-light p-4 aos-init aos-animate" data-aos="fade-right">
+										<h6 class="headline d-inline">La gazette</h6>
+										<h5 class="d-inline float-right mt-0 mb-0" data-bs-original-title="%s" data-bs-toggle="tooltip" data-toggle="tooltip">%s <span class="thin">%s</span> <i class="icon icon-down-right-light"></i></h5>
+									</div>
+									<div class="col-md-7"></div>
+									<div class="col-md-2"></div>
+								</div>
+								<div class="row g-0 align-items-center d-none">
+									<div class="col-md-3 p-4 aos-init aos-animate" data-aos="fade-right">
+										<p class="--text-muted text-black position-sticky sticky-top mb-0">
+											%s
+											%s
+											%s
+										</p>
+									</div>
+									<div class="col-md-2"></div>
+								</div>
+							</div>
+						</section>',
+							esc_attr( ucfirst($gazette_weekday) . ' ' . $gazette_day_number . ' ' . date_i18n('F Y', $gazette_day_timestamp) ),
+							esc_html( ucfirst($gazette_weekday) ),
+							esc_html( $gazette_day_number ),
+							( isset($counts['films']) && $counts['films'] != '0' )
+								? '<small class="d-block"><strong>' . sprintf( _n( '%s film', '%s films', $counts['films'], 'waff' ), $counts['films'] ) . '</strong></small>'
+								: '',
+							( isset($counts['projections']) && $counts['projections'] != '0' )
+								? '<small class="d-block"><strong>' . sprintf( _n( '%s projection', '%s projections', $counts['projections'], 'waff' ), $counts['projections'] ) . '</strong></small>'
+								: '',
+							( isset($counts['programs']) && $counts['programs'] != '0' )
+								? '<small class="d-block"><strong>' . sprintf( _n( '%s programme', '%s programmes', $counts['programs'], 'waff' ), $counts['programs'] ) . '</strong></small>'
+								: ''
+						);
+					}
+				}
+
 				foreach($the_days as $key => $the_day) {
 
 					//echo '<pre>',print_r($the_day,1),'</pre>';
 
-					//Days 
+					// Gazette mode: Skip days that are not the selected day
+					if ( $show_gazette == '1' && $gazette_day_to_show !== null && $the_day['day_count'] != $gazette_day_to_show ) {
+						continue;
+					}
+
+					//Days
 					if ( $the_day['has_films'] === true ) {
 
-						printf('<!-- Day -->
+						printf('<!--  Day -->
 						<div class="row g-0 --mb-4">
-							<div class="col-md-2 col-day bg-color-dark px-2 px-sm-6 --py-4 pt-3 pb-3 w-sm-100">
+							<div class="col-md-2 col-day bg-color-dark px-2 px-sm-6 --py-4 pt-3 pb-3 w-sm-100 %s">
 								<a class="scrollspy text-white" id="day%d" data-count="%d" data-ts="%d">
 									<span class="subline h4 --subline-4">%s</span>
 									<span class="display-2 d-block mt-2">%s</span>
 								</a>
 							</div>',
+							$show_gazette == '1' ? 'd-none':'',
 							esc_html($the_day['day_number']),
 							esc_html($the_day['day_count']),
 							esc_html($the_day['day']),
@@ -501,8 +629,10 @@ function wa_programmation_callback( $attributes ) {
 							esc_html($the_day['day_number'])
 						);
 
-						print('<!-- Rooms -->
-							<div class="col-md-10 p-0">');
+						printf('<!-- Rooms -->
+							<div class="%s p-0">',
+							$show_gazette == '1' ? 'col-md-12':'col-md-10',
+						);
 
 						// Rooms
 						foreach($the_day['rooms'] as $key => $the_day_rooms) {
@@ -518,9 +648,9 @@ function wa_programmation_callback( $attributes ) {
 										$r_use_parent_room_title = get_term_meta( $the_day_room['term_id'], 'wpcf-r-use-parent-room-title', true );
 										$r_use_parent_room_title = ($r_use_parent_room_title == '1')?true:false;
 										
-										printf('<!-- Room  -->
+										printf('<!--  Room -->
 										<div class="d-flex flex-column flex-lg-row w-100">
-											<div class="col-md-3 col-room bg-color-gray px-6 py-4 pt-4 pb-2" style="min-height: 150px;">
+											<div class="col-md-3 col-room bg-color-gray px-4 py-4 pt-4 pb-2" style="min-height: 150px;">
 												<div class="room-list">
 													<a href="%s" class="room-item">%s</a>
 													<a href="%s" class="parentroom-item %s">%s</a>
@@ -533,7 +663,8 @@ function wa_programmation_callback( $attributes ) {
 											(($the_day_rooms['name'])?esc_html($the_day_rooms['name']):'ERROR')
 										);
 
-										print('<!-- Film --><div class="col-md-9 col-films bg-light text-black text-dark color-dark">
+										print('<!-- Film -->
+										<div class="col-md-9 col-films bg-light text-black text-dark color-dark">
 													<dl class="row">');
 										// Film
 										foreach($the_day_room['projections'] as $key => $the_day_room_projections) {
@@ -669,7 +800,7 @@ function wa_programmation_callback( $attributes ) {
 																	%s
 																	%s
 																	<!-- Favorite --> %s
-																	<!-- Program sep-->
+																	<!-- Program sep -->
 																	%s',
 															(( $last_p_f_section_color != '' )?'style="color: '.$last_p_f_section_color.';"':''),
 															(( $p_f_title != '' )?get_permalink( $p_f_id ):'#debug'),
@@ -714,7 +845,7 @@ function wa_programmation_callback( $attributes ) {
 												// Print film
 												// //if ( $has_film_favorited || $has_film_favorited_in_program ) : 
 												printf('
-												<dd class="col-10 mb-3 ps-3 ps-sm-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
+												<dd class="%s mb-3 ps-3 ps-sm-6 py-4 pt-4 pb-2 pe-0" data-p-id="%d">
 													<p class="length text-black"><span class="">%s</span> <span class="normal op-5"> › %s</span></p>
 													<p class="text-black">
 														<span class="last_f_section_color" %s>
@@ -738,6 +869,7 @@ function wa_programmation_callback( $attributes ) {
 												</dd>
 												<dt class="%s" data-p-id="%d"><a href="%s">%s</a></dt>
 												<hr class="--bg-light op-1 %s"/>',
+												($show_gazette == '1')?'col-12':'col-10',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												//
 												esc_html( $the_day_room_projections['p_start_and_stop_time_raw']['begin'] ),
@@ -768,7 +900,7 @@ function wa_programmation_callback( $attributes ) {
 												esc_html__( 'Taggued', 'waff' ),
 												$html_p_tags,
 												//
-												($the_day_room_projections['f_poster_img'] == '')?'d-none':'col-2 mb-0',
+												($the_day_room_projections['f_poster_img'] == '' || $show_gazette == '1')?'d-none':'col-2 mb-0',
 												esc_attr( $the_day_room_projections['p_id'] ),
 												get_permalink( $the_day_room_projections['f_id'] ),
 												$the_day_room_projections['f_poster_img'],
@@ -781,21 +913,21 @@ function wa_programmation_callback( $attributes ) {
 										}
 
 										print('</dl>
-												</div><!-- END: Film -->');
+												</div><!--  END: Film -->');
 
-										print('</div><!-- END: Room -->');
+										print('</div><!--  END: Room -->');
 
 									}
 								}
 							}
 						}
 
-						print('</div><!-- END: Rooms --> ');
-						print('</div><!-- END: Day-->');
+						print('</div><!--  END: Rooms -->');
+						print('</div><!--  END: Day -->');
 
 					}
 				}
-			print('<!-- END: RENDER -->');
+			print('<!--  END: RENDER -->');
 			?>
 		
 		</div>
@@ -836,11 +968,8 @@ function wa_programmation_callback( $attributes ) {
 				</div>
 			</div>
 			
-		<?php endif; // end if ! $current_edition_films_are_online ?> 
-
-
-
-		<!-- END:programmation -->
-		<!-- END: #programmation list -->
+		<?php endif; // end if ! $current_edition_films_are_online ?>
+		<?php /* END:programmation */ ?>
+		<?php /* END: #programmation list */ ?>
 		<?php
 }

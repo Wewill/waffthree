@@ -4,7 +4,7 @@ msgstr ""
 "godaddy go theme and WA Theme V2 v3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-04 13:44+0000\n"
-"PO-Revision-Date: 2025-11-13 10:01+0000\n"
+"PO-Revision-Date: 2025-11-13 09:59+0000\n"
 "Last-Translator: Wilhem\n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -543,7 +543,7 @@ msgstr "Image de fond:"
 
 #: includes/blocks/block-awards.php:182
 msgid "Be patient ! Awards has not been published yet"
-msgstr "Soyez patients ! Les awards n'ont pas encore été publiés"
+msgstr ""
 
 #: includes/admin/widgets/custom-wp-widget-twocols.php:285
 #: includes/admin/widgets/custom-wp-widget-twocols.php:354
@@ -976,7 +976,7 @@ msgstr ""
 
 #: includes/blocks/block-edito.php:68 includes/blocks/block-edito.php:147
 msgid "Discover..."
-msgstr "Découvrir..."
+msgstr ""
 
 # @ waff
 #: includes/admin/custom_media_sizes.php:601
