@@ -325,7 +325,7 @@ echo ((true === WAFF_DEBUG)?'<code> ##CONTENTEXCERPT</code>':'');
 							%s
 							%s
 							<p class="card-text fs-sm mb-0">%s</p>
-							<p class="card-text --mt-n2"><small class="text-body-secondary">%s</small></p>
+							<p class="card-text --mt-n2 d-none"><small class="text-body-secondary">%s</small></p>
 						<!-- </div> -->', 
 					sprintf( '<h6 class="mb-2 muted subline">%s</h6>', esc_html_x( 'Course', 'post', 'waff' ) ),
 					the_title( sprintf( '<h4 class="post__title entry-title m-0 lh-1 mb-2 text-dark fw-normal mb-3" style="margin-left: -2px !important;"><a href="%s" rel="bookmark">', esc_url(get_permalink()) ), '</a></h4>', false ),
