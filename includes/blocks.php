@@ -7,17 +7,17 @@
 
 namespace WaffTwo\Blocks;
 
-use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
-use function WaffTwo\Core\waff_clean_alltags as waff_clean_alltags;
-use function WaffTwo\Core\waff_trim as waff_trim;
-use function WaffTwo\Theme\waff_get_edition_badge as waff_get_edition_badge;
-use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
-use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
-use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
-use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
+// use function WaffTwo\Core\waff_do_markdown as waff_do_markdown;
+// use function WaffTwo\Core\waff_clean_alltags as waff_clean_alltags;
+// use function WaffTwo\Core\waff_trim as waff_trim;
+// use function WaffTwo\Theme\waff_get_edition_badge as waff_get_edition_badge;
+// use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB; 
+// use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL; 
+// use function WaffTwo\Core\waff_get_image_id_by_url as waff_get_image_id_by_url;
+// use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
 
-use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
-use function WaffTwo\Theme\waff_get_theme_homeslide_content as waff_get_theme_homeslide_content;
+// use function WaffTwo\Theme\waff_get_theme_homeslide_background as waff_get_theme_homeslide_background;
+// use function WaffTwo\Theme\waff_get_theme_homeslide_content as waff_get_theme_homeslide_content;
 
 require_once get_theme_file_path( 'includes/blocks/block-programmation.php' );
 require_once get_theme_file_path( 'includes/blocks/block-latest-posts.php' );

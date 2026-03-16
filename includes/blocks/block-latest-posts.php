@@ -8,6 +8,8 @@
 namespace WaffTwo\Blocks\Block;
 
 use function WaffTwo\waff_entry_meta_header as waff_entry_meta_header;
+use function WaffTwo\Core\waff_HTMLToRGB as waff_HTMLToRGB;
+use function WaffTwo\Core\waff_RGBToHSL as waff_RGBToHSL;
 
 function wa_latest_posts_callback( $attributes ) {
 	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST ?? true;
