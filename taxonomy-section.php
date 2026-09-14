@@ -427,7 +427,7 @@ if ( have_posts() ) {
 
 } else {
 
-	print('<p class="lead"><strong>I’ll be back !</strong> Oui il semblerait que cette section ne contiennent pas encore de films...</p>');
+	print('<p class="lead"><strong>I’ll be back !</strong> Oui il semblerait que cette section ne contienne pas encore de films...</p>');
 	print('<div class="wp-block-button aligncenter is-style-circular"><a class="wp-block-button__link wp-element-button" href="/ledition">Consulter l\'édition</a></div>');
 	
 	// Write overaccess for TEAM ($allowed_roles)  
