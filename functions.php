@@ -142,3 +142,10 @@ require_once get_theme_file_path( 'includes/blocks.php' );
 	WaffTwo\Blocks\setup();
 	if( true === WAFF_ISFILM_VERSION ){ WaffTwo\Migrate\setup(); }
 //} );
+
+
+// Temporaire 
+if ( defined('WAFF_THEME') && WAFF_THEME == 'DINARD' )
+	add_shortcode('wacp_favorite_star', function($atts, $content = null) {
+		return '<!-- Favorite star fallback -->';
+	});
