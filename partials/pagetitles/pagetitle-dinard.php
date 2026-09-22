@@ -181,6 +181,80 @@ if ( is_singular() && has_post_thumbnail() ) {
 	<?php } /* is_singular + has_post_thumbnail */ ?>
 	<!-- END: #pageheader -->
 
+<?php elseif ( $args == 'projection' ) : ?>
+
+	<?php 
+		$projection_date 					= get_post_meta( $post->ID, 'wpcf-p-date', true ); 
+		$projection_start_and_stop_time 	= get_post_meta( $post->ID, 'wpcf-p-start-and-stop-time', true ); 
+		$projection_ticketing_url			= get_post_meta( $post->ID, 'wpcf-p-ticketing-url', true ); 
+		$projection_date_string = wp_kses(
+			sprintf(
+				'<time datetime="%1$s">%2$s</time>',
+				esc_attr( $projection_date ),
+				( function_exists('qtranxf_getLanguage') && qtranxf_getLanguage() == 'en' )?date_i18n( 'l M jS, Y', $projection_date) : date_i18n('Y-m-d', $projection_date)
+			),
+			array_merge(
+				wp_kses_allowed_html( 'post' ),
+				array(
+					'time' => array(
+						'datetime' => true,
+					),
+				)
+			)
+		);
+	?>
+
+	<!-- #pagetitle : Post -->
+	<section id="pagetitle" class="pt-12 pt-md-20 pb-14 contrast--light container-10 container-left bg-color-bg" <?= $page_atts['post_color_class']?>>
+		<div class="jumbotron">
+			<div class="container-fluid container-10 container-left">
+				<hgroup>
+					<?php if ( $args != '' ) printf('<h5 class="subline text-muted mb-1">%s</h5>', sanitize_text_field(ucfirst($args))); ?>
+					<a href="<?= esc_url($partenaire_link) ?>"><h2 class="title --subline mb-0"><?php single_post_title(); ?></h2></a>
+					<ul class="list-unstyled mt-2 mb-2">
+						<?php if ( $projection_date != '' ) echo '<li class="subline opacity-75 pb-1"><span class="headline medium">'.$projection_date_string.'</span></li>'; ?>
+						<?php if ( $projection_start_and_stop_time['begin'] != '' ) echo '<li class="subline opacity-50 pb-1">'.esc_html(__('[:fr]De[:en]From[:]')).' <span class="headline medium">'.$projection_start_and_stop_time['begin'].'</span></li>'; ?>
+						<?php if ( $projection_start_and_stop_time['end'] != '' ) echo '<li class="subline opacity-50 pb-1">'.esc_html(__('[:fr]à[:en]To[:]')).' <span class="headline medium">'.$projection_start_and_stop_time['end'].'</span></li>'; ?>
+					</ul>
+					<?= WaffTwo\waff_entry_meta_header(); ?>
+
+					<?php if ( $projection_ticketing_url != '' ) printf('<span class="badge rounded-pill bg-action-1 color-white subline mt-2"><a href="%s" target="_blank" onclick="%s" class="color-white link-white" rel="noopener"><i class="icon-ticket"></i> %s</a></span>', sanitize_url($projection_ticketing_url), sprintf( 'var w=window.open(\'%s\', \'Billetterie_weezevent\', \'width=650, height=600, top=100, left=100, toolbar=no, resizable=yes, scrollbars=yes, status=no\'); w.focus(); return false;', sanitize_url($projection_ticketing_url)), __('Buy tickets', 'waff')); ?>
+
+				</hgroup>
+			</div>
+		</div>
+	</section>
+	<!-- END: #pagetitle -->
+
+	<!-- #pageheader -->
+	<?php if ( is_singular() && has_post_thumbnail() ) { ?>
+	<section id="pageheader" class="mt-0 mb-0 contrast--light container-10 container-left bg-light" data-aos="fade-up" data-aos-id="pageheader">
+		<figure class="" title="<?php echo esc_attr($featured_img_description); ?>">
+			<picture class="lazy">
+			<!-- 3800x1200 > 1900x600 -->
+			<data-src media="(min-width: 990px)"
+					srcset="<?= $featured_img_urls['page-featured-image-x2']; ?> 2x,
+							<?= $featured_img_urls['page-featured-image']; ?>" type="image/jpeg"></data-src>
+			<data-src media="(min-width: 590px)"
+					srcset="<?= $featured_img_urls['page-featured-image-m-x2']; ?> 2x,
+							<?= $featured_img_urls['page-featured-image-m']; ?>" type="image/jpeg"></data-src>
+			<data-src media="(min-width: 380px)"
+					srcset="<?= $featured_img_urls['page-featured-image-s-x2']; ?> 2x,
+							<?= $featured_img_urls['page-featured-image-s']; ?>" type="image/jpeg"></data-src>
+			<data-img src="<?= $featured_img_urls['thumbnail']; ?>" alt="<?= esc_html($featured_img_caption); ?>" class="img-fluid h-600-px" style="object-fit: cover; width: 100%;"></data-img> <!-- style="height: 600px;" -->
+			</picture>
+			<?php if ( $featured_img_caption || $featured_img_description ) : ?>
+			<figcaption><strong>© <?= esc_html($featured_img_caption); ?></strong> <?= esc_html($featured_img_description); ?></figcaption>
+			<?php endif; /* If captions */ ?>
+			<!--
+			Sizes :
+			<?php print_r($featured_img_urls); ?>  
+			-->
+		</figure>
+	</section>
+	<?php } /* is_singular + has_post_thumbnail */ ?>
+	<!-- END: #pageheader -->
+
 <?php elseif ( $args == 'film' ) : ?>
 	<?php 
 		$film_french_title 		= get_post_meta( $post->ID, 'wpcf-f-french-operating-title', true ); 

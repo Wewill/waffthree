@@ -1,6 +1,6 @@
 <?php
 /**
- * Partial: single-film.php
+ * Partial: single-projection.php
  * Display permalinks or full articles
  *
  * @package WAFF
