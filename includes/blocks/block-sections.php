@@ -226,7 +226,7 @@ function wa_sections_callback( $attributes ) {
 		<?php /* BEGIN:Sections list */ ?>
 		<?php if ( isset( $show_tiny_list ) && $show_tiny_list == '0' ) : ?>
 		<section class="<?= $subclass ?> mt-0 mb-0 <?= $section_color_class ?> <?= $animation_class ?>" <?= $data ?>>
-			<div class="--card border-0 rounded-0 row <?= (($section_image!='')?'p-gutter-l p-gutter-r':'p-gutter-r') ?>" style="<?= (($section_color!='')?'background-color:'.$section_color.' !important;':'') ?><?= $section_opacity_style ?>">
+			<div class="--card border-0 rounded-0 row <?= (($section_image!='')?'p-gutter-r':'p-gutter-l p-gutter-r') ?>" style="<?= (($section_color!='')?'background-color:'.$section_color.' !important;':'') ?><?= $section_opacity_style ?>">
 				<?php if ( $section_image != '' ) : ?>
 				<figure title="<?php echo esc_attr(sanitize_text_field($section->name)); ?>" class="h-sm-600-px h-600-px col-12 col-sm-6">
 					<picture class="lazy">
